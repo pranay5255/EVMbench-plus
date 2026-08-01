@@ -1,0 +1,194 @@
+{
+  "schema_version": "benqi_governance.snapshot_recovery.gh_api.v1",
+  "report_group_id": "2025-11-benqi-governance",
+  "recorded_at": "2026-07-31T13:35:16Z",
+  "requested_transport": "gh api in the GitHub CLI",
+  "audited_source": {
+    "repository": "aragon/benqi-governance",
+    "vulnerable_commit": "ded42b671f112eef318482a8c9f10329d0aeef65",
+    "fix_commit_observed_in_report": "3ab793e0115d3595f95400b55e43d9e1693da0a8"
+  },
+  "original_repository_endpoints": {
+    "authenticated_result": "404_not_found_or_not_accessible_to_current_account",
+    "checked": [
+      "repository metadata",
+      "vulnerable commit",
+      "contents at vulnerable commit",
+      "releases",
+      "latest release",
+      "Actions artifacts",
+      "Actions caches",
+      "tarball at vulnerable commit",
+      "zipball at vulnerable commit"
+    ]
+  },
+  "asset_inventory": {
+    "aragon_organization": {
+      "visible_repositories": 210,
+      "repositories_scanned_successfully": 210,
+      "releases": 1014,
+      "release_assets": 232,
+      "benqi_or_audited_commit_asset_matches": 0,
+      "relevant_release_metadata_only": {
+        "repository": "aragon/app",
+        "tag": "v1.15.0",
+        "observation": "Release body mentions the GaugeRegistrar UI; it has no recoverable audited Solidity asset."
+      }
+    },
+    "actions_artifacts": {
+      "repositories_scanned_successfully": 210,
+      "artifacts": 5389,
+      "active_artifacts": 247,
+      "exact_audited_commit_matches": 0,
+      "audited_contract_identifier_matches": 0,
+      "benqi_metadata_matches": 37,
+      "benqi_matches_expired": 37,
+      "benqi_match_repository": "aragon/app",
+      "benqi_match_name": "nextjs-build",
+      "benqi_match_branches": [
+        "benqi-qa",
+        "app-204-benqi-gauge-registrar-plugin-basic-action-uis"
+      ],
+      "classification": "frontend Next.js builds, not the audited contract source",
+      "download_probe": "410_gone"
+    },
+    "audit_report_repositories": {
+      "Cyfrin/cyfrin-audit-reports": {
+        "releases": 0,
+        "release_assets": 0,
+        "actions_artifacts": 0
+      },
+      "solodit/solodit_content": {
+        "releases": 0,
+        "release_assets": 0,
+        "actions_artifacts": 0
+      }
+    },
+    "github_packages": {
+      "result": "403_missing_read_packages_scope",
+      "package_types_checked": [
+        "container",
+        "npm",
+        "maven",
+        "rubygems",
+        "nuget"
+      ],
+      "interpretation": "ambiguous_scope_blocker_not_evidence_of_absence"
+    }
+  },
+  "code_search": {
+    "api": "GET /search/code",
+    "pass_1_exact_high_entropy": [
+      {"query": "\"calculateMarketBudgetUsed\" language:Solidity", "total_count": 0},
+      {"query": "\"getGaugeByRewardController\" language:Solidity", "total_count": 0},
+      {"query": "\"IBenqiEcosystemModuleErrors\" language:Solidity", "total_count": 0},
+      {"query": "\"IUnifiedBudgetAllocatorEventsAndErrors\" language:Solidity", "total_count": 0},
+      {"query": "\"ControllerAlreadyRegistered\" \"rewardControllerToModule\" language:Solidity", "total_count": 0},
+      {"query": "\"NoModulesConfigured\" \"VotingStillActive\" language:Solidity", "total_count": 0},
+      {"query": "\"hasRegisteredSupplyGauge\" language:Solidity", "total_count": 0},
+      {"query": "\"testPoC_bufferWindowSkipsEpoch\"", "total_count": 4},
+      {"query": "\"test_deactivateSupplyGauge_usesExistingSpeed\"", "total_count": 4},
+      {"query": "\"getAllRegisteredGaugeDetails\" language:Solidity", "total_count": 0}
+    ],
+    "pass_2_broader_contract_terms": [
+      {"query": "UnifiedBudgetAllocator language:Solidity", "total_count": 0},
+      {"query": "BenqiEcosystemModule language:Solidity", "total_count": 0},
+      {"query": "BenqiCoreModule language:Solidity", "total_count": 0},
+      {"query": "GaugeRegistrar \"GAUGE_REGISTRAR_ROLE\" language:Solidity", "total_count": 0},
+      {"query": "DistributionManager \"ZeroTotalVotes\" language:Solidity", "total_count": 0},
+      {"query": "SpeedCalculator \"SPEED_PRECISION\" language:Solidity", "total_count": 0},
+      {"query": "\"ModuleForControllerSet\" language:Solidity", "total_count": 0},
+      {"query": "\"epochGaugeVotes\" \"RegisteredGauge\" language:Solidity", "total_count": 0},
+      {"query": "\"Unable to find emission token in qiToken configs\"", "total_count": 5},
+      {"query": "\"registerGauge(address _qiToken\" language:Solidity", "total_count": 0}
+    ],
+    "pass_3_fork_inclusive": [
+      {"query": "\"calculateMarketBudgetUsed\" fork:true", "total_count": 3},
+      {"query": "\"getGaugeByRewardController\" fork:true", "total_count": 0},
+      {"query": "\"IBenqiEcosystemModuleErrors\" fork:true", "total_count": 3},
+      {"query": "\"IUnifiedBudgetAllocatorEventsAndErrors\" fork:true", "total_count": 3},
+      {"query": "UnifiedBudgetAllocator language:Solidity fork:true", "total_count": 0},
+      {"query": "BenqiCoreModule language:Solidity fork:true", "total_count": 0},
+      {"query": "\"rewardControllerToModule\" fork:true", "total_count": 3},
+      {"query": "\"hasRegisteredSupplyGauge\" fork:true", "total_count": 3},
+      {"query": "\"ModuleForControllerSet\" fork:true", "total_count": 3},
+      {"query": "\"getAllRegisteredGaugeDetails\" fork:true", "total_count": 6}
+    ],
+    "matched_classes": {
+      "official_audit_markdown": {
+        "repository": "Cyfrin/cyfrin-audit-reports",
+        "path": "reports_md/2025-11-10-cyfrin-benqi-governance-v2.0.md",
+        "blob_sha": "623e91bd719872b8858305d30ad7fff69be95ef2",
+        "classification": "audit-report text and PoCs, not source code"
+      },
+      "audit_report_copies": [
+        "solodit/solodit_content",
+        "ChunWang1998/audit_knowledge-base-factory",
+        "AdigunQ/ralph-smart",
+        "Alexsio274ltd/cyfrin-audit-reportss",
+        "Burnnnnny/cyfrin-audit-reports"
+      ],
+      "frontend_forks": [
+        {"repository": "Axodus/aragon-app", "source": "aragon/app"},
+        {"repository": "mzfshark/aragon-app", "source": "aragon/app"},
+        {"repository": "sponsian/orcanize-app", "source": "aragon/app"}
+      ],
+      "frontend_paths": [
+        "src/actions/gaugeRegistrar/constants/gaugeRegistrarAbi.ts",
+        "src/actions/gaugeRegistrar/hooks/useGaugeRegistrarGauges/useGaugeRegistrarGauges.ts"
+      ],
+      "unrelated_solidity_hit": {
+        "repository": "Mach1Btc/avalanche-basics",
+        "path": "contracts/Benqi/Isolated Markets/rewards/MultiRewardDistributor.sol",
+        "matched_only": "generic emission-token error phrase",
+        "classification": "different BENQI system and not an audited-path match"
+      }
+    },
+    "solidity_source_result": "zero_matches_for_audited_contract_names_and_high_entropy_identifiers"
+  },
+  "snippet_crosswalk": [
+    {
+      "report_id": "L-01",
+      "ocr_pages": [6, 7],
+      "identifiers": ["_collectVotes", "epochGaugeVotes(0, gaugeAddress)", "enableUpdateVotingPowerHook"],
+      "report_named_paths": ["DistributionManager.sol", "DistributionManagerSetup.sol"],
+      "match": "official and copied audit Markdown only"
+    },
+    {
+      "report_id": "L-05",
+      "ocr_pages": [9, 10, 11, 12],
+      "identifiers": ["calculateMarketBudgetUsed", "hasRegisteredSupplyGauge", "hasRegisteredBorrowGauge"],
+      "report_named_paths": ["BenqiCoreModule.sol", "DistributionManager.sol"],
+      "match": "official and copied audit Markdown only"
+    },
+    {
+      "report_id": "L-07",
+      "ocr_pages": [14, 15],
+      "identifiers": ["_validateCanDistribute", "NoModulesConfigured", "VotingStillActive", "testPoC_bufferWindowSkipsEpoch"],
+      "report_named_paths": ["DistributionManager.sol", "Clock.sol", "DistributorManager.distribute.t.sol"],
+      "match": "official and copied audit Markdown only"
+    },
+    {
+      "report_id": "L-08",
+      "ocr_pages": [15, 16],
+      "identifiers": ["calculateSpeeds", "hasRegisteredSupplyGauge", "test_deactivateSupplyGauge_usesExistingSpeed"],
+      "report_named_paths": ["BenqiCoreModule.sol", "BenqiCoreModule.generateActions.t.sol"],
+      "match": "official and copied audit Markdown only"
+    },
+    {
+      "report_id": "L-11",
+      "ocr_pages": [17, 18],
+      "identifiers": ["rewardControllerToModule", "_activeRewardControllers", "getGaugeByRewardController", "ZeroTotalVotes"],
+      "report_named_paths": ["DistributionManager.sol", "GaugeRegistrar.sol", "UnifiedBudgetAllocator.sol"],
+      "match": "official and copied audit Markdown only"
+    }
+  ],
+  "conclusion": {
+    "pdf_ocr_to_report_match": "confirmed",
+    "pdf_ocr_to_frontend_abi_match": "partial_interface_only",
+    "pdf_ocr_to_audited_solidity_tree_match": "not_found",
+    "exact_commit_object_recovered": false,
+    "snapshot_gate": "failed_closed",
+    "candidate_creation_allowed": false
+  }
+}

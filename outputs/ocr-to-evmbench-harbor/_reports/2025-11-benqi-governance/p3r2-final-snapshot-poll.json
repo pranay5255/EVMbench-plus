@@ -1,0 +1,43 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_snapshot_poll.v1",
+  "phase": "P3",
+  "report_group_id": "2025-11-benqi-governance",
+  "checked_at": "2026-07-31T13:15:01Z",
+  "requested_repository": "https://github.com/aragon/benqi-governance",
+  "requested_commit": "ded42b671f112eef318482a8c9f10329d0aeef65",
+  "checks": {
+    "github_authenticated_repository_api": {
+      "http_status": 404,
+      "result": "not_found_or_not_authorized"
+    },
+    "github_git_smart_http": {
+      "result": "repository_not_found"
+    },
+    "github_authenticated_exact_commit_search": {
+      "total_count": 0,
+      "incomplete_results": false
+    },
+    "github_authenticated_repository_and_fork_search": {
+      "query": "benqi-governance in:name fork:true",
+      "total_count": 0,
+      "incomplete_results": false
+    },
+    "ecosystems_commits_repository": {
+      "last_synced_at": null,
+      "last_synced_commit": null,
+      "total_commits": null
+    },
+    "ecosystems_commits_listing": []
+  },
+  "snapshot_recovered": false,
+  "detached_checkout_possible": false,
+  "audited_scope_verifiable": false,
+  "framework_verifiable": false,
+  "candidate_creation_permitted": false,
+  "workflow_status": "failed_closed_pending_external_snapshot_evidence",
+  "unblocking_evidence": [
+    "Access to the original repository for the authenticated GitHub account, including required organization SSO authorization.",
+    "An official mirror containing the exact vulnerable commit object.",
+    "A trusted Git bundle containing the exact commit and all required submodules."
+  ]
+}

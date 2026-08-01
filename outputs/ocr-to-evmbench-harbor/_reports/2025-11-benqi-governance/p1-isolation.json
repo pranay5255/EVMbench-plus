@@ -1,0 +1,32 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "phase": "P1",
+  "report_group_id": "2025-11-benqi-governance",
+  "recorded_at": "2026-07-31T12:46:03Z",
+  "opd_base": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "dirty": true,
+    "porcelain_line_count": 328,
+    "porcelain_sha256": "100b9203530399a0db4875f9ed778a8f04e0303e7d138c39d02cbc4a1c60b043",
+    "handling": "Preserved. New evidence is confined to the Benqi report directory; no existing candidate was edited."
+  },
+  "canonical_evmbench": {
+    "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "dirty": true,
+    "porcelain_line_count": 94,
+    "porcelain_sha256": "b8cc233d3ee6a7b835766e52aaf0c31793f19bd529f315da9637d4517fbcb82b",
+    "handling": "Read-only. It was not used for discovery, validation, admission, or generation."
+  },
+  "isolated_repository_review": {
+    "path": "/tmp/benqi-governance-review.7XuCDS/repo",
+    "operation": "git clone --filter=blob:none --no-checkout https://github.com/aragon/benqi-governance.git",
+    "result": "failed_repository_not_found",
+    "checkout_created": false
+  },
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-11-benqi-governance",
+  "candidate_path_exists": false,
+  "harbor_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-11-benqi-governance",
+  "harbor_path_exists": false
+}

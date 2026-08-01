@@ -1,0 +1,56 @@
+{
+  "schema_version": "benqi_governance.snapshot_recovery.final_authenticated_poll.v1",
+  "report_group_id": "2025-11-benqi-governance",
+  "recorded_at": "2026-07-31T14:15:58Z",
+  "transport": "gh api in the GitHub CLI",
+  "authentication": {
+    "account": "pranay5255",
+    "oauth_scopes": [
+      "gist",
+      "read:org",
+      "repo",
+      "workflow"
+    ],
+    "token_recorded": false
+  },
+  "requested_snapshot": {
+    "repository": "aragon/benqi-governance",
+    "vulnerable_commit": "ded42b671f112eef318482a8c9f10329d0aeef65"
+  },
+  "checks": [
+    {
+      "endpoint": "GET /repos/aragon/benqi-governance",
+      "http_status": 404,
+      "result": "not_found_or_not_accessible_to_authenticated_account",
+      "github_request_id": "8D7E:3BD591:A934CE:AF09CC:6A6CAE1E"
+    },
+    {
+      "endpoint": "GET /repos/aragon/benqi-governance/git/commits/ded42b671f112eef318482a8c9f10329d0aeef65",
+      "http_status": 404,
+      "result": "commit_object_not_found_or_not_accessible_to_authenticated_account",
+      "github_request_id": "8D90:394CD7:A28306:A84FD9:6A6CAE1E"
+    },
+    {
+      "endpoint": "GET /search/commits?q=ded42b671f112eef318482a8c9f10329d0aeef65",
+      "http_status": 200,
+      "total_count": 0,
+      "incomplete_results": false,
+      "result": "zero_public_or_accessible_exact_commit_matches"
+    }
+  ],
+  "interpretation": {
+    "repository_deleted_proven": false,
+    "repository_unavailable_to_current_account": true,
+    "exact_commit_object_recovered": false,
+    "accepted_unblockers": [
+      "Grant pranay5255 access to aragon/benqi-governance, including any required Aragon organization SSO authorization.",
+      "Provide an official public mirror containing the exact commit object.",
+      "Provide a trusted Git bundle containing the exact commit and required submodules."
+    ]
+  },
+  "conclusion": {
+    "snapshot_gate": "failed_closed",
+    "candidate_creation_allowed": false,
+    "workflow_state": "blocked_pending_external_snapshot_access"
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "schema_version": "benqi_governance.foundry_onchain_simulation.v1",
+  "report_group_id": "2025-11-benqi-governance",
+  "recorded_at": "2026-07-31T14:11:57Z",
+  "purpose": "Read-only Foundry RPC calls to test whether a live Avalanche deployment can corroborate report-facing interfaces without substituting for the exact audited Git snapshot.",
+  "audited_source": {
+    "repository": "aragon/benqi-governance",
+    "vulnerable_commit": "ded42b671f112eef318482a8c9f10329d0aeef65",
+    "audit_report_date": "2025-11-10",
+    "exact_snapshot_recovered": false
+  },
+  "foundry": {
+    "download_transport": "gh api in the GitHub CLI",
+    "repository": "foundry-rs/foundry",
+    "release_tag": "v1.7.1",
+    "release_asset_id": 415095756,
+    "release_asset_name": "foundry_v1.7.1_linux_amd64.tar.gz",
+    "github_release_digest": "sha256:cf7e688ed0c4c48adffca788b496076e31060b67ac5afe1e43dbb5499c20c88b",
+    "verified_archive_sha256": "cf7e688ed0c4c48adffca788b496076e31060b67ac5afe1e43dbb5499c20c88b",
+    "cast_sha256": "ccd95a4607ca3ebfcb88bb90e7235cdb7f0564f5f1afa17478d5fccabbb222cb",
+    "forge_sha256": "4f77da0810de94325734855d0ad58d70640aa8a5b2a837608ddf8c26da34355c",
+    "version": "1.7.1",
+    "commit": "4072e48705af9d93e3c0f6e29e93b5e9a40caed8",
+    "staging_directory": "/tmp/foundry-benqi.SRKpXb",
+    "installed_into_workspace": false
+  },
+  "rpc": {
+    "chain": "Avalanche C-Chain",
+    "chain_id": 43114,
+    "url": "https://api.avax.network/ext/bc/C/rpc",
+    "mode": "read_only_eth_call_and_historical_state_queries",
+    "transactions_broadcast": 0
+  },
+  "deployment": {
+    "proxy": "0xe3522b2828fd106e648b310b9c37909c261bba8d",
+    "eip1967_implementation_slot": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+    "slot_at_block_73974527": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "slot_at_block_73974528": "0x00000000000000000000000024591406f4090c2bd5b35913e8e4c8cc415d1f51",
+    "implementation": "0x24591406F4090C2Bd5B35913e8E4c8cC415d1f51",
+    "implementation_runtime_bytes": 9265,
+    "compiler_from_cbor_metadata": "0.8.30",
+    "metadata_cid_v1": "bafybeigrer7mxouw4772fvr2vugo4c7otzqgubqdok6sdscxenell3otpq",
+    "first_observed_gauge_registration_block": 73974570,
+    "first_observed_gauge_registration_time": "2025-12-18T13:13:37Z",
+    "classification": "post_audit_live_deployment_not_the_2025_11_10_audited_snapshot"
+  },
+  "historical_transaction": {
+    "hash": "0x29c174ad444fbdcec2890a94d0ce832fb1654b8440850bcd4ba01f236c1348cd",
+    "block": 73974570,
+    "status": "success",
+    "sender": "0x376c649111543C46Ce15fD3a9386b4F202A6E06c",
+    "outer_target": "0xa0b548ca2D91f97d494F519cCC35d46279E244Ae",
+    "nested_target": "0xe3522b2828fd106e648b310b9c37909c261bba8d",
+    "nested_selector": "0x0de61ed0",
+    "nested_signature": "registerGauge(address,uint8,address,string)",
+    "receipt_gas_used": 452231
+  },
+  "registered_gauges_at_block_73974570": [
+    {
+      "gauge": "0xF382051b04Eec8E31b4e493c59DCA9A634957B3a",
+      "qi_token": "0x1D0e6c24611fDAeF8eDAab57E2016e3819d6f78B",
+      "incentive": 0,
+      "reward_controller": "0xB0A8acBE3432D75dF7D3992de2a8560924544595"
+    },
+    {
+      "gauge": "0x908B53Cf8891510bE07c2db0aC906042817A4739",
+      "qi_token": "0xED41Aa0fCe34A14CAA5f2e5dEd7E0b998733b28D",
+      "incentive": 0,
+      "reward_controller": "0xB0A8acBE3432D75dF7D3992de2a8560924544595"
+    },
+    {
+      "gauge": "0x1b72C36eCE65E56010D763b982Cd2f04067Ba8aa",
+      "qi_token": "0xcaFd3E163E7dc6335DB337E59A19B4f36b6322d1",
+      "incentive": 0,
+      "reward_controller": "0xB0A8acBE3432D75dF7D3992de2a8560924544595"
+    }
+  ],
+  "foundry_api_comparison": {
+    "report_ocr_anchor": "getGaugeByRewardController(address)",
+    "report_ocr_anchor_result_on_live_deployment": "reverted_with_empty_data",
+    "live_selector": "getGaugesByRewardController(address)",
+    "live_selector_result_count": 3,
+    "live_related_selectors": [
+      "registerGauge(address,uint8,address,string)",
+      "unregisterGauge(address,uint8,address)",
+      "getGaugesByRewardController(address)",
+      "getGaugeCountByRewardController(address)",
+      "getGaugeInfo(address)",
+      "getGaugeAddress(address,uint8,address)",
+      "getAllRegisteredGaugeAddresses()",
+      "getAllRegisteredGaugeDetails()"
+    ],
+    "interpretation": "The singular report-facing getter is absent while a plural getter is present, so the live runtime materially differs from the audited interface."
+  },
+  "simulation": {
+    "command_family": "cast call",
+    "block": 73974570,
+    "from": "0xa0b548ca2D91f97d494F519cCC35d46279E244Ae",
+    "target": "0xe3522b2828fd106e648b310b9c37909c261bba8d",
+    "signature": "registerGauge(address,uint8,address,string)(address)",
+    "arguments": {
+      "qi_token": "0x1D0e6c24611fDAeF8eDAab57E2016e3819d6f78B",
+      "incentive": 1,
+      "reward_controller": "0xB0A8acBE3432D75dF7D3992de2a8560924544595",
+      "metadata": "ipfs://simulation-only"
+    },
+    "returned_gauge": "0x4946845D2D276D003ddFDdd4558419812aC1Fdfd",
+    "result": "eth_call_succeeded",
+    "broadcast": false,
+    "state_persisted": false
+  },
+  "source_resolution": {
+    "routescan_proxy_source": "verified_erc1967proxy_only",
+    "implementation_verified_source": false,
+    "sourcify_match": false,
+    "ipfs_metadata_recovered": false,
+    "blockscout_eth_bytecode_db": {
+      "endpoint": "POST /api/v2/bytecodes/sources:search-all",
+      "request_bytecode_type": "DEPLOYED_BYTECODE",
+      "eth_bytecode_db_sources": 0,
+      "sourcify_sources": 0,
+      "alliance_sources": 0
+    }
+  },
+  "limitations": [
+    "The deployment appeared after the audit report date.",
+    "The live ABI differs from the report-facing interface.",
+    "A successful eth_call demonstrates current deployed behavior under supplied historical state; it does not recover or authenticate a Git tree.",
+    "The official Avalanche endpoint does not expose debug_traceTransaction for this request, and no trace output is treated as snapshot evidence."
+  ],
+  "conclusion": {
+    "foundry_read_only_simulation": "passed",
+    "live_deployment_correlated_to_report_domain": true,
+    "live_deployment_admissible_as_audited_source_snapshot": false,
+    "exact_commit_object_recovered": false,
+    "snapshot_gate": "failed_closed",
+    "candidate_creation_allowed": false
+  }
+}

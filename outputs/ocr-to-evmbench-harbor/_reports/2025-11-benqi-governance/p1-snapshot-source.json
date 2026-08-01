@@ -1,0 +1,138 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.snapshot_source.v1",
+  "phase": "P3",
+  "report_group_id": "2025-11-benqi-governance",
+  "generated_at": "2026-07-31T12:46:03Z",
+  "status": "blocked_missing_exact_snapshot",
+  "requested_snapshot": {
+    "repository_url": "https://github.com/aragon/benqi-governance",
+    "vulnerable_commit": "ded42b671f112eef318482a8c9f10329d0aeef65",
+    "source": "Checksum-verified PDF page-4 annotations",
+    "mode": "detect"
+  },
+  "supplied_snapshot": null,
+  "discovery": [
+    {
+      "method": "isolated_git_clone",
+      "target": "https://github.com/aragon/benqi-governance.git",
+      "result": "repository_not_found",
+      "checkout_created": false
+    },
+    {
+      "method": "github_repository_api_authenticated",
+      "target": "aragon/benqi-governance",
+      "result": "not_found_or_not_authorized",
+      "http_status": 404
+    },
+    {
+      "method": "github_exact_commit_search_authenticated",
+      "target": "ded42b671f112eef318482a8c9f10329d0aeef65",
+      "result": "zero_results",
+      "incomplete_results": false
+    },
+    {
+      "method": "github_report_linked_fix_commit_search_authenticated",
+      "target": "3ab793e0115d3595f95400b55e43d9e1693da0a8",
+      "result": "zero_results",
+      "incomplete_results": false
+    },
+    {
+      "method": "github_repository_and_fork_search_authenticated",
+      "target": "benqi-governance",
+      "result": "zero_matching_repositories_or_forks",
+      "incomplete_results": false
+    },
+    {
+      "method": "github_code_search_authenticated",
+      "target": ["DistributionManagerSetup", "UnifiedBudgetAllocator"],
+      "result": "zero_matching_public_code",
+      "incomplete_results": false
+    },
+    {
+      "method": "github_aragon_organization_inventory_authenticated",
+      "target": "all visible aragon repositories",
+      "result": "zero names_or_descriptions_matching_benqi"
+    },
+    {
+      "method": "github_raw_and_codeload",
+      "target": "aragon/benqi-governance@ded42b671f112eef318482a8c9f10329d0aeef65",
+      "result": "not_found",
+      "http_status": 404
+    },
+    {
+      "method": "github_pull_patch_cdn",
+      "target": "aragon/benqi-governance pull request 13",
+      "result": "redirected_to_repository_then_not_found",
+      "http_status": 404
+    },
+    {
+      "method": "software_heritage_origin_lookup",
+      "target": [
+        "https://github.com/aragon/benqi-governance",
+        "https://github.com/aragon/benqi-governance.git"
+      ],
+      "result": "origins_not_found",
+      "http_status": 404
+    },
+    {
+      "method": "internet_archive_wayback_availability",
+      "target": [
+        "repository root",
+        "vulnerable commit page",
+        "vulnerable tree page",
+        "report-linked pull request 13"
+      ],
+      "result": "no_archived_snapshots_at_report_time"
+    },
+    {
+      "method": "local_filesystem_search",
+      "target_roots": ["/home/experiments_base", "/root", "/tmp"],
+      "target_names_and_strings": [
+        "DistributionManager.sol",
+        "UnifiedBudgetAllocator.sol",
+        "GaugeRegistrar.sol",
+        "ded42b671f112eef318482a8c9f10329d0aeef65"
+      ],
+      "result": "only_pdf_ocr_and_current_session_evidence; no_source_tree"
+    },
+    {
+      "method": "local_git_object_database_search",
+      "target_roots": ["/home/experiments_base", "/root", "/tmp"],
+      "git_databases_checked": 29,
+      "target_commit": "ded42b671f112eef318482a8c9f10329d0aeef65",
+      "result": "zero_commit_object_matches"
+    }
+  ],
+  "github_authentication": {
+    "account": "pranay5255",
+    "active": true,
+    "verified_via": "gh api user",
+    "token_scopes_observed": ["gist", "read:org", "repo", "workflow"],
+    "requested_repository_accessible": false,
+    "security_note": "No token value was recorded. A 404 cannot distinguish deletion from lack of authorization."
+  },
+  "framework": {
+    "status": "unresolved",
+    "report_only_indicators": ["Foundry-style .t.sol filenames", "vm.warp", "vm.prank", "assertEq"],
+    "reason": "Framework and dependency versions must be verified from the exact vulnerable checkout, not inferred from report PoCs."
+  },
+  "accepted_recovery_routes": [
+    "Grant the authenticated GitHub account access to the original repository, including required organization SSO authorization.",
+    "Supply an official public mirror containing the exact commit object.",
+    "Supply a trusted Git bundle containing the exact commit and all required submodules."
+  ],
+  "rejected_substitutes": [
+    "OCR text",
+    "PDF code snippets and PoCs",
+    "report-linked fixed pull-request descriptions",
+    "a later public Aragon or BENQI repository",
+    "deployed verified source without exact Git-object proof"
+  ],
+  "summary": {
+    "exact_snapshot_found": false,
+    "git_commit_object_available": false,
+    "canonical_repository_verified": false,
+    "framework_verified": false,
+    "p3_exit_criterion_met": false
+  }
+}

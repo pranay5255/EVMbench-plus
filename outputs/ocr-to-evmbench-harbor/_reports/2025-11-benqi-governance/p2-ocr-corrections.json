@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "pdf_id": "pdf_003649_db4d3200ba27",
+  "source_ocr_modified": false,
+  "corrections": [
+    {
+      "page_number": 3,
+      "ocr_text": "benqi-governance/src/contracts/BenqiEcoSystemModule.sol",
+      "pdf_verified_text": "benqi-governance/src/contracts/BenqiEcosystemModule.sol",
+      "reason": "Case-sensitive audited-path transcription."
+    },
+    {
+      "page_number": 4,
+      "ocr_text": "ded42b671f11...",
+      "pdf_verified_text": "ded42b671f112eef318482a8c9f10329d0aeef65",
+      "reason": "The visible table is intentionally abbreviated; the page-4 PDF hyperlink contains the full vulnerable commit."
+    },
+    {
+      "page_number": 4,
+      "ocr_text": "benqi-governance",
+      "pdf_verified_text": "https://github.com/aragon/benqi-governance",
+      "reason": "The page-4 PDF hyperlink resolves the repository label to the canonical URL named by the report."
+    }
+  ],
+  "navigation_only_note": "Code-block OCR contains additional character-level errors. It was not normalized or accepted as code evidence."
+}

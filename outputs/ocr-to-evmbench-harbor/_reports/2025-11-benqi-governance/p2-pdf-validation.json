@@ -1,0 +1,105 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "status": "passed",
+  "validated_at": "2026-07-31T12:46:03Z",
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/cyfrin-audit-reports/reports/2025-11-10-cyfrin-benqi-governance-v2.0.pdf",
+    "sha256_before": "dd1ac726e8088bda57191043993fd9eba126f358d44156344d2ed3b56bc48128",
+    "sha256_after": "dd1ac726e8088bda57191043993fd9eba126f358d44156344d2ed3b56bc48128",
+    "unchanged": true,
+    "size_bytes": 287721,
+    "pages": 29,
+    "page_size_points": [612, 792],
+    "page_rotation": 0,
+    "encrypted": false,
+    "pdf_version": "1.7"
+  },
+  "ocr_jsonl": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003649_db4d3200ba27.jsonl",
+    "sha256_before": "2de66fc23d5216db39fa0d492cebf886a57e9e2a7abd0ba81d87f2dd5b024522",
+    "sha256_after": "2de66fc23d5216db39fa0d492cebf886a57e9e2a7abd0ba81d87f2dd5b024522",
+    "unchanged": true,
+    "size_bytes": 229644,
+    "records": 29,
+    "page_numbers": "1..29",
+    "all_source_abs_paths_match_pdf": true,
+    "all_source_pdf_sha256_values_match_pdf": true
+  },
+  "text_and_render_review": {
+    "layout_text_form_feed_count": 29,
+    "physical_to_exported_page_mapping": "one_to_one",
+    "methods": [
+      "pdftotext -layout full-report extraction",
+      "pdfinfo physical metadata and annotation URL extraction",
+      "page-level OCR heading extraction",
+      "rendered inspection of scope, summary, and asset-relevant finding pages"
+    ],
+    "rendered_pages_inspected": [3, 4, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18]
+  },
+  "pdf_hyperlink_corrections": {
+    "repository_url": "https://github.com/aragon/benqi-governance",
+    "vulnerable_commit_url": "https://github.com/aragon/benqi-governance/blob/ded42b671f112eef318482a8c9f10329d0aeef65",
+    "vulnerable_commit": "ded42b671f112eef318482a8c9f10329d0aeef65"
+  },
+  "audited_scope": [
+    "src/contracts/BenqiCoreModule.sol",
+    "src/contracts/BenqiEcosystemModule.sol",
+    "src/contracts/CallerId.sol",
+    "src/contracts/Clock.sol",
+    "src/contracts/DistributionManager.sol",
+    "src/contracts/DistributionManagerSetup.sol",
+    "src/contracts/ExecuteSelectorCondition.sol",
+    "src/contracts/GaugeRegistrar.sol",
+    "src/contracts/SpeedCalculator.sol",
+    "src/contracts/UnifiedBudgetAllocator.sol"
+  ],
+  "page_roles": [
+    {"pages": "1", "role": "report_identity_version_auditors_date"},
+    {"pages": "2", "role": "contents_and_finding_index"},
+    {"pages": "3", "role": "protocol_summary_audited_scope"},
+    {"pages": "4-5", "role": "repository_commit_counts_and_finding_summary"},
+    {"pages": "6-18", "role": "low_risk_findings"},
+    {"pages": "19-27", "role": "informational_findings"},
+    {"pages": "28-29", "role": "gas_optimizations"}
+  ],
+  "finding_page_ranges": [
+    {"report_id": "L-01", "pages": "6-7"},
+    {"report_id": "L-02", "pages": "7"},
+    {"report_id": "L-03", "pages": "8"},
+    {"report_id": "L-04", "pages": "8-9"},
+    {"report_id": "L-05", "pages": "9-12"},
+    {"report_id": "L-06", "pages": "12-13"},
+    {"report_id": "L-07", "pages": "14-15"},
+    {"report_id": "L-08", "pages": "15-16"},
+    {"report_id": "L-09", "pages": "16"},
+    {"report_id": "L-10", "pages": "16-17"},
+    {"report_id": "L-11", "pages": "17-18"},
+    {"report_id": "I-1", "pages": "19"},
+    {"report_id": "I-2", "pages": "19-20"},
+    {"report_id": "I-3", "pages": "20"},
+    {"report_id": "I-4", "pages": "20-26"},
+    {"report_id": "I-5", "pages": "26-27"},
+    {"report_id": "G-1", "pages": "28"},
+    {"report_id": "G-2", "pages": "28"},
+    {"report_id": "G-3", "pages": "28-29"},
+    {"report_id": "G-4", "pages": "29"},
+    {"report_id": "G-5", "pages": "29"}
+  ],
+  "checks": {
+    "physical_page_count_matches_ocr_source_page_count": true,
+    "exact_ordered_ocr_page_coverage": true,
+    "scope_and_summary_pages_reconciled": true,
+    "all_21_finding_boundaries_reconciled": true,
+    "severity_counts_reconciled": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 11,
+      "informational": 5,
+      "gas": 5,
+      "total": 21
+    },
+    "ocr_corrections_recorded_separately": true,
+    "source_files_modified": false
+  }
+}
