@@ -1,0 +1,43 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v1",
+  "phase": "P6",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "image": "evmbench-burve:c1r1",
+  "runtime_network": "none",
+  "repository": {
+    "head": "f0597768fee2d00c17429941f4721475e1ca5723",
+    "reachable_commit_count": 1,
+    "git_status_line_count": 0,
+    "tracked_file_count": 64,
+    "top_git_object_file_count": 81,
+    "unreachable_git_object_count": 0
+  },
+  "post_audit_objects": {
+    "checked": [
+      "f383c7f93cadc853d27a0722c5af908211c44f98",
+      "e0930639405dd1fe023cc6b2b73fbd8882b17146",
+      "a2a6cc139536df46bfbc3de1056777c18fb27d58",
+      "01a33cf68330b93b2bf6aac755c3094a7c8d7786",
+      "e89ebff2c7daafc98e94c66e4273e4c366949c76"
+    ],
+    "present_count": 0
+  },
+  "vendored_dependencies": {
+    "source_directories_present": true,
+    "nested_git_metadata_present": false,
+    "submodule_object_store_present": false,
+    "working_gitmodules_size_bytes": 0,
+    "gitmodules_index_flag": "h",
+    "automatic_reinstall_disabled": true,
+    "source_contracts_modified": false
+  },
+  "offline_force_build": {
+    "network": "none",
+    "force_recompiled_files": 109,
+    "passed": true,
+    "automatic_dependency_install_attempted": false
+  },
+  "summary": {"ok": true}
+}

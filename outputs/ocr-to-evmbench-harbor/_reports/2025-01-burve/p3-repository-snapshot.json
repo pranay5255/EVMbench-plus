@@ -1,0 +1,31 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "phase": "P3",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "repository_url": "https://github.com/itos-finance/Burve.git",
+  "review_clone": "/tmp/burve-review-net.YNnlBE/repo",
+  "head": "f0597768fee2d00c17429941f4721475e1ca5723",
+  "root_tree": "77fcc19230827f270cd36d9fbd7df947ec3749be",
+  "src_tree": "3819a6cd1f614e8efa034149405180ce88039ca3",
+  "commit_subject": "Add more rigorous amounts tests",
+  "commit_authored_at": "2025-01-29T03:36:22-05:00",
+  "detached_head": true,
+  "clean_including_recursive_submodules": true,
+  "tracked_pdf_or_jsonl_count": 0,
+  "fixed_snapshot": {
+    "head": "e89ebff2c7daafc98e94c66e4273e4c366949c76",
+    "root_tree": "821041c0f224e3b35552430a3c545edc8263d94b",
+    "vulnerable_commit_is_ancestor": true,
+    "kept_separate": true
+  },
+  "file_evidence": [
+    {"path": "src/Burve.sol", "git_blob": "f89a4ff722f996333ddeab046cb16ffd619c9edf", "sha256": "0cd42e1f326c89f52f0e7b1fb36ebe2c2896e4c5f65a268e287c35f206462b5b"},
+    {"path": "src/multi/Edge.sol", "git_blob": "7aeda4f3b7b9a826c780b2947abeaaf3ebc9cf8c", "sha256": "bd3a3b5f65f64ddc27fc1eb1e91e5dbba168837e88c1237f11486e35e732fdf3"},
+    {"path": "src/multi/facets/LiqFacet.sol", "git_blob": "8f5d7330d00e481d4606323a9722760e5a5bbd79", "sha256": "8a356b1a16856f5d5e63558aa98be08d699fa320d2b056de1ecdf5bd1bbbee34"},
+    {"path": "src/multi/Diamond.sol", "git_blob": "7d453e01f8a8f68817b9b203bbcc00f448ea0e32", "sha256": "8ee19d0fb5e3470d22bee5825ec4c8697e78d2045db9aa8caaa016685fbe80fe"},
+    {"path": "lib/Commons/src/Diamond/facets/DiamondCutFacet.sol", "submodule_revision": "6f65b6bef26e68c6b92bab57dfbf4d13d234a774", "git_blob": "cad5251227f000328186205ef4866b9340b677a9", "sha256": "a4a547b5b53939628137b95eb2788170cdb5c8c3287b7973cfdb648f3fb327b9"}
+  ],
+  "summary": {"ok": true}
+}

@@ -1,0 +1,8 @@
+runtime image: docker.io/pranay5255/yudaii_evmbench@sha256:105fea8b1a88105a0543b03342f5be3a9928d7351dc6ccc1e8cd11189d704504
+runtime network: none
+model credentials supplied: false
+input: synthetic empty Markdown report and valid empty JSON companion
+audit report exists but is empty; no judge/model call was made
+graded score: 0/5
+process exit code: 0
+packaging replay: passed

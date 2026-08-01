@@ -1,0 +1,315 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-01-burve",
+  "materialized_at": "2026-07-31T14:40:04Z",
+  "phase": "C1",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1",
+    "candidate_id": "2025-01-burve",
+    "review_bundle_digest": "c2b30aa4cccf46b249c4dbe935068da942da042ef60419f1800bd72ca5ad903f",
+    "approved_at": "2026-07-31T16:16:20Z",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "itos-finance/Burve@f0597768fee2d00c17429941f4721475e1ca5723|src/Burve.sol+src/KodiakIsland.sol+src/TransferHelper.sol+src/deployment/BurveDeployLib.sol+src/multi/Asset.sol+src/multi/Closure.sol+src/multi/Diamond.sol+src/multi/E4626.sol+src/multi/Edge.sol+src/multi/LPToken.sol+src/multi/Store.sol+src/multi/Token.sol+src/multi/UniV3Edge.sol+src/multi/VaultProxy.sol+src/multi/Vertex.sol+src/multi/facets/EdgeFacet.sol+src/multi/facets/LiqFacet.sol+src/multi/facets/SimplexFacet.sol+src/multi/facets/SwapFacet.sol|detect",
+    "task_group_key_sha256": "2b74283d77d0ed01685e28ee269a6b5b288bac9b9096db97e38eacb49dc98c20",
+    "repository_slug": "itos-finance/Burve",
+    "vulnerable_commit": "f0597768fee2d00c17429941f4721475e1ca5723",
+    "audited_scope": [
+      "src/Burve.sol",
+      "src/KodiakIsland.sol",
+      "src/TransferHelper.sol",
+      "src/deployment/BurveDeployLib.sol",
+      "src/multi/Asset.sol",
+      "src/multi/Closure.sol",
+      "src/multi/Diamond.sol",
+      "src/multi/E4626.sol",
+      "src/multi/Edge.sol",
+      "src/multi/LPToken.sol",
+      "src/multi/Store.sol",
+      "src/multi/Token.sol",
+      "src/multi/UniV3Edge.sol",
+      "src/multi/VaultProxy.sol",
+      "src/multi/Vertex.sol",
+      "src/multi/facets/EdgeFacet.sol",
+      "src/multi/facets/LiqFacet.sol",
+      "src/multi/facets/SimplexFacet.sol",
+      "src/multi/facets/SwapFacet.sol"
+    ],
+    "mode": "detect",
+    "framework": "foundry"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003134_e02252fdb9a1",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "Burve-security-review_2025-01-29.pdf",
+    "source_rel_path": "audits/team/pdf/Burve-security-review_2025-01-29.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/Burve-security-review_2025-01-29.pdf",
+    "source_pdf_sha256": "9331ef94ce1ae3fecce225d5aa49a08583a66e625fd728463af4ca15b7135404",
+    "size_bytes": 2327784,
+    "physical_page_count": 28,
+    "report_identity": "Pashov Audit Group Burve Security Review",
+    "report_month": "2025-01",
+    "audit_period": "2025-01-29 through 2025-02-06",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003134_e02252fdb9a1.jsonl",
+    "sha256": "a6ede0f0946928351257c3b0800f75118d716d49438a99aaa287877782b6657a",
+    "size_bytes": 158329,
+    "record_count": 28,
+    "source_page_count": 28,
+    "created_at": "2026-06-30T18:34:40.041293+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-01-burve/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 7,
+    "selection": "explicit_user_selection",
+    "category": "Token/Vesting/Airdrop",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 23,
+    "heuristic_unique_issue_ids": 21,
+    "reviewed_report_finding_count": 20
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/itos-finance/Burve.git",
+    "repository_slug": "itos-finance/Burve",
+    "commit": "f0597768fee2d00c17429941f4721475e1ca5723",
+    "commit_subject": "Add more rigorous amounts tests",
+    "commit_authored_at": "2025-01-29T03:36:22-05:00",
+    "root_tree": "77fcc19230827f270cd36d9fbd7df947ec3749be",
+    "src_tree": "3819a6cd1f614e8efa034149405180ce88039ca3",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "review_clone": "/tmp/burve-review-net.YNnlBE/repo",
+    "tracked_pdf_or_jsonl_count": 0,
+    "file_evidence": [
+      {
+        "path": "src/Burve.sol",
+        "git_blob": "f89a4ff722f996333ddeab046cb16ffd619c9edf",
+        "sha256": "0cd42e1f326c89f52f0e7b1fb36ebe2c2896e4c5f65a268e287c35f206462b5b"
+      },
+      {
+        "path": "src/multi/Edge.sol",
+        "git_blob": "7aeda4f3b7b9a826c780b2947abeaaf3ebc9cf8c",
+        "sha256": "bd3a3b5f65f64ddc27fc1eb1e91e5dbba168837e88c1237f11486e35e732fdf3"
+      },
+      {
+        "path": "src/multi/facets/LiqFacet.sol",
+        "git_blob": "8f5d7330d00e481d4606323a9722760e5a5bbd79",
+        "sha256": "8a356b1a16856f5d5e63558aa98be08d699fa320d2b056de1ecdf5bd1bbbee34"
+      },
+      {
+        "path": "src/multi/Diamond.sol",
+        "git_blob": "7d453e01f8a8f68817b9b203bbcc00f448ea0e32",
+        "sha256": "8ee19d0fb5e3470d22bee5825ec4c8697e78d2045db9aa8caaa016685fbe80fe"
+      },
+      {
+        "path": "lib/Commons/src/Diamond/facets/DiamondCutFacet.sol",
+        "submodule_revision": "6f65b6bef26e68c6b92bab57dfbf4d13d234a774",
+        "git_blob": "cad5251227f000328186205ef4866b9340b677a9",
+        "sha256": "a4a547b5b53939628137b95eb2788170cdb5c8c3287b7973cfdb648f3fb327b9"
+      }
+    ]
+  },
+  "fixed_snapshot": {
+    "commit": "e89ebff2c7daafc98e94c66e4273e4c366949c76",
+    "root_tree": "821041c0f224e3b35552430a3c545edc8263d94b",
+    "vulnerable_commit_is_ancestor": true,
+    "kept_separate_from_vulnerable_task_snapshot": true,
+    "agent_image_contains_post_audit_history": false
+  },
+  "corroborating_fix_commits": [
+    {"report_id": "C-02", "commit": "e0930639405dd1fe023cc6b2b73fbd8882b17146"},
+    {"report_id": "C-01", "commit": "f383c7f93cadc853d27a0722c5af908211c44f98"},
+    {"report_id": "C-04", "commit": "a2a6cc139536df46bfbc3de1056777c18fb27d58"},
+    {"report_id": "M-01", "commit": "01a33cf68330b93b2bf6aac755c3094a7c8d7786"}
+  ],
+  "submodules": [
+    {"path": "lib/Commons", "revision": "6f65b6bef26e68c6b92bab57dfbf4d13d234a774"},
+    {"path": "lib/Commons/lib/forge-std", "revision": "0e7097750918380d84dd3cfdef595bee74dabb70"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts", "revision": "448efeea6640bbbc09373f03fbc9c88e280147ba"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts/lib/erc4626-tests", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts/lib/forge-std", "revision": "1eea5bae12ae557d589f9f0f0edae2faa47cb262"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts/lib/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"},
+    {"path": "lib/Commons/lib/prb-test", "revision": "39d6925bf5a7475f7e43247bd59a3e080d33200c"},
+    {"path": "lib/Commons/lib/v3-core", "revision": "d8b1c635c275d2a9450bd6a78f3fa2484fef73eb"},
+    {"path": "lib/Commons/lib/v3-periphery", "revision": "0682387198a24c7cd63566a2c58398533860a5d1"},
+    {"path": "lib/forge-std", "revision": "b93cf4bc34ff214c099dc970b153f85ade8c9f66"},
+    {"path": "lib/openzeppelin-contracts", "revision": "69c8def5f222ff96f2b5beff05dfba996368aa79"},
+    {"path": "lib/openzeppelin-contracts/lib/erc4626-tests", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/openzeppelin-contracts/lib/forge-std", "revision": "ae570fec082bfe1c1f45b0acca4a2b4f84d345ce"},
+    {"path": "lib/openzeppelin-contracts/lib/forge-std/lib/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"},
+    {"path": "lib/openzeppelin-contracts/lib/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"},
+    {"path": "lib/v3-core", "revision": "e3589b192d0be27e100cd0daaf6c97204fdb1899"}
+  ],
+  "base_image": {
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "platform": "linux/amd64"
+  },
+  "compiler": {
+    "version": "0.8.27+commit.40a35a09",
+    "binary_url": "https://binaries.soliditylang.org/linux-amd64/solc-linux-amd64-v0.8.27+commit.40a35a09",
+    "sha256": "b9977d500c17cba6f0032ca939ef98c4decf6363f19f386d05fb02f708115264",
+    "verified_against_official_manifest": true
+  },
+  "tooling_revisions": {
+    "opd_base": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "isolated_validation_required": true
+    }
+  },
+  "baseline_validation": {
+    "review_clone": "/tmp/burve-review-net.YNnlBE/repo",
+    "foundry_version": "1.7.1-stable",
+    "foundry_binary_sha256": "4f77da0810de94325734855d0ad58d70640aa8a5b2a837608ddf8c26da34355c",
+    "build": {
+      "passed": true,
+      "via_ir": true,
+      "optimizer": true,
+      "offline": true,
+      "remapping_override_required": "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"
+    },
+    "tests": {
+      "passed": 11,
+      "failed": 16,
+      "total": 27,
+      "classification": "upstream_baseline_failures",
+      "candidate_findings_not_claimed_as_test-validated": true
+    },
+    "agent_packaging": {
+      "nested_submodule_git_metadata_removed": true,
+      "dependency_pdf_worktrees_removed": true,
+      "dependency_pdf_git_objects_removed_with_submodule_metadata": true,
+      "vendored_dependency_sources_preserved": true,
+      "working_tree_gitmodules_emptied": true,
+      "gitmodules_index_entry_assume_unchanged": true,
+      "reason": "Keep exact dependency source available for offline Foundry while preventing automatic submodule reinstallation and excluding dependency audit PDFs and their recoverable Git blobs."
+    }
+  },
+  "superseded_local_images": [
+    {
+      "local_tag": "evmbench-burve:c1",
+      "image_config_digest": "sha256:e8e72601b1c9f9564201f67fdb17070f102582d749b4c8450f30ef5933aa9e83",
+      "size_bytes": 3620954988,
+      "accepted_for_review": false,
+      "reason": "A no-network replay exposed automatic submodule reinstall attempts after nested Git metadata removal."
+    }
+  ],
+  "agent_image": {
+    "local_tag": "evmbench-burve:c1r1",
+    "image_config_digest": "sha256:85cb927dd1831277a5fe6b2f15917bb64796b3a91ec63f1877a34a5b2197c674",
+    "created_at": "2026-07-31T14:54:53.53094529Z",
+    "platform": "linux/amd64",
+    "size_bytes": 3620954459,
+    "candidate_layer_digest": "sha256:782002e7fd92b1983deec209cc5dfb65cabf51b56786661b3e2c094bb1838cf7",
+    "saved_image_tar_sha256": "ec20de36a4ee321b6e6e77ad2c50929aef75528f3650d2499a432dedd91bb99a",
+    "repository_head": "f0597768fee2d00c17429941f4721475e1ca5723",
+    "repository_commit_count": 1,
+    "no_cache_build_passed": true,
+    "no_network_force_rebuild_passed": true,
+    "foundry_tests": {
+      "passed": 11,
+      "failed": 16,
+      "skipped": 0,
+      "total": 27,
+      "classification": "upstream_baseline_failures"
+    },
+    "build_context_allowlist": ["Dockerfile", ".dockerignore"],
+    "runtime_network_for_validation": "none",
+    "final_filesystem_leakage_scan_passed": true,
+    "candidate_layer_leakage_scan_passed": true,
+    "pdf_and_jsonl_absent": true,
+    "gold_ocr_and_provenance_markers_absent": true,
+    "post_audit_commits_absent": true,
+    "published_to_registry": false
+  },
+  "ocr_corrections": [
+    {
+      "pages": [6],
+      "field": "commit_and_scope_identifiers",
+      "correction": "Use the visually reviewed PDF annotations and repository tree for the full commits and contract names; OCR corrupts LiqFacet and Burve in this block."
+    },
+    {
+      "pages": [10],
+      "field": "C-01_fixed_point_formula",
+      "correction": "Use the PDF and vulnerable source for the exact parentheses and shift expression; OCR spacing is not treated as executable evidence."
+    },
+    {
+      "pages": [13, 14],
+      "field": "C-03_proof_of_concept",
+      "correction": "The OCR corrupts several Solidity identifiers and line breaks in the PoC. The finding is grounded in SimplexDiamond and the pinned Commons DiamondCutFacet source instead."
+    }
+  ],
+  "ocr_evidence": [
+    {"page_number": 1, "role": "scope", "page_image_sha256": "c91b2e1b76dd59a78faf3e314ba5edf3a33e94611c9aaa16617cdeeeacf45b3a", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/scope.pages.jsonl"},
+    {"page_number": 6, "role": "scope", "page_image_sha256": "b3246c097e731ae5b02e18ac4c6e7dee1ae4a174c821f7b3cd9ffd209788497d", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/scope.pages.jsonl"},
+    {"page_number": 7, "role": "scope", "page_image_sha256": "a221ce4cf937699b30f35125f21959b94cd6353da2b2a174fc5f1ae719f534a6", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/scope.pages.jsonl"},
+    {"page_number": 10, "finding_id": "H-01", "page_image_sha256": "642d7aa59628f7c0a1048ae5ad5935169b9926e26ef89c8ced2a6384f03d73ff", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/H-01.pages.jsonl"},
+    {"page_number": 11, "finding_id": "H-02", "page_image_sha256": "5b97a3e7c3b2cb2f942343aa14e9103113594f9f2b22cb5e206680765c070e13", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/H-02.pages.jsonl"},
+    {"page_number": 12, "finding_id": "H-02", "page_image_sha256": "7b18fcadef88d11fd7b3ec5d2cbe3ff223e375ba241a8e1e4c1da456fe9646b9", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/H-02.pages.jsonl"},
+    {"page_number": 13, "finding_id": "H-03", "page_image_sha256": "c3629fbdeb7081d2ef72cf6b631e44279ed0fcda2963053d637570dcfdafaa7f", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/H-03.pages.jsonl"},
+    {"page_number": 14, "finding_id": "H-03", "page_image_sha256": "7d8f48170da8a72e9e5464232eea809835ea429e16cd40f8d8da8582fc38bf15", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/H-03.pages.jsonl"},
+    {"page_number": 15, "finding_id": "H-04", "page_image_sha256": "c46954e76f989c3c0697d28d74e1f621bae4858fce8426217d628d08c6b4c278", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/H-04.pages.jsonl"},
+    {"page_number": 19, "finding_id": "H-05", "page_image_sha256": "9956b58ed8755f24366df6585863b55a5f58867dc9ab898453bf14d8170a7138", "artifact_ref": "ocr_evidence/pdf_003134_e02252fdb9a1/H-05.pages.jsonl"}
+  ],
+  "selected_findings": [
+    {"finding_id": "H-01", "report_id": "C-01", "pages": [10], "reported_severity": "Critical", "title": "Broken implied-price arithmetic corrupts swaps and liquidity valuation", "generated_file": "findings/H-01.md"},
+    {"finding_id": "H-02", "report_id": "C-02", "pages": [11, 12], "reported_severity": "Critical", "title": "Liquidity additions include the deposit in pool value and under-mint shares", "generated_file": "findings/H-02.md"},
+    {"finding_id": "H-03", "report_id": "C-03", "pages": [13, 14], "reported_severity": "Critical", "title": "Unrestricted diamond cuts let any caller replace protocol logic", "generated_file": "findings/H-03.md"},
+    {"finding_id": "H-04", "report_id": "C-04", "pages": [15], "reported_severity": "Critical", "title": "Unrestricted mint callback spends arbitrary users' token approvals", "generated_file": "findings/H-04.md"},
+    {"finding_id": "H-05", "report_id": "M-01", "pages": [19], "reported_severity": "Medium", "title": "Mint and burn lack price bounds and expose users to adverse execution", "generated_file": "findings/H-05.md"}
+  ],
+  "report_dispositions": [
+    {"report_id": "C-01", "pages": [10], "reported_severity": "Critical", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-01", "affected_paths": ["src/multi/Edge.sol"], "root_cause": "Reserve division is placed inside the shift count in all implied-price branches.", "asset_loss_path": "Corrupted prices and liquidity values make swaps or liquidity settlement transfer the wrong token amounts."},
+    {"report_id": "C-02", "pages": [11, 12], "reported_severity": "Critical", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-02", "affected_paths": ["src/multi/facets/LiqFacet.sol", "src/multi/Asset.sol"], "root_cause": "The post-deposit token balance, rather than its pre-deposit balance, initializes cumulative pool value.", "asset_loss_path": "The depositor is under-minted and existing LPs capture part of the contribution."},
+    {"report_id": "C-03", "pages": [13, 14], "reported_severity": "Critical", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-03", "affected_paths": ["src/multi/Diamond.sol", "lib/Commons/src/Diamond/facets/DiamondCutFacet.sol"], "root_cause": "The exposed diamondCut facet omits its admin validation.", "asset_loss_path": "Any caller can install arbitrary delegatecall logic and transfer all diamond-controlled assets."},
+    {"report_id": "C-04", "pages": [15], "reported_severity": "Critical", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-04", "affected_paths": ["src/Burve.sol"], "root_cause": "The external Uniswap mint callback does not authenticate the pool and trusts caller-supplied payer data.", "asset_loss_path": "An attacker spends victims' outstanding Burve allowances without issuing them a position."},
+    {"report_id": "H-01", "pages": [16], "reported_severity": "High", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/Burve.sol"], "reason_category": "availability_only", "reason": "The missing island funding makes mint revert atomically; the report establishes failed liquidity provision, not an asset transfer or destruction."},
+    {"report_id": "H-02", "pages": [16, 17], "reported_severity": "High", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/Closure.sol", "src/multi/FullMath.sol"], "reason_category": "availability_only", "reason": "The single-element normalization case reverts; it does not commit state or move assets."},
+    {"report_id": "H-03", "pages": [17, 18], "reported_severity": "High", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/Burve.sol"], "reason_category": "recoverable_availability", "reason": "The default Burve burn path reverts for island shares, but the report identifies direct island burning and batched share transfer as user workarounds; no permanent asset loss is established."},
+    {"report_id": "M-01", "pages": [19], "reported_severity": "Medium", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-05", "affected_paths": ["src/Burve.sol"], "root_cause": "Mint and burn accept no enforceable execution-price or output bounds.", "asset_loss_path": "A price move or sandwich causes a successful transaction to return fewer shares or tokens than the user accepted off chain."},
+    {"report_id": "M-02", "pages": [20], "reported_severity": "Medium", "reported_status": "Acknowledged", "disposition": "excluded", "affected_paths": ["src/multi/facets/LiqFacet.sol", "src/multi/VaultProxy.sol"], "reason_category": "temporary_availability", "reason": "A paused component blocks the aggregate removal transaction until it is unpaused; the report does not show theft, destruction, or permanent loss."},
+    {"report_id": "M-03", "pages": [21, 22], "reported_severity": "Medium", "reported_status": "Acknowledged", "disposition": "excluded", "affected_paths": ["src/Burve.sol"], "reason_category": "atomic_revert_compatibility", "reason": "A fee-on-transfer token makes the external pool mint revert atomically. The shown trace does not leave an underfunded position or consume another user's balance."},
+    {"report_id": "M-04", "pages": [23], "reported_severity": "Medium", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/Diamond.sol", "src/multi/facets/SimplexFacet.sol"], "reason_category": "recoverable_interface_omission", "reason": "Three functions are initially inaccessible through the selector table, but the upgradeable diamond can add them; the finding does not establish an unprivileged asset-loss path."},
+    {"report_id": "M-05", "pages": [24], "reported_severity": "Medium", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/Diamond.sol"], "reason_category": "interface_compatibility", "reason": "Omitting supportsInterface breaks ERC-165 detection but does not change asset accounting or authorize a transfer."},
+    {"report_id": "L-01", "pages": [25], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/LPToken.sol"], "reason_category": "gas_and_ux", "reason": "Self-redemption requires a self-allowance, adding an approval step and gas cost without losing the user's LP tokens or underlying assets."},
+    {"report_id": "L-02", "pages": [25, 26], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/E4626.sol"], "reason_category": "token_compatibility_availability", "reason": "Tokens that reject zero approvals cause the vault operation to revert; the report establishes compatibility-driven denial of service, not asset loss."},
+    {"report_id": "L-03", "pages": [26], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/E4626.sol"], "reason_category": "future_hardening", "reason": "The report explicitly states that no current execution can have the pending-withdrawal condition during deposit, so there is no present loss path."},
+    {"report_id": "L-04", "pages": [26], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/E4626.sol"], "reason_category": "token_compatibility_availability", "reason": "Non-standard ERC-20 return behavior makes approval revert and the operation fail atomically; it does not move or destroy assets."},
+    {"report_id": "L-05", "pages": [26, 27], "reported_severity": "Low", "reported_status": "Acknowledged", "disposition": "excluded", "affected_paths": ["src/Burve.sol"], "reason_category": "deployment_compatibility", "reason": "Non-string token metadata can prevent deployment for a pool. No deployed user position or protocol asset can be lost in the described sequence."},
+    {"report_id": "L-06", "pages": [27], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/Closure.sol"], "reason_category": "input_validation_without_grounded_loss", "reason": "An unregistered token maps to index zero, but the report does not provide a complete reachable sequence that transfers or destroys assets at the audited snapshot."},
+    {"report_id": "L-07", "pages": [27], "reported_severity": "Low", "reported_status": "Acknowledged", "disposition": "excluded", "affected_paths": ["src/multi/Diamond.sol"], "reason_category": "accidental_native_token_recovery", "reason": "The receive function can retain unsolicited ETH, but ETH is not part of the described protocol flow and the upgradeable diamond can add a recovery selector; no normal user-fund loss path is established."},
+    {"report_id": "L-08", "pages": [27, 28], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["src/multi/Edge.sol"], "reason_category": "boundary_compatibility", "reason": "Strict inequalities unnecessarily reject the two boundary ticks. The effect is configuration exclusion, not incorrect settlement or loss of assets."}
+  ],
+  "generated_files": [
+    "config.yaml",
+    "Dockerfile",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/H-04.md",
+    "findings/H-05.md",
+    "findings/gold_audit.md",
+    "provenance.json",
+    "review_status.yaml",
+    "ocr_evidence/pdf_003134_e02252fdb9a1/scope.pages.jsonl",
+    "ocr_evidence/pdf_003134_e02252fdb9a1/H-01.pages.jsonl",
+    "ocr_evidence/pdf_003134_e02252fdb9a1/H-02.pages.jsonl",
+    "ocr_evidence/pdf_003134_e02252fdb9a1/H-03.pages.jsonl",
+    "ocr_evidence/pdf_003134_e02252fdb9a1/H-04.pages.jsonl",
+    "ocr_evidence/pdf_003134_e02252fdb9a1/H-05.pages.jsonl"
+  ]
+}

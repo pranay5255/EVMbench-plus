@@ -1,0 +1,38 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "phase": "P5",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "source": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003134_e02252fdb9a1.jsonl",
+    "sha256_before_p5": "a6ede0f0946928351257c3b0800f75118d716d49438a99aaa287877782b6657a",
+    "sha256_after_p5": "a6ede0f0946928351257c3b0800f75118d716d49438a99aaa287877782b6657a",
+    "unchanged": true,
+    "size_bytes": 158329,
+    "line_count": 28
+  },
+  "method": {
+    "selection_key": "page_number",
+    "slice_unit": "complete original JSONL lines including trailing newline bytes",
+    "comparison": "Each slice equals the ordered byte concatenation of its selected source lines.",
+    "source_rewritten": false
+  },
+  "slices": [
+    {"role": "scope", "path": "ocr_evidence/pdf_003134_e02252fdb9a1/scope.pages.jsonl", "expected_pages": [1, 6, 7], "actual_pages": [1, 6, 7], "line_count": 3, "size_bytes": 13654, "sha256": "5b55a33e93f0d73a791c3e0f841291d1017128330eb55c3a720179dcba68429d", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-01", "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-01.pages.jsonl", "expected_pages": [10], "actual_pages": [10], "line_count": 1, "size_bytes": 5375, "sha256": "7e61b85e78383a381c48458a5017ac78d9b9985e24e000402a4fe19e0cefa536", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-02", "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-02.pages.jsonl", "expected_pages": [11, 12], "actual_pages": [11, 12], "line_count": 2, "size_bytes": 12235, "sha256": "bb554aecfe2b891198de349a6622ca5671e6befbcb6384e85f0920a7e82ca564", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-03", "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-03.pages.jsonl", "expected_pages": [13, 14], "actual_pages": [13, 14], "line_count": 2, "size_bytes": 11636, "sha256": "ce4d893b1f9a54c76a53b8b792ba5d1dc72bead88e9cea6e72faa6eefe5ae0e6", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-04", "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-04.pages.jsonl", "expected_pages": [15], "actual_pages": [15], "line_count": 1, "size_bytes": 6459, "sha256": "ad1c040c13582bc72b9b79e72c6dd8ccdd9c93dbed4c709041f4df93dbc51d28", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-05", "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-05.pages.jsonl", "expected_pages": [19], "actual_pages": [19], "line_count": 1, "size_bytes": 5394, "sha256": "20b0fb84c7655559e1b3d433c6f228791169e07d5d9386fedf9a8f46c63223f9", "byte_exact": true, "strictly_ordered": true}
+  ],
+  "selected_page_numbers": [1, 6, 7, 10, 11, 12, 13, 14, 15, 19],
+  "checks": [
+    {"id": "source_hash_unchanged", "passed": true},
+    {"id": "six_expected_slices_exist", "passed": true},
+    {"id": "all_slice_records_are_complete_source_lines", "passed": true},
+    {"id": "all_slice_bytes_match_ordered_source_concatenation", "passed": true},
+    {"id": "all_expected_page_sequences_match", "passed": true}
+  ],
+  "summary": {"ok": true, "slice_count": 6, "selected_record_count": 10, "failed_check_count": 0}
+}

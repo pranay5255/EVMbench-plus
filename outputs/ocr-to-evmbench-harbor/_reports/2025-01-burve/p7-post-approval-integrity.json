@@ -1,0 +1,31 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.post_approval_integrity.v1",
+  "phase": "P7",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T16:16:20Z",
+  "status": "passed",
+  "review_bundle_digest": "c2b30aa4cccf46b249c4dbe935068da942da042ef60419f1800bd72ca5ad903f",
+  "c1_candidate_checksum_stream_sha256": "4a8e52d71065f4afdd917a9c6a2591a12bb46a2e777e587b777d17dac539269c",
+  "approved_candidate_checksum_stream_sha256": "7e05b1abaf75d34a82928dc64f673a779708bed76e667b4c3d41301c114aa903",
+  "approved_manifest_file_count": 17,
+  "candidate_file_count": 17,
+  "files_changed_from_c1": [
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "only_approval_state_files_changed": true,
+  "strict_current_validator_ok": true,
+  "strict_pinned_validator_ok": true,
+  "source_ocr_sha256": "a6ede0f0946928351257c3b0800f75118d716d49438a99aaa287877782b6657a",
+  "source_pdf_sha256": "9331ef94ce1ae3fecce225d5aa49a08583a66e625fd728463af4ca15b7135404",
+  "source_hashes_unchanged": true,
+  "task_group_key_sha256": "2b74283d77d0ed01685e28ee269a6b5b288bac9b9096db97e38eacb49dc98c20",
+  "vulnerable_commit": "f0597768fee2d00c17429941f4721475e1ca5723",
+  "finding_count": 5,
+  "pre_approval_leakage_report_sha256": "4a903a5194e31fabef2ddf270f47ac5c15f6e3c69e4d49a4c1a9433c0a008215",
+  "pre_approval_leakage_status": "passed",
+  "canonical_checkout_written": false,
+  "candidate_admitted": false,
+  "harbor_task_generated": false,
+  "agent_or_model_run": false
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image.v1",
+  "phase": "P6",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "base_image": {
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "platform": "linux/amd64"
+  },
+  "superseded_image": {
+    "tag": "evmbench-burve:c1",
+    "config_digest": "sha256:e8e72601b1c9f9564201f67fdb17070f102582d749b4c8450f30ef5933aa9e83",
+    "accepted": false,
+    "reason": "Runtime Foundry attempted automatic submodule reinstall after Git metadata cleanup."
+  },
+  "reviewed_image": {
+    "tag": "evmbench-burve:c1r1",
+    "config_digest": "sha256:85cb927dd1831277a5fe6b2f15917bb64796b3a91ec63f1877a34a5b2197c674",
+    "created_at": "2026-07-31T14:54:53.53094529Z",
+    "architecture": "amd64",
+    "os": "linux",
+    "size_bytes": 3620954459,
+    "layer_count": 20,
+    "candidate_layer_digest": "sha256:782002e7fd92b1983deec209cc5dfb65cabf51b56786661b3e2c094bb1838cf7",
+    "candidate_layer_size_bytes": 48113664,
+    "saved_image_tar_path": "/tmp/burve-agent-c1r1.tar",
+    "saved_image_tar_size_bytes": 3709195776,
+    "saved_image_tar_sha256": "ec20de36a4ee321b6e6e77ad2c50929aef75528f3650d2499a432dedd91bb99a"
+  },
+  "build": {
+    "no_cache": true,
+    "passed": true,
+    "compiler": "0.8.27+commit.40a35a09",
+    "compiler_sha256_verified": true,
+    "compiled_file_count": 109
+  },
+  "runtime": {
+    "network": "none",
+    "fresh_force_rebuild_passed": true,
+    "tests_passed": 11,
+    "tests_failed": 16,
+    "tests_skipped": 0,
+    "test_total": 27,
+    "test_failures_classified_as_upstream_baseline": true
+  },
+  "registry": {
+    "published": false,
+    "manifest_digest": null
+  },
+  "summary": {"ok": true}
+}

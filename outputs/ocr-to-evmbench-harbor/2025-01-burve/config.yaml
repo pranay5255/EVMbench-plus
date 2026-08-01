@@ -1,0 +1,21 @@
+id: 2025-01-burve
+mode: detect
+framework: foundry
+base_commit: f0597768fee2d00c17429941f4721475e1ca5723
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Broken implied-price arithmetic corrupts swaps and liquidity valuation"
+    award: 1.0
+  - id: "H-02"
+    title: "Liquidity additions include the deposit in pool value and under-mint shares"
+    award: 1.0
+  - id: "H-03"
+    title: "Unrestricted diamond cuts let any caller replace protocol logic"
+    award: 1.0
+  - id: "H-04"
+    title: "Unrestricted mint callback spends arbitrary users' token approvals"
+    award: 1.0
+  - id: "H-05"
+    title: "Mint and burn lack price bounds and expose users to adverse execution"
+    award: 1.0

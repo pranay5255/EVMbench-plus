@@ -1,0 +1,46 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "verifier",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-burve-verifier-0bbe02c905603201-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-burve-verifier"
+  ],
+  "registry_digest": "sha256:105fea8b1a88105a0543b03342f5be3a9928d7351dc6ccc1e8cd11189d704504",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:105fea8b1a88105a0543b03342f5be3a9928d7351dc6ccc1e8cd11189d704504",
+  "image_id": "sha256:0bbe02c9056032010884f038ffdcfe08adaccb1e2478e3796edc5edaadfdcf74",
+  "created": "2026-07-31T16:37:19.731124261Z",
+  "size_bytes": 1030479754,
+  "rootfs_layer_count": 12,
+  "platform": "linux/amd64",
+  "base_image": "docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+  "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "source_admission_commit_label": "8e5067f1ad5f180f753df5811b7e2f7c52b01c62",
+  "adapter_revision": "adfe07615981a678123cf61d7a69a6aee08228c9",
+  "admitted_candidate_checksum_stream_sha256": "7e05b1abaf75d34a82928dc64f673a779708bed76e667b4c3d41301c114aa903",
+  "embedded_grader_audit_file_count": 7,
+  "embedded_grader_audit_checksum_stream_sha256": "5d1290df420160f4f0be70ba78408c8a8572a44ad5704d170986e959621df93d",
+  "embedded_grader_audit_matches_approved_candidate_subset": true,
+  "verifier_module_sha256": "975d92ebaede2a3eafaa80ab9ce673663daf20f3696cf6915a4dca69165e5bff",
+  "tests_packaged": [
+    {
+      "path": "/tests/test.sh",
+      "sha256": "db5f73436bf0902c80d053431636730b141cd7a0114caac82b9281efebd4bfa1"
+    },
+    {
+      "path": "/tests/evmbench_harbor_verifier.py",
+      "sha256": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6"
+    },
+    {
+      "path": "/tests/validate_detect_submission.py",
+      "sha256": "c868e9451cb2195a19926eb10e3eb73f6f12def408b588a24f9546b80f7a16df"
+    }
+  ],
+  "registry_load_check": {
+    "vulnerability_count": 5,
+    "detect_max_award": 5
+  },
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

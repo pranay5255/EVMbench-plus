@@ -1,0 +1,308 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:09:16Z",
+  "task_group_key": "itos-finance/Burve@f0597768fee2d00c17429941f4721475e1ca5723|src/Burve.sol+src/KodiakIsland.sol+src/TransferHelper.sol+src/deployment/BurveDeployLib.sol+src/multi/Asset.sol+src/multi/Closure.sol+src/multi/Diamond.sol+src/multi/E4626.sol+src/multi/Edge.sol+src/multi/LPToken.sol+src/multi/Store.sol+src/multi/Token.sol+src/multi/UniV3Edge.sol+src/multi/VaultProxy.sol+src/multi/Vertex.sol+src/multi/facets/EdgeFacet.sol+src/multi/facets/LiqFacet.sol+src/multi/facets/SimplexFacet.sol+src/multi/facets/SwapFacet.sol|detect",
+  "task_group_key_sha256": "2b74283d77d0ed01685e28ee269a6b5b288bac9b9096db97e38eacb49dc98c20",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-burve",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false,
+    "approved_by_present": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "reviewer_identity": {
+    "authenticated_github_identity": "https://github.com/pranay5255",
+    "github_user_id": 22420966,
+    "supplied_as_approval": false,
+    "must_be_supplied_with_exact_approval": true
+  },
+  "source_evidence": {
+    "ocr": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003134_e02252fdb9a1.jsonl",
+      "sha256": "a6ede0f0946928351257c3b0800f75118d716d49438a99aaa287877782b6657a",
+      "record_count": 28,
+      "schema_version": "evmbench_task_creation.ocr_page.v1"
+    },
+    "pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/Burve-security-review_2025-01-29.pdf",
+      "sha256": "9331ef94ce1ae3fecce225d5aa49a08583a66e625fd728463af4ca15b7135404",
+      "page_count": 28,
+      "report_identity": "Pashov Audit Group Burve Security Review"
+    }
+  },
+  "repository": {
+    "url": "https://github.com/itos-finance/Burve.git",
+    "vulnerable_commit": "f0597768fee2d00c17429941f4721475e1ca5723",
+    "root_tree": "77fcc19230827f270cd36d9fbd7df947ec3749be",
+    "src_tree": "3819a6cd1f614e8efa034149405180ce88039ca3",
+    "audited_scope": [
+      "src/Burve.sol",
+      "src/KodiakIsland.sol",
+      "src/TransferHelper.sol",
+      "src/deployment/BurveDeployLib.sol",
+      "src/multi/Asset.sol",
+      "src/multi/Closure.sol",
+      "src/multi/Diamond.sol",
+      "src/multi/E4626.sol",
+      "src/multi/Edge.sol",
+      "src/multi/LPToken.sol",
+      "src/multi/Store.sol",
+      "src/multi/Token.sol",
+      "src/multi/UniV3Edge.sol",
+      "src/multi/VaultProxy.sol",
+      "src/multi/Vertex.sol",
+      "src/multi/facets/EdgeFacet.sol",
+      "src/multi/facets/LiqFacet.sol",
+      "src/multi/facets/SimplexFacet.sol",
+      "src/multi/facets/SwapFacet.sol"
+    ],
+    "mode": "detect",
+    "recursive_submodule_revision_count": 16,
+    "fixed_commit_kept_separate": "e89ebff2c7daafc98e94c66e4273e4c366949c76"
+  },
+  "findings": [
+    {
+      "gold_id": "H-01",
+      "report_id": "C-01",
+      "pages": [
+        10
+      ],
+      "reported_severity": "Critical",
+      "title": "Broken implied-price arithmetic corrupts swaps and liquidity valuation",
+      "award": 1.0,
+      "finding_sha256": "5e24d65e7a80906b30c5045315efb61e50a90c507dc5b2285adc57ca0d8d92c7"
+    },
+    {
+      "gold_id": "H-02",
+      "report_id": "C-02",
+      "pages": [
+        11,
+        12
+      ],
+      "reported_severity": "Critical",
+      "title": "Liquidity additions include the deposit in pool value and under-mint shares",
+      "award": 1.0,
+      "finding_sha256": "9ade087b67e3bba9813907350bf25228045ecc3d3544f764c67efd375dfbe4e3"
+    },
+    {
+      "gold_id": "H-03",
+      "report_id": "C-03",
+      "pages": [
+        13,
+        14
+      ],
+      "reported_severity": "Critical",
+      "title": "Unrestricted diamond cuts let any caller replace protocol logic",
+      "award": 1.0,
+      "finding_sha256": "b8421a0119980e225482e10b5b23f30cf22475d0d939b99cf91f3bf9ce3c663c"
+    },
+    {
+      "gold_id": "H-04",
+      "report_id": "C-04",
+      "pages": [
+        15
+      ],
+      "reported_severity": "Critical",
+      "title": "Unrestricted mint callback spends arbitrary users' token approvals",
+      "award": 1.0,
+      "finding_sha256": "81abaca3e82556e9ee0254faf0cf6d861af8113a50b9d48d8c4410bac50506f9"
+    },
+    {
+      "gold_id": "H-05",
+      "report_id": "M-01",
+      "pages": [
+        19
+      ],
+      "reported_severity": "Medium",
+      "title": "Mint and burn lack price bounds and expose users to adverse execution",
+      "award": 1.0,
+      "finding_sha256": "3ccd580a1dba1a59807bc6203b02f454f798ac38d5ddc2ce90549178386056bb"
+    }
+  ],
+  "max_score": 5.0,
+  "reviewed_candidate": {
+    "file_manifest": "c1-generated-file-manifest.json",
+    "file_manifest_sha256": "1108ec26f117481ae9f7d71a62b04b3c6340a9881f148838476dc57a349dff3c",
+    "candidate_file_count": 17,
+    "candidate_checksum_stream_sha256": "4a8e52d71065f4afdd917a9c6a2591a12bb46a2e777e587b777d17dac539269c",
+    "dockerfile_sha256": "3d45949b081ae0abe5a19b12d2e0476c29136ff6678caf87bcc6c958fafcbe48",
+    "config_sha256": "b95e01032fe66ff2f81fd7e58c04a07f68fc9120486168dadfec069844e05a0e",
+    "gold_audit_sha256": "b2ff3c99d9ec771ace6f74b723a37f2af002681b8b45eeab98a25d48d2457c3c",
+    "provenance_sha256": "4801e52ca32e7dd2547b8414221424d03ff1ea03fc22ce234120fd57a58273ae",
+    "review_status_sha256": "0ed20a18933f518b764c139ce5cb9e1f8d31ea82af3980ff7c4a41b9d30e6ae4"
+  },
+  "validation_reports": [
+    {
+      "path": "p1-isolation.json",
+      "sha256": "51b0d490d81c3cf483860ab3284cab6e8a6c4aed068f1fa0822004c39ad1ca71",
+      "status": "passed"
+    },
+    {
+      "path": "p1-ocr-validation.json",
+      "sha256": "a37977f2a66556ebd4fe259e5bff4493e068f6ea5ba007b060a59745837503bc",
+      "status": "passed"
+    },
+    {
+      "path": "p1-ocr-validation.txt",
+      "sha256": "04509a43dcf724c9dd91cc0e93e668c6718224a6ad5f08e0e97743bb7c0f5008",
+      "status": "passed"
+    },
+    {
+      "path": "p2-ocr-corrections.json",
+      "sha256": "a0755ee924349fa95297ddc4e14d9389156e3c650289735b37776bbf3290abb9",
+      "status": "passed"
+    },
+    {
+      "path": "p2-pdf-validation.json",
+      "sha256": "2076f430d52a65641df19ec85e800c26e4f84e75d19eb87d97baaddafcd2bfcc",
+      "status": "passed"
+    },
+    {
+      "path": "p2-pdf-ocr-review.md",
+      "sha256": "fc2f4b1f7fa96c46f7ae196df9d571f1b8ed90ace2a30d57ad3d5bab9b0ee61f",
+      "status": "passed"
+    },
+    {
+      "path": "p3-task-group.json",
+      "sha256": "f422d62d97abcf5e03d2b2263401aef3d37bdf918dca7614b3371228120019c8",
+      "status": "passed"
+    },
+    {
+      "path": "p3-repository-snapshot.json",
+      "sha256": "4ce411a59b951af07114558f02e4691eef906ce45b4cec5f013f515ae1a6f159",
+      "status": "passed"
+    },
+    {
+      "path": "p3-submodules.json",
+      "sha256": "28ac57744af5606a8c60801a6d32e269151cb4a5b36c785d6bc3964178851599",
+      "status": "passed"
+    },
+    {
+      "path": "p3-repository-grounding.md",
+      "sha256": "83601a066522220b8c43c5255286f8a1798960aa3c05b0da205364c45bb091ea",
+      "status": "passed"
+    },
+    {
+      "path": "p4-semantic-validation.json",
+      "sha256": "b4527f4d130d011b601d035252473e5d2622340014575163f20f304b46d1e9ae",
+      "status": "passed"
+    },
+    {
+      "path": "p4-finding-grounding.md",
+      "sha256": "5bdccae41e6a71ff97b8f09fd72da721498950444afcca51b1e2b052ea011815",
+      "status": "passed"
+    },
+    {
+      "path": "p5-build-baseline.md",
+      "sha256": "8914956ffd9ecc866e5fdde51850196f1f6a83626ec6b3fea23ea01debed7743",
+      "status": "passed_with_disclosure"
+    },
+    {
+      "path": "p5-byte-exact-slices.json",
+      "sha256": "5b23519b2648a7a79009c56be0e8d470b01c54e344f571af281b76ee6565d972",
+      "status": "passed"
+    },
+    {
+      "path": "p6-agent-image.json",
+      "sha256": "dc56a136271ddaa415d0ac6264d22c2ad0fbb435fbe4b659b81e8e270d28eb97",
+      "status": "passed_with_disclosure"
+    },
+    {
+      "path": "p6-current-structural-validator.json",
+      "sha256": "bb345dc93638e77335648733ee05a9c04e34783318d5db92392f3577a351bbf1",
+      "status": "passed"
+    },
+    {
+      "path": "p6-pinned-structural-validator.json",
+      "sha256": "3a53b80b2525b8291b257c139e3fba7bbaca46b7da35366131a9bcd09f0ff222",
+      "status": "passed"
+    },
+    {
+      "path": "p6-repository-validation.json",
+      "sha256": "6600a93ded604b9ef2496730835658adfcf360ce3cae2480636a954de5d15487",
+      "status": "passed"
+    },
+    {
+      "path": "p6-leakage-scan.json",
+      "sha256": "4a903a5194e31fabef2ddf270f47ac5c15f6e3c69e4d49a4c1a9433c0a008215",
+      "status": "passed"
+    },
+    {
+      "path": "p6-validator-tests.txt",
+      "sha256": "714fbde8a217eecec70199f1c60516ca8628feef56ab5c31a87457dd726ea5a8",
+      "status": "passed"
+    },
+    {
+      "path": "c1-generated-file-manifest.json",
+      "sha256": "1108ec26f117481ae9f7d71a62b04b3c6340a9881f148838476dc57a349dff3c",
+      "status": "passed"
+    },
+    {
+      "path": "c1-validation-summary.json",
+      "sha256": "d21a174398ed2e25787c575cddfc85c5d5d5d21c1c9db4043f32a02bbcf5a491",
+      "status": "passed_with_disclosures"
+    }
+  ],
+  "base_image": {
+    "manifest_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0"
+  },
+  "agent_image": {
+    "local_tag": "evmbench-burve:c1r1",
+    "config_digest": "sha256:85cb927dd1831277a5fe6b2f15917bb64796b3a91ec63f1877a34a5b2197c674",
+    "platform": "linux/amd64",
+    "size_bytes": 3620954459,
+    "candidate_layer_digest": "sha256:782002e7fd92b1983deec209cc5dfb65cabf51b56786661b3e2c094bb1838cf7",
+    "saved_image_tar_sha256": "ec20de36a4ee321b6e6e77ad2c50929aef75528f3650d2499a432dedd91bb99a",
+    "published_to_registry": false
+  },
+  "validation_summary": {
+    "structural": "passed",
+    "semantic": "passed",
+    "repository": "passed",
+    "docker_build": "passed",
+    "foundry_compile": "109 files",
+    "foundry_tests": "11 passed; 16 failed; 0 skipped; 27 total (disclosed upstream baseline)",
+    "runtime_network": "none",
+    "final_filesystem_leakage": "passed",
+    "pdf_files_in_agent_image": 0,
+    "jsonl_files_in_agent_image": 0,
+    "unresolved_semantic_or_reproducibility_concerns": [
+      {
+        "artifact": "upstream_foundry_tests",
+        "concern": "The exact vulnerable snapshot's unmodified suite is not green: 11 passed and 16 failed across 27 tests. Failures include setup reverts, cheatcode call-depth expectation mismatches, and one log mismatch; no finding-specific tests were added."
+      },
+      {
+        "artifact": "agent_image_repository_shape",
+        "concern": "The reviewed image vendors the 16 pinned recursive submodules, removes their nested Git metadata and the parent submodule object store, and disables automatic reinstall. The exact audited source contract files are unchanged and a fresh no-network force build passes."
+      },
+      {
+        "artifact": "agent_image",
+        "concern": "The reviewed image is local-only; registry publication is forbidden until exact human approval."
+      }
+    ]
+  },
+  "isolation": {
+    "canonical_forest_of_audits_status_sha256_before": "199306451e707afc4c63e94f65ca7a188683b8a2419a9feaa78a20531c8640b4",
+    "canonical_forest_of_audits_status_sha256_after": "199306451e707afc4c63e94f65ca7a188683b8a2419a9feaa78a20531c8640b4",
+    "canonical_forest_of_audits_changed": false,
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "adjacent_dirty_checkouts_preserved": true,
+    "queue_document_modified": true,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "approval_requirement": {
+    "required_state_transition": "approved_for_admission",
+    "must_quote_exact_candidate_id": true,
+    "must_quote_review_manifest_sha256": true,
+    "must_supply_reviewer_identity": true,
+    "expected_reviewer_identity": "https://github.com/pranay5255",
+    "approval_not_contained_in_this_manifest": true
+  }
+}

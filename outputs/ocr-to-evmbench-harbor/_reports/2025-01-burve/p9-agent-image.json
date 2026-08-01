@@ -1,0 +1,32 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-burve-agent-85cb927dd1831277-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-burve"
+  ],
+  "registry_digest": "sha256:8b0f8512de7b0d94370a87d8245bebfa0628e733dc7066229a5f0a3ee0ff51f6",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:8b0f8512de7b0d94370a87d8245bebfa0628e733dc7066229a5f0a3ee0ff51f6",
+  "image_id": "sha256:85cb927dd1831277a5fe6b2f15917bb64796b3a91ec63f1877a34a5b2197c674",
+  "review_image_id": "sha256:85cb927dd1831277a5fe6b2f15917bb64796b3a91ec63f1877a34a5b2197c674",
+  "canonical_build_resolved_to_reviewed_image_id": true,
+  "created": "2026-07-31T14:54:53.53094529Z",
+  "size_bytes": 3620954459,
+  "rootfs_layer_count": 20,
+  "platform": "linux/amd64",
+  "repository_head": "f0597768fee2d00c17429941f4721475e1ca5723",
+  "reachable_repository_commit_count": 1,
+  "audited_file_hashes_verified": true,
+  "manifest_verified": true,
+  "foundry_compile_files": 109,
+  "foundry_tests": {
+    "passed": 11,
+    "failed": 16,
+    "skipped": 0,
+    "executed": true,
+    "failures_classified_as_upstream_baseline": true
+  },
+  "offline_isolation_check_passed": true
+}

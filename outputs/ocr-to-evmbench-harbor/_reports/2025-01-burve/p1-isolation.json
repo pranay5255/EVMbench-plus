@@ -1,0 +1,41 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "phase": "P1",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "workspace": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "preexisting_dirty_state_preserved": true,
+    "queue_document_preexisting_and_untracked": true,
+    "queue_document_modified_by_this_run": true
+  },
+  "canonical_forest_of_audits": {
+    "path": "/home/experiments_base/forestOfAudits",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "branch": "main",
+    "dirty_entry_count_at_initial_read": 94,
+    "initial_porcelain_v1_z_sha256": "199306451e707afc4c63e94f65ca7a188683b8a2419a9feaa78a20531c8640b4",
+    "read_only": true,
+    "modified_by_this_run": false
+  },
+  "isolated_review_repository": {
+    "path": "/tmp/burve-review-net.YNnlBE/repo",
+    "repository": "https://github.com/itos-finance/Burve.git",
+    "detached_head": "f0597768fee2d00c17429941f4721475e1ca5723",
+    "clean_including_recursive_submodules": true
+  },
+  "isolated_pinned_validator": {
+    "path": "/tmp/burve-opd-validator.hxzjQN/opd-base",
+    "head": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "clean": true
+  },
+  "isolation_guarantees": {
+    "canonical_evmbench_admission_performed": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false,
+    "candidate_and_queue_only_workspace_writes": true
+  },
+  "summary": {"ok": true}
+}

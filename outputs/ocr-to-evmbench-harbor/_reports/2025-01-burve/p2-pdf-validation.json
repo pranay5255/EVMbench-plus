@@ -1,0 +1,31 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "phase": "P2",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/Burve-security-review_2025-01-29.pdf",
+    "sha256": "9331ef94ce1ae3fecce225d5aa49a08583a66e625fd728463af4ca15b7135404",
+    "size_bytes": 2327784,
+    "physical_page_count": 28,
+    "encrypted": false,
+    "readable": true
+  },
+  "ocr_cross_check": {
+    "pdf_id": "pdf_003134_e02252fdb9a1",
+    "record_count": 28,
+    "source_page_count": 28,
+    "recorded_source_pdf_sha256": "9331ef94ce1ae3fecce225d5aa49a08583a66e625fd728463af4ca15b7135404",
+    "physical_hash_matches_ocr": true,
+    "physical_page_count_matches_ocr": true,
+    "source_path_is_unique_and_matches": true
+  },
+  "visual_review": {
+    "rendered_page_count": 28,
+    "render_directory": "/tmp/burve-pdf-pages.Zs8xBc",
+    "scope_and_finding_pages_reviewed_against_pdf": true,
+    "pdf_overrides_ocr_for_exact_code_and_identifiers": true
+  },
+  "summary": {"ok": true}
+}

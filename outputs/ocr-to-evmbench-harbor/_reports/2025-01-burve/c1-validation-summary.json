@@ -1,0 +1,46 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:09:16Z",
+  "status": "passed_with_disclosures",
+  "checks": {
+    "ocr_contract": "passed: 28 ordered records",
+    "pdf_checksum_and_page_count": "passed: exact SHA-256 and 28 pages",
+    "single_task_group": "passed",
+    "repository_snapshot": "passed: exact detached commit and 16 recursive submodule revisions",
+    "finding_dispositions_complete": "passed: 5 included and 15 excluded",
+    "byte_exact_ocr_slices": "passed",
+    "candidate_consistency": "passed",
+    "pinned_structural_validator": "passed with 0 errors and 0 warnings",
+    "current_structural_validator": "passed with 0 errors and 0 warnings",
+    "validator_tests": "9 current tests and 6 pinned candidate-validator tests passed",
+    "foundry_compile": "109 Solidity files compiled",
+    "agent_image_build": "passed: no-cache build",
+    "agent_image_offline_force_rebuild": "passed with runtime network none",
+    "agent_image_repository_check": "passed: exact HEAD, one reachable commit, clean worktree",
+    "agent_visible_leakage": "passed",
+    "canonical_forest_of_audits_status_unchanged": "199306451e707afc4c63e94f65ca7a188683b8a2419a9feaa78a20531c8640b4"
+  },
+  "disclosures": [
+    {
+      "artifact": "upstream_foundry_tests",
+      "concern": "The exact vulnerable snapshot's unmodified suite is not green: 11 passed and 16 failed across 27 tests. Failures include setup reverts, cheatcode call-depth expectation mismatches, and one log mismatch; no finding-specific tests were added."
+    },
+    {
+      "artifact": "agent_image_repository_shape",
+      "concern": "The reviewed image vendors the 16 pinned recursive submodules, removes their nested Git metadata and the parent submodule object store, and disables automatic reinstall. The exact audited source contract files are unchanged and a fresh no-network force build passes."
+    },
+    {
+      "artifact": "agent_image",
+      "concern": "The reviewed image is local-only; registry publication is forbidden until exact human approval."
+    }
+  ],
+  "isolation": {
+    "canonical_forest_of_audits_written": false,
+    "canonical_evmbench_written": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false,
+    "queue_document_modified": true
+  }
+}

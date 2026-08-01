@@ -1,0 +1,57 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approved_validator.v1",
+  "phase": "P7",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T16:16:20Z",
+  "status": "passed",
+  "require_approved_used": true,
+  "current_checkout": {
+    "result": {
+      "candidate_count": 1,
+      "ok": true,
+      "results": [
+        {
+          "candidate_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-burve",
+          "errors": [],
+          "finding_files": [
+            "findings/H-01.md",
+            "findings/H-02.md",
+            "findings/H-03.md",
+            "findings/H-04.md",
+            "findings/H-05.md"
+          ],
+          "ok": true,
+          "review_state": "approved_for_admission",
+          "warnings": []
+        }
+      ]
+    }
+  },
+  "pinned_checkout": {
+    "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "path": "/tmp/burve-opd-validator.hxzjQN/opd-base",
+    "result": {
+      "candidate_count": 1,
+      "ok": true,
+      "results": [
+        {
+          "candidate_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-burve",
+          "errors": [],
+          "finding_files": [
+            "findings/H-01.md",
+            "findings/H-02.md",
+            "findings/H-03.md",
+            "findings/H-04.md",
+            "findings/H-05.md"
+          ],
+          "ok": true,
+          "review_state": "approved_for_admission",
+          "warnings": []
+        }
+      ]
+    }
+  },
+  "finding_count": 5,
+  "errors": [],
+  "warnings": []
+}

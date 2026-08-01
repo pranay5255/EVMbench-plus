@@ -1,0 +1,29 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.submodules.v1",
+  "phase": "P3",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "recursive_submodule_count": 16,
+  "submodules": [
+    {"path": "lib/Commons", "revision": "6f65b6bef26e68c6b92bab57dfbf4d13d234a774"},
+    {"path": "lib/Commons/lib/forge-std", "revision": "0e7097750918380d84dd3cfdef595bee74dabb70"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts", "revision": "448efeea6640bbbc09373f03fbc9c88e280147ba"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts/lib/erc4626-tests", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts/lib/forge-std", "revision": "1eea5bae12ae557d589f9f0f0edae2faa47cb262"},
+    {"path": "lib/Commons/lib/openzeppelin-contracts/lib/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"},
+    {"path": "lib/Commons/lib/prb-test", "revision": "39d6925bf5a7475f7e43247bd59a3e080d33200c"},
+    {"path": "lib/Commons/lib/v3-core", "revision": "d8b1c635c275d2a9450bd6a78f3fa2484fef73eb"},
+    {"path": "lib/Commons/lib/v3-periphery", "revision": "0682387198a24c7cd63566a2c58398533860a5d1"},
+    {"path": "lib/forge-std", "revision": "b93cf4bc34ff214c099dc970b153f85ade8c9f66"},
+    {"path": "lib/openzeppelin-contracts", "revision": "69c8def5f222ff96f2b5beff05dfba996368aa79"},
+    {"path": "lib/openzeppelin-contracts/lib/erc4626-tests", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/openzeppelin-contracts/lib/forge-std", "revision": "ae570fec082bfe1c1f45b0acca4a2b4f84d345ce"},
+    {"path": "lib/openzeppelin-contracts/lib/forge-std/lib/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"},
+    {"path": "lib/openzeppelin-contracts/lib/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"},
+    {"path": "lib/v3-core", "revision": "e3589b192d0be27e100cd0daaf6c97204fdb1899"}
+  ],
+  "all_initialized_in_review_clone": true,
+  "all_revisions_verified_before_image_cleanup": true,
+  "summary": {"ok": true}
+}

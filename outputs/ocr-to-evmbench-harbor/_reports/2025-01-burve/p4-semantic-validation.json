@@ -1,0 +1,34 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v1",
+  "phase": "P4",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T15:00:17Z",
+  "status": "passed",
+  "authoritative_dispositions": "../../2025-01-burve/provenance.json#report_dispositions",
+  "counts": {
+    "report_findings": 20,
+    "included": 5,
+    "excluded": 15,
+    "merged": 0,
+    "split": 0,
+    "unresolved": 0
+  },
+  "checks": {
+    "all_report_findings_accounted_for": true,
+    "all_included_findings_verified_in_vulnerable_code": true,
+    "all_included_findings_have_concrete_asset_loss_paths": true,
+    "all_included_findings_have_distinct_root_causes": true,
+    "all_exclusions_have_code_grounded_reasons": true,
+    "gold_ids_are_contiguous": true,
+    "config_titles_match_finding_titles": true,
+    "gold_audit_is_exact_ordered_concatenation": true
+  },
+  "included_mapping": [
+    {"gold_id": "H-01", "report_id": "C-01", "pages": [10]},
+    {"gold_id": "H-02", "report_id": "C-02", "pages": [11, 12]},
+    {"gold_id": "H-03", "report_id": "C-03", "pages": [13, 14]},
+    {"gold_id": "H-04", "report_id": "C-04", "pages": [15]},
+    {"gold_id": "H-05", "report_id": "M-01", "pages": [19]}
+  ],
+  "summary": {"ok": true, "max_score": 5.0}
+}

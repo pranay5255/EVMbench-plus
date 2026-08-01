@@ -1,0 +1,101 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "phase": "P7",
+  "candidate_id": "2025-01-burve",
+  "generated_at": "2026-07-31T16:16:20Z",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-burve",
+  "approval_review_manifest_sha256": "c2b30aa4cccf46b249c4dbe935068da942da042ef60419f1800bd72ca5ad903f",
+  "candidate_file_count": 17,
+  "candidate_checksum_stream_sha256": "7e05b1abaf75d34a82928dc64f673a779708bed76e667b4c3d41301c114aa903",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size_bytes": 30,
+      "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 3853,
+      "sha256": "3d45949b081ae0abe5a19b12d2e0476c29136ff6678caf87bcc6c958fafcbe48"
+    },
+    {
+      "path": "config.yaml",
+      "size_bytes": 685,
+      "sha256": "b95e01032fe66ff2f81fd7e58c04a07f68fc9120486168dadfec069844e05a0e"
+    },
+    {
+      "path": "findings/H-01.md",
+      "size_bytes": 2110,
+      "sha256": "5e24d65e7a80906b30c5045315efb61e50a90c507dc5b2285adc57ca0d8d92c7"
+    },
+    {
+      "path": "findings/H-02.md",
+      "size_bytes": 2075,
+      "sha256": "9ade087b67e3bba9813907350bf25228045ecc3d3544f764c67efd375dfbe4e3"
+    },
+    {
+      "path": "findings/H-03.md",
+      "size_bytes": 1985,
+      "sha256": "b8421a0119980e225482e10b5b23f30cf22475d0d939b99cf91f3bf9ce3c663c"
+    },
+    {
+      "path": "findings/H-04.md",
+      "size_bytes": 1985,
+      "sha256": "81abaca3e82556e9ee0254faf0cf6d861af8113a50b9d48d8c4410bac50506f9"
+    },
+    {
+      "path": "findings/H-05.md",
+      "size_bytes": 2076,
+      "sha256": "3ccd580a1dba1a59807bc6203b02f454f798ac38d5ddc2ce90549178386056bb"
+    },
+    {
+      "path": "findings/gold_audit.md",
+      "size_bytes": 10235,
+      "sha256": "b2ff3c99d9ec771ace6f74b723a37f2af002681b8b45eeab98a25d48d2457c3c"
+    },
+    {
+      "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-01.pages.jsonl",
+      "size_bytes": 5375,
+      "sha256": "7e61b85e78383a381c48458a5017ac78d9b9985e24e000402a4fe19e0cefa536"
+    },
+    {
+      "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-02.pages.jsonl",
+      "size_bytes": 12235,
+      "sha256": "bb554aecfe2b891198de349a6622ca5671e6befbcb6384e85f0920a7e82ca564"
+    },
+    {
+      "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-03.pages.jsonl",
+      "size_bytes": 11636,
+      "sha256": "ce4d893b1f9a54c76a53b8b792ba5d1dc72bead88e9cea6e72faa6eefe5ae0e6"
+    },
+    {
+      "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-04.pages.jsonl",
+      "size_bytes": 6459,
+      "sha256": "ad1c040c13582bc72b9b79e72c6dd8ccdd9c93dbed4c709041f4df93dbc51d28"
+    },
+    {
+      "path": "ocr_evidence/pdf_003134_e02252fdb9a1/H-05.pages.jsonl",
+      "size_bytes": 5394,
+      "sha256": "20b0fb84c7655559e1b3d433c6f228791169e07d5d9386fedf9a8f46c63223f9"
+    },
+    {
+      "path": "ocr_evidence/pdf_003134_e02252fdb9a1/scope.pages.jsonl",
+      "size_bytes": 13654,
+      "sha256": "5b55a33e93f0d73a791c3e0f841291d1017128330eb55c3a720179dcba68429d"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 24172,
+      "sha256": "716d902196acfb0c84b172a8f66e2fc3b4d48a84fb0b03e5de6cf1508b3e78c9"
+    },
+    {
+      "path": "review_status.yaml",
+      "size_bytes": 320,
+      "sha256": "6dae4b446f7c32e2ae4401e40c5ea575ef9675c655ddf0bfab72f917425de1d6"
+    }
+  ],
+  "review_state": "approved_for_admission",
+  "human_approved": true,
+  "approved_by": "https://github.com/pranay5255",
+  "status": "passed"
+}
