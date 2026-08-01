@@ -1,0 +1,101 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "phase": "P7",
+  "candidate_id": "2025-12-lido-v3-core",
+  "generated_at": "2026-07-27T12:46:33Z",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-12-lido-v3-core",
+  "approval_review_manifest_sha256": "8e276720b26afb8c760a8bb3a8dc791a47c5f2ff1f023b4ceddcbd0777a0e663",
+  "candidate_file_count": 17,
+  "candidate_checksum_stream_sha256": "c49c0a717269783d280a5ca76c7571bb1bfba3c994d03959c0cc5e8deca04632",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size_bytes": 30,
+      "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 2022,
+      "sha256": "6ef17928564f5bffa8f4f66b65facdf1086de70f488e6ba8134121f9d309a150"
+    },
+    {
+      "path": "config.yaml",
+      "size_bytes": 631,
+      "sha256": "014aca8d23f74d3bc14dc6bc914718314f3a4a4ecedf4e8ff2efadbc81d4735a"
+    },
+    {
+      "path": "findings/H-01.md",
+      "size_bytes": 2574,
+      "sha256": "88604bcd90a6c65f6491f7220252f3ca256eb70a6e6fe12fcc4cd8aeb67ba07f"
+    },
+    {
+      "path": "findings/H-02.md",
+      "size_bytes": 2328,
+      "sha256": "830b0057d074de6fca008b46fcc25ea8b105041ad647075671a4971205d67775"
+    },
+    {
+      "path": "findings/H-03.md",
+      "size_bytes": 3206,
+      "sha256": "837cf1d819284d2d3e248c05293faef2ae0e3e180238fae98b5b767fe90d4595"
+    },
+    {
+      "path": "findings/H-04.md",
+      "size_bytes": 2653,
+      "sha256": "4cc5ca07b89bd2a976702f24636cde4014fb40653b99dc43eec1ed2c2308ca14"
+    },
+    {
+      "path": "findings/H-05.md",
+      "size_bytes": 2725,
+      "sha256": "6ce3e6d76d5b838eec70ac0b1e65e82d3b27ddc982a8bc4bb5f0d173b18aa31a"
+    },
+    {
+      "path": "findings/gold_audit.md",
+      "size_bytes": 13490,
+      "sha256": "7068603e265e5ff039f4aaa2c75126a2c94cac1ef08f21f54aa802fe6d0283b9"
+    },
+    {
+      "path": "ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl",
+      "size_bytes": 8934,
+      "sha256": "a8236b8efb847f15952e0cc889601035d5ef69826b22af7be807e3db0ad01691"
+    },
+    {
+      "path": "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl",
+      "size_bytes": 15388,
+      "sha256": "2bd6780815faaa4412fbcff06641a6e598d763e7a2da8ef07dcae2a3ef183328"
+    },
+    {
+      "path": "ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl",
+      "size_bytes": 8942,
+      "sha256": "8d90fbd86851a0d8ed6b0412bcd1535bc8a3a9f8fde5ff9f946968ecb6562b93"
+    },
+    {
+      "path": "ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl",
+      "size_bytes": 8005,
+      "sha256": "9be3b7a7f5184aeb2dae7706a82cd54123ea35182baa16f87fc69eedd19c11ca"
+    },
+    {
+      "path": "ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl",
+      "size_bytes": 10497,
+      "sha256": "4a6cf33efcd6f92ee016cfeab723992d27da1caefa971682288dd2d56523c665"
+    },
+    {
+      "path": "ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl",
+      "size_bytes": 12485,
+      "sha256": "8433375408e358b99f76780cc20b0dbf0b7c59e60b329a11f4241655d11aeb51"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 20776,
+      "sha256": "f6875916e975ee620018cfcba76f79de7bd6b98b19b3d17592f49bb539826a84"
+    },
+    {
+      "path": "review_status.yaml",
+      "size_bytes": 241,
+      "sha256": "d7cf5f3dc7b020589113af88537874787deab9bfffca5813bcc2ca837d8d4ad9"
+    }
+  ],
+  "review_state": "approved_for_admission",
+  "human_approved": true,
+  "approved_by": "https://github.com/pranay5255",
+  "status": "passed"
+}

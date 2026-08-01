@@ -1,0 +1,21 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolated_admission.v1",
+  "phase": "P8",
+  "status": "passed",
+  "forest_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "forest_base_revision_observed": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "admission_commit": "8f7c6574eaaa8751a5065e5d6d3e051b94459ca2",
+  "forest_clone": "/tmp/lido-ocr-harbor.vCSoEx/forest-of-audits",
+  "evmbench_root": "/tmp/lido-ocr-harbor.vCSoEx/forest-of-audits/project/evmbench",
+  "admitted_path": "/tmp/lido-ocr-harbor.vCSoEx/forest-of-audits/project/evmbench/audits/2025-12-lido-v3-core",
+  "clean_start_required_and_observed": true,
+  "clean_after_admission_commit": true,
+  "only_admitted_audit_id": "2025-12-lido-v3-core",
+  "detect_split_entry_added": true,
+  "candidate_checksum_stream_sha256": "c49c0a717269783d280a5ca76c7571bb1bfba3c994d03959c0cc5e8deca04632",
+  "admitted_checksum_stream_sha256": "c49c0a717269783d280a5ca76c7571bb1bfba3c994d03959c0cc5e8deca04632",
+  "candidate_and_admitted_tree_byte_identical": true,
+  "canonical_checkout_written": false,
+  "canonical_checkout_observed_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+  "canonical_checkout_external_drift_preserved": true
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_supersession.v1",
+  "phase": "P9",
+  "status": "passed",
+  "superseded": [
+    {
+      "image_id": "sha256:48d77f5077568c30e770a1b60522159c479aa4fc44682cec2397c8927d96979d",
+      "registry_digest": "sha256:6344fecdb08cdac9c17f971650abb48782069a433cc8b2bd3017ed3f9a50a093",
+      "reason": "separate verifier image omitted the generated /tests payload"
+    },
+    {
+      "image_id": "sha256:f2e9357dc7b4e3484be83058cf57a036b9829eb8da312affdea670f299c594ca",
+      "registry_digest": null,
+      "reason": "tests payload was present but Pydantic serialize_as_any caused a circular-reference failure while writing the full grade artifact"
+    }
+  ],
+  "replacement": {
+    "image_id": "sha256:529765870d002b22098e4376b5b30f5dcdafee2232324b96de319c598bcb7927",
+    "registry_digest": "sha256:85bc90283899514489f8f071d10efea3f37f866e2984c56b36f96cd4eea6f2c4",
+    "serialization_fix_commit": "977c70ab2a418512eb887fb8ffee92535ac21be1",
+    "replay_status": "passed"
+  },
+  "human_readable_alias_updated": true
+}

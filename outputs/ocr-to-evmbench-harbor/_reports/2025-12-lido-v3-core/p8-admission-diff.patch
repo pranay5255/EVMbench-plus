@@ -1,0 +1,1511 @@
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/.dockerignore b/project/evmbench/audits/2025-12-lido-v3-core/.dockerignore
+new file mode 100644
+index 0000000..4d0f9ce
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/.dockerignore
+@@ -0,0 +1,3 @@
++**
++!Dockerfile
++!.dockerignore
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/Dockerfile b/project/evmbench/audits/2025-12-lido-v3-core/Dockerfile
+new file mode 100644
+index 0000000..24a2139
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/Dockerfile
+@@ -0,0 +1,42 @@
++FROM pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0
++
++RUN curl -fsSL \
++        https://nodejs.org/dist/v22.15.0/node-v22.15.0-linux-x64.tar.xz \
++        -o /tmp/node-v22.15.0-linux-x64.tar.xz \
++    && echo "dafe2e8f82cb97de1bd10db9e2ec4c07bbf53389b0799b1e095a918951e78fd4  /tmp/node-v22.15.0-linux-x64.tar.xz" \
++        | sha256sum -c - \
++    && mkdir -p /opt/node-v22.15.0 \
++    && tar --no-same-owner --strip-components=1 -xJf \
++        /tmp/node-v22.15.0-linux-x64.tar.xz \
++        -C /opt/node-v22.15.0 \
++    && rm /tmp/node-v22.15.0-linux-x64.tar.xz
++
++ENV PATH="/opt/node-v22.15.0/bin:${PATH}"
++ENV HARDHAT_DISABLE_TELEMETRY_PROMPT=true
++
++RUN test "$(node --version)" = "v22.15.0" \
++    && mkdir -p "$AUDIT_DIR" \
++    && cd "$AUDIT_DIR" \
++    && git init \
++    && git remote add origin https://github.com/lidofinance/core.git \
++    && git fetch --depth=1 origin 22cab0f0372015f2d2fce8bede64e98beae28571 \
++    && git checkout --detach FETCH_HEAD \
++    && test "$(git rev-parse HEAD)" = "22cab0f0372015f2d2fce8bede64e98beae28571" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && git submodule update --init --recursive --depth=1 \
++    && test "$(git -C foundry/lib/forge-std rev-parse HEAD)" = \
++        "8f24d6b04c92975e0795b5868aa0d783251cdeaa" \
++    && corepack yarn install --immutable \
++    && corepack yarn compile \
++    && corepack yarn test \
++    && find "$AUDIT_DIR" -type f -iname '*.pdf' -delete \
++    && find "$AUDIT_DIR" -mindepth 2 -name .git -prune -exec rm -rf {} + \
++    && rm -rf "$AUDIT_DIR/.git/modules" \
++    && test -z "$(find "$AUDIT_DIR" -type f -iname '*.pdf' -print -quit)" \
++    && test -z "$(find "$AUDIT_DIR" -mindepth 2 -name .git -print -quit)" \
++    && test ! -e "$AUDIT_DIR/.git/modules" \
++    && test "$(git rev-parse HEAD)" = "22cab0f0372015f2d2fce8bede64e98beae28571" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && test -z "$(git ls-tree -r --name-only HEAD | grep -Ei '\\.(pdf|jsonl)$')"
++
++WORKDIR $AGENT_DIR
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/config.yaml b/project/evmbench/audits/2025-12-lido-v3-core/config.yaml
+new file mode 100644
+index 0000000..840f943
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/config.yaml
+@@ -0,0 +1,21 @@
++id: 2025-12-lido-v3-core
++mode: detect
++framework: hardhat
++base_commit: 22cab0f0372015f2d2fce8bede64e98beae28571
++
++vulnerabilities:
++  - id: "H-01"
++    title: "Bad-debt internalization leaves a pre-bunker exit window"
++    award: 1.0
++  - id: "H-02"
++    title: "External bad-debt conversion double-counts protocol losses"
++    award: 1.0
++  - id: "H-03"
++    title: "Validator exits weaken the annual CL balance sanity check"
++    award: 1.0
++  - id: "H-04"
++    title: "Vault operations remain active during Lido bunker mode"
++    award: 1.0
++  - id: "H-05"
++    title: "Rebase smoothing ignores pending bad-debt internalization"
++    award: 1.0
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/findings/H-01.md b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-01.md
+new file mode 100644
+index 0000000..e929f7a
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-01.md
+@@ -0,0 +1,77 @@
++# [H-01] Bad-debt internalization leaves a pre-bunker exit window
++
++## Affected code
++
++- `contracts/0.8.25/vaults/VaultHub.sol`: `internalizeBadDebt`
++- `contracts/0.8.9/oracle/AccountingOracle.sol`: report delivery
++- `contracts/0.8.9/WithdrawalQueue.sol`: `onOracleReport`
++
++## Root cause
++
++`VaultHub.internalizeBadDebt` immediately records shares that the protocol must
++socialize, but it does not activate WithdrawalQueue bunker mode. Bunker mode is
++updated only when a later AccountingOracle report calls
++`WithdrawalQueue.onOracleReport`.
++
++The system therefore has two different clocks for the same recognized loss:
++bad debt exists as soon as it is internalized, while exit restrictions remain
++off until the next oracle report.
++
++## Prerequisites
++
++- A vault has recognized bad debt that is selected for protocol
++  internalization.
++- WithdrawalQueue is not yet in bunker mode.
++- The bad-debt transaction lands before the oracle report that carries the
++  corresponding bunker decision.
++
++## Failure sequence
++
++1. A vault has bad debt that cannot be covered or socialized to another vault.
++2. The bad-debt master calls `VaultHub.internalizeBadDebt`.
++3. `badDebtToInternalize` increases immediately.
++4. Before the next oracle report, WithdrawalQueue still reports turbo mode.
++5. Users can enter the withdrawal flow without the restrictions that the known
++   bad debt will trigger.
++6. The next report internalizes the loss into stETH accounting and only then
++   enables bunker mode.
++
++## Impact
++
++Exiting users can avoid the loss controls during the delay. The known bad debt
++is then borne by the stETH holders who remain, shifting protocol losses between
++holder cohorts through oracle timing.
++
++## Code evidence
++
++The bad debt is recorded synchronously:
++
++```solidity
++uint256 badDebtToInternalize = _writeOffBadDebt({
++    _vault: _badDebtVault,
++    _record: _vaultRecord(_badDebtVault),
++    _maxSharesToWriteOff: _maxSharesToInternalize
++});
++
++_storage().badDebtToInternalize =
++    _storage().badDebtToInternalize.withValueIncrease({
++        _consensus: CONSENSUS_CONTRACT,
++        _increment: uint112(badDebtToInternalize)
++    });
++```
++
++WithdrawalQueue receives bunker state only during oracle delivery:
++
++```solidity
++withdrawalQueue.onOracleReport(
++    data.isBunkerMode,
++    GENESIS_TIME + prevRefSlot * SECONDS_PER_SLOT,
++    GENESIS_TIME + data.refSlot * SECONDS_PER_SLOT
++);
++```
++
++## Remediation
++
++Make the off-chain bunker decision precede bad-debt internalization, or add an
++on-chain pending-bad-debt condition that immediately restricts exits until the
++next report reconciles the state.
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/findings/H-02.md b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-02.md
+new file mode 100644
+index 0000000..a1a0511
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-02.md
+@@ -0,0 +1,63 @@
++# [H-02] External bad-debt conversion double-counts protocol losses
++
++## Affected code
++
++- `contracts/0.4.24/Lido.sol`: `internalizeExternalBadDebt`
++- `contracts/0.8.9/Accounting.sol`: bad-debt application
++
++## Root cause
++
++`internalizeExternalBadDebt` decreases `externalShares` while leaving
++`totalShares` unchanged. That converts the removed shares into internal shares
++without adding internal ether, lowering the internal share rate. The new,
++lower rate is then also used to value the remaining external shares.
++
++The loss is consequently reflected twice: once through dilution of internal
++shares and again through the reduced ether value of external shares.
++
++## Prerequisites
++
++- Both internal and external shares are outstanding.
++- A vault retains some value but has debt selected for emergency
++  internalization.
++- The authorized Accounting path invokes the conversion with the share amount
++  derived by off-chain/governance procedures.
++
++## Failure sequence
++
++1. Accounting determines a number of external shares to internalize.
++2. Lido subtracts those shares from `externalShares`.
++3. Because total shares do not change, internal shares increase by the same
++   amount while internal ether is constant.
++4. The internal share rate falls.
++5. Remaining external ether is valued using that lower rate, causing an
++   additional reduction in total pooled ether.
++
++## Impact
++
++stETH holders absorb more value loss than the vault's actual bad debt. The
++report's worked example calculates real debt of 10.789473 ETH but a
++total-pooled-ether decrease of 11.357328 ETH, an overstatement of about 5%.
++
++## Code evidence
++
++```solidity
++uint256 externalShares = _getExternalShares();
++require(externalShares >= _amountOfShares, "EXT_SHARES_TOO_SMALL");
++
++// total shares remains the same
++// external shares are decreased
++// => external ether is decreased as well
++// internal shares are increased
++// internal ether stays the same
++// => total pooled ether is decreased
++// => share rate is decreased
++// ==> losses are split between token holders
++_setExternalShares(externalShares - _amountOfShares);
++```
++
++## Remediation
++
++Compute the shares to internalize from the exact ether deficit while accounting
++for the coupled internal-share-rate change, and enforce that conversion in the
++on-chain path rather than relying only on an off-chain caller estimate.
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/findings/H-03.md b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-03.md
+new file mode 100644
+index 0000000..156ad2e
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-03.md
+@@ -0,0 +1,88 @@
++# [H-03] Validator exits weaken the annual CL balance sanity check
++
++## Affected code
++
++- `contracts/0.8.9/Accounting.sol`: `_simulateOracleReport`
++- `contracts/0.8.9/sanity_checks/OracleReportSanityChecker.sol`:
++  `_checkAnnualBalancesIncrease`
++
++## Root cause
++
++Accounting constructs the sanity check's pre-report CL balance by adding
++32 ETH for every newly appeared validator. It does not subtract principal that
++left the CL through validator exits during the same reporting interval.
++
++When new validators appear while old validators exit, the calculated baseline
++can be higher than the actual comparable pre-report CL principal. The annual
++growth check then understates the increase or returns early without checking
++growth at all.
++
++## Prerequisites
++
++- New validators appear and existing validators exit during the same reporting
++  interval.
++- An erroneous or compromised oracle report overstates post-report CL balance.
++- The report satisfies the remaining consensus and accounting checks.
++
++## Failure sequence
++
++1. New validators appear between two oracle reports.
++2. Existing validators exit during the same interval and their principal moves
++   to the execution layer.
++3. Accounting adds the new validators' full 32 ETH deposits to the old CL
++   balance but does not remove the exited principal.
++4. `_checkAnnualBalancesIncrease` compares the reported post balance against
++   this inflated baseline.
++5. An abnormal CL balance increase can pass a weaker bound, or the function can
++   return at `_preCLBalance >= _postCLBalance`.
++6. Lido accepts the inflated CL balance into pooled-ether/share-rate
++   accounting.
++7. Holders who exit before the accounting error is corrected can receive value
++   based on nonexistent backing, leaving the correction loss to remaining
++   holders.
++
++## Impact
++
++The check is intended to stop an anomalously inflated CL balance from entering
++Lido accounting. Weakening it can allow overstated pooled ether and stETH share
++value to be accepted if an erroneous or compromised oracle report coincides
++with validator churn. Early exits can realize that overvaluation and socialize
++the eventual correction across remaining holders. This asset-loss consequence
++is an inference from the checked value's use in accounting; the report directly
++establishes the security-control bypass.
++
++## Code evidence
++
++```solidity
++update.principalClBalance =
++    _pre.clBalance
++        + (_report.clValidators - _pre.clValidators) * DEPOSIT_SIZE;
++```
++
++The derived value is passed as the pre-CL balance:
++
++```solidity
++_contracts.oracleReportSanityChecker.checkAccountingOracleReport(
++    _report.timeElapsed,
++    _update.principalClBalance,
++    _report.clBalance,
++    // ...
++);
++```
++
++The sanity check skips growth validation when that baseline is already greater:
++
++```solidity
++if (_preCLBalance >= _postCLBalance) return;
++
++uint256 balanceIncrease = _postCLBalance - _preCLBalance;
++uint256 annualBalanceIncrease =
++    ((365 days * MAX_BASIS_POINTS * balanceIncrease) / _preCLBalance)
++        / _timeElapsed;
++```
++
++## Remediation
++
++Use a comparable CL-principal baseline that accounts for exits, or introduce a
++separate observable bound for aggregate-balance growth and emit/monitor every
++early-return case.
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/findings/H-04.md b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-04.md
+new file mode 100644
+index 0000000..34a962e
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-04.md
+@@ -0,0 +1,80 @@
++# [H-04] Vault operations remain active during Lido bunker mode
++
++## Affected code
++
++- `contracts/0.8.25/vaults/VaultHub.sol`: `connectVault`, `fund`,
++  `mintShares`, and `resumeBeaconChainDeposits`
++- `contracts/0.4.24/Lido.sol`: `canDeposit`
++
++## Root cause
++
++VaultHub's pause state is independent from WithdrawalQueue bunker mode.
++Vault activation, funding, liability minting, and beacon-deposit resumption use
++only VaultHub's own `whenResumed` or vault-health checks.
++
++The main Lido deposit path explicitly blocks deposits during bunker mode, but
++the staking-vault path does not consult that state.
++
++## Prerequisites
++
++- WithdrawalQueue bunker mode is active while VaultHub remains locally
++  resumed.
++- A connected or newly connected vault owner can resume beacon deposits.
++- The node operator is malicious or otherwise able to cause validator
++  slashing that exceeds the vault's recoverable backing.
++
++## Failure sequence
++
++1. Lido enters bunker mode because consensus-layer conditions are abnormal.
++2. Main-protocol deposits stop because `Lido.canDeposit()` reads the
++   WithdrawalQueue bunker flag.
++3. VaultHub remains resumed.
++4. A vault owner activates or funds a vault, mints external shares, and resumes
++   validator deposits.
++5. A malicious node operator can operate those validators to incur additional
++   slashing and bad debt while the protocol is already distressed.
++
++## Impact
++
++The amount of new vault bad debt is uncapped. A malicious operator can deepen
++the protocol deficit during bunker mode, increasing the loss later
++internalized and socialized to stETH holders.
++
++## Code evidence
++
++The main path checks bunker mode:
++
++```solidity
++function canDeposit() public view returns (bool) {
++    return !_withdrawalQueue().isBunkerModeActive() && !isStopped();
++}
++```
++
++VaultHub activation checks only its own pause state:
++
++```solidity
++function connectVault(address _vault) external whenResumed {
++    // ...
++    _connectVault(_vault, shareLimit, reserveRatioBP, ...);
++}
++```
++
++Beacon deposits can be resumed based only on local vault health:
++
++```solidity
++function resumeBeaconChainDeposits(address _vault) external {
++    VaultConnection storage connection = _checkConnectionAndOwner(_vault);
++    VaultRecord storage record = _vaultRecord(_vault);
++    if (!_isVaultHealthy(connection, record)) {
++        revert UnhealthyVaultCannotDeposit(_vault);
++    }
++    // ...
++    IStakingVault(_vault).resumeBeaconChainDeposits();
++}
++```
++
++## Remediation
++
++Read the canonical bunker flag in VaultHub and reject vault activation,
++liability increases, and beacon deposits while it is active, or atomically
++synchronize VaultHub's pause state with Lido bunker transitions.
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/findings/H-05.md b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-05.md
+new file mode 100644
+index 0000000..63fd195
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/findings/H-05.md
+@@ -0,0 +1,84 @@
++# [H-05] Rebase smoothing ignores pending bad-debt internalization
++
++## Affected code
++
++- `contracts/0.8.9/Accounting.sol`: `_simulateOracleReport`
++- `contracts/0.8.9/sanity_checks/OracleReportSanityChecker.sol`:
++  `smoothenTokenRebase`
++
++## Root cause
++
++Accounting snapshots `badDebtToInternalize`, but the value is absent from every
++input to `smoothenTokenRebase`. Smoothing therefore decides how much
++execution-layer reward ether to pull as though the pending share conversion
++will not reduce the internal share rate.
++
++Accounting applies the bad-debt conversion only after the smoother has capped
++the available rewards.
++
++## Prerequisites
++
++- `badDebtToInternalize` is nonzero for the report.
++- The execution-layer rewards vault contains enough ether to offset more of
++  the bad-debt share-rate decrease.
++- The positive-rebase limiter is binding, so smoothing leaves some rewards
++  unpulled.
++
++## Failure sequence
++
++1. VaultHub has pending bad debt to internalize.
++2. An oracle report contains execution-layer rewards that could offset the
++   corresponding share-rate decrease.
++3. `smoothenTokenRebase` computes its reward pull without the pending debt.
++4. It leaves some available reward ether in the vault to satisfy its
++   positive-rebase bound.
++5. Accounting then converts external shares into internal shares, decreasing
++   the share rate.
++
++## Impact
++
++stETH can undergo an avoidable negative rebase even though enough execution
++layer rewards were available to cover more of the loss. Holder balances and
++share value are reduced by the ordering mismatch rather than by insufficient
++assets. A holder who transfers or exits before later rewards are distributed
++crystallizes that reduction and does not recover it from a future rebase.
++
++## Code evidence
++
++The snapshot includes the debt:
++
++```solidity
++pre.badDebtToInternalize =
++    _contracts.vaultHub.badDebtToInternalizeAsOfLastRefSlot();
++```
++
++The smoothing call has no bad-debt argument:
++
++```solidity
++_contracts.oracleReportSanityChecker.smoothenTokenRebase(
++    _pre.totalPooledEther,
++    _pre.totalShares,
++    update.principalClBalance,
++    _report.clBalance,
++    _report.withdrawalVaultBalance,
++    _report.elRewardsVaultBalance,
++    _report.sharesRequestedToBurn,
++    update.etherToFinalizeWQ,
++    update.sharesToFinalizeWQ
++);
++```
++
++Only afterward does Accounting increase internal shares by the debt amount:
++
++```solidity
++update.postInternalShares =
++    postInternalSharesBeforeFees
++        + update.sharesToMintAsFees
++        + _pre.badDebtToInternalize;
++```
++
++## Remediation
++
++Include pending bad-debt internalization in the rebase-limiter state before it
++caps reward collection, so available execution-layer rewards can offset the
++same report's negative share-rate effect.
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/findings/gold_audit.md b/project/evmbench/audits/2025-12-lido-v3-core/findings/gold_audit.md
+new file mode 100644
+index 0000000..d2b52dc
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/findings/gold_audit.md
+@@ -0,0 +1,396 @@
++# [H-01] Bad-debt internalization leaves a pre-bunker exit window
++
++## Affected code
++
++- `contracts/0.8.25/vaults/VaultHub.sol`: `internalizeBadDebt`
++- `contracts/0.8.9/oracle/AccountingOracle.sol`: report delivery
++- `contracts/0.8.9/WithdrawalQueue.sol`: `onOracleReport`
++
++## Root cause
++
++`VaultHub.internalizeBadDebt` immediately records shares that the protocol must
++socialize, but it does not activate WithdrawalQueue bunker mode. Bunker mode is
++updated only when a later AccountingOracle report calls
++`WithdrawalQueue.onOracleReport`.
++
++The system therefore has two different clocks for the same recognized loss:
++bad debt exists as soon as it is internalized, while exit restrictions remain
++off until the next oracle report.
++
++## Prerequisites
++
++- A vault has recognized bad debt that is selected for protocol
++  internalization.
++- WithdrawalQueue is not yet in bunker mode.
++- The bad-debt transaction lands before the oracle report that carries the
++  corresponding bunker decision.
++
++## Failure sequence
++
++1. A vault has bad debt that cannot be covered or socialized to another vault.
++2. The bad-debt master calls `VaultHub.internalizeBadDebt`.
++3. `badDebtToInternalize` increases immediately.
++4. Before the next oracle report, WithdrawalQueue still reports turbo mode.
++5. Users can enter the withdrawal flow without the restrictions that the known
++   bad debt will trigger.
++6. The next report internalizes the loss into stETH accounting and only then
++   enables bunker mode.
++
++## Impact
++
++Exiting users can avoid the loss controls during the delay. The known bad debt
++is then borne by the stETH holders who remain, shifting protocol losses between
++holder cohorts through oracle timing.
++
++## Code evidence
++
++The bad debt is recorded synchronously:
++
++```solidity
++uint256 badDebtToInternalize = _writeOffBadDebt({
++    _vault: _badDebtVault,
++    _record: _vaultRecord(_badDebtVault),
++    _maxSharesToWriteOff: _maxSharesToInternalize
++});
++
++_storage().badDebtToInternalize =
++    _storage().badDebtToInternalize.withValueIncrease({
++        _consensus: CONSENSUS_CONTRACT,
++        _increment: uint112(badDebtToInternalize)
++    });
++```
++
++WithdrawalQueue receives bunker state only during oracle delivery:
++
++```solidity
++withdrawalQueue.onOracleReport(
++    data.isBunkerMode,
++    GENESIS_TIME + prevRefSlot * SECONDS_PER_SLOT,
++    GENESIS_TIME + data.refSlot * SECONDS_PER_SLOT
++);
++```
++
++## Remediation
++
++Make the off-chain bunker decision precede bad-debt internalization, or add an
++on-chain pending-bad-debt condition that immediately restricts exits until the
++next report reconciles the state.
++
++# [H-02] External bad-debt conversion double-counts protocol losses
++
++## Affected code
++
++- `contracts/0.4.24/Lido.sol`: `internalizeExternalBadDebt`
++- `contracts/0.8.9/Accounting.sol`: bad-debt application
++
++## Root cause
++
++`internalizeExternalBadDebt` decreases `externalShares` while leaving
++`totalShares` unchanged. That converts the removed shares into internal shares
++without adding internal ether, lowering the internal share rate. The new,
++lower rate is then also used to value the remaining external shares.
++
++The loss is consequently reflected twice: once through dilution of internal
++shares and again through the reduced ether value of external shares.
++
++## Prerequisites
++
++- Both internal and external shares are outstanding.
++- A vault retains some value but has debt selected for emergency
++  internalization.
++- The authorized Accounting path invokes the conversion with the share amount
++  derived by off-chain/governance procedures.
++
++## Failure sequence
++
++1. Accounting determines a number of external shares to internalize.
++2. Lido subtracts those shares from `externalShares`.
++3. Because total shares do not change, internal shares increase by the same
++   amount while internal ether is constant.
++4. The internal share rate falls.
++5. Remaining external ether is valued using that lower rate, causing an
++   additional reduction in total pooled ether.
++
++## Impact
++
++stETH holders absorb more value loss than the vault's actual bad debt. The
++report's worked example calculates real debt of 10.789473 ETH but a
++total-pooled-ether decrease of 11.357328 ETH, an overstatement of about 5%.
++
++## Code evidence
++
++```solidity
++uint256 externalShares = _getExternalShares();
++require(externalShares >= _amountOfShares, "EXT_SHARES_TOO_SMALL");
++
++// total shares remains the same
++// external shares are decreased
++// => external ether is decreased as well
++// internal shares are increased
++// internal ether stays the same
++// => total pooled ether is decreased
++// => share rate is decreased
++// ==> losses are split between token holders
++_setExternalShares(externalShares - _amountOfShares);
++```
++
++## Remediation
++
++Compute the shares to internalize from the exact ether deficit while accounting
++for the coupled internal-share-rate change, and enforce that conversion in the
++on-chain path rather than relying only on an off-chain caller estimate.
++
++# [H-03] Validator exits weaken the annual CL balance sanity check
++
++## Affected code
++
++- `contracts/0.8.9/Accounting.sol`: `_simulateOracleReport`
++- `contracts/0.8.9/sanity_checks/OracleReportSanityChecker.sol`:
++  `_checkAnnualBalancesIncrease`
++
++## Root cause
++
++Accounting constructs the sanity check's pre-report CL balance by adding
++32 ETH for every newly appeared validator. It does not subtract principal that
++left the CL through validator exits during the same reporting interval.
++
++When new validators appear while old validators exit, the calculated baseline
++can be higher than the actual comparable pre-report CL principal. The annual
++growth check then understates the increase or returns early without checking
++growth at all.
++
++## Prerequisites
++
++- New validators appear and existing validators exit during the same reporting
++  interval.
++- An erroneous or compromised oracle report overstates post-report CL balance.
++- The report satisfies the remaining consensus and accounting checks.
++
++## Failure sequence
++
++1. New validators appear between two oracle reports.
++2. Existing validators exit during the same interval and their principal moves
++   to the execution layer.
++3. Accounting adds the new validators' full 32 ETH deposits to the old CL
++   balance but does not remove the exited principal.
++4. `_checkAnnualBalancesIncrease` compares the reported post balance against
++   this inflated baseline.
++5. An abnormal CL balance increase can pass a weaker bound, or the function can
++   return at `_preCLBalance >= _postCLBalance`.
++6. Lido accepts the inflated CL balance into pooled-ether/share-rate
++   accounting.
++7. Holders who exit before the accounting error is corrected can receive value
++   based on nonexistent backing, leaving the correction loss to remaining
++   holders.
++
++## Impact
++
++The check is intended to stop an anomalously inflated CL balance from entering
++Lido accounting. Weakening it can allow overstated pooled ether and stETH share
++value to be accepted if an erroneous or compromised oracle report coincides
++with validator churn. Early exits can realize that overvaluation and socialize
++the eventual correction across remaining holders. This asset-loss consequence
++is an inference from the checked value's use in accounting; the report directly
++establishes the security-control bypass.
++
++## Code evidence
++
++```solidity
++update.principalClBalance =
++    _pre.clBalance
++        + (_report.clValidators - _pre.clValidators) * DEPOSIT_SIZE;
++```
++
++The derived value is passed as the pre-CL balance:
++
++```solidity
++_contracts.oracleReportSanityChecker.checkAccountingOracleReport(
++    _report.timeElapsed,
++    _update.principalClBalance,
++    _report.clBalance,
++    // ...
++);
++```
++
++The sanity check skips growth validation when that baseline is already greater:
++
++```solidity
++if (_preCLBalance >= _postCLBalance) return;
++
++uint256 balanceIncrease = _postCLBalance - _preCLBalance;
++uint256 annualBalanceIncrease =
++    ((365 days * MAX_BASIS_POINTS * balanceIncrease) / _preCLBalance)
++        / _timeElapsed;
++```
++
++## Remediation
++
++Use a comparable CL-principal baseline that accounts for exits, or introduce a
++separate observable bound for aggregate-balance growth and emit/monitor every
++early-return case.
++
++# [H-04] Vault operations remain active during Lido bunker mode
++
++## Affected code
++
++- `contracts/0.8.25/vaults/VaultHub.sol`: `connectVault`, `fund`,
++  `mintShares`, and `resumeBeaconChainDeposits`
++- `contracts/0.4.24/Lido.sol`: `canDeposit`
++
++## Root cause
++
++VaultHub's pause state is independent from WithdrawalQueue bunker mode.
++Vault activation, funding, liability minting, and beacon-deposit resumption use
++only VaultHub's own `whenResumed` or vault-health checks.
++
++The main Lido deposit path explicitly blocks deposits during bunker mode, but
++the staking-vault path does not consult that state.
++
++## Prerequisites
++
++- WithdrawalQueue bunker mode is active while VaultHub remains locally
++  resumed.
++- A connected or newly connected vault owner can resume beacon deposits.
++- The node operator is malicious or otherwise able to cause validator
++  slashing that exceeds the vault's recoverable backing.
++
++## Failure sequence
++
++1. Lido enters bunker mode because consensus-layer conditions are abnormal.
++2. Main-protocol deposits stop because `Lido.canDeposit()` reads the
++   WithdrawalQueue bunker flag.
++3. VaultHub remains resumed.
++4. A vault owner activates or funds a vault, mints external shares, and resumes
++   validator deposits.
++5. A malicious node operator can operate those validators to incur additional
++   slashing and bad debt while the protocol is already distressed.
++
++## Impact
++
++The amount of new vault bad debt is uncapped. A malicious operator can deepen
++the protocol deficit during bunker mode, increasing the loss later
++internalized and socialized to stETH holders.
++
++## Code evidence
++
++The main path checks bunker mode:
++
++```solidity
++function canDeposit() public view returns (bool) {
++    return !_withdrawalQueue().isBunkerModeActive() && !isStopped();
++}
++```
++
++VaultHub activation checks only its own pause state:
++
++```solidity
++function connectVault(address _vault) external whenResumed {
++    // ...
++    _connectVault(_vault, shareLimit, reserveRatioBP, ...);
++}
++```
++
++Beacon deposits can be resumed based only on local vault health:
++
++```solidity
++function resumeBeaconChainDeposits(address _vault) external {
++    VaultConnection storage connection = _checkConnectionAndOwner(_vault);
++    VaultRecord storage record = _vaultRecord(_vault);
++    if (!_isVaultHealthy(connection, record)) {
++        revert UnhealthyVaultCannotDeposit(_vault);
++    }
++    // ...
++    IStakingVault(_vault).resumeBeaconChainDeposits();
++}
++```
++
++## Remediation
++
++Read the canonical bunker flag in VaultHub and reject vault activation,
++liability increases, and beacon deposits while it is active, or atomically
++synchronize VaultHub's pause state with Lido bunker transitions.
++
++# [H-05] Rebase smoothing ignores pending bad-debt internalization
++
++## Affected code
++
++- `contracts/0.8.9/Accounting.sol`: `_simulateOracleReport`
++- `contracts/0.8.9/sanity_checks/OracleReportSanityChecker.sol`:
++  `smoothenTokenRebase`
++
++## Root cause
++
++Accounting snapshots `badDebtToInternalize`, but the value is absent from every
++input to `smoothenTokenRebase`. Smoothing therefore decides how much
++execution-layer reward ether to pull as though the pending share conversion
++will not reduce the internal share rate.
++
++Accounting applies the bad-debt conversion only after the smoother has capped
++the available rewards.
++
++## Prerequisites
++
++- `badDebtToInternalize` is nonzero for the report.
++- The execution-layer rewards vault contains enough ether to offset more of
++  the bad-debt share-rate decrease.
++- The positive-rebase limiter is binding, so smoothing leaves some rewards
++  unpulled.
++
++## Failure sequence
++
++1. VaultHub has pending bad debt to internalize.
++2. An oracle report contains execution-layer rewards that could offset the
++   corresponding share-rate decrease.
++3. `smoothenTokenRebase` computes its reward pull without the pending debt.
++4. It leaves some available reward ether in the vault to satisfy its
++   positive-rebase bound.
++5. Accounting then converts external shares into internal shares, decreasing
++   the share rate.
++
++## Impact
++
++stETH can undergo an avoidable negative rebase even though enough execution
++layer rewards were available to cover more of the loss. Holder balances and
++share value are reduced by the ordering mismatch rather than by insufficient
++assets. A holder who transfers or exits before later rewards are distributed
++crystallizes that reduction and does not recover it from a future rebase.
++
++## Code evidence
++
++The snapshot includes the debt:
++
++```solidity
++pre.badDebtToInternalize =
++    _contracts.vaultHub.badDebtToInternalizeAsOfLastRefSlot();
++```
++
++The smoothing call has no bad-debt argument:
++
++```solidity
++_contracts.oracleReportSanityChecker.smoothenTokenRebase(
++    _pre.totalPooledEther,
++    _pre.totalShares,
++    update.principalClBalance,
++    _report.clBalance,
++    _report.withdrawalVaultBalance,
++    _report.elRewardsVaultBalance,
++    _report.sharesRequestedToBurn,
++    update.etherToFinalizeWQ,
++    update.sharesToFinalizeWQ
++);
++```
++
++Only afterward does Accounting increase internal shares by the debt amount:
++
++```solidity
++update.postInternalShares =
++    postInternalSharesBeforeFees
++        + update.sharesToMintAsFees
++        + _pre.badDebtToInternalize;
++```
++
++## Remediation
++
++Include pending bad-debt internalization in the rebase-limiter state before it
++caps reward collection, so available execution-layer rewards can offset the
++same report's negative share-rate effect.
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl
+new file mode 100644
+index 0000000..e4cb2e8
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>title [81, 60, 577, 98]<|/det|>2. Findings Report\n<|det|>title [81, 122, 296, 145]<|/det|>2.1 Critical\n<|det|>text [81, 165, 172, 179]<|/det|>Not Found\n<|det|>title [81, 203, 228, 228]<|/det|>2.2 High\n<|det|>table [88, 248, 910, 315]<|/det|><table><tr><td>H-1</td><td colspan=\"3\">Delayed Bunker Mode Activation After Bad Debt Internalization</td></tr><tr><td>Severity</td><td>High</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 336, 186, 350]<|/det|>Description\n<|det|>text [80, 353, 884, 403]<|/det|>The VaultHub.internalizeBadDebt function is responsible for internalizing vault bad debt into Lido V2. It reduces the vault's liability and incorporates the badDebtToInternalize value when calculating the stETH rebase during the oracle report.\n<|det|>text [80, 405, 911, 542]<|/det|>However, the creation and internalization of bad debt can trigger bunker mode in Lido V2. This mode is only activated after the oracle report is submitted, which may occur some time after the bad debt has been internalized via VaultHub. During this delay, the protocol continues to operate normally—even though a known and acknowledged bad debt exists. This issue is classified as High severity because it enables front-running of bunker mode activation. Users can exit the protocol without any restrictions before the oracle report is submitted, despite the fact that bunker mode activation is guaranteed once the report arrives.\n<|det|>title [81, 562, 214, 574]<|/det|>Recommendation\n<|det|>text [80, 579, 890, 610]<|/det|>We recommend monitoring the health of vaults in the off-chain logic and triggering bunker mode as soon as bad debt is detected-before it is internalized via\n<|det|>text [80, 614, 915, 645]<|/det|>VaultHub.internalizeBadDebt. This approach will more accurately reflect the current state of the protocol and help prevent bypassing exit limitations.\n<|det|>title [81, 667, 233, 680]<|/det|>Client's Commentary:\n<|det|>text [81, 683, 650, 697]<|/det|>Client: https://github.com/lidofinance/core/issues/1338#issuecomment-3249283991\n<|det|>text [81, 700, 316, 714]<|/det|>Comment from the analytics team:\n<|det|>text [81, 717, 816, 731]<|/det|>Even in the worst-case scenario, the protocol's impact occurs only at network-wide slashing levels above \\(1.4\\%\\).\n<|det|>text [81, 735, 576, 748]<|/det|>Given the extremely low probability of these conditions, it is suggested to:\n<|det|>text [81, 752, 576, 765]<|/det|>Not implement any new bunker mode conditions on initial stVaults rollout\n<|det|>text [80, 769, 915, 800]<|/det|>Consider implementing Ethereum-wide bunker mode condition - triggering bunker mode based on observed network slashing share (suggested level: 1.7%-1.8%)\n<|det|>text [80, 804, 864, 818]<|/det|>So looks like we will acknowledge the issue, and probably have to lower the severity of the finding, what do you think?\n<|det|>text [80, 821, 897, 854]<|/det|>MixBytes: Based on client's feedback, we agree to downgrade this finding from Critical to High severity. While the potential for front-running bunker mode activation remains a valid concern, the likelihood is indeed low.\n<|det|>footer [81, 950, 248, 972]<|/det|>MixBytes ()\n<|det|>page_number [879, 951, 916, 970]<|/det|>13\n", "page_image_sha256": "5ed04236cf785545ec069c21e3986e71e07029afa877461ab17da7b9d1d3cabc", "page_number": 14, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>title [81, 60, 577, 98]<|/det|>2. Findings Report\n<|det|>title [81, 122, 296, 145]<|/det|>2.1 Critical\n<|det|>text [81, 165, 172, 179]<|/det|>Not Found\n<|det|>title [81, 203, 228, 228]<|/det|>2.2 High\n<|det|>table [88, 248, 910, 315]<|/det|><table><tr><td>H-1</td><td colspan=\"3\">Delayed Bunker Mode Activation After Bad Debt Internalization</td></tr><tr><td>Severity</td><td>High</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 336, 186, 350]<|/det|>Description\n<|det|>text [80, 353, 884, 403]<|/det|>The VaultHub.internalizeBadDebt function is responsible for internalizing vault bad debt into Lido V2. It reduces the vault's liability and incorporates the badDebtToInternalize value when calculating the stETH rebase during the oracle report.\n<|det|>text [80, 405, 911, 542]<|/det|>However, the creation and internalization of bad debt can trigger bunker mode in Lido V2. This mode is only activated after the oracle report is submitted, which may occur some time after the bad debt has been internalized via VaultHub. During this delay, the protocol continues to operate normally—even though a known and acknowledged bad debt exists. This issue is classified as High severity because it enables front-running of bunker mode activation. Users can exit the protocol without any restrictions before the oracle report is submitted, despite the fact that bunker mode activation is guaranteed once the report arrives.\n<|det|>title [81, 562, 214, 574]<|/det|>Recommendation\n<|det|>text [80, 579, 890, 610]<|/det|>We recommend monitoring the health of vaults in the off-chain logic and triggering bunker mode as soon as bad debt is detected-before it is internalized via\n<|det|>text [80, 614, 915, 645]<|/det|>VaultHub.internalizeBadDebt. This approach will more accurately reflect the current state of the protocol and help prevent bypassing exit limitations.\n<|det|>title [81, 667, 233, 680]<|/det|>Client's Commentary:\n<|det|>text [81, 683, 650, 697]<|/det|>Client: https://github.com/lidofinance/core/issues/1338#issuecomment-3249283991\n<|det|>text [81, 700, 316, 714]<|/det|>Comment from the analytics team:\n<|det|>text [81, 717, 816, 731]<|/det|>Even in the worst-case scenario, the protocol's impact occurs only at network-wide slashing levels above \\(1.4\\%\\).\n<|det|>text [81, 735, 576, 748]<|/det|>Given the extremely low probability of these conditions, it is suggested to:\n<|det|>text [81, 752, 576, 765]<|/det|>Not implement any new bunker mode conditions on initial stVaults rollout\n<|det|>text [80, 769, 915, 800]<|/det|>Consider implementing Ethereum-wide bunker mode condition - triggering bunker mode based on observed network slashing share (suggested level: 1.7%-1.8%)\n<|det|>text [80, 804, 864, 818]<|/det|>So looks like we will acknowledge the issue, and probably have to lower the severity of the finding, what do you think?\n<|det|>text [80, 821, 897, 854]<|/det|>MixBytes: Based on client's feedback, we agree to downgrade this finding from Critical to High severity. While the potential for front-running bunker mode activation remains a valid concern, the likelihood is indeed low.\n<|det|>footer [81, 950, 248, 972]<|/det|>MixBytes ()\n<|det|>page_number [879, 951, 916, 970]<|/det|>13\n", "page_image_sha256": "5ed04236cf785545ec069c21e3986e71e07029afa877461ab17da7b9d1d3cabc", "page_number": 14, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 420.181}, "timing_ms": {"decode": 1992, "sglang_total": 2185, "ttft": 192}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 837, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 1115}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 3243}
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl
+new file mode 100644
+index 0000000..a8d5f37
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl
+@@ -0,0 +1,3 @@
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>title [82, 58, 264, 79]<|/det|>2.3 Medium\n<|det|>table [84, 98, 905, 190]<|/det|><table><tr><td>M-1</td><td colspan=\"3\">Incorrect Accounting in internalizeExternalBadDebt May Overestimate Protocol Losses</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [82, 208, 186, 221]<|/det|>Description\n<|det|>text [81, 224, 890, 256]<|/det|>This issue has been identified within the internalizeExternalBadDebt Lido.sol#L768 of the Lido contract.\n<|det|>text [81, 259, 915, 395]<|/det|>The function is designed to convert external bad debt into internal accounting by decreasing externalShares, which reduces the protocol's totalPooledEther. However, due to how the internal and external shares are coupled, the reduction of externalShares without the reduction of totalShares already decreases the shareRate (because it increases internalShares without changing the internalEther, which leads to the reduction of the shareRate). If externalShares are reduced, it affects totalPooledEther in 2 ways: the internal shareRate is being reduced, and the externalEther is being reduced, which may overestimate the losses for the protocol.\n<|det|>text [81, 398, 878, 412]<|/det|>Here is an example of the script that shows how the overestimation affects the protocol:\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 917, 970]<|/det|>14\n", "page_image_sha256": "71ab2ac5edcdee6fa69779b60e66e70bb2cc42583779684ed7e82be1bf00552b", "page_number": 15, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>title [82, 58, 264, 79]<|/det|>2.3 Medium\n<|det|>table [84, 98, 905, 190]<|/det|><table><tr><td>M-1</td><td colspan=\"3\">Incorrect Accounting in internalizeExternalBadDebt May Overestimate Protocol Losses</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [82, 208, 186, 221]<|/det|>Description\n<|det|>text [81, 224, 890, 256]<|/det|>This issue has been identified within the internalizeExternalBadDebt Lido.sol#L768 of the Lido contract.\n<|det|>text [81, 259, 915, 395]<|/det|>The function is designed to convert external bad debt into internal accounting by decreasing externalShares, which reduces the protocol's totalPooledEther. However, due to how the internal and external shares are coupled, the reduction of externalShares without the reduction of totalShares already decreases the shareRate (because it increases internalShares without changing the internalEther, which leads to the reduction of the shareRate). If externalShares are reduced, it affects totalPooledEther in 2 ways: the internal shareRate is being reduced, and the externalEther is being reduced, which may overestimate the losses for the protocol.\n<|det|>text [81, 398, 878, 412]<|/det|>Here is an example of the script that shows how the overestimation affects the protocol:\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 917, 970]<|/det|>14\n", "page_image_sha256": "71ab2ac5edcdee6fa69779b60e66e70bb2cc42583779684ed7e82be1bf00552b", "page_number": 15, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 455.939}, "timing_ms": {"decode": 783, "sglang_total": 975, "ttft": 192}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 357, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 635}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 1424}
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [104, 75, 692, 681]<|/det|>def main():\n    # input parameters\n    internal_ether = 10.000.000 * 10**18\n    external_shares = 500.000 * 10**18\n    internal_shares = 9.500.000 * 10**18\n    liability_shares = 110 * 10**18\n    total_vault_value = 105 * 10**18\n\n    total_shares = external_shares + internal_shares\n    total_pooled_ether = internal_ether \\\n    + external_shares * internal_ether // internal_shares\n\n    total_vault_shares = total_vault_value \\\n    * total_shares // total_pooled_ether\n    real_bad_debt = liability_shares \\\n    * total_pooled_ether // total_shares - total_vault_value\n    print(\"The real bad debt: \", real_bad_debt / 10**18)\n\n    bad_debt_shares = liability_shares - total_vault_shares\n\n    total_pooled_ether_upd = internal_ether \\\n    + (external_shares - bad_debt_shares) \\\n    * internal_ether // (internal_shares + bad_debt_shares)\n\n    ether_decrease = total_pooled_ether - total_pooled_ether_upd\n    print(\"Ether decrease: \", ether_decrease / 10**18)\n\n    vault_unlocked = total_vault_value \\\n    - (liability_shares - bad_debt_shares) \\\n    * total_pooled_ether_upd // total_shares\n    print(\"Vault unlocked: \", vault_unlocked / 10**18)\n\nif __name__ == \"__main__\":\n    main()\n<|det|>text [84, 713, 228, 726]<|/det|>And the results:\n<|det|>text [106, 763, 370, 813]<|/det|>The real bad debt: 10.789473  \nEther decrease: 11.357328  \nVault unlocked: 0.000113\n<|det|>text [84, 846, 490, 861]<|/det|>This leads to an overestimation of around 5%.\n<|det|>title [84, 882, 212, 894]<|/det|>Recommendation\n<|det|>text [83, 898, 899, 930]<|/det|>We recommend reviewing the off-chain service responsible for VaultHub.sol#L609_maxSharesToWriteOff to ensure that it implements strict validation to avoid internalizing\n<|det|>footer [84, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 950, 916, 969]<|/det|>15\n", "page_image_sha256": "257edb3a4e7fbd3800f48b22cf246a101987c858ccb92e867dbb0907c8335b57", "page_number": 16, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [104, 75, 692, 681]<|/det|>def main():\n    # input parameters\n    internal_ether = 10.000.000 * 10**18\n    external_shares = 500.000 * 10**18\n    internal_shares = 9.500.000 * 10**18\n    liability_shares = 110 * 10**18\n    total_vault_value = 105 * 10**18\n\n    total_shares = external_shares + internal_shares\n    total_pooled_ether = internal_ether \\\n    + external_shares * internal_ether // internal_shares\n\n    total_vault_shares = total_vault_value \\\n    * total_shares // total_pooled_ether\n    real_bad_debt = liability_shares \\\n    * total_pooled_ether // total_shares - total_vault_value\n    print(\"The real bad debt: \", real_bad_debt / 10**18)\n\n    bad_debt_shares = liability_shares - total_vault_shares\n\n    total_pooled_ether_upd = internal_ether \\\n    + (external_shares - bad_debt_shares) \\\n    * internal_ether // (internal_shares + bad_debt_shares)\n\n    ether_decrease = total_pooled_ether - total_pooled_ether_upd\n    print(\"Ether decrease: \", ether_decrease / 10**18)\n\n    vault_unlocked = total_vault_value \\\n    - (liability_shares - bad_debt_shares) \\\n    * total_pooled_ether_upd // total_shares\n    print(\"Vault unlocked: \", vault_unlocked / 10**18)\n\nif __name__ == \"__main__\":\n    main()\n<|det|>text [84, 713, 228, 726]<|/det|>And the results:\n<|det|>text [106, 763, 370, 813]<|/det|>The real bad debt: 10.789473  \nEther decrease: 11.357328  \nVault unlocked: 0.000113\n<|det|>text [84, 846, 490, 861]<|/det|>This leads to an overestimation of around 5%.\n<|det|>title [84, 882, 212, 894]<|/det|>Recommendation\n<|det|>text [83, 898, 899, 930]<|/det|>We recommend reviewing the off-chain service responsible for VaultHub.sol#L609_maxSharesToWriteOff to ensure that it implements strict validation to avoid internalizing\n<|det|>footer [84, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 950, 916, 969]<|/det|>15\n", "page_image_sha256": "257edb3a4e7fbd3800f48b22cf246a101987c858ccb92e867dbb0907c8335b57", "page_number": 16, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 438.636}, "timing_ms": {"decode": 1320, "sglang_total": 1512, "ttft": 191}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 579, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 857}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 1861}
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [81, 60, 264, 72]<|/det|>more than necessary.\n<|det|>title [81, 95, 232, 108]<|/det|>Client's Commentary:\n<|det|>text [80, 111, 897, 175]<|/det|>As bad debt internalization is perceived as emergency measure that will be used semi-manually and preceded by the Lido DAO governance decision and only after the other means to compensate the bad debt will be exhausted, we think that this imperfection in design is acceptable. Especially, noticing the fact that the possible impact in realistic scenarios is very low and also requires that the vault still hold some value (which is unlikely, because it should have been rebalanced before).\n<|det|>footer [82, 950, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 952, 916, 970]<|/det|>16\n", "page_image_sha256": "01b2171515d73868b879148bb9e560ad76560b40157ed16e45ff46fabd1f5ef5", "page_number": 17, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [81, 60, 264, 72]<|/det|>more than necessary.\n<|det|>title [81, 95, 232, 108]<|/det|>Client's Commentary:\n<|det|>text [80, 111, 897, 175]<|/det|>As bad debt internalization is perceived as emergency measure that will be used semi-manually and preceded by the Lido DAO governance decision and only after the other means to compensate the bad debt will be exhausted, we think that this imperfection in design is acceptable. Especially, noticing the fact that the possible impact in realistic scenarios is very low and also requires that the vault still hold some value (which is unlikely, because it should have been rebalanced before).\n<|det|>footer [82, 950, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 952, 916, 970]<|/det|>16\n", "page_image_sha256": "01b2171515d73868b879148bb9e560ad76560b40157ed16e45ff46fabd1f5ef5", "page_number": 17, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 475.578}, "timing_ms": {"decode": 389, "sglang_total": 578, "ttft": 188}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 185, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 463}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 755}
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl
+new file mode 100644
+index 0000000..f93adfc
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>table [84, 58, 905, 130]<|/det|><table><tr><td>M-2</td><td colspan=\"3\">Incorrect Balance Increase Calculation Due to Validators&#x27; Exit</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 149, 187, 162]<|/det|>Description\n<|det|>text [80, 166, 860, 197]<|/det|>This issue has been identified within the _checkAnnualBalancesIncrease function of the OracleReportSanityChecker contract.\n<|det|>text [80, 200, 896, 318]<|/det|>The _preCLBalance parameter does not account for the withdrawal vault balance, yet it includes new validators. It is possible for N new validators to enter the protocol while simultaneously N old validators exit the protocol. In such a scenario, the balanceIncrease OracleReportSanityChecker.sol#L710 than the actual growth of the total consensus layer balance. As a result, the subsequent check will fail to detect anomalous balance growth. Also, OracleReportSanityChecker.sol#L704 may pass and return early without any checks for balance increase.\n<|det|>text [80, 321, 886, 355]<|/det|>The issue is classified as Medium severity because it undermines the effectiveness of an important security control designed to detect abnormal consensus layer balance increases.\n<|det|>title [81, 374, 214, 386]<|/det|>Recommendation\n<|det|>text [80, 390, 905, 422]<|/det|>We recommend modifying the balance increase calculation to properly account for validators' exit.\n<|det|>title [81, 444, 234, 457]<|/det|>Client's Commentary:\n<|det|>text [81, 460, 460, 474]<|/det|>Client: https://github.com/lidofinance/core/issues/1372\n<|det|>text [81, 478, 152, 491]<|/det|>Example?\n<|det|>text [80, 495, 831, 526]<|/det|>MixBytes:_preCLBalance = _pre.clBalance + (_post.clValidators - _pre.clValidators) * DEPOSIT_SIZE\n<|det|>text [80, 530, 915, 596]<|/det|>If there were some deposits on validators between the 2 reports (let's say we deposited 100 new validators) and some of the withdrawals were finalized between the 2 reports (let's say 20 validators were finalized and their principal balance was sent to EL) the _preCLBalance will account only for 100 new validators (since the withdrawal vault balance is not accounted here), but the _postCLBalance will increase only by 80 validators (100 - 20).\n<|det|>text [80, 600, 906, 649]<|/det|>Client: There is no simple way to track validator exits in accounting. If we simply add the balance of the withdraw vault, that opens a DoS vector on the oracle report by allowing anyone to inflate the withdraw vault balance from the outside. It's not expensive to execute, but it's available to anyone.\n<|det|>text [80, 652, 898, 684]<|/det|>It looks like the current approach is optimal from the sanity-checks perspective. We can update the docs and state that we limit growth of the aggregate balance (excluding deposits) over a period to prevent the misunderstanding in the future.\n<|det|>text [80, 687, 852, 719]<|/det|>MixBytes: We would also recommend emitting an event inside the if (_preCLBalance >= _postCLBalance) return; branch of the _checkAnnualBalancesIncrease function to track such cases in the off-chain logic.\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 917, 970]<|/det|>17\n", "page_image_sha256": "08307f4b7f02ca6c4d9d949ca0b3dc8bd045ca53a24a6d8563f28d26869cf1c9", "page_number": 18, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>table [84, 58, 905, 130]<|/det|><table><tr><td>M-2</td><td colspan=\"3\">Incorrect Balance Increase Calculation Due to Validators&#x27; Exit</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 149, 187, 162]<|/det|>Description\n<|det|>text [80, 166, 860, 197]<|/det|>This issue has been identified within the _checkAnnualBalancesIncrease function of the OracleReportSanityChecker contract.\n<|det|>text [80, 200, 896, 318]<|/det|>The _preCLBalance parameter does not account for the withdrawal vault balance, yet it includes new validators. It is possible for N new validators to enter the protocol while simultaneously N old validators exit the protocol. In such a scenario, the balanceIncrease OracleReportSanityChecker.sol#L710 than the actual growth of the total consensus layer balance. As a result, the subsequent check will fail to detect anomalous balance growth. Also, OracleReportSanityChecker.sol#L704 may pass and return early without any checks for balance increase.\n<|det|>text [80, 321, 886, 355]<|/det|>The issue is classified as Medium severity because it undermines the effectiveness of an important security control designed to detect abnormal consensus layer balance increases.\n<|det|>title [81, 374, 214, 386]<|/det|>Recommendation\n<|det|>text [80, 390, 905, 422]<|/det|>We recommend modifying the balance increase calculation to properly account for validators' exit.\n<|det|>title [81, 444, 234, 457]<|/det|>Client's Commentary:\n<|det|>text [81, 460, 460, 474]<|/det|>Client: https://github.com/lidofinance/core/issues/1372\n<|det|>text [81, 478, 152, 491]<|/det|>Example?\n<|det|>text [80, 495, 831, 526]<|/det|>MixBytes:_preCLBalance = _pre.clBalance + (_post.clValidators - _pre.clValidators) * DEPOSIT_SIZE\n<|det|>text [80, 530, 915, 596]<|/det|>If there were some deposits on validators between the 2 reports (let's say we deposited 100 new validators) and some of the withdrawals were finalized between the 2 reports (let's say 20 validators were finalized and their principal balance was sent to EL) the _preCLBalance will account only for 100 new validators (since the withdrawal vault balance is not accounted here), but the _postCLBalance will increase only by 80 validators (100 - 20).\n<|det|>text [80, 600, 906, 649]<|/det|>Client: There is no simple way to track validator exits in accounting. If we simply add the balance of the withdraw vault, that opens a DoS vector on the oracle report by allowing anyone to inflate the withdraw vault balance from the outside. It's not expensive to execute, but it's available to anyone.\n<|det|>text [80, 652, 898, 684]<|/det|>It looks like the current approach is optimal from the sanity-checks perspective. We can update the docs and state that we limit growth of the aggregate balance (excluding deposits) over a period to prevent the misunderstanding in the future.\n<|det|>text [80, 687, 852, 719]<|/det|>MixBytes: We would also recommend emitting an event inside the if (_preCLBalance >= _postCLBalance) return; branch of the _checkAnnualBalancesIncrease function to track such cases in the off-chain logic.\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 917, 970]<|/det|>17\n", "page_image_sha256": "08307f4b7f02ca6c4d9d949ca0b3dc8bd045ca53a24a6d8563f28d26869cf1c9", "page_number": 18, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 421.384}, "timing_ms": {"decode": 1908, "sglang_total": 2103, "ttft": 195}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 804, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 1082}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 3257}
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl
+new file mode 100644
+index 0000000..ad70fdb
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>table [84, 58, 896, 145]<|/det|><table><tr><td>M-3</td><td colspan=\"3\">Vault Activation Possible During Bunker Mode, Enabling Bad Debt Attacks</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 166, 186, 180]<|/det|>Description\n<|det|>text [80, 183, 905, 336]<|/det|>Even while Lido v2 is in bunker mode, it is still possible to activate vaults and make deposits into them. While this does not directly affect the share rate, it opens up the possibility for an attack scenario where a malicious Node Operator intentionally increases bad debt through the malicious operation as a validator, which causes slashing penalties. This can worsen the protocol's state during bunker mode and potentially prolong the period in which Lido v2 remains in this critical state as the bad debt value increase is uncapped. The root cause is that the VaultHub contract's pause mechanism is independent from the main protocol's bunker mode, so vault operations are not automatically restricted when the protocol is in bunker mode.\n<|det|>text [80, 339, 898, 388]<|/det|>The issue is classified as Medium severity because it allows a malicious Node Operator worsen the bunker mode state and allows staking vaults to perform normally, while the Lido v2 protocol experiences the restrictions related to the bunker mode.\n<|det|>title [81, 409, 212, 421]<|/det|>Recommendation\n<|det|>text [80, 425, 915, 493]<|/det|>We recommend adding explicit checks for bunker mode status in the VaultHub contract, especially in functions that allow vault activation or deposits. The pause logic of VaultHub should be synchronized with the main protocol's bunker mode to prevent vault operations that could worsen protocol health during critical periods.\n<|det|>title [81, 514, 232, 527]<|/det|>Client's Commentary:\n<|det|>text [81, 530, 228, 544]<|/det|>Client: Need example\n<|det|>text [80, 548, 875, 613]<|/det|>Mixbytes: The risk of increasing the bad debt is very low since it is not that easy to cause slashing in the CS that would cause bad debt, but there is an invariant that there cannot be new deposits to validators during the bunker mode (this invariant exists in Lido v2) which is better to hold, since bunker mode means some abnormality in CS and it is better to resolve it before setting up new validators.\n<|det|>text [80, 617, 913, 666]<|/det|>Client: For the initial stage, when the amount of TVL in stVaults is limited, the proposed limitation looks to be the overkill, but the bunker mode should be improved to be able to scale up the stVaults somewhere further, so this recommendation implementation is postponed to the next release.\n<|det|>footer [81, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 916, 970]<|/det|>18\n", "page_image_sha256": "da2886fa0ec0420ba6b417837005cd023c9ba09552f3219df996f2cbfca8138c", "page_number": 19, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>table [84, 58, 896, 145]<|/det|><table><tr><td>M-3</td><td colspan=\"3\">Vault Activation Possible During Bunker Mode, Enabling Bad Debt Attacks</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 166, 186, 180]<|/det|>Description\n<|det|>text [80, 183, 905, 336]<|/det|>Even while Lido v2 is in bunker mode, it is still possible to activate vaults and make deposits into them. While this does not directly affect the share rate, it opens up the possibility for an attack scenario where a malicious Node Operator intentionally increases bad debt through the malicious operation as a validator, which causes slashing penalties. This can worsen the protocol's state during bunker mode and potentially prolong the period in which Lido v2 remains in this critical state as the bad debt value increase is uncapped. The root cause is that the VaultHub contract's pause mechanism is independent from the main protocol's bunker mode, so vault operations are not automatically restricted when the protocol is in bunker mode.\n<|det|>text [80, 339, 898, 388]<|/det|>The issue is classified as Medium severity because it allows a malicious Node Operator worsen the bunker mode state and allows staking vaults to perform normally, while the Lido v2 protocol experiences the restrictions related to the bunker mode.\n<|det|>title [81, 409, 212, 421]<|/det|>Recommendation\n<|det|>text [80, 425, 915, 493]<|/det|>We recommend adding explicit checks for bunker mode status in the VaultHub contract, especially in functions that allow vault activation or deposits. The pause logic of VaultHub should be synchronized with the main protocol's bunker mode to prevent vault operations that could worsen protocol health during critical periods.\n<|det|>title [81, 514, 232, 527]<|/det|>Client's Commentary:\n<|det|>text [81, 530, 228, 544]<|/det|>Client: Need example\n<|det|>text [80, 548, 875, 613]<|/det|>Mixbytes: The risk of increasing the bad debt is very low since it is not that easy to cause slashing in the CS that would cause bad debt, but there is an invariant that there cannot be new deposits to validators during the bunker mode (this invariant exists in Lido v2) which is better to hold, since bunker mode means some abnormality in CS and it is better to resolve it before setting up new validators.\n<|det|>text [80, 617, 913, 666]<|/det|>Client: For the initial stage, when the amount of TVL in stVaults is limited, the proposed limitation looks to be the overkill, but the bunker mode should be improved to be able to scale up the stVaults somewhere further, so this recommendation implementation is postponed to the next release.\n<|det|>footer [81, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 916, 970]<|/det|>18\n", "page_image_sha256": "da2886fa0ec0420ba6b417837005cd023c9ba09552f3219df996f2cbfca8138c", "page_number": 19, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 438.0}, "timing_ms": {"decode": 1500, "sglang_total": 1691, "ttft": 191}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 657, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 935}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 2795}
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl
+new file mode 100644
+index 0000000..1ac1eff
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>table [84, 56, 913, 146]<|/det|><table><tr><td>M-5</td><td colspan=\"3\">smoothenTokenRebase Function doesn&#x27;t Account for the badDebtToInternalize variable</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 166, 185, 180]<|/det|>Description\n<|det|>text [80, 183, 725, 198]<|/det|>There is a call to oracleReportSanityChecker.smootherTokenRebase in the\n<|det|>text [80, 200, 915, 249]<|/det|>_simulateOracleReport function of the Accounting contract. This function smoothens the token rebase while limiting how much ether may be used to update the totalPooledEther variable, which is used in the setTH share rate calculation.\n<|det|>text [80, 252, 892, 302]<|/det|>This function doesn't account for the _pre.badDebtToInternalize variable, which in a very rare scenario can cause the smoothing logic to pull fewer update.eLRewards than available, so as not to increase the exchange price of the share too much in the oracle update.\n<|det|>text [80, 305, 880, 337]<|/det|>However, the _pre.badDebtToInternalize will decrease the share price, and if not all the execution layer rewards are pulled from the vault, it can cause a negative rebase.\n<|det|>text [80, 339, 895, 388]<|/det|>The issue is classified as Medium severity because it may result in a very rare case of a negative rebase that could be resolved by pulling more of the execution layer rewards that are available in the vault.\n<|det|>title [81, 409, 212, 421]<|/det|>Recommendation\n<|det|>text [80, 425, 895, 493]<|/det|>We recommend also smoothing the badDebtToInternalize variable in the smoothenTokenRebase function of the OracleReportSanityChecker contract, as missing that variable in the smoothing logic may lead to pulling less ether from the execution layer rewards vault than is possible, which may lead to a negative rebase of stETH.\n<|det|>title [81, 514, 234, 527]<|/det|>Client's Commentary:\n<|det|>text [81, 530, 460, 544]<|/det|>Client: https://github.com/lidofinance/core/issues/1375\n<|det|>text [80, 548, 738, 562]<|/det|>Actually, we have a question about this. While it's true that _pre.badDebtToInternalize can increase\n<|det|>text [80, 565, 880, 596]<|/det|>update.postInternalShares, as it is used as a denominator, it will only decrease the share rate, so it won't lead to a larger token rebase. Or did we misunderstand the issue somehow?\n<|det|>text [80, 600, 911, 649]<|/det|>MixBytes: We analyzed a highly unlikely yet theoretically possible scenario where e1Rewards collection would be insufficient due to OracleSanityChecker constraints, leading to inadequate coverage of the total bad debt (despite potential sufficiency if all rewards were collected), thus forcing a negative rebase that could have been prevented.\n<|det|>text [80, 669, 714, 683]<|/det|>Client: Looks like it's better to divide this issue in two, because of different origin and structure:\n<|det|>text [80, 686, 845, 700]<|/det|>badDebtToInternalize-related is definitely correct and can be fixed, while accounting sharesToMintAsFees is more\n<|det|>text [80, 703, 890, 734]<|/det|>complicated(because it's value depends on the smoothing result) and better be done by switching the semantical context from limiting the rebase to limiting the gross APR(before fee deduction)\n<|det|>text [80, 738, 788, 752]<|/det|>MixBytes: The issue description related to the sharesToMintAsFees was moved to the Low #13 finding.\n<|det|>text [80, 755, 911, 787]<|/det|>Client: Supporting increased internal shares would require rewriting the limit logic and complicating the code, but the feature is unlikely to be used. The smoothing mechanism (0.075%/day = 27% APR) almost never triggers, and bad debt\n<|det|>text [80, 790, 901, 822]<|/det|>internalization is a manual, DAO-governed process that should never occur under normal conditions. Adding complexity for this edge case provides negligible benefit.\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 916, 970]<|/det|>20\n", "page_image_sha256": "a6e829005a9f18a869c986cf6148e6977cd0879ba580b15474350370c02c9139", "page_number": 21, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>table [84, 56, 913, 146]<|/det|><table><tr><td>M-5</td><td colspan=\"3\">smoothenTokenRebase Function doesn&#x27;t Account for the badDebtToInternalize variable</td></tr><tr><td>Severity</td><td>Medium</td><td>Status</td><td>Acknowledged</td></tr></table>\n<|det|>title [81, 166, 185, 180]<|/det|>Description\n<|det|>text [80, 183, 725, 198]<|/det|>There is a call to oracleReportSanityChecker.smootherTokenRebase in the\n<|det|>text [80, 200, 915, 249]<|/det|>_simulateOracleReport function of the Accounting contract. This function smoothens the token rebase while limiting how much ether may be used to update the totalPooledEther variable, which is used in the setTH share rate calculation.\n<|det|>text [80, 252, 892, 302]<|/det|>This function doesn't account for the _pre.badDebtToInternalize variable, which in a very rare scenario can cause the smoothing logic to pull fewer update.eLRewards than available, so as not to increase the exchange price of the share too much in the oracle update.\n<|det|>text [80, 305, 880, 337]<|/det|>However, the _pre.badDebtToInternalize will decrease the share price, and if not all the execution layer rewards are pulled from the vault, it can cause a negative rebase.\n<|det|>text [80, 339, 895, 388]<|/det|>The issue is classified as Medium severity because it may result in a very rare case of a negative rebase that could be resolved by pulling more of the execution layer rewards that are available in the vault.\n<|det|>title [81, 409, 212, 421]<|/det|>Recommendation\n<|det|>text [80, 425, 895, 493]<|/det|>We recommend also smoothing the badDebtToInternalize variable in the smoothenTokenRebase function of the OracleReportSanityChecker contract, as missing that variable in the smoothing logic may lead to pulling less ether from the execution layer rewards vault than is possible, which may lead to a negative rebase of stETH.\n<|det|>title [81, 514, 234, 527]<|/det|>Client's Commentary:\n<|det|>text [81, 530, 460, 544]<|/det|>Client: https://github.com/lidofinance/core/issues/1375\n<|det|>text [80, 548, 738, 562]<|/det|>Actually, we have a question about this. While it's true that _pre.badDebtToInternalize can increase\n<|det|>text [80, 565, 880, 596]<|/det|>update.postInternalShares, as it is used as a denominator, it will only decrease the share rate, so it won't lead to a larger token rebase. Or did we misunderstand the issue somehow?\n<|det|>text [80, 600, 911, 649]<|/det|>MixBytes: We analyzed a highly unlikely yet theoretically possible scenario where e1Rewards collection would be insufficient due to OracleSanityChecker constraints, leading to inadequate coverage of the total bad debt (despite potential sufficiency if all rewards were collected), thus forcing a negative rebase that could have been prevented.\n<|det|>text [80, 669, 714, 683]<|/det|>Client: Looks like it's better to divide this issue in two, because of different origin and structure:\n<|det|>text [80, 686, 845, 700]<|/det|>badDebtToInternalize-related is definitely correct and can be fixed, while accounting sharesToMintAsFees is more\n<|det|>text [80, 703, 890, 734]<|/det|>complicated(because it's value depends on the smoothing result) and better be done by switching the semantical context from limiting the rebase to limiting the gross APR(before fee deduction)\n<|det|>text [80, 738, 788, 752]<|/det|>MixBytes: The issue description related to the sharesToMintAsFees was moved to the Low #13 finding.\n<|det|>text [80, 755, 911, 787]<|/det|>Client: Supporting increased internal shares would require rewriting the limit logic and complicating the code, but the feature is unlikely to be used. The smoothing mechanism (0.075%/day = 27% APR) almost never triggers, and bad debt\n<|det|>text [80, 790, 901, 822]<|/det|>internalization is a manual, DAO-governed process that should never occur under normal conditions. Adding complexity for this edge case provides negligible benefit.\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [880, 951, 916, 970]<|/det|>20\n", "page_image_sha256": "a6e829005a9f18a869c986cf6148e6977cd0879ba580b15474350370c02c9139", "page_number": 21, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0021_0024.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 408.541}, "timing_ms": {"decode": 2482, "sglang_total": 2679, "ttft": 197}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 1014, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 1292}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0021_0024.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 4029}
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl
+new file mode 100644
+index 0000000..7b45083
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl
+@@ -0,0 +1,2 @@
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [80, 58, 911, 125]<|/det|>for the negative rebase, as there will probably be entities monitoring vaults health. Entering the withdrawal queue before the bad debt was internalized from the vaults, leading to negative rebase, also makes no sense, as the lower StETH rate between entry and finalization will be taken.\n<|det|>text [80, 141, 918, 227]<|/det|>In conclusion, the project demonstrates a high level of security, operational integrity, and good overall code quality. The contracts in scope are well-written and follow established best practices. However, several findings require careful consideration to ensure a balanced distribution of risks between the staking vaults and Lido V2. Addressing these issues will further enhance the protocol's efficiency and reliability.\n<|det|>title [81, 266, 441, 291]<|/det|>1.3 Project Overview\n<|det|>text [81, 325, 170, 342]<|/det|>Summary\n<|det|>table [82, 358, 898, 576]<|/det|><table><tr><td>Title</td><td>Description</td></tr><tr><td>Client Name</td><td>Lido</td></tr><tr><td>Project Name</td><td>Lido v3</td></tr><tr><td>Type</td><td>Solidity</td></tr><tr><td>Platform</td><td>EVM</td></tr><tr><td>Timeline</td><td>17.06.2025 - 11.12.2025</td></tr></table>\n<|det|>text [81, 609, 254, 627]<|/det|>Scope of Audit\n<|det|>table [82, 643, 898, 756]<|/det|><table><tr><td>File</td><td>Link</td></tr><tr><td>contracts/0.4.24/Lido.sol</td><td>Lido.sol</td></tr><tr><td>contracts/0.8.25/Accounting.sol</td><td>Accounting.sol</td></tr></table>\n<|det|>footer [81, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [897, 951, 917, 969]<|/det|>4\n", "page_image_sha256": "79ff953222cf3d1a9067b6b3b0ad944f2a774383444c54a10b12c8240f73a256", "page_number": 5, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [80, 58, 911, 125]<|/det|>for the negative rebase, as there will probably be entities monitoring vaults health. Entering the withdrawal queue before the bad debt was internalized from the vaults, leading to negative rebase, also makes no sense, as the lower StETH rate between entry and finalization will be taken.\n<|det|>text [80, 141, 918, 227]<|/det|>In conclusion, the project demonstrates a high level of security, operational integrity, and good overall code quality. The contracts in scope are well-written and follow established best practices. However, several findings require careful consideration to ensure a balanced distribution of risks between the staking vaults and Lido V2. Addressing these issues will further enhance the protocol's efficiency and reliability.\n<|det|>title [81, 266, 441, 291]<|/det|>1.3 Project Overview\n<|det|>text [81, 325, 170, 342]<|/det|>Summary\n<|det|>table [82, 358, 898, 576]<|/det|><table><tr><td>Title</td><td>Description</td></tr><tr><td>Client Name</td><td>Lido</td></tr><tr><td>Project Name</td><td>Lido v3</td></tr><tr><td>Type</td><td>Solidity</td></tr><tr><td>Platform</td><td>EVM</td></tr><tr><td>Timeline</td><td>17.06.2025 - 11.12.2025</td></tr></table>\n<|det|>text [81, 609, 254, 627]<|/det|>Scope of Audit\n<|det|>table [82, 643, 898, 756]<|/det|><table><tr><td>File</td><td>Link</td></tr><tr><td>contracts/0.4.24/Lido.sol</td><td>Lido.sol</td></tr><tr><td>contracts/0.8.25/Accounting.sol</td><td>Accounting.sol</td></tr></table>\n<|det|>footer [81, 949, 248, 972]<|/det|>MixBytes()\n<|det|>page_number [897, 951, 917, 969]<|/det|>4\n", "page_image_sha256": "79ff953222cf3d1a9067b6b3b0ad944f2a774383444c54a10b12c8240f73a256", "page_number": 5, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0005_0008.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 452.688}, "timing_ms": {"decode": 930, "sglang_total": 1126, "ttft": 195}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 421, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 699}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0005_0008.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 1606}
++{"created_at": "2026-06-29T21:15:28.640711+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [82, 57, 229, 74]<|/det|>Versions Log\n<|det|>table [85, 88, 898, 710]<|/det|><table><tr><td>Date</td><td>Commit Hash</td><td>Note</td></tr><tr><td>17.06.2025</td><td>22cab0f0372015f2d2fce8bede64e98beae28571</td><td>Initial Commit</td></tr><tr><td>18.09.2025</td><td>4af82f0d0851ec514b32c9ce40c7ac0cd2915d69</td><td>Commit for Re-audit</td></tr><tr><td>06.10.2025</td><td>d50d46573ff0254ea7d3a576c5b59e31b2b186437</td><td>Commit with Updates</td></tr><tr><td>08.10.2025</td><td>88ce9647db982f14133e5bab80aac399cb930106</td><td>Commit with Updates</td></tr><tr><td>23.10.2025</td><td>25c2be321bae1b379ee4f77db96714ab9a3aebf90</td><td>Commit with Updates</td></tr><tr><td>28.10.2025</td><td>b9839f5110bb7faf6e78892c2649c93b09c32883</td><td>Commit with Updates</td></tr><tr><td>29.10.2025</td><td>79870b4809fb48d6f8dc4b72edf3670826928b2f</td><td>Commit with Updates</td></tr><tr><td>07.11.2025</td><td>33006a9c68d880a680b7b537ffde9c7abae0d3c6</td><td>Commit with Updates</td></tr><tr><td>19.11.2025</td><td>83616971c3dedfa50b9775b6b9418c69a0320987</td><td>Commit with Updates</td></tr><tr><td>21.11.2025</td><td>17e854a4c315053fe6a9023c65009244d83872e3</td><td>Commit with Updates</td></tr><tr><td>27.11.2025</td><td>b98371l488eb9479cf072bd6c2b682a59c5dd7ld8</td><td>Commit with Updates</td></tr></table>\n<|det|>title [81, 745, 312, 763]<|/det|>Mainnet Deployments\n<|det|>text [80, 781, 918, 919]<|/det|>We conducted comprehensive bytecode verification for all deployed contracts against the audited commit (b98371l488eb9479cf072bd6c2b682a59c5dd7ld8), confirming identical bytecode. We verified the configuration of all storage parameters and constructor arguments, including the initialMaxExternalRatioBP (300 basis points for Phase 1 cap), oracle slashing reserve epochs (8192 for both lookback and look-ahead windows), LazyOracle quarantine period (259200 seconds), and Easy Track factory limits aligned with the phased rollout strategy. The upgrade vote structure was reviewed, confirming proper segregation between immediate execution items (8 Easy Track factory additions) and Dual Governance-protected items (18\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes ()\n<|det|>page_number [897, 952, 915, 969]<|/det|>5\n", "page_image_sha256": "ff9405f02f51ac45732c398d9134a7823173956f9f937131ef9594d95aa8ba70", "page_number": 6, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T21:15:28.640711+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [82, 57, 229, 74]<|/det|>Versions Log\n<|det|>table [85, 88, 898, 710]<|/det|><table><tr><td>Date</td><td>Commit Hash</td><td>Note</td></tr><tr><td>17.06.2025</td><td>22cab0f0372015f2d2fce8bede64e98beae28571</td><td>Initial Commit</td></tr><tr><td>18.09.2025</td><td>4af82f0d0851ec514b32c9ce40c7ac0cd2915d69</td><td>Commit for Re-audit</td></tr><tr><td>06.10.2025</td><td>d50d46573ff0254ea7d3a576c5b59e31b2b186437</td><td>Commit with Updates</td></tr><tr><td>08.10.2025</td><td>88ce9647db982f14133e5bab80aac399cb930106</td><td>Commit with Updates</td></tr><tr><td>23.10.2025</td><td>25c2be321bae1b379ee4f77db96714ab9a3aebf90</td><td>Commit with Updates</td></tr><tr><td>28.10.2025</td><td>b9839f5110bb7faf6e78892c2649c93b09c32883</td><td>Commit with Updates</td></tr><tr><td>29.10.2025</td><td>79870b4809fb48d6f8dc4b72edf3670826928b2f</td><td>Commit with Updates</td></tr><tr><td>07.11.2025</td><td>33006a9c68d880a680b7b537ffde9c7abae0d3c6</td><td>Commit with Updates</td></tr><tr><td>19.11.2025</td><td>83616971c3dedfa50b9775b6b9418c69a0320987</td><td>Commit with Updates</td></tr><tr><td>21.11.2025</td><td>17e854a4c315053fe6a9023c65009244d83872e3</td><td>Commit with Updates</td></tr><tr><td>27.11.2025</td><td>b98371l488eb9479cf072bd6c2b682a59c5dd7ld8</td><td>Commit with Updates</td></tr></table>\n<|det|>title [81, 745, 312, 763]<|/det|>Mainnet Deployments\n<|det|>text [80, 781, 918, 919]<|/det|>We conducted comprehensive bytecode verification for all deployed contracts against the audited commit (b98371l488eb9479cf072bd6c2b682a59c5dd7ld8), confirming identical bytecode. We verified the configuration of all storage parameters and constructor arguments, including the initialMaxExternalRatioBP (300 basis points for Phase 1 cap), oracle slashing reserve epochs (8192 for both lookback and look-ahead windows), LazyOracle quarantine period (259200 seconds), and Easy Track factory limits aligned with the phased rollout strategy. The upgrade vote structure was reviewed, confirming proper segregation between immediate execution items (8 Easy Track factory additions) and Dual Governance-protected items (18\n<|det|>footer [82, 949, 248, 972]<|/det|>MixBytes ()\n<|det|>page_number [897, 952, 915, 969]<|/det|>5\n", "page_image_sha256": "ff9405f02f51ac45732c398d9134a7823173956f9f937131ef9594d95aa8ba70", "page_number": 6, "pdf_id": "pdf_003436_1e68fc3994b5", "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0005_0008.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 424.028}, "timing_ms": {"decode": 1698, "sglang_total": 1891, "ttft": 193}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 720, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 998}, "warnings": []}, "raw_response_ref": "chunk_0007/other_audit_repo_pdfs/pdf_003436_1e68fc3994b5_Lido_v3_Security_Audit_Report/pages_0005_0008.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Lido v3 Security Audit Report.pdf", "source_page_count": 35, "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda", "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf", "text_length": 2235}
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/provenance.json b/project/evmbench/audits/2025-12-lido-v3-core/provenance.json
+new file mode 100644
+index 0000000..154e572
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/provenance.json
+@@ -0,0 +1,528 @@
++{
++  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
++  "candidate_id": "2025-12-lido-v3-core",
++  "materialized_at": "2026-07-27T12:20:02Z",
++  "phase": "P7",
++  "review_state": "approved_for_admission",
++  "approval": {
++    "checkpoint": "C1R1",
++    "candidate_id": "2025-12-lido-v3-core",
++    "review_bundle_digest": "8e276720b26afb8c760a8bb3a8dc791a47c5f2ff1f023b4ceddcbd0777a0e663",
++    "approved_at": "2026-07-27T12:46:33Z",
++    "reviewer_identity": "https://github.com/pranay5255",
++    "reviewer_github_login": "pranay5255",
++    "reviewer_github_user_id": 22420966,
++    "explicit_admission_approval": true
++  },
++  "task_identity": {
++    "task_group_key": "lidofinance/core@22cab0f0372015f2d2fce8bede64e98beae28571|contracts/0.4.24/Lido.sol+contracts/0.8.9/Accounting.sol|detect",
++    "task_group_key_sha256": "a402c4c8d352ae352afc528a3de050675490358dd6cad4d9b4722505dc32a802",
++    "repository_slug": "lidofinance/core",
++    "vulnerable_commit": "22cab0f0372015f2d2fce8bede64e98beae28571",
++    "audited_scope": [
++      "contracts/0.4.24/Lido.sol",
++      "contracts/0.8.9/Accounting.sol"
++    ],
++    "report_printed_scope": [
++      "contracts/0.4.24/Lido.sol",
++      "contracts/0.8.25/Accounting.sol"
++    ],
++    "scope_correction": "The PDF's embedded link for the printed Accounting path targets contracts/0.8.9/Accounting.sol at the initial commit; that file exists and contracts/0.8.25/Accounting.sol does not.",
++    "mode": "detect",
++    "framework": "hardhat"
++  },
++  "source_pdf": {
++    "pdf_id": "pdf_003436_1e68fc3994b5",
++    "source_bucket": "other_audit_repo_pdfs",
++    "source_filename": "Lido v3 Security Audit Report.pdf",
++    "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf",
++    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf",
++    "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda",
++    "size_bytes": 2409580,
++    "physical_page_count": 35,
++    "report_date": "2025-12-12",
++    "audit_period": "2025-06-17 through 2025-12-11",
++    "readable": true,
++    "encrypted": false,
++    "copied_into_candidate": false
++  },
++  "source_ocr": {
++    "schema_version": "evmbench_task_creation.ocr_page.v1",
++    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003436_1e68fc3994b5.jsonl",
++    "sha256": "f7a5cf35d01708e04abd62a670cad8f66d00025db572ffc15f81d860b0f3fe68",
++    "size_bytes": 215874,
++    "record_count": 35,
++    "source_page_count": 35,
++    "created_at": "2026-06-29T21:15:28.640711+00:00",
++    "ocr_backend": "sglang",
++    "ocr_model": "Unlimited-OCR",
++    "ocr_model_version": "Unlimited-OCR",
++    "immutable_input": true,
++    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/pdf_003436_1e68fc3994b5/p1-ocr-validation.json"
++  },
++  "queue_record": {
++    "rank": 3,
++    "state": "queued",
++    "category": "Staking/Yield",
++    "inferred_year": 2025,
++    "vulnerability_page_count": 32,
++    "unique_issue_ids": 23
++  },
++  "repository_match": {
++    "repository_url": "https://github.com/lidofinance/core.git",
++    "repository_slug": "lidofinance/core",
++    "commit": "22cab0f0372015f2d2fce8bede64e98beae28571",
++    "commit_subject": "Merge pull request #1175 from lidofinance/feat/rebase-on-tw-e2e",
++    "commit_authored_at": "2025-06-17T12:08:09+03:00",
++    "root_tree": "0204ee9df364357c27e683434ef3129c7b70a81e",
++    "detached_head": true,
++    "clean_including_submodules": true,
++    "review_clone": "/tmp/lido-core-review.pFDq6A/repo",
++    "tracked_pdf_or_jsonl_count": 0,
++    "file_evidence": [
++      {
++        "path": "contracts/0.4.24/Lido.sol",
++        "git_blob": "5732480f06c400933b89c0eccc52fd0a449c6af8",
++        "sha256": "1be0fd7523df23e916bcc3130bb517c0a8c9fd77afcfa12cd543ad7575ce5f21"
++      },
++      {
++        "path": "contracts/0.8.9/Accounting.sol",
++        "git_blob": "cabed2c31475ee490934e31fc36340f50b787398",
++        "sha256": "8f5b456caeec50f63f75150229c9315f970c99db0900bc4738485c08773330ff"
++      },
++      {
++        "path": "contracts/0.8.25/vaults/VaultHub.sol",
++        "git_blob": "54275b03cf507cc2ff3df09fe7695104963b0383",
++        "sha256": "adf8eed681a14184caecf7871a94325b5ff5432f1d7081fde0071ee27232161b"
++      },
++      {
++        "path": "contracts/0.8.9/sanity_checks/OracleReportSanityChecker.sol",
++        "git_blob": "d6cb0c6dca00e624a27b7585d6e913754949515a",
++        "sha256": "a9af376b8f34b312f464e85a8797054e14396d62743e4084ab3a5651a083d4a7"
++      },
++      {
++        "path": "contracts/0.8.9/WithdrawalQueue.sol",
++        "git_blob": "733c4a830c4515743969d32d77fa32505e44e9e6",
++        "sha256": "efa5a32fbc99cafdb16a38d96a9bb5b29a62e60b5610e7c317711cc58402b131"
++      },
++      {
++        "path": "contracts/0.8.9/oracle/AccountingOracle.sol",
++        "git_blob": "0d3e9b1788d5be51b998f3fa223ed1bde9ec88a3",
++        "sha256": "b3557bb25649701c42a39a035b8d826b857a8c725ca0f50cba141664da14b748"
++      }
++    ]
++  },
++  "later_snapshots": {
++    "final_audited_commit": "b98371488eb9479cf072bd6c2b682a59c5dd71d8",
++    "kept_separate_from_vulnerable_task_snapshot": true,
++    "report_listed_reaudit_commits": [
++      "4af82f0d0851ec514b32c9ce40c7ac0cd2915d69",
++      "d50d46573ff0254ea7d3a576cb59e31b2b186437",
++      "88ce9647db982414133e5bab80aac399cb930106",
++      "25c2be321bae1b379ee477db96714ab9a3aebf90",
++      "b9839f5110bb7faf6e78892c2649c93b09c32883",
++      "79870b4809fb48d6f8dc4b72edf3670826928b2f",
++      "33006a9c68d880a608b7b537ffde9c7abae0d3c6",
++      "83616971c3dedfa50b9775b6b9418c69a0320987",
++      "17e854ac4315053fe6a9023c65009244d83872e3"
++    ]
++  },
++  "submodules": [
++    {
++      "path": "foundry/lib/forge-std",
++      "url": "https://github.com/foundry-rs/forge-std",
++      "revision": "8f24d6b04c92975e0795b5868aa0d783251cdeaa"
++    }
++  ],
++  "dependency_locks": {
++    "node": {
++      "version": "22.15.0",
++      "source": "https://nodejs.org/dist/v22.15.0/node-v22.15.0-linux-x64.tar.xz",
++      "sha256": "dafe2e8f82cb97de1bd10db9e2ec4c07bbf53389b0799b1e095a918951e78fd4"
++    },
++    "yarn": {
++      "version": "4.9.2",
++      "package_manager_field": "yarn@4.9.2",
++      "yarn_lock_sha256": "d08984f244c92e40d54388a7303d3fb706e49115fc4a75546bc4924a9deb8a88"
++    },
++    "package_json_sha256": "28e4d1c088239aeacb31c445c5e55b7884754ddfd85cc0e874482f1a4d2b4d8c",
++    "nvmrc_sha256": "9053fd0bf7393ff6796ce60bbfebbd1897fbe8deb390e4fb632cf3eed5de14f8",
++    "yarnrc_sha256": "473e6def86fc03638120e0c01d0c8bbab095677256460fa4ea763e5d4697f270"
++  },
++  "base_image": {
++    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
++    "image_config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
++    "platform": "linux/amd64"
++  },
++  "tooling_revisions": {
++    "opd_base": {
++      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
++      "isolated_clone": "/tmp/lido-opd-validator.hk8idR/opd-base",
++      "clean": true,
++      "candidate_validator_passed": true,
++      "candidate_validator_errors": 0,
++      "candidate_validator_warnings": 0
++    }
++  },
++  "agent_image": {
++    "local_tag": "evmbench-lido-v3-core:c1",
++    "image_config_digest": "sha256:5b9ba64cb56749554da391939e53e29ce4d7c1663fa0fa981b144ff4e144e416",
++    "created_at": "2026-07-27T12:29:13.011252083Z",
++    "platform": "linux/amd64",
++    "size_bytes": 5282888597,
++    "repository_head": "22cab0f0372015f2d2fce8bede64e98beae28571",
++    "repository_commit_count": 1,
++    "hardhat_compile_passed": true,
++    "hardhat_tests": {
++      "passed": 2555,
++      "failed": 0,
++      "pending": 19
++    },
++    "offline_forced_compile_passed": true,
++    "leakage_scan_passed": true,
++    "raw_agent_layer_leakage_scan_passed": true,
++    "repository_layer_diff_id": "sha256:c9611a333d2b456bd56cef11f5df6677739251f14ee20acc431860c767db48fd",
++    "nested_git_metadata_absent": true,
++    "pdf_and_jsonl_absent": true,
++    "gold_and_provenance_markers_absent": true,
++    "later_commit_markers_absent": true
++  },
++  "baseline_validation": {
++    "disposable_clone": "/tmp/lido-core-build.GjJpQ9/repo",
++    "hardhat_compile": {
++      "node_version": "22.15.0",
++      "solidity_files_compiled": 408,
++      "generated_typings": 1266,
++      "passed": true
++    },
++    "hardhat_unit_tests": {
++      "node_version": "22.15.0",
++      "passed": 2555,
++      "failed": 0,
++      "pending": 19
++    },
++    "foundry_full_build": {
++      "forge_version": "1.3.6",
++      "passed": false,
++      "classification": "upstream_noncanonical_baseline",
++      "reason": "The full repository forge build reaches a Solidity stack-too-deep compiler error; the repository's canonical compile command is hardhat compile."
++    }
++  },
++  "ocr_corrections": [
++    {
++      "pages": [5],
++      "field": "audited_scope",
++      "correction": "Use contracts/0.8.9/Accounting.sol from the embedded GitHub annotation and repository tree, not the printed contracts/0.8.25/Accounting.sol."
++    },
++    {
++      "pages": [6],
++      "field": "commit_hashes",
++      "correction": "Use the visually reviewed PDF annotations; OCR confuses several hexadecimal 1/l characters."
++    },
++    {
++      "pages": [16],
++      "field": "M-1 example literals",
++      "correction": "Use PDF/code separators and values; OCR changes underscores and punctuation."
++    },
++    {
++      "pages": [20],
++      "field": "M-4 identifiers",
++      "correction": "The PDF/code say stETH and require(!isStopped()); OCR corrupts both identifiers."
++    },
++    {
++      "pages": [21],
++      "field": "M-5 identifiers",
++      "correction": "The PDF/code say smoothenTokenRebase, stETH, and elRewards; OCR corrupts these identifiers."
++    }
++  ],
++  "ocr_evidence": [
++    {
++      "page_number": 5,
++      "role": "scope",
++      "page_image_sha256": "79ff953222cf3d1a9067b6b3b0ad944f2a774383444c54a10b12c8240f73a256",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl"
++    },
++    {
++      "page_number": 6,
++      "role": "commit",
++      "page_image_sha256": "ff9405f02f51ac45732c398d9134a7823173956f9f937131ef9594d95aa8ba70",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl"
++    },
++    {
++      "page_number": 14,
++      "finding_id": "H-01",
++      "page_image_sha256": "5ed04236cf785545ec069c21e3986e71e07029afa877461ab17da7b9d1d3cabc",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl"
++    },
++    {
++      "page_number": 15,
++      "finding_id": "H-02",
++      "page_image_sha256": "71ab2ac5edcdee6fa69779b60e66e70bb2cc42583779684ed7e82be1bf00552b",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl"
++    },
++    {
++      "page_number": 16,
++      "finding_id": "H-02",
++      "page_image_sha256": "257edb3a4e7fbd3800f48b22cf246a101987c858ccb92e867dbb0907c8335b57",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl"
++    },
++    {
++      "page_number": 17,
++      "finding_id": "H-02",
++      "page_image_sha256": "01b2171515d73868b879148bb9e560ad76560b40157ed16e45ff46fabd1f5ef5",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl"
++    },
++    {
++      "page_number": 18,
++      "finding_id": "H-03",
++      "page_image_sha256": "08307f4b7f02ca6c4d9d949ca0b3dc8bd045ca53a24a6d8563f28d26869cf1c9",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl"
++    },
++    {
++      "page_number": 19,
++      "finding_id": "H-04",
++      "page_image_sha256": "da2886fa0ec0420ba6b417837005cd023c9ba09552f3219df996f2cbfca8138c",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl"
++    },
++    {
++      "page_number": 21,
++      "finding_id": "H-05",
++      "page_image_sha256": "a6e829005a9f18a869c986cf6148e6977cd0879ba580b15474350370c02c9139",
++      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl"
++    }
++  ],
++  "selected_findings": [
++    {
++      "finding_id": "H-01",
++      "report_id": "H-1",
++      "pages": [14],
++      "reported_severity": "High",
++      "title": "Bad-debt internalization leaves a pre-bunker exit window",
++      "generated_file": "findings/H-01.md"
++    },
++    {
++      "finding_id": "H-02",
++      "report_id": "M-1",
++      "pages": [15, 16, 17],
++      "reported_severity": "Medium",
++      "title": "External bad-debt conversion double-counts protocol losses",
++      "generated_file": "findings/H-02.md"
++    },
++    {
++      "finding_id": "H-03",
++      "report_id": "M-2",
++      "pages": [18],
++      "reported_severity": "Medium",
++      "title": "Validator exits weaken the annual CL balance sanity check",
++      "generated_file": "findings/H-03.md"
++    },
++    {
++      "finding_id": "H-04",
++      "report_id": "M-3",
++      "pages": [19],
++      "reported_severity": "Medium",
++      "title": "Vault operations remain active during Lido bunker mode",
++      "generated_file": "findings/H-04.md"
++    },
++    {
++      "finding_id": "H-05",
++      "report_id": "M-5",
++      "pages": [21],
++      "reported_severity": "Medium",
++      "title": "Rebase smoothing ignores pending bad-debt internalization",
++      "generated_file": "findings/H-05.md"
++    }
++  ],
++  "report_dispositions": [
++    {
++      "report_id": "H-1",
++      "pages": [14],
++      "reported_severity": "High",
++      "reported_status": "Acknowledged",
++      "disposition": "included",
++      "finding_id": "H-01",
++      "loss_path": "Users exit before known bad debt activates bunker restrictions, shifting the later socialized loss to remaining holders."
++    },
++    {
++      "report_id": "M-1",
++      "pages": [15, 16, 17],
++      "reported_severity": "Medium",
++      "reported_status": "Acknowledged",
++      "disposition": "included",
++      "finding_id": "H-02",
++      "loss_path": "Coupled internal and external share-rate effects overstate the bad debt and impose excess stETH loss."
++    },
++    {
++      "report_id": "M-2",
++      "pages": [18],
++      "reported_severity": "Medium",
++      "reported_status": "Acknowledged",
++      "disposition": "included",
++      "finding_id": "H-03",
++      "loss_path": "An inflated comparable-balance baseline can accept anomalous CL growth and thereby overstate pooled ether; the downstream holder-loss consequence is explicitly labeled as an inference."
++    },
++    {
++      "report_id": "M-3",
++      "pages": [19],
++      "reported_severity": "Medium",
++      "reported_status": "Acknowledged",
++      "disposition": "included",
++      "finding_id": "H-04",
++      "loss_path": "A malicious node operator can create uncapped additional slashing-derived bad debt during bunker mode."
++    },
++    {
++      "report_id": "M-4",
++      "pages": [20],
++      "reported_severity": "Medium",
++      "reported_status": "Fixed in 4af82f0d",
++      "disposition": "excluded",
++      "reason_code": "operational_safety_only_no_verified_asset_loss",
++      "reason": "The report establishes an invariant break and operational mistake, but not a distinct theft, destruction, or permanent asset-loss path at the vulnerable snapshot.",
++      "corroborating_fix_commit": "97321b8a9ce01ff4b40ea212678f3d89994fd841"
++    },
++    {
++      "report_id": "M-5",
++      "pages": [21],
++      "reported_severity": "Medium",
++      "reported_status": "Acknowledged",
++      "disposition": "included",
++      "finding_id": "H-05",
++      "loss_path": "The ordering mismatch can cause an avoidable negative stETH rebase while compensating EL rewards remain available."
++    },
++    {
++      "report_id": "L-1",
++      "pages": [22],
++      "reported_severity": "Low",
++      "reported_status": "Acknowledged",
++      "disposition": "excluded",
++      "reason_code": "parameter_front_run_without_independent_loss_path",
++      "reason": "Front-running a lower external-share ratio preserves old capacity but does not itself steal, destroy, or permanently lock assets."
++    },
++    {
++      "report_id": "L-2",
++      "pages": [23],
++      "reported_severity": "Low",
++      "reported_status": "Acknowledged",
++      "disposition": "excluded",
++      "reason_code": "defense_in_depth_hypothetical_upstream_bug",
++      "reason": "The proposed cap assumes a separate Accounting bug or misconfiguration and is bypassable by repeated calls; no independent vulnerable attacker path is established."
++    },
++    {
++      "report_id": "L-3",
++      "pages": [24],
++      "reported_severity": "Low",
++      "reported_status": "Fixed in 4af82f0d",
++      "disposition": "excluded",
++      "reason_code": "comment_only",
++      "reason": "The implementation is correct; only an explanatory comment is reversed."
++    },
++    {
++      "report_id": "L-4",
++      "pages": [25],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason_code": "maintainability_only",
++      "reason": "The two accessors are behaviorally equivalent for the stored low 160 bits; the issue concerns consistency and future maintenance."
++    },
++    {
++      "report_id": "L-5",
++      "pages": [26],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason_code": "infeasible_numeric_bound",
++      "reason": "The downcast requires more than 2^128-1 total shares; the report does not establish a realistic reachable asset-loss condition."
++    },
++    {
++      "report_id": "L-6",
++      "pages": [27],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason_code": "integration_or_gas_only",
++      "reason": "Repeated vault-data updates remain correctly accounted; the reported concern is integration confusion and unnecessary gas."
++    },
++    {
++      "report_id": "L-7",
++      "pages": [28],
++      "reported_severity": "Low",
++      "reported_status": "Acknowledged",
++      "disposition": "excluded",
++      "reason_code": "safety_check_without_concrete_loss_path",
++      "reason": "The time-insensitive LazyOracle bound can be over- or under-conservative, but the report provides no concrete theft, destruction, or permanent loss sequence."
++    },
++    {
++      "report_id": "L-8",
++      "pages": [29],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason_code": "admin_input_availability_only",
++      "reason": "The unsafe share-limit downcast can disable a group or create accounting ambiguity under an admin-selected value, but no verified asset-loss path is shown."
++    },
++    {
++      "report_id": "L-9",
++      "pages": [30],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason_code": "visibility_gas_style_only",
++      "reason": "Changing public to external is an interface/gas optimization with no security or asset effect."
++    },
++    {
++      "report_id": "L-10",
++      "pages": [31],
++      "reported_severity": "Low",
++      "reported_status": "Acknowledged",
++      "disposition": "excluded",
++      "reason_code": "readability_only",
++      "reason": "The arithmetic is correct and an underflow intentionally reverts; the suggested regrouping is readability and assurance work."
++    },
++    {
++      "report_id": "L-11",
++      "pages": [32],
++      "reported_severity": "Low",
++      "reported_status": "Acknowledged",
++      "disposition": "excluded",
++      "reason_code": "report_states_no_practical_impact",
++      "reason": "The report explicitly says ignoring the return value has no practical impact because later sanity checking prevents balance inflation."
++    },
++    {
++      "report_id": "L-12",
++      "pages": [33],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason_code": "comment_only",
++      "reason": "The implementation is unaffected; only a changeTier comment is misleading."
++    },
++    {
++      "report_id": "L-13",
++      "pages": [34],
++      "reported_severity": "Low",
++      "reported_status": "Acknowledged",
++      "disposition": "excluded",
++      "reason_code": "temporary_under_distribution_no_loss",
++      "reason": "The calculation can leave more EL rewards in the vault and reduce a positive rebase, but it does not create the negative rebase or asset destruction established for M-5."
++    }
++  ],
++  "generated_files": [
++    "config.yaml",
++    "Dockerfile",
++    "findings/H-01.md",
++    "findings/H-02.md",
++    "findings/H-03.md",
++    "findings/H-04.md",
++    "findings/H-05.md",
++    "findings/gold_audit.md",
++    "provenance.json",
++    "review_status.yaml",
++    "ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl",
++    "ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl",
++    "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl",
++    "ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl",
++    "ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl",
++    "ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl"
++  ]
++}
+diff --git a/project/evmbench/audits/2025-12-lido-v3-core/review_status.yaml b/project/evmbench/audits/2025-12-lido-v3-core/review_status.yaml
+new file mode 100644
+index 0000000..7c0e8a8
+--- /dev/null
++++ b/project/evmbench/audits/2025-12-lido-v3-core/review_status.yaml
+@@ -0,0 +1,6 @@
++state: approved_for_admission
++human_approved: true
++approved_by: https://github.com/pranay5255
++approved_at: 2026-07-27T12:46:33Z
++approval_checkpoint: C1R1
++review_bundle_digest: 8e276720b26afb8c760a8bb3a8dc791a47c5f2ff1f023b4ceddcbd0777a0e663
+diff --git a/project/evmbench/splits/detect-tasks.txt b/project/evmbench/splits/detect-tasks.txt
+index b14cafd..412e0d7 100644
+--- a/project/evmbench/splits/detect-tasks.txt
++++ b/project/evmbench/splits/detect-tasks.txt
+@@ -35,6 +35,7 @@
+ 2025-05-blackhole
+ 2025-06-panoptic
+ 2025-10-sequence
++2025-12-lido-v3-core
+ 2026-01-tempo-feeamm
+ 2026-01-tempo-mpp-streams
+ 2026-01-tempo-stablecoin-dex

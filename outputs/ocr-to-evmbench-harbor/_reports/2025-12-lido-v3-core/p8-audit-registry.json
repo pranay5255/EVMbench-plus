@@ -1,0 +1,37 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8",
+  "status": "passed",
+  "audit_id": "2025-12-lido-v3-core",
+  "framework": "hardhat",
+  "base_commit": "22cab0f0372015f2d2fce8bede64e98beae28571",
+  "vulnerability_count": 5,
+  "detect_max_award": 5.0,
+  "vulnerabilities": [
+    {
+      "id": "H-01",
+      "title": "Bad-debt internalization leaves a pre-bunker exit window",
+      "award": 1.0
+    },
+    {
+      "id": "H-02",
+      "title": "External bad-debt conversion double-counts protocol losses",
+      "award": 1.0
+    },
+    {
+      "id": "H-03",
+      "title": "Validator exits weaken the annual CL balance sanity check",
+      "award": 1.0
+    },
+    {
+      "id": "H-04",
+      "title": "Vault operations remain active during Lido bunker mode",
+      "award": 1.0
+    },
+    {
+      "id": "H-05",
+      "title": "Rebase smoothing ignores pending bad-debt internalization",
+      "award": 1.0
+    }
+  ]
+}

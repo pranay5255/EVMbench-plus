@@ -1,0 +1,8 @@
+candidate_id: 2025-12-lido-v3-core
+checkpoint: C1R1
+review_manifest: c1r1-review-manifest.json
+review_manifest_size_bytes: 7996
+review_bundle_digest_algorithm: sha256
+review_bundle_digest: 8e276720b26afb8c760a8bb3a8dc791a47c5f2ff1f023b4ceddcbd0777a0e663
+reviewer_identity: https://github.com/pranay5255
+state: awaiting_exact_digest_bound_admission_approval

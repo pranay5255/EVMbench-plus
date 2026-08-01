@@ -1,0 +1,528 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-12-lido-v3-core",
+  "materialized_at": "2026-07-27T12:20:02Z",
+  "phase": "P7",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1R1",
+    "candidate_id": "2025-12-lido-v3-core",
+    "review_bundle_digest": "8e276720b26afb8c760a8bb3a8dc791a47c5f2ff1f023b4ceddcbd0777a0e663",
+    "approved_at": "2026-07-27T12:46:33Z",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "lidofinance/core@22cab0f0372015f2d2fce8bede64e98beae28571|contracts/0.4.24/Lido.sol+contracts/0.8.9/Accounting.sol|detect",
+    "task_group_key_sha256": "a402c4c8d352ae352afc528a3de050675490358dd6cad4d9b4722505dc32a802",
+    "repository_slug": "lidofinance/core",
+    "vulnerable_commit": "22cab0f0372015f2d2fce8bede64e98beae28571",
+    "audited_scope": [
+      "contracts/0.4.24/Lido.sol",
+      "contracts/0.8.9/Accounting.sol"
+    ],
+    "report_printed_scope": [
+      "contracts/0.4.24/Lido.sol",
+      "contracts/0.8.25/Accounting.sol"
+    ],
+    "scope_correction": "The PDF's embedded link for the printed Accounting path targets contracts/0.8.9/Accounting.sol at the initial commit; that file exists and contracts/0.8.25/Accounting.sol does not.",
+    "mode": "detect",
+    "framework": "hardhat"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003436_1e68fc3994b5",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "Lido v3 Security Audit Report.pdf",
+    "source_rel_path": "audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf",
+    "source_pdf_sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda",
+    "size_bytes": 2409580,
+    "physical_page_count": 35,
+    "report_date": "2025-12-12",
+    "audit_period": "2025-06-17 through 2025-12-11",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003436_1e68fc3994b5.jsonl",
+    "sha256": "f7a5cf35d01708e04abd62a670cad8f66d00025db572ffc15f81d860b0f3fe68",
+    "size_bytes": 215874,
+    "record_count": 35,
+    "source_page_count": 35,
+    "created_at": "2026-06-29T21:15:28.640711+00:00",
+    "ocr_backend": "sglang",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/pdf_003436_1e68fc3994b5/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 3,
+    "state": "queued",
+    "category": "Staking/Yield",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 32,
+    "unique_issue_ids": 23
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/lidofinance/core.git",
+    "repository_slug": "lidofinance/core",
+    "commit": "22cab0f0372015f2d2fce8bede64e98beae28571",
+    "commit_subject": "Merge pull request #1175 from lidofinance/feat/rebase-on-tw-e2e",
+    "commit_authored_at": "2025-06-17T12:08:09+03:00",
+    "root_tree": "0204ee9df364357c27e683434ef3129c7b70a81e",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "review_clone": "/tmp/lido-core-review.pFDq6A/repo",
+    "tracked_pdf_or_jsonl_count": 0,
+    "file_evidence": [
+      {
+        "path": "contracts/0.4.24/Lido.sol",
+        "git_blob": "5732480f06c400933b89c0eccc52fd0a449c6af8",
+        "sha256": "1be0fd7523df23e916bcc3130bb517c0a8c9fd77afcfa12cd543ad7575ce5f21"
+      },
+      {
+        "path": "contracts/0.8.9/Accounting.sol",
+        "git_blob": "cabed2c31475ee490934e31fc36340f50b787398",
+        "sha256": "8f5b456caeec50f63f75150229c9315f970c99db0900bc4738485c08773330ff"
+      },
+      {
+        "path": "contracts/0.8.25/vaults/VaultHub.sol",
+        "git_blob": "54275b03cf507cc2ff3df09fe7695104963b0383",
+        "sha256": "adf8eed681a14184caecf7871a94325b5ff5432f1d7081fde0071ee27232161b"
+      },
+      {
+        "path": "contracts/0.8.9/sanity_checks/OracleReportSanityChecker.sol",
+        "git_blob": "d6cb0c6dca00e624a27b7585d6e913754949515a",
+        "sha256": "a9af376b8f34b312f464e85a8797054e14396d62743e4084ab3a5651a083d4a7"
+      },
+      {
+        "path": "contracts/0.8.9/WithdrawalQueue.sol",
+        "git_blob": "733c4a830c4515743969d32d77fa32505e44e9e6",
+        "sha256": "efa5a32fbc99cafdb16a38d96a9bb5b29a62e60b5610e7c317711cc58402b131"
+      },
+      {
+        "path": "contracts/0.8.9/oracle/AccountingOracle.sol",
+        "git_blob": "0d3e9b1788d5be51b998f3fa223ed1bde9ec88a3",
+        "sha256": "b3557bb25649701c42a39a035b8d826b857a8c725ca0f50cba141664da14b748"
+      }
+    ]
+  },
+  "later_snapshots": {
+    "final_audited_commit": "b98371488eb9479cf072bd6c2b682a59c5dd71d8",
+    "kept_separate_from_vulnerable_task_snapshot": true,
+    "report_listed_reaudit_commits": [
+      "4af82f0d0851ec514b32c9ce40c7ac0cd2915d69",
+      "d50d46573ff0254ea7d3a576cb59e31b2b186437",
+      "88ce9647db982414133e5bab80aac399cb930106",
+      "25c2be321bae1b379ee477db96714ab9a3aebf90",
+      "b9839f5110bb7faf6e78892c2649c93b09c32883",
+      "79870b4809fb48d6f8dc4b72edf3670826928b2f",
+      "33006a9c68d880a608b7b537ffde9c7abae0d3c6",
+      "83616971c3dedfa50b9775b6b9418c69a0320987",
+      "17e854ac4315053fe6a9023c65009244d83872e3"
+    ]
+  },
+  "submodules": [
+    {
+      "path": "foundry/lib/forge-std",
+      "url": "https://github.com/foundry-rs/forge-std",
+      "revision": "8f24d6b04c92975e0795b5868aa0d783251cdeaa"
+    }
+  ],
+  "dependency_locks": {
+    "node": {
+      "version": "22.15.0",
+      "source": "https://nodejs.org/dist/v22.15.0/node-v22.15.0-linux-x64.tar.xz",
+      "sha256": "dafe2e8f82cb97de1bd10db9e2ec4c07bbf53389b0799b1e095a918951e78fd4"
+    },
+    "yarn": {
+      "version": "4.9.2",
+      "package_manager_field": "yarn@4.9.2",
+      "yarn_lock_sha256": "d08984f244c92e40d54388a7303d3fb706e49115fc4a75546bc4924a9deb8a88"
+    },
+    "package_json_sha256": "28e4d1c088239aeacb31c445c5e55b7884754ddfd85cc0e874482f1a4d2b4d8c",
+    "nvmrc_sha256": "9053fd0bf7393ff6796ce60bbfebbd1897fbe8deb390e4fb632cf3eed5de14f8",
+    "yarnrc_sha256": "473e6def86fc03638120e0c01d0c8bbab095677256460fa4ea763e5d4697f270"
+  },
+  "base_image": {
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "image_config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+    "platform": "linux/amd64"
+  },
+  "tooling_revisions": {
+    "opd_base": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "isolated_clone": "/tmp/lido-opd-validator.hk8idR/opd-base",
+      "clean": true,
+      "candidate_validator_passed": true,
+      "candidate_validator_errors": 0,
+      "candidate_validator_warnings": 0
+    }
+  },
+  "agent_image": {
+    "local_tag": "evmbench-lido-v3-core:c1",
+    "image_config_digest": "sha256:5b9ba64cb56749554da391939e53e29ce4d7c1663fa0fa981b144ff4e144e416",
+    "created_at": "2026-07-27T12:29:13.011252083Z",
+    "platform": "linux/amd64",
+    "size_bytes": 5282888597,
+    "repository_head": "22cab0f0372015f2d2fce8bede64e98beae28571",
+    "repository_commit_count": 1,
+    "hardhat_compile_passed": true,
+    "hardhat_tests": {
+      "passed": 2555,
+      "failed": 0,
+      "pending": 19
+    },
+    "offline_forced_compile_passed": true,
+    "leakage_scan_passed": true,
+    "raw_agent_layer_leakage_scan_passed": true,
+    "repository_layer_diff_id": "sha256:c9611a333d2b456bd56cef11f5df6677739251f14ee20acc431860c767db48fd",
+    "nested_git_metadata_absent": true,
+    "pdf_and_jsonl_absent": true,
+    "gold_and_provenance_markers_absent": true,
+    "later_commit_markers_absent": true
+  },
+  "baseline_validation": {
+    "disposable_clone": "/tmp/lido-core-build.GjJpQ9/repo",
+    "hardhat_compile": {
+      "node_version": "22.15.0",
+      "solidity_files_compiled": 408,
+      "generated_typings": 1266,
+      "passed": true
+    },
+    "hardhat_unit_tests": {
+      "node_version": "22.15.0",
+      "passed": 2555,
+      "failed": 0,
+      "pending": 19
+    },
+    "foundry_full_build": {
+      "forge_version": "1.3.6",
+      "passed": false,
+      "classification": "upstream_noncanonical_baseline",
+      "reason": "The full repository forge build reaches a Solidity stack-too-deep compiler error; the repository's canonical compile command is hardhat compile."
+    }
+  },
+  "ocr_corrections": [
+    {
+      "pages": [5],
+      "field": "audited_scope",
+      "correction": "Use contracts/0.8.9/Accounting.sol from the embedded GitHub annotation and repository tree, not the printed contracts/0.8.25/Accounting.sol."
+    },
+    {
+      "pages": [6],
+      "field": "commit_hashes",
+      "correction": "Use the visually reviewed PDF annotations; OCR confuses several hexadecimal 1/l characters."
+    },
+    {
+      "pages": [16],
+      "field": "M-1 example literals",
+      "correction": "Use PDF/code separators and values; OCR changes underscores and punctuation."
+    },
+    {
+      "pages": [20],
+      "field": "M-4 identifiers",
+      "correction": "The PDF/code say stETH and require(!isStopped()); OCR corrupts both identifiers."
+    },
+    {
+      "pages": [21],
+      "field": "M-5 identifiers",
+      "correction": "The PDF/code say smoothenTokenRebase, stETH, and elRewards; OCR corrupts these identifiers."
+    }
+  ],
+  "ocr_evidence": [
+    {
+      "page_number": 5,
+      "role": "scope",
+      "page_image_sha256": "79ff953222cf3d1a9067b6b3b0ad944f2a774383444c54a10b12c8240f73a256",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl"
+    },
+    {
+      "page_number": 6,
+      "role": "commit",
+      "page_image_sha256": "ff9405f02f51ac45732c398d9134a7823173956f9f937131ef9594d95aa8ba70",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl"
+    },
+    {
+      "page_number": 14,
+      "finding_id": "H-01",
+      "page_image_sha256": "5ed04236cf785545ec069c21e3986e71e07029afa877461ab17da7b9d1d3cabc",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl"
+    },
+    {
+      "page_number": 15,
+      "finding_id": "H-02",
+      "page_image_sha256": "71ab2ac5edcdee6fa69779b60e66e70bb2cc42583779684ed7e82be1bf00552b",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl"
+    },
+    {
+      "page_number": 16,
+      "finding_id": "H-02",
+      "page_image_sha256": "257edb3a4e7fbd3800f48b22cf246a101987c858ccb92e867dbb0907c8335b57",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl"
+    },
+    {
+      "page_number": 17,
+      "finding_id": "H-02",
+      "page_image_sha256": "01b2171515d73868b879148bb9e560ad76560b40157ed16e45ff46fabd1f5ef5",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl"
+    },
+    {
+      "page_number": 18,
+      "finding_id": "H-03",
+      "page_image_sha256": "08307f4b7f02ca6c4d9d949ca0b3dc8bd045ca53a24a6d8563f28d26869cf1c9",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl"
+    },
+    {
+      "page_number": 19,
+      "finding_id": "H-04",
+      "page_image_sha256": "da2886fa0ec0420ba6b417837005cd023c9ba09552f3219df996f2cbfca8138c",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl"
+    },
+    {
+      "page_number": 21,
+      "finding_id": "H-05",
+      "page_image_sha256": "a6e829005a9f18a869c986cf6148e6977cd0879ba580b15474350370c02c9139",
+      "artifact_ref": "ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl"
+    }
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "report_id": "H-1",
+      "pages": [14],
+      "reported_severity": "High",
+      "title": "Bad-debt internalization leaves a pre-bunker exit window",
+      "generated_file": "findings/H-01.md"
+    },
+    {
+      "finding_id": "H-02",
+      "report_id": "M-1",
+      "pages": [15, 16, 17],
+      "reported_severity": "Medium",
+      "title": "External bad-debt conversion double-counts protocol losses",
+      "generated_file": "findings/H-02.md"
+    },
+    {
+      "finding_id": "H-03",
+      "report_id": "M-2",
+      "pages": [18],
+      "reported_severity": "Medium",
+      "title": "Validator exits weaken the annual CL balance sanity check",
+      "generated_file": "findings/H-03.md"
+    },
+    {
+      "finding_id": "H-04",
+      "report_id": "M-3",
+      "pages": [19],
+      "reported_severity": "Medium",
+      "title": "Vault operations remain active during Lido bunker mode",
+      "generated_file": "findings/H-04.md"
+    },
+    {
+      "finding_id": "H-05",
+      "report_id": "M-5",
+      "pages": [21],
+      "reported_severity": "Medium",
+      "title": "Rebase smoothing ignores pending bad-debt internalization",
+      "generated_file": "findings/H-05.md"
+    }
+  ],
+  "report_dispositions": [
+    {
+      "report_id": "H-1",
+      "pages": [14],
+      "reported_severity": "High",
+      "reported_status": "Acknowledged",
+      "disposition": "included",
+      "finding_id": "H-01",
+      "loss_path": "Users exit before known bad debt activates bunker restrictions, shifting the later socialized loss to remaining holders."
+    },
+    {
+      "report_id": "M-1",
+      "pages": [15, 16, 17],
+      "reported_severity": "Medium",
+      "reported_status": "Acknowledged",
+      "disposition": "included",
+      "finding_id": "H-02",
+      "loss_path": "Coupled internal and external share-rate effects overstate the bad debt and impose excess stETH loss."
+    },
+    {
+      "report_id": "M-2",
+      "pages": [18],
+      "reported_severity": "Medium",
+      "reported_status": "Acknowledged",
+      "disposition": "included",
+      "finding_id": "H-03",
+      "loss_path": "An inflated comparable-balance baseline can accept anomalous CL growth and thereby overstate pooled ether; the downstream holder-loss consequence is explicitly labeled as an inference."
+    },
+    {
+      "report_id": "M-3",
+      "pages": [19],
+      "reported_severity": "Medium",
+      "reported_status": "Acknowledged",
+      "disposition": "included",
+      "finding_id": "H-04",
+      "loss_path": "A malicious node operator can create uncapped additional slashing-derived bad debt during bunker mode."
+    },
+    {
+      "report_id": "M-4",
+      "pages": [20],
+      "reported_severity": "Medium",
+      "reported_status": "Fixed in 4af82f0d",
+      "disposition": "excluded",
+      "reason_code": "operational_safety_only_no_verified_asset_loss",
+      "reason": "The report establishes an invariant break and operational mistake, but not a distinct theft, destruction, or permanent asset-loss path at the vulnerable snapshot.",
+      "corroborating_fix_commit": "97321b8a9ce01ff4b40ea212678f3d89994fd841"
+    },
+    {
+      "report_id": "M-5",
+      "pages": [21],
+      "reported_severity": "Medium",
+      "reported_status": "Acknowledged",
+      "disposition": "included",
+      "finding_id": "H-05",
+      "loss_path": "The ordering mismatch can cause an avoidable negative stETH rebase while compensating EL rewards remain available."
+    },
+    {
+      "report_id": "L-1",
+      "pages": [22],
+      "reported_severity": "Low",
+      "reported_status": "Acknowledged",
+      "disposition": "excluded",
+      "reason_code": "parameter_front_run_without_independent_loss_path",
+      "reason": "Front-running a lower external-share ratio preserves old capacity but does not itself steal, destroy, or permanently lock assets."
+    },
+    {
+      "report_id": "L-2",
+      "pages": [23],
+      "reported_severity": "Low",
+      "reported_status": "Acknowledged",
+      "disposition": "excluded",
+      "reason_code": "defense_in_depth_hypothetical_upstream_bug",
+      "reason": "The proposed cap assumes a separate Accounting bug or misconfiguration and is bypassable by repeated calls; no independent vulnerable attacker path is established."
+    },
+    {
+      "report_id": "L-3",
+      "pages": [24],
+      "reported_severity": "Low",
+      "reported_status": "Fixed in 4af82f0d",
+      "disposition": "excluded",
+      "reason_code": "comment_only",
+      "reason": "The implementation is correct; only an explanatory comment is reversed."
+    },
+    {
+      "report_id": "L-4",
+      "pages": [25],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason_code": "maintainability_only",
+      "reason": "The two accessors are behaviorally equivalent for the stored low 160 bits; the issue concerns consistency and future maintenance."
+    },
+    {
+      "report_id": "L-5",
+      "pages": [26],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason_code": "infeasible_numeric_bound",
+      "reason": "The downcast requires more than 2^128-1 total shares; the report does not establish a realistic reachable asset-loss condition."
+    },
+    {
+      "report_id": "L-6",
+      "pages": [27],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason_code": "integration_or_gas_only",
+      "reason": "Repeated vault-data updates remain correctly accounted; the reported concern is integration confusion and unnecessary gas."
+    },
+    {
+      "report_id": "L-7",
+      "pages": [28],
+      "reported_severity": "Low",
+      "reported_status": "Acknowledged",
+      "disposition": "excluded",
+      "reason_code": "safety_check_without_concrete_loss_path",
+      "reason": "The time-insensitive LazyOracle bound can be over- or under-conservative, but the report provides no concrete theft, destruction, or permanent loss sequence."
+    },
+    {
+      "report_id": "L-8",
+      "pages": [29],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason_code": "admin_input_availability_only",
+      "reason": "The unsafe share-limit downcast can disable a group or create accounting ambiguity under an admin-selected value, but no verified asset-loss path is shown."
+    },
+    {
+      "report_id": "L-9",
+      "pages": [30],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason_code": "visibility_gas_style_only",
+      "reason": "Changing public to external is an interface/gas optimization with no security or asset effect."
+    },
+    {
+      "report_id": "L-10",
+      "pages": [31],
+      "reported_severity": "Low",
+      "reported_status": "Acknowledged",
+      "disposition": "excluded",
+      "reason_code": "readability_only",
+      "reason": "The arithmetic is correct and an underflow intentionally reverts; the suggested regrouping is readability and assurance work."
+    },
+    {
+      "report_id": "L-11",
+      "pages": [32],
+      "reported_severity": "Low",
+      "reported_status": "Acknowledged",
+      "disposition": "excluded",
+      "reason_code": "report_states_no_practical_impact",
+      "reason": "The report explicitly says ignoring the return value has no practical impact because later sanity checking prevents balance inflation."
+    },
+    {
+      "report_id": "L-12",
+      "pages": [33],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason_code": "comment_only",
+      "reason": "The implementation is unaffected; only a changeTier comment is misleading."
+    },
+    {
+      "report_id": "L-13",
+      "pages": [34],
+      "reported_severity": "Low",
+      "reported_status": "Acknowledged",
+      "disposition": "excluded",
+      "reason_code": "temporary_under_distribution_no_loss",
+      "reason": "The calculation can leave more EL rewards in the vault and reduce a positive rebase, but it does not create the negative rebase or asset destruction established for M-5."
+    }
+  ],
+  "generated_files": [
+    "config.yaml",
+    "Dockerfile",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/H-04.md",
+    "findings/H-05.md",
+    "findings/gold_audit.md",
+    "provenance.json",
+    "review_status.yaml",
+    "ocr_evidence/pdf_003436_1e68fc3994b5/scope.pages.jsonl",
+    "ocr_evidence/pdf_003436_1e68fc3994b5/H-01.pages.jsonl",
+    "ocr_evidence/pdf_003436_1e68fc3994b5/H-02.pages.jsonl",
+    "ocr_evidence/pdf_003436_1e68fc3994b5/H-03.pages.jsonl",
+    "ocr_evidence/pdf_003436_1e68fc3994b5/H-04.pages.jsonl",
+    "ocr_evidence/pdf_003436_1e68fc3994b5/H-05.pages.jsonl"
+  ]
+}

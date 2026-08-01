@@ -1,0 +1,165 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v1",
+  "phase": "C1R1",
+  "candidate_id": "2025-12-lido-v3-core",
+  "generated_at": "2026-07-27T12:36:29Z",
+  "task_group_key": "lidofinance/core@22cab0f0372015f2d2fce8bede64e98beae28571|contracts/0.4.24/Lido.sol+contracts/0.8.9/Accounting.sol|detect",
+  "checks": {
+    "pdf_sha256_matches": true,
+    "ocr_sha256_matches": true,
+    "task_key_matches": true,
+    "review_state_in_review": true,
+    "human_approved_false": true,
+    "finding_count_matches_config": true,
+    "gold_is_ordered_full_combination": true,
+    "all_finding_sections_present": true,
+    "all_ocr_slices_byte_exact": true,
+    "all_report_findings_disposed": true,
+    "included_findings_count": true,
+    "excluded_findings_count": true,
+    "selected_findings_count": true,
+    "candidate_file_count": true
+  },
+  "finding_checks": [
+    {
+      "finding_id": "H-01",
+      "sha256": "88604bcd90a6c65f6491f7220252f3ca256eb70a6e6fe12fcc4cd8aeb67ba07f",
+      "all_required_sections_present": true,
+      "prerequisites_present": true,
+      "asset_loss_impact_present": true
+    },
+    {
+      "finding_id": "H-02",
+      "sha256": "830b0057d074de6fca008b46fcc25ea8b105041ad647075671a4971205d67775",
+      "all_required_sections_present": true,
+      "prerequisites_present": true,
+      "asset_loss_impact_present": true
+    },
+    {
+      "finding_id": "H-03",
+      "sha256": "837cf1d819284d2d3e248c05293faef2ae0e3e180238fae98b5b767fe90d4595",
+      "all_required_sections_present": true,
+      "prerequisites_present": true,
+      "asset_loss_impact_present": true
+    },
+    {
+      "finding_id": "H-04",
+      "sha256": "4cc5ca07b89bd2a976702f24636cde4014fb40653b99dc43eec1ed2c2308ca14",
+      "all_required_sections_present": true,
+      "prerequisites_present": true,
+      "asset_loss_impact_present": true
+    },
+    {
+      "finding_id": "H-05",
+      "sha256": "6ce3e6d76d5b838eec70ac0b1e65e82d3b27ddc982a8bc4bb5f0d173b18aa31a",
+      "all_required_sections_present": true,
+      "prerequisites_present": true,
+      "asset_loss_impact_present": true
+    }
+  ],
+  "ocr_slice_checks": [
+    {
+      "path": "scope.pages.jsonl",
+      "pages": [
+        5,
+        6
+      ],
+      "byte_exact": true,
+      "sha256": "8433375408e358b99f76780cc20b0dbf0b7c59e60b329a11f4241655d11aeb51"
+    },
+    {
+      "path": "H-01.pages.jsonl",
+      "pages": [
+        14
+      ],
+      "byte_exact": true,
+      "sha256": "a8236b8efb847f15952e0cc889601035d5ef69826b22af7be807e3db0ad01691"
+    },
+    {
+      "path": "H-02.pages.jsonl",
+      "pages": [
+        15,
+        16,
+        17
+      ],
+      "byte_exact": true,
+      "sha256": "2bd6780815faaa4412fbcff06641a6e598d763e7a2da8ef07dcae2a3ef183328"
+    },
+    {
+      "path": "H-03.pages.jsonl",
+      "pages": [
+        18
+      ],
+      "byte_exact": true,
+      "sha256": "8d90fbd86851a0d8ed6b0412bcd1535bc8a3a9f8fde5ff9f946968ecb6562b93"
+    },
+    {
+      "path": "H-04.pages.jsonl",
+      "pages": [
+        19
+      ],
+      "byte_exact": true,
+      "sha256": "9be3b7a7f5184aeb2dae7706a82cd54123ea35182baa16f87fc69eedd19c11ca"
+    },
+    {
+      "path": "H-05.pages.jsonl",
+      "pages": [
+        21
+      ],
+      "byte_exact": true,
+      "sha256": "4a6cf33efcd6f92ee016cfeab723992d27da1caefa971682288dd2d56523c665"
+    }
+  ],
+  "selected_mapping": [
+    {
+      "finding_id": "H-01",
+      "report_id": "H-1",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "finding_id": "H-02",
+      "report_id": "M-1",
+      "pages": [
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "finding_id": "H-03",
+      "report_id": "M-2",
+      "pages": [
+        18
+      ]
+    },
+    {
+      "finding_id": "H-04",
+      "report_id": "M-3",
+      "pages": [
+        19
+      ]
+    },
+    {
+      "finding_id": "H-05",
+      "report_id": "M-5",
+      "pages": [
+        21
+      ]
+    }
+  ],
+  "semantic_review_notes": [
+    "The report's printed contracts/0.8.25/Accounting.sol path is corrected to contracts/0.8.9/Accounting.sol using its embedded GitHub annotation and the vulnerable tree.",
+    "H-03 directly establishes a validator-churn bypass of the annual CL balance check; its downstream holder-loss path is a code-grounded inference requiring an erroneous or compromised oracle report and early exits.",
+    "M-4 and all thirteen Low findings remain excluded with explicit loss-of-assets screening reasons."
+  ],
+  "unresolved_semantic_or_reproducibility_concerns": [
+    {
+      "finding_id": "H-03",
+      "classification": "human_semantic_review_required",
+      "concern": "The report states a security-control bypass, while the candidate's holder-loss sequence is an explicit inference from acceptance of an inflated CL balance."
+    }
+  ],
+  "status": "passed"
+}

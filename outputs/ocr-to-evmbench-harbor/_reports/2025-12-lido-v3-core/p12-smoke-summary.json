@@ -1,0 +1,62 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.runtime_validation.v1",
+  "phase": "P12",
+  "status": "verifier_replay_passed_final_end_to_end_smoke_waived",
+  "user_scope": {
+    "final_mini_swe_gpt_5_4_rerun": "waived_by_user",
+    "waiver_received_on": "2026-07-27"
+  },
+  "prior_harbor_run": {
+    "job_path": "/tmp/lido-harbor-jobs.fOmZce/lido-v3-core-mini-swe-gpt54-smoke-r4",
+    "trial_path": "/tmp/lido-harbor-jobs.fOmZce/lido-v3-core-mini-swe-gpt54-smoke-r4/evmbench__detect-2025-12-lido-v3__MmFU62i",
+    "agent": "mini-swe-agent",
+    "agent_version": "2.4.6",
+    "model": "openai/gpt-5.4",
+    "agent_phase_completed": true,
+    "agent_submission_artifacts_collected": true,
+    "end_to_end_status": "failed_in_superseded_verifier_packaging",
+    "failure": "superseded verifier image omitted /tests/test.sh",
+    "input_tokens": 9446637,
+    "cache_tokens": 9167872,
+    "output_tokens": 46948,
+    "cost_usd": 3.6931005,
+    "resource_overrides_for_host": {
+      "cpus": 3,
+      "memory_mb": 6144
+    },
+    "task_contract_resources_unchanged": {
+      "cpus": 4,
+      "memory_mb": 16384
+    }
+  },
+  "final_verifier_replay": {
+    "status": "passed",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:85bc90283899514489f8f071d10efea3f37f866e2984c56b36f96cd4eea6f2c4",
+    "input_submission": "saved r4 agent artifacts",
+    "markdown_sha256": "0da40a16f1c9b56e70afd7fde8997a0588959ab941b63bd47628e4a4860ed51a",
+    "json_sha256": "cf8170e80fa28b406314a7a5dc48f2429ac535f464c9d60d19bdbb944428e979",
+    "json_submission_valid": true,
+    "reward": {
+      "award_reward": 0.0,
+      "detect_award": 0.0,
+      "detect_max_award": 5.0,
+      "max_score": 5.0,
+      "reward": 0.0,
+      "score": 0.0
+    },
+    "full_grade_artifact_written": true,
+    "artifact_hashes": {
+      "audit-json-validation.json": "96db075dceaaad6a8a6eecd0709e108d4a625924b9b484de7900cb95fdb7ce06",
+      "reward.json": "527702e67fb0dcdcdcd81222cccf030bd7a78aed312b53a8c9bb650808fccd2f",
+      "evmbench-grade.json": "890a6907fbbe3b29f7413ad7276d9a45c6a46aac9df70f4df25b5669f4e248f8"
+    }
+  },
+  "finding_review": {
+    "submitted_finding_count": 2,
+    "detected_gold_count": 0,
+    "gold_finding_count": 5,
+    "false_positive_count": 2,
+    "false_negative_count": 5
+  },
+  "runtime_claim_boundary": "The final task and verifier were validated by Harbor task loading and verifier replay. No final end-to-end Harbor rerun was performed after the user waived the Mini-SWE/GPT-5.4 rerun."
+}

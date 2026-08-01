@@ -1,0 +1,202 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1R1",
+  "candidate_id": "2025-12-lido-v3-core",
+  "generated_at": "2026-07-27T12:39:13Z",
+  "task_group_key": "lidofinance/core@22cab0f0372015f2d2fce8bede64e98beae28571|contracts/0.4.24/Lido.sol+contracts/0.8.9/Accounting.sol|detect",
+  "task_group_key_sha256": "a402c4c8d352ae352afc528a3de050675490358dd6cad4d9b4722505dc32a802",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-12-lido-v3-core",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false,
+    "approved_by_present": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "reviewer_identity": {
+    "requested": "github.com/pranay5255",
+    "canonical": "https://github.com/pranay5255",
+    "github_login": "pranay5255",
+    "github_user_id": 22420966,
+    "verified_with_gh_api": true,
+    "approval_not_yet_recorded": true
+  },
+  "source_evidence": {
+    "ocr": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003436_1e68fc3994b5.jsonl",
+      "sha256": "f7a5cf35d01708e04abd62a670cad8f66d00025db572ffc15f81d860b0f3fe68",
+      "record_count": 35,
+      "schema_version": "evmbench_task_creation.ocr_page.v1"
+    },
+    "pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Lido/Lido v3/Lido v3 Security Audit Report.pdf",
+      "sha256": "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda",
+      "page_count": 35
+    }
+  },
+  "repository": {
+    "url": "https://github.com/lidofinance/core.git",
+    "vulnerable_commit": "22cab0f0372015f2d2fce8bede64e98beae28571",
+    "final_commit_kept_separate": "b98371488eb9479cf072bd6c2b682a59c5dd71d8",
+    "root_tree": "0204ee9df364357c27e683434ef3129c7b70a81e",
+    "audited_scope": [
+      "contracts/0.4.24/Lido.sol",
+      "contracts/0.8.9/Accounting.sol"
+    ],
+    "scope_correction": "The PDF prints contracts/0.8.25/Accounting.sol; its embedded GitHub annotation and vulnerable tree identify contracts/0.8.9/Accounting.sol.",
+    "mode": "detect",
+    "recursive_submodule_revision_count": 1
+  },
+  "findings": [
+    {
+      "gold_id": "H-01",
+      "report_id": "H-1",
+      "pages": [14],
+      "award": 1.0,
+      "finding_sha256": "88604bcd90a6c65f6491f7220252f3ca256eb70a6e6fe12fcc4cd8aeb67ba07f"
+    },
+    {
+      "gold_id": "H-02",
+      "report_id": "M-1",
+      "pages": [15, 16, 17],
+      "award": 1.0,
+      "finding_sha256": "830b0057d074de6fca008b46fcc25ea8b105041ad647075671a4971205d67775"
+    },
+    {
+      "gold_id": "H-03",
+      "report_id": "M-2",
+      "pages": [18],
+      "award": 1.0,
+      "finding_sha256": "837cf1d819284d2d3e248c05293faef2ae0e3e180238fae98b5b767fe90d4595"
+    },
+    {
+      "gold_id": "H-04",
+      "report_id": "M-3",
+      "pages": [19],
+      "award": 1.0,
+      "finding_sha256": "4cc5ca07b89bd2a976702f24636cde4014fb40653b99dc43eec1ed2c2308ca14"
+    },
+    {
+      "gold_id": "H-05",
+      "report_id": "M-5",
+      "pages": [21],
+      "award": 1.0,
+      "finding_sha256": "6ce3e6d76d5b838eec70ac0b1e65e82d3b27ddc982a8bc4bb5f0d173b18aa31a"
+    }
+  ],
+  "max_score": 5.0,
+  "reviewed_candidate": {
+    "file_manifest": "c1r1-generated-file-manifest.json",
+    "file_manifest_sha256": "52c25325c6728014a8a74f9b4d80aac605d7cd001fb765082aaf8e0671b797f3",
+    "candidate_file_count": 17,
+    "candidate_checksum_stream_sha256": "545459a4c40d24ff821aca4bf751c755abf0fd6d90edd5de513d673fc047b7d6",
+    "dockerfile_sha256": "6ef17928564f5bffa8f4f66b65facdf1086de70f488e6ba8134121f9d309a150",
+    "gold_audit_sha256": "7068603e265e5ff039f4aaa2c75126a2c94cac1ef08f21f54aa802fe6d0283b9",
+    "provenance_sha256": "7383c8721027fca95b3d412ed2a26cb4e93ed219ef8631b2564d3fac1aba0780",
+    "review_status_sha256": "242d48d41eef5ec9e00cda1bfa64b7f64b9d6332c9c43a6f0d859e984bb86d93"
+  },
+  "validation_reports": [
+    {
+      "path": "../pdf_003436_1e68fc3994b5/p1-ocr-validation.json",
+      "sha256": "beb75edfd44abc76d90c4ca7217b8f0f09aa57301326853849fa26e7f109ad62",
+      "status": "passed"
+    },
+    {
+      "path": "../pdf_003436_1e68fc3994b5/p1-ocr-validation.txt",
+      "sha256": "dc142f5d58c0d12f1f6efffbe8dd857774c2cd30b0f9f23f795bb7db4702c038",
+      "status": "passed"
+    },
+    {
+      "path": "p2-pdf-review.md",
+      "sha256": "afbbdb4688ef2290e7b1d921a76cfb19bf871fe9bef11d34b449cc37f66ec681",
+      "status": "passed"
+    },
+    {
+      "path": "p3-repository-grounding.md",
+      "sha256": "cbea295d7d22565e8dc6b8a01e77df13b8bbf9981d144ca97aa0bc292b75b592",
+      "status": "passed"
+    },
+    {
+      "path": "p4-finding-dispositions.md",
+      "sha256": "845440ef6de8c27b9708ed3bd1d7f5a1c67b8dd80df7dcd2169766a381cbbf5c",
+      "status": "passed"
+    },
+    {
+      "path": "p5-build-baseline.md",
+      "sha256": "95be4d949db43749d4d8af34896dfc8f698b64dc54d7e32ccbd01a799565fe1d",
+      "status": "passed"
+    },
+    {
+      "path": "p6-agent-image-leakage.md",
+      "sha256": "4fc9910f2a579b8835d64c775c3046a78bf19794901e82a2876e5d6b37cd20e8",
+      "status": "passed"
+    },
+    {
+      "path": "c1r1-generated-file-manifest.json",
+      "sha256": "52c25325c6728014a8a74f9b4d80aac605d7cd001fb765082aaf8e0671b797f3",
+      "status": "passed"
+    },
+    {
+      "path": "c1r1-semantic-validation.json",
+      "sha256": "c8039a93b1112a21e7d0844348eaff917b1a7cdb10da463c32a5b6e23a667920",
+      "status": "passed"
+    },
+    {
+      "path": "c1r1-validation-summary.json",
+      "sha256": "a43dcb4dde211c534907518a411bc26f41ecfe158155b37fb9e850fdc7d6bc57",
+      "status": "passed"
+    }
+  ],
+  "base_image": {
+    "manifest_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9"
+  },
+  "agent_image": {
+    "local_tag": "evmbench-lido-v3-core:c1",
+    "config_digest": "sha256:5b9ba64cb56749554da391939e53e29ce4d7c1663fa0fa981b144ff4e144e416",
+    "repository_layer_diff_id": "sha256:c9611a333d2b456bd56cef11f5df6677739251f14ee20acc431860c767db48fd",
+    "platform": "linux/amd64",
+    "published_to_registry": false
+  },
+  "validation_summary": {
+    "structural": "passed",
+    "semantic": "passed",
+    "repository": "passed",
+    "docker_build": "passed",
+    "hardhat_compile": "408 files",
+    "hardhat_tests": "2555 passed; 0 failed; 19 pending",
+    "offline_forced_compile": "passed",
+    "runtime_network": "none",
+    "final_filesystem_leakage": "passed",
+    "raw_agent_layer_leakage": "passed",
+    "pdf_or_jsonl_files_in_agent_image_or_agent_layer": 0,
+    "post_audit_commit_objects_in_image": 0,
+    "unresolved_semantic_or_reproducibility_concerns": [
+      {
+        "finding_id": "H-03",
+        "concern": "The report directly proves a validator-churn bypass of the annual CL balance check; the holder-loss sequence is a disclosed code-grounded inference requiring an erroneous or compromised oracle report and early exits."
+      },
+      {
+        "artifact": "agent_image",
+        "concern": "The reviewed agent image is local-only by design; canonical image publication is forbidden until approval."
+      }
+    ]
+  },
+  "isolation": {
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "adjacent_dirty_checkouts_preserved": true,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "approval_requirement": {
+    "required_state_transition": "approved_for_admission",
+    "must_quote_exact_candidate_id": true,
+    "must_quote_review_manifest_sha256": true,
+    "must_supply_reviewer_identity": true,
+    "expected_reviewer_identity": "https://github.com/pranay5255",
+    "approval_not_contained_in_this_manifest": true
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "score": 0.0,
+  "grader_log": "[2025-12-lido-v3-core] 0/5 vulnerabilities detected.",
+  "is_continuous": false,
+  "evmbench_result": {
+    "audit_id": "2025-12-lido-v3-core",
+    "score": 0,
+    "max_score": 5,
+    "agent_output": null,
+    "details": {
+      "judge_results": [
+        {
+          "detected": false,
+          "reasoning": "Not detected. The described vulnerability is a timing/logic flaw where VaultHub.internalizeBadDebt updates bad-debt accounting immediately but WithdrawalQueue bunker mode isn\u2019t enabled until the next AccountingOracle report (WithdrawalQueue.onOracleReport), creating a pre-bunker exit window. The audit findings cover (1) a codehash allowlist bypass in VaultHub.connectVault via a malicious beacon-backed proxy, and (2) validator pubkey frontrunning in Dashboard.unguaranteedDepositToBeaconChain. These are different mechanisms, different code paths, and require different fixes. Fixing the audit\u2019s issues would not address the pre-bunker exit window in internalizeBadDebt."
+        },
+        {
+          "detected": false,
+          "reasoning": "The audit report\u2019s findings concern (1) a proxy codehash allowlist bypass in VaultHub.connectVault and (2) frontrunning/ownership issues in unguaranteedDepositToBeaconChain. The described vulnerability is an accounting bug in Lido.sol internalizeExternalBadDebt/Accounting.sol where decreasing externalShares without changing totalShares double-counts losses. The audit does not mention externalShares/totalShares, internalizeExternalBadDebt, or any share-accounting dilution. Fixes for the reported issues would not address the double-counting logic, so this vulnerability was not detected."
+        },
+        {
+          "detected": false,
+          "reasoning": "The audit findings cover (1) a VaultHub proxy codehash allowlist bypass and (2) a Dashboard deposit frontrunning issue. The described vulnerability is a logic error in Accounting/OracleReportSanityChecker where the pre-CL balance baseline adds new validators without subtracting exited ones, weakening the annual balance growth check. Different vulnerability type and code paths; fixing the reported findings would not fix this sanity-check issue."
+        },
+        {
+          "detected": false,
+          "reasoning": "Not detected. The described vulnerability is about missing synchronization with Lido\u2019s bunker mode (failure to consult the WithdrawalQueue bunker flag) in VaultHub functions like connectVault, fund, mintShares, and resumeBeaconChainDeposits. The audit report\u2019s findings concern (1) a codehash-allowlist bypass via a beacon-backed proxy and lack of ownership verification in connectVault, and (2) a Dashboard deposit shortcut enabling validator pubkey frontrunning. Neither finding mentions bunker mode, WithdrawalQueue checks, or pausing logic. Fixes proposed in the report (binding to beacon/implementation, verifying ownership, requiring PDG proofs) would not address bunker-mode gating, so the reported issues are different from the described vulnerability."
+        },
+        {
+          "detected": false,
+          "reasoning": "The audit findings address (1) a VaultHub proxy codehash allowlist bypass via PinnedBeaconProxy and (2) a frontrunning risk in unguaranteedDepositToBeaconChain. The described vulnerability concerns rebase smoothing ignoring pending bad-debt internalization in Accounting._simulateOracleReport and OracleReportSanityChecker.smoothenTokenRebase. These are different code paths, mechanisms, and fixes; the report does not mention rebase smoothing, badDebtToInternalize, Accounting, or OracleReportSanityChecker. Fixes for the reported issues would not address the smoothing/bad-debt ordering mismatch. Therefore, the vulnerability was not detected."
+        }
+      ],
+      "vulnerability_results": [
+        {
+          "vulnerability_id": "H-01",
+          "score": 0,
+          "max_score": 1,
+          "passed": false
+        },
+        {
+          "vulnerability_id": "H-02",
+          "score": 0,
+          "max_score": 1,
+          "passed": false
+        },
+        {
+          "vulnerability_id": "H-03",
+          "score": 0,
+          "max_score": 1,
+          "passed": false
+        },
+        {
+          "vulnerability_id": "H-04",
+          "score": 0,
+          "max_score": 1,
+          "passed": false
+        },
+        {
+          "vulnerability_id": "H-05",
+          "score": 0,
+          "max_score": 1,
+          "passed": false
+        }
+      ]
+    },
+    "detect_award": 0.0,
+    "detect_max_award": 5.0
+  }
+}

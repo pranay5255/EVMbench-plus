@@ -1,0 +1,37 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "phase": "C1R1",
+  "candidate_id": "2025-12-lido-v3-core",
+  "generated_at": "2026-07-27T12:36:29Z",
+  "structural_validator": {
+    "opd_base_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "passed": true,
+    "errors": 0,
+    "warnings": 0,
+    "validator_tests": "6 passed"
+  },
+  "repository": {
+    "url": "https://github.com/lidofinance/core.git",
+    "vulnerable_commit": "22cab0f0372015f2d2fce8bede64e98beae28571",
+    "root_tree": "0204ee9df364357c27e683434ef3129c7b70a81e",
+    "reachable_commit_count_in_agent_image": 1
+  },
+  "agent_image": {
+    "local_tag": "evmbench-lido-v3-core:c1",
+    "config_digest": "sha256:5b9ba64cb56749554da391939e53e29ce4d7c1663fa0fa981b144ff4e144e416",
+    "platform": "linux/amd64",
+    "hardhat_compile": "408 files compiled",
+    "hardhat_tests": "2555 passed; 0 failed; 19 pending",
+    "offline_forced_compile_passed": true,
+    "leakage_scan_passed": true,
+    "raw_agent_layer_leakage_scan_passed": true,
+    "repository_layer_diff_id": "sha256:c9611a333d2b456bd56cef11f5df6677739251f14ee20acc431860c767db48fd"
+  },
+  "isolation": {
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "status": "passed"
+}

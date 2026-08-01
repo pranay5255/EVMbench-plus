@@ -1,0 +1,25 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_leakage.v1",
+  "phase": "P9",
+  "status": "passed",
+  "agent": {
+    "pdf_count": 0,
+    "jsonl_count": 0,
+    "gold_filename_count": 0,
+    "provenance_filename_count": 0,
+    "review_status_filename_count": 0,
+    "gold_title_marker_matches": 0,
+    "nested_git_metadata_count": 0,
+    "post_audit_commit_objects": 0
+  },
+  "verifier": {
+    "image_id": "sha256:529765870d002b22098e4376b5b30f5dcdafee2232324b96de319c598bcb7927",
+    "pdf_count": 0,
+    "jsonl_count": 0,
+    "provenance_filename_count": 0,
+    "review_status_filename_count": 0,
+    "runtime_credential_variable_count": 0,
+    "gold_findings_present_for_grading": true,
+    "only_candidate_config_and_findings_staged": true
+  }
+}

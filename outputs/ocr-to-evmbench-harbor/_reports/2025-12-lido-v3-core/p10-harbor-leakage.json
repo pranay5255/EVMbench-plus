@@ -1,0 +1,33 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "status": "passed",
+  "regular_file_count": 6,
+  "symlink_count": 0,
+  "archive_count": 0,
+  "binary_file_count": 0,
+  "forbidden_filename_count": 0,
+  "forbidden_content_match_count": 0,
+  "forbidden_terms_checked": [
+    "pdf_003436",
+    "Lido v3 Security Audit Report",
+    "f7a5cf35d01708e04abd62a670cad8f66d00025db572ffc15f81d860b0f3fe68",
+    "394412f5537fe8936dad4362cad9a71bf8d37c4bf7e759bdd2d021e4f98cbcda",
+    "ocr_evidence",
+    "gold_audit",
+    "provenance.json",
+    "review_status.yaml",
+    "review-bundle",
+    "H-01",
+    "H-02",
+    "H-03",
+    "H-04",
+    "H-05",
+    "Bad-debt internalization leaves a pre-bunker exit window",
+    "External bad-debt conversion double-counts protocol losses",
+    "Validator exits weaken the annual CL balance sanity check",
+    "Vault operations remain active during Lido bunker mode",
+    "Rebase smoothing ignores pending bad-debt internalization",
+    "/home/experiments_base/"
+  ]
+}
