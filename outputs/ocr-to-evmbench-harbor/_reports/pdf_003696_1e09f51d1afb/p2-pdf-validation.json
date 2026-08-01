@@ -1,0 +1,38 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "phase": "P2",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "candidate_id": null,
+  "generated_at": "2026-08-01T15:16:01Z",
+  "status": "passed",
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/eigenlayer/Sigma_Prime_EigenLayer_DA_Secure_Integration_Security_Assessment_Report_v2_0.pdf",
+    "sha256": "2900c32ac36fb78949c11cc620c68efe453b411d021a2f09665c91dcb00b42fb",
+    "size_bytes": 461391,
+    "physical_page_count": 33,
+    "page_size": "595 x 842 pts (A4)",
+    "pdf_version": "1.5",
+    "encrypted": false,
+    "readable": true,
+    "poppler_text_extraction": "passed",
+    "poppler_rendering": "passed",
+    "qpdf_check": "not_available"
+  },
+  "ocr_cross_check": {
+    "pdf_id": "pdf_003696_1e09f51d1afb",
+    "record_count": 33,
+    "source_page_count": 33,
+    "recorded_source_pdf_sha256": "2900c32ac36fb78949c11cc620c68efe453b411d021a2f09665c91dcb00b42fb",
+    "physical_hash_matches_ocr": true,
+    "physical_page_count_matches_ocr": true,
+    "source_path_is_unique_and_matches": true,
+    "ordered_page_coverage": "1-33"
+  },
+  "visual_review": {
+    "pdf_and_ocr_text_reviewed_for_all_33_pages": true,
+    "rendered_pages_visually_inspected": [4, 7, 17, 26],
+    "scope_summary_and_all_16_finding_boundaries_reconciled": true,
+    "pdf_overrides_ocr_for_exact_code_identifiers_and_scope": true
+  },
+  "summary": {"ok": true}
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.queue_update.v1",
+  "recorded_at": "2026-08-01T15:25:15Z",
+  "queue_path": "/home/experiments_base/OPD_base/docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md",
+  "queue_sha256_before": "0e0e23bbcc32088ecd8f214cd8ea011288ea71ee396bcdeb1ea2351e6a3c90c5",
+  "queue_sha256_after": "a0ed83f3c0bc3e4eac2028a4df79b3f77e25839f53f6154f6bd8366af059d712",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "selection_rank": 13,
+  "prior_state": "queued",
+  "new_state": "blocked",
+  "failure_code": "NO_ELIGIBLE_ASSET_LOSS_FINDINGS",
+  "candidate_created": false,
+  "queue_counts": {
+    "created": 7,
+    "blocked": 4,
+    "in_review": 0,
+    "next": 1,
+    "queued": 8,
+    "total": 20
+  },
+  "next_selection_rank": 6,
+  "next_report": "Benqi Governance",
+  "pre_update_gate_evidence_manifest_sha256": "a30e9d26f4a3dd8d70ae66d6a124096481916328db64130eeb9e86f5883efa77",
+  "processed_out_of_queue_order": true,
+  "stale_post_approval_instruction_applied": false,
+  "stale_post_approval_instruction_reason": "No EigenLayer candidate or approval exists; the live evidence-backed queue already records Burve as created and Benqi Governance as next."
+}

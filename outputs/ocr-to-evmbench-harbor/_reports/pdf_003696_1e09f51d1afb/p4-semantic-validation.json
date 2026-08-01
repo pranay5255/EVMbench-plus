@@ -1,0 +1,41 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v1",
+  "recorded_at": "2026-08-01T15:16:01Z",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "candidate_id": null,
+  "repository": "https://github.com/Layr-Labs/eigenda.git",
+  "vulnerable_commit": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+  "vulnerable_tree": "c3d52e52d6471ead466775bc80b40b35c62a4f08",
+  "review_contract": "Select only distinct, concrete direct or indirect loss-of-user-or-protocol-assets root causes supported by the PDF and exact vulnerable code.",
+  "report_summary": {
+    "finding_count": 16,
+    "critical": 0,
+    "high": 0,
+    "medium": 1,
+    "low": 7,
+    "informational": 8
+  },
+  "findings": [
+    {"id":"EDA-01","severity":"Medium","pages":[8,9],"category":"http_response_correctness","selected":false,"reason":"Incorrect content-type header key; body and state are unchanged, with no asset impact."},
+    {"id":"EDA-02","severity":"Low","pages":[10,11],"category":"cancellation_and_availability","selected":false,"reason":"Missing context cancellation can delay or leak retrieval work; no permanent asset lock is established."},
+    {"id":"EDA-03","severity":"Low","pages":[12,13],"category":"resource_exhaustion","selected":false,"reason":"Unclosed gRPC connections can exhaust descriptors and impair availability only."},
+    {"id":"EDA-04","severity":"Low","pages":[14,15],"category":"panic_availability","selected":false,"reason":"Nil cleanup after connection creation failure can crash the client; no asset movement or lock."},
+    {"id":"EDA-05","severity":"Low","pages":[16],"category":"memory_dos","selected":false,"reason":"Unbounded path input creates memory denial of service, not a demonstrated permanent asset lock."},
+    {"id":"EDA-06","severity":"Low","pages":[17,18],"category":"division_by_zero_availability","selected":false,"reason":"A zero reservation window can panic the client. The report and code do not demonstrate misbilling or unauthorized asset movement."},
+    {"id":"EDA-07","severity":"Low","pages":[19],"category":"future_enum_handling","selected":false,"reason":"Unknown chunk formats can produce error, nil data, or panic behavior; no invalid blob acceptance is shown."},
+    {"id":"EDA-08","severity":"Low","pages":[20,21],"category":"input_validation","selected":false,"reason":"Wrong-length commitment keys reach storage lookup/error handling; no cryptographic or authorization bypass."},
+    {"id":"EDA-09","severity":"Informational","pages":[22],"category":"error_classification","selected":false,"reason":"Empty revert data maps to INTERNAL_ERROR rather than INVALID_CERT, but never maps to SUCCESS."},
+    {"id":"EDA-10","severity":"Informational","pages":[23],"category":"panic_availability","selected":false,"reason":"Mismatched security-parameter array lengths can panic; no invalid certificate is accepted."},
+    {"id":"EDA-11","severity":"Informational","pages":[24],"category":"integer_downcast_hardening","selected":false,"reason":"Unchecked uint32-to-uint8 conversion may truncate representation, but Merkle and security checks remain and no bypassing certificate or asset loss is established."},
+    {"id":"EDA-12","severity":"Informational","pages":[25],"category":"logging_hygiene","selected":false,"reason":"A non-secret query value is printed; no asset authorization or value is exposed."},
+    {"id":"EDA-13","severity":"Informational","pages":[26],"category":"optional_admin_authentication","selected":false,"reason":"Explicitly enabled admin routes toggle only predefined dispersal backends; the report provides no concrete asset-loss sequence."},
+    {"id":"EDA-14","severity":"Informational","pages":[27],"category":"limit_consistency_out_of_scope","selected":false,"reason":"Unsupported quorum values encounter the on-chain limit rather than bypass it; cited assets are outside the strict scope."},
+    {"id":"EDA-15","severity":"Informational","pages":[28],"category":"rpc_failover_availability","selected":false,"reason":"RPC failure returns an internal error and requires retry/failover; verification does not fail open."},
+    {"id":"EDA-16","severity":"Informational","pages":[29,30,31],"category":"diagnostics_documentation_style","selected":false,"reason":"Five general comments have no direct security implications or asset-loss mechanism."}
+  ],
+  "selected_finding_ids": [],
+  "distinct_selected_root_cause_count": 0,
+  "result": "failed_zero_eligible_asset_loss_findings",
+  "failure_code": "NO_ELIGIBLE_ASSET_LOSS_FINDINGS",
+  "candidate_creation_allowed": false
+}

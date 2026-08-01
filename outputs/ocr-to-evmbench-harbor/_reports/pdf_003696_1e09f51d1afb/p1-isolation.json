@@ -1,0 +1,45 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "recorded_at": "2026-08-01T15:16:01Z",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "candidate_id": null,
+  "immutable_inputs": {
+    "ocr_jsonl": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003696_1e09f51d1afb.jsonl",
+      "sha256": "b6e57d6e6cf6a894a6f9d015170621861b3bc82091e0579efdf7cfa4d41b7686",
+      "size_bytes": 226604,
+      "modified": false
+    },
+    "source_pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/eigenlayer/Sigma_Prime_EigenLayer_DA_Secure_Integration_Security_Assessment_Report_v2_0.pdf",
+      "sha256": "2900c32ac36fb78949c11cc620c68efe453b411d021a2f09665c91dcb00b42fb",
+      "size_bytes": 461391,
+      "modified": false
+    }
+  },
+  "opd_base": {
+    "path": "/home/experiments_base/OPD_base",
+    "head_at_closeout": "da8db8fe852e912c668e115decdefa9ff5e66b69",
+    "tracked_and_untracked_dirty_entry_count_at_closeout_before_hand_authored_reports": 0,
+    "unrelated_changes_preserved": true
+  },
+  "canonical_evmbench": {
+    "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "dirty_before_work": true,
+    "dirty_entry_count_before_work": 94,
+    "modified_by_this_review": false
+  },
+  "isolated_vulnerable_checkout": {
+    "path": "/tmp/eigenda-review.uO3C5H/repo",
+    "origin": "https://github.com/Layr-Labs/eigenda.git",
+    "detached_head": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+    "root_tree": "c3d52e52d6471ead466775bc80b40b35c62a4f08",
+    "tracked_worktree_clean_after_baseline": true,
+    "recursive_submodules_initialized": true,
+    "purpose": "Exact audited vulnerable-snapshot review and source baseline only. It is not a canonical EVMBench checkout."
+  },
+  "candidate_directory_created": false,
+  "harbor_artifacts_created": false,
+  "model_or_agent_run_started": false
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "recorded_at": "2026-08-01T15:16:01Z",
+  "report_repository_url": "https://github.com/Layr-Labs/eigenda.git",
+  "report_commit_url": "https://github.com/Layr-Labs/eigenda/commit/066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+  "vulnerable_commit": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+  "vulnerable_tree": "c3d52e52d6471ead466775bc80b40b35c62a4f08",
+  "vulnerable_parent": "d5eec17de570d20d4e24ad53146ad8df4dce54cb",
+  "vulnerable_commit_date": "2025-09-08T21:16:16Z",
+  "vulnerable_commit_subject": "feat(payments): Implement reservation vault monitor (#1952)",
+  "fixed_commit": "794c356269b2e9559b6d43e4b21dee7c45eb354b",
+  "fixed_tree": "155b4043663e651b97f14bb9747c4cfb70aa7c9e",
+  "fixed_commit_date": "2025-10-29T01:04:52Z",
+  "vulnerable_checkout_available": true,
+  "checkout": {
+    "path": "/tmp/eigenda-review.uO3C5H/repo",
+    "detached_head_exact": true,
+    "tracked_worktree_clean_after_baseline": true,
+    "origin_matches_report": true,
+    "recursive_submodules_initialized": true,
+    "recursive_submodule_count": 22,
+    "recursive_submodule_status_sha256": "58f6a64ea7fca48f61c1d6915609b976eeb866e381fb48a1e0831ed299d70922"
+  },
+  "report_scope": {
+    "included": [
+      "api/clients/**",
+      "api/proxy/**",
+      "contracts/src/integrations/cert/**"
+    ],
+    "excluded": [
+      "contracts/src/integrations/cert/legacy/**",
+      "third-party libraries",
+      "dependencies"
+    ],
+    "tree_entries": {
+      "api/clients": "ac91c58f6eb7db5f522b5d93a4d230530343ebc3",
+      "api/proxy": "c145d5e6e2ad97cc4f6fef5e5501c00dfad0346b",
+      "contracts/src/integrations/cert": "3a33808e0388f589f9cc34f12520b5095080f370",
+      "contracts/src/integrations/cert/legacy": "3f0ac037837057d4b409346d52b6d59464f3d06d"
+    },
+    "tracked_file_counts": {
+      "api_clients_and_proxy": 230,
+      "cert_including_legacy": 15,
+      "legacy_excluded": 5
+    },
+    "exact_scope_validated": true,
+    "report_scope_conflicts": [
+      "EDA-06 also cites contracts/src/core/PaymentVault.sol, outside the strict path allowlist.",
+      "EDA-14 cites core/v2/types.go and contracts/src/core/EigenDARegistryCoordinatorStorage.sol, both outside the strict allowlist; its lower on-chain limit is inherited from an expressly excluded pinned dependency."
+    ]
+  },
+  "framework": {
+    "target_type": "mixed Go and Solidity/EVM",
+    "go_module": "github.com/Layr-Labs/eigenda",
+    "go_version": "1.24",
+    "go_toolchain": "go1.24.4",
+    "solidity_framework": "Foundry",
+    "solc_version": "0.8.12",
+    "contracts_package_manager": "yarn/npm-compatible dependency install",
+    "contracts_build_script": "yarn && forge build"
+  },
+  "embedded_report_artifacts": {
+    "tracked_pdf_or_jsonl_count": 5,
+    "in_scope_proxy_audit_pdf": "api/proxy/docs/audits/Sigma_Prime_EigenDA_Proxy_Security_Assessment_Report.pdf",
+    "in_scope_proxy_audit_pdf_sha256": "5d76d62aa477ff4f1256e8fc082b1f4cfca03c9c46527c6b8dfeabefe35337dc",
+    "matches_host_source_pdf": false,
+    "candidate_leakage_action": "Would require explicit exclusion if a candidate were ever created; no candidate was materialized."
+  },
+  "normalized_repository_url": "https://github.com/Layr-Labs/eigenda.git",
+  "task_group_key_resolved": true,
+  "failure_code": "NO_ELIGIBLE_ASSET_LOSS_FINDINGS",
+  "canonical_evmbench_modified": false
+}

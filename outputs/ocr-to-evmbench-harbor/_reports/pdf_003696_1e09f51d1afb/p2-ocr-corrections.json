@@ -1,0 +1,36 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "generated_at": "2026-08-01T15:16:01Z",
+  "policy": "The immutable OCR remains unchanged. Exact identifiers and normalized conclusions use the hash-verified PDF and audited Git tree.",
+  "corrections": [
+    {
+      "page_number": 2,
+      "field": "function_name",
+      "ocr": "RetrieveBothChunks",
+      "pdf": "RetrieveBlobChunks",
+      "material": true
+    },
+    {
+      "page_number": 4,
+      "field": "repository_owner",
+      "ocr": "Lyr-Labs/eigenda",
+      "pdf": "Layr-Labs/eigenda",
+      "material": true
+    },
+    {
+      "page_number": 26,
+      "field": "admin_endpoint_snippet",
+      "ocr": "materially corrupted route and identifier text",
+      "pdf_and_code": "/admin/eigenda-dispersal-backend GET/PUT guarded by IsAPIEnabled(AdminAPIType)",
+      "material": true
+    },
+    {
+      "page_number": 29,
+      "field": "code_and_comment_identifiers",
+      "ocr": "multiple malformed identifiers and operators",
+      "pdf_and_code": "normalized from the PDF and exact audited tree",
+      "material": true
+    }
+  ]
+}

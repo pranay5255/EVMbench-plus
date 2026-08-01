@@ -1,0 +1,31 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.gate_status.v1",
+  "recorded_at": "2026-08-01T15:16:01Z",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "candidate_id": null,
+  "review_bundle_digest": null,
+  "gates": {
+    "ocr_jsonl": "passed",
+    "source_pdf": "passed",
+    "pdf_ocr_side_by_side_review": "passed",
+    "repository_and_vulnerable_commit": "passed_exact_detached_checkout",
+    "audited_scope": "passed_with_reported_out_of_scope_finding_references_preserved_as_exclusions",
+    "framework": "passed_mixed_go_and_foundry",
+    "source_baseline": "passed_with_full_go_runtime_suite_environmentally_incomplete",
+    "finding_selection": "failed_zero_eligible_asset_loss_findings",
+    "candidate_materialization": "not_run_fail_closed",
+    "structural_validation": "not_run_no_candidate",
+    "candidate_semantic_validation": "not_run_no_candidate",
+    "candidate_source_build_validation": "not_run_no_candidate",
+    "leakage_validation": "not_run_no_candidate_or_image",
+    "human_approval": "not_reached",
+    "admission_and_harbor": "prohibited"
+  },
+  "result": "held_before_candidate",
+  "failure_code": "NO_ELIGIBLE_ASSET_LOSS_FINDINGS",
+  "canonical_evmbench_modified": false,
+  "canonical_queue_modified": true,
+  "canonical_queue_state": "blocked",
+  "harbor_artifacts_created": false,
+  "model_smoke_run": false
+}

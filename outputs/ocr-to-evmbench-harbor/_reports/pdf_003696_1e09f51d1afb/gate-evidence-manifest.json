@@ -1,0 +1,39 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.gate_evidence_manifest.v1",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "candidate_id": null,
+  "purpose": "Pre-candidate fail-closed evidence only; this is not an approval-bound candidate review bundle.",
+  "pre_queue_manifest_sha256": "a30e9d26f4a3dd8d70ae66d6a124096481916328db64130eeb9e86f5883efa77",
+  "immutable_inputs": [
+    {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003696_1e09f51d1afb.jsonl",
+      "sha256": "b6e57d6e6cf6a894a6f9d015170621861b3bc82091e0579efdf7cfa4d41b7686"
+    },
+    {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/eigenlayer/Sigma_Prime_EigenLayer_DA_Secure_Integration_Security_Assessment_Report_v2_0.pdf",
+      "sha256": "2900c32ac36fb78949c11cc620c68efe453b411d021a2f09665c91dcb00b42fb"
+    },
+    {
+      "path": "https://github.com/Layr-Labs/eigenda.git#066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+      "git_tree": "c3d52e52d6471ead466775bc80b40b35c62a4f08"
+    }
+  ],
+  "files": [
+    {"path":"gate-status.json","sha256":"c1fcf88755a586c8385d6b69435167659eef4ad8229ec1c2bb47dbb959c715c7"},
+    {"path":"p1-isolation.json","sha256":"3ea2c83ed572744efc697cdad4efbf8376f7e4496d0ff416c50ee3ffceecd081"},
+    {"path":"p1-ocr-validation.json","sha256":"0e2dfd8cc2ca13508c3f9fdc37652e807b9b861e7540de50396da7bec96b94a0"},
+    {"path":"p1-ocr-validation.txt","sha256":"50e6b722af1273e019c0dc269e6b4af02a0a1fec3b18e5803d3857e2cc6a0666"},
+    {"path":"p2-ocr-corrections.json","sha256":"4f1752168ffe0d374447857d51013e340c31d49695e0ae76ad5a79a86fd35690"},
+    {"path":"p2-pdf-ocr-review.md","sha256":"b29cb3aa445ca86ccd3e1e3a3f361e1a8345a73512a056244c54ec82fb76b137"},
+    {"path":"p2-pdf-validation.json","sha256":"fec464c172f87ce5da2c7094b161d97ed4f4d64329033682e47a0335567b8b11"},
+    {"path":"p3-missing-evidence-report.md","sha256":"db7781b0bd45f0ec1304ececcfc04b8d966ca469de3f90f4e6ae61faabfc77f7"},
+    {"path":"p3-repository-grounding.md","sha256":"1f9fe632b3935696b04d0a16d60a454d11af1d0898148dc0c7d471e407f392b1"},
+    {"path":"p3-repository-snapshot.json","sha256":"93a784b2a79e94c9751346ea600aed6c64d80501f023d62a5be397b030e5a2d0"},
+    {"path":"p3-task-group.json","sha256":"49389fe61e473b1c2dc41333a45de5bd9e280946814854065d40541db2e9b4ee"},
+    {"path":"p4-finding-dispositions.md","sha256":"c22484b56744330f04f029bed593791d5695462d918f2b9ddc814f1b5140bde7"},
+    {"path":"p4-semantic-validation.json","sha256":"0c8566f5712ef31b3acf16a5eb4cf84aa931270bb285ee01bd95927e352cde0a"},
+    {"path":"p5-build-baseline.json","sha256":"8d1a255091f6cbfdf78a8ea52bd4e2855283e9bec7fb8c494874f3e903894814"},
+    {"path":"p5-build-baseline.md","sha256":"19db48ca2a5cd14e9cca997ad87db21e6eb1e40fd01ff03a2f1b848a43e18edd"},
+    {"path":"p7-queue-update.json","sha256":"5b00d2b7f89f1ed94a475029220d8d6735d8c9e3f7bc366ffa3a6e230fab95c9"}
+  ]
+}

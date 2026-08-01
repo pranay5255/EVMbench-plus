@@ -1,0 +1,65 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.source_baseline.v1",
+  "recorded_at": "2026-08-01T15:16:01Z",
+  "repository": "https://github.com/Layr-Labs/eigenda.git",
+  "commit": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+  "tree": "c3d52e52d6471ead466775bc80b40b35c62a4f08",
+  "recursive_submodules_initialized": true,
+  "containers": {
+    "go": {
+      "reference": "golang:1.24.4-bookworm",
+      "repository_digest": "golang@sha256:10f549dc8489597aa7ed2b62008199bb96717f52a8e8434ea035d5b44368f8a6",
+      "image_id": "sha256:aca47f4a3f6a6dae115984e55d027898e8cf644fed7504413a57237b66d7af95"
+    },
+    "foundry": {
+      "local_reference": "evmbench/base:latest",
+      "repository_digest": "pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+      "image_id": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+      "forge_version": "1.3.6-v1.3.6",
+      "forge_commit": "d2415887096b10226d13af9240b5bef5e6b0d815"
+    }
+  },
+  "checks": [
+    {
+      "name": "solidity_dependency_install",
+      "command": "npm install --ignore-scripts --no-audit --no-fund",
+      "result": "passed",
+      "note": "Executed only in the disposable exact checkout; generated lockfile was removed after validation."
+    },
+    {
+      "name": "solidity_build",
+      "command": "forge build",
+      "result": "passed",
+      "details": "216 files compiled successfully with solc 0.8.12; lint notes only."
+    },
+    {
+      "name": "solidity_focused_tests",
+      "command": "forge test --match-contract 'PaymentVaultUnit|EigenDACertVerifierRouterUnit'",
+      "result": "passed",
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "go_audited_package_compile",
+      "command": "go test -mod=readonly -run '^$' ./api/clients/... ./api/proxy/server ./api/proxy/store/generated_key/eigenda/verify",
+      "result": "passed",
+      "details": "All listed package groups compiled."
+    },
+    {
+      "name": "go_focused_tests",
+      "command": "go test -mod=readonly -run 'Test(SetPaymentState|EigenDADispersalBackendEndpoints|Routing|ParseReturnEncodedPayloadQueryParam|CommitmentVerification|CommitmentWithTooLargeBlob)$' ./api/clients/v2 ./api/proxy/server ./api/proxy/store/generated_key/eigenda/verify",
+      "result": "passed",
+      "details": "All three selected package groups passed."
+    },
+    {
+      "name": "go_broad_runtime_attempt",
+      "command": "go test -mod=readonly ./api/clients/... ./api/proxy/server ./api/proxy/store/generated_key/eigenda/verify",
+      "result": "environmentally_incomplete",
+      "details": "Some client tests require writing SRS resources and api/clients/v2 testcontainers require a nested Docker daemon. Server and verifier subsets passed; this attempt is not represented as a full-suite pass."
+    }
+  ],
+  "source_baseline_result": "passed_with_full_go_runtime_suite_environmentally_incomplete",
+  "candidate_or_verifier_image_built": false,
+  "model_smoke_run": false
+}

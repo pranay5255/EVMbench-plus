@@ -1,0 +1,16 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.task_group.v1",
+  "recorded_at": "2026-08-01T15:16:01Z",
+  "pdf_id": "pdf_003696_1e09f51d1afb",
+  "candidate_id": null,
+  "normalized_repository_url": "https://github.com/Layr-Labs/eigenda.git",
+  "vulnerable_commit": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+  "audited_scope_key": "api/clients/**+api/proxy/**+contracts/src/integrations/cert/**-contracts/src/integrations/cert/legacy/**",
+  "task_mode": "detect",
+  "canonical_key_material": "https://github.com/Layr-Labs/eigenda.git@066f8ef4f93bb8ce196555904e89adf7ef50e57f|api/clients/**+api/proxy/**+contracts/src/integrations/cert/**-contracts/src/integrations/cert/legacy/**|detect",
+  "task_group_sha256": "85ab5a8c5f7b96b34fcf7468709809886a451d6d9b162aca12d3a739840f3d0b",
+  "existing_candidate_or_admission_collision": false,
+  "collision_scan_scope": "Existing non-report OCR-to-EVMBench task, metadata, config, gold, and markdown artifacts",
+  "admissible_task_group": false,
+  "admissibility_reason": "The grouping key is exact, but zero eligible loss-of-assets findings remain after code-grounded semantic review."
+}
