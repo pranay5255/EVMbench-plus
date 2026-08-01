@@ -1,0 +1,38 @@
+# Agent workspace metadata
+/.agents/
+/.codex/
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.venv/
+venv/
+
+# Local secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+.secrets/
+*.key
+*.pem
+
+# Coverage output
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Editor and operating-system metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
