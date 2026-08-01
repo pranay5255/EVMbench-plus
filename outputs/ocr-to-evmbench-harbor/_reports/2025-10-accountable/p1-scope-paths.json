@@ -1,0 +1,44 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.scope_paths.v1",
+  "phase": "P1",
+  "candidate_id": "2025-10-accountable",
+  "generated_at": "2026-07-27T11:15:14Z",
+  "status": "blocked_no_checkout",
+  "scope_source": {
+    "pdf_id": "pdf_003641_b981ced0a4d4",
+    "pdf_page": 6,
+    "source_pdf_sha256": "5ff212c2abd0c2a690914ee7ae5e48fc18cfe8cb8662afde44788bf024034e90"
+  },
+  "expected_path_count": 20,
+  "checked_path_count": 0,
+  "existing_path_count": 0,
+  "missing_path_count": null,
+  "paths": [
+    {"path": "src/access/AccessBase.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/access/Authorizable.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/access/Whitelistable.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/constants/Errors.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/factory/AsyncVaultFactory.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/factory/FixedTermFactory.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/factory/OpenTermFactory.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/factory/RewardsFactory.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/factory/StrategyFactoryBase.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/modules/FeeManager.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/modules/GlobalRegistry.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/rewards/Rewards.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/rewards/RewardsDistributorMerkle.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/rewards/RewardsDistributorStrategy.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/strategies/AccountableFixedTerm.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/strategies/AccountableOpenTerm.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/strategies/AccountableStrategy.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/vault/AccountableAsyncRedeemVault.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/vault/AccountableVault.sol", "exists_in_vulnerable_tree": null},
+    {"path": "src/vault/queue/AccountableWithdrawalQueue.sol", "exists_in_vulnerable_tree": null}
+  ],
+  "reason": "The exact vulnerable repository tree is unavailable, so no path may be marked verified.",
+  "summary": {
+    "ok": false,
+    "all_expected_paths_verified": false,
+    "p1_exit_criterion_met": false
+  }
+}

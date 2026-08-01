@@ -1,0 +1,30 @@
+P1 ADJACENT CHECKOUT PRESERVATION
+
+observed_at: 2026-07-27T11:15:14Z
+candidate_id: 2025-10-accountable
+status: preserved_read_only
+
+OPD_base:
+  path: /home/experiments_base/OPD_base
+  head: 27b0d592ce079a02b83b2091b0c1cf41795012b2
+  compatible_revision: 38957485d5cd63dc5d664c3c2993f60b308f5776
+  at_compatible_revision: false
+  dirty: true
+  action: inspected only; no clean, reset, stash, checkout, or overwrite
+
+forestOfAudits:
+  path: /home/experiments_base/forestOfAudits
+  head: cd54d9446a301fb62ee36538d0efa1e70d830ab4
+  compatible_revision: 1db91e36ec6f7c5975a8779b6ad930503c23e9d4
+  at_compatible_revision: false
+  dirty: true
+  nested_evmbench_is_separate_git_toplevel: false
+  action: inspected only; no clean, reset, stash, checkout, or overwrite
+
+Accountable candidate:
+  path: /home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-10-accountable
+  exists: false
+
+Required isolation:
+  Clean detached clones at the compatible revisions are mandatory before
+  candidate validation or EVMBench admission.

@@ -1,0 +1,169 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "status": "passed",
+  "validated_at": "2026-07-27",
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/cyfrin-audit-reports/reports/2025-10-16-cyfrin-accountable-v2.0.pdf",
+    "sha256_before": "5ff212c2abd0c2a690914ee7ae5e48fc18cfe8cb8662afde44788bf024034e90",
+    "sha256_after": "5ff212c2abd0c2a690914ee7ae5e48fc18cfe8cb8662afde44788bf024034e90",
+    "unchanged": true,
+    "size_bytes": 327470,
+    "pages": 37,
+    "page_size_points": [
+      612,
+      792
+    ],
+    "page_rotation": 0,
+    "encrypted": false,
+    "pdf_version": "1.7"
+  },
+  "ocr_jsonl": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003641_b981ced0a4d4.jsonl",
+    "sha256_before": "0c0ed8af4f1f0c90f62ea0b23e375c2aa2de2a7306941356a9dc0bf5ded28fcb",
+    "sha256_after": "0c0ed8af4f1f0c90f62ea0b23e375c2aa2de2a7306941356a9dc0bf5ded28fcb",
+    "unchanged": true,
+    "size_bytes": 312975,
+    "records": 37,
+    "page_numbers": "1..37",
+    "all_source_abs_paths_match_pdf": true,
+    "all_source_pdf_sha256_values_match_pdf": true
+  },
+  "text_extraction": {
+    "layout_text_size_bytes": 97677,
+    "form_feed_count": 37,
+    "physical_to_exported_page_mapping": "one_to_one",
+    "normalized_sequence_ratio_note": "Diagnostic only; layout, tables, syntax highlighting, and diff markup prevent this value from being a pass threshold.",
+    "normalized_sequence_ratios_pages_6_37": {
+      "6": 0.928783,
+      "7": 0.803150,
+      "8": 0.852817,
+      "9": 0.892115,
+      "10": 0.956793,
+      "11": 0.911868,
+      "12": 0.921650,
+      "13": 0.937326,
+      "14": 0.906709,
+      "15": 0.937794,
+      "16": 0.972805,
+      "17": 0.897936,
+      "18": 0.911659,
+      "19": 0.906683,
+      "20": 0.910428,
+      "21": 0.957830,
+      "22": 0.937200,
+      "23": 0.975318,
+      "24": 0.968294,
+      "25": 0.943769,
+      "26": 0.930536,
+      "27": 0.933226,
+      "28": 0.920697,
+      "29": 0.937184,
+      "30": 0.909650,
+      "31": 0.909982,
+      "32": 0.879325,
+      "33": 0.870911,
+      "34": 0.920259,
+      "35": 0.844258,
+      "36": 0.739642,
+      "37": 0.870594
+    }
+  },
+  "page_roles": [
+    {
+      "pages": "1",
+      "role": "report_identity_and_version"
+    },
+    {
+      "pages": "2-3",
+      "role": "contents_and_finding_index"
+    },
+    {
+      "pages": "4-5",
+      "role": "protocol_actors_components_and_centralization"
+    },
+    {
+      "pages": "6",
+      "role": "audited_scope_and_executive_summary"
+    },
+    {
+      "pages": "7-8",
+      "role": "repository_commits_counts_and_finding_summary"
+    },
+    {
+      "pages": "9-14",
+      "role": "critical_findings"
+    },
+    {
+      "pages": "15-17",
+      "role": "high_findings"
+    },
+    {
+      "pages": "18-29",
+      "role": "medium_findings"
+    },
+    {
+      "pages": "30-32",
+      "role": "low_findings"
+    },
+    {
+      "pages": "33-36",
+      "role": "informational_findings"
+    },
+    {
+      "pages": "37",
+      "role": "gas_optimization"
+    }
+  ],
+  "finding_page_ranges": [
+    {"report_id": "C-1", "pages": "9-10"},
+    {"report_id": "C-2", "pages": "10-11"},
+    {"report_id": "C-3", "pages": "12"},
+    {"report_id": "C-4", "pages": "12-14"},
+    {"report_id": "H-1", "pages": "15"},
+    {"report_id": "H-2", "pages": "15-17"},
+    {"report_id": "M-01", "pages": "18"},
+    {"report_id": "M-02", "pages": "19"},
+    {"report_id": "M-03", "pages": "19-20"},
+    {"report_id": "M-04", "pages": "20"},
+    {"report_id": "M-05", "pages": "21-22"},
+    {"report_id": "M-06", "pages": "22-25"},
+    {"report_id": "M-07", "pages": "25-26"},
+    {"report_id": "M-08", "pages": "26"},
+    {"report_id": "M-09", "pages": "26"},
+    {"report_id": "M-10", "pages": "26-27"},
+    {"report_id": "M-11", "pages": "27-28"},
+    {"report_id": "M-12", "pages": "28-29"},
+    {"report_id": "L-1", "pages": "30"},
+    {"report_id": "L-2", "pages": "30-31"},
+    {"report_id": "L-3", "pages": "31"},
+    {"report_id": "L-4", "pages": "31-32"},
+    {"report_id": "L-5", "pages": "32"},
+    {"report_id": "I-1", "pages": "33"},
+    {"report_id": "I-2", "pages": "33"},
+    {"report_id": "I-3", "pages": "33"},
+    {"report_id": "I-4", "pages": "33"},
+    {"report_id": "I-5", "pages": "34"},
+    {"report_id": "I-6", "pages": "34-35"},
+    {"report_id": "I-7", "pages": "35"},
+    {"report_id": "I-8", "pages": "35-36"},
+    {"report_id": "I-9", "pages": "36"},
+    {"report_id": "G-1", "pages": "37"}
+  ],
+  "checks": {
+    "physical_page_count_matches_ocr_source_page_count": true,
+    "exact_ordered_ocr_page_coverage": true,
+    "scope_and_summary_pages_reconciled": true,
+    "all_33_finding_boundaries_reconciled": true,
+    "severity_counts_reconciled": {
+      "critical": 4,
+      "high": 2,
+      "medium": 12,
+      "low": 5,
+      "informational": 9,
+      "gas": 1,
+      "total": 33
+    },
+    "ocr_corrections_recorded_separately": true,
+    "source_files_modified": false
+  }
+}

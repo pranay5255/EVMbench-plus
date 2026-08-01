@@ -1,0 +1,43 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "status": "reviewed",
+  "source_jsonl_modified": false,
+  "authority": "Rendered hash-verified PDF; code spelling remains subject to P3 verification at the exact vulnerable commit.",
+  "corrections": [
+    {
+      "page": 7,
+      "field": "vulnerable_commit_link",
+      "ocr_text": "fc43546fe671...",
+      "pdf_hyperlink_value": "fc43546fe67183235c0725f6214ee2b876b1aac6",
+      "use": "Repository snapshot claim only"
+    },
+    {
+      "page": 7,
+      "field": "fixed_commit_link",
+      "ocr_text": "1ae7e2fb74a3...",
+      "pdf_hyperlink_value": "1ae7e2fb74a3c0f543147e8793785b7f70d25070",
+      "use": "Separate post-audit corroboration only"
+    },
+    {
+      "page": 22,
+      "field": "finding_title",
+      "ocr_text": "AccountableFixedTerm::claimInterest irreducible due to share burn mechanics",
+      "pdf_text": "AccountableFixedTerm::claimInterest unpredictable due to share burn mechanics",
+      "use": "M-06 PDF title"
+    },
+    {
+      "page": 33,
+      "field": "finding_title",
+      "ocr_text": "Consider consistently use Owable2Step",
+      "pdf_text": "Consider consistently use Ownable2Step",
+      "use": "I-2 PDF title"
+    },
+    {
+      "page": 37,
+      "field": "identifier",
+      "ocr_text": "__calculateRequiredLiquidity",
+      "pdf_text": "_calculateRequiredLiquidity",
+      "use": "G-1 report identifier; exact source identifier must be checked in P3"
+    }
+  ]
+}

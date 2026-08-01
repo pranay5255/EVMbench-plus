@@ -1,0 +1,62 @@
+P1 AUTHENTICATED GITHUB API EVIDENCE
+
+observed_at: 2026-07-27T11:23:10Z
+last_rechecked_at: 2026-07-27T11:28:40Z
+candidate_id: 2025-10-accountable
+account: pranay5255
+authentication: valid
+observed_scopes: gist, read:org, repo, workflow
+secret_values_recorded: false
+
+gh api user
+  result: success
+  login: pranay5255
+  id: 22420966
+  type: User
+
+gh api repos/Accountable-Protocol/credit-vaults-internal
+  result: HTTP 404 Not Found
+
+gh api repos/Accountable-Protocol/audit-2025-09-accountable
+  result: HTTP 404 Not Found
+
+gh api "orgs/Accountable-Protocol/repos?type=all&per_page=100"
+  result: success
+  visible repositories:
+    Accountable-Protocol/safe-harbor
+    Accountable-Protocol/euler-price-oracle
+
+gh api --paginate user/repos
+  affiliation: owner,collaborator,organization_member
+  visibility: all
+  matching accountable/credit-vault/audit-2025-09 repositories: 0
+
+Authenticated GitHub search:
+  repository "audit-2025-09-accountable in:name fork:true": 0
+  code "AccountableFixedTerm in:file language:Solidity": 0
+  code "AccountableWithdrawalQueue in:file language:Solidity": 0
+  commit fc43546fe67183235c0725f6214ee2b876b1aac6: 0
+  commit 1ae7e2fb74a3c0f543147e8793785b7f70d25070: 0
+  commit 4e5eef57464d548ec09048eae27b6fcc1489a5c3: 0
+  commit fce6961c71269739ec35da60131eaf63e66e1726: 0
+  commit 8e53eba7340f223f86c9c392f50b8b2d885fdd39: 0
+
+Interpretation:
+  The active account and token are valid, but they cannot access either exact
+  repository and expose no matching repository through the account inventory.
+  GitHub HTTP 404 cannot distinguish a deleted repository from an unauthorized
+  private repository. P1 therefore remains fail-closed.
+
+Third gate audit:
+  Authentication remained valid; both repository endpoints again returned
+  HTTP 404; the visible account inventory again returned zero matching
+  repositories; and the local exact-commit object sweep again returned zero
+  matches.
+
+User-requested resumed gh-api audit:
+  gh api user succeeded for pranay5255.
+  Both exact repository endpoints returned HTTP 404.
+  Accountable-Protocol exposed only safe-harbor and euler-price-oracle.
+  The complete account-visible repository inventory had zero matching names.
+  Exact repository, Solidity code, vulnerable-commit, and fixed-commit
+  searches each returned zero results.

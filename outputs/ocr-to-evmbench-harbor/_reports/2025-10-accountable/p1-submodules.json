@@ -1,0 +1,17 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.submodules.v1",
+  "phase": "P1",
+  "candidate_id": "2025-10-accountable",
+  "generated_at": "2026-07-27T11:15:14Z",
+  "status": "not_evaluated_no_checkout",
+  "checkout_path": null,
+  "gitmodules_present": null,
+  "expected_submodule_count": null,
+  "initialized_submodule_count": 0,
+  "submodules": [],
+  "reason": "Submodule discovery and verification require the exact vulnerable Git checkout.",
+  "summary": {
+    "ok": false,
+    "p1_exit_criterion_met": false
+  }
+}

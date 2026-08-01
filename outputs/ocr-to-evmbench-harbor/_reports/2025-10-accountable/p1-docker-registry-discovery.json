@@ -1,0 +1,50 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.docker_registry_discovery.v1",
+  "candidate_id": "2025-10-accountable",
+  "observed_at": "2026-07-27T11:32:18Z",
+  "registry_repository": "docker.io/pranay5255/yudaii_evmbench",
+  "repository_status": "active",
+  "repository_visibility": "public",
+  "description": "Base images for EVMbench++",
+  "tag_count": 4,
+  "tags": [
+    {
+      "name": "2025-03-valantis-stex-verifier-p9",
+      "digest": "sha256:f6ad584c2fc82c2baea6ebc290da0074d1073f70bf131a968ccc967052622112",
+      "architecture": "amd64",
+      "os": "linux"
+    },
+    {
+      "name": "2025-03-valantis-stex",
+      "digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+      "architecture": "amd64",
+      "os": "linux"
+    },
+    {
+      "name": "2025-03-valantis-stex-agent-d21ecebec4083ea5-amd64",
+      "digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+      "architecture": "amd64",
+      "os": "linux"
+    },
+    {
+      "name": "base-fc20d776501708f9-amd64",
+      "digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+      "architecture": "amd64",
+      "os": "linux"
+    }
+  ],
+  "accountable_tag_matches": [],
+  "exact_snapshot_recovered": false,
+  "planned_use": {
+    "registry_repository": "pranay5255/yudaii_evmbench",
+    "agent_tag_pattern": "2025-10-accountable-agent-<content-id>-amd64",
+    "verifier_tag_pattern": "2025-10-accountable-verifier-<content-id>-amd64",
+    "harbor_reference_policy": "immutable_digest",
+    "push_gate": "Only after the exact vulnerable snapshot, candidate validation, C1 approval, isolated admission, image build, and leakage inspection pass."
+  },
+  "notes": [
+    "The existing tags are Valantis or shared-base images and do not contain an identified Accountable snapshot.",
+    "Selecting a registry is not candidate approval and does not satisfy the missing repository gate.",
+    "No image was built, tagged, or pushed during this discovery."
+  ]
+}

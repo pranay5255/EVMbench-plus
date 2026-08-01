@@ -1,0 +1,184 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.snapshot_source.v1",
+  "phase": "P1",
+  "candidate_id": "2025-10-accountable",
+  "generated_at": "2026-07-27T11:15:14Z",
+  "last_checked_at": "2026-07-27T11:28:40Z",
+  "status": "blocked_missing_exact_snapshot",
+  "authenticated_github_evidence": "outputs/ocr-to-evmbench-harbor/_reports/2025-10-accountable/p1-github-api-authenticated.txt",
+  "requested_snapshot": {
+    "vulnerable_commit": "fc43546fe67183235c0725f6214ee2b876b1aac6",
+    "pdf_primary_repository": "https://github.com/Accountable-Protocol/credit-vaults-internal",
+    "pdf_code_permalink_repository": "https://github.com/Accountable-Protocol/audit-2025-09-accountable",
+    "fixed_commit_kept_separate": "1ae7e2fb74a3c0f543147e8793785b7f70d25070"
+  },
+  "supplied_snapshot": null,
+  "discovery": [
+    {
+      "method": "github_repository_api",
+      "target": "Accountable-Protocol/credit-vaults-internal",
+      "result": "not_found_or_not_authorized_with_authenticated_repo_scope_token",
+      "http_status": 404
+    },
+    {
+      "method": "github_repository_api",
+      "target": "Accountable-Protocol/audit-2025-09-accountable",
+      "result": "not_found_or_not_authorized_with_authenticated_repo_scope_token",
+      "http_status": 404
+    },
+    {
+      "method": "github_org_repository_inventory",
+      "target": "Accountable-Protocol",
+      "result": "only_unrelated_public_repositories_visible",
+      "visible_repositories": [
+        "Accountable-Protocol/safe-harbor",
+        "Accountable-Protocol/euler-price-oracle"
+      ]
+    },
+    {
+      "method": "github_exact_commit_search",
+      "target": "fc43546fe67183235c0725f6214ee2b876b1aac6",
+      "result": "zero_results_with_authenticated_search"
+    },
+    {
+      "method": "github_related_fix_commit_search",
+      "target": [
+        "1ae7e2fb74a3c0f543147e8793785b7f70d25070",
+        "4e5eef57464d548ec09048eae27b6fcc1489a5c3",
+        "fce6961c71269739ec35da60131eaf63e66e1726",
+        "8e53eba7340f223f86c9c392f50b8b2d885fdd39"
+      ],
+      "result": "zero_results_with_authenticated_search",
+      "purpose": "Check whether a transferred or renamed repository can be recovered from a related commit indexed on its current default branch."
+    },
+    {
+      "method": "github_code_path_search",
+      "target": [
+        "AccountableWithdrawalQueue",
+        "AccountableFixedTerm"
+      ],
+      "result": "zero_results_with_authenticated_code_search"
+    },
+    {
+      "method": "github_repository_and_fork_search",
+      "target": [
+        "credit-vaults-internal",
+        "audit-2025-09-accountable"
+      ],
+      "result": "zero_results_with_authenticated_search"
+    },
+    {
+      "method": "github_authenticated_visible_repository_inventory",
+      "target": "pranay5255 owner/collaborator/organization-member repositories, visibility=all",
+      "result": "zero_matching_repositories",
+      "match_terms": [
+        "accountable",
+        "credit-vault",
+        "audit-2025-09"
+      ]
+    },
+    {
+      "method": "github_raw_and_codeload",
+      "target": "Accountable-Protocol/audit-2025-09-accountable@fc43546fe67183235c0725f6214ee2b876b1aac6",
+      "result": "not_found",
+      "http_status": 404
+    },
+    {
+      "method": "software_heritage_origin_lookup",
+      "target": [
+        "https://github.com/Accountable-Protocol/credit-vaults-internal",
+        "https://github.com/Accountable-Protocol/audit-2025-09-accountable"
+      ],
+      "result": "origins_not_found",
+      "http_status": 404
+    },
+    {
+      "method": "internet_archive_cdx",
+      "target": [
+        "github.com/Accountable-Protocol/credit-vaults-internal/*",
+        "github.com/Accountable-Protocol/audit-2025-09-accountable/*"
+      ],
+      "result": "zero_captures"
+    },
+    {
+      "method": "hugging_face_dataset_inventory",
+      "target": "Farseen0/scar-eval",
+      "result": "finding_pairs_only_no_git_snapshot",
+      "dataset_revision": "231e9397055c43f1b3ccd419640a51bc8c906ad8",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "data/train-00000-of-00001.parquet"
+      ]
+    },
+    {
+      "method": "docker_hub_search",
+      "target": [
+        "accountable-protocol",
+        "credit-vaults",
+        "accountable"
+      ],
+      "result": "no_relevant_protocol_snapshot_image"
+    },
+    {
+      "method": "local_filesystem_search",
+      "target_roots": [
+        "/home",
+        "/root",
+        "/tmp"
+      ],
+      "source_filenames": [
+        "AccountableWithdrawalQueue.sol",
+        "AccountableAsyncRedeemVault.sol",
+        "AccountableOpenTerm.sol",
+        "AccountableFixedTerm.sol"
+      ],
+      "result": "zero_source_files"
+    },
+    {
+      "method": "local_git_object_database_search",
+      "target_roots": [
+        "/home/experiments_base",
+        "/root",
+        "/tmp"
+      ],
+      "target_commit": "fc43546fe67183235c0725f6214ee2b876b1aac6",
+      "result": "zero_commit_object_matches",
+      "note": "Every discovered .git object database was queried with git cat-file; this includes packed and unreachable local objects."
+    }
+  ],
+  "github_authentication": {
+    "account": "pranay5255",
+    "active": true,
+    "status": "valid",
+    "verified_via": "gh api user",
+    "token_scopes_observed": [
+      "gist",
+      "read:org",
+      "repo",
+      "workflow"
+    ],
+    "private_repository_access_tested": true,
+    "requested_repositories_accessible": false,
+    "security_note": "No token value was recorded."
+  },
+  "accepted_recovery_routes": [
+    "Grant the authenticated GitHub account access to the original private repository, including any required organization SSO authorization.",
+    "Supply an official public mirror containing the exact commit object.",
+    "Supply a trusted Git bundle containing the exact commit and required submodules."
+  ],
+  "rejected_substitutes": [
+    "OCR text",
+    "PDF code snippets",
+    "Cyfrin markdown report content",
+    "finding-pair datasets",
+    "verified deployed source without exact Git-object proof",
+    "fixed or later source trees"
+  ],
+  "summary": {
+    "exact_snapshot_found": false,
+    "git_commit_object_available": false,
+    "canonical_repository_resolved": false,
+    "p1_exit_criterion_met": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.git_object_and_tree.v1",
+  "phase": "P1",
+  "candidate_id": "2025-10-accountable",
+  "generated_at": "2026-07-27T11:15:14Z",
+  "status": "blocked_no_checkout",
+  "expected_commit": "fc43546fe67183235c0725f6214ee2b876b1aac6",
+  "checkout_path": null,
+  "repository_url": null,
+  "detached_head": null,
+  "commit_object_verified": false,
+  "head_matches_expected_commit": false,
+  "parents": null,
+  "root_tree": null,
+  "worktree_clean": null,
+  "verification_commands_run": false,
+  "reason": "No repository or Git bundle containing the expected commit object was available.",
+  "summary": {
+    "ok": false,
+    "p1_exit_criterion_met": false
+  }
+}
