@@ -1,0 +1,29 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "recorded_at": "2026-08-01T10:24:46Z",
+  "pdf_id": "pdf_003203_1498fddcc34b",
+  "source_pdf": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/Initia-security-review_2025-06-17.pdf",
+  "expected_sha256": "67d7fbfadc21cbf638f7114989fde983e16c002e336bc34c6c8ef0f52c59adc0",
+  "actual_sha256": "67d7fbfadc21cbf638f7114989fde983e16c002e336bc34c6c8ef0f52c59adc0",
+  "hash_matches": true,
+  "expected_page_count": 38,
+  "physical_page_count": 38,
+  "page_count_matches": true,
+  "file_size_bytes": 2891865,
+  "ocr_validation_report": "p1-ocr-validation.json",
+  "ocr_validation_ok": true,
+  "ocr_record_count": 38,
+  "ocr_pages": "1..38",
+  "side_by_side_review": {
+    "identity_pages": [1, 4, 7],
+    "scope_pages": [6],
+    "summary_pages": [2, 3, 8, 9],
+    "finding_pages": "10..38",
+    "all_physical_pages_compared_to_same_numbered_ocr_records": true,
+    "visual_pdf_check": {
+      "page": 6,
+      "rendered_png": "/tmp/initia-scope-page6.png",
+      "rendered_png_sha256": "6ea6474589df4a73d117c5c850a3ed726c573f18ceee5f841b0494fee719da2b"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.gate_evidence_manifest.v1",
+  "pdf_id": "pdf_003203_1498fddcc34b",
+  "candidate_id": null,
+  "purpose": "Pre-candidate fail-closed evidence only; this is not an approval-bound candidate review bundle.",
+  "immutable_inputs": [
+    {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003203_1498fddcc34b.jsonl",
+      "sha256": "7c62a967214341879f7c01a853b12efa4b307410ef85efaa14e139ff1793c65c"
+    },
+    {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/Initia-security-review_2025-06-17.pdf",
+      "sha256": "67d7fbfadc21cbf638f7114989fde983e16c002e336bc34c6c8ef0f52c59adc0"
+    }
+  ],
+  "files": [
+    {
+      "path": "gate-status.json",
+      "sha256": "a4ad5afbdc2fb4e7255699d8f17aa8c9e5b7f19a5aae25a150a14e12c5574ee3"
+    },
+    {
+      "path": "p1-isolation.json",
+      "sha256": "0075aac7703bccda31769a4575a1230f1cafca30922c0d54aa00d775b23cc888"
+    },
+    {
+      "path": "p1-ocr-validation.json",
+      "sha256": "c82a281ee3c90fe076aa0ca773297c037bd3e830af3df2d10a6c6d6b3eee3612"
+    },
+    {
+      "path": "p1-ocr-validation.txt",
+      "sha256": "fec3d4758357fc8d55dbb1400fee7e7d545cc8ed038e7015b17d68f1809658e1"
+    },
+    {
+      "path": "p2-ocr-corrections.json",
+      "sha256": "0bd4d359e6254bd8fd0d8e7474ac11c9a7e2b31658dc7ffb1df78c489c9984ce"
+    },
+    {
+      "path": "p2-pdf-ocr-review.md",
+      "sha256": "82921bff7aebeb2acc401e1cc1a10a792b0847bad8f4848fc14404d6b1038aa4"
+    },
+    {
+      "path": "p2-pdf-validation.json",
+      "sha256": "6c84bea0874b89363b3bd74adbe5c03ebd218fd16ac64bac083f24b05bf661f5"
+    },
+    {
+      "path": "p3-missing-evidence-report.md",
+      "sha256": "278c784f001afb8e1467b59d04bc686ee750522199d08df50899c79c7d5c2721"
+    },
+    {
+      "path": "p3-repository-snapshot.json",
+      "sha256": "b33f4ca4db7375f8db07fd8423bb161c657d339b04c18a7d5203f4622ef1862b"
+    },
+    {
+      "path": "p4-finding-dispositions.md",
+      "sha256": "3a56c369e3b74927254fe211e371d5440d83fd1dc5ddd30a3025edc68b56c525"
+    }
+  ]
+}

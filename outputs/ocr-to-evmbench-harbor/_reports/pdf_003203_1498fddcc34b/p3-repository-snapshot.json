@@ -1,0 +1,72 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "recorded_at": "2026-08-01T10:24:46Z",
+  "report_repository_url": "https://github.com/initia-labs/widget",
+  "report_repository_visibility": {
+    "authenticated_git": "repository not found",
+    "authenticated_github_api": 404
+  },
+  "normalized_repository_url": "https://github.com/initia-labs/interwovenkit.git",
+  "normalization_basis": [
+    "GitHub resolves the exact report commit in initia-labs/interwovenkit",
+    "The commit SHA and tree are unchanged",
+    "The audited package remains named @initia/widget-react",
+    "npm metadata for @initia/widget-react points to initia-labs/interwovenkit"
+  ],
+  "vulnerable_commit": "c7c7fc23a5d65cafbd8d748711a607abf695052a",
+  "vulnerable_tree": "a342e9402d5e41debcd1de0851bf1c234420b251",
+  "vulnerable_commit_subject": "feat(bridge): exclude `amount_out` when reusing previous `route`",
+  "vulnerable_commit_date": "2025-06-17T20:26:39+09:00",
+  "fixed_review_commit": "de9d3602dc1afcb40312cadf12c6dbf1fb1a1169",
+  "fixed_review_tree": "c43d045c16ff2a6ab33d664ea97be707ec9015c4",
+  "checkout": {
+    "path": "/tmp/initia-review.jcgEr3/repo",
+    "detached_head": "c7c7fc23a5d65cafbd8d748711a607abf695052a",
+    "clean": true,
+    "submodules": [],
+    "direct_sha_fetch_required": true,
+    "reason": "The preserved audited commit is fetchable from the public successor but is no longer reachable from its current default branch."
+  },
+  "framework": {
+    "target_type": "React SDK / browser wallet and bridge frontend",
+    "languages": ["TypeScript", "TSX", "CSS"],
+    "package_manager": "pnpm",
+    "build": "pnpm --filter widget-react build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "package": "@initia/widget-react",
+    "bundler": "Vite",
+    "test_runner": "Vitest"
+  },
+  "tree_validation": {
+    "tracked_file_count": 294,
+    "solidity_file_count": 0,
+    "foundry_config_count": 0,
+    "hardhat_config_count": 0,
+    "truffle_config_count": 0,
+    "router_api_present": false,
+    "layerzero_snippet_present": false
+  },
+  "present_widget_scope": [
+    "packages/widget-react/src/components/",
+    "packages/widget-react/src/data/",
+    "packages/widget-react/src/lib/router/",
+    "packages/widget-react/src/pages/",
+    "packages/widget-react/src/public/",
+    "packages/widget-react/src/styles/",
+    "packages/widget-react/src/console.ts",
+    "packages/widget-react/src/index.ts"
+  ],
+  "unresolved_report_scope": [
+    "router-api/src/app/",
+    "router-api/src/shared/",
+    "router-api/src/types/",
+    "router-api/src/utils/",
+    "router-api/constants",
+    "router-api/env",
+    "router-api/main",
+    "router-api/sentry.ts"
+  ],
+  "evmbench_eligible": false,
+  "eligibility_failure": "The executable EVMBench detect contract requires a smart-contract audit target, while the exact snapshot is an off-chain React/TypeScript frontend with no smart contracts. The report's Router API code is also absent and has no exact repository/commit identity."
+}

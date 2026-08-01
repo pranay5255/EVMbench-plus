@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.gate_status.v1",
+  "recorded_at": "2026-08-01T10:24:46Z",
+  "pdf_id": "pdf_003203_1498fddcc34b",
+  "candidate_id": null,
+  "review_bundle_digest": null,
+  "gates": {
+    "ocr_jsonl": "passed",
+    "source_pdf": "passed",
+    "pdf_ocr_side_by_side_review": "passed",
+    "repository_and_vulnerable_commit": "passed_for_widget_only",
+    "audited_scope": "failed_multiple_components_with_missing_router_api_snapshot",
+    "framework": "failed_not_a_smart_contract_target",
+    "finding_selection": "failed_zero_evmbench_eligible_findings",
+    "candidate_materialization": "not_run_fail_closed",
+    "structural_validation": "not_run_no_candidate",
+    "semantic_validation": "not_run_no_candidate",
+    "build_validation": "not_run_no_candidate",
+    "leakage_validation": "not_run_no_candidate",
+    "human_approval": "not_reached",
+    "admission_and_harbor": "prohibited"
+  },
+  "result": "rejected_before_candidate",
+  "failure_code": "INCOMPATIBLE_EVMBENCH_TARGET_AND_UNRESOLVED_ROUTER_API_SNAPSHOT",
+  "canonical_evmbench_modified": false,
+  "harbor_artifacts_created": false,
+  "model_smoke_run": false
+}

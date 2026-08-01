@@ -1,0 +1,57 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "pdf_id": "pdf_003203_1498fddcc34b",
+  "source_ocr_modified": false,
+  "corrections": [
+    {
+      "page_number": 3,
+      "ocr": "Enc20Service",
+      "pdf": "Erc20Service"
+    },
+    {
+      "page_number": 10,
+      "ocr": "transfer.controlr.ets",
+      "pdf": "transfer.controller.ts"
+    },
+    {
+      "page_number": 12,
+      "ocr": "NfDetails.tsx / NfThumbnail",
+      "pdf": "NftDetails.tsx / NftThumbnail"
+    },
+    {
+      "page_number": 15,
+      "ocr": "packages/widget-great/src/data/signer.ts",
+      "pdf": "packages/widget-react/src/data/signer.ts"
+    },
+    {
+      "page_number": 22,
+      "ocr": "transformation and fund locks",
+      "pdf": "transaction and fund locks"
+    },
+    {
+      "page_number": 28,
+      "ocr": "12Denom / bridgedId",
+      "pdf": "l2Denom / bridgeId"
+    },
+    {
+      "page_number": 30,
+      "ocr": "skip_service.ts",
+      "pdf": "skip.service.ts"
+    },
+    {
+      "page_number": 31,
+      "ocr": "axis clients",
+      "pdf": "axios clients"
+    },
+    {
+      "page_number": 35,
+      "ocr": "packages/widget-resact",
+      "pdf": "packages/widget-react"
+    },
+    {
+      "page_number": 38,
+      "ocr": "BridgeAccount.txs",
+      "pdf": "BridgeAccount.tsx"
+    }
+  ]
+}

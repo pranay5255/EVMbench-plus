@@ -1,0 +1,48 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "recorded_at": "2026-08-01T10:24:46Z",
+  "selection": {
+    "selection_id": "evmbench-task-batch-v1",
+    "selection_rank": 9,
+    "pdf_id": "pdf_003203_1498fddcc34b",
+    "source_filename": "Initia-security-review_2025-06-17.pdf",
+    "requested_out_of_queue_order": true
+  },
+  "source_evidence": {
+    "ocr_jsonl": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003203_1498fddcc34b.jsonl",
+    "ocr_jsonl_sha256": "7c62a967214341879f7c01a853b12efa4b307410ef85efaa14e139ff1793c65c",
+    "source_pdf": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/Initia-security-review_2025-06-17.pdf",
+    "source_pdf_sha256": "67d7fbfadc21cbf638f7114989fde983e16c002e336bc34c6c8ef0f52c59adc0"
+  },
+  "opd_base": {
+    "caller_checkout": "/home/experiments_base/OPD_base",
+    "caller_head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "caller_checkout_dirty": true,
+    "caller_checkout_modified": false,
+    "compatible_validator_checkout": "/tmp/initia-opd.VSvRhR/repo",
+    "compatible_validator_head": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "compatible_validator_clean": true,
+    "validator_sha256": "6ab85456246bac79c4794ff69d5a2aab8aa0ade90e9ae1863d703730aa83fb5c"
+  },
+  "canonical_forest_of_audits": {
+    "path": "/home/experiments_base/forestOfAudits",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "dirty": true,
+    "modified": false
+  },
+  "audited_repository_review": {
+    "isolated_clone": "/tmp/initia-review.jcgEr3/repo",
+    "repository_url": "https://github.com/initia-labs/interwovenkit.git",
+    "head": "c7c7fc23a5d65cafbd8d748711a607abf695052a",
+    "tree": "a342e9402d5e41debcd1de0851bf1c234420b251",
+    "detached": true,
+    "clean": true,
+    "submodules": []
+  },
+  "mutations_excluded": {
+    "source_ocr": true,
+    "source_pdf": true,
+    "caller_checkout_existing_changes": true,
+    "canonical_forest_of_audits": true
+  }
+}

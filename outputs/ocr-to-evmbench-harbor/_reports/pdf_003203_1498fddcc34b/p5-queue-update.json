@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.queue_update.v1",
+  "recorded_at": "2026-08-01T10:32:01Z",
+  "queue_path": "/home/experiments_base/OPD_base/docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md",
+  "queue_sha256_before": "2907c7fcb6c97de9c7ac7d59abeee64be3750593df8f8bc70ac8e52794f2c911",
+  "queue_sha256_after": "146906fa29b9f8920b3332eee468194af6e716204869a47f31c0078df5ed5b5f",
+  "pdf_id": "pdf_003203_1498fddcc34b",
+  "selection_rank": 9,
+  "prior_state": "queued",
+  "new_state": "blocked",
+  "failure_code": "INCOMPATIBLE_EVMBENCH_TARGET_AND_UNRESOLVED_ROUTER_API_SNAPSHOT",
+  "candidate_created": false,
+  "queue_counts": {
+    "created": 5,
+    "blocked": 2,
+    "in_review": 0,
+    "next": 1,
+    "queued": 12,
+    "total": 20
+  },
+  "next_selection_rank": 6,
+  "next_report": "Benqi Governance",
+  "gate_evidence_manifest_sha256": "422364e755e568430376736a3fbde058582647c8b0b491ca9e6b391d146b61ee",
+  "stale_post_approval_instruction_applied": false,
+  "stale_post_approval_instruction_reason": "No Initia candidate or approval exists, and the live queue already records Burve as created with Benqi Governance next."
+}
