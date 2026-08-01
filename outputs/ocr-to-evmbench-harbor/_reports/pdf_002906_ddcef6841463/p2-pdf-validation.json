@@ -1,0 +1,34 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "phase": "P2",
+  "pdf_id": "pdf_002906_ddcef6841463",
+  "candidate_id": null,
+  "generated_at": "2026-08-01T11:00:39Z",
+  "status": "passed",
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/ufarm-may-25(Final).pdf",
+    "sha256": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281",
+    "size_bytes": 9154788,
+    "physical_page_count": 31,
+    "encrypted": false,
+    "readable": true
+  },
+  "ocr_cross_check": {
+    "pdf_id": "pdf_002906_ddcef6841463",
+    "record_count": 31,
+    "source_page_count": 31,
+    "recorded_source_pdf_sha256": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281",
+    "physical_hash_matches_ocr": true,
+    "physical_page_count_matches_ocr": true,
+    "source_path_is_unique_and_matches": true
+  },
+  "visual_review": {
+    "rendered_page_count": 31,
+    "render_directory": "/tmp/ufarm-review.wYF062/pdf-pages",
+    "scope_and_all_finding_boundaries_reviewed_against_pdf": true,
+    "pdf_overrides_ocr_for_exact_code_and_identifiers": true
+  },
+  "summary": {
+    "ok": true
+  }
+}

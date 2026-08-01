@@ -1,0 +1,499 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_validation.v1",
+  "validation_started_at": "2026-08-01T11:00:27.733514Z",
+  "validation_finished_at": "2026-08-01T11:00:27.737239Z",
+  "input": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002906_ddcef6841463.jsonl",
+    "size_bytes": 162876,
+    "sha256_before": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe",
+    "sha256_after": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe",
+    "unchanged": true
+  },
+  "contract": {
+    "ocr_schema_version": "evmbench_task_creation.ocr_page.v1",
+    "required_top_level_fields": [
+      "created_at",
+      "ocr_backend",
+      "ocr_endpoint_version",
+      "ocr_model",
+      "ocr_model_version",
+      "ocr_text",
+      "page_image_sha256",
+      "page_number",
+      "pdf_id",
+      "raw_record",
+      "raw_response_ref",
+      "schema_version",
+      "source_bucket",
+      "source_filename",
+      "source_page_count",
+      "source_pdf_sha256",
+      "source_rel_path",
+      "text_length"
+    ],
+    "duplicated_raw_fields": [
+      "created_at",
+      "ocr_backend",
+      "ocr_endpoint_version",
+      "ocr_model",
+      "ocr_model_version",
+      "ocr_text",
+      "page_image_sha256",
+      "page_number",
+      "pdf_id",
+      "raw_response_ref",
+      "source_bucket",
+      "source_filename",
+      "source_page_count",
+      "source_pdf_sha256",
+      "source_rel_path"
+    ],
+    "consistent_across_records_fields": [
+      "pdf_id",
+      "source_bucket",
+      "source_filename",
+      "source_rel_path",
+      "source_page_count",
+      "source_pdf_sha256"
+    ],
+    "ocr_text_page_marker": "<PAGE>"
+  },
+  "expectations": {
+    "sha256": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe",
+    "record_count": 31,
+    "pdf_id": "pdf_002906_ddcef6841463",
+    "source_page_count": 31,
+    "source_pdf_sha256": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281"
+  },
+  "summary": {
+    "ok": true,
+    "record_count": 31,
+    "valid_record_count": 31,
+    "invalid_record_count": 0,
+    "all_expected_page_records_passed": true,
+    "page_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "source_page_count": 31,
+    "pdf_id": "pdf_002906_ddcef6841463",
+    "source_pdf_sha256": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281",
+    "global_check_count": 18,
+    "failed_global_check_count": 0,
+    "failed_global_check_ids": [],
+    "record_check_count": 1333,
+    "failed_record_check_count": 0
+  },
+  "global_checks": [
+    {
+      "id": "file.nonempty",
+      "passed": true,
+      "details": {
+        "size_bytes": 162876,
+        "line_count": 31
+      }
+    },
+    {
+      "id": "file.every_line_json_object",
+      "passed": true,
+      "details": {
+        "parsed_object_count": 31,
+        "line_count": 31
+      }
+    },
+    {
+      "id": "file.expected_sha256",
+      "passed": true,
+      "details": {
+        "expected": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe",
+        "actual": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe"
+      }
+    },
+    {
+      "id": "file.expected_record_count",
+      "passed": true,
+      "details": {
+        "expected": 31,
+        "actual": 31
+      }
+    },
+    {
+      "id": "pages.all_positive_integers",
+      "passed": true,
+      "details": {
+        "page_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ]
+      }
+    },
+    {
+      "id": "pages.strictly_increasing",
+      "passed": true,
+      "details": {
+        "page_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ]
+      }
+    },
+    {
+      "id": "pages.unique",
+      "passed": true,
+      "details": {
+        "page_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ]
+      }
+    },
+    {
+      "id": "pages.complete_1_to_source_page_count",
+      "passed": true,
+      "details": {
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "actual": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ]
+      }
+    },
+    {
+      "id": "records.consistent.pdf_id",
+      "passed": true,
+      "details": {
+        "observed": [
+          {
+            "type": "str",
+            "value": "pdf_002906_ddcef6841463"
+          },
+          {
+            "type": "str",
+            "value": "pdf_002906_ddcef6841463"
+          },
+          {
+            "type": "str",
+            "value": "pdf_002906_ddcef6841463"
+          }
+        ],
+        "unique_typed_value_count": 1
+      }
+    },
+    {
+      "id": "records.consistent.source_bucket",
+      "passed": true,
+      "details": {
+        "observed": [
+          {
+            "type": "str",
+            "value": "other_audit_repo_pdfs"
+          },
+          {
+            "type": "str",
+            "value": "other_audit_repo_pdfs"
+          },
+          {
+            "type": "str",
+            "value": "other_audit_repo_pdfs"
+          }
+        ],
+        "unique_typed_value_count": 1
+      }
+    },
+    {
+      "id": "records.consistent.source_filename",
+      "passed": true,
+      "details": {
+        "observed": [
+          {
+            "type": "str",
+            "value": "ufarm-may-25(Final).pdf"
+          },
+          {
+            "type": "str",
+            "value": "ufarm-may-25(Final).pdf"
+          },
+          {
+            "type": "str",
+            "value": "ufarm-may-25(Final).pdf"
+          }
+        ],
+        "unique_typed_value_count": 1
+      }
+    },
+    {
+      "id": "records.consistent.source_rel_path",
+      "passed": true,
+      "details": {
+        "observed": [
+          {
+            "type": "str",
+            "value": "Smart-Contract-Review-Public-Reports/ufarm-may-25(Final).pdf"
+          },
+          {
+            "type": "str",
+            "value": "Smart-Contract-Review-Public-Reports/ufarm-may-25(Final).pdf"
+          },
+          {
+            "type": "str",
+            "value": "Smart-Contract-Review-Public-Reports/ufarm-may-25(Final).pdf"
+          }
+        ],
+        "unique_typed_value_count": 1
+      }
+    },
+    {
+      "id": "records.consistent.source_page_count",
+      "passed": true,
+      "details": {
+        "observed": [
+          {
+            "type": "int",
+            "value": 31
+          },
+          {
+            "type": "int",
+            "value": 31
+          },
+          {
+            "type": "int",
+            "value": 31
+          }
+        ],
+        "unique_typed_value_count": 1
+      }
+    },
+    {
+      "id": "records.consistent.source_pdf_sha256",
+      "passed": true,
+      "details": {
+        "observed": [
+          {
+            "type": "str",
+            "value": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281"
+          },
+          {
+            "type": "str",
+            "value": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281"
+          },
+          {
+            "type": "str",
+            "value": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281"
+          }
+        ],
+        "unique_typed_value_count": 1
+      }
+    },
+    {
+      "id": "records.exactly_one_pdf_id",
+      "passed": true,
+      "details": {
+        "expected": "pdf_002906_ddcef6841463",
+        "actual": [
+          "pdf_002906_ddcef6841463"
+        ]
+      }
+    },
+    {
+      "id": "records.expected_source_page_count",
+      "passed": true,
+      "details": {
+        "expected": 31
+      }
+    },
+    {
+      "id": "records.expected_source_pdf_sha256",
+      "passed": true,
+      "details": {
+        "expected": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281"
+      }
+    },
+    {
+      "id": "records.source_abs_path_unique",
+      "passed": true,
+      "details": {
+        "observed": [
+          "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/ufarm-may-25(Final).pdf"
+        ]
+      }
+    }
+  ],
+  "failures": []
+}

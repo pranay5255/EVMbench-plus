@@ -1,0 +1,81 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_discovery_refresh.v1",
+  "recorded_at": "2026-08-01T11:12:45Z",
+  "pdf_id": "pdf_002906_ddcef6841463",
+  "vulnerable_commit": "aa69668de34c7bcd32cb271d082a4398d127b145",
+  "immutable_inputs_reverified": {
+    "ocr_jsonl_sha256": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe",
+    "source_pdf_sha256": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281",
+    "unchanged": true
+  },
+  "probes": [
+    {
+      "surface": "GitLab original namespace",
+      "target": "https://gitlab.com/mobileup/ufarm-digital/ufarm-evm-contracts.git",
+      "result": "Git requires credentials; unauthenticated project API remains 404."
+    },
+    {
+      "surface": "GitLab probable renamed namespace",
+      "target": "https://gitlab.com/ufarm-digital/ufarm-evm-contracts.git",
+      "result": "Git requires credentials; public GitLab project search does not return the project."
+    },
+    {
+      "surface": "GitLab container registries",
+      "target": "both historical namespaces with tags aa69668d, latest, and stable",
+      "result": "All six manifest requests return access forbidden. The aa69668d tag follows the repository's historical CI short-SHA tagging rule but could not be inspected."
+    },
+    {
+      "surface": "Available GitLab credentials",
+      "target": "GITLAB_TOKEN, GLAB_TOKEN, CI_JOB_TOKEN, GITLAB_PRIVATE_TOKEN",
+      "result": "All are unset; no credential value was read or exposed."
+    },
+    {
+      "surface": "GitHub repository discovery",
+      "target": "repositories named ufarm-evm-contracts",
+      "result": "GitHub search returns exactly one non-fork repository, UFarmDigital/UFarm-EVM-Contracts. The audited SHA remains absent from its refs and object API."
+    },
+    {
+      "surface": "GitHub global commit index",
+      "target": "exact 40-character vulnerable SHA",
+      "result": "Zero matches."
+    },
+    {
+      "surface": "GitHub fork network",
+      "target": "all eight currently enumerated forks",
+      "result": "The Git commit-object API returns 404 for the vulnerable SHA in every fork."
+    },
+    {
+      "surface": "Software Heritage",
+      "target": "original GitLab origins and revision sha1_git",
+      "result": "Both origin forms and the exact revision return 404 Not Found."
+    },
+    {
+      "surface": "Internet Archive Wayback",
+      "target": "project prefix, exact tree URL, and exact source-archive URL",
+      "result": "No captures found."
+    },
+    {
+      "surface": "Common Crawl June and July 2025 indexes",
+      "target": "original GitLab project/tree prefix",
+      "result": "No captures found."
+    },
+    {
+      "surface": "Sourcegraph global code index",
+      "target": "exact vulnerable SHA including forked and archived repositories",
+      "result": "Zero matches; the service reported a shard match limit, so this result is corroborative rather than exhaustive."
+    },
+    {
+      "surface": "Public image and package registries",
+      "target": "Docker Hub, GitHub releases/tags, and npm public search",
+      "result": "No UFarm audited-source artifact or revision-bearing package was found."
+    },
+    {
+      "surface": "Local files and Docker images",
+      "target": "workspace, temporary files, Git bundles/packs, and locally cached image names",
+      "result": "No independent UFarm vulnerable snapshot or image was found; the only matching Git pack belongs to the isolated public fixed-repository clone."
+    }
+  ],
+  "result": "exact_audited_commit_still_unavailable",
+  "candidate_creation_permitted": false,
+  "required_external_state": "Authenticated read access to the original GitLab repository, or a content-addressed Git bundle that contains and verifies the exact commit and complete tree."
+}

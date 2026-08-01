@@ -1,0 +1,7 @@
+OCR JSONL validation: PASS
+input: /home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002906_ddcef6841463.jsonl
+sha256_before: 097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe
+sha256_after: 097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe
+records: 31
+global_checks: 18 (0 failed)
+record_checks: 1333 (0 failed)

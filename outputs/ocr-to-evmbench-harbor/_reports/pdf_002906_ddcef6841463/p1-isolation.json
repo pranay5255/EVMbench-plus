@@ -1,0 +1,40 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "recorded_at": "2026-08-01T11:00:39Z",
+  "pdf_id": "pdf_002906_ddcef6841463",
+  "candidate_id": null,
+  "immutable_inputs": {
+    "ocr_jsonl": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002906_ddcef6841463.jsonl",
+      "sha256": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe",
+      "modified": false
+    },
+    "source_pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/ufarm-may-25(Final).pdf",
+      "sha256": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281",
+      "modified": false
+    }
+  },
+  "opd_base": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "compatible_reference_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "dirty_before_work": true,
+    "unrelated_changes_preserved": true
+  },
+  "canonical_evmbench": {
+    "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "dirty_before_work": true,
+    "modified_by_this_review": false
+  },
+  "isolated_repository_discovery": {
+    "path": "/tmp/ufarm-review.wYF062/repo",
+    "origin": "https://github.com/UFarmDigital/UFarm-EVM-Contracts.git",
+    "clone_clean": true,
+    "purpose": "Public-mirror discovery only; it is not an audited vulnerable checkout because the report commit is absent."
+  },
+  "candidate_directory_created": false,
+  "harbor_artifacts_created": false,
+  "model_or_agent_run_started": false
+}

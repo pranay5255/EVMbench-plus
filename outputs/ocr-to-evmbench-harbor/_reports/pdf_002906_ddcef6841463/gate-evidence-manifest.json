@@ -1,0 +1,62 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.gate_evidence_manifest.v1",
+  "pdf_id": "pdf_002906_ddcef6841463",
+  "candidate_id": null,
+  "purpose": "Pre-candidate fail-closed evidence only; this is not an approval-bound candidate review bundle.",
+  "immutable_inputs": [
+    {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002906_ddcef6841463.jsonl",
+      "sha256": "097be42f6831d661eb05870845f9b67b31d75051af4982aa488bd41edfe482fe"
+    },
+    {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/ufarm-may-25(Final).pdf",
+      "sha256": "f83b7a21de368b71f90138371290b2f435f72888f840b274649f793e4cb4e281"
+    }
+  ],
+  "files": [
+    {
+      "path": "gate-status.json",
+      "sha256": "1b2cf47db7eef7af47e5ec7fdb99a5a0cbd1f4e7c0ad206023608cf67b567cb4"
+    },
+    {
+      "path": "p1-isolation.json",
+      "sha256": "c4b97174e0b171c27ac0fc1530accb5719c2ed9c584a69b8e0332c6a2dffbfe4"
+    },
+    {
+      "path": "p1-ocr-validation.json",
+      "sha256": "c513a649b5d4779f247988e1b664be43033a4999c1e91b232b1726cc7b9385d0"
+    },
+    {
+      "path": "p1-ocr-validation.txt",
+      "sha256": "985095cb66d095213f78ae7a655c6334eae67503d93342b7ae62b71ae38a9574"
+    },
+    {
+      "path": "p2-ocr-corrections.json",
+      "sha256": "466b38a1533a9d49ecdb5373fc9de6b3b4d3d39e236dbd968d3a76842b49273c"
+    },
+    {
+      "path": "p2-pdf-ocr-review.md",
+      "sha256": "36e87088002e6298d9c9af5cddab4faccaadfeb405c30c677a1f7a6a5d064b85"
+    },
+    {
+      "path": "p2-pdf-validation.json",
+      "sha256": "f36e232a92330a5230841057b6c3ef1ca0fa99a2eac9704d01dd2f2cea7871f7"
+    },
+    {
+      "path": "p3-missing-evidence-report.md",
+      "sha256": "9e918fc7a38b297eefbfbe1b9a9a854c7d0df3c5fe95aae6bd2d2b6e4cc47d57"
+    },
+    {
+      "path": "p3-repository-snapshot.json",
+      "sha256": "18573cdfd1cc3699508fe389299b3a71cbd03765c2f13c9a591fd2443a6cb407"
+    },
+    {
+      "path": "p3-discovery-refresh.json",
+      "sha256": "b48d9b2434c48cb68874d8bb4f274cfb942305e2a787392758b0dc01f1952ae1"
+    },
+    {
+      "path": "p4-finding-dispositions.md",
+      "sha256": "8f78528fca6ee35e8873a731a960644b02a82e4a53c03b314ff76f190eae0082"
+    }
+  ]
+}

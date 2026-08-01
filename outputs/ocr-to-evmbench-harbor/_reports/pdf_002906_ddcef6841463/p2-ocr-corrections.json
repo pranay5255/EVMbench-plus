@@ -1,0 +1,78 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "pdf_id": "pdf_002906_ddcef6841463",
+  "generated_at": "2026-08-01T11:00:39Z",
+  "policy": "The immutable OCR remains unchanged. These corrections come from the hash-verified PDF and are used only for normalized review conclusions.",
+  "corrections": [
+    {
+      "page_number": 5,
+      "field": "fixed_commit",
+      "ocr": "2fc58b7b81b82a2385ea8e275665311e3b8364f",
+      "pdf": "2fc58b7b810b82a2385ea8e275665311e3b8364f",
+      "material": true
+    },
+    {
+      "page_number": 9,
+      "field": "function_name",
+      "ocr": "queuCallback",
+      "pdf": "quexCallback",
+      "material": true
+    },
+    {
+      "page_number": 10,
+      "field": "function_name",
+      "ocr": "saveTransferToPool",
+      "pdf": "safeTransferToPool",
+      "material": true
+    },
+    {
+      "page_number": 12,
+      "field": "function_name",
+      "ocr": "sendQueueRequest",
+      "pdf": "sendQuexRequest",
+      "material": true
+    },
+    {
+      "page_number": 13,
+      "field": "mapping_name",
+      "ocr": "__usedDepositRequests",
+      "pdf": "__usedDepositsRequests",
+      "material": true
+    },
+    {
+      "page_number": 17,
+      "field": "source_location",
+      "ocr": "UFarmPool.sol#LL517",
+      "pdf": "UFarmPool.sol#L517",
+      "material": true
+    },
+    {
+      "page_number": 22,
+      "field": "local_variable",
+      "ocr": "constInTime",
+      "pdf": "costInTime",
+      "material": true
+    },
+    {
+      "page_number": 27,
+      "field": "function_name",
+      "ocr": "__processWithdrawal",
+      "pdf": "_processWithdrawal",
+      "material": true
+    },
+    {
+      "page_number": 27,
+      "field": "assignment_operator",
+      "ocr": "highWaterMark =",
+      "pdf": "highWaterMark -=",
+      "material": true
+    },
+    {
+      "page_number": 30,
+      "field": "source_path",
+      "ocr": "UnoswapV2Controller.so#L320",
+      "pdf": "UnoswapV2Controller.sol#L320",
+      "material": true
+    }
+  ]
+}

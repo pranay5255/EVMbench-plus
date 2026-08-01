@@ -1,0 +1,58 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "recorded_at": "2026-08-01T11:00:39Z",
+  "report_repository_url": "https://gitlab.com/mobileup/ufarm-digital/ufarm-evm-contracts.git",
+  "report_commit_url": "https://gitlab.com/mobileup/ufarm-digital/ufarm-evm-contracts/-/tree/aa69668de34c7bcd32cb271d082a4398d127b145",
+  "vulnerable_commit": "aa69668de34c7bcd32cb271d082a4398d127b145",
+  "vulnerable_checkout_available": false,
+  "report_scope": {
+    "description": "Updates to the UFarm core protocol code; the PDF supplies a repository-root tree link rather than an explicit path allowlist.",
+    "finding_path_prefixes": [
+      "contracts/main/contracts/pool/",
+      "contracts/main/contracts/fund/FundFactory.sol",
+      "contracts/main/contracts/controllers/UnoswapV2Controller.sol"
+    ],
+    "exact_scope_validated_in_vulnerable_tree": false
+  },
+  "original_repository_resolution": {
+    "git_ls_remote": "failed: interactive GitLab authentication required",
+    "unauthenticated_gitlab_api": "404 Project Not Found",
+    "unauthenticated_web": "redirects to GitLab sign-in",
+    "archive_discovery": "no matching Wayback CDX capture returned",
+    "result": "The report-linked project is private, removed, or unavailable to this environment."
+  },
+  "public_fixed_repository": {
+    "url": "https://github.com/UFarmDigital/UFarm-EVM-Contracts.git",
+    "isolated_clone": "/tmp/ufarm-review.wYF062/repo",
+    "clone_clean": true,
+    "fixed_commit": "2fc58b7b810b82a2385ea8e275665311e3b8364f",
+    "fixed_tree": "7fee9d000bf83dcbb0447d7d1e551fd943b7d171",
+    "fixed_commit_subject": "Production Release 1.5.1",
+    "fixed_commit_date": "2025-06-26T23:38:55+05:00",
+    "fixed_parent": "6a43b19f427b9140cd19e956925c2068ed918f0d",
+    "vulnerable_object_present": false,
+    "direct_sha_fetch": "failed: upload-pack not our ref",
+    "github_commit_api": "422 No commit found for SHA",
+    "github_global_commit_search_count": 0,
+    "official_forks_checked": 8,
+    "safe_substitute": false
+  },
+  "public_history_mismatch": {
+    "reason": "The fixed public release is a monolithic 71-file commit. Its public parent has no depositQueue implementation, while the fixed commit has the remediated QUEUE_LIMIT and forward-processing implementation. The missing audited intermediate tree cannot be derived or identified by an equivalent tree hash from the report.",
+    "fixed_parent_has_deposit_queue": false,
+    "fixed_commit_has_remediated_deposit_queue": true
+  },
+  "framework_from_fixed_repository_only": {
+    "target_type": "Solidity/EVM smart contracts",
+    "framework": "Hardhat",
+    "package_manager": "npm",
+    "language_support": ["Solidity", "TypeScript"],
+    "compile_command": "npm run compile",
+    "test_command": "npm test",
+    "corroborative_only": true
+  },
+  "normalized_repository_url": null,
+  "task_group_key_resolved": false,
+  "failure_code": "EXACT_AUDITED_COMMIT_UNAVAILABLE",
+  "canonical_evmbench_modified": false
+}
