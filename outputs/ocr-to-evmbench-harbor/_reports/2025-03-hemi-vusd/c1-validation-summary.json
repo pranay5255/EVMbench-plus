@@ -1,0 +1,59 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-03-hemi-vusd",
+  "status": "passed_with_disclosures",
+  "checks": {
+    "ocr_contract": "32 records; 19 global and 1664 record checks passed",
+    "pdf_checksum_and_page_count": "passed",
+    "single_task_group": "passed",
+    "repository_snapshot": "passed",
+    "finding_dispositions_complete": "10 of 10",
+    "byte_exact_ocr_slices": "4 of 4",
+    "candidate_consistency": "passed",
+    "pinned_structural_validator": "passed",
+    "current_structural_validator": "passed",
+    "pinned_validator_tests": "6 passed",
+    "current_validator_tests": "6 passed",
+    "hardhat_compile": "29 Solidity files compiled; 30 artifacts generated",
+    "agent_image_build": "passed",
+    "agent_image_offline_repository_check": "passed",
+    "agent_visible_leakage": "164357 files and 4476482419 bytes scanned; passed",
+    "candidate_manifest": "13 files; exact checksum stream passed"
+  },
+  "unresolved_semantic_or_reproducibility_concerns": [
+    {
+      "artifact": "upstream_hardhat_tests",
+      "concern": "The exact snapshot's locked gas reporter selects a Mocha reporter that is rejected before test discovery; no upstream test body executes."
+    },
+    {
+      "finding_id": "H-01",
+      "concern": "The asset-loss path requires a keeper or governor to submit a zero or economically unsafe output floor before an external sandwich can extract protocol yield."
+    },
+    {
+      "finding_id": "H-02",
+      "concern": "The public mint exploit requires the governor to whitelist a token whose transfer credits less than the requested amount."
+    },
+    {
+      "finding_id": "H-03",
+      "concern": "A safe nonzero minimum output bounds direct loss; the missing expiry gives block producers indefinite optionality within that accepted slippage interval."
+    },
+    {
+      "artifact": "agent_image",
+      "concern": "The reviewed image is local-only; registry publication is forbidden until exact human approval."
+    }
+  ],
+  "isolation": {
+    "canonical_evmbench_written": false,
+    "canonical_harbor_written": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "post_approval_smoke_policy": {
+    "requested_by_user": false,
+    "waived_by_user": true,
+    "waiver_text": "No need to run smoke test for final run.",
+    "effect": "After exact candidate approval, admission, image, Harbor generation, loader validation, and verifier packaging remain required; no agent/model smoke will be launched."
+  }
+}

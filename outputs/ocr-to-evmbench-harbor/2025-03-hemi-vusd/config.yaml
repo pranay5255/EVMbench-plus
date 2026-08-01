@@ -1,0 +1,15 @@
+id: 2025-03-hemi-vusd
+mode: detect
+framework: hardhat
+base_commit: 54f9f235f26df813152b3d3235e7f4373ce473b6
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Keeper-controlled zero output floor exposes protocol rewards to sandwiches"
+    award: 1.0
+  - id: "H-02"
+    title: "Nominal fee-on-transfer accounting mints unbacked VUSD"
+    award: 1.0
+  - id: "H-03"
+    title: "Always-current router deadlines give validators indefinite execution optionality"
+    award: 1.0

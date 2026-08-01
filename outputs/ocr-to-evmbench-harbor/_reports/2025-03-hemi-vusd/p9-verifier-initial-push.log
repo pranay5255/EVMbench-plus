@@ -1,0 +1,31 @@
+The push refers to repository [docker.io/pranay5255/yudaii_evmbench]
+223d373349d3: Preparing
+312f2fa277e7: Preparing
+f37c7bae928f: Preparing
+4d76e2f7986f: Preparing
+5f70bf18a086: Preparing
+7b286faf07a2: Preparing
+1e99b74adf9f: Preparing
+c3790b31a46e: Preparing
+fc95983f78e7: Preparing
+99ab40bce873: Preparing
+1d1e59fb3586: Preparing
+f2ec4de84f55: Preparing
+7b286faf07a2: Waiting
+1e99b74adf9f: Waiting
+c3790b31a46e: Waiting
+fc95983f78e7: Waiting
+99ab40bce873: Waiting
+1d1e59fb3586: Waiting
+f2ec4de84f55: Waiting
+5f70bf18a086: Layer already exists
+312f2fa277e7: Pushed
+f37c7bae928f: Pushed
+223d373349d3: Pushed
+fc95983f78e7: Layer already exists
+7b286faf07a2: Pushed
+99ab40bce873: Layer already exists
+1d1e59fb3586: Layer already exists
+f2ec4de84f55: Layer already exists
+1e99b74adf9f: Pushed
+c3790b31a46e: Pushed

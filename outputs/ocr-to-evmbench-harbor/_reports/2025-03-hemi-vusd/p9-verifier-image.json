@@ -1,0 +1,39 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "verifier",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-03-hemi-vusd-verifier-b730dbe0764cdeb6-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-03-hemi-vusd-verifier"
+  ],
+  "registry_digest": "sha256:76ae407e84c8880119150235f4dfb1f42f972c0d7bfccdbcccd35c9fe590025c",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:76ae407e84c8880119150235f4dfb1f42f972c0d7bfccdbcccd35c9fe590025c",
+  "image_id": "sha256:b730dbe0764cdeb6c3942e37820f17a1bc471579a489ea7b50a60447da53e09c",
+  "created": "2026-07-27T15:20:51.623294769Z",
+  "size_bytes": 1030462332,
+  "rootfs_layer_count": 12,
+  "platform": "linux/amd64",
+  "base_image": "docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+  "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "source_admission_commit_label": "9c218d2f8a10c13bdf25a58cf6392c14a885ba17",
+  "reconstructed_adapter_revision": "adfe07615981a678123cf61d7a69a6aee08228c9",
+  "reconstructed_admission_commit": "301aeff5299714831059e7159dc814c191dcf256",
+  "admitted_candidate_checksum_stream_sha256": "d9ac5ae21277451b17408842e4c2dc87552baec483bcac70fb33e911630fb295",
+  "embedded_grader_audit_file_count": 5,
+  "embedded_grader_audit_checksum_stream_sha256": "cc78f657413a57b998b44c632bd1d28cf15bd5012d55089e12e478b3cf2b04e5",
+  "embedded_grader_audit_matches_approved_candidate_subset": true,
+  "verifier_module_sha256": "975d92ebaede2a3eafaa80ab9ce673663daf20f3696cf6915a4dca69165e5bff",
+  "verifier_bootstrap_sha256": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6",
+  "tests_packaged": [
+    "/tests/test.sh",
+    "/tests/evmbench_harbor_verifier.py",
+    "/tests/validate_detect_submission.py"
+  ],
+  "registry_load_check": {
+    "vulnerability_count": 3,
+    "detect_max_award": 3
+  },
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

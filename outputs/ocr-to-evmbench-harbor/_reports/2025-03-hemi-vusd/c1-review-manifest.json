@@ -1,0 +1,230 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-03-hemi-vusd",
+  "generated_at": "2026-07-27T15:07:50Z",
+  "task_group_key": "hemilabs/vusd-stablecoin@54f9f235f26df813152b3d3235e7f4373ce473b6|contracts/|detect",
+  "task_group_key_sha256": "9fcaf3e387f95a3c87e9c02ef235b20d88cfa2d6d7946a7157e47f8242832970",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-hemi-vusd",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false,
+    "approved_by_present": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "reviewer_identity": {
+    "supplied": false,
+    "must_be_supplied_with_exact_approval": true
+  },
+  "source_evidence": {
+    "ocr": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002969_2a929a776caf.jsonl",
+      "sha256": "a79ba90ae9ed42bf8d7e620bbb06ea36799f13b5f33dcefc36b477614ff21182",
+      "record_count": 32,
+      "schema_version": "evmbench_task_creation.ocr_page.v1"
+    },
+    "pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf",
+      "sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3",
+      "page_count": 32
+    }
+  },
+  "repository": {
+    "url": "https://github.com/hemilabs/vusd-stablecoin.git",
+    "vulnerable_commit": "54f9f235f26df813152b3d3235e7f4373ce473b6",
+    "root_tree": "f0214c72689158da00ff7d14be3d87008db4c57b",
+    "audited_scope": [
+      "contracts/"
+    ],
+    "mode": "detect",
+    "recursive_submodule_revision_count": 0,
+    "post_audit_fix_commit_kept_separate": "f3dec329d42c6e6b81ea61c3f4f4dd3340e976e2"
+  },
+  "findings": [
+    {
+      "gold_id": "H-01",
+      "report_id": "Bug ID #1",
+      "pages": [
+        16
+      ],
+      "award": 1,
+      "finding_sha256": "93d6027cfaf610d49f4133b889a5038f9bd7f5c4e0df3bfeaa7397792bb163e0"
+    },
+    {
+      "gold_id": "H-02",
+      "report_id": "Bug ID #2",
+      "pages": [
+        17
+      ],
+      "award": 1,
+      "finding_sha256": "6a32d2e230f46dd07e2d95e3815deb752dde3cd2056907f4627f3b99e3e036f3"
+    },
+    {
+      "gold_id": "H-03",
+      "report_id": "Bug ID #3",
+      "pages": [
+        18
+      ],
+      "award": 1,
+      "finding_sha256": "e64660b0ea5745583777cc95563b3706228d6dcd3e04954777d4ce5f4a0548d0"
+    }
+  ],
+  "max_score": 3,
+  "reviewed_candidate": {
+    "file_manifest": "c1-generated-file-manifest.json",
+    "file_manifest_sha256": "70bcad72968b9a18d77b95786158bc27fb30494d64dbf9f624f5cb6fc760ddc5",
+    "candidate_file_count": 13,
+    "candidate_checksum_stream_sha256": "9c0f3e33b7c6a4bd2b2808ced003a0bebff485ea24cdd61db6e2a4affa9c2656",
+    "dockerfile_sha256": "4994afbab77e2de5ae46dbcd5d79cd1e7785fd52752e0ac7b43b9d2ba3e537b2",
+    "gold_audit_sha256": "3ec4f88fcb1590a26dfff552a9400105fe44d9ca4f4c3d2e998a6f0afe808f1b",
+    "provenance_sha256": "ef809f15879cf09900a336625c5b9208cb3ea8331525b846c11737d1dac8ced2",
+    "review_status_sha256": "8d1479dd1927cc414accc7e7fec3b18664e51c56d9a2a6e16429baa3bad9baee"
+  },
+  "validation_reports": [
+    {
+      "path": "p1-isolation.json",
+      "sha256": "238e4d2f704f2d8f6e164eea5373c4d8f3e1a7e773b6c437dd544d5ed09342a7",
+      "status": "passed"
+    },
+    {
+      "path": "p1-ocr-validation.json",
+      "sha256": "973eb9734a630534dfbb61a042d1c991668714fa722143571dedfb36cf20d48d",
+      "status": "passed"
+    },
+    {
+      "path": "p1-ocr-validation.txt",
+      "sha256": "4ae33b76de17beb2ade28889c1a47de37c45ea8fb1d8b9bc34586ba76133f4ec",
+      "status": "passed"
+    },
+    {
+      "path": "p2-pdf-review.md",
+      "sha256": "95e6964f3ae07de482297b54e3aebdd2b86165e496d4e7739dfbfefd6c3efa51",
+      "status": "passed"
+    },
+    {
+      "path": "p3-repository-grounding.md",
+      "sha256": "0c91b7eaa0c660bb37547fa08e2e50e439934ea7aa5246afb7ec38bfd3f34f3e",
+      "status": "passed"
+    },
+    {
+      "path": "p4-finding-dispositions.md",
+      "sha256": "79a9c8973a892d163b317dee196f47ffccded4970de2334f382f692cf7f48716",
+      "status": "passed"
+    },
+    {
+      "path": "p5-build-baseline.md",
+      "sha256": "8b201fc9ce7798eb326cacd3e06c815c327f72ff1dbfd050b603c0a92eaee48e",
+      "status": "passed_with_disclosure"
+    },
+    {
+      "path": "p5-byte-exact-slices.json",
+      "sha256": "725caf6de4a30e3ef038426fdf7bf157efd2a7baca2a7d8b0d366bf225d042dc",
+      "status": "passed"
+    },
+    {
+      "path": "p6-agent-image.json",
+      "sha256": "9fc284a48a071898083b9ff1480100a852f0bdcff1170ca1943768bab9c569dc",
+      "status": "passed"
+    },
+    {
+      "path": "p6-agent-image-leakage.md",
+      "sha256": "4342b389ecfc5dbb25bd09dba54fdaf54302053ba160234143242a2fae630543",
+      "status": "passed"
+    },
+    {
+      "path": "p6-pinned-structural-validator.json",
+      "sha256": "5d62e6655cf31800f161b401876ba89fc702c27316d6f6a09f4c52dae6838167",
+      "status": "passed"
+    },
+    {
+      "path": "p6-current-structural-validator.json",
+      "sha256": "3109044af9b48049818d1ef18a129307df77cbf0683d6c58aa24b9375d51d9a6",
+      "status": "passed"
+    },
+    {
+      "path": "p6-pinned-validator-tests.txt",
+      "sha256": "fd14cdc4324f99c94e1c223a45b4157339986c37c6aa682625e9d58908d92420",
+      "status": "6 passed"
+    },
+    {
+      "path": "p6-validator-tests.txt",
+      "sha256": "198661464356254ba2730329275879f7aae3f650d1971b2d0fa5dd1d3231c38e",
+      "status": "6 passed with read-only cache warning"
+    },
+    {
+      "path": "c1-generated-file-manifest.json",
+      "sha256": "70bcad72968b9a18d77b95786158bc27fb30494d64dbf9f624f5cb6fc760ddc5",
+      "status": "passed"
+    },
+    {
+      "path": "c1-validation-summary.json",
+      "sha256": "2554ca53007de9185cac8dfd32ac226359c0b565951b090d2de41276181fc96c",
+      "status": "passed_with_disclosures"
+    }
+  ],
+  "base_image": {
+    "manifest_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0"
+  },
+  "agent_image": {
+    "local_tag": "evmbench-hemi-vusd:c1",
+    "config_digest": "sha256:6d5805038ba1478c51900f86a7714fa5db7c972da2333fd640b3aedd088c351d",
+    "platform": "linux/amd64",
+    "published_to_registry": false
+  },
+  "validation_summary": {
+    "structural": "passed",
+    "semantic": "passed_with_disclosures",
+    "repository": "passed",
+    "docker_build": "passed",
+    "hardhat_compile": "29 Solidity files; 30 artifacts",
+    "hardhat_tests": "not executed due to upstream reporter configuration failure before discovery",
+    "runtime_network": "none",
+    "full_filesystem_leakage": "passed",
+    "pdf_files_in_agent_image": 0,
+    "agent_repository_jsonl_files": 0,
+    "unresolved_semantic_or_reproducibility_concerns": [
+      {
+        "artifact": "upstream_hardhat_tests",
+        "concern": "The locked reporter configuration fails before test discovery."
+      },
+      {
+        "finding_id": "H-01",
+        "concern": "Requires a privileged caller to submit an unsafe output floor."
+      },
+      {
+        "finding_id": "H-02",
+        "concern": "Requires a fee-on-transfer token to be whitelisted."
+      },
+      {
+        "finding_id": "H-03",
+        "concern": "A safe minimum output bounds the direct loss from delayed inclusion."
+      },
+      {
+        "artifact": "agent_image",
+        "concern": "The reviewed image is local-only by design; publication is forbidden until approval."
+      }
+    ]
+  },
+  "isolation": {
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "adjacent_dirty_checkouts_preserved": true,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "smoke_waiver": {
+    "present": true,
+    "text": "No need to run smoke test for final run.",
+    "post_approval_agent_or_model_run_required": false
+  },
+  "approval_requirement": {
+    "required_state_transition": "approved_for_admission",
+    "must_quote_exact_candidate_id": true,
+    "must_quote_review_manifest_sha256": true,
+    "must_supply_reviewer_identity": true,
+    "approval_not_contained_in_this_manifest": true
+  }
+}

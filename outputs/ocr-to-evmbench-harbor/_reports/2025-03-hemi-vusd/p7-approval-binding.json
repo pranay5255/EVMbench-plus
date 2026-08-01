@@ -1,0 +1,55 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approval_binding.v1",
+  "phase": "P7",
+  "candidate_id": "2025-03-hemi-vusd",
+  "generated_at": "2026-07-27T15:11:01Z",
+  "status": "passed",
+  "approval": {
+    "candidate_id": "2025-03-hemi-vusd",
+    "review_checkpoint": "C1",
+    "review_manifest": "c1-review-manifest.json",
+    "review_manifest_sha256": "0d7d24df7170e763f532343a98227c3abdf86600036ce94240ca91bc26913c42",
+    "reviewer_identity": "github.com/pranay5255",
+    "explicit_admission_approval": true,
+    "received_at": "2026-07-27T15:11:01Z"
+  },
+  "pre_binding_integrity": {
+    "review_manifest_digest_matched": true,
+    "candidate_checksum_stream_sha256": "9c0f3e33b7c6a4bd2b2808ced003a0bebff485ea24cdd61db6e2a4affa9c2656",
+    "candidate_checksum_stream_matched_review_manifest": true,
+    "source_ocr_sha256_matched": true,
+    "source_pdf_sha256_matched": true
+  },
+  "binding_mutations": {
+    "expected": [
+      "provenance.json",
+      "review_status.yaml"
+    ],
+    "actual": [
+      "provenance.json",
+      "review_status.yaml"
+    ],
+    "unexpected": []
+  },
+  "post_binding_state": {
+    "state": "approved_for_admission",
+    "human_approved": true,
+    "approved_by": "github.com/pranay5255",
+    "review_status_sha256": "a32f1288d1faa71af8d850f66e2135b90bfcc0f42f867e0da1bbc61fd15e9ab6",
+    "provenance_sha256": "e3ee7c8234edeb9014bdb0b2bb114dab3c6766878e2bddc495063ec99060abf9",
+    "approved_candidate_checksum_stream_sha256": "d9ac5ae21277451b17408842e4c2dc87552baec483bcac70fb33e911630fb295"
+  },
+  "validator": {
+    "require_approved_used": true,
+    "exit_code": 0,
+    "candidate_count": 1,
+    "finding_count": 3,
+    "errors": [],
+    "warnings": []
+  },
+  "summary": {
+    "ok": true,
+    "admission_authorized": true,
+    "candidate_admitted": false
+  }
+}

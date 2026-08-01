@@ -1,0 +1,45 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "candidate_id": "2025-03-hemi-vusd",
+  "source": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002969_2a929a776caf.jsonl",
+    "sha256_before": "a79ba90ae9ed42bf8d7e620bbb06ea36799f13b5f33dcefc36b477614ff21182",
+    "sha256_after": "a79ba90ae9ed42bf8d7e620bbb06ea36799f13b5f33dcefc36b477614ff21182",
+    "unchanged": true
+  },
+  "slices": [
+    {
+      "role": "scope",
+      "page_number": 6,
+      "source_line_number": 6,
+      "artifact": "ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl",
+      "sha256": "aecf0756a0532b39b7be64d3a15a5a0611035a023d2e1e471b4eedbc0fae646b",
+      "byte_exact": true
+    },
+    {
+      "finding_id": "H-01",
+      "page_number": 16,
+      "source_line_number": 16,
+      "artifact": "ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl",
+      "sha256": "9fce6dd7697b6437cf14d8a9fa75b91f212e5e5e098ac1ff818f3560f0e6a98e",
+      "byte_exact": true
+    },
+    {
+      "finding_id": "H-02",
+      "page_number": 17,
+      "source_line_number": 17,
+      "artifact": "ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl",
+      "sha256": "8e29eef850f49c16f050b57f70f2d63400b8cd5b1847b1057846a5fcdd4ef4f7",
+      "byte_exact": true
+    },
+    {
+      "finding_id": "H-03",
+      "page_number": 18,
+      "source_line_number": 18,
+      "artifact": "ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl",
+      "sha256": "a14638db2381951ed6dd3bcfe56913fa81d04f60eb64740d6f36cc55658a0404",
+      "byte_exact": true
+    }
+  ],
+  "all_slices_byte_exact": true
+}

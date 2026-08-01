@@ -1,0 +1,48 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image_scan.v1",
+  "candidate_id": "2025-03-hemi-vusd",
+  "image": {
+    "local_tag": "evmbench-hemi-vusd:c1",
+    "config_digest": "sha256:6d5805038ba1478c51900f86a7714fa5db7c972da2333fd640b3aedd088c351d",
+    "created_at": "2026-07-27T15:01:41.125332346Z",
+    "platform": "linux/amd64",
+    "size_bytes": 4480508923,
+    "rootfs_layer_count": 20,
+    "working_dir": "/home/agent",
+    "published_to_registry": false
+  },
+  "build_context": {
+    "dockerfile_bytes": 1316,
+    "dockerignore_bytes": 30,
+    "allowed_files": [
+      "Dockerfile",
+      ".dockerignore"
+    ],
+    "authoring_evidence_sent": false
+  },
+  "repository": {
+    "head": "54f9f235f26df813152b3d3235e7f4373ce473b6",
+    "commit_count": 1,
+    "status_short": "",
+    "recursive_submodules": [],
+    "tracked_pdf_or_jsonl": []
+  },
+  "compile_artifacts": {
+    "treasury": true,
+    "minter": true,
+    "redeemer": true
+  },
+  "offline_validation": {
+    "runtime_network": "none",
+    "regular_files_scanned": 164357,
+    "bytes_scanned": 4476482419,
+    "pdf_paths": [],
+    "agent_repository_jsonl_paths": [],
+    "forbidden_filename_paths": [],
+    "forbidden_marker_hits": [],
+    "unrelated_base_image_jsonl_count": 12,
+    "unrelated_base_image_jsonl_scope": "/usr/local/lib/python3.12/dist-packages/litellm/proxy/guardrails/guardrail_hooks/litellm_content_filter/guardrail_benchmarks/evals/",
+    "passed": true
+  },
+  "passed": true
+}

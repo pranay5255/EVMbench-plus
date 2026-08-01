@@ -1,0 +1,16 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_isolation.v1",
+  "phase": "P9",
+  "status": "passed",
+  "agent_image_id": "sha256:6d5805038ba1478c51900f86a7714fa5db7c972da2333fd640b3aedd088c351d",
+  "verifier_image_id": "sha256:b730dbe0764cdeb6c3942e37820f17a1bc471579a489ea7b50a60447da53e09c",
+  "separate_image_ids": true,
+  "agent_docker_socket_absent": true,
+  "agent_contains_verifier_digest": false,
+  "agent_contains_verifier_gold": false,
+  "verifier_docker_socket_absent": true,
+  "credentials_embedded_in_agent_environment": false,
+  "credentials_embedded_in_verifier_environment": false,
+  "credentials_injected_only_at_verifier_runtime": true,
+  "verifier_tests_packaged": true
+}

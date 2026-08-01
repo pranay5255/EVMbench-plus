@@ -1,0 +1,264 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-03-hemi-vusd",
+  "materialized_at": "2026-07-27T14:55:33Z",
+  "phase": "P7",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1",
+    "candidate_id": "2025-03-hemi-vusd",
+    "review_bundle_digest": "0d7d24df7170e763f532343a98227c3abdf86600036ce94240ca91bc26913c42",
+    "approved_at": "2026-07-27T15:11:01Z",
+    "reviewer_identity": "github.com/pranay5255",
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "hemilabs/vusd-stablecoin@54f9f235f26df813152b3d3235e7f4373ce473b6|contracts/|detect",
+    "task_group_key_sha256": "9fcaf3e387f95a3c87e9c02ef235b20d88cfa2d6d7946a7157e47f8242832970",
+    "repository_slug": "hemilabs/vusd-stablecoin",
+    "vulnerable_commit": "54f9f235f26df813152b3d3235e7f4373ce473b6",
+    "audited_scope": [
+      "contracts/"
+    ],
+    "mode": "detect",
+    "framework": "hardhat"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_002969_2a929a776caf",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "Hemi_Labs_Final_Audit_Report.pdf",
+    "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf",
+    "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3",
+    "size_bytes": 2317318,
+    "physical_page_count": 32,
+    "report_identity": "CredShields Hemi Labs VUSD Smart Contract Audit",
+    "report_month": "2025-03",
+    "audit_period": "2025-03-04 through 2025-03-07",
+    "retest_date": "2025-03-10",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002969_2a929a776caf.jsonl",
+    "sha256": "a79ba90ae9ed42bf8d7e620bbb06ea36799f13b5f33dcefc36b477614ff21182",
+    "size_bytes": 172136,
+    "record_count": 32,
+    "source_page_count": 32,
+    "created_at": "2026-06-29T14:05:22.295670+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-03-hemi-vusd/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 5,
+    "state_at_start": "next",
+    "category": "Oracle/Data",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 24,
+    "unique_issue_ids": 44
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/hemilabs/vusd-stablecoin.git",
+    "repository_slug": "hemilabs/vusd-stablecoin",
+    "commit": "54f9f235f26df813152b3d3235e7f4373ce473b6",
+    "commit_subject": "Merge pull request #3 from patidarmanoj10/main",
+    "commit_authored_at": "2025-03-05T17:59:42+05:30",
+    "root_tree": "f0214c72689158da00ff7d14be3d87008db4c57b",
+    "audited_scope": [
+      "contracts/"
+    ],
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "review_clone": "/tmp/hemi-vusd-review.p0Hk6v",
+    "tracked_pdf_or_jsonl_count": 0,
+    "file_evidence": [
+      {
+        "path": "contracts/Treasury.sol",
+        "git_blob": "f584bdb296ec91d933a26389602f5df8b437a5bd",
+        "sha256": "61c1e500084b96f0b4081ceb91a93524c78d58d7a760b34bea8bd49ac7a320e0"
+      },
+      {
+        "path": "contracts/Minter.sol",
+        "git_blob": "c3571743f88cebbafbaf77779226666f509659ff",
+        "sha256": "e3ca778b046d8298469b06814ec3221909c8ebdadb07a2207dc29985e85e17a2"
+      },
+      {
+        "path": "contracts/Redeemer.sol",
+        "git_blob": "623899817620b09a8b2450746a3bdb1b8066bb82",
+        "sha256": "db8b387edeb11dc8667c53196316c15e8baf796d7a450ea3dd6317fd44f26ae3"
+      }
+    ]
+  },
+  "post_audit_corroboration": {
+    "kept_separate_from_vulnerable_task_snapshot": true,
+    "fee_on_transfer_fix": {
+      "commit": "f3dec329d42c6e6b81ea61c3f4f4dd3340e976e2",
+      "subject": "Fixed issues reported in audit",
+      "authored_at": "2025-03-10T11:17:23+05:30",
+      "effect": "Minter issuance is calculated from balanceAfter minus balanceBefore"
+    }
+  },
+  "submodules": [],
+  "dependency_locks": {
+    "package_json_sha256": "f9efa5cc2212a7644dbd7cd36b1388d26deff92d9902c8118f844a18c14f1af4",
+    "package_lock_sha256": "f88c66530f5f0c54e82cb6b0ff27fbd812c7e809ae060aa54587c6a79882fb1a",
+    "foundry_toml_sha256": "ad7e3e6deceb714520973cbf8151956eef71f00aa48848f9c28988831b6d55c4",
+    "hardhat_config_sha256": "230f72457f698ba4b83e38ffcfe9ab7596bbcc809f4645bed2aa3a1a45cdc160"
+  },
+  "base_image": {
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "platform": "linux/amd64",
+    "node_version": "v22.22.3"
+  },
+  "tooling_revisions": {
+    "opd_base": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "isolated_clone": "/tmp/hemi-opd-validator.L63kdc/opd-base",
+      "clean": true,
+      "candidate_validator_passed": true,
+      "candidate_validator_errors": 0,
+      "candidate_validator_warnings": 0,
+      "validator_tests_passed": 6
+    }
+  },
+  "baseline_validation": {
+    "review_clone": "/tmp/hemi-vusd-review.p0Hk6v",
+    "npm_ci": {
+      "passed": true,
+      "packages_added": 2602,
+      "disclosure": "The upstream postinstall patch for hardhat-deploy 0.7.9 does not apply to locked hardhat-deploy 0.9.3; npm ci still exits zero."
+    },
+    "hardhat_compile": {
+      "host_node_version": "v20.19.6",
+      "solidity_version": "0.8.3",
+      "compiled_solidity_files": 29,
+      "generated_artifacts": 30,
+      "passed": true
+    },
+    "hardhat_tests": {
+      "passed": 0,
+      "failed": 0,
+      "executed": false,
+      "classification": "upstream_reporter_configuration_failure",
+      "reason": "The locked hardhat-gas-reporter forces Mocha reporter eth-gas-reporter, which the locked Mocha rejects before test discovery."
+    }
+  },
+  "agent_image": {
+    "local_tag": "evmbench-hemi-vusd:c1",
+    "image_config_digest": "sha256:6d5805038ba1478c51900f86a7714fa5db7c972da2333fd640b3aedd088c351d",
+    "created_at": "2026-07-27T15:01:41.125332346Z",
+    "platform": "linux/amd64",
+    "size_bytes": 4480508923,
+    "rootfs_layer_count": 20,
+    "repository_head": "54f9f235f26df813152b3d3235e7f4373ce473b6",
+    "repository_commit_count": 1,
+    "hardhat_compile_passed": true,
+    "build_context_allowlist": [
+      "Dockerfile",
+      ".dockerignore"
+    ],
+    "runtime_network_for_validation": "none",
+    "full_filesystem_regular_files_scanned": 164357,
+    "full_filesystem_bytes_scanned": 4476482419,
+    "final_filesystem_leakage_scan_passed": true,
+    "pdf_absent": true,
+    "agent_repository_jsonl_absent": true,
+    "gold_ocr_and_provenance_markers_absent": true,
+    "built": true,
+    "published_to_registry": false
+  },
+  "ocr_corrections": [
+    {
+      "pages": [
+        6,
+        16,
+        17,
+        18,
+        19
+      ],
+      "field": "vulnerable_commit",
+      "correction": "Use the visually reviewed PDF link target 54f9f235f26df813152b3d3235e7f4373ce473b6. OCR inserts an extra 3 after 152b."
+    },
+    {
+      "pages": [
+        19,
+        20
+      ],
+      "field": "finding_boundary",
+      "correction": "Physical page 20 continues Bug ID #4's retest comment and is not a separate finding."
+    }
+  ],
+  "ocr_evidence": [
+    {
+      "page_number": 6,
+      "role": "scope",
+      "page_image_sha256": "5362d6550991d004dba89bf522a258087aff9b2d1af058ed6ee673f42ec7239c",
+      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl"
+    },
+    {
+      "page_number": 16,
+      "finding_id": "H-01",
+      "page_image_sha256": "2b489ac29912908848b85e4c366f22e319e7aec15aef810b4a3fc41a3e36870d",
+      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl"
+    },
+    {
+      "page_number": 17,
+      "finding_id": "H-02",
+      "page_image_sha256": "3fab09271aa7bb3d867f4c6b64e02c86c3da1bf3c0046146658b26b4ced6c75a",
+      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl"
+    },
+    {
+      "page_number": 18,
+      "finding_id": "H-03",
+      "page_image_sha256": "53dd49b07c41354eb5431861c86e63c0e9c8a4cffa781727cdc7f1a67578bb8a",
+      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl"
+    }
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "source_report_finding_id": "Bug ID #1",
+      "source_pages": [
+        16
+      ],
+      "generated_file": "findings/H-01.md"
+    },
+    {
+      "finding_id": "H-02",
+      "source_report_finding_id": "Bug ID #2",
+      "source_pages": [
+        17
+      ],
+      "generated_file": "findings/H-02.md"
+    },
+    {
+      "finding_id": "H-03",
+      "source_report_finding_id": "Bug ID #3",
+      "source_pages": [
+        18
+      ],
+      "generated_file": "findings/H-03.md"
+    }
+  ],
+  "generated_files": [
+    ".dockerignore",
+    "Dockerfile",
+    "config.yaml",
+    "provenance.json",
+    "review_status.yaml",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl",
+    "ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl",
+    "ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl",
+    "ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl"
+  ]
+}

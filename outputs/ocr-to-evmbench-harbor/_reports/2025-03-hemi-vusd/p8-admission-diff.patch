@@ -1,0 +1,833 @@
+commit 301aeff5299714831059e7159dc814c191dcf256
+Author:     pranay5255 <pranay5255@yahoo.com>
+AuthorDate: Fri Jul 31 12:19:45 2026 +0000
+Commit:     pranay5255 <pranay5255@yahoo.com>
+CommitDate: Fri Jul 31 12:19:45 2026 +0000
+
+    admit 2025-03-hemi-vusd audit
+
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/.dockerignore b/project/evmbench/audits/2025-03-hemi-vusd/.dockerignore
+new file mode 100644
+index 0000000..4d0f9ce
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/.dockerignore
+@@ -0,0 +1,3 @@
++**
++!Dockerfile
++!.dockerignore
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/Dockerfile b/project/evmbench/audits/2025-03-hemi-vusd/Dockerfile
+new file mode 100644
+index 0000000..4bd7fad
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/Dockerfile
+@@ -0,0 +1,31 @@
++FROM pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0
++
++ENV HARDHAT_DISABLE_TELEMETRY_PROMPT=true
++ENV NODE_URL=http://127.0.0.1:8545
++
++RUN test "$(node --version)" = "v22.22.3" \
++    && mkdir -p "$AUDIT_DIR" \
++    && cd "$AUDIT_DIR" \
++    && git init \
++    && git remote add origin \
++        https://github.com/hemilabs/vusd-stablecoin.git \
++    && git fetch --depth=1 origin \
++        54f9f235f26df813152b3d3235e7f4373ce473b6 \
++    && git checkout --detach FETCH_HEAD \
++    && test "$(git rev-parse HEAD)" = \
++        "54f9f235f26df813152b3d3235e7f4373ce473b6" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && test -z "$(git submodule status --recursive)" \
++    && npm ci \
++    && npm run compile \
++    && find "$AUDIT_DIR" -type f -iname '*.pdf' -delete \
++    && find "$AUDIT_DIR" -mindepth 2 -name .git -prune -exec rm -rf {} + \
++    && test -z "$(find "$AUDIT_DIR" -type f -iname '*.pdf' -print -quit)" \
++    && test -z "$(find "$AUDIT_DIR" -mindepth 2 -name .git -print -quit)" \
++    && cd "$AUDIT_DIR" \
++    && test "$(git rev-parse HEAD)" = \
++        "54f9f235f26df813152b3d3235e7f4373ce473b6" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && test -z "$(git ls-tree -r --name-only HEAD | grep -Ei '\\.(pdf|jsonl)$')"
++
++WORKDIR $AGENT_DIR
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/config.yaml b/project/evmbench/audits/2025-03-hemi-vusd/config.yaml
+new file mode 100644
+index 0000000..fdbd4ae
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/config.yaml
+@@ -0,0 +1,15 @@
++id: 2025-03-hemi-vusd
++mode: detect
++framework: hardhat
++base_commit: 54f9f235f26df813152b3d3235e7f4373ce473b6
++
++vulnerabilities:
++  - id: "H-01"
++    title: "Keeper-controlled zero output floor exposes protocol rewards to sandwiches"
++    award: 1.0
++  - id: "H-02"
++    title: "Nominal fee-on-transfer accounting mints unbacked VUSD"
++    award: 1.0
++  - id: "H-03"
++    title: "Always-current router deadlines give validators indefinite execution optionality"
++    award: 1.0
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/findings/H-01.md b/project/evmbench/audits/2025-03-hemi-vusd/findings/H-01.md
+new file mode 100644
+index 0000000..9fc950d
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/findings/H-01.md
+@@ -0,0 +1,72 @@
++# [H-01] Keeper-controlled zero output floor exposes protocol rewards to sandwiches
++
++## Affected code
++
++- `contracts/Treasury.sol`: `claimCompAndConvertTo`
++
++## Root cause
++
++`claimCompAndConvertTo` swaps the Treasury's full COMP reward balance while
++accepting `_minOut` entirely from a keeper or governor. The contract does not
++enforce a nonzero or protocol-derived output floor before forwarding that
++value to `swapExactTokensForTokens`.
++
++The router quote returned as `amountOut` is used only to decide whether to
++enter the swap branch. It is not used to constrain the executed output.
++
++## Prerequisites
++
++- A keeper or governor submits the reward-conversion transaction with
++  `_minOut == 0` or another economically unsafe value.
++- An attacker can observe and sandwich the public transaction, or a
++  compromised keeper coordinates with the price manipulation.
++- The selected route has enough manipulable liquidity for the attacker to
++  move its execution price.
++
++## Exploit sequence
++
++1. The Treasury claims all available COMP rewards.
++2. A keeper broadcasts `claimCompAndConvertTo` with a zero output floor.
++3. An attacker front-runs the transaction and moves the selected pool price
++   against the Treasury.
++4. The Treasury's swap remains valid for any nonzero output and sells the
++   entire COMP balance at the manipulated rate.
++5. The attacker reverses the price movement after the Treasury trade and
++   retains the extracted value.
++
++## Impact
++
++Protocol-owned COMP rewards can be exchanged for a negligible amount of the
++destination asset. The lost yield would otherwise be deposited into Compound
++and support the VUSD system.
++
++## Code evidence
++
++The caller controls `_minOut`, while `amountOut` from the route search is not
++used as the minimum:
++
++```solidity
++function claimCompAndConvertTo(address _toToken, uint256 _minOut)
++    external
++    onlyKeeperOrGovernor
++{
++    // ...
++    (address[] memory path, uint256 amountOut, uint256 rIdx) =
++        swapManager.bestOutputFixedInput(COMP, _toToken, _compAmount);
++    if (amountOut != 0) {
++        swapManager.ROUTERS(rIdx).swapExactTokensForTokens(
++            _compAmount,
++            _minOut,
++            path,
++            address(this),
++            block.timestamp
++        );
++    }
++}
++```
++
++## Remediation
++
++Reject zero and economically unsafe minimums. Prefer deriving a protocol-side
++floor from the route quote and a tightly bounded slippage policy rather than
++relying only on the privileged caller to supply one.
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/findings/H-02.md b/project/evmbench/audits/2025-03-hemi-vusd/findings/H-02.md
+new file mode 100644
+index 0000000..aa28385
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/findings/H-02.md
+@@ -0,0 +1,72 @@
++# [H-02] Nominal fee-on-transfer accounting mints unbacked VUSD
++
++## Affected code
++
++- `contracts/Minter.sol`: `_mint` and `_calculateMintage`
++
++## Root cause
++
++`_mint` calculates VUSD issuance from the caller's nominal `_amountIn` before
++transferring the collateral. It never measures the Minter's balance change.
++If a whitelisted ERC-20 deducts a transfer fee, less collateral arrives than
++the amount used to calculate `_mintage`.
++
++## Prerequisites
++
++- A whitelisted collateral token deducts a transfer fee or otherwise credits
++  less than the requested transfer amount.
++- Its oracle price remains within the configured stable-price tolerance.
++- A public caller approves the Minter and deposits that token.
++
++## Exploit sequence
++
++1. A user calls a public `mint` overload with a nominal collateral amount.
++2. `_calculateMintage` computes VUSD output from that full nominal amount.
++3. `safeTransferFrom` succeeds but the token credits the Minter with less
++   collateral after deducting its fee.
++4. The Minter deposits the smaller received balance into Compound.
++5. It nevertheless mints the larger nominal VUSD amount to the caller.
++6. Repeated mints create undercollateralized VUSD that can be redeemed against
++   other assets held by the shared Treasury.
++
++## Impact
++
++The attacker receives more VUSD than the deposited collateral supports and
++can externalize the deficit onto other VUSD holders or Treasury collateral.
++At scale, honest redemptions become underfunded.
++
++## Code evidence
++
++The nominal amount is priced before the transfer:
++
++```solidity
++_mintage = _calculateMintage(_token, _amountIn);
++IERC20(_token).safeTransferFrom(_msgSender(), address(this), _amountIn);
++```
++
++The contract then deposits its actual balance but mints the already-computed
++nominal output:
++
++```solidity
++address _cToken = cTokens[_token];
++require(
++    CToken(_cToken).mint(IERC20(_token).balanceOf(address(this))) == 0,
++    "cToken-mint-failed"
++);
++IERC20(_cToken).safeTransfer(
++    treasury(),
++    IERC20(_cToken).balanceOf(address(this))
++);
++vusd.mint(_receiver, _mintage);
++```
++
++The immediate post-audit fix at
++`f3dec329d42c6e6b81ea61c3f4f4dd3340e976e2` instead measures
++`balanceAfter - balanceBefore` and calculates issuance from that delta.
++
++## Remediation
++
++Measure the exact balance increase across `safeTransferFrom` and calculate
++VUSD issuance from the received amount. Deposit only that transaction's
++balance delta, or explicitly reject tokens whose received amount differs from
++the requested amount.
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/findings/H-03.md b/project/evmbench/audits/2025-03-hemi-vusd/findings/H-03.md
+new file mode 100644
+index 0000000..0c29b29
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/findings/H-03.md
+@@ -0,0 +1,60 @@
++# [H-03] Always-current router deadlines give validators indefinite execution optionality
++
++## Affected code
++
++- `contracts/Treasury.sol`: `claimCompAndConvertTo`
++
++## Root cause
++
++The Treasury passes `block.timestamp` as the Uniswap-style router deadline.
++Because that expression is evaluated only when the transaction executes, it
++is always equal to the current block time and can never reject an old pending
++transaction.
++
++This is separate from the output-floor issue: a nonzero `_minOut` limits the
++absolute output but does not bound how long validators or builders may wait
++for the most adverse still-valid execution point.
++
++## Prerequisites
++
++- A keeper or governor broadcasts a COMP conversion transaction.
++- A validator, builder, or other party with ordering influence can delay its
++  inclusion.
++- The caller's `_minOut` leaves an economically exploitable price interval.
++
++## Failure sequence
++
++1. The keeper prepares the swap using current market conditions.
++2. A block producer withholds the transaction instead of including it
++   promptly.
++3. Market conditions later move to the least favorable point that still
++   satisfies `_minOut`.
++4. The producer includes the stale transaction.
++5. The router sees `deadline == block.timestamp`, so the age of the original
++   transaction provides no reason to revert.
++
++## Impact
++
++Protocol reward conversion can execute much later than intended at an
++adversely selected price, transferring value from the Treasury to arbitrageurs
++or ordered-flow participants up to the caller's allowed slippage.
++
++## Code evidence
++
++The deadline has no relationship to the transaction's creation time:
++
++```solidity
++swapManager.ROUTERS(rIdx).swapExactTokensForTokens(
++    _compAmount,
++    _minOut,
++    path,
++    address(this),
++    block.timestamp
++);
++```
++
++## Remediation
++
++Accept a caller-supplied expiry representing the keeper's signing or
++submission intent, enforce that it is within a short protocol-defined horizon,
++and pass that fixed value to the router.
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/findings/gold_audit.md b/project/evmbench/audits/2025-03-hemi-vusd/findings/gold_audit.md
+new file mode 100644
+index 0000000..ad907c7
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/findings/gold_audit.md
+@@ -0,0 +1,208 @@
++# Hemi VUSD detect findings
++
++# [H-01] Keeper-controlled zero output floor exposes protocol rewards to sandwiches
++
++## Affected code
++
++- `contracts/Treasury.sol`: `claimCompAndConvertTo`
++
++## Root cause
++
++`claimCompAndConvertTo` swaps the Treasury's full COMP reward balance while
++accepting `_minOut` entirely from a keeper or governor. The contract does not
++enforce a nonzero or protocol-derived output floor before forwarding that
++value to `swapExactTokensForTokens`.
++
++The router quote returned as `amountOut` is used only to decide whether to
++enter the swap branch. It is not used to constrain the executed output.
++
++## Prerequisites
++
++- A keeper or governor submits the reward-conversion transaction with
++  `_minOut == 0` or another economically unsafe value.
++- An attacker can observe and sandwich the public transaction, or a
++  compromised keeper coordinates with the price manipulation.
++- The selected route has enough manipulable liquidity for the attacker to
++  move its execution price.
++
++## Exploit sequence
++
++1. The Treasury claims all available COMP rewards.
++2. A keeper broadcasts `claimCompAndConvertTo` with a zero output floor.
++3. An attacker front-runs the transaction and moves the selected pool price
++   against the Treasury.
++4. The Treasury's swap remains valid for any nonzero output and sells the
++   entire COMP balance at the manipulated rate.
++5. The attacker reverses the price movement after the Treasury trade and
++   retains the extracted value.
++
++## Impact
++
++Protocol-owned COMP rewards can be exchanged for a negligible amount of the
++destination asset. The lost yield would otherwise be deposited into Compound
++and support the VUSD system.
++
++## Code evidence
++
++The caller controls `_minOut`, while `amountOut` from the route search is not
++used as the minimum:
++
++```solidity
++function claimCompAndConvertTo(address _toToken, uint256 _minOut)
++    external
++    onlyKeeperOrGovernor
++{
++    // ...
++    (address[] memory path, uint256 amountOut, uint256 rIdx) =
++        swapManager.bestOutputFixedInput(COMP, _toToken, _compAmount);
++    if (amountOut != 0) {
++        swapManager.ROUTERS(rIdx).swapExactTokensForTokens(
++            _compAmount,
++            _minOut,
++            path,
++            address(this),
++            block.timestamp
++        );
++    }
++}
++```
++
++## Remediation
++
++Reject zero and economically unsafe minimums. Prefer deriving a protocol-side
++floor from the route quote and a tightly bounded slippage policy rather than
++relying only on the privileged caller to supply one.
++
++# [H-02] Nominal fee-on-transfer accounting mints unbacked VUSD
++
++## Affected code
++
++- `contracts/Minter.sol`: `_mint` and `_calculateMintage`
++
++## Root cause
++
++`_mint` calculates VUSD issuance from the caller's nominal `_amountIn` before
++transferring the collateral. It never measures the Minter's balance change.
++If a whitelisted ERC-20 deducts a transfer fee, less collateral arrives than
++the amount used to calculate `_mintage`.
++
++## Prerequisites
++
++- A whitelisted collateral token deducts a transfer fee or otherwise credits
++  less than the requested transfer amount.
++- Its oracle price remains within the configured stable-price tolerance.
++- A public caller approves the Minter and deposits that token.
++
++## Exploit sequence
++
++1. A user calls a public `mint` overload with a nominal collateral amount.
++2. `_calculateMintage` computes VUSD output from that full nominal amount.
++3. `safeTransferFrom` succeeds but the token credits the Minter with less
++   collateral after deducting its fee.
++4. The Minter deposits the smaller received balance into Compound.
++5. It nevertheless mints the larger nominal VUSD amount to the caller.
++6. Repeated mints create undercollateralized VUSD that can be redeemed against
++   other assets held by the shared Treasury.
++
++## Impact
++
++The attacker receives more VUSD than the deposited collateral supports and
++can externalize the deficit onto other VUSD holders or Treasury collateral.
++At scale, honest redemptions become underfunded.
++
++## Code evidence
++
++The nominal amount is priced before the transfer:
++
++```solidity
++_mintage = _calculateMintage(_token, _amountIn);
++IERC20(_token).safeTransferFrom(_msgSender(), address(this), _amountIn);
++```
++
++The contract then deposits its actual balance but mints the already-computed
++nominal output:
++
++```solidity
++address _cToken = cTokens[_token];
++require(
++    CToken(_cToken).mint(IERC20(_token).balanceOf(address(this))) == 0,
++    "cToken-mint-failed"
++);
++IERC20(_cToken).safeTransfer(
++    treasury(),
++    IERC20(_cToken).balanceOf(address(this))
++);
++vusd.mint(_receiver, _mintage);
++```
++
++The immediate post-audit fix at
++`f3dec329d42c6e6b81ea61c3f4f4dd3340e976e2` instead measures
++`balanceAfter - balanceBefore` and calculates issuance from that delta.
++
++## Remediation
++
++Measure the exact balance increase across `safeTransferFrom` and calculate
++VUSD issuance from the received amount. Deposit only that transaction's
++balance delta, or explicitly reject tokens whose received amount differs from
++the requested amount.
++
++# [H-03] Always-current router deadlines give validators indefinite execution optionality
++
++## Affected code
++
++- `contracts/Treasury.sol`: `claimCompAndConvertTo`
++
++## Root cause
++
++The Treasury passes `block.timestamp` as the Uniswap-style router deadline.
++Because that expression is evaluated only when the transaction executes, it
++is always equal to the current block time and can never reject an old pending
++transaction.
++
++This is separate from the output-floor issue: a nonzero `_minOut` limits the
++absolute output but does not bound how long validators or builders may wait
++for the most adverse still-valid execution point.
++
++## Prerequisites
++
++- A keeper or governor broadcasts a COMP conversion transaction.
++- A validator, builder, or other party with ordering influence can delay its
++  inclusion.
++- The caller's `_minOut` leaves an economically exploitable price interval.
++
++## Failure sequence
++
++1. The keeper prepares the swap using current market conditions.
++2. A block producer withholds the transaction instead of including it
++   promptly.
++3. Market conditions later move to the least favorable point that still
++   satisfies `_minOut`.
++4. The producer includes the stale transaction.
++5. The router sees `deadline == block.timestamp`, so the age of the original
++   transaction provides no reason to revert.
++
++## Impact
++
++Protocol reward conversion can execute much later than intended at an
++adversely selected price, transferring value from the Treasury to arbitrageurs
++or ordered-flow participants up to the caller's allowed slippage.
++
++## Code evidence
++
++The deadline has no relationship to the transaction's creation time:
++
++```solidity
++swapManager.ROUTERS(rIdx).swapExactTokensForTokens(
++    _compAmount,
++    _minOut,
++    path,
++    address(this),
++    block.timestamp
++);
++```
++
++## Remediation
++
++Accept a caller-supplied expiry representing the keeper's signing or
++submission intent, enforce that it is within a short protocol-defined horizon,
++and pass that fixed value to the router.
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl
+new file mode 100644
+index 0000000..fe4fd46
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T14:05:22.295670+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [114, 95, 395, 125]<|/det|>5. Bug Reports\n<|det|>text [114, 185, 378, 207]<|/det|>Bug ID #1[ Acknowledged ]\n<|det|>title [113, 241, 592, 262]<|/det|>Missing zero _minOut validation while swapping\n<|det|>title [113, 302, 260, 319]<|/det|>Vulnerability Type\n<|det|>text [114, 321, 302, 337]<|/det|>Missing Input Validation\n<|det|>title [113, 360, 185, 377]<|/det|>Severity\n<|det|>text [114, 380, 154, 396]<|/det|>High\n<|det|>title [113, 418, 210, 435]<|/det|>Description\n<|det|>text [112, 437, 884, 531]<|/det|>The claimCompAndConvertTo() function allows swapping COMP tokens to a specified token using a DEX router. The function accepts a __minOut parameter that determines the minimum output amount when performing the swap. However, the function does not validate that this value is greater than zero. When a keeper or governor calls this function with __minOut set to 0, they effectively approve any amount of tokens in return, even if it's substantially below market value.\n<|det|>title [114, 552, 231, 567]<|/det|>Affected Code\n<|det|>text [142, 571, 880, 607]<|/det|>- https://github.com/hemilabs/vusd-stablecoin/blob/54f9f235f26df813152b3d3235e7f4373c e473b6/contracts/Treasury.sol#.L168-L187\n<|det|>title [113, 629, 185, 644]<|/det|>Impacts\n<|det|>text [112, 647, 885, 740]<|/det|>A malicious keeper can exploit this by front-running the transaction and manipulating the pool's price, causing the function to receive far fewer tokens than what would be fair for the input amount. This can lead to direct fund loss for the protocol as the swap could execute at highly unfavorable rates. MEV bots can also target these transactions, further extracting value from the protocol.\n<|det|>title [113, 763, 219, 777]<|/det|>Remediation\n<|det|>text [113, 782, 678, 798]<|/det|>It is recommended to add a validation to the _minOut is not equal to zero.\n<|det|>title [113, 821, 174, 835]<|/det|>Retest\n<|det|>text [113, 839, 655, 856]<|/det|>Client's comment: Won't fix assuming the keeper role is a trusted role.\n", "page_image_sha256": "2b489ac29912908848b85e4c366f22e319e7aec15aef810b4a3fc41a3e36870d", "page_number": 16, "pdf_id": "pdf_002969_2a929a776caf", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T14:05:22.295670+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [114, 95, 395, 125]<|/det|>5. Bug Reports\n<|det|>text [114, 185, 378, 207]<|/det|>Bug ID #1[ Acknowledged ]\n<|det|>title [113, 241, 592, 262]<|/det|>Missing zero _minOut validation while swapping\n<|det|>title [113, 302, 260, 319]<|/det|>Vulnerability Type\n<|det|>text [114, 321, 302, 337]<|/det|>Missing Input Validation\n<|det|>title [113, 360, 185, 377]<|/det|>Severity\n<|det|>text [114, 380, 154, 396]<|/det|>High\n<|det|>title [113, 418, 210, 435]<|/det|>Description\n<|det|>text [112, 437, 884, 531]<|/det|>The claimCompAndConvertTo() function allows swapping COMP tokens to a specified token using a DEX router. The function accepts a __minOut parameter that determines the minimum output amount when performing the swap. However, the function does not validate that this value is greater than zero. When a keeper or governor calls this function with __minOut set to 0, they effectively approve any amount of tokens in return, even if it's substantially below market value.\n<|det|>title [114, 552, 231, 567]<|/det|>Affected Code\n<|det|>text [142, 571, 880, 607]<|/det|>- https://github.com/hemilabs/vusd-stablecoin/blob/54f9f235f26df813152b3d3235e7f4373c e473b6/contracts/Treasury.sol#.L168-L187\n<|det|>title [113, 629, 185, 644]<|/det|>Impacts\n<|det|>text [112, 647, 885, 740]<|/det|>A malicious keeper can exploit this by front-running the transaction and manipulating the pool's price, causing the function to receive far fewer tokens than what would be fair for the input amount. This can lead to direct fund loss for the protocol as the swap could execute at highly unfavorable rates. MEV bots can also target these transactions, further extracting value from the protocol.\n<|det|>title [113, 763, 219, 777]<|/det|>Remediation\n<|det|>text [113, 782, 678, 798]<|/det|>It is recommended to add a validation to the _minOut is not equal to zero.\n<|det|>title [113, 821, 174, 835]<|/det|>Retest\n<|det|>text [113, 839, 655, 856]<|/det|>Client's comment: Won't fix assuming the keeper role is a trusted role.\n", "page_image_sha256": "2b489ac29912908848b85e4c366f22e319e7aec15aef810b4a3fc41a3e36870d", "page_number": 16, "pdf_id": "pdf_002969_2a929a776caf", "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 461.726}, "timing_ms": {"decode": 1228, "sglang_total": 1422, "ttft": 193}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 567, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 845}, "warnings": []}, "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "text_length": 2030}
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl
+new file mode 100644
+index 0000000..adcc93a
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T14:05:22.295670+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [114, 115, 293, 136]<|/det|>Bug ID #2 [Fixed]\n<|det|>title [113, 170, 728, 192]<|/det|>Missing handling of fees on transfer in ERC20 token transfers\n<|det|>title [113, 232, 262, 249]<|/det|>Vulnerability Type\n<|det|>text [114, 251, 296, 268]<|/det|>Calculation Inaccuracy\n<|det|>title [113, 290, 186, 306]<|/det|>Severity\n<|det|>text [114, 309, 182, 325]<|/det|>Medium\n<|det|>title [113, 348, 212, 364]<|/det|>Description\n<|det|>text [112, 366, 886, 459]<|/det|>The contract contains a vulnerability related to transferring ERC20 tokens without considering the possibility of fees charged on transfer. Some ERC20 tokens implement a fee mechanism, where a certain percentage of tokens is deducted as a fee during each transfer. However, the contract does not account for this possibility when transferring tokens using the safeTransferFrom/TransferFrom function.\n<|det|>title [113, 482, 234, 497]<|/det|>Affected Code\n<|det|>text [142, 501, 880, 537]<|/det|>- https://github.com/hemilabs/vusd-stablecoin/blob/54f9f235f26df813152b3d3235e7f4373c e473b6/contracts/Minter.sol#L237-L249\n<|det|>title [113, 559, 185, 574]<|/det|>Impacts\n<|det|>text [112, 578, 886, 670]<|/det|>Failure to account for transfer fees can lead to accounting errors and financial losses. When tokens with transfer fees are transferred, the actual received amount may be less than expected due to the deduction of fees. As a result, the contract's internal accounting and balance tracking may become inaccurate, leading to discrepancies in token balances and potential financial losses for users.\n<|det|>title [113, 693, 219, 707]<|/det|>Remediation\n<|det|>text [112, 712, 884, 748]<|/det|>To address this vulnerability, it is recommended to add a mechanism to calculate the balance of the contract before and after the transfer is completed.\n<|det|>title [113, 770, 174, 784]<|/det|>Retest\n<|det|>text [113, 789, 316, 805]<|/det|>This issue has been fixed.\n", "page_image_sha256": "3fab09271aa7bb3d867f4c6b64e02c86c3da1bf3c0046146658b26b4ced6c75a", "page_number": 17, "pdf_id": "pdf_002969_2a929a776caf", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T14:05:22.295670+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [114, 115, 293, 136]<|/det|>Bug ID #2 [Fixed]\n<|det|>title [113, 170, 728, 192]<|/det|>Missing handling of fees on transfer in ERC20 token transfers\n<|det|>title [113, 232, 262, 249]<|/det|>Vulnerability Type\n<|det|>text [114, 251, 296, 268]<|/det|>Calculation Inaccuracy\n<|det|>title [113, 290, 186, 306]<|/det|>Severity\n<|det|>text [114, 309, 182, 325]<|/det|>Medium\n<|det|>title [113, 348, 212, 364]<|/det|>Description\n<|det|>text [112, 366, 886, 459]<|/det|>The contract contains a vulnerability related to transferring ERC20 tokens without considering the possibility of fees charged on transfer. Some ERC20 tokens implement a fee mechanism, where a certain percentage of tokens is deducted as a fee during each transfer. However, the contract does not account for this possibility when transferring tokens using the safeTransferFrom/TransferFrom function.\n<|det|>title [113, 482, 234, 497]<|/det|>Affected Code\n<|det|>text [142, 501, 880, 537]<|/det|>- https://github.com/hemilabs/vusd-stablecoin/blob/54f9f235f26df813152b3d3235e7f4373c e473b6/contracts/Minter.sol#L237-L249\n<|det|>title [113, 559, 185, 574]<|/det|>Impacts\n<|det|>text [112, 578, 886, 670]<|/det|>Failure to account for transfer fees can lead to accounting errors and financial losses. When tokens with transfer fees are transferred, the actual received amount may be less than expected due to the deduction of fees. As a result, the contract's internal accounting and balance tracking may become inaccurate, leading to discrepancies in token balances and potential financial losses for users.\n<|det|>title [113, 693, 219, 707]<|/det|>Remediation\n<|det|>text [112, 712, 884, 748]<|/det|>To address this vulnerability, it is recommended to add a mechanism to calculate the balance of the contract before and after the transfer is completed.\n<|det|>title [113, 770, 174, 784]<|/det|>Retest\n<|det|>text [113, 789, 316, 805]<|/det|>This issue has been fixed.\n", "page_image_sha256": "3fab09271aa7bb3d867f4c6b64e02c86c3da1bf3c0046146658b26b4ced6c75a", "page_number": 17, "pdf_id": "pdf_002969_2a929a776caf", "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 466.368}, "timing_ms": {"decode": 1115, "sglang_total": 1304, "ttft": 188}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 520, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 798}, "warnings": []}, "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "text_length": 1948}
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl
+new file mode 100644
+index 0000000..10c3710
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T14:05:22.295670+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [114, 92, 380, 113]<|/det|>Bug ID #3 [Acknowledged]\n<|det|>title [112, 148, 884, 194]<|/det|>claimCompAndConvertTo() swap with 'deadline: block.timestamp' offers no protection\n<|det|>title [113, 234, 260, 251]<|/det|>Vulnerability Type\n<|det|>text [114, 253, 262, 269]<|/det|>Incorrect Deadline\n<|det|>title [113, 292, 185, 308]<|/det|>Severity\n<|det|>text [114, 311, 180, 325]<|/det|>Medium\n<|det|>title [113, 350, 212, 366]<|/det|>Description\n<|det|>text [112, 368, 884, 424]<|/det|>Using block.timestamp as deadline parameter in claimCompAndConvertTo() during interaction with router, which suggests that whenever the miner decides to include the transaction in a block, it will be valid at that time, since block.timestamp will be the current timestamp.\n<|det|>text [112, 426, 884, 462]<|/det|>Whichever block the txn will be included in will be block.timestamp, so setting the deadline to block.timestamp offers no protection as validators can hold the transaction indefinitely.\n<|det|>title [113, 483, 236, 498]<|/det|>Affected Code\n<|det|>text [142, 502, 880, 539]<|/det|>- https://github.com/hemilabs/vusd-stablecoin/blob/54f9f235f26df813152b3d3235e7f4373c e473b6/contracts/Treasury.sol#L183\n<|det|>title [113, 560, 182, 575]<|/det|>Impacts\n<|det|>text [112, 579, 885, 690]<|/det|>It may be more profitable for a miner to deny the transaction from being mined until the transaction incurs the maximum amount of slippage. A malicious miner can hold the transaction as the deadline is set to block.timestamp, which means that whenever the miner decides to include the transaction in a block, it will be valid at that time, since block.timestamp will be the current timestamp. The transaction might be left hanging in the mempool and be executed way later than the user wanted.\n<|det|>title [113, 713, 219, 727]<|/det|>Remediation\n<|det|>text [112, 732, 884, 768]<|/det|>It is recommended to add a deadline argument to the claimCompAndConvertTo() function that interacts with the router, and pass it along to the router calls.\n<|det|>title [113, 790, 172, 805]<|/det|>Retest\n<|det|>text [112, 809, 763, 825]<|/det|>Client's comment: will fix it in future when we have plan to update treasury contract.\n", "page_image_sha256": "53dd49b07c41354eb5431861c86e63c0e9c8a4cffa781727cdc7f1a67578bb8a", "page_number": 18, "pdf_id": "pdf_002969_2a929a776caf", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T14:05:22.295670+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [114, 92, 380, 113]<|/det|>Bug ID #3 [Acknowledged]\n<|det|>title [112, 148, 884, 194]<|/det|>claimCompAndConvertTo() swap with 'deadline: block.timestamp' offers no protection\n<|det|>title [113, 234, 260, 251]<|/det|>Vulnerability Type\n<|det|>text [114, 253, 262, 269]<|/det|>Incorrect Deadline\n<|det|>title [113, 292, 185, 308]<|/det|>Severity\n<|det|>text [114, 311, 180, 325]<|/det|>Medium\n<|det|>title [113, 350, 212, 366]<|/det|>Description\n<|det|>text [112, 368, 884, 424]<|/det|>Using block.timestamp as deadline parameter in claimCompAndConvertTo() during interaction with router, which suggests that whenever the miner decides to include the transaction in a block, it will be valid at that time, since block.timestamp will be the current timestamp.\n<|det|>text [112, 426, 884, 462]<|/det|>Whichever block the txn will be included in will be block.timestamp, so setting the deadline to block.timestamp offers no protection as validators can hold the transaction indefinitely.\n<|det|>title [113, 483, 236, 498]<|/det|>Affected Code\n<|det|>text [142, 502, 880, 539]<|/det|>- https://github.com/hemilabs/vusd-stablecoin/blob/54f9f235f26df813152b3d3235e7f4373c e473b6/contracts/Treasury.sol#L183\n<|det|>title [113, 560, 182, 575]<|/det|>Impacts\n<|det|>text [112, 579, 885, 690]<|/det|>It may be more profitable for a miner to deny the transaction from being mined until the transaction incurs the maximum amount of slippage. A malicious miner can hold the transaction as the deadline is set to block.timestamp, which means that whenever the miner decides to include the transaction in a block, it will be valid at that time, since block.timestamp will be the current timestamp. The transaction might be left hanging in the mempool and be executed way later than the user wanted.\n<|det|>title [113, 713, 219, 727]<|/det|>Remediation\n<|det|>text [112, 732, 884, 768]<|/det|>It is recommended to add a deadline argument to the claimCompAndConvertTo() function that interacts with the router, and pass it along to the router calls.\n<|det|>title [113, 790, 172, 805]<|/det|>Retest\n<|det|>text [112, 809, 763, 825]<|/det|>Client's comment: will fix it in future when we have plan to update treasury contract.\n", "page_image_sha256": "53dd49b07c41354eb5431861c86e63c0e9c8a4cffa781727cdc7f1a67578bb8a", "page_number": 18, "pdf_id": "pdf_002969_2a929a776caf", "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 459.5}, "timing_ms": {"decode": 1321, "sglang_total": 1510, "ttft": 189}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 607, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 885}, "warnings": []}, "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "text_length": 2227}
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl
+new file mode 100644
+index 0000000..bf99b84
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-06-29T14:05:22.295670+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>title [112, 94, 471, 126]<|/det|>2. The Methodology\n<|det|>text [112, 170, 884, 214]<|/det|>Hemi Labs engaged CredShields to perform a VUSD Smart Contract audit. The following sections cover how the engagement was put together and executed.\n<|det|>title [113, 257, 336, 276]<|/det|>2.1 Preparation Phase\n<|det|>text [112, 316, 885, 459]<|/det|>The CredShields team meticulously reviewed all provided documents and comments in the smart contract code to gain a thorough understanding of the contract's features and functionalities. They meticulously examined all functions and created a mind map to systematically identify potential security vulnerabilities, prioritizing those that were more critical and business-sensitive for the refactored code. To confirm their findings, the team deployed a self-hosted version of the smart contract and performed verifications and validations during the audit phase.\n<|det|>text [112, 492, 884, 534]<|/det|>A testing window from March 4th, 2025, to March 7th, 2025, was agreed upon during the preparation phase.\n<|det|>title [113, 591, 228, 610]<|/det|>2.1.1 Scope\n<|det|>text [113, 625, 799, 642]<|/det|>During the preparation phase, the following scope for the engagement was agreed upon:\n<|det|>title [131, 658, 279, 674]<|/det|>IN SCOPE ASSETS\n<|det|>text [130, 687, 879, 721]<|/det|>https://github.com/hemilabs/vusd-stablecoin/tree/54f9f235f26df813152b3d3235e7f4373ce473b8\n<|det|>title [113, 777, 321, 795]<|/det|>2.1.2 Documentation\n<|det|>text [112, 814, 848, 831]<|/det|>Documentation was not required as the code was self-sufficient for understanding the project.\n<|det|>footer [909, 902, 971, 950]<|/det|>[Non-Text]\n", "page_image_sha256": "5362d6550991d004dba89bf522a258087aff9b2d1af058ed6ee673f42ec7239c", "page_number": 6, "pdf_id": "pdf_002969_2a929a776caf", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-06-29T14:05:22.295670+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>title [112, 94, 471, 126]<|/det|>2. The Methodology\n<|det|>text [112, 170, 884, 214]<|/det|>Hemi Labs engaged CredShields to perform a VUSD Smart Contract audit. The following sections cover how the engagement was put together and executed.\n<|det|>title [113, 257, 336, 276]<|/det|>2.1 Preparation Phase\n<|det|>text [112, 316, 885, 459]<|/det|>The CredShields team meticulously reviewed all provided documents and comments in the smart contract code to gain a thorough understanding of the contract's features and functionalities. They meticulously examined all functions and created a mind map to systematically identify potential security vulnerabilities, prioritizing those that were more critical and business-sensitive for the refactored code. To confirm their findings, the team deployed a self-hosted version of the smart contract and performed verifications and validations during the audit phase.\n<|det|>text [112, 492, 884, 534]<|/det|>A testing window from March 4th, 2025, to March 7th, 2025, was agreed upon during the preparation phase.\n<|det|>title [113, 591, 228, 610]<|/det|>2.1.1 Scope\n<|det|>text [113, 625, 799, 642]<|/det|>During the preparation phase, the following scope for the engagement was agreed upon:\n<|det|>title [131, 658, 279, 674]<|/det|>IN SCOPE ASSETS\n<|det|>text [130, 687, 879, 721]<|/det|>https://github.com/hemilabs/vusd-stablecoin/tree/54f9f235f26df813152b3d3235e7f4373ce473b8\n<|det|>title [113, 777, 321, 795]<|/det|>2.1.2 Documentation\n<|det|>text [112, 814, 848, 831]<|/det|>Documentation was not required as the code was self-sufficient for understanding the project.\n<|det|>footer [909, 902, 971, 950]<|/det|>[Non-Text]\n", "page_image_sha256": "5362d6550991d004dba89bf522a258087aff9b2d1af058ed6ee673f42ec7239c", "page_number": 6, "pdf_id": "pdf_002969_2a929a776caf", "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0005_0008.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 475.936}, "timing_ms": {"decode": 935, "sglang_total": 1122, "ttft": 186}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 445, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 723}, "warnings": []}, "raw_response_ref": "chunk_0003/other_audit_repo_pdfs/pdf_002969_2a929a776caf_Hemi_Labs_Final_Audit_Report/pages_0005_0008.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "Hemi_Labs_Final_Audit_Report.pdf", "source_page_count": 32, "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3", "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf", "text_length": 1678}
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/provenance.json b/project/evmbench/audits/2025-03-hemi-vusd/provenance.json
+new file mode 100644
+index 0000000..fa362d7
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/provenance.json
+@@ -0,0 +1,264 @@
++{
++  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
++  "candidate_id": "2025-03-hemi-vusd",
++  "materialized_at": "2026-07-27T14:55:33Z",
++  "phase": "P7",
++  "review_state": "approved_for_admission",
++  "approval": {
++    "checkpoint": "C1",
++    "candidate_id": "2025-03-hemi-vusd",
++    "review_bundle_digest": "0d7d24df7170e763f532343a98227c3abdf86600036ce94240ca91bc26913c42",
++    "approved_at": "2026-07-27T15:11:01Z",
++    "reviewer_identity": "github.com/pranay5255",
++    "explicit_admission_approval": true
++  },
++  "task_identity": {
++    "task_group_key": "hemilabs/vusd-stablecoin@54f9f235f26df813152b3d3235e7f4373ce473b6|contracts/|detect",
++    "task_group_key_sha256": "9fcaf3e387f95a3c87e9c02ef235b20d88cfa2d6d7946a7157e47f8242832970",
++    "repository_slug": "hemilabs/vusd-stablecoin",
++    "vulnerable_commit": "54f9f235f26df813152b3d3235e7f4373ce473b6",
++    "audited_scope": [
++      "contracts/"
++    ],
++    "mode": "detect",
++    "framework": "hardhat"
++  },
++  "source_pdf": {
++    "pdf_id": "pdf_002969_2a929a776caf",
++    "source_bucket": "other_audit_repo_pdfs",
++    "source_filename": "Hemi_Labs_Final_Audit_Report.pdf",
++    "source_rel_path": "audit-reports/Hemi_Labs_Final_Audit_Report.pdf",
++    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf",
++    "source_pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3",
++    "size_bytes": 2317318,
++    "physical_page_count": 32,
++    "report_identity": "CredShields Hemi Labs VUSD Smart Contract Audit",
++    "report_month": "2025-03",
++    "audit_period": "2025-03-04 through 2025-03-07",
++    "retest_date": "2025-03-10",
++    "readable": true,
++    "encrypted": false,
++    "copied_into_candidate": false
++  },
++  "source_ocr": {
++    "schema_version": "evmbench_task_creation.ocr_page.v1",
++    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002969_2a929a776caf.jsonl",
++    "sha256": "a79ba90ae9ed42bf8d7e620bbb06ea36799f13b5f33dcefc36b477614ff21182",
++    "size_bytes": 172136,
++    "record_count": 32,
++    "source_page_count": 32,
++    "created_at": "2026-06-29T14:05:22.295670+00:00",
++    "ocr_backend": "sglang",
++    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
++    "ocr_model": "Unlimited-OCR",
++    "ocr_model_version": "Unlimited-OCR",
++    "immutable_input": true,
++    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-03-hemi-vusd/p1-ocr-validation.json"
++  },
++  "queue_record": {
++    "rank": 5,
++    "state_at_start": "next",
++    "category": "Oracle/Data",
++    "inferred_year": 2025,
++    "vulnerability_page_count": 24,
++    "unique_issue_ids": 44
++  },
++  "repository_match": {
++    "repository_url": "https://github.com/hemilabs/vusd-stablecoin.git",
++    "repository_slug": "hemilabs/vusd-stablecoin",
++    "commit": "54f9f235f26df813152b3d3235e7f4373ce473b6",
++    "commit_subject": "Merge pull request #3 from patidarmanoj10/main",
++    "commit_authored_at": "2025-03-05T17:59:42+05:30",
++    "root_tree": "f0214c72689158da00ff7d14be3d87008db4c57b",
++    "audited_scope": [
++      "contracts/"
++    ],
++    "detached_head": true,
++    "clean_including_submodules": true,
++    "review_clone": "/tmp/hemi-vusd-review.p0Hk6v",
++    "tracked_pdf_or_jsonl_count": 0,
++    "file_evidence": [
++      {
++        "path": "contracts/Treasury.sol",
++        "git_blob": "f584bdb296ec91d933a26389602f5df8b437a5bd",
++        "sha256": "61c1e500084b96f0b4081ceb91a93524c78d58d7a760b34bea8bd49ac7a320e0"
++      },
++      {
++        "path": "contracts/Minter.sol",
++        "git_blob": "c3571743f88cebbafbaf77779226666f509659ff",
++        "sha256": "e3ca778b046d8298469b06814ec3221909c8ebdadb07a2207dc29985e85e17a2"
++      },
++      {
++        "path": "contracts/Redeemer.sol",
++        "git_blob": "623899817620b09a8b2450746a3bdb1b8066bb82",
++        "sha256": "db8b387edeb11dc8667c53196316c15e8baf796d7a450ea3dd6317fd44f26ae3"
++      }
++    ]
++  },
++  "post_audit_corroboration": {
++    "kept_separate_from_vulnerable_task_snapshot": true,
++    "fee_on_transfer_fix": {
++      "commit": "f3dec329d42c6e6b81ea61c3f4f4dd3340e976e2",
++      "subject": "Fixed issues reported in audit",
++      "authored_at": "2025-03-10T11:17:23+05:30",
++      "effect": "Minter issuance is calculated from balanceAfter minus balanceBefore"
++    }
++  },
++  "submodules": [],
++  "dependency_locks": {
++    "package_json_sha256": "f9efa5cc2212a7644dbd7cd36b1388d26deff92d9902c8118f844a18c14f1af4",
++    "package_lock_sha256": "f88c66530f5f0c54e82cb6b0ff27fbd812c7e809ae060aa54587c6a79882fb1a",
++    "foundry_toml_sha256": "ad7e3e6deceb714520973cbf8151956eef71f00aa48848f9c28988831b6d55c4",
++    "hardhat_config_sha256": "230f72457f698ba4b83e38ffcfe9ab7596bbcc809f4645bed2aa3a1a45cdc160"
++  },
++  "base_image": {
++    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
++    "platform": "linux/amd64",
++    "node_version": "v22.22.3"
++  },
++  "tooling_revisions": {
++    "opd_base": {
++      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
++      "isolated_clone": "/tmp/hemi-opd-validator.L63kdc/opd-base",
++      "clean": true,
++      "candidate_validator_passed": true,
++      "candidate_validator_errors": 0,
++      "candidate_validator_warnings": 0,
++      "validator_tests_passed": 6
++    }
++  },
++  "baseline_validation": {
++    "review_clone": "/tmp/hemi-vusd-review.p0Hk6v",
++    "npm_ci": {
++      "passed": true,
++      "packages_added": 2602,
++      "disclosure": "The upstream postinstall patch for hardhat-deploy 0.7.9 does not apply to locked hardhat-deploy 0.9.3; npm ci still exits zero."
++    },
++    "hardhat_compile": {
++      "host_node_version": "v20.19.6",
++      "solidity_version": "0.8.3",
++      "compiled_solidity_files": 29,
++      "generated_artifacts": 30,
++      "passed": true
++    },
++    "hardhat_tests": {
++      "passed": 0,
++      "failed": 0,
++      "executed": false,
++      "classification": "upstream_reporter_configuration_failure",
++      "reason": "The locked hardhat-gas-reporter forces Mocha reporter eth-gas-reporter, which the locked Mocha rejects before test discovery."
++    }
++  },
++  "agent_image": {
++    "local_tag": "evmbench-hemi-vusd:c1",
++    "image_config_digest": "sha256:6d5805038ba1478c51900f86a7714fa5db7c972da2333fd640b3aedd088c351d",
++    "created_at": "2026-07-27T15:01:41.125332346Z",
++    "platform": "linux/amd64",
++    "size_bytes": 4480508923,
++    "rootfs_layer_count": 20,
++    "repository_head": "54f9f235f26df813152b3d3235e7f4373ce473b6",
++    "repository_commit_count": 1,
++    "hardhat_compile_passed": true,
++    "build_context_allowlist": [
++      "Dockerfile",
++      ".dockerignore"
++    ],
++    "runtime_network_for_validation": "none",
++    "full_filesystem_regular_files_scanned": 164357,
++    "full_filesystem_bytes_scanned": 4476482419,
++    "final_filesystem_leakage_scan_passed": true,
++    "pdf_absent": true,
++    "agent_repository_jsonl_absent": true,
++    "gold_ocr_and_provenance_markers_absent": true,
++    "built": true,
++    "published_to_registry": false
++  },
++  "ocr_corrections": [
++    {
++      "pages": [
++        6,
++        16,
++        17,
++        18,
++        19
++      ],
++      "field": "vulnerable_commit",
++      "correction": "Use the visually reviewed PDF link target 54f9f235f26df813152b3d3235e7f4373ce473b6. OCR inserts an extra 3 after 152b."
++    },
++    {
++      "pages": [
++        19,
++        20
++      ],
++      "field": "finding_boundary",
++      "correction": "Physical page 20 continues Bug ID #4's retest comment and is not a separate finding."
++    }
++  ],
++  "ocr_evidence": [
++    {
++      "page_number": 6,
++      "role": "scope",
++      "page_image_sha256": "5362d6550991d004dba89bf522a258087aff9b2d1af058ed6ee673f42ec7239c",
++      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl"
++    },
++    {
++      "page_number": 16,
++      "finding_id": "H-01",
++      "page_image_sha256": "2b489ac29912908848b85e4c366f22e319e7aec15aef810b4a3fc41a3e36870d",
++      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl"
++    },
++    {
++      "page_number": 17,
++      "finding_id": "H-02",
++      "page_image_sha256": "3fab09271aa7bb3d867f4c6b64e02c86c3da1bf3c0046146658b26b4ced6c75a",
++      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl"
++    },
++    {
++      "page_number": 18,
++      "finding_id": "H-03",
++      "page_image_sha256": "53dd49b07c41354eb5431861c86e63c0e9c8a4cffa781727cdc7f1a67578bb8a",
++      "artifact_ref": "ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl"
++    }
++  ],
++  "selected_findings": [
++    {
++      "finding_id": "H-01",
++      "source_report_finding_id": "Bug ID #1",
++      "source_pages": [
++        16
++      ],
++      "generated_file": "findings/H-01.md"
++    },
++    {
++      "finding_id": "H-02",
++      "source_report_finding_id": "Bug ID #2",
++      "source_pages": [
++        17
++      ],
++      "generated_file": "findings/H-02.md"
++    },
++    {
++      "finding_id": "H-03",
++      "source_report_finding_id": "Bug ID #3",
++      "source_pages": [
++        18
++      ],
++      "generated_file": "findings/H-03.md"
++    }
++  ],
++  "generated_files": [
++    ".dockerignore",
++    "Dockerfile",
++    "config.yaml",
++    "provenance.json",
++    "review_status.yaml",
++    "findings/H-01.md",
++    "findings/H-02.md",
++    "findings/H-03.md",
++    "findings/gold_audit.md",
++    "ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl",
++    "ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl",
++    "ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl",
++    "ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl"
++  ]
++}
+diff --git a/project/evmbench/audits/2025-03-hemi-vusd/review_status.yaml b/project/evmbench/audits/2025-03-hemi-vusd/review_status.yaml
+new file mode 100644
+index 0000000..6804a54
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-hemi-vusd/review_status.yaml
+@@ -0,0 +1,9 @@
++state: approved_for_admission
++human_approved: true
++approved_by: github.com/pranay5255
++approved_at: 2026-07-27T15:11:01Z
++approval_checkpoint: C1
++review_bundle_digest: 0d7d24df7170e763f532343a98227c3abdf86600036ce94240ca91bc26913c42
++candidate_admitted: false
++harbor_task_generated: false
++agent_or_model_run: false
+diff --git a/project/evmbench/splits/detect-tasks.txt b/project/evmbench/splits/detect-tasks.txt
+index b14cafd..f34d1e5 100644
+--- a/project/evmbench/splits/detect-tasks.txt
++++ b/project/evmbench/splits/detect-tasks.txt
+@@ -38,3 +38,4 @@
+ 2026-01-tempo-feeamm
+ 2026-01-tempo-mpp-streams
+ 2026-01-tempo-stablecoin-dex
++2025-03-hemi-vusd

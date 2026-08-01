@@ -1,0 +1,5 @@
+agent immutable tag digest: sha256:eeca08d02d9a4b71aa236cadff3d49b8ef3bb7f218b2e3e6ed6e55b4fefabe45
+agent convenience tag digest: sha256:eeca08d02d9a4b71aa236cadff3d49b8ef3bb7f218b2e3e6ed6e55b4fefabe45
+verifier immutable tag digest: sha256:76ae407e84c8880119150235f4dfb1f42f972c0d7bfccdbcccd35c9fe590025c
+verifier convenience tag digest: sha256:76ae407e84c8880119150235f4dfb1f42f972c0d7bfccdbcccd35c9fe590025c
+status: passed

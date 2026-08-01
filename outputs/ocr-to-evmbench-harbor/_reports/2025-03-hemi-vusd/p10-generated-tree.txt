@@ -1,0 +1,6 @@
+evmbench__detect-2025-03-hemi-vusd/environment/README.md
+evmbench__detect-2025-03-hemi-vusd/instruction.md
+evmbench__detect-2025-03-hemi-vusd/task.toml
+evmbench__detect-2025-03-hemi-vusd/tests/evmbench_harbor_verifier.py
+evmbench__detect-2025-03-hemi-vusd/tests/test.sh
+evmbench__detect-2025-03-hemi-vusd/tests/validate_detect_submission.py

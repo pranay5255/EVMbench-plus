@@ -1,0 +1,38 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "candidate_id": "2025-03-hemi-vusd",
+  "recorded_at": "2026-07-27T14:55:33Z",
+  "inputs": {
+    "ocr_path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002969_2a929a776caf.jsonl",
+    "ocr_sha256": "a79ba90ae9ed42bf8d7e620bbb06ea36799f13b5f33dcefc36b477614ff21182",
+    "pdf_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audit-reports/Hemi_Labs_Final_Audit_Report.pdf",
+    "pdf_sha256": "76d151f58c3edb5688802c8bd5dbd3727bb3b4a0d3ecc858b4b88e457a8be6e3",
+    "read_only": true
+  },
+  "review_repository": {
+    "path": "/tmp/hemi-vusd-review.p0Hk6v",
+    "isolated": true,
+    "detached_head": true,
+    "head": "54f9f235f26df813152b3d3235e7f4373ce473b6",
+    "clean_including_submodules": true
+  },
+  "adjacent_checkouts": {
+    "opd_base": {
+      "path": "/home/experiments_base/OPD_base",
+      "head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+      "dirty": true,
+      "modified": false
+    },
+    "canonical_evmbench": {
+      "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+      "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+      "dirty": true,
+      "modified": false
+    }
+  },
+  "candidate_output": {
+    "path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-hemi-vusd",
+    "created_only_after_gates_1_through_3": true
+  },
+  "status": "passed"
+}

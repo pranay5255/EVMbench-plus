@@ -1,0 +1,82 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "phase": "P7",
+  "candidate_id": "2025-03-hemi-vusd",
+  "generated_at": "2026-07-27T15:11:01Z",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-hemi-vusd",
+  "approval_review_manifest_sha256": "0d7d24df7170e763f532343a98227c3abdf86600036ce94240ca91bc26913c42",
+  "candidate_file_count": 13,
+  "checksum_stream_definition": "SHA-256 of sorted sha256sum lines generated from NUL-sorted candidate-relative paths",
+  "candidate_checksum_stream_sha256": "d9ac5ae21277451b17408842e4c2dc87552baec483bcac70fb33e911630fb295",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size_bytes": 30,
+      "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 1316,
+      "sha256": "4994afbab77e2de5ae46dbcd5d79cd1e7785fd52752e0ac7b43b9d2ba3e537b2"
+    },
+    {
+      "path": "config.yaml",
+      "size_bytes": 466,
+      "sha256": "f3f88d2eaabded6f82bf53eaa3cbbf9d18b5302187212e693421146e96989fef"
+    },
+    {
+      "path": "findings/H-01.md",
+      "size_bytes": 2463,
+      "sha256": "93d6027cfaf610d49f4133b889a5038f9bd7f5c4e0df3bfeaa7397792bb163e0"
+    },
+    {
+      "path": "findings/H-02.md",
+      "size_bytes": 2481,
+      "sha256": "6a32d2e230f46dd07e2d95e3815deb752dde3cd2056907f4627f3b99e3e036f3"
+    },
+    {
+      "path": "findings/H-03.md",
+      "size_bytes": 1982,
+      "sha256": "e64660b0ea5745583777cc95563b3706228d6dcd3e04954777d4ce5f4a0548d0"
+    },
+    {
+      "path": "findings/gold_audit.md",
+      "size_bytes": 6957,
+      "sha256": "3ec4f88fcb1590a26dfff552a9400105fe44d9ca4f4c3d2e998a6f0afe808f1b"
+    },
+    {
+      "path": "ocr_evidence/pdf_002969_2a929a776caf/H-01.pages.jsonl",
+      "size_bytes": 6437,
+      "sha256": "9fce6dd7697b6437cf14d8a9fa75b91f212e5e5e098ac1ff818f3560f0e6a98e"
+    },
+    {
+      "path": "ocr_evidence/pdf_002969_2a929a776caf/H-02.pages.jsonl",
+      "size_bytes": 6271,
+      "sha256": "8e29eef850f49c16f050b57f70f2d63400b8cd5b1847b1057846a5fcdd4ef4f7"
+    },
+    {
+      "path": "ocr_evidence/pdf_002969_2a929a776caf/H-03.pages.jsonl",
+      "size_bytes": 6829,
+      "sha256": "a14638db2381951ed6dd3bcfe56913fa81d04f60eb64740d6f36cc55658a0404"
+    },
+    {
+      "path": "ocr_evidence/pdf_002969_2a929a776caf/scope.pages.jsonl",
+      "size_bytes": 5720,
+      "sha256": "aecf0756a0532b39b7be64d3a15a5a0611035a023d2e1e471b4eedbc0fae646b"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 9580,
+      "sha256": "e3ee7c8234edeb9014bdb0b2bb114dab3c6766878e2bddc495063ec99060abf9"
+    },
+    {
+      "path": "review_status.yaml",
+      "size_bytes": 312,
+      "sha256": "a32f1288d1faa71af8d850f66e2135b90bfcc0f42f867e0da1bbc61fd15e9ab6"
+    }
+  ],
+  "review_state": "approved_for_admission",
+  "human_approved": true,
+  "approved_by": "github.com/pranay5255",
+  "status": "passed"
+}

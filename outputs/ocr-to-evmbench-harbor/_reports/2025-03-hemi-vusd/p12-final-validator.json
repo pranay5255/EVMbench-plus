@@ -1,0 +1,30 @@
+{
+  "candidate_count": 2,
+  "ok": true,
+  "results": [
+    {
+      "candidate_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-hemi-vusd",
+      "errors": [],
+      "finding_files": [
+        "findings/H-01.md",
+        "findings/H-02.md",
+        "findings/H-03.md"
+      ],
+      "ok": true,
+      "review_state": "approved_for_admission",
+      "warnings": []
+    },
+    {
+      "candidate_dir": "/tmp/hemi-completion.CuPDzS/forest-of-audits/project/evmbench/audits/2025-03-hemi-vusd",
+      "errors": [],
+      "finding_files": [
+        "findings/H-01.md",
+        "findings/H-02.md",
+        "findings/H-03.md"
+      ],
+      "ok": true,
+      "review_state": "approved_for_admission",
+      "warnings": []
+    }
+  ]
+}
