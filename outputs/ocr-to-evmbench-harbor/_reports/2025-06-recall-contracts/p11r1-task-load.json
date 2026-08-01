@@ -1,0 +1,35 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_load.v1",
+  "phase": "P11R1",
+  "status": "passed",
+  "approval_checkpoint": "C1R1",
+  "loader": "harbor.models.task.task.Task",
+  "harbor_version": "0.20.0",
+  "task_count": 1,
+  "task_checksum": "8cbff250f478e08941ab04bd046157142c8bbb5363619f97f3d5677fa1b808af",
+  "name": "evmbench/detect-2025-06-recall-contracts",
+  "task_schema_version": "1.3",
+  "instruction_chars": 2367,
+  "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:154679dd7ac483cff4ccd537b166b56f421f6243dfb5a9944d99732776a780e3",
+  "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:773b4f9153e224e7426bc4165ebade6e9d3599f23cfcc5e9bd3db3aac905683d",
+  "agent_network_mode": "no-network",
+  "environment_network_mode": "no-network",
+  "verifier_environment_mode": "separate",
+  "verifier_network_mode": "public",
+  "resources": {
+    "cpus": 4,
+    "memory_mb": 16384,
+    "storage_mb": 20480
+  },
+  "timeouts": {
+    "agent": 3600,
+    "verifier": 900
+  },
+  "artifact_count": 5,
+  "tests_present": true,
+  "runtime_scope": {
+    "end_to_end_model_smoke": "not_authorized",
+    "task_load_validated": true,
+    "verifier_replay_report": "p12r2-smoke-summary.json"
+  }
+}

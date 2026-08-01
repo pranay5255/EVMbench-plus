@@ -1,0 +1,131 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_integrity.v1",
+  "phase": "P12R2",
+  "candidate_id": "2025-06-recall-contracts",
+  "generated_at": "2026-08-01T14:02:14Z",
+  "status": "passed",
+  "final_integrity_audit": "passed",
+  "approval": {
+    "checkpoint": "C1R1",
+    "review_manifest_sha256": "444ee75d07d977f33ed4b208210023f01d7d4b0b5025b2f3554e5d2132adc7ef",
+    "reviewer": "https://github.com/pranay5255",
+    "binding_report": "p7r1-approval-binding.json",
+    "candidate_drift_detected_before_binding": false
+  },
+  "candidate": {
+    "approved_checksum_stream_sha256": "cad384a766ee556b4678647c8c73fbc4d83fb085e79a7c6a42db10824b738c12",
+    "file_count": 9,
+    "finding_count": 1,
+    "finding_ids": [
+      "H-01"
+    ],
+    "selected_component": "src/token/ValidatorRewarder.sol",
+    "excluded_component": "src/token/ValidatorGater.sol",
+    "validator_gater_targeted_test_count": 0,
+    "current_strict_validator": {
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    },
+    "pinned_strict_validator": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "immutable_inputs": {
+    "source_ocr_sha256": "e1a1f3fa2ad1144b63103cb4150e62ed4072b0109db1c00fa07d656b56f4d800",
+    "source_pdf_sha256": "f737f649ece8716f7cb4e7f7d6a3df97ca496b12c1bbda0e26c0d0c73a052fc1",
+    "vulnerable_commit": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+    "unchanged": true
+  },
+  "isolated_admission": {
+    "status": "passed",
+    "admission_commit": "b38d1f764618c8daf48f3c43748b49d9997a9197",
+    "candidate_and_admitted_tree_byte_identical": true,
+    "detect_split_entry_count": 1,
+    "audit_registry_vulnerability_count": 1,
+    "audit_registry_detect_max_award": 1.0,
+    "adapter_tests": {
+      "passed": 7,
+      "failed": 0
+    },
+    "repository_audit_validation_tests": {
+      "passed": 5,
+      "failed": 1,
+      "disclosed_failure": "Legacy repository-wide mirror test assumes a single-line RUN git clone from evmbench-org; the approved exact-commit multi-step Dockerfile does not have that shape.",
+      "candidate_changed_to_satisfy_legacy_assumption": false,
+      "registry_or_adapter_affected": false
+    },
+    "isolated_tree_clean": true
+  },
+  "images": {
+    "agent": {
+      "digest": "sha256:154679dd7ac483cff4ccd537b166b56f421f6243dfb5a9944d99732776a780e3",
+      "manifest_verified": true,
+      "network_disabled_replay_passed": true,
+      "selected_rewarder_tests": {
+        "passed": 20,
+        "failed": 0
+      }
+    },
+    "verifier": {
+      "digest": "sha256:773b4f9153e224e7426bc4165ebade6e9d3599f23cfcc5e9bd3db3aac905683d",
+      "manifest_verified": true,
+      "separate_from_agent": true,
+      "tests_packaged": true,
+      "audit_registry_vulnerability_count": 1,
+      "audit_registry_detect_max_award": 1.0
+    },
+    "leakage_and_isolation": "passed"
+  },
+  "harbor": {
+    "directory_count": 1,
+    "regular_file_count": 6,
+    "symlink_count": 0,
+    "checksum_stream_sha256": "ad2e554ce383954872e24b39aafe15686a84794b4d3402634241511bdf0ad209",
+    "task_checksum": "8cbff250f478e08941ab04bd046157142c8bbb5363619f97f3d5677fa1b808af",
+    "schema_version": "1.3",
+    "harbor_version": "0.20.0",
+    "task_load": "passed",
+    "agent_network_mode": "no-network",
+    "environment_network_mode": "no-network",
+    "agent_image_digest_pinned": true,
+    "verifier_image_digest_pinned": true,
+    "leakage_scan": "passed"
+  },
+  "verifier_packaging_replay": {
+    "status": "passed",
+    "runtime_network": "none",
+    "synthetic_empty_submission_score": 0,
+    "max_score": 1,
+    "json_submission_valid": true,
+    "judge_or_model_call_made": false,
+    "claim_boundary": "The 0/1 result validates verifier packaging only; it is not an agent evaluation or evidence about model quality."
+  },
+  "model_execution": {
+    "authorized": false,
+    "launched": false,
+    "agent": null,
+    "model": null
+  },
+  "workspace_isolation": {
+    "canonical_forest_checkout_written": false,
+    "canonical_forest_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "canonical_forest_status_entry_count": 94,
+    "canonical_forest_porcelain_v1_z_sha256": "199306451e707afc4c63e94f65ca7a188683b8a2419a9feaa78a20531c8640b4",
+    "external_dirty_state_preserved": true
+  },
+  "canonical_queue": {
+    "path": "docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md",
+    "recall_rank": 12,
+    "recall_state": "created",
+    "created_count": 7,
+    "blocked_count": 3,
+    "in_review_count": 0,
+    "next_count": 1,
+    "queued_count": 9,
+    "next_task": "Benqi Governance"
+  }
+}

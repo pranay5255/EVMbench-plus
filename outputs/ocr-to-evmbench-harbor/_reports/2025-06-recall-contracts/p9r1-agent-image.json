@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9R1",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-06-recall-contracts-agent-7d07380c9a3dbbf9-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-06-recall-contracts"
+  ],
+  "registry_digest": "sha256:154679dd7ac483cff4ccd537b166b56f421f6243dfb5a9944d99732776a780e3",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:154679dd7ac483cff4ccd537b166b56f421f6243dfb5a9944d99732776a780e3",
+  "image_id": "sha256:7d07380c9a3dbbf91d0a6d6f90bb4e177e6f82b4d82c8d8474ffaa9ee01e372c",
+  "review_image_id": "sha256:7d07380c9a3dbbf91d0a6d6f90bb4e177e6f82b4d82c8d8474ffaa9ee01e372c",
+  "canonical_build_resolved_to_reviewed_image_id": true,
+  "created": "2026-08-01T13:14:07.972534459Z",
+  "size_bytes": 3746802169,
+  "rootfs_layer_count": 20,
+  "platform": "linux/amd64",
+  "repository_head": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+  "reachable_repository_commit_count": 1,
+  "selected_component": "src/token/ValidatorRewarder.sol",
+  "selected_tests": {"passed":20,"failed":0,"skipped":0},
+  "validator_gater_tests_executed": 0,
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.superseded_execution.v1",
+  "phase": "P12",
+  "status": "stopped_before_final_integrity_and_queue_transition",
+  "candidate_id": "2025-06-recall-contracts",
+  "approved_snapshot": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "f2c1dce81ca7f27df9dddac8854dd92f28b327aa9433398296c0d3fd77317f48",
+    "reviewer": "https://github.com/pranay5255",
+    "approved_at": "2026-08-01T13:12:55Z",
+    "approved_dockerfile_sha256": "b311a3f665138995cdb8d7ea75f581eb5ba703b956da28527cec2e7026c3ed82"
+  },
+  "completed_for_approved_snapshot": {
+    "isolated_admission_commit": "c8bf0bda25a05a763d2fe8fcb412823720217dc9",
+    "canonical_checkout_written": false,
+    "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:91aa83dcef69170871fa0adf46703c43ba006ac5b3d18d4b6c1472ec273da1e0",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:d33bd58523895180ab56bbec13550158d963f65bee7030c1f3cab70073d40aa9",
+    "single_harbor_task_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-06-recall-contracts/evmbench__detect-2025-06-recall-contracts",
+    "harbor_0_20_0_load": "passed",
+    "network_disabled_no_model_verifier_replay": "passed_0_of_1"
+  },
+  "concurrent_replacement": {
+    "checkpoint": "C1R1",
+    "review_bundle_digest": "444ee75d07d977f33ed4b208210023f01d7d4b0b5025b2f3554e5d2132adc7ef",
+    "created_at": "2026-08-01T13:27:00Z",
+    "supersedes_c1": true,
+    "prior_approval_invalidated": true,
+    "human_approved": false,
+    "changed_candidate_paths": ["Dockerfile", "provenance.json", "review_status.yaml"]
+  },
+  "required_next_gate": {
+    "action": "obtain exact human approval for C1R1 or explicitly restore C1 as authoritative",
+    "final_integrity_report_written": false,
+    "selected_20_queue_transitioned_to_created": false,
+    "agent_or_model_run_launched": false
+  },
+  "irreversible_external_state": {
+    "published_agent_digest": "sha256:91aa83dcef69170871fa0adf46703c43ba006ac5b3d18d4b6c1472ec273da1e0",
+    "published_verifier_digest": "sha256:d33bd58523895180ab56bbec13550158d963f65bee7030c1f3cab70073d40aa9",
+    "note": "Registry images are immutable C1 evidence and must not be represented as approved C1R1 images."
+  }
+}

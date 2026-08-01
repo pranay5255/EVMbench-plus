@@ -1,0 +1,18 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-06-recall-contracts",
+  "candidate_root": "task_dir/outputs/ocr-to-evmbench-harbor/2025-06-recall-contracts",
+  "file_count": 9,
+  "files": [
+    {"path":".dockerignore","size_bytes":30,"sha256":"dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"},
+    {"path":"Dockerfile","size_bytes":2457,"sha256":"b311a3f665138995cdb8d7ea75f581eb5ba703b956da28527cec2e7026c3ed82"},
+    {"path":"config.yaml","size_bytes":262,"sha256":"bf5e5d8a42142f8cb6133252692c8500467296e965a30b1dd156c4b3dded634b"},
+    {"path":"findings/H-01.md","size_bytes":2006,"sha256":"e0a65361b2a48be9cfc2fdda6aaf41140fd1e9510b8bb155fcff039cc3e131fe"},
+    {"path":"findings/gold_audit.md","size_bytes":839,"sha256":"d9960ac1140610e0f6ef67391417f5a2e98186f318c4d6007ef0821ecc8cb919"},
+    {"path":"ocr_evidence/pdf_003752_45da189a57d1/H-01.pages.jsonl","size_bytes":8028,"sha256":"fb5348be43e3816d7730e0709703c204eb5cb80a335e03c9254391f73c4bb0d1"},
+    {"path":"ocr_evidence/pdf_003752_45da189a57d1/scope.pages.jsonl","size_bytes":12898,"sha256":"b85de4bccf94c7d4c99af6010199eff5cc29a859a2f62f77021e8537629d128d"},
+    {"path":"provenance.json","size_bytes":13812,"sha256":"5686b917ee9b222c8bcc2a89b6cbb8d28b4dfce0818231e3b68b1fe30462bfa5"},
+    {"path":"review_status.yaml","size_bytes":192,"sha256":"d8963ed50d166774924de5673e3af386df42cd32dfea1ba1dc5dec2e479d3478"}
+  ]
+}

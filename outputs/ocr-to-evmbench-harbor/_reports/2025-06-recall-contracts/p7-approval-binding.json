@@ -1,0 +1,53 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approval_binding.v1",
+  "phase": "P7",
+  "candidate_id": "2025-06-recall-contracts",
+  "generated_at": "2026-08-01T13:16:00Z",
+  "status": "passed",
+  "approval": {
+    "candidate_id": "2025-06-recall-contracts",
+    "review_checkpoint": "C1",
+    "review_manifest": "c1-review-manifest.json",
+    "review_manifest_sha256": "f2c1dce81ca7f27df9dddac8854dd92f28b327aa9433398296c0d3fd77317f48",
+    "reviewer_identity_as_declared": "github.com/pranay5255",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "explicit_admission_approval": true,
+    "received_at": "2026-08-01T13:12:55Z"
+  },
+  "pre_binding_integrity": {
+    "review_manifest_digest_matched": true,
+    "c1_candidate_checksum_stream_sha256": "61247a30ec8ae1d8d9a2949a90f3eb4f1f870d088befaadd0112810f5a32364b",
+    "candidate_files_matched_c1_before_binding": true,
+    "source_ocr_sha256_matched": true,
+    "source_pdf_sha256_matched": true,
+    "transient_drift_detected": true,
+    "transient_drift_path": "Dockerfile",
+    "transient_drift_detail": "One reviewed test command had been removed after C1 sealing. Admission was held closed; the exact C1 bytes were restored before approval binding.",
+    "restored_dockerfile_sha256": "b311a3f665138995cdb8d7ea75f581eb5ba703b956da28527cec2e7026c3ed82",
+    "restored_dockerfile_matched_c1": true
+  },
+  "post_binding_state": {
+    "state": "approved_for_admission",
+    "human_approved": true,
+    "approved_by": "https://github.com/pranay5255",
+    "review_status_sha256": "99f29ed671cc55d6d37bfce8b46fa83744a2190b3bf0630e378a5f7e6ca30cfe",
+    "provenance_sha256": "13e2688bd76f946403b497fce6e3b76c9192b0422cb883ec7a1630e7e56f0cbd",
+    "approved_candidate_checksum_stream_sha256": "230d023491a0b506f10bff9c49c5bc9d49f8d8c427f7672e2205e90ec8a6a141",
+    "files_changed_from_c1": ["provenance.json", "review_status.yaml"]
+  },
+  "validator": {
+    "require_approved_used": true,
+    "current_exit_code": 0,
+    "pinned_exit_code": 0,
+    "candidate_count": 1,
+    "finding_count": 1,
+    "errors": [],
+    "warnings": []
+  },
+  "summary": {
+    "ok": true,
+    "admission_authorized": true,
+    "candidate_admitted": false
+  }
+}

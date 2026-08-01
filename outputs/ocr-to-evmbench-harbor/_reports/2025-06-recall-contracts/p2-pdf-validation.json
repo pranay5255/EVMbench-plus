@@ -1,0 +1,25 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "phase": "P2",
+  "candidate_id": "2025-06-recall-contracts",
+  "generated_at": "2026-08-01T12:05:00Z",
+  "status": "passed",
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/recall/Sigma_Prime_recall_labs_recall_Security_Assessment_Report_v2_2.pdf",
+    "expected_sha256": "f737f649ece8716f7cb4e7f7d6a3df97ca496b12c1bbda0e26c0d0c73a052fc1",
+    "actual_sha256": "f737f649ece8716f7cb4e7f7d6a3df97ca496b12c1bbda0e26c0d0c73a052fc1",
+    "size_bytes": 471127,
+    "expected_page_count": 33,
+    "physical_page_count": 33,
+    "encrypted": false,
+    "readable": true
+  },
+  "selected_pdf_pages": [1,4,13],
+  "checks": [
+    {"id":"sha256_matches_preserved_ocr","passed":true},
+    {"id":"physical_page_count_matches","passed":true},
+    {"id":"selected_pages_visually_reviewed","passed":true},
+    {"id":"pdf_outside_candidate_and_docker_context","passed":true}
+  ],
+  "summary": {"ok":true}
+}

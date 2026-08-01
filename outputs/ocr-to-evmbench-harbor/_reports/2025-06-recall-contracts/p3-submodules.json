@@ -1,0 +1,13 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.submodules.v1",
+  "phase": "P3",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed",
+  "recursive_submodule_count": 30,
+  "canonical_status_sha256": "88153bfe96ddc641c46ea2fc1140070e8fccee9787ea11c93b4f894f729b351f",
+  "canonical_status_file": "p3-submodules.txt",
+  "all_initialized": true,
+  "all_gitlink_heads_match": true,
+  "all_clean": true,
+  "summary": {"ok":true}
+}

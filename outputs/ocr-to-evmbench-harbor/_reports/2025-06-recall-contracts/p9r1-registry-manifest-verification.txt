@@ -1,0 +1,5 @@
+agent unique tag digest: sha256:154679dd7ac483cff4ccd537b166b56f421f6243dfb5a9944d99732776a780e3
+agent alias tag digest: sha256:154679dd7ac483cff4ccd537b166b56f421f6243dfb5a9944d99732776a780e3
+verifier unique tag digest: sha256:773b4f9153e224e7426bc4165ebade6e9d3599f23cfcc5e9bd3db3aac905683d
+verifier alias tag digest: sha256:773b4f9153e224e7426bc4165ebade6e9d3599f23cfcc5e9bd3db3aac905683d
+all tag-to-digest checks: passed

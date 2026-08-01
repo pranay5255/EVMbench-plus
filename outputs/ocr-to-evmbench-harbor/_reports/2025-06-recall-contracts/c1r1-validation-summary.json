@@ -1,0 +1,62 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.c1_validation_summary.v1",
+  "checkpoint": "C1R1",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "ready_for_exact_human_review",
+  "revision_reason": "Remove the non-asset-loss ValidatorGater test branch and retain only the important ValidatorRewarder detect task.",
+  "approval": {
+    "human_approved": false,
+    "reviewer_identity": null,
+    "approved_at": null,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "task": {
+    "repository": "https://github.com/recallnet/contracts.git",
+    "vulnerable_commit": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+    "task_group_key_sha256": "8ec5dfb95cbaf65f5e64043c38932ed0002b259a8167ad8df14b26927d8284f2",
+    "mode": "detect",
+    "selected_finding_count": 1,
+    "selected_finding": "H-01: Silent inactive reward handling permanently consumes validator claims without payment",
+    "selected_component": "src/token/ValidatorRewarder.sol"
+  },
+  "inputs": {
+    "ocr_sha256": "e1a1f3fa2ad1144b63103cb4150e62ed4072b0109db1c00fa07d656b56f4d800",
+    "pdf_sha256": "f737f649ece8716f7cb4e7f7d6a3df97ca496b12c1bbda0e26c0d0c73a052fc1",
+    "ocr_records": 33,
+    "pdf_pages": 33,
+    "ocr_input_unchanged": true
+  },
+  "checks": [
+    {"id":"ocr_schema_and_immutability","status":"passed","record_checks":1716,"global_checks":19},
+    {"id":"pdf_ocr_side_by_side_review","status":"passed_with_two_cosmetic_corrections"},
+    {"id":"exact_repository_snapshot","status":"passed","recursive_submodules":30},
+    {"id":"all_report_findings_dispositioned","status":"passed","report_findings":19},
+    {"id":"selected_finding_code_and_asset_loss_grounding","status":"passed_with_disclosure"},
+    {"id":"byte_exact_evidence_slices","status":"passed","selected_records":3},
+    {"id":"current_structural_validator","status":"passed","errors":0,"warnings":0,"review_state":"in_review"},
+    {"id":"pinned_structural_validator","status":"passed","errors":0,"warnings":0,"validator_commit":"38957485d5cd63dc5d664c3c2993f60b308f5776"},
+    {"id":"validator_unit_tests_current","status":"passed","passed":6,"failed":0},
+    {"id":"validator_unit_tests_pinned","status":"passed","passed":6,"failed":0},
+    {"id":"no_cache_agent_image_build","status":"passed","image_id":"sha256:7d07380c9a3dbbf91d0a6d6f90bb4e177e6f82b4d82c8d8474ffaa9ee01e372c"},
+    {"id":"network_disabled_build_and_selected_test_replay","status":"passed","rewarder_tests":"20/20","gater_tests_executed":0},
+    {"id":"runtime_and_candidate_layer_leakage","status":"passed","target_marker_hits":0,"pdf_jsonl_entries":0}
+  ],
+  "supersession": {
+    "prior_checkpoint": "C1",
+    "prior_review_manifest_sha256": "f2c1dce81ca7f27df9dddac8854dd92f28b327aa9433398296c0d3fd77317f48",
+    "prior_approval_invalidated": true,
+    "reason": "The user-requested Dockerfile scope correction changes a review-bound candidate byte.",
+    "prior_isolated_admission_canonicalized": false,
+    "prior_harbor_task_generated": false
+  },
+  "disclosures": [
+    "The outer consensus-claim processor that consumes a successful claim is in the separately audited recallnet/ipc repository and is not agent-visible in this Solidity candidate; the report supplies that cross-repository system context.",
+    "Two historical recallnet/ipc submodules use inaccessible SSH-only hokunet remotes, so the IPC task group was not materialized and is not represented as reproducible.",
+    "The ValidatorGater component of RECL-05 is excluded from H-01 and from selected-path test execution because the report does not establish a concrete asset-loss path for that component.",
+    "The unmodified full upstream suite is 76/79 under Foundry 1.3.6 due three disclosed compatibility failures; the selected ValidatorRewarder suite is 20/20.",
+    "The review image is local-only and has no registry digest; admission must rebuild and digest-pin an approved image from the exact approved candidate."
+  ],
+  "summary": {"ok": true, "mandatory_human_gate_reached": true}
+}

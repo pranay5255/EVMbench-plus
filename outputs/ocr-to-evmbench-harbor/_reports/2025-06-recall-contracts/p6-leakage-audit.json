@@ -1,0 +1,54 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_audit.v1",
+  "phase": "P6",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed",
+  "image_id": "sha256:f0e0e4c53f0d3c505a0a471f0d5b56b04ddd5f09d6291d5bd3ff967b1b518c3a",
+  "build_context": {
+    "transferred_bytes": 70,
+    "included_files": [".dockerignore", "Dockerfile"],
+    "candidate_sensitive_files_included": 0
+  },
+  "runtime_filesystem": {
+    "scope": "/home",
+    "pdf_or_jsonl_files": 0,
+    "target_evidence_marker_hits": 0,
+    "root_repository_reachable_commits": 1,
+    "root_repository_remotes": 0,
+    "forbidden_fix_or_post_audit_commits_reachable": 0,
+    "forbidden_commits_checked": [
+      "b5f6ef783bc28859b0caaa037d56a7298ee6d076",
+      "fa69b46fb81379c14deef2f8456161cc87a5b5f5",
+      "fe4d3b42d3c711a7098749772f0457d806964635"
+    ],
+    "original_submodule_git_objects": 0,
+    "synthetic_empty_dependency_git_markers": 31
+  },
+  "candidate_layer": {
+    "diff_id": "sha256:b48e4999fe8ae91bb8b156dc80ef9bd0f201e5415a0a33ad6e7c83f404839f39",
+    "raw_size_bytes": 171793517,
+    "file_count": 7060,
+    "pdf_jsonl_or_whiteout_entries": 0,
+    "dependency_git_object_files": 0,
+    "target_evidence_marker_hits": 0,
+    "pdf_signature_hits": 0,
+    "single_acquire_verify_sanitize_layer": true
+  },
+  "docker_history": {
+    "target_evidence_marker_hits": 0,
+    "candidate_nonempty_layer_count": 1
+  },
+  "target_markers": [
+    "OCR SHA-256",
+    "source PDF SHA-256",
+    "RECL-05",
+    "source PDF filename",
+    "gold finding title",
+    "ocr_evidence",
+    "gold_audit.md",
+    "OCR detection token"
+  ],
+  "admission_or_harbor_artifacts_created": false,
+  "agent_or_model_run": false,
+  "summary": {"ok": true}
+}

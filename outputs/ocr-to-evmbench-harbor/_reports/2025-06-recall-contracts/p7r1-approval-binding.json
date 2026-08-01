@@ -1,0 +1,49 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approval_binding.v1",
+  "phase": "P7R1",
+  "candidate_id": "2025-06-recall-contracts",
+  "generated_at": "2026-08-01T13:42:32Z",
+  "status": "passed",
+  "approval": {
+    "candidate_id": "2025-06-recall-contracts",
+    "review_checkpoint": "C1R1",
+    "review_manifest": "c1r1-review-manifest.json",
+    "review_manifest_sha256": "444ee75d07d977f33ed4b208210023f01d7d4b0b5025b2f3554e5d2132adc7ef",
+    "reviewer_identity_as_declared": "github.com/pranay5255",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "explicit_admission_approval": true,
+    "received_at": "2026-08-01T13:42:32Z"
+  },
+  "pre_binding_integrity": {
+    "review_manifest_digest_matched": true,
+    "c1r1_candidate_checksum_stream_sha256": "7a1b90159916cf344665718d68828e4146e10c602bc42c1aac2293a281f8ca51",
+    "candidate_files_matched_c1r1_before_binding": true,
+    "source_ocr_sha256_matched": true,
+    "source_pdf_sha256_matched": true,
+    "candidate_drift_detected": false
+  },
+  "post_binding_state": {
+    "state": "approved_for_admission",
+    "human_approved": true,
+    "approved_by": "https://github.com/pranay5255",
+    "review_status_sha256": "f4b1ff7fb4fae7399b5e530ca78710f74a7dfef54667853d3134d4ec68e4bb7a",
+    "provenance_sha256": "fc605a3efd1a99cbf1d52bb90a32237b1fb704a05e760b87b860b8b00faf590d",
+    "approved_candidate_checksum_stream_sha256": "cad384a766ee556b4678647c8c73fbc4d83fb085e79a7c6a42db10824b738c12",
+    "files_changed_from_c1r1": ["provenance.json", "review_status.yaml"]
+  },
+  "validator": {
+    "require_approved_used": true,
+    "current_exit_code": 0,
+    "pinned_exit_code": 0,
+    "candidate_count": 1,
+    "finding_count": 1,
+    "errors": [],
+    "warnings": []
+  },
+  "summary": {
+    "ok": true,
+    "admission_authorized": true,
+    "candidate_admitted": false
+  }
+}

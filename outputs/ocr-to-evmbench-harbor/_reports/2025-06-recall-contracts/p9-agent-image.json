@@ -1,0 +1,40 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-06-recall-contracts-agent-cee10c066694104c-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-06-recall-contracts"
+  ],
+  "registry_digest": "sha256:91aa83dcef69170871fa0adf46703c43ba006ac5b3d18d4b6c1472ec273da1e0",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:91aa83dcef69170871fa0adf46703c43ba006ac5b3d18d4b6c1472ec273da1e0",
+  "image_id": "sha256:cee10c066694104c3d36046206405219f5cb5903ba921cfa904a1e217ac845c9",
+  "review_image_id": "sha256:f0e0e4c53f0d3c505a0a471f0d5b56b04ddd5f09d6291d5bd3ff967b1b518c3a",
+  "approved_dockerfile_sha256": "b311a3f665138995cdb8d7ea75f581eb5ba703b956da28527cec2e7026c3ed82",
+  "exact_approved_dockerfile_rebuilt": true,
+  "created": "2026-08-01T13:22:38.171744482Z",
+  "size_bytes": 3746810663,
+  "rootfs_layer_count": 20,
+  "construction_layer_diff_id": "sha256:7e2b4da16f93170e2d096afd0342466c1c193d4330a13e742516ead15a5ce3ba",
+  "platform": "linux/amd64",
+  "repository_head": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+  "reachable_repository_commit_count": 1,
+  "root_repository_remote_count": 0,
+  "synthetic_empty_dependency_git_markers": 31,
+  "dependency_git_object_file_count": 0,
+  "audited_file_hashes_verified": true,
+  "registry_manifest_verified": true,
+  "foundry_compile_source_files": 182,
+  "targeted_tests": {
+    "validator_rewarder": {"passed": 20, "failed": 0, "skipped": 0},
+    "validator_gater_compatible_subset": {"passed": 7, "failed": 0, "skipped": 0}
+  },
+  "c1_full_upstream_suite": {
+    "passed": 76,
+    "failed": 3,
+    "total": 79,
+    "failures_classified_as_disclosed_toolchain_compatibility": true
+  },
+  "offline_isolation_check_passed": true
+}

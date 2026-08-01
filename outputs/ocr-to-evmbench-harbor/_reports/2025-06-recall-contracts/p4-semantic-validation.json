@@ -1,0 +1,40 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v1",
+  "phase": "P4",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed_with_disclosures",
+  "report_finding_count": 19,
+  "dispositioned_finding_count": 19,
+  "selected_finding_count": 1,
+  "selected": [
+    {
+      "finding_id": "H-01",
+      "report_id": "RECL-05",
+      "pages": [13],
+      "distinct_root_cause": true,
+      "present_at_vulnerable_commit": true,
+      "direct_or_indirect_asset_loss": true,
+      "code_paths": ["src/token/ValidatorRewarder.sol"],
+      "excluded_report_component": {
+        "path": "src/token/ValidatorGater.sol",
+        "asset_loss_path_established": false
+      },
+      "fix_corroborated": true
+    }
+  ],
+  "disclosures": [
+    "The report's statement that the upstream consensus processor marks the claim consumed is used as system-context evidence; that processor lives in the separately audited IPC repository and is not agent-visible in this Solidity candidate.",
+    "The ValidatorGater component of RECL-05 is excluded because the report does not establish a concrete asset-loss path for its power-range bypass.",
+    "The additional ValidatorRewarder refactor commit fe4d3b42d3c711a7098749772f0457d806964635 is not the base commit; the same defect is directly present at primary audited commit 5a6710409a90944ceb3ff4d8ad9edea1b00557c3.",
+    "IPC findings are task-key splits, not assertions that those findings are ineligible for a separate benchmark."
+  ],
+  "checks": [
+    {"id":"every_report_finding_dispositioned","passed":true},
+    {"id":"selected_finding_pdf_grounded","passed":true},
+    {"id":"selected_finding_code_grounded","passed":true},
+    {"id":"selected_finding_asset_loss_grounded","passed":true},
+    {"id":"non_asset_loss_component_excluded","passed":true},
+    {"id":"root_causes_deduplicated","passed":true}
+  ],
+  "summary": {"ok":true,"failed_check_count":0}
+}

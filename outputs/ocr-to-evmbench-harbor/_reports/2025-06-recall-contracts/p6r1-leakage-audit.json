@@ -1,0 +1,55 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_audit.v1",
+  "phase": "P6R1",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed",
+  "image_id": "sha256:7d07380c9a3dbbf91d0a6d6f90bb4e177e6f82b4d82c8d8474ffaa9ee01e372c",
+  "build_context": {
+    "transferred_bytes": 70,
+    "included_files": [".dockerignore", "Dockerfile"],
+    "candidate_sensitive_files_included": 0
+  },
+  "runtime_filesystem": {
+    "scope": "/home",
+    "pdf_or_jsonl_files": 0,
+    "target_evidence_marker_hits": 0,
+    "root_repository_reachable_commits": 1,
+    "root_repository_remotes": 0,
+    "root_status_clean": true,
+    "forbidden_fix_or_post_audit_commits_reachable": 0,
+    "forbidden_commits_checked": [
+      "b5f6ef783bc28859b0caaa037d56a7298ee6d076",
+      "fa69b46fb81379c14deef2f8456161cc87a5b5f5",
+      "fe4d3b42d3c711a7098749772f0457d806964635"
+    ],
+    "original_submodule_git_objects": 0,
+    "synthetic_empty_dependency_git_markers": 31
+  },
+  "candidate_layer": {
+    "diff_id": "sha256:ccdb007a1004d7a1a12d0bc5b73f07bd08977af8b9016cd69150d121d2eee764",
+    "filesystem_size_bytes": 181389342,
+    "filesystem_entry_count": 9407,
+    "pdf_jsonl_or_whiteout_entries": 0,
+    "dependency_git_object_files": 0,
+    "target_evidence_marker_hits": 0,
+    "pdf_signature_hits": 0,
+    "single_acquire_verify_sanitize_layer": true
+  },
+  "docker_history": {
+    "target_evidence_marker_hits": 0,
+    "candidate_nonempty_layer_count": 1
+  },
+  "target_markers": [
+    "OCR SHA-256",
+    "source PDF SHA-256",
+    "RECL-05",
+    "source PDF filename",
+    "gold finding title",
+    "ocr_evidence",
+    "gold_audit.md",
+    "OCR detection token"
+  ],
+  "admission_or_harbor_artifacts_created_for_revision": false,
+  "agent_or_model_run": false,
+  "summary": {"ok": true}
+}

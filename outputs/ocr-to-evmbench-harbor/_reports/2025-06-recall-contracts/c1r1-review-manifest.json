@@ -1,0 +1,115 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1R1",
+  "candidate_id": "2025-06-recall-contracts",
+  "created_at": "2026-08-01T13:27:00Z",
+  "review_state": "in_review",
+  "approval": {
+    "human_approved": false,
+    "reviewer_identity": null,
+    "approved_at": null,
+    "binding_rule": "Approval must name this candidate ID, the exact SHA-256 digest of this manifest, and the reviewer identity.",
+    "candidate_admission_allowed": false,
+    "harbor_generation_allowed": false,
+    "agent_or_model_run_allowed": false
+  },
+  "revision": {
+    "supersedes_checkpoint": "C1",
+    "supersedes_review_manifest_sha256": "f2c1dce81ca7f27df9dddac8854dd92f28b327aa9433398296c0d3fd77317f48",
+    "prior_approval_invalidated": true,
+    "reason": "The non-asset-loss ValidatorGater test branch was removed at user request; only the important ValidatorRewarder detect path remains."
+  },
+  "candidate": {
+    "repository": "https://github.com/recallnet/contracts.git",
+    "vulnerable_commit": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+    "task_group_key": "recallnet/contracts@5a6710409a90944ceb3ff4d8ad9edea1b00557c3|src/**+script/**+test/**|detect",
+    "task_group_key_sha256": "8ec5dfb95cbaf65f5e64043c38932ed0002b259a8167ad8df14b26927d8284f2",
+    "mode": "detect",
+    "framework": "foundry",
+    "selected_finding_count": 1,
+    "selected_finding": {
+      "id": "H-01",
+      "report_id": "RECL-05",
+      "source_pages": [13],
+      "title": "Silent inactive reward handling permanently consumes validator claims without payment",
+      "affected_path": "src/token/ValidatorRewarder.sol"
+    },
+    "excluded_component": {
+      "path": "src/token/ValidatorGater.sol",
+      "reason": "No concrete report-grounded asset-loss path; excluded from scoring and selected-path test execution."
+    }
+  },
+  "source_evidence": {
+    "pdf_id": "pdf_003752_45da189a57d1",
+    "pdf_sha256": "f737f649ece8716f7cb4e7f7d6a3df97ca496b12c1bbda0e26c0d0c73a052fc1",
+    "ocr_sha256": "e1a1f3fa2ad1144b63103cb4150e62ed4072b0109db1c00fa07d656b56f4d800",
+    "pdf_pages": 33,
+    "ocr_records": 33,
+    "selected_byte_exact_pages": [1, 4, 13]
+  },
+  "agent_image": {
+    "tag": "evmbench-recall-contracts-c1:review",
+    "id": "sha256:7d07380c9a3dbbf91d0a6d6f90bb4e177e6f82b4d82c8d8474ffaa9ee01e372c",
+    "size_bytes": 3746802169,
+    "local_only": true,
+    "repo_digests": [],
+    "candidate_layer_diff_id": "sha256:ccdb007a1004d7a1a12d0bc5b73f07bd08977af8b9016cd69150d121d2eee764",
+    "network_disabled_replay": "passed",
+    "selected_rewarder_tests": "20/20",
+    "validator_gater_tests_executed": 0,
+    "runtime_and_layer_leakage": "passed"
+  },
+  "validation": {
+    "ocr": "passed",
+    "pdf_ocr_review": "passed_with_cosmetic_corrections",
+    "repository_resolution": "passed",
+    "semantic_grounding": "passed_with_disclosures",
+    "byte_exact_slices": "passed",
+    "current_structural_validator": "passed_zero_errors_zero_warnings",
+    "pinned_structural_validator": "passed_zero_errors_zero_warnings",
+    "current_validator_tests": "6/6",
+    "pinned_validator_tests": "6/6",
+    "no_cache_image_build": "passed",
+    "network_disabled_selected_tests": "20/20",
+    "candidate_leakage": "passed"
+  },
+  "material_disclosures": [
+    "The report supplies the cross-repository fact that the outer recallnet/ipc consensus processor consumes the successfully returned claim; that processor is not agent-visible in this Solidity-only candidate.",
+    "Two historical recallnet/ipc SSH-only submodules were inaccessible, so no IPC candidate was materialized and IPC reproducibility is not claimed.",
+    "The full unmodified upstream suite is 76/79 under Foundry 1.3.6 due three disclosed compatibility failures; the selected ValidatorRewarder suite is 20/20.",
+    "The prior C1 approval and isolated admission are superseded; the canonical EVMBench checkout was not written and no Harbor task was generated.",
+    "The C1R1 image is local-only. A registry-pushed, digest-pinned image may be produced only after new exact approval and isolated admission."
+  ],
+  "artifact_bindings": [
+    {"path":"c1r1-generated-file-manifest.json","sha256":"4d3a99a64a48747817644bfb98404ccaaf1a9e55702baadcb5a4fd9e60e28612"},
+    {"path":"c1r1-validation-summary.json","sha256":"090a6f8feb21478599664cbae53b664041d2047da48d0b4e01f1297c9043a2c4"},
+    {"path":"c1r1-supersession.json","sha256":"7e4a0f9edaa8b0b8557f3a2fed60fe29c5f77d2feebeaabcd00a9071d846bfbc"},
+    {"path":"p1-isolation.json","sha256":"b6d9aa90a90b628fd77e75ad4f479d29f210d03fb99372114fea43e6407d24fb"},
+    {"path":"p1-ocr-validation.json","sha256":"573167f98e686b178c06f0bca5f78964c6b1bb43d52aa6a46573d0f9123f30b6"},
+    {"path":"p2-pdf-validation.json","sha256":"a11098fb5ff7062fcff3c3f614407a87d5a40e17bdfd46ee27f9a7321c1bcae5"},
+    {"path":"p2-pdf-ocr-review.md","sha256":"51c989e7e64818ccc0f008a277f73fb096d332df8d9e29cfdf6ddedc601ad088"},
+    {"path":"p3-repository-snapshot.json","sha256":"cad5e0a24d54283da57b19df14cb4d923b1166d8c48f622d610826eb92c422e6"},
+    {"path":"p3-submodules.json","sha256":"60870ac35764e5ce71789d9b1ed5db5f4eb2c0e0f44e61478d0b7864511e7703"},
+    {"path":"p3-repository-grounding.md","sha256":"9c1916597e0f712c444630e2d01b005528abca59f31a709f249b5e5244d64ec9"},
+    {"path":"p4-semantic-validation.json","sha256":"65684c558ff700d2daaf8ae16b3959f87a7b22a3630f205aa0b99f239c8ecf1d"},
+    {"path":"p4-finding-grounding.md","sha256":"8be50438a09615d9d72351ee327163af2f2997c8342a504ec91f253034c0e476"},
+    {"path":"p5-byte-exact-slices.json","sha256":"44bc282bfe480816fce93d582531eaf91badf3bb8de794c8b9e1d6bed0971a34"},
+    {"path":"p5-build-baseline.md","sha256":"07f51900fe29f185d038784c2ebd9bfc6db90cda11451b3656aa85511c1d72ac"},
+    {"path":"p6-current-structural-validator.json","sha256":"525e5b5cfd5ab441d3efee1d595ccf0eee65501f8b5a5a22415002ef1e600473"},
+    {"path":"p6-pinned-structural-validator.json","sha256":"0782a519324cf6b08415e67dfbe296a5d30b60e762628ac0e39ff1df216795bc"},
+    {"path":"p6-current-validator-tests.txt","sha256":"ede79f995e2f310beccdc9410e7733dc39b02dbefaa16a04f56b0c5951bb8a9f"},
+    {"path":"p6-pinned-validator-tests.txt","sha256":"ede79f995e2f310beccdc9410e7733dc39b02dbefaa16a04f56b0c5951bb8a9f"},
+    {"path":"p6r1-image-build-and-offline-replay.json","sha256":"fc52070be049430874f310114cd86069f07f6753e21891618941c7d8e06965cc"},
+    {"path":"p6r1-leakage-audit.json","sha256":"7e53f2d28f7791b1a148b8d3065de017d369532ac145da4cb6e89027e6c6a8e8"}
+  ],
+  "queue_state_after_checkpoint_recording": {
+    "created": 6,
+    "blocked": 3,
+    "in_review": 1,
+    "next": 1,
+    "queued": 9,
+    "next_task": "rank 6 Benqi Governance",
+    "out_of_queue_order_selection": "rank 12 Recall Labs"
+  },
+  "summary": {"ok": true, "mandatory_human_approval_required": true}
+}

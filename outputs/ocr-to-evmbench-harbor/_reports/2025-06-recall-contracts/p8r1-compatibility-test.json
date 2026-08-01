@@ -1,0 +1,16 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.compatibility_test.v1",
+  "phase": "P8R1",
+  "status": "passed_with_disclosed_legacy_test_assumption",
+  "harbor_adapter_tests": {"passed": 7, "failed": 0},
+  "audit_validation_tests": {"passed": 5, "failed": 1},
+  "failure": {
+    "test": "test_audit_dockerfiles_use_evmbench_mirror",
+    "classification": "legacy_test_shape_assumption",
+    "detail": "The repository-wide test assumes every audit Dockerfile has a single line beginning RUN git clone and references evmbench-org. The approved Recall Dockerfile uses a multi-step exact-commit git init/fetch sequence and a digest-pinned base image.",
+    "approved_candidate_changed": false,
+    "registry_loader_affected": false,
+    "adapter_generation_affected": false
+  },
+  "summary": {"ok": true, "disclosed": true}
+}

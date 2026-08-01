@@ -1,0 +1,9 @@
+id: 2025-06-recall-contracts
+mode: detect
+framework: foundry
+base_commit: 5a6710409a90944ceb3ff4d8ad9edea1b00557c3
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Silent inactive reward handling permanently consumes validator claims without payment"
+    award: 1.0

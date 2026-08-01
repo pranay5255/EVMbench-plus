@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "status": "passed",
+  "task_count": 1,
+  "regular_file_count": 6,
+  "forbidden_content_patterns": [
+    "exact gold finding title",
+    "RECL-05",
+    "Sigma Prime",
+    "C1 review bundle digest",
+    "gold_audit",
+    "ocr_evidence",
+    "provenance",
+    "review_status",
+    "vulnerable repository URL",
+    "vulnerable commit"
+  ],
+  "forbidden_content_match_count": 0,
+  "pdf_file_count": 0,
+  "jsonl_file_count": 0,
+  "agent_image_reference_is_digest_pinned": true,
+  "verifier_image_reference_is_digest_pinned": true,
+  "tests_match_packaged_verifier_image": true,
+  "summary": {"ok":true}
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.task_group.v1",
+  "phase": "P3",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed",
+  "task_group_key": "recallnet/contracts@5a6710409a90944ceb3ff4d8ad9edea1b00557c3|src/**+script/**+test/**|detect",
+  "task_group_key_sha256": "8ec5dfb95cbaf65f5e64043c38932ed0002b259a8167ad8df14b26927d8284f2",
+  "repository_url": "https://github.com/recallnet/contracts.git",
+  "vulnerable_commit": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+  "audited_scope": ["src/**","script/**","test/**"],
+  "audited_exclusions": ["lib/**"],
+  "mode": "detect",
+  "framework": "foundry",
+  "separate_report_groups": [
+    {"repository_url":"https://github.com/recallnet/ipc.git","commit":"d08b2794743a9013502950292934fb98b0341c79","included":false,"reason":"different repository, commit, language scope, and task key"},
+    {"repository_url":"https://github.com/recallnet/contracts.git","commit":"fe4d3b42d3c711a7098749772f0457d806964635","included":false,"reason":"additional ValidatorRewarder refactor snapshot; RECL-05 already exists at the primary audited base"}
+  ],
+  "checks": [
+    {"id":"one_repository","passed":true},
+    {"id":"one_full_vulnerable_commit","passed":true},
+    {"id":"one_audited_scope","passed":true},
+    {"id":"detect_mode","passed":true},
+    {"id":"cross_repository_findings_excluded","passed":true}
+  ],
+  "summary": {"ok":true}
+}

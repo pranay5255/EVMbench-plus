@@ -1,0 +1,13 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "phase": "P2",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed_with_cosmetic_corrections",
+  "corrections": [
+    {"pages":[4],"field":"footer","ocr":"g high-origin prime","verified_pdf":"Sigma Prime","security_semantics_changed":false},
+    {"pages":[13],"field":"code_label","ocr":"ValidatorGatersol","verified_pdf":"ValidatorGater.sol","security_semantics_changed":false},
+    {"pages":[13],"field":"footer","ocr":"sigmeprime","verified_pdf":"Sigma Prime","security_semantics_changed":false}
+  ],
+  "ocr_rewritten": false,
+  "summary": {"ok":true,"semantic_correction_count":0}
+}

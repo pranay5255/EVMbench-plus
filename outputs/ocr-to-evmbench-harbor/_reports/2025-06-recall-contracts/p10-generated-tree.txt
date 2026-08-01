@@ -1,0 +1,9 @@
+evmbench__detect-2025-06-recall-contracts/
+├── environment/
+│   └── README.md
+├── instruction.md
+├── task.toml
+└── tests/
+    ├── evmbench_harbor_verifier.py
+    ├── test.sh
+    └── validate_detect_submission.py

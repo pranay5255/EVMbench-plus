@@ -1,0 +1,54 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "phase": "P1",
+  "candidate_id": "2025-06-recall-contracts",
+  "generated_at": "2026-08-01T12:05:00Z",
+  "status": "passed",
+  "workspace": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "dirty": true,
+    "status_entry_count_after_candidate_materialization": 539,
+    "status_sha256_after_candidate_materialization": "82c96ca8cfda445bbe1a1a4e23a7e52dcf202cc91c74fc0a9702c88106af4c01",
+    "handling": "preserved; no reset, clean, stash, or checkout"
+  },
+  "canonical_forest_of_audits": {
+    "path": "/home/experiments_base/forestOfAudits",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "branch": "main",
+    "dirty": true,
+    "status_entry_count": 94,
+    "status_sha256": "b8cc233d3ee6a7b835766e52aaf0c31793f19bd529f315da9637d4517fbcb82b",
+    "written": false
+  },
+  "pinned_opd_validator_checkout": {
+    "path": "/tmp/opd-recall-validator.YlgviU",
+    "head": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "detached": true,
+    "clean": true
+  },
+  "review_checkouts": [
+    {
+      "path": "/tmp/recall-contracts-review.nPXzYR",
+      "repository": "https://github.com/recallnet/contracts.git",
+      "head": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+      "detached": true,
+      "clean_including_submodules": true
+    },
+    {
+      "path": "/tmp/recall-ipc-review.k4TqT0",
+      "repository": "https://github.com/recallnet/ipc.git",
+      "head": "d08b2794743a9013502950292934fb98b0341c79",
+      "detached": true,
+      "clean_including_submodules": false,
+      "reason": "historical SSH-only hokunet submodule URLs are inaccessible without private keys"
+    }
+  ],
+  "checks": [
+    {"id":"dirty_workspace_preserved","passed":true},
+    {"id":"canonical_forest_read_only","passed":true},
+    {"id":"pinned_validator_checkout_clean","passed":true},
+    {"id":"selected_repository_checkout_clean","passed":true}
+  ],
+  "summary": {"ok":true}
+}

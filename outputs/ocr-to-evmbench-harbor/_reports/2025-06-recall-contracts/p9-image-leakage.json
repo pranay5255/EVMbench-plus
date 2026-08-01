@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_leakage.v1",
+  "phase": "P9",
+  "status": "passed",
+  "agent": {
+    "network_disabled_runtime_scan": true,
+    "pdf_file_count": 0,
+    "jsonl_file_count": 0,
+    "ocr_evidence_present": false,
+    "provenance_present": false,
+    "review_status_present": false,
+    "gold_finding_title_match_count": 0,
+    "review_bundle_digest_match_count": 0,
+    "verifier_tests_directory_present": false,
+    "credential_environment_match_count": 0
+  },
+  "verifier": {
+    "network_disabled_runtime_scan": true,
+    "grader_only_audit_subset": ["config.yaml", "findings/H-01.md", "findings/gold_audit.md"],
+    "pdf_file_count": 0,
+    "jsonl_file_count": 0,
+    "ocr_evidence_present": false,
+    "provenance_present": false,
+    "review_status_present": false,
+    "credential_environment_match_count": 0
+  },
+  "summary": {"ok":true}
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_validation.v1",
+  "phase": "P6R1",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed_with_disclosed_upstream_compatibility_failures",
+  "scope_revision": "ValidatorGater test execution removed; only the selected ValidatorRewarder detect path is exercised",
+  "base_image": "pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+  "image": {
+    "tag": "evmbench-recall-contracts-c1:review",
+    "id": "sha256:7d07380c9a3dbbf91d0a6d6f90bb4e177e6f82b4d82c8d8474ffaa9ee01e372c",
+    "created_at": "2026-08-01T13:14:07.972534459Z",
+    "size_bytes": 3746802169,
+    "repo_digests": [],
+    "local_only": true,
+    "candidate_layer_diff_id": "sha256:ccdb007a1004d7a1a12d0bc5b73f07bd08977af8b9016cd69150d121d2eee764"
+  },
+  "build": {
+    "no_cache": true,
+    "network_enabled_only_during_construction": true,
+    "effective_context_bytes": 70,
+    "compiled_source_files": 182,
+    "foundry": "1.3.6-v1.3.6",
+    "solc": "0.8.30",
+    "source_or_test_files_modified": false,
+    "explicit_remapping": "solidity-cborutils/=lib/filecoin-solidity/lib/solidity-cborutils/"
+  },
+  "full_upstream_suite": {
+    "passed": 76,
+    "failed": 3,
+    "total": 79,
+    "failures": [
+      {
+        "test": "LibWasmTest.testEncodeCborBytesArray",
+        "classification": "Foundry 1.3.6 nested cheatcode/revert-depth compatibility"
+      },
+      {
+        "test": "LibWasmTest.testEncodeCborUint256AsBytes",
+        "classification": "Foundry 1.3.6 nested cheatcode/revert-depth compatibility"
+      },
+      {
+        "test": "ValidatorGaterTest.testFailUnauthorizedApprove",
+        "classification": "legacy testFail naming unsupported by current Foundry"
+      }
+    ],
+    "represented_as_green": false,
+    "historical_baseline_only": true
+  },
+  "hard_gate_tests": {
+    "validator_rewarder": {"passed": 20, "failed": 0, "total": 20},
+    "selected_finding_regression_test": "ValidatorRewarderBasicClaimTest.testNotifyValidClaimWhenNotActive"
+  },
+  "network_disabled_replay": {
+    "network_mode": "none",
+    "foundry_offline": true,
+    "build": "passed",
+    "validator_rewarder": {"passed": 20, "failed": 0, "total": 20},
+    "elapsed_seconds": 431.68,
+    "head": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+    "reachable_root_commits": 1,
+    "root_remotes": 0,
+    "root_status_clean": true,
+    "root_tracked_files": 78,
+    "synthetic_empty_dependency_git_markers": 31,
+    "dependency_git_object_files": 0
+  },
+  "summary": {"ok": true}
+}

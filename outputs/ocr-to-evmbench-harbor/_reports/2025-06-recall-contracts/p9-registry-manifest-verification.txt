@@ -1,0 +1,7 @@
+agent_tag=docker.io/pranay5255/yudaii_evmbench:2025-06-recall-contracts-agent-cee10c066694104c-amd64
+agent_media_type=application/vnd.docker.distribution.manifest.v2+json
+agent_digest=sha256:91aa83dcef69170871fa0adf46703c43ba006ac5b3d18d4b6c1472ec273da1e0
+verifier_tag=docker.io/pranay5255/yudaii_evmbench:2025-06-recall-contracts-verifier-db27c5150458aaf8-amd64
+verifier_media_type=application/vnd.docker.distribution.manifest.v2+json
+verifier_digest=sha256:d33bd58523895180ab56bbec13550158d963f65bee7030c1f3cab70073d40aa9
+status=passed

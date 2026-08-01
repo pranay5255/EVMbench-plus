@@ -1,0 +1,19 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8R1",
+  "status": "passed",
+  "audit_id": "2025-06-recall-contracts",
+  "framework": "foundry",
+  "base_commit": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+  "vulnerability_count": 1,
+  "detect_max_award": 1.0,
+  "vulnerabilities": [
+    {
+      "id": "H-01",
+      "title": "Silent inactive reward handling permanently consumes validator claims without payment",
+      "award": 1.0
+    }
+  ],
+  "strict_candidate_validator": "passed_zero_errors_zero_warnings",
+  "harbor_adapter_tests": "7/7 passed"
+}

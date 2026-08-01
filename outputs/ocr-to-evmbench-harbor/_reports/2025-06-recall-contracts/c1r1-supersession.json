@@ -1,0 +1,29 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_supersession.v1",
+  "candidate_id": "2025-06-recall-contracts",
+  "generated_at": "2026-08-01T13:25:00Z",
+  "status": "superseded_pending_new_exact_approval",
+  "superseded": {
+    "checkpoint": "C1",
+    "review_manifest_sha256": "f2c1dce81ca7f27df9dddac8854dd92f28b327aa9433398296c0d3fd77317f48",
+    "approval_binding_report": "p7-approval-binding.json",
+    "isolated_admission_report": "p8-isolated-evmbench-state.json"
+  },
+  "replacement": {
+    "checkpoint": "C1R1",
+    "reason": "User requested removal of the non-asset-loss ValidatorGater branch and retention of important detect tasks only.",
+    "changed_candidate_paths": ["Dockerfile", "provenance.json", "review_status.yaml"],
+    "selected_finding_count": 1,
+    "selected_component": "src/token/ValidatorRewarder.sol",
+    "selected_path_tests": "20/20",
+    "validator_gater_tests_executed": 0,
+    "human_approved": false
+  },
+  "boundaries": {
+    "canonical_evmbench_checkout_written": false,
+    "harbor_task_generated": false,
+    "registry_publication": false,
+    "agent_or_model_run": false
+  },
+  "summary": {"ok": true, "new_exact_approval_required": true}
+}

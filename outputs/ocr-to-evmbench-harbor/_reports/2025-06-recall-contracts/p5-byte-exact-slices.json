@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "phase": "P5",
+  "candidate_id": "2025-06-recall-contracts",
+  "source_jsonl": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003752_45da189a57d1.jsonl",
+    "sha256": "e1a1f3fa2ad1144b63103cb4150e62ed4072b0109db1c00fa07d656b56f4d800"
+  },
+  "slices": [
+    {"role":"scope","path":"ocr_evidence/pdf_003752_45da189a57d1/scope.pages.jsonl","expected_pages":[1,4],"actual_pages":[1,4],"line_count":2,"sha256":"b85de4bccf94c7d4c99af6010199eff5cc29a859a2f62f77021e8537629d128d","byte_exact":true,"strictly_ordered":true},
+    {"role":"finding","finding_id":"H-01","path":"ocr_evidence/pdf_003752_45da189a57d1/H-01.pages.jsonl","expected_pages":[13],"actual_pages":[13],"line_count":1,"sha256":"fb5348be43e3816d7730e0709703c204eb5cb80a335e03c9254391f73c4bb0d1","byte_exact":true,"strictly_ordered":true}
+  ],
+  "checks": [
+    {"id":"source_hash_unchanged","passed":true},
+    {"id":"all_slice_records_are_complete_source_lines","passed":true},
+    {"id":"all_slice_bytes_match_ordered_source_concatenation","passed":true},
+    {"id":"all_expected_page_sequences_match","passed":true}
+  ],
+  "summary": {"ok":true,"slice_count":2,"selected_unique_record_count":3,"failed_check_count":0}
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "phase": "P3",
+  "candidate_id": "2025-06-recall-contracts",
+  "status": "passed",
+  "repository": {
+    "url": "https://github.com/recallnet/contracts.git",
+    "review_clone": "/tmp/recall-contracts-review.nPXzYR",
+    "head": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+    "parents": ["7e43ba07086e9e3fbc045f7bed03bf1d3ba4e95d","bcafc3bb93fd6133559e29c0363368e561e9c8ea"],
+    "root_tree": "810ec9fb5be525c09699f1861b24ea7fb4def076",
+    "src_tree": "4a2f669391451c9e7d7b2684a7b566522b1f8902",
+    "token_tree": "05614df4108e6db4865f048e45dfc86e276e8911",
+    "detached": true,
+    "clean_including_submodules": true,
+    "shallow": false,
+    "git_fsck_passed": true,
+    "tracked_pdf_or_jsonl_count": 0
+  },
+  "key_files": [
+    {"path":"src/token/ValidatorGater.sol","git_blob":"a2b1ac8ba3d293259766d9eed7267e9d04845396","sha256":"feca3bd96f5983d194e7c39095cdf4e1365f9e62bc7a8e7dd867c6d5e477beeb"},
+    {"path":"src/token/ValidatorRewarder.sol","git_blob":"02781a2409c3ce812914b08194b5796df604c1c9","sha256":"2a92ad055394c3afeb1b8e30bfc2f06468c903ffb67689846f39ac28b53d5400"}
+  ],
+  "submodules": {"count":30,"status_sha256":"88153bfe96ddc641c46ea2fc1140070e8fccee9787ea11c93b4f894f729b351f","all_heads_match_gitlinks":true,"all_clean":true},
+  "summary": {"ok":true}
+}

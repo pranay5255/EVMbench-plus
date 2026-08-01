@@ -1,0 +1,226 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-06-recall-contracts",
+  "materialized_at": "2026-08-01T12:00:00Z",
+  "phase": "P7R1",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1R1",
+    "review_bundle_digest": "444ee75d07d977f33ed4b208210023f01d7d4b0b5025b2f3554e5d2132adc7ef",
+    "approved_at": "2026-08-01T13:42:32Z",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "recallnet/contracts@5a6710409a90944ceb3ff4d8ad9edea1b00557c3|src/**+script/**+test/**|detect",
+    "task_group_key_sha256": "8ec5dfb95cbaf65f5e64043c38932ed0002b259a8167ad8df14b26927d8284f2",
+    "repository_slug": "recallnet/contracts",
+    "vulnerable_commit": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+    "audited_scope": [
+      "src/**",
+      "script/**",
+      "test/**"
+    ],
+    "audited_exclusions": [
+      "lib/**"
+    ],
+    "mode": "detect",
+    "framework": "foundry"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003752_45da189a57d1",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "Sigma_Prime_recall_labs_recall_Security_Assessment_Report_v2_2.pdf",
+    "source_rel_path": "public-audits/reports/recall/Sigma_Prime_recall_labs_recall_Security_Assessment_Report_v2_2.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/recall/Sigma_Prime_recall_labs_recall_Security_Assessment_Report_v2_2.pdf",
+    "source_pdf_sha256": "f737f649ece8716f7cb4e7f7d6a3df97ca496b12c1bbda0e26c0d0c73a052fc1",
+    "size_bytes": 471127,
+    "physical_page_count": 33,
+    "report_identity": "Sigma Prime Recall Labs Recall Security Assessment Report v2.2",
+    "report_month": "2025-06",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003752_45da189a57d1.jsonl",
+    "sha256": "e1a1f3fa2ad1144b63103cb4150e62ed4072b0109db1c00fa07d656b56f4d800",
+    "size_bytes": 206464,
+    "record_count": 33,
+    "source_page_count": 33,
+    "created_at": "2026-07-01T13:51:55.117149+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-06-recall-contracts/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 12,
+    "selection": "explicit_user_selection_out_of_queue_order",
+    "category": "Other/Unknown",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 26,
+    "reviewed_report_finding_count": 19
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/recallnet/contracts.git",
+    "repository_slug": "recallnet/contracts",
+    "commit": "5a6710409a90944ceb3ff4d8ad9edea1b00557c3",
+    "commit_subject": "Merge pull request #44 from hokunet/dtb/refactor-state-changes",
+    "commit_authored_at": "2024-12-24T17:04:22-06:00",
+    "root_tree": "810ec9fb5be525c09699f1861b24ea7fb4def076",
+    "src_tree": "4a2f669391451c9e7d7b2684a7b566522b1f8902",
+    "token_tree": "05614df4108e6db4865f048e45dfc86e276e8911",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "review_clone": "/tmp/recall-contracts-review.nPXzYR",
+    "submodule_count": 30,
+    "submodule_status_sha256": "88153bfe96ddc641c46ea2fc1140070e8fccee9787ea11c93b4f894f729b351f",
+    "tracked_pdf_or_jsonl_count": 0,
+    "audited_tracked_file_count": 54,
+    "file_evidence": [
+      {
+        "path": "src/token/ValidatorRewarder.sol",
+        "git_blob": "02781a2409c3ce812914b08194b5796df604c1c9",
+        "sha256": "2a92ad055394c3afeb1b8e30bfc2f06468c903ffb67689846f39ac28b53d5400"
+      }
+    ]
+  },
+  "additional_report_snapshot": {
+    "repository_url": "https://github.com/recallnet/ipc.git",
+    "commit": "d08b2794743a9013502950292934fb98b0341c79",
+    "role": "separate Rust task group excluded from this candidate",
+    "submodule_reproducibility": "two historical git@github.com/hokunet submodules were not accessible without SSH credentials"
+  },
+  "additional_validator_rewarder_snapshot": {
+    "repository_url": "https://github.com/recallnet/contracts.git",
+    "commit": "fe4d3b42d3c711a7098749772f0457d806964635",
+    "role": "additional refactor reviewed by the report; not used as this candidate's vulnerable base",
+    "reason": "RECL-05 is independently present in both affected contracts at the primary audited commit 5a6710409a90944ceb3ff4d8ad9edea1b00557c3"
+  },
+  "fixed_snapshot": {
+    "contracts_commit": "fa69b46fb81379c14deef2f8456161cc87a5b5f5",
+    "ipc_commit": "a72edb87470a49473d5b9ace1ee49167374a6cc8",
+    "contracts_relation_to_vulnerable_commit": "diverged",
+    "kept_separate_from_vulnerable_task_snapshot": true,
+    "agent_image_contains_post_audit_history": false
+  },
+  "corroborating_fix": {
+    "finding_id": "H-01",
+    "pull_request": "https://github.com/recallnet/contracts/pull/57",
+    "commit": "b5f6ef783bc28859b0caaa037d56a7298ee6d076",
+    "summary": "Replace the ValidatorRewarder whenActive silent return with a ContractNotActive revert."
+  },
+  "build_baseline": {
+    "host_forge": "unavailable",
+    "pinned_base_forge": "1.3.6-v1.3.6",
+    "offline_attempt": "blocked only because solc 0.8.30 was not cached in the base image",
+    "candidate_image_build": {
+      "status": "passed",
+      "tag": "evmbench-recall-contracts-c1:review",
+      "image_id": "sha256:7d07380c9a3dbbf91d0a6d6f90bb4e177e6f82b4d82c8d8474ffaa9ee01e372c",
+      "created_at": "2026-08-01T13:14:07.972534459Z",
+      "size_bytes": 3746802169,
+      "local_only": true,
+      "repo_digests": [],
+      "no_cache_build": true,
+      "base_image_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+      "candidate_layer_diff_id": "sha256:ccdb007a1004d7a1a12d0bc5b73f07bd08977af8b9016cd69150d121d2eee764",
+      "candidate_layer_filesystem_size_bytes": 181389342,
+      "candidate_layer_filesystem_entry_count": 9407,
+      "effective_build_context_bytes": 70,
+      "compile_source_file_count": 182,
+      "full_upstream_suite": {
+        "passed": 76,
+        "failed": 3,
+        "total": 79,
+        "status": "disclosed_foundry_compatibility_failures"
+      },
+      "targeted_unmodified_tests": {
+        "validator_rewarder": {"passed": 20, "failed": 0, "total": 20}
+      },
+      "network_disabled_replay": "passed",
+      "runtime_leakage_scan": "passed",
+      "candidate_layer_leakage_scan": "passed",
+      "agent_image_contains_original_submodule_objects": false,
+      "synthetic_empty_dependency_git_markers": 31
+    }
+  },
+  "ocr_corrections": [
+    {
+      "pages": [4],
+      "field": "footer",
+      "correction": "The PDF footer reads Sigma Prime; OCR corrupts the logo text."
+    },
+    {
+      "pages": [13],
+      "field": "code_label_and_footer",
+      "correction": "Use the PDF and repository for ValidatorGater.sol and Sigma Prime; OCR drops punctuation and corrupts the footer."
+    }
+  ],
+  "ocr_evidence": [
+    {
+      "page_number": 1,
+      "role": "identity",
+      "page_image_sha256": "491089183adfc6383bc55d7f23148b51a7079eb0799a4e63f971fb4d2d27b70c",
+      "artifact_ref": "ocr_evidence/pdf_003752_45da189a57d1/scope.pages.jsonl"
+    },
+    {
+      "page_number": 4,
+      "role": "scope",
+      "page_image_sha256": "f3dfa4f722b4bed6c5de20951e687fe601dbdc3f7b54c6a5b46c3363a383ced3",
+      "artifact_ref": "ocr_evidence/pdf_003752_45da189a57d1/scope.pages.jsonl"
+    },
+    {
+      "page_number": 13,
+      "finding_id": "H-01",
+      "page_image_sha256": "afe407e5cfa28585e3fdd4e980b93968af7035433060cd599abca2056fbc7c98",
+      "artifact_ref": "ocr_evidence/pdf_003752_45da189a57d1/H-01.pages.jsonl"
+    }
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "source_report_finding_id": "RECL-05",
+      "source_pages": [13],
+      "reported_severity": "High",
+      "title": "Silent inactive reward handling permanently consumes validator claims without payment",
+      "generated_file": "findings/H-01.md"
+    }
+  ],
+  "report_dispositions": [
+    {"report_id":"RECL-01","pages":[8],"reported_severity":"Critical","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust blob-reader and VM code belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-02","pages":[9,10],"reported_severity":"High","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust blob-reader state belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-03","pages":[11],"reported_severity":"High","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust bucket actor belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-04","pages":[12],"reported_severity":"High","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust blobs actor belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-05","pages":[13],"reported_severity":"High","disposition":"included_asset_loss_component","finding_id":"H-01","repository":"recallnet/contracts","affected_paths":["src/token/ValidatorRewarder.sol"],"root_cause":"ValidatorRewarder.whenActive returns EVM success without executing notifyValidClaim when inactive.","asset_loss_path":"The system consumes a validator claim after a successful no-op callback, while no validator reward is minted or transferred.","excluded_component":{"path":"src/token/ValidatorGater.sol","reason":"The power-range bypass is not included because the report does not establish a concrete asset-loss path for that component."}},
+    {"report_id":"RECL-06","pages":[14],"reported_severity":"Medium","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust timehub actor belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-07","pages":[15],"reported_severity":"Medium","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust blobs actor state belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-08","pages":[16],"reported_severity":"Medium","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust blobs actor belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-09","pages":[17,18],"reported_severity":"Low","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust actor authentication belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-10","pages":[19],"reported_severity":"Low","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust RecallConfig actor belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-11","pages":[20,21],"reported_severity":"Low","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust blobs actor state belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-12","pages":[22],"reported_severity":"Low","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust blob-reader actor belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-13","pages":[23],"reported_severity":"Informational","disposition":"excluded","repository":"recallnet/contracts","reason_category":"implementation_initialization_hardening","reason":"Missing _disableInitializers constructors harden implementation deployment but the report does not establish a concrete asset-loss sequence."},
+    {"report_id":"RECL-14","pages":[24],"reported_severity":"Informational","disposition":"excluded","repository":"recallnet/contracts","reason_category":"faucet_recipient_compatibility","reason":"The fixed gas stipend can make a complex recipient revert, but the faucet transfer is atomic and no user or protocol asset is consumed or misdirected."},
+    {"report_id":"RECL-15","pages":[25],"reported_severity":"Informational","disposition":"excluded","repository":"recallnet/contracts","reason_category":"event_semantics","reason":"An extra Approval event changes observability only; token balances and allowances remain governed by the underlying transfer logic."},
+    {"report_id":"RECL-16","pages":[26],"reported_severity":"Informational","disposition":"excluded","repository":"recallnet/contracts","reason_category":"role_separation_hardening","reason":"Using one administrative role for pause and unpause is a governance design recommendation without a concrete asset-loss path."},
+    {"report_id":"RECL-17","pages":[27,28],"reported_severity":"Informational","disposition":"excluded","repository":"mixed","reason_category":"non_security_miscellany","reason":"The report explicitly groups these comments as having no direct security implications; mixed Rust items also belong to the separate IPC snapshot."},
+    {"report_id":"RECL-18","pages":[29,30],"reported_severity":"Low","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust syscall error handling belongs to the separately audited IPC snapshot."},
+    {"report_id":"RECL-19","pages":[31],"reported_severity":"Informational","disposition":"split_to_other_task_group","repository":"recallnet/ipc","reason":"Rust IPLD hashing belongs to the separately audited IPC snapshot."}
+  ],
+  "generated_files": [
+    ".dockerignore",
+    "config.yaml",
+    "Dockerfile",
+    "provenance.json",
+    "review_status.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_003752_45da189a57d1/scope.pages.jsonl",
+    "ocr_evidence/pdf_003752_45da189a57d1/H-01.pages.jsonl"
+  ]
+}

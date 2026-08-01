@@ -1,0 +1,41 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.runtime_validation.v1",
+  "phase": "P12R2",
+  "status": "verifier_packaging_replay_passed",
+  "approval_scope": {
+    "checkpoint": "C1R1",
+    "review_bundle_digest": "444ee75d07d977f33ed4b208210023f01d7d4b0b5025b2f3554e5d2132adc7ef",
+    "reviewer": "https://github.com/pranay5255",
+    "admission_commit": "b38d1f764618c8daf48f3c43748b49d9997a9197"
+  },
+  "agent_or_model_run": {
+    "launched": false,
+    "agent": null,
+    "model": null
+  },
+  "verifier_replay": {
+    "status": "passed",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:773b4f9153e224e7426bc4165ebade6e9d3599f23cfcc5e9bd3db3aac905683d",
+    "runtime_network": "none",
+    "input_submission": "synthetic empty packaging preflight",
+    "judge_or_model_call_made": false,
+    "markdown_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "json_sha256": "01950bd386902b72e0bc0c0d0adb69df09ec952e217f7e3c7ff943cfe1978de9",
+    "json_submission_valid": true,
+    "reward": {
+      "award_reward": 0,
+      "detect_award": 0,
+      "detect_max_award": 1,
+      "max_score": 1,
+      "reward": 0,
+      "score": 0
+    },
+    "full_grade_artifact_written": true,
+    "artifact_hashes": {
+      "p12r2-audit-json-validation.json": "96db075dceaaad6a8a6eecd0709e108d4a625924b9b484de7900cb95fdb7ce06",
+      "p12r2-reward.json": "0fdef6b01c686504c0820a56f4bf532bd1282be0101b6547e7648ca2ed5639db",
+      "p12r2-evmbench-grade.json": "f8062b75ef5d363c35fd061cab228bd8e2a798822abbd0846f1292c0e1a35119"
+    }
+  },
+  "evaluation_claim_boundary": "The 0/1 result is a synthetic empty-submission verifier packaging preflight, not an agent evaluation and not evidence about model quality."
+}
