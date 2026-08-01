@@ -1,0 +1,71 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "recorded_at": "2026-08-01T11:25:15Z",
+  "report_repository_url": "https://github.com/DCADOTFUN/dca-audit.git",
+  "report_commit_url": "https://github.com/DCADOTFUN/dca-audit/tree/72db329418bbf72d5981fba82f16a13693391df1",
+  "vulnerable_commit": "72db329418bbf72d5981fba82f16a13693391df1",
+  "previous_audit_final_commit": "7abd6236056826d2147c3a5fe8164c14759f8b9b",
+  "vulnerable_checkout_available": false,
+  "report_scope": {
+    "description": "Differential audit limited to changes between 7abd6236056826d2147c3a5fe8164c14759f8b9b and 72db329418bbf72d5981fba82f16a13693391df1.",
+    "audited_paths": [
+      "src/dcaDotFun/DcaDotFun.sol",
+      "src/dcaDotFun/DcaVaultFactory.sol",
+      "src/dcaDotFun/DcaVault.sol",
+      "src/dcaDotFun/interfaces/IFillOrderCallback.sol",
+      "src/dcaDotFun/interfaces/IDcaVault.sol",
+      "src/dcaDotFun/interfaces/IDcaDotFun.sol",
+      "src/dcaDotFun/interfaces/IDcaVaultFactory.sol",
+      "src/verifierDotFun/VerifierDotFun.sol",
+      "src/verifierDotFun/libraries/VerifierLib.sol",
+      "src/verifierDotFun/interfaces/IVerifierDotFun.sol",
+      "src/verifierDotFun/interfaces/IVerifierProxy.sol",
+      "src/verifierDotFun/interfaces/IFeeManager.sol",
+      "src/dotFun/DotFun.sol",
+      "src/dotFun/libraries/AaveConstants.sol",
+      "src/dotFun/interfaces/IDotFun.sol",
+      "src/interfaces/IWETH.sol"
+    ],
+    "exact_scope_validated_in_vulnerable_tree": false
+  },
+  "report_linked_repository_resolution": {
+    "github_repository_api": "404 Not Found",
+    "git_ls_remote": "repository not found",
+    "github_commit_api": "404 Not Found",
+    "github_global_commit_search_count": 0,
+    "github_codeload_commit_archive": "404 Not Found",
+    "github_raw_commit_path": "404 Not Found",
+    "result": "The report-linked repository is deleted, private, renamed without accessible history, or unavailable to this authenticated account."
+  },
+  "public_fixed_repository": {
+    "url": "https://github.com/DCADOTFUN/dcaDotFun-contracts.git",
+    "isolated_clone": "/tmp/dca-fixed-review.fgwZdg/repo",
+    "clone_clean": true,
+    "fixed_commit": "3193689e8c94ce545ec2b30eb3558d0db36eb3e3",
+    "fixed_tree": "6ae26c3e519d31016bdf089ce18ae480acee97b8",
+    "fixed_commit_subject": "public commit",
+    "fixed_commit_date": "2025-11-22T14:25:17-05:00",
+    "fixed_parent": null,
+    "public_commit_count": 1,
+    "vulnerable_object_present": false,
+    "github_commit_api_for_vulnerable_sha": "422 No commit found for SHA",
+    "public_fork_count": 0,
+    "safe_substitute": false
+  },
+  "fixed_snapshot_corroboration_only": {
+    "all_16_reported_scope_paths_present": true,
+    "reported_remediation_present": true,
+    "remediation_evidence": "src/dcaDotFun/DcaDotFun.sol constructor sets isCreateOrderPaused = true",
+    "framework": "Foundry with pnpm/TypeScript helpers",
+    "build_command": "pnpm run build (forge clean && forge build --sizes)",
+    "test_command": "pnpm run testAll",
+    "corroborative_only": true
+  },
+  "normalized_repository_url": null,
+  "task_group_key_resolved": false,
+  "failure_codes": [
+    "EXACT_AUDITED_COMMIT_UNAVAILABLE",
+    "NO_ELIGIBLE_ASSET_LOSS_FINDINGS"
+  ],
+  "canonical_evmbench_modified": false
+}

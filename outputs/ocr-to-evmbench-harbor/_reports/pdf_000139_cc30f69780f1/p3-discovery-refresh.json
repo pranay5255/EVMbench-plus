@@ -1,0 +1,62 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_discovery.v1",
+  "recorded_at": "2026-08-01T11:25:15Z",
+  "repository": "DCADOTFUN/dca-audit",
+  "required_commit": "72db329418bbf72d5981fba82f16a13693391df1",
+  "probes": [
+    {
+      "source": "PDF embedded links",
+      "result": "repository and full commit identity recovered"
+    },
+    {
+      "source": "GitHub repository API",
+      "result": "404 Not Found"
+    },
+    {
+      "source": "Git smart HTTP ls-remote",
+      "result": "Repository not found"
+    },
+    {
+      "source": "GitHub global commit search",
+      "result": "zero matches"
+    },
+    {
+      "source": "GitHub web search for commit, repository, and audited paths",
+      "result": "zero matches"
+    },
+    {
+      "source": "GitHub codeload and raw content endpoints",
+      "result": "404 Not Found"
+    },
+    {
+      "source": "Official surviving repository DCADOTFUN/dcaDotFun-contracts",
+      "result": "public one-commit fixed tree only; audited commit object absent"
+    },
+    {
+      "source": "Official surviving repository forks",
+      "result": "zero public forks"
+    },
+    {
+      "source": "GitHub code search for DcaDotFun identifiers",
+      "result": "only the one-commit fixed repository"
+    },
+    {
+      "source": "Software Heritage revision API",
+      "result": "revision not found"
+    },
+    {
+      "source": "Software Heritage origin API",
+      "result": "origin not found"
+    },
+    {
+      "source": "local filename and exact-SHA scan under experiment roots",
+      "result": "no vulnerable checkout or archive found"
+    },
+    {
+      "source": "local Docker image inventory",
+      "result": "no DCA image or candidate image found"
+    }
+  ],
+  "credentials_recorded": false,
+  "recoverable_exact_snapshot_found": false
+}

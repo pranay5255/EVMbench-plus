@@ -1,0 +1,43 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "recorded_at": "2026-08-01T11:25:15Z",
+  "pdf_id": "pdf_000139_cc30f69780f1",
+  "candidate_id": null,
+  "immutable_inputs": {
+    "ocr_jsonl": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_000139_cc30f69780f1.jsonl",
+      "sha256": "c15f5c982e6b004386703fece459d17f439ecbebbefb0d67ded8ebc955b6af1a",
+      "modified": false
+    },
+    "source_pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/PublicAuditReports/NM0640-FINAL_DCA.pdf",
+      "sha256": "bbfd98d1aabf7136140f06e7471eab640a476eb359da6a99c2e19a6846156a6f",
+      "modified": false
+    }
+  },
+  "opd_base": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "compatible_reference_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "dirty_before_work": true,
+    "dirty_entry_count_before_work": 498,
+    "unrelated_changes_preserved": true
+  },
+  "canonical_evmbench": {
+    "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "dirty_before_work": true,
+    "dirty_entry_count_before_work": 94,
+    "modified_by_this_review": false
+  },
+  "isolated_repository_discovery": {
+    "path": "/tmp/dca-fixed-review.fgwZdg/repo",
+    "origin": "https://github.com/DCADOTFUN/dcaDotFun-contracts.git",
+    "checkout_head": "3193689e8c94ce545ec2b30eb3558d0db36eb3e3",
+    "clone_clean": true,
+    "purpose": "Fixed-snapshot corroboration only; it is not the report-linked audited vulnerable checkout because commit 72db329418bbf72d5981fba82f16a13693391df1 is absent."
+  },
+  "candidate_directory_created": false,
+  "harbor_artifacts_created": false,
+  "model_or_agent_run_started": false
+}

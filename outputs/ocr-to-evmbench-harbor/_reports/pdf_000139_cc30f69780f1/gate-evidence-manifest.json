@@ -1,0 +1,66 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.gate_evidence_manifest.v1",
+  "pdf_id": "pdf_000139_cc30f69780f1",
+  "candidate_id": null,
+  "purpose": "Pre-candidate fail-closed evidence only; this is not an approval-bound candidate review bundle.",
+  "immutable_inputs": [
+    {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_000139_cc30f69780f1.jsonl",
+      "sha256": "c15f5c982e6b004386703fece459d17f439ecbebbefb0d67ded8ebc955b6af1a"
+    },
+    {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/PublicAuditReports/NM0640-FINAL_DCA.pdf",
+      "sha256": "bbfd98d1aabf7136140f06e7471eab640a476eb359da6a99c2e19a6846156a6f"
+    }
+  ],
+  "files": [
+    {
+      "path": "gate-status.json",
+      "sha256": "9c9599434c721568368ad2208704829ea2815ae622b9c8a66a6422704551136f"
+    },
+    {
+      "path": "p1-isolation.json",
+      "sha256": "34f68cc124147b7cdba6ca817e45e7ef7be9dc89708909c0d23c44e2727ecb02"
+    },
+    {
+      "path": "p1-ocr-validation.json",
+      "sha256": "cad44d016e32e1e9cb27ede3d2e3486569ff09d142f38925f5b9fdeebdbd8fd7"
+    },
+    {
+      "path": "p1-ocr-validation.txt",
+      "sha256": "af9cbdf0684a6a2a4d03e560df92ee17ecd559d926fe7aaa0249149f496afe31"
+    },
+    {
+      "path": "p2-ocr-corrections.json",
+      "sha256": "260bfa127a461de0c04b46b152a1bf2eadd4a3fd86bffb3b92eae1bea1a036b6"
+    },
+    {
+      "path": "p2-pdf-ocr-review.md",
+      "sha256": "107b641756a46e724ccfb2857eb5ae6bb2af218ae7854984e268e8ad94fe2ec6"
+    },
+    {
+      "path": "p2-pdf-validation.json",
+      "sha256": "ce140a09273d1396b2c9d80fd3409b2b24001160a05be842f71782770b3a5a32"
+    },
+    {
+      "path": "p3-discovery-refresh.json",
+      "sha256": "67bcc34e2ec6983e5c0abbcbc190987495fa91707e3ac72b5274815c70e3cff5"
+    },
+    {
+      "path": "p3-missing-evidence-report.md",
+      "sha256": "c3924062a7ad240478d0304643e12add1dec7fe7c07ce4042984309bb5cd3bb6"
+    },
+    {
+      "path": "p3-repository-snapshot.json",
+      "sha256": "7f0eb4417db15c59c91141de949d04cd6c677615ab7c1c7ac28f5e9dbdeac78d"
+    },
+    {
+      "path": "p4-finding-dispositions.md",
+      "sha256": "9133feabdca9f0fa3a3046ac5b27dc9e155def4bb026d11a83e054d493e4366c"
+    },
+    {
+      "path": "p5-queue-update.json",
+      "sha256": "a56afbf2a3e56ae72dae4b4aa77706a62b1854c8617e5075a53651b466fb8055"
+    }
+  ]
+}

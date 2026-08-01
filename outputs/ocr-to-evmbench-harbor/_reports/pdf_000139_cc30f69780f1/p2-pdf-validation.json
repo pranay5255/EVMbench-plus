@@ -1,0 +1,40 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "phase": "P2",
+  "pdf_id": "pdf_000139_cc30f69780f1",
+  "candidate_id": null,
+  "generated_at": "2026-08-01T11:25:15Z",
+  "status": "passed",
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/PublicAuditReports/NM0640-FINAL_DCA.pdf",
+    "sha256": "bbfd98d1aabf7136140f06e7471eab640a476eb359da6a99c2e19a6846156a6f",
+    "size_bytes": 239650,
+    "physical_page_count": 15,
+    "encrypted": false,
+    "readable": true,
+    "poppler_text_extraction": "passed",
+    "poppler_rendering": "passed",
+    "qpdf_check": "not_available"
+  },
+  "ocr_cross_check": {
+    "pdf_id": "pdf_000139_cc30f69780f1",
+    "record_count": 15,
+    "source_page_count": 15,
+    "recorded_source_pdf_sha256": "bbfd98d1aabf7136140f06e7471eab640a476eb359da6a99c2e19a6846156a6f",
+    "physical_hash_matches_ocr": true,
+    "physical_page_count_matches_ocr": true,
+    "source_path_is_unique_and_matches": true
+  },
+  "visual_review": {
+    "rendered_page_count": 15,
+    "render_prefix": "/tmp/dca-page",
+    "identity_scope_summary_and_only_finding_reviewed_against_pdf": true,
+    "reviewed_physical_pages": [3, 4, 6],
+    "all_finding_boundaries_reconciled": true,
+    "pdf_embedded_links_used_for_exact_repository_and_commit_identifiers": true,
+    "pdf_overrides_ocr_for_exact_code_and_identifiers": true
+  },
+  "summary": {
+    "ok": true
+  }
+}
