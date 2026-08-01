@@ -1,0 +1,44 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "phase": "P1",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed",
+  "workspace": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "initial_dirty_entry_count": 419,
+    "initial_porcelain_sha256": "cfc23e4ffe5f338bd72901cc730916d6f0fb4b07572dba1bb33035100ddb9bff",
+    "preexisting_dirty_state_preserved": true,
+    "queue_document_preexisting_and_untracked": true,
+    "queue_document_modified_by_this_run": true
+  },
+  "canonical_forest_of_audits": {
+    "path": "/home/experiments_base/forestOfAudits",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "branch": "main",
+    "dirty_entry_count": 94,
+    "porcelain_sha256": "b8cc233d3ee6a7b835766e52aaf0c31793f19bd529f315da9637d4517fbcb82b",
+    "read_only": true,
+    "modified_by_this_run": false
+  },
+  "isolated_review_repository": {
+    "path": "/tmp/brava-review-net.CpDgTb/repo",
+    "repository": "https://github.com/brava-labs/brava-contracts.git",
+    "detached_head": "655613454d3c6264096457adeb387b965fefc3c6",
+    "clean": true
+  },
+  "isolated_pinned_validator": {
+    "path": "/tmp/brava-opd-validator.BpoLT6/repo",
+    "head": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "clean": true
+  },
+  "isolation_guarantees": {
+    "canonical_evmbench_admission_performed": false,
+    "harbor_task_generated": false,
+    "registry_publication_performed": false,
+    "agent_or_model_run": false,
+    "workspace_writes_limited_to_candidate_reports_and_queue": true
+  },
+  "summary": {"ok": true}
+}

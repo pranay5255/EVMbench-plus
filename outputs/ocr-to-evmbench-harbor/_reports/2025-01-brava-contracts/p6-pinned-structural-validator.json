@@ -1,0 +1,17 @@
+{
+  "tool_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+  "tool_checkout": "/tmp/brava-opd-validator.BpoLT6/repo",
+  "tool_checkout_clean": true,
+  "candidate_count": 1,
+  "ok": true,
+  "results": [
+    {
+      "candidate_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-brava-contracts",
+      "errors": [],
+      "finding_files": ["findings/H-01.md", "findings/H-02.md", "findings/H-03.md"],
+      "ok": true,
+      "review_state": "in_review",
+      "warnings": []
+    }
+  ]
+}

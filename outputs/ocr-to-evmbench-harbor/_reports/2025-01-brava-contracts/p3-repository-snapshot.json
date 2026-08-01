@@ -1,0 +1,35 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "phase": "P3",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed",
+  "repository_url": "https://github.com/brava-labs/brava-contracts.git",
+  "review_clone": "/tmp/brava-review-net.CpDgTb/repo",
+  "head": "655613454d3c6264096457adeb387b965fefc3c6",
+  "root_tree": "adc6756be8d1c213aa1ed0e40532654932776d6d",
+  "contracts_tree": "ef5317418e5ccfcc79ead0745dfed72eb4c0d9d0",
+  "commit_subject": "Merge pull request #75 from brava-labs/epic/DEL-48-Smart-contract-suite",
+  "commit_authored_at": "2024-11-23T15:55:57+01:00",
+  "detached_head": true,
+  "clean": true,
+  "tracked_pdf_or_jsonl_count": 0,
+  "audited_tracked_file_count": 37,
+  "fixed_snapshot": {
+    "head": "29d4211f732e745a926209dc1cc915562a8c0b74",
+    "root_tree": "f3b118288afc678958636a7a01d0d606adbbe9f4",
+    "vulnerable_commit_is_ancestor": true,
+    "kept_separate": true
+  },
+  "file_evidence": [
+    {"path": "contracts/auth/AdminVault.sol", "git_blob": "eba5c1733282a552a2a2134182c923b8aefa37e8", "sha256": "24adb5b592fcdf5add555281b9dd9ae1b3719177ce7eb3c830755fec1b90075c"},
+    {"path": "contracts/auth/FeeTakeSafeModule.sol", "git_blob": "02725f2e8b150319385fce73d02351b6a792aa44", "sha256": "a0c085365920e6b4be2e6e314e58d517ed0cd0c6188d9887dc795da27d894737"},
+    {"path": "contracts/actions/utils/SendToken.sol", "git_blob": "a9a6665a518046fbdff73868adc1b46b50632dbe", "sha256": "413df965bab554e67e41c21be98727c671f6d13802ce8142113fc67966b6fbfc"},
+    {"path": "contracts/actions/common/AaveWithdraw.sol", "git_blob": "5d9948444815589d982c678ca213e282dc17382b", "sha256": "dc36d8a39471bb372109e3e84be907fddec030fb402a409bb38f6dd1f8f4a125"},
+    {"path": "contracts/actions/common/CompoundV2Withdraw.sol", "git_blob": "b44f112cc46d58f8759abea5932ff0ce03f90991", "sha256": "226a441b741e895417a3046ecc02a0d4bddba328761526291ff50c4f64ec78aa"},
+    {"path": "contracts/actions/common/ERC4626Withdraw.sol", "git_blob": "bcacaf8ab5371c869a55f08f9806eae22493781f", "sha256": "895b6a1af1383be598aab3a06c9aa38bf8d4110a1f575bdb9cbce8be1522666a"},
+    {"path": "contracts/actions/clearpool/ClearpoolWithdraw.sol", "git_blob": "65b59ee9b31d28b931187eba50452ecdf34bb229", "sha256": "891faf6942754e3494485bb4985f4a5b3e871cc22cb468af714fcefc7b8f1e44"},
+    {"path": "contracts/SequenceExecutor.sol", "git_blob": "be56c8a7b9074be3166b8e24de08d24746310df1", "sha256": "a6c2cc784c65c8086eff9cbfd085275b2c3050a313bcf7d12acff3cfb3e718a7"}
+  ],
+  "summary": {"ok": true}
+}

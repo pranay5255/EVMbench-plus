@@ -1,0 +1,43 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v1",
+  "phase": "P6",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed",
+  "image": "evmbench-brava-candidate:c1r1",
+  "runtime_network": "none",
+  "repository": {
+    "head": "655613454d3c6264096457adeb387b965fefc3c6",
+    "reachable_commit_count": 1,
+    "git_status_line_count": 0,
+    "remote_count": 0,
+    "tracked_file_count": 119,
+    "audited_scope_tracked_file_count": 37,
+    "top_git_object_file_count": 3,
+    "unreachable_git_object_count": 0,
+    "tracked_pdf_or_jsonl_count": 0
+  },
+  "post_audit_objects": {
+    "checked": [
+      "29d4211f732e745a926209dc1cc915562a8c0b74",
+      "e5b37e4f91f2209affe707fbe9082248bdb64243",
+      "3912ff0916ea03fd27713ef50eb8174329f84b33",
+      "0c8c4188bfa70e859ff231f8872345e7323f0432",
+      "1e56666db5134c12cee94ec691eb11b8c0b72e20",
+      "7ec904fe46740d495bae417f9f45ac8088f7cfbc",
+      "03e631b53e01bbc43de7e2bc192d78651080c61d",
+      "aedcec366ace3f1a705bf3d99a057cc36d9f55a6"
+    ],
+    "present_count": 0
+  },
+  "audited_file_hashes_match_provenance": true,
+  "offline_force_build": {
+    "network": "none",
+    "force_recompiled_files": 92,
+    "passed": true,
+    "post_compile_git_status_line_count": 0,
+    "tenderly_network_attempt_logged": true,
+    "hardhat_exit_code": 0
+  },
+  "summary": {"ok": true}
+}

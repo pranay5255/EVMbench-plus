@@ -1,0 +1,42 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approved_validator.v1",
+  "phase": "P7",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:58:26Z",
+  "status": "passed",
+  "require_approved_used": true,
+  "current_checkout": {
+    "revision": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "result": {
+      "candidate_count": 1,
+      "ok": true,
+      "results": [{
+        "candidate_dir": "task_dir/outputs/ocr-to-evmbench-harbor/2025-01-brava-contracts",
+        "errors": [],
+        "finding_files": ["findings/H-01.md", "findings/H-02.md", "findings/H-03.md"],
+        "ok": true,
+        "review_state": "approved_for_admission",
+        "warnings": []
+      }]
+    }
+  },
+  "pinned_checkout": {
+    "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "path": "/tmp/brava-opd-validator.BpoLT6/repo",
+    "result": {
+      "candidate_count": 1,
+      "ok": true,
+      "results": [{
+        "candidate_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-brava-contracts",
+        "errors": [],
+        "finding_files": ["findings/H-01.md", "findings/H-02.md", "findings/H-03.md"],
+        "ok": true,
+        "review_state": "approved_for_admission",
+        "warnings": []
+      }]
+    }
+  },
+  "finding_count": 3,
+  "errors": [],
+  "warnings": []
+}

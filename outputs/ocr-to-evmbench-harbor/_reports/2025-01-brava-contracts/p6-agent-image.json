@@ -1,0 +1,50 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image.v1",
+  "phase": "P6",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed_with_disclosure",
+  "base_image": {
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "platform": "linux/amd64"
+  },
+  "superseded_image": {
+    "tag": "evmbench-brava-candidate:c1",
+    "config_digest": "sha256:40d88b9915fc924f66a382898b3b299fc63a3fdb78bad367d76798f5b4f58174",
+    "accepted": false,
+    "reason": "Replaced by the explicit no-cache review build."
+  },
+  "reviewed_image": {
+    "tag": "evmbench-brava-candidate:c1r1",
+    "config_digest": "sha256:b395ead9583a83c1a8fd430fd75767d0177fadb5afc4cc8e462b27ffba0546d4",
+    "created_at": "2026-08-01T10:45:09.631098431Z",
+    "architecture": "amd64",
+    "os": "linux",
+    "size_bytes": 4318533186,
+    "layer_count": 20,
+    "candidate_layer_digest": "sha256:a69037a483defdba6416750052c09c5ea3dba041bf151659a66ea71892797c55",
+    "candidate_layer_size_bytes": 780795904,
+    "saved_image_tar_path": "/tmp/brava-agent-c1r1.tar",
+    "saved_image_tar_size_bytes": 4441875456,
+    "saved_image_tar_sha256": "be685b230f6d0ee908d60121340e62b58cd89fa5f0fcdc32c6546e66827ad276"
+  },
+  "build": {
+    "no_cache": true,
+    "passed": true,
+    "compiler": "0.8.28",
+    "compiled_file_count": 92,
+    "npm_ci_package_count": 1027
+  },
+  "runtime": {
+    "network": "none",
+    "fresh_force_rebuild_passed": true,
+    "post_compile_git_status_entries": 0,
+    "test_entrypoint": "0 passing; 18 before-all hook failures caused by unavailable Tenderly mainnet fork",
+    "test_failures_classified_as_environment_baseline": true
+  },
+  "registry": {
+    "published": false,
+    "manifest_digest": null
+  },
+  "summary": {"ok": true}
+}

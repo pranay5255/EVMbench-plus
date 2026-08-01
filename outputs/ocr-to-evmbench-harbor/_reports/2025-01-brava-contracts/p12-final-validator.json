@@ -1,0 +1,30 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_validator.v1",
+  "phase": "P12",
+  "status": "passed",
+  "require_approved_used": true,
+  "current_checkout": {
+    "candidate_count": 2,
+    "ok": true,
+    "validated_paths": [
+      "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-brava-contracts",
+      "/tmp/brava-admission.ALO5nf/forest-of-audits/project/evmbench/audits/2025-01-brava-contracts"
+    ],
+    "finding_count_per_path": 3,
+    "errors": [],
+    "warnings": []
+  },
+  "pinned_checkout": {
+    "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "path": "/tmp/brava-opd-validator.BpoLT6/repo",
+    "candidate_count": 2,
+    "ok": true,
+    "validated_paths": [
+      "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-brava-contracts",
+      "/tmp/brava-admission.ALO5nf/forest-of-audits/project/evmbench/audits/2025-01-brava-contracts"
+    ],
+    "finding_count_per_path": 3,
+    "errors": [],
+    "warnings": []
+  }
+}

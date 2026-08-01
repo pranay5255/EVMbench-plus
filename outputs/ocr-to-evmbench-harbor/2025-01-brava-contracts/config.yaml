@@ -1,0 +1,15 @@
+id: 2025-01-brava-contracts
+mode: detect
+framework: hardhat
+base_commit: 655613454d3c6264096457adeb387b965fefc3c6
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Unguarded Safe control lets owners erase and bypass accrued fees"
+    award: 1.0
+  - id: "H-02"
+    title: "Unrestricted exit entry points withdraw positions without charging fees"
+    award: 1.0
+  - id: "H-03"
+    title: "SendToken exports fee-bearing position tokens before fees are settled"
+    award: 1.0

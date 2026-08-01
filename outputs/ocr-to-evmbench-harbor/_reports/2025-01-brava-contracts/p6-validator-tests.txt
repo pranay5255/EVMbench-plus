@@ -1,0 +1,9 @@
+Current workspace validators:
+  tests/test_validate_evmbench_candidate.py: 6 passed in 0.27s
+  task_dir/tests/test_validate_ocr_jsonl.py: 3 passed in 0.02s
+  combined: 9 passed
+
+Pinned OPD validator checkout 38957485d5cd63dc5d664c3c2993f60b308f5776:
+  tests/test_validate_evmbench_candidate.py: 6 passed in 0.27s
+
+All validator commands exited 0.

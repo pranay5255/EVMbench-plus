@@ -1,0 +1,34 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v1",
+  "phase": "P4",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed_with_review_judgment",
+  "authoritative_dispositions": "../../2025-01-brava-contracts/provenance.json#report_dispositions",
+  "counts": {
+    "report_findings": 16,
+    "included": 1,
+    "excluded": 13,
+    "merged": 1,
+    "split": 1,
+    "selected_gold_findings": 3,
+    "unresolved": 0
+  },
+  "checks": {
+    "all_report_findings_accounted_for": true,
+    "all_selected_findings_verified_in_vulnerable_code": true,
+    "all_selected_findings_have_concrete_asset_loss_paths": true,
+    "selected_findings_have_distinct_root_causes": true,
+    "all_exclusions_have_code_grounded_reasons": true,
+    "gold_ids_are_contiguous": true,
+    "config_titles_match_finding_titles": true,
+    "gold_audit_is_exact_ordered_concatenation": true
+  },
+  "selected_mapping": [
+    {"gold_id": "H-01", "report_ids": ["BRAV-02", "BRAV-04", "BRAV-05#3"], "pages": [9, 11, 12]},
+    {"gold_id": "H-02", "report_ids": ["BRAV-05#1"], "pages": [12]},
+    {"gold_id": "H-03", "report_ids": ["BRAV-05#2"], "pages": [12]}
+  ],
+  "review_judgment": "BRAV-04 and one BRAV-05 mechanism are merged into H-01 because they share the missing Safe-guard boundary; BRAV-05 is split where the report combines two independently reachable fee-bypass selectors with that boundary.",
+  "summary": {"ok": true, "max_score": 3.0}
+}

@@ -1,0 +1,7 @@
+runtime network: none
+verifier image: docker.io/pranay5255/yudaii_evmbench@sha256:a944fc99e20ac643d20d010ccf0b1ab79b60b9a3bcd42e6ce16ad8bd87f935c4
+synthetic Markdown: empty
+synthetic JSON: valid empty evmbench.detect_submission.v1
+judge results: []
+score: 0/3
+exit code: 0

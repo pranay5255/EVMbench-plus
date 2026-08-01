@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.task_group.v1",
+  "phase": "P3",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed",
+  "repository_slug": "brava-labs/brava-contracts",
+  "vulnerable_commit": "655613454d3c6264096457adeb387b965fefc3c6",
+  "audited_scope": [
+    "contracts/actions/**",
+    "contracts/auth/**",
+    "contracts/SequenceExecutor.sol"
+  ],
+  "mode": "detect",
+  "framework": "hardhat",
+  "task_group_key": "brava-labs/brava-contracts@655613454d3c6264096457adeb387b965fefc3c6|contracts/actions/**+contracts/auth/**+contracts/SequenceExecutor.sol|detect",
+  "task_group_key_sha256": "b58b51e4fbd6102d8c3a7baf9e7d0822394bb3e51bd5544bd6597b51a70c6531",
+  "duplicate_candidate_found": false,
+  "summary": {"ok": true}
+}

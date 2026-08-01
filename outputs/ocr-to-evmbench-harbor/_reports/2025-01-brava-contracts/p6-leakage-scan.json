@@ -1,0 +1,78 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_scan.v2",
+  "phase": "P6",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed",
+  "hard_failure": false,
+  "violations": [],
+  "candidate_context": {
+    "dockerignore_policy": "deny all; allow Dockerfile and .dockerignore only",
+    "effective_files": [".dockerignore", "Dockerfile"],
+    "effective_file_count": 2,
+    "transferred_context_bytes": 70,
+    "copy_or_add_directive_count": 0,
+    "host_candidate_artifacts_in_context": false,
+    "passed": true
+  },
+  "history_scan": {
+    "distinctive_sensitive_marker_matches": 0,
+    "depth_one_fetch_and_same_layer_cleanup_confirmed": true,
+    "passed": true
+  },
+  "saved_image_scan": {
+    "path": "/tmp/brava-agent-c1r1.tar",
+    "size_bytes": 4441875456,
+    "sha256": "be685b230f6d0ee908d60121340e62b58cd89fa5f0fcdc32c6546e66827ad276",
+    "whole_archive_sensitive_marker_matches": 0,
+    "passed": true
+  },
+  "candidate_layer_scan": {
+    "digest": "sha256:a69037a483defdba6416750052c09c5ea3dba041bf151659a66ea71892797c55",
+    "size_bytes": 780795904,
+    "entry_count": 48623,
+    "pdf_path_count": 0,
+    "jsonl_path_count": 0,
+    "nested_git_path_count": 0,
+    "authoring_path_count": 0,
+    "sensitive_marker_match_count": 0,
+    "passed": true
+  },
+  "runtime_filesystem_scan": {
+    "audit_regular_file_count": 38009,
+    "audit_json_file_count": 2402,
+    "audit_pdf_file_count": 0,
+    "audit_jsonl_file_count": 0,
+    "audit_symlink_count": 62,
+    "audit_archive_count": 6,
+    "non_dependency_evidence_file_count": 0,
+    "distinctive_sensitive_marker_matches": 0,
+    "passed": true
+  },
+  "expected_answer_history_scan": {
+    "reachable_commit_count": 1,
+    "reachable_commit": "655613454d3c6264096457adeb387b965fefc3c6",
+    "unreachable_git_object_count": 0,
+    "known_fix_or_post_audit_commit_objects_present": 0,
+    "passed": true
+  },
+  "text_scan_patterns": [
+    "source PDF and OCR SHA-256 values",
+    "all three gold titles",
+    "gold, provenance, review, and OCR-evidence paths"
+  ],
+  "isolation": {
+    "source_ocr_sha256_unchanged": true,
+    "source_pdf_sha256_unchanged": true,
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "summary": {
+    "ok": true,
+    "hard_failure_count": 0,
+    "candidate_review_checkpoint_allowed": true,
+    "candidate_admission_allowed_without_c1_approval": false
+  }
+}

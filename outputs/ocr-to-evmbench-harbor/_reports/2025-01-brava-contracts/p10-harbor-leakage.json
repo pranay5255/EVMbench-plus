@@ -1,0 +1,30 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "status": "passed",
+  "regular_file_count": 6,
+  "symlink_count": 0,
+  "archive_count": 0,
+  "binary_file_count": 0,
+  "forbidden_filename_count": 0,
+  "forbidden_content_match_count": 0,
+  "forbidden_terms_checked": [
+    "pdf_003676",
+    "report.pdf",
+    "0a2e01d42de45845dbc5b3aea01cb37458e23a59b256696949f5f4d4f772967d",
+    "359b5683f6e7eedcda602ebf40cd4d7fa2c08811d3fb50e33380ec3a8470e26c",
+    "617de0007ff0087caa3fa062c40f2f2b3c6f49e558d27b6f9893eac74db25167",
+    "ocr_evidence",
+    "gold_audit",
+    "provenance.json",
+    "review_status.yaml",
+    "review-bundle",
+    "H-01",
+    "H-02",
+    "H-03",
+    "Unguarded Safe control lets owners erase and bypass accrued fees",
+    "Unrestricted exit entry points withdraw positions without charging fees",
+    "SendToken exports fee-bearing position tokens before fees are settled",
+    "/home/experiments_base/"
+  ]
+}

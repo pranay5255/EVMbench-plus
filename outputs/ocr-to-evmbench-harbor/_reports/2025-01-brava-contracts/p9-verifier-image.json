@@ -1,0 +1,47 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "verifier",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-brava-contracts-verifier-601aba9d679b8786-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-brava-contracts-verifier"
+  ],
+  "registry_digest": "sha256:a944fc99e20ac643d20d010ccf0b1ab79b60b9a3bcd42e6ce16ad8bd87f935c4",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:a944fc99e20ac643d20d010ccf0b1ab79b60b9a3bcd42e6ce16ad8bd87f935c4",
+  "image_id": "sha256:601aba9d679b878654a8f02e8e7fc449156a608765c3688960e07d24f75dd2dd",
+  "created": "2026-08-01T11:09:38.835414513Z",
+  "size_bytes": 1030475993,
+  "rootfs_layer_count": 12,
+  "platform": "linux/amd64",
+  "base_image": "docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+  "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "source_admission_commit_label": "1fdb992a6eb80980f07f62b2bd64f8c8687067dc",
+  "adapter_revision": "adfe07615981a678123cf61d7a69a6aee08228c9",
+  "requirements_sha256": "0298495df4b48e9b30a949966d93d64b029cf30c2edaea083df8b646caab26cf",
+  "dockerfile_sha256": "661151154def1fbe1e55b27af246aae476d2de4c251789cb13dd761b9732bc9f",
+  "admitted_candidate_checksum_stream_sha256": "0cf2adc079563c3e78474c677edf95037ec1082501cc89aec726a99e95c979dd",
+  "embedded_grader_audit_file_count": 5,
+  "embedded_grader_audit_checksum_stream_sha256": "72aaf2342533ad59afd1178dd57fcdb6594297b70933d311b96727c28dec3495",
+  "embedded_grader_audit_matches_approved_candidate_subset": true,
+  "tests_packaged": [
+    {
+      "path": "/tests/test.sh",
+      "sha256": "0e41a13ea98aeee65e2feac59001b511868a94d59182a3b0249f074417bdfeeb"
+    },
+    {
+      "path": "/tests/evmbench_harbor_verifier.py",
+      "sha256": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6"
+    },
+    {
+      "path": "/tests/validate_detect_submission.py",
+      "sha256": "c868e9451cb2195a19926eb10e3eb73f6f12def408b588a24f9546b80f7a16df"
+    }
+  ],
+  "registry_load_check": {
+    "vulnerability_count": 3,
+    "detect_max_award": 3
+  },
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

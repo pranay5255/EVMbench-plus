@@ -1,0 +1,50 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:49:00Z",
+  "status": "passed_with_disclosures",
+  "checks": {
+    "ocr_contract": "passed: 28 ordered records; 1,456 record checks and 19 global checks",
+    "pdf_checksum_and_page_count": "passed: exact SHA-256 and 28 pages",
+    "single_task_group": "passed",
+    "repository_snapshot": "passed: exact detached commit; no submodules",
+    "finding_dispositions_complete": "passed: all 16 report findings; 3 selected gold findings",
+    "byte_exact_ocr_slices": "passed",
+    "candidate_consistency": "passed",
+    "pinned_structural_validator": "passed with 0 errors and 0 warnings",
+    "current_structural_validator": "passed with 0 errors and 0 warnings",
+    "validator_tests": "9 current tests and 6 pinned candidate-validator tests passed",
+    "hardhat_compile": "92 Solidity files compiled",
+    "agent_image_build": "passed: explicit no-cache build",
+    "agent_image_offline_force_rebuild": "passed with runtime network none",
+    "agent_image_repository_check": "passed: exact HEAD, one reachable commit, clean worktree",
+    "agent_visible_leakage": "passed",
+    "canonical_forest_of_audits_status_preserved": "b8cc233d3ee6a7b835766e52aaf0c31793f19bd529f315da9637d4517fbcb82b"
+  },
+  "disclosures": [
+    {
+      "artifact": "finding_selection",
+      "concern": "BRAV-04 and part of BRAV-05 are merged into H-01 at the shared missing-guard boundary, while BRAV-05's independent exit-selector and token-transfer mechanisms become H-02 and H-03. This is a human-review judgment, not a mechanical transcription."
+    },
+    {
+      "artifact": "upstream_hardhat_tests",
+      "concern": "The unmodified suite requires a Tenderly mainnet fork. With runtime network disabled it executes zero tests and reports 18 before-all hook failures, so no green upstream semantic baseline is claimed."
+    },
+    {
+      "artifact": "upstream_dependencies",
+      "concern": "npm audit reports 76 lockfile dependency vulnerabilities: 12 low, 14 moderate, 42 high, and 8 critical."
+    },
+    {
+      "artifact": "agent_image",
+      "concern": "The reviewed image is local-only and has no registry manifest digest; publication is forbidden until exact human approval."
+    }
+  ],
+  "isolation": {
+    "canonical_forest_of_audits_written": false,
+    "canonical_evmbench_written": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false,
+    "queue_document_modified": true
+  }
+}

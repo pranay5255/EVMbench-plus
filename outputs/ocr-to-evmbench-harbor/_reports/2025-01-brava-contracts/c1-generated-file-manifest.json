@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "phase": "C1",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:49:00Z",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-brava-contracts",
+  "checksum_stream_format": "sha256, two spaces, relative path, newline; paths sorted bytewise",
+  "candidate_file_count": 13,
+  "candidate_checksum_stream_sha256": "0ac944543ad96a610840dab71d4b3eade876a59c8af9c190a0a19ea455e99bd8",
+  "files": [
+    {"path": ".dockerignore", "size_bytes": 30, "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"},
+    {"path": "Dockerfile", "size_bytes": 1290, "sha256": "f65e950b0eeaff6be707ffbbadb044fabda44460ff0f26d1bddd465b4607f983"},
+    {"path": "config.yaml", "size_bytes": 468, "sha256": "b6b63cb296fa4fa7f5ca21f67d4b13e8947091a1793efbd37bd412cf92b43ce9"},
+    {"path": "findings/H-01.md", "size_bytes": 3276, "sha256": "3fb29fb53a4fdb5f3b084abd78f258b027d4a2fe5d94c552a573e5c26d112ff1"},
+    {"path": "findings/H-02.md", "size_bytes": 2756, "sha256": "dbfa306e3d721653c38c82ea779ed669d4e057dc18d9f88029547213a4bc1063"},
+    {"path": "findings/H-03.md", "size_bytes": 2463, "sha256": "d1aabce3bfe66b79e0b445c09a174b5bb91f7c077f1a0f3ae9df5584ab80657f"},
+    {"path": "findings/gold_audit.md", "size_bytes": 8497, "sha256": "5b2fa2decacec4f8330ad6ef0a1f2ccffa275186e2f00fd80373539d67abfa3e"},
+    {"path": "ocr_evidence/pdf_003676_5e7283108c30/H-01.pages.jsonl", "size_bytes": 23287, "sha256": "a6b9b726faf8b3b60d6f74bbcc7c6e42466d86e1df4fec780eb72bf77f47016c"},
+    {"path": "ocr_evidence/pdf_003676_5e7283108c30/H-02.pages.jsonl", "size_bytes": 8983, "sha256": "9a6d0c0e6f86f118f800ae1c2edaac475b68a1a2cc4e026b27eb1fdebb11ec5f"},
+    {"path": "ocr_evidence/pdf_003676_5e7283108c30/H-03.pages.jsonl", "size_bytes": 8983, "sha256": "9a6d0c0e6f86f118f800ae1c2edaac475b68a1a2cc4e026b27eb1fdebb11ec5f"},
+    {"path": "ocr_evidence/pdf_003676_5e7283108c30/scope.pages.jsonl", "size_bytes": 17556, "sha256": "e28beb8a56173f3bf20b715ec1f0184b46d2bf8b9b7f6161988210a9aaa87f39"},
+    {"path": "provenance.json", "size_bytes": 18135, "sha256": "9702d1f6b201c6abe235b664344e6031e71ee7c2717b0a378f013ce94df804ea"},
+    {"path": "review_status.yaml", "size_bytes": 192, "sha256": "d8963ed50d166774924de5673e3af386df42cd32dfea1ba1dc5dec2e479d3478"}
+  ],
+  "review_state": "in_review",
+  "human_approved": false,
+  "status": "passed"
+}

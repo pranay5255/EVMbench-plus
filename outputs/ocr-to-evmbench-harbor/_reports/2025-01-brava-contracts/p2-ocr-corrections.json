@@ -1,0 +1,34 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "phase": "P2",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed_with_corrections",
+  "corrections": [
+    {
+      "pages": [4],
+      "field": "repository_and_commits",
+      "ocr_or_visible_text": "The displayed links abbreviate the two commits.",
+      "authoritative_value": {
+        "repository": "https://github.com/brava-labs/brava-contracts",
+        "vulnerable_commit": "655613454d3c6264096457adeb387b965fefc3c6",
+        "fixed_commit": "29d4211f732e745a926209dc1cc915562a8c0b74"
+      },
+      "basis": "PDF hyperlink annotations, followed by detached repository verification"
+    },
+    {
+      "pages": [8],
+      "field": "BRAV-01_code_block",
+      "authoritative_value": "Errors.AdminVault_NotGranted, proposedRoles, keccak256, LOGGER.logAdminVaultEvent",
+      "basis": "PDF rendering and vulnerable source; OCR corrupts these identifiers"
+    },
+    {
+      "pages": [12, 14],
+      "field": "token_and_contract_names",
+      "authoritative_value": "aTokens, yvToken, ERC4626Withdraw",
+      "basis": "PDF rendering and vulnerable source; OCR corrupts these names"
+    }
+  ],
+  "source_ocr_rewritten": false,
+  "summary": {"ok": true, "correction_count": 3}
+}

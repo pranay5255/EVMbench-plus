@@ -1,0 +1,159 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:50:00Z",
+  "task_group_key": "brava-labs/brava-contracts@655613454d3c6264096457adeb387b965fefc3c6|contracts/actions/**+contracts/auth/**+contracts/SequenceExecutor.sol|detect",
+  "task_group_key_sha256": "b58b51e4fbd6102d8c3a7baf9e7d0822394bb3e51bd5544bd6597b51a70c6531",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-01-brava-contracts",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false,
+    "approved_by_present": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "reviewer_identity": {
+    "value": null,
+    "supplied_as_approval": false,
+    "must_be_supplied_with_exact_approval": true
+  },
+  "source_evidence": {
+    "ocr": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003676_5e7283108c30.jsonl",
+      "sha256": "359b5683f6e7eedcda602ebf40cd4d7fa2c08811d3fb50e33380ec3a8470e26c",
+      "size_bytes": 184940,
+      "record_count": 28,
+      "schema_version": "evmbench_task_creation.ocr_page.v1"
+    },
+    "pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/brava/report.pdf",
+      "sha256": "0a2e01d42de45845dbc5b3aea01cb37458e23a59b256696949f5f4d4f772967d",
+      "size_bytes": 433530,
+      "page_count": 28,
+      "report_identity": "Sigma Prime Brava - Smart Contracts Security Assessment Report v2.1"
+    }
+  },
+  "repository": {
+    "url": "https://github.com/brava-labs/brava-contracts.git",
+    "vulnerable_commit": "655613454d3c6264096457adeb387b965fefc3c6",
+    "root_tree": "adc6756be8d1c213aa1ed0e40532654932776d6d",
+    "contracts_tree": "ef5317418e5ccfcc79ead0745dfed72eb4c0d9d0",
+    "audited_scope": ["contracts/actions/**", "contracts/auth/**", "contracts/SequenceExecutor.sol"],
+    "audited_tracked_file_count": 37,
+    "mode": "detect",
+    "framework": "hardhat",
+    "fixed_commit_kept_separate": "29d4211f732e745a926209dc1cc915562a8c0b74"
+  },
+  "findings": [
+    {
+      "gold_id": "H-01",
+      "report_ids": ["BRAV-02", "BRAV-04", "BRAV-05#3"],
+      "pages": [9, 11, 12],
+      "reported_severities": ["High", "High", "Medium"],
+      "title": "Unguarded Safe control lets owners erase and bypass accrued fees",
+      "award": 1.0,
+      "finding_sha256": "3fb29fb53a4fdb5f3b084abd78f258b027d4a2fe5d94c552a573e5c26d112ff1"
+    },
+    {
+      "gold_id": "H-02",
+      "report_ids": ["BRAV-05#1"],
+      "pages": [12],
+      "reported_severities": ["Medium"],
+      "title": "Unrestricted exit entry points withdraw positions without charging fees",
+      "award": 1.0,
+      "finding_sha256": "dbfa306e3d721653c38c82ea779ed669d4e057dc18d9f88029547213a4bc1063"
+    },
+    {
+      "gold_id": "H-03",
+      "report_ids": ["BRAV-05#2"],
+      "pages": [12],
+      "reported_severities": ["Medium"],
+      "title": "SendToken exports fee-bearing position tokens before fees are settled",
+      "award": 1.0,
+      "finding_sha256": "d1aabce3bfe66b79e0b445c09a174b5bb91f7c077f1a0f3ae9df5584ab80657f"
+    }
+  ],
+  "max_score": 3.0,
+  "reviewed_candidate": {
+    "file_manifest": "c1-generated-file-manifest.json",
+    "file_manifest_sha256": "cbe47d647b0187bd634aa3f05f7a640b3658208c43ed0a9a73326e550d913989",
+    "candidate_file_count": 13,
+    "candidate_checksum_stream_sha256": "0ac944543ad96a610840dab71d4b3eade876a59c8af9c190a0a19ea455e99bd8",
+    "dockerfile_sha256": "f65e950b0eeaff6be707ffbbadb044fabda44460ff0f26d1bddd465b4607f983",
+    "config_sha256": "b6b63cb296fa4fa7f5ca21f67d4b13e8947091a1793efbd37bd412cf92b43ce9",
+    "gold_audit_sha256": "5b2fa2decacec4f8330ad6ef0a1f2ccffa275186e2f00fd80373539d67abfa3e",
+    "provenance_sha256": "9702d1f6b201c6abe235b664344e6031e71ee7c2717b0a378f013ce94df804ea",
+    "review_status_sha256": "d8963ed50d166774924de5673e3af386df42cd32dfea1ba1dc5dec2e479d3478"
+  },
+  "validation_reports": [
+    {"path": "p1-isolation.json", "sha256": "053a1e0735962915f26c9c1a88a0749b53fe5b3644ff277afa57c4f699123d50", "status": "passed"},
+    {"path": "p1-ocr-validation.json", "sha256": "24131e698c22893b38ca4c3542d9698e5a323331b99de94b655a0627240353c4", "status": "passed"},
+    {"path": "p1-ocr-validation.txt", "sha256": "c1bb9afe7db051714fae57f87b4110ce916e371336834bd0bc917111a6dcb949", "status": "passed"},
+    {"path": "p2-ocr-corrections.json", "sha256": "ea369904786b6b96ce390e7d9f87d0cdb1141e04fdc9f315c7f46765c9ae103a", "status": "passed_with_corrections"},
+    {"path": "p2-pdf-ocr-review.md", "sha256": "0f664caea4e9b9184edb319f0b60de4687b330257c8a7145985f5ba9dbfebd1b", "status": "passed"},
+    {"path": "p2-pdf-validation.json", "sha256": "a8c177626441db69d01cf5beb111e0d0cb96f0783986e65979f114cd5ab4892d", "status": "passed"},
+    {"path": "p3-repository-grounding.md", "sha256": "df10aa0c9d61a43fbed23ad81272949a9df99b5b76e1eb489e7e69fb7969654b", "status": "passed"},
+    {"path": "p3-repository-snapshot.json", "sha256": "b75fb6f83c0a5675785d0f2844b1945ebd752824168c7dfd0161fe8106ef0847", "status": "passed"},
+    {"path": "p3-submodules.json", "sha256": "49a09f636aa29ae88fc6a454f7dc915fbb10b6ca458caf5468223d52176fc33e", "status": "passed"},
+    {"path": "p3-task-group.json", "sha256": "48678736d2eca05a306fbdd108df85e450e9979ec80f5da2179fefa5b97c6c9e", "status": "passed"},
+    {"path": "p4-finding-grounding.md", "sha256": "fe5174f4b2290897f857fd4a64b3b862b0c8f6dc94d59e2cea8728d03389d4b6", "status": "passed_with_review_judgment"},
+    {"path": "p4-semantic-validation.json", "sha256": "792ba5308d1f014b95d3ca97a88f2ca6e4717f6da508a813109062be3aa32f2b", "status": "passed_with_review_judgment"},
+    {"path": "p5-build-baseline.md", "sha256": "d7dc891c9fcda994df3611b466504e3d16dd4efe967f3f6f5805513b5701ad8a", "status": "passed_with_disclosure"},
+    {"path": "p5-byte-exact-slices.json", "sha256": "3a02462e9a58a9caef486de4f28875012229706311d3f8a3b14f693c458f6b45", "status": "passed"},
+    {"path": "p6-agent-image.json", "sha256": "bb11311aae103c3d8aa20e86790085e2420410ea88b3eeacd60a0fba91148626", "status": "passed_with_disclosure"},
+    {"path": "p6-current-structural-validator.json", "sha256": "2d1f386a74d920c5e69b9ee3326076c74e6bb77e5aaf6c6710dbac82c601613f", "status": "passed"},
+    {"path": "p6-leakage-scan.json", "sha256": "9c2d187cf1547858ceb37efc8bcfda76859abd2ffbb15911c8562d11f09b6c4d", "status": "passed"},
+    {"path": "p6-pinned-structural-validator.json", "sha256": "d4ee3684437f4dd5d2cf35cc5fd11664ded7710bfd5e6ef8a64f46997f51d76e", "status": "passed"},
+    {"path": "p6-repository-validation.json", "sha256": "6523d67dafa5d1f1b5948bf16309775ac7daac7bca178fa5552e68142fd89b79", "status": "passed"},
+    {"path": "p6-validator-tests.txt", "sha256": "5721ece63d2a858044d805678c39d8b68d658ac18a1bc132927dd0c5d5907e13", "status": "passed"},
+    {"path": "c1-generated-file-manifest.json", "sha256": "cbe47d647b0187bd634aa3f05f7a640b3658208c43ed0a9a73326e550d913989", "status": "passed"},
+    {"path": "c1-validation-summary.json", "sha256": "02535822a87d255075745bea90141cbe6d45320f7e378efa23df750b6c8e04e0", "status": "passed_with_disclosures"}
+  ],
+  "base_image": {
+    "manifest_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0"
+  },
+  "agent_image": {
+    "local_tag": "evmbench-brava-candidate:c1r1",
+    "config_digest": "sha256:b395ead9583a83c1a8fd430fd75767d0177fadb5afc4cc8e462b27ffba0546d4",
+    "platform": "linux/amd64",
+    "size_bytes": 4318533186,
+    "candidate_layer_digest": "sha256:a69037a483defdba6416750052c09c5ea3dba041bf151659a66ea71892797c55",
+    "saved_image_tar_sha256": "be685b230f6d0ee908d60121340e62b58cd89fa5f0fcdc32c6546e66827ad276",
+    "published_to_registry": false
+  },
+  "validation_summary": {
+    "structural": "passed",
+    "semantic": "passed with explicit merge/split review judgment",
+    "repository": "passed",
+    "docker_build": "passed with no cache",
+    "hardhat_compile": "92 files",
+    "hardhat_tests": "not runnable offline: 0 passing and 18 before-all fork failures",
+    "runtime_network": "none",
+    "final_filesystem_leakage": "passed",
+    "pdf_files_in_agent_image": 0,
+    "jsonl_files_in_agent_image": 0,
+    "unresolved_semantic_or_reproducibility_concerns": [
+      "Human confirmation of the BRAV-04/BRAV-05 merge and split is required.",
+      "The upstream test suite has no offline green baseline because it requires a Tenderly mainnet fork.",
+      "The upstream lockfile reports 76 npm audit vulnerabilities.",
+      "The local image is not registry-published before approval."
+    ]
+  },
+  "queue": {
+    "selected_rank": 8,
+    "selection": "explicit_user_selection_out_of_queue_order",
+    "benqi_rank_6_remains_next": true,
+    "stale_instruction_to_mark_benqi_created_or_burve_next_applied": false
+  },
+  "approval_requirement": {
+    "approval_scope": "exact candidate bytes and this review manifest digest",
+    "reviewer_identity_required": true,
+    "approval_phrase_template": "I approve candidate 2025-01-brava-contracts at review-bundle digest <digest> for admission. Reviewer: <identity>.",
+    "admission_before_approval_forbidden": true,
+    "harbor_generation_before_approval_forbidden": true,
+    "registry_publication_before_approval_forbidden": true
+  }
+}

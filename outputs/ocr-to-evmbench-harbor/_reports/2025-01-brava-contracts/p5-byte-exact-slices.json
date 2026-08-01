@@ -1,0 +1,36 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "phase": "P5",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed",
+  "source": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003676_5e7283108c30.jsonl",
+    "sha256_before_p5": "359b5683f6e7eedcda602ebf40cd4d7fa2c08811d3fb50e33380ec3a8470e26c",
+    "sha256_after_p5": "359b5683f6e7eedcda602ebf40cd4d7fa2c08811d3fb50e33380ec3a8470e26c",
+    "unchanged": true,
+    "size_bytes": 184940,
+    "line_count": 28
+  },
+  "method": {
+    "selection_key": "page_number",
+    "slice_unit": "complete original JSONL lines including trailing newline bytes",
+    "comparison": "Each slice equals the ordered byte concatenation of its selected source lines.",
+    "source_rewritten": false
+  },
+  "slices": [
+    {"role": "scope", "path": "ocr_evidence/pdf_003676_5e7283108c30/scope.pages.jsonl", "expected_pages": [1, 4, 7], "actual_pages": [1, 4, 7], "line_count": 3, "size_bytes": 17556, "sha256": "e28beb8a56173f3bf20b715ec1f0184b46d2bf8b9b7f6161988210a9aaa87f39", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-01", "path": "ocr_evidence/pdf_003676_5e7283108c30/H-01.pages.jsonl", "expected_pages": [9, 11, 12], "actual_pages": [9, 11, 12], "line_count": 3, "size_bytes": 23287, "sha256": "a6b9b726faf8b3b60d6f74bbcc7c6e42466d86e1df4fec780eb72bf77f47016c", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-02", "path": "ocr_evidence/pdf_003676_5e7283108c30/H-02.pages.jsonl", "expected_pages": [12], "actual_pages": [12], "line_count": 1, "size_bytes": 8983, "sha256": "9a6d0c0e6f86f118f800ae1c2edaac475b68a1a2cc4e026b27eb1fdebb11ec5f", "byte_exact": true, "strictly_ordered": true},
+    {"role": "finding", "finding_id": "H-03", "path": "ocr_evidence/pdf_003676_5e7283108c30/H-03.pages.jsonl", "expected_pages": [12], "actual_pages": [12], "line_count": 1, "size_bytes": 8983, "sha256": "9a6d0c0e6f86f118f800ae1c2edaac475b68a1a2cc4e026b27eb1fdebb11ec5f", "byte_exact": true, "strictly_ordered": true}
+  ],
+  "selected_page_numbers": [1, 4, 7, 9, 11, 12],
+  "checks": [
+    {"id": "source_hash_unchanged", "passed": true},
+    {"id": "four_expected_slices_exist", "passed": true},
+    {"id": "all_slice_records_are_complete_source_lines", "passed": true},
+    {"id": "all_slice_bytes_match_ordered_source_concatenation", "passed": true},
+    {"id": "all_expected_page_sequences_match", "passed": true}
+  ],
+  "summary": {"ok": true, "slice_count": 4, "selected_unique_record_count": 6, "failed_check_count": 0}
+}

@@ -1,0 +1,443 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-01-brava-contracts",
+  "materialized_at": "2026-08-01T10:25:55Z",
+  "phase": "C1",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "617de0007ff0087caa3fa062c40f2f2b3c6f49e558d27b6f9893eac74db25167",
+    "approved_at": "2026-08-01T10:58:26Z",
+    "reviewer_identity": "github.com/pranay5255",
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "brava-labs/brava-contracts@655613454d3c6264096457adeb387b965fefc3c6|contracts/actions/**+contracts/auth/**+contracts/SequenceExecutor.sol|detect",
+    "task_group_key_sha256": "b58b51e4fbd6102d8c3a7baf9e7d0822394bb3e51bd5544bd6597b51a70c6531",
+    "repository_slug": "brava-labs/brava-contracts",
+    "vulnerable_commit": "655613454d3c6264096457adeb387b965fefc3c6",
+    "audited_scope": [
+      "contracts/actions/**",
+      "contracts/auth/**",
+      "contracts/SequenceExecutor.sol"
+    ],
+    "mode": "detect",
+    "framework": "hardhat"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003676_5e7283108c30",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "report.pdf",
+    "source_rel_path": "public-audits/reports/brava/report.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/brava/report.pdf",
+    "source_pdf_sha256": "0a2e01d42de45845dbc5b3aea01cb37458e23a59b256696949f5f4d4f772967d",
+    "size_bytes": 433530,
+    "physical_page_count": 28,
+    "report_identity": "Sigma Prime Brava - Smart Contracts Security Assessment Report v2.1",
+    "report_month": "2025-01",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003676_5e7283108c30.jsonl",
+    "sha256": "359b5683f6e7eedcda602ebf40cd4d7fa2c08811d3fb50e33380ec3a8470e26c",
+    "size_bytes": 184940,
+    "record_count": 28,
+    "source_page_count": 28,
+    "created_at": "2026-06-30T20:20:23.688015+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-01-brava-contracts/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 8,
+    "selection": "explicit_user_selection",
+    "category": "Wallet/Account Abstraction",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 24,
+    "reviewed_report_finding_count": 16
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/brava-labs/brava-contracts.git",
+    "repository_slug": "brava-labs/brava-contracts",
+    "commit": "655613454d3c6264096457adeb387b965fefc3c6",
+    "commit_subject": "Merge pull request #75 from brava-labs/epic/DEL-48-Smart-contract-suite",
+    "commit_authored_at": "2024-11-23T15:55:57+01:00",
+    "root_tree": "adc6756be8d1c213aa1ed0e40532654932776d6d",
+    "contracts_tree": "ef5317418e5ccfcc79ead0745dfed72eb4c0d9d0",
+    "detached_head": true,
+    "clean": true,
+    "review_clone": "/tmp/brava-review-net.CpDgTb/repo",
+    "submodule_count": 0,
+    "tracked_pdf_or_jsonl_count": 0,
+    "audited_tracked_file_count": 37,
+    "file_evidence": [
+      {
+        "path": "contracts/auth/AdminVault.sol",
+        "git_blob": "eba5c1733282a552a2a2134182c923b8aefa37e8",
+        "sha256": "24adb5b592fcdf5add555281b9dd9ae1b3719177ce7eb3c830755fec1b90075c"
+      },
+      {
+        "path": "contracts/auth/FeeTakeSafeModule.sol",
+        "git_blob": "02725f2e8b150319385fce73d02351b6a792aa44",
+        "sha256": "a0c085365920e6b4be2e6e314e58d517ed0cd0c6188d9887dc795da27d894737"
+      },
+      {
+        "path": "contracts/actions/utils/SendToken.sol",
+        "git_blob": "a9a6665a518046fbdff73868adc1b46b50632dbe",
+        "sha256": "413df965bab554e67e41c21be98727c671f6d13802ce8142113fc67966b6fbfc"
+      },
+      {
+        "path": "contracts/actions/common/AaveWithdraw.sol",
+        "git_blob": "5d9948444815589d982c678ca213e282dc17382b",
+        "sha256": "dc36d8a39471bb372109e3e84be907fddec030fb402a409bb38f6dd1f8f4a125"
+      },
+      {
+        "path": "contracts/actions/common/CompoundV2Withdraw.sol",
+        "git_blob": "b44f112cc46d58f8759abea5932ff0ce03f90991",
+        "sha256": "226a441b741e895417a3046ecc02a0d4bddba328761526291ff50c4f64ec78aa"
+      },
+      {
+        "path": "contracts/actions/common/ERC4626Withdraw.sol",
+        "git_blob": "bcacaf8ab5371c869a55f08f9806eae22493781f",
+        "sha256": "895b6a1af1383be598aab3a06c9aa38bf8d4110a1f575bdb9cbce8be1522666a"
+      },
+      {
+        "path": "contracts/actions/clearpool/ClearpoolWithdraw.sol",
+        "git_blob": "65b59ee9b31d28b931187eba50452ecdf34bb229",
+        "sha256": "891faf6942754e3494485bb4985f4a5b3e871cc22cb468af714fcefc7b8f1e44"
+      },
+      {
+        "path": "contracts/SequenceExecutor.sol",
+        "git_blob": "be56c8a7b9074be3166b8e24de08d24746310df1",
+        "sha256": "a6c2cc784c65c8086eff9cbfd085275b2c3050a313bcf7d12acff3cfb3e718a7"
+      }
+    ]
+  },
+  "fixed_snapshot": {
+    "commit": "29d4211f732e745a926209dc1cc915562a8c0b74",
+    "root_tree": "f3b118288afc678958636a7a01d0d606adbbe9f4",
+    "vulnerable_commit_is_ancestor": true,
+    "kept_separate_from_vulnerable_task_snapshot": true,
+    "agent_image_contains_post_audit_history": false
+  },
+  "corroborating_fix_commits": [
+    {
+      "finding_id": "H-01",
+      "commits": [
+        "e5b37e4",
+        "3912ff0",
+        "0c8c418",
+        "1e56666"
+      ],
+      "summary": "Add and harden BravaGuard so Safe transactions target SequenceExecutor."
+    },
+    {
+      "finding_id": "H-02",
+      "commit": "7ec904f",
+      "summary": "Remove remaining exit functions."
+    },
+    {
+      "finding_id": "H-03",
+      "commits": [
+        "03e631b",
+        "aedcec3"
+      ],
+      "summary": "Key fees by token and settle fees before transfers and swaps."
+    }
+  ],
+  "build_baseline": {
+    "node": "v20.19.6",
+    "npm": "11.11.0",
+    "dependency_install": "npm ci",
+    "lockfile_installed_package_count": 1027,
+    "solidity": "0.8.28",
+    "compile_command": "./node_modules/.bin/hardhat compile --force",
+    "compiled_solidity_file_count": 92,
+    "generated_artifact_json_count": 172,
+    "compile_passed": true,
+    "upstream_test_status": "not_run_missing_TENDERLY_API_KEY_for_pinned_mainnet_fork",
+    "npm_audit_summary": {
+      "low": 12,
+      "moderate": 14,
+      "high": 42,
+      "critical": 8,
+      "total": 76
+    }
+  },
+  "ocr_corrections": [
+    {
+      "pages": [4],
+      "field": "repository_and_commits",
+      "correction": "Use the PDF hyperlink annotations for the full repository URL and full vulnerable and fixed commits; visible PDF text and OCR show abbreviated commits."
+    },
+    {
+      "pages": [8],
+      "field": "BRAV-01_code_block",
+      "correction": "Use the PDF and vulnerable source for Errors.AdminVault_NotGranted, proposedRoles, keccak256, and LOGGER.logAdminVaultEvent; OCR corrupts these identifiers."
+    },
+    {
+      "pages": [12, 14],
+      "field": "token_and_contract_names",
+      "correction": "Use PDF text and vulnerable source for aTokens, yvToken, and ERC4626Withdraw; OCR corrupts these names."
+    }
+  ],
+  "ocr_evidence": [
+    {
+      "page_number": 1,
+      "role": "scope",
+      "page_image_sha256": "8a4542463693dd8945794ee207ac9ab020bcd8e6475f0f8632ef5c1cf96942b9",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/scope.pages.jsonl"
+    },
+    {
+      "page_number": 4,
+      "role": "scope",
+      "page_image_sha256": "fb4eed8f1b2338759618b4243e66582fc295ee8f575828163fb9ecc9d4d0c9ac",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/scope.pages.jsonl"
+    },
+    {
+      "page_number": 7,
+      "role": "scope",
+      "page_image_sha256": "0685064b691017dea12600820a16aea6c05574a841b17bcca4aa5774eca8768e",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/scope.pages.jsonl"
+    },
+    {
+      "page_number": 9,
+      "finding_id": "H-01",
+      "page_image_sha256": "ea2fa61a91f3d782fdd303ee62dedb587ccbd1bc709522eefe84d1d768277c3b",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/H-01.pages.jsonl"
+    },
+    {
+      "page_number": 11,
+      "finding_id": "H-01",
+      "page_image_sha256": "349eb3f12137a76db4b3bed4b9ec9f0ea690786b23047d7ca8c617b2f3b53112",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/H-01.pages.jsonl"
+    },
+    {
+      "page_number": 12,
+      "finding_id": "H-01",
+      "page_image_sha256": "b50815b56260b3518e15def22b392bcb177ca6bf492c18f3d43ae01fbfbd3c46",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/H-01.pages.jsonl"
+    },
+    {
+      "page_number": 12,
+      "finding_id": "H-02",
+      "page_image_sha256": "b50815b56260b3518e15def22b392bcb177ca6bf492c18f3d43ae01fbfbd3c46",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/H-02.pages.jsonl"
+    },
+    {
+      "page_number": 12,
+      "finding_id": "H-03",
+      "page_image_sha256": "b50815b56260b3518e15def22b392bcb177ca6bf492c18f3d43ae01fbfbd3c46",
+      "artifact_ref": "ocr_evidence/pdf_003676_5e7283108c30/H-03.pages.jsonl"
+    }
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "source_report_finding_ids": [
+        "BRAV-02",
+        "BRAV-04",
+        "BRAV-05#3"
+      ],
+      "source_pages": [9, 11, 12],
+      "reported_severities": ["High", "High", "Medium"],
+      "title": "Unguarded Safe control lets owners erase and bypass accrued fees",
+      "generated_file": "findings/H-01.md"
+    },
+    {
+      "finding_id": "H-02",
+      "source_report_finding_ids": ["BRAV-05#1"],
+      "source_pages": [12],
+      "reported_severities": ["Medium"],
+      "title": "Unrestricted exit entry points withdraw positions without charging fees",
+      "generated_file": "findings/H-02.md"
+    },
+    {
+      "finding_id": "H-03",
+      "source_report_finding_ids": ["BRAV-05#2"],
+      "source_pages": [12],
+      "reported_severities": ["Medium"],
+      "title": "SendToken exports fee-bearing position tokens before fees are settled",
+      "generated_file": "findings/H-03.md"
+    }
+  ],
+  "report_dispositions": [
+    {
+      "report_id": "BRAV-01",
+      "pages": [8],
+      "reported_severity": "Critical",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/auth/AccessControlDelayed.sol"],
+      "reason_category": "availability_only",
+      "reason": "Arbitrary role revocation can disable protocol administration, but the report and audited code do not establish theft, destruction, or a permanent loss path for assets held in user-controlled Safes."
+    },
+    {
+      "report_id": "BRAV-02",
+      "pages": [9],
+      "reported_severity": "High",
+      "disposition": "included",
+      "finding_id": "H-01",
+      "affected_paths": ["contracts/auth/AdminVault.sol"],
+      "root_cause": "The unguarded Safe can call AdminVault.setFeeTimestamp directly and reset its own fee clock.",
+      "asset_loss_path": "The next withdrawal transfers only the negligible post-reset fee, so the fee recipient loses the accrued asset amount."
+    },
+    {
+      "report_id": "BRAV-03",
+      "pages": [10],
+      "reported_severity": "High",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/actions/across/AcrossWithdraw.sol"],
+      "reason_category": "atomic_revert_availability",
+      "reason": "The stale pre-fee share balance makes Across withdrawal revert atomically; the report identifies a temporary zero-fee workaround and no asset transfer or destruction."
+    },
+    {
+      "report_id": "BRAV-04",
+      "pages": [11],
+      "reported_severity": "High",
+      "disposition": "merged",
+      "finding_id": "H-01",
+      "affected_paths": ["contracts/auth/FeeTakeSafeModule.sol"],
+      "reason": "Module disablement is another symptom of the same missing Safe guard. Alone it delays collection because normal deposit and withdrawal actions still charge fees; it is not a distinct permanent-loss root cause."
+    },
+    {
+      "report_id": "BRAV-05",
+      "pages": [12],
+      "reported_severity": "Medium",
+      "disposition": "split",
+      "finding_ids": ["H-01", "H-02", "H-03"],
+      "affected_paths": [
+        "contracts/SequenceExecutor.sol",
+        "contracts/actions/common/AaveWithdraw.sol",
+        "contracts/actions/common/CompoundV2Withdraw.sol",
+        "contracts/actions/common/ERC4626Withdraw.sol",
+        "contracts/actions/clearpool/ClearpoolWithdraw.sol",
+        "contracts/actions/utils/SendToken.sol"
+      ],
+      "split_reason": "The report combines three mechanisms removed by different changes: arbitrary unguarded Safe calls, stale exit selectors, and generic receipt-token transfer."
+    },
+    {
+      "report_id": "BRAV-06",
+      "pages": [13],
+      "reported_severity": "Medium",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/actions/across/AcrossSupply.sol"],
+      "reason_category": "atomic_revert_availability",
+      "reason": "Fee collection can make a later deposit revert through subtraction or slippage checks, but the transaction is atomic and does not consume or misdirect assets."
+    },
+    {
+      "report_id": "BRAV-07",
+      "pages": [14],
+      "reported_severity": "Medium",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/actions/yearn/YearnWithdraw.sol", "contracts/actions/common/ERC4626Withdraw.sol"],
+      "reason_category": "denomination_mismatch_without_grounded_value_loss",
+      "reason": "The interface treats a Yearn share amount as an underlying amount, producing a different quantity than requested. The redemption remains exchange-rate backed, and the report does not establish value theft or destruction."
+    },
+    {
+      "report_id": "BRAV-08",
+      "pages": [15],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/actions/ActionBase.sol"],
+      "reason_category": "availability_only",
+      "reason": "A pre-existing receipt-token balance prevents fee initialization and makes supply revert atomically; no assets leave the user."
+    },
+    {
+      "report_id": "BRAV-09",
+      "pages": [16],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/actions/nexus-mutual/BuyCover.sol"],
+      "reason_category": "recoverable_same_owner_custody",
+      "reason": "Excess ETH remains in the user's own Safe and can be recovered with a custom owner call; it is temporarily inconvenient, not lost to another party."
+    },
+    {
+      "report_id": "BRAV-10",
+      "pages": [17],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/auth/AdminVault.sol"],
+      "reason_category": "privileged_governance_availability",
+      "reason": "An already authorized fee proposer can delay configuration changes by overwriting a proposal, but the finding does not authorize an asset transfer or corrupt accounting."
+    },
+    {
+      "report_id": "BRAV-11",
+      "pages": [18],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/auth/AdminVault.sol"],
+      "reason_category": "privileged_delay_bypass_without_grounded_loss",
+      "reason": "A pool executor can reuse an old proposal after a pool is removed. The report does not show that the previously approved pool steals or destroys user assets."
+    },
+    {
+      "report_id": "BRAV-12",
+      "pages": [19],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/actions/utils/SendToken.sol"],
+      "reason_category": "event_only",
+      "reason": "The emitted amount can be wrong when the max sentinel is used, but the transferred amount and recipient are unchanged."
+    },
+    {
+      "report_id": "BRAV-13",
+      "pages": [20],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/actions/common/ERC4626Supply.sol"],
+      "reason_category": "atomic_revert_compatibility",
+      "reason": "A deposit above maxDeposit reverts atomically; the omission causes failed execution rather than asset loss."
+    },
+    {
+      "report_id": "BRAV-14",
+      "pages": [21],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "affected_paths": [
+        "contracts/actions/nexus-mutual/BuyCover.sol",
+        "contracts/actions/strike/**",
+        "contracts/actions/spark/**"
+      ],
+      "reason_category": "third_party_legal_restriction",
+      "reason": "Possible future geo-restriction is a third-party policy risk and the report recommends frontend warnings; it is not a concrete vulnerability in the audited contracts."
+    },
+    {
+      "report_id": "BRAV-15",
+      "pages": [22],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/auth/AdminVault.sol"],
+      "reason_category": "role_management_operability",
+      "reason": "Some roles cannot be granted to new accounts, affecting administration but not establishing an asset-loss sequence."
+    },
+    {
+      "report_id": "BRAV-16",
+      "pages": [23, 24],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "affected_paths": ["contracts/**"],
+      "reason_category": "non_security_miscellany",
+      "reason": "The report explicitly groups stale code, repeated reads, typos, and inaccurate comments as having no direct security implications."
+    }
+  ],
+  "generated_files": [
+    ".dockerignore",
+    "config.yaml",
+    "Dockerfile",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/gold_audit.md",
+    "provenance.json",
+    "review_status.yaml",
+    "ocr_evidence/pdf_003676_5e7283108c30/scope.pages.jsonl",
+    "ocr_evidence/pdf_003676_5e7283108c30/H-01.pages.jsonl",
+    "ocr_evidence/pdf_003676_5e7283108c30/H-02.pages.jsonl",
+    "ocr_evidence/pdf_003676_5e7283108c30/H-03.pages.jsonl"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8",
+  "status": "passed",
+  "audit_id": "2025-01-brava-contracts",
+  "framework": "hardhat",
+  "base_commit": "655613454d3c6264096457adeb387b965fefc3c6",
+  "vulnerability_count": 3,
+  "detect_max_award": 3,
+  "vulnerabilities": [
+    {
+      "id": "H-01",
+      "title": "Unguarded Safe control lets owners erase and bypass accrued fees",
+      "award": 1
+    },
+    {
+      "id": "H-02",
+      "title": "Unrestricted exit entry points withdraw positions without charging fees",
+      "award": 1
+    },
+    {
+      "id": "H-03",
+      "title": "SendToken exports fee-bearing position tokens before fees are settled",
+      "award": 1
+    }
+  ]
+}

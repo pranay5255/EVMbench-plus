@@ -1,0 +1,32 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed_with_disclosure",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-brava-contracts-agent-b395ead9583a83c1-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-01-brava-contracts"
+  ],
+  "registry_digest": "sha256:611cd19ac058de83acde3a0f29955f9d95792fd415adee5bee303eb5d1c3b37b",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:611cd19ac058de83acde3a0f29955f9d95792fd415adee5bee303eb5d1c3b37b",
+  "image_id": "sha256:b395ead9583a83c1a8fd430fd75767d0177fadb5afc4cc8e462b27ffba0546d4",
+  "review_image_id": "sha256:b395ead9583a83c1a8fd430fd75767d0177fadb5afc4cc8e462b27ffba0546d4",
+  "canonical_build_resolved_to_reviewed_image_id": true,
+  "created": "2026-08-01T10:45:09.631098431Z",
+  "size_bytes": 4318533186,
+  "rootfs_layer_count": 20,
+  "platform": "linux/amd64",
+  "repository_head": "655613454d3c6264096457adeb387b965fefc3c6",
+  "reachable_repository_commit_count": 1,
+  "audited_file_hashes_verified": true,
+  "manifest_verified": true,
+  "hardhat_compile_files": 92,
+  "hardhat_tests": {
+    "passed": 0,
+    "failed_before_all_hooks": 18,
+    "executed": true,
+    "failures_classified_as_offline_upstream_baseline": true,
+    "cause": "Tenderly mainnet fork unavailable with runtime network disabled"
+  },
+  "offline_isolation_check_passed": true
+}

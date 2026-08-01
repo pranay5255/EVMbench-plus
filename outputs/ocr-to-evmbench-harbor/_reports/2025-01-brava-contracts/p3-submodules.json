@@ -1,0 +1,11 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.submodules.v1",
+  "phase": "P3",
+  "candidate_id": "2025-01-brava-contracts",
+  "generated_at": "2026-08-01T10:47:00Z",
+  "status": "passed",
+  "gitmodules_present": false,
+  "gitlink_count": 0,
+  "recursive_submodule_revision_count": 0,
+  "summary": {"ok": true}
+}

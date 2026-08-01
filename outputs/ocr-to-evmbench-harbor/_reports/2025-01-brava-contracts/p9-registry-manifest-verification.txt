@@ -1,0 +1,7 @@
+agent unique tag digest: sha256:611cd19ac058de83acde3a0f29955f9d95792fd415adee5bee303eb5d1c3b37b
+agent alias tag digest: sha256:611cd19ac058de83acde3a0f29955f9d95792fd415adee5bee303eb5d1c3b37b
+verifier unique tag digest: sha256:a944fc99e20ac643d20d010ccf0b1ab79b60b9a3bcd42e6ce16ad8bd87f935c4
+verifier alias tag digest: sha256:a944fc99e20ac643d20d010ccf0b1ab79b60b9a3bcd42e6ce16ad8bd87f935c4
+agent pulled config digest: sha256:b395ead9583a83c1a8fd430fd75767d0177fadb5afc4cc8e462b27ffba0546d4
+verifier pulled config digest: sha256:601aba9d679b878654a8f02e8e7fc449156a608765c3688960e07d24f75dd2dd
+all tag-to-digest and digest-to-config checks: passed
