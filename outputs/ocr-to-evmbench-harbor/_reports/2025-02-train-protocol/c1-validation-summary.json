@@ -1,0 +1,45 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-02-train-protocol",
+  "status": "passed_with_disclosures",
+  "checks": {
+    "ocr_contract": "passed",
+    "pdf_checksum_and_page_count": "passed",
+    "single_task_group": "passed",
+    "repository_snapshot": "passed",
+    "finding_dispositions_complete": "passed",
+    "byte_exact_ocr_slices": "passed",
+    "candidate_consistency": "passed",
+    "pinned_structural_validator": "passed",
+    "current_structural_validator": "passed",
+    "validator_tests": "6 passed",
+    "hardhat_compile": "30 files compiled",
+    "agent_image_build": "passed",
+    "agent_image_offline_repository_check": "passed",
+    "agent_visible_leakage": "passed"
+  },
+  "unresolved_semantic_or_reproducibility_concerns": [
+    {
+      "artifact": "upstream_hardhat_tests",
+      "concern": "The exact snapshot's tests request obsolete contract artifact names and fail in setup before executing any test body."
+    },
+    {
+      "artifact": "starknet_build",
+      "concern": "The audited Cairo source was byte-verified and reviewed, but Scarb was unavailable, so a Cairo build was not run."
+    },
+    {
+      "finding_id": "H-04",
+      "concern": "The asset-loss path requires a live hard fork with duplicated HTLC state and replay of a signature onto the unintended branch."
+    },
+    {
+      "artifact": "agent_image",
+      "concern": "The reviewed image is local-only; registry publication is forbidden until exact human approval."
+    }
+  ],
+  "isolation": {
+    "canonical_evmbench_written": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  }
+}

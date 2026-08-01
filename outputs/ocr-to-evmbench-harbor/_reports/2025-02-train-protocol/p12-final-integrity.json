@@ -1,0 +1,70 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_integrity.v1",
+  "phase": "P12",
+  "status": "passed_with_user_waiver_for_final_end_to_end_smoke",
+  "candidate_id": "2025-02-train-protocol",
+  "approval": {
+    "review_bundle_digest": "4cec4cef2a1fb71efaaf18b811a1a366460edc311b0dd9342517da15d4d3cb65",
+    "reviewer": "https://github.com/pranay5255"
+  },
+  "candidate": {
+    "path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-02-train-protocol",
+    "file_count": 15,
+    "checksum_stream_sha256": "6c5f39070e1937ee95f2b84782f674d656574e3ea0f0f365e73b3b860f54ac92",
+    "matches_approved_manifest": true
+  },
+  "admission": {
+    "isolated_path": "/tmp/train-ocr-harbor.R3Hlwf/forest-of-audits/project/evmbench/audits/2025-02-train-protocol",
+    "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+    "adapter_revision": "977c70ab2a418512eb887fb8ffee92535ac21be1",
+    "admission_commit": "a20633ebc9e7a3606178ac9609f42a16a52631f2",
+    "isolated_checkout_clean": true,
+    "candidate_and_admitted_byte_identical": true,
+    "strict_validator_ok": true,
+    "canonical_checkout_written": false,
+    "canonical_checkout_observed_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "canonical_checkout_status_entry_count": 94,
+    "canonical_checkout_external_drift_preserved": true
+  },
+  "images": {
+    "agent": "docker.io/pranay5255/yudaii_evmbench@sha256:13c2ffed895c0b9373227e4d8c72ab670e55e2e951be02731365f7ab00fe4ec8",
+    "verifier": "docker.io/pranay5255/yudaii_evmbench@sha256:a8249d0108d34f0d682cbe6870f17b3659392f5900d932cf75c5bde8f074f1ac",
+    "registry_manifests_verified": true,
+    "image_isolation_passed": true,
+    "leakage_scan_passed": true
+  },
+  "harbor_task": {
+    "path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-02-train-protocol/evmbench__detect-2025-02-train-protocol",
+    "task_count": 1,
+    "regular_file_count": 6,
+    "checksum_stream_sha256": "070376fb87ac6ae974fd88bdc2544f530c11840fcf13e03f4ac084187a957a67",
+    "task_name": "evmbench/detect-2025-02-train-protocol",
+    "schema_version": "1.3",
+    "harbor_version": "0.20.0",
+    "task_load_status": "passed",
+    "leakage_status": "passed",
+    "forbidden_content_match_count": 0
+  },
+  "runtime_validation": {
+    "final_end_to_end_smoke": "waived_by_user",
+    "mini_swe_gpt_5_4_run_launched": false,
+    "verifier_packaging_replay": "passed",
+    "replay_submission_kind": "synthetic_empty",
+    "json_submission_valid": true,
+    "score": 0.0,
+    "max_score": 4.0,
+    "score_is_agent_evaluation": false,
+    "reward_artifact_written": true,
+    "full_grade_artifact_written": true,
+    "grade_audit_id": "2025-02-train-protocol"
+  },
+  "gates": {
+    "P7_approval_binding": "passed",
+    "P8_isolated_admission": "passed",
+    "P9_image_build_publish_isolation": "passed",
+    "P10_single_task_generation_and_leakage": "passed",
+    "P11_harbor_task_load": "passed",
+    "P12_verifier_replay": "passed",
+    "P12_final_end_to_end_smoke": "waived_by_user"
+  }
+}

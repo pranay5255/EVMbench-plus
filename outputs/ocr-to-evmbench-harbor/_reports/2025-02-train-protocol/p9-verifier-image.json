@@ -1,0 +1,36 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "verifier",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-02-train-protocol-verifier-8efb574c8266c783-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-02-train-protocol-verifier"
+  ],
+  "registry_digest": "sha256:a8249d0108d34f0d682cbe6870f17b3659392f5900d932cf75c5bde8f074f1ac",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:a8249d0108d34f0d682cbe6870f17b3659392f5900d932cf75c5bde8f074f1ac",
+  "image_id": "sha256:8efb574c8266c783fd7b1b9b99d0536654f331e088fa0d1e73bffb60ea94ece4",
+  "created": "2026-07-27T14:30:35.364826265Z",
+  "size_bytes": 1030460068,
+  "rootfs_layer_count": 12,
+  "platform": "linux/amd64",
+  "base_image": "docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+  "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "adapter_revision": "977c70ab2a418512eb887fb8ffee92535ac21be1",
+  "admission_commit": "a20633ebc9e7a3606178ac9609f42a16a52631f2",
+  "dockerfile_sha256": "367576c895a83afd95cb53d4a9e93367a454d72ddd403925de66cf4016866bea",
+  "requirements_sha256": "1b60d42d87faff2b512bd89b83aa5ea9d11693b3e4fd7a761067e0e378359e4b",
+  "verifier_module_sha256": "975d92ebaede2a3eafaa80ab9ce673663daf20f3696cf6915a4dca69165e5bff",
+  "verifier_bootstrap_sha256": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6",
+  "tests_packaged": [
+    "/tests/test.sh",
+    "/tests/evmbench_harbor_verifier.py",
+    "/tests/validate_detect_submission.py"
+  ],
+  "registry_load_check": {
+    "vulnerability_count": 4,
+    "detect_max_award": 4
+  },
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

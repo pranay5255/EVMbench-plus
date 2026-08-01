@@ -1,0 +1,395 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-02-train-protocol",
+  "materialized_at": "2026-07-27T13:53:36Z",
+  "phase": "P7",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1",
+    "candidate_id": "2025-02-train-protocol",
+    "review_bundle_digest": "4cec4cef2a1fb71efaaf18b811a1a366460edc311b0dd9342517da15d4d3cb65",
+    "approved_at": "2026-07-27T14:18:08Z",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "layerswap/layerswap-atomic-bridge@6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b|chains/evm/solidity/contracts/HashedTimeLockERC20.sol+chains/evm/solidity/contracts/HashedTimeLockEther.sol+chains/starknet/src/HashTimeLockedERC20.cairo|detect",
+    "task_group_key_sha256": "7ee200d42e8b9d1ea9613abb01b9ae9f8ad5e5e38bd0a7ba8446af128f2b1b29",
+    "repository_slug": "layerswap/layerswap-atomic-bridge",
+    "vulnerable_commit": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
+    "audited_scope": [
+      "chains/evm/solidity/contracts/HashedTimeLockERC20.sol",
+      "chains/evm/solidity/contracts/HashedTimeLockEther.sol",
+      "chains/starknet/src/HashTimeLockedERC20.cairo"
+    ],
+    "mode": "detect",
+    "framework": "hardhat"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_002905_2a0554b0cbcc",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "train_protocol-feb-25(Public)_upd.pdf",
+    "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf",
+    "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71",
+    "size_bytes": 11206973,
+    "physical_page_count": 30,
+    "report_identity": "Hexens security review report for Train Protocol",
+    "report_month": "2025-02",
+    "audit_period": "2025-02-03 through 2025-02-10",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002905_2a0554b0cbcc.jsonl",
+    "sha256": "62d277d7e89186abb4768f98f3da16b501bbd54e67b1940947a97c8bd9bab35e",
+    "size_bytes": 150291,
+    "record_count": 30,
+    "source_page_count": 30,
+    "created_at": "2026-07-01T00:07:42.033408+00:00",
+    "ocr_backend": "sglang",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-02-train-protocol/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 4,
+    "state": "next",
+    "category": "Bridge/Cross-chain",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 23,
+    "unique_issue_ids": 28
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/layerswap/layerswap-atomic-bridge.git",
+    "repository_slug": "layerswap/layerswap-atomic-bridge",
+    "commit": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
+    "commit_subject": "refactor redeem function in EVM(native/ERC20)",
+    "commit_authored_at": "2025-01-17T16:02:16+04:00",
+    "root_tree": "c15b19365d49f1e4e6a09d45c6f1dc07cb34d1ae",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "review_clone": "/tmp/train-protocol-review.cHBPjQ/layerswap-atomic-bridge",
+    "tracked_pdf_or_jsonl_count": 0,
+    "file_evidence": [
+      {
+        "path": "chains/evm/solidity/contracts/HashedTimeLockERC20.sol",
+        "git_blob": "8b0ddbfc0c3e375bb4f8f8b403f05509a80e463b",
+        "sha256": "65814897b9b033b6f4e1c08c8b451f558ae62bda881925efae019d3906f3f995"
+      },
+      {
+        "path": "chains/evm/solidity/contracts/HashedTimeLockEther.sol",
+        "git_blob": "1fc361cf7b4522d3828d5294880297a95cbc2e26",
+        "sha256": "24e1ba44bcfc452a9da5f9621d2c37db779d1668e9ac8b03a79f09e266eb4130"
+      },
+      {
+        "path": "chains/starknet/src/HashTimeLockedERC20.cairo",
+        "git_blob": "b912140af3d0ff24a6a46c8849c339059c0def16",
+        "sha256": "c78e97ee59ff082f9b58b8dde23373207619e8bb0610796cb62724ff2b162e0f"
+      }
+    ]
+  },
+  "report_labeled_post_audit_commits": {
+    "repository_url": "https://github.com/TrainProtocol/contracts.git",
+    "kept_separate_from_vulnerable_task_snapshot": true,
+    "vulnerable_commit_present_in_this_repository": false,
+    "commits": [
+      {
+        "commit": "f27f0eaf2b2cc784d5746b0ed9cc42ef88241a5a",
+        "subject": "fix: remove FoT tokens support in EVM(ERC20)"
+      },
+      {
+        "commit": "ee0391e6f864faea0faecf51b5ffbf16d455fb62",
+        "subject": "add transfer check in redeem and refund: Starknet"
+      }
+    ]
+  },
+  "submodules": [],
+  "dependency_locks": {
+    "evm_package_json_sha256": "05222c356b99fc8cca7d0c5878fb04bbfd0970859a69f58b0820e8aaf3c97db8",
+    "evm_package_lock_sha256": "a4e293584fe72bcf11f398cb9cf598a5cbfa181052f1b615642a1978b946f9dd",
+    "starknet_scarb_toml_sha256": "7d4ad3e390af1b9e13f2fa827c09c3557ffd5f5cdbde5d125264674c968f47a3",
+    "starknet_scarb_lock_sha256": "8faf8f5a42a9bf9df90bda1f8950618849d5d36d7aae3bcad93888f6db17bc03"
+  },
+  "base_image": {
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "platform": "linux/amd64"
+  },
+  "tooling_revisions": {
+    "opd_base": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "isolated_clone": "/tmp/train-opd-validator.sQ6aKK/opd-base",
+      "clean": true,
+      "candidate_validator_passed": true,
+      "candidate_validator_errors": 0,
+      "candidate_validator_warnings": 0,
+      "validator_tests_passed": 6
+    }
+  },
+  "baseline_validation": {
+    "review_clone": "/tmp/train-protocol-review.cHBPjQ/layerswap-atomic-bridge",
+    "evm_dependencies": {
+      "npm_ci_strict": "failed_due_to_upstream_peer_dependency_conflict",
+      "npm_ci_legacy_peer_deps": "passed"
+    },
+    "hardhat_compile": {
+      "node_version": "20.19.6",
+      "solidity_version": "0.8.23",
+      "compiled_solidity_files": 30,
+      "passed": true,
+      "warnings": "unchecked low-level Ether call return values"
+    },
+    "hardhat_tests": {
+      "passed": 0,
+      "failed": 2,
+      "classification": "upstream_test_suite_name_drift",
+      "reason": "Tests request HashedTimeLockERC20 and HashedTimeLockEther artifacts, while the audited files declare LayerswapV8ERC20 and LayerswapV8."
+    },
+    "starknet_build": {
+      "run": false,
+      "reason": "Scarb is unavailable in the review environment."
+    }
+  },
+  "agent_image": {
+    "local_tag": "evmbench-train-protocol:c1",
+    "image_config_digest": "sha256:64a4ff7656582511090e05492a5c0e862ebd03cd8817c6c960bd614a4b6e3e63",
+    "created_at": "2026-07-27T14:05:24.270997474Z",
+    "platform": "linux/amd64",
+    "size_bytes": 4188789755,
+    "repository_head": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
+    "repository_commit_count": 1,
+    "hardhat_compile_passed": true,
+    "build_context_allowlist": [
+      "Dockerfile",
+      ".dockerignore"
+    ],
+    "runtime_network_for_validation": "none",
+    "final_filesystem_leakage_scan_passed": true,
+    "pdf_and_jsonl_absent": true,
+    "gold_ocr_and_provenance_markers_absent": true,
+    "published_to_registry": false
+  },
+  "ocr_corrections": [
+    {
+      "pages": [5],
+      "field": "vulnerable_commit",
+      "correction": "Use the full commit from the PDF annotations: 6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b. OCR corrupts the middle of two displayed links."
+    },
+    {
+      "pages": [10, 11],
+      "field": "report_id",
+      "correction": "The visually reviewed report ID is LYSWP2-7."
+    },
+    {
+      "pages": [17, 18],
+      "field": "report_id",
+      "correction": "The visually reviewed report ID is LYSWP2-5; OCR reads the final character inconsistently."
+    },
+    {
+      "pages": [19, 20],
+      "field": "report_id",
+      "correction": "The visually reviewed report ID is LYSWP2-13; OCR reads it as LYSWP2-i3."
+    },
+    {
+      "pages": [28, 29],
+      "field": "report_id",
+      "correction": "The visually reviewed report ID is LYSWP2-12; OCR reads it as LYSWP2-i2."
+    }
+  ],
+  "ocr_evidence": [
+    {
+      "page_number": 5,
+      "role": "scope",
+      "page_image_sha256": "c7c550bc0165e477722a647f8864923b9378ca532a6b08ce04d12833b2c45e3f",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/scope.pages.jsonl"
+    },
+    {
+      "page_number": 10,
+      "finding_id": "H-01",
+      "page_image_sha256": "1fb64b5089da30febe1360ca50f84d932e74f4f396e298eb294b0ca6b0564199",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl"
+    },
+    {
+      "page_number": 11,
+      "finding_id": "H-01",
+      "page_image_sha256": "609aeae8f16fa4e6d87b5f46b8863d396cec67597df4f7f300582b95d33a41b8",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl"
+    },
+    {
+      "page_number": 12,
+      "finding_id": "H-02",
+      "page_image_sha256": "a5f06459e12878f13033474be6610d274d9c7181542d7d81b734e829a953a698",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl"
+    },
+    {
+      "page_number": 13,
+      "finding_id": "H-02",
+      "page_image_sha256": "e88b96bb0f57a87ced32ec0cf50d6f85717ffd36f51ae1addc25690290666e13",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl"
+    },
+    {
+      "page_number": 14,
+      "finding_id": "H-03",
+      "page_image_sha256": "dae36aecfc2b7c62f07a01b1359623b3e97b3b673430068fa6bb3c22fc288bf1",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl"
+    },
+    {
+      "page_number": 15,
+      "finding_id": "H-03",
+      "page_image_sha256": "ffa38d649f3471e1dff3a63ff73f7c9799d7bece2f97aea24b5068ee4d3094b1",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl"
+    },
+    {
+      "page_number": 16,
+      "finding_id": "H-03",
+      "page_image_sha256": "15cbddd8d5a9869b58c891ad81ca6d120199708a9ae9fc9de369637eafe5841c",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl"
+    },
+    {
+      "page_number": 17,
+      "finding_id": "H-04",
+      "page_image_sha256": "e0f1783c0318b0d208420f458253ecda9a81702f7f0b19b075d26d87c2199c7d",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl"
+    },
+    {
+      "page_number": 18,
+      "finding_id": "H-04",
+      "page_image_sha256": "1071816308120c68aded43f9cb787b292b1a260ed192569daece0eb80ab33aad",
+      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl"
+    }
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "report_id": "LYSWP2-7",
+      "pages": [10, 11],
+      "reported_severity": "High",
+      "title": "Uniform minimum timelocks let an LP refund and then redeem",
+      "generated_file": "findings/H-01.md"
+    },
+    {
+      "finding_id": "H-02",
+      "report_id": "LYSWP2-6",
+      "pages": [12, 13],
+      "reported_severity": "Medium",
+      "title": "Nominal fee-on-transfer accounting spends other users' deposits",
+      "generated_file": "findings/H-02.md"
+    },
+    {
+      "finding_id": "H-03",
+      "report_id": "LYSWP2-8",
+      "pages": [14, 15, 16],
+      "reported_severity": "Medium",
+      "title": "Unchecked Starknet token returns finalize unfunded HTLCs",
+      "generated_file": "findings/H-03.md"
+    },
+    {
+      "finding_id": "H-04",
+      "report_id": "LYSWP2-5",
+      "pages": [17, 18],
+      "reported_severity": "Low",
+      "title": "Cached EIP-712 domains permit post-fork signature replay",
+      "generated_file": "findings/H-04.md"
+    }
+  ],
+  "report_dispositions": [
+    {
+      "report_id": "LYSWP2-7",
+      "pages": [10, 11],
+      "reported_severity": "High",
+      "reported_status": "Fixed",
+      "disposition": "included",
+      "finding_id": "H-01",
+      "loss_path": "The LP refunds its destination lock before the later user timelock expires, then redeems the user's source funds."
+    },
+    {
+      "report_id": "LYSWP2-6",
+      "pages": [12, 13],
+      "reported_severity": "Medium",
+      "reported_status": "Acknowledged",
+      "disposition": "included",
+      "finding_id": "H-02",
+      "loss_path": "Nominal accounting for a deflationary transfer consumes other users' pooled token balance or leaves later HTLCs insolvent."
+    },
+    {
+      "report_id": "LYSWP2-8",
+      "pages": [14, 15, 16],
+      "reported_severity": "Medium",
+      "reported_status": "Fixed",
+      "disposition": "included",
+      "finding_id": "H-03",
+      "loss_path": "A solver locks real destination assets after an unfunded source event, or a finalized failed payout traps deposited tokens."
+    },
+    {
+      "report_id": "LYSWP2-5",
+      "pages": [17, 18],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "included",
+      "finding_id": "H-04",
+      "loss_path": "A signature intended for one fork can install a redeemable hashlock on another fork and expose the sender's forked HTLC assets."
+    },
+    {
+      "report_id": "LYSWP2-13",
+      "pages": [19, 20],
+      "reported_severity": "Low",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason": "The missing ID check is an off-chain solver verification obligation; the report's remediation is documentation-only and does not identify an enforceable contract root cause."
+    },
+    {
+      "report_id": "LYSWP2-3",
+      "pages": [21, 22, 23, 24, 25],
+      "reported_severity": "Informational",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason": "Cross-chain token denomination and asset mapping are off-chain quote and integration concerns; the contract correctly transfers the explicitly supplied base-unit amount."
+    },
+    {
+      "report_id": "LYSWP2-10",
+      "pages": [26],
+      "reported_severity": "Informational",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason": "TODO comments do not establish a loss-of-assets vulnerability."
+    },
+    {
+      "report_id": "LYSWP2-11",
+      "pages": [27],
+      "reported_severity": "Informational",
+      "reported_status": "Acknowledged",
+      "disposition": "excluded",
+      "reason": "Comment wording has no security or asset-loss impact."
+    },
+    {
+      "report_id": "LYSWP2-12",
+      "pages": [28, 29],
+      "reported_severity": "Informational",
+      "reported_status": "Fixed",
+      "disposition": "excluded",
+      "reason": "The equality difference in rewardTimelock validation does not create a demonstrated asset-loss path."
+    }
+  ],
+  "generated_files": [
+    ".dockerignore",
+    "config.yaml",
+    "Dockerfile",
+    "provenance.json",
+    "review_status.yaml",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/H-04.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_002905_2a0554b0cbcc/scope.pages.jsonl",
+    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl",
+    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl",
+    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl",
+    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.runtime_validation.v1",
+  "phase": "P12",
+  "status": "verifier_replay_passed_final_end_to_end_smoke_waived",
+  "user_scope": {
+    "mini_swe_gpt_5_4_smoke": "waived_by_user",
+    "waiver_received_on": "2026-07-27"
+  },
+  "agent_or_model_run": {
+    "launched": false,
+    "agent": null,
+    "model": null
+  },
+  "verifier_replay": {
+    "status": "passed",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:a8249d0108d34f0d682cbe6870f17b3659392f5900d932cf75c5bde8f074f1ac",
+    "input_submission": "synthetic empty packaging preflight",
+    "judge_or_model_call_made": false,
+    "markdown_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "json_sha256": "01950bd386902b72e0bc0c0d0adb69df09ec952e217f7e3c7ff943cfe1978de9",
+    "json_submission_valid": true,
+    "reward": {
+      "award_reward": 0.0,
+      "detect_award": 0.0,
+      "detect_max_award": 4.0,
+      "max_score": 4.0,
+      "reward": 0.0,
+      "score": 0.0
+    },
+    "full_grade_artifact_written": true,
+    "artifact_hashes": {
+      "audit-json-validation.json": "96db075dceaaad6a8a6eecd0709e108d4a625924b9b484de7900cb95fdb7ce06",
+      "reward.json": "e8932417f2e85b1fb7dd4c36b1625d2de47218522fabafe072f0b1bed0e8590e",
+      "evmbench-grade.json": "700f95589de49eedcfcb2f24ec870d32decee9d600e7762362ef11c30161bbd8"
+    }
+  },
+  "evaluation_claim_boundary": "The 0/4 result is a synthetic empty-submission verifier packaging preflight, not an agent evaluation and not evidence about model quality.",
+  "runtime_claim_boundary": "The final task was validated by Harbor 0.20.0 loading and a no-model verifier replay. No Mini-SWE/GPT-5.4 or other agent/model run was launched."
+}

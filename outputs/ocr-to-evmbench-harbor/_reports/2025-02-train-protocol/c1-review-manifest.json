@@ -1,0 +1,218 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-02-train-protocol",
+  "generated_at": "2026-07-27T14:10:52Z",
+  "task_group_key": "layerswap/layerswap-atomic-bridge@6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b|chains/evm/solidity/contracts/HashedTimeLockERC20.sol+chains/evm/solidity/contracts/HashedTimeLockEther.sol+chains/starknet/src/HashTimeLockedERC20.cairo|detect",
+  "task_group_key_sha256": "7ee200d42e8b9d1ea9613abb01b9ae9f8ad5e5e38bd0a7ba8446af128f2b1b29",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-02-train-protocol",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false,
+    "approved_by_present": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "reviewer_identity": {
+    "supplied": false,
+    "must_be_supplied_with_exact_approval": true
+  },
+  "source_evidence": {
+    "ocr": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002905_2a0554b0cbcc.jsonl",
+      "sha256": "62d277d7e89186abb4768f98f3da16b501bbd54e67b1940947a97c8bd9bab35e",
+      "record_count": 30,
+      "schema_version": "evmbench_task_creation.ocr_page.v1"
+    },
+    "pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf",
+      "sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71",
+      "page_count": 30
+    }
+  },
+  "repository": {
+    "url": "https://github.com/layerswap/layerswap-atomic-bridge.git",
+    "vulnerable_commit": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
+    "root_tree": "c15b19365d49f1e4e6a09d45c6f1dc07cb34d1ae",
+    "audited_scope": [
+      "chains/evm/solidity/contracts/HashedTimeLockERC20.sol",
+      "chains/evm/solidity/contracts/HashedTimeLockEther.sol",
+      "chains/starknet/src/HashTimeLockedERC20.cairo"
+    ],
+    "mode": "detect",
+    "recursive_submodule_revision_count": 0,
+    "report_labeled_post_audit_repository": "https://github.com/TrainProtocol/contracts.git",
+    "post_audit_commits_kept_separate": [
+      "f27f0eaf2b2cc784d5746b0ed9cc42ef88241a5a",
+      "ee0391e6f864faea0faecf51b5ffbf16d455fb62"
+    ]
+  },
+  "findings": [
+    {
+      "gold_id": "H-01",
+      "report_id": "LYSWP2-7",
+      "pages": [10, 11],
+      "award": 1,
+      "finding_sha256": "d836c7a2f9aae3b2cefa7f6c89278e24e8f2f61e8b6db35ec660e5a18435f248"
+    },
+    {
+      "gold_id": "H-02",
+      "report_id": "LYSWP2-6",
+      "pages": [12, 13],
+      "award": 1,
+      "finding_sha256": "d9a69458376f65d114b4d553bf277ad5e11f84c94b6ca2760e426210ec1f4da6"
+    },
+    {
+      "gold_id": "H-03",
+      "report_id": "LYSWP2-8",
+      "pages": [14, 15, 16],
+      "award": 1,
+      "finding_sha256": "8608bac3865f72e6566780654279c012549c9e89cadf42e82c04fc48f26aadde"
+    },
+    {
+      "gold_id": "H-04",
+      "report_id": "LYSWP2-5",
+      "pages": [17, 18],
+      "award": 1,
+      "finding_sha256": "41090fd286dbf4b9d6514b186d1b56f8267689f14399d668df8438d536acfdbd"
+    }
+  ],
+  "max_score": 4,
+  "reviewed_candidate": {
+    "file_manifest": "c1-generated-file-manifest.json",
+    "file_manifest_sha256": "b6194346296e8f854feaf23482a37dbda1aaa9d52e5b03c71d1280817767d8e1",
+    "candidate_file_count": 15,
+    "candidate_checksum_stream_sha256": "1ce649fc112acbeb42ea5f205bca155de8677e49b205811e08827ed18b66d6ad",
+    "dockerfile_sha256": "7e5edbf9b6cc0b09c98581c4458bd7295ff1fd4d68d1935b8ec5ef6800dd7148",
+    "gold_audit_sha256": "9ba140e58c8dd94873496902846259bbb2fd682ab555dd9c47722aee55fdecc3",
+    "provenance_sha256": "9f85f4c5af7293623bd2b3c10c9979cb7e3bbfd7f12f13dd67af6944fc5a84af",
+    "review_status_sha256": "c59cdd1b9f9e668d26d858d272285abfff15235de67701bb59d144a82fc8e591"
+  },
+  "validation_reports": [
+    {
+      "path": "p1-isolation.json",
+      "sha256": "b753ed0a914fb2d55d040adbcb09c60973ec76b7c5133d45a5e1f59c063e8800",
+      "status": "passed"
+    },
+    {
+      "path": "p1-ocr-validation.json",
+      "sha256": "56084be144fa0a30923417564e89923252c2f88971bd608528d0b89f34c18b02",
+      "status": "passed"
+    },
+    {
+      "path": "p1-ocr-validation.txt",
+      "sha256": "eb59e7b24da7f9c33f34ca9d49fd9dfec928b7aed764d9126c0ae054d6bbaf92",
+      "status": "passed"
+    },
+    {
+      "path": "p2-pdf-review.md",
+      "sha256": "352249908a14c6a4a698cef0d180010441a0d0f49feb2491cba7b18856988ac2",
+      "status": "passed"
+    },
+    {
+      "path": "p3-repository-grounding.md",
+      "sha256": "8db0a4b76609d22f27bfca2eab883fa62a0af3133edc85e273f3acd1f1e24a2d",
+      "status": "passed"
+    },
+    {
+      "path": "p4-finding-dispositions.md",
+      "sha256": "0c69526cbc7dfa645b522fe7c12a47c037d67d8b10aa72a18741cec832d1265d",
+      "status": "passed"
+    },
+    {
+      "path": "p5-build-baseline.md",
+      "sha256": "0bd939df0134d00d864c1959844763e77d4f0c6cb490248a3b8b5da2138f72c0",
+      "status": "passed_with_disclosure"
+    },
+    {
+      "path": "p5-byte-exact-slices.json",
+      "sha256": "1f2cc822d3d1825301082ae88f747df0f727877eed9830c90d92658ce50a34ba",
+      "status": "passed"
+    },
+    {
+      "path": "p6-agent-image-leakage.md",
+      "sha256": "149b25efc30a07d8173fcdb1de297ea3d796d92282b1cc3f71d10f1cf7891072",
+      "status": "passed"
+    },
+    {
+      "path": "p6-pinned-structural-validator.json",
+      "sha256": "fa142031278fb1d45e12ca647ff5c81bebb6d92eb242f99072236a3aa08e8955",
+      "status": "passed"
+    },
+    {
+      "path": "p6-current-structural-validator.json",
+      "sha256": "fa142031278fb1d45e12ca647ff5c81bebb6d92eb242f99072236a3aa08e8955",
+      "status": "passed"
+    },
+    {
+      "path": "p6-validator-tests.txt",
+      "sha256": "5707b7c226afa31cdf05b00ea6ace6139bf169b53d9f8ca5d16d7cc61b909f18",
+      "status": "passed"
+    },
+    {
+      "path": "c1-generated-file-manifest.json",
+      "sha256": "b6194346296e8f854feaf23482a37dbda1aaa9d52e5b03c71d1280817767d8e1",
+      "status": "passed"
+    },
+    {
+      "path": "c1-validation-summary.json",
+      "sha256": "8165a86bcaad340aa6eb5c49739cf7406d19f2ca64abd7c3d861d9b08f07724f",
+      "status": "passed_with_disclosures"
+    }
+  ],
+  "base_image": {
+    "manifest_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0"
+  },
+  "agent_image": {
+    "local_tag": "evmbench-train-protocol:c1",
+    "config_digest": "sha256:64a4ff7656582511090e05492a5c0e862ebd03cd8817c6c960bd614a4b6e3e63",
+    "platform": "linux/amd64",
+    "published_to_registry": false
+  },
+  "validation_summary": {
+    "structural": "passed",
+    "semantic": "passed_with_disclosures",
+    "repository": "passed",
+    "docker_build": "passed",
+    "hardhat_compile": "30 files",
+    "hardhat_tests": "0 passed; 2 setup hooks failed on upstream contract artifact name drift",
+    "starknet_build": "not run; Scarb unavailable",
+    "runtime_network": "none",
+    "final_filesystem_leakage": "passed",
+    "pdf_or_jsonl_files_in_agent_image": 0,
+    "unresolved_semantic_or_reproducibility_concerns": [
+      {
+        "artifact": "upstream_hardhat_tests",
+        "concern": "Tests request obsolete artifact names and fail before executing test bodies."
+      },
+      {
+        "artifact": "starknet_build",
+        "concern": "The Cairo source was byte-verified and code-reviewed, but not compiled."
+      },
+      {
+        "finding_id": "H-04",
+        "concern": "The loss path requires a live hard fork with duplicated HTLC state and cross-fork signature replay."
+      },
+      {
+        "artifact": "agent_image",
+        "concern": "The reviewed agent image is local-only by design; publication is forbidden until approval."
+      }
+    ]
+  },
+  "isolation": {
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "adjacent_dirty_checkouts_preserved": true,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "approval_requirement": {
+    "required_state_transition": "approved_for_admission",
+    "must_quote_exact_candidate_id": true,
+    "must_quote_review_manifest_sha256": true,
+    "must_supply_reviewer_identity": true,
+    "approval_not_contained_in_this_manifest": true
+  }
+}

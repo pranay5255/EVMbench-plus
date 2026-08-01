@@ -1,0 +1,30 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-02-train-protocol-agent-64a4ff7656582511-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-02-train-protocol"
+  ],
+  "registry_digest": "sha256:13c2ffed895c0b9373227e4d8c72ab670e55e2e951be02731365f7ab00fe4ec8",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:13c2ffed895c0b9373227e4d8c72ab670e55e2e951be02731365f7ab00fe4ec8",
+  "image_id": "sha256:64a4ff7656582511090e05492a5c0e862ebd03cd8817c6c960bd614a4b6e3e63",
+  "review_image_id": "sha256:64a4ff7656582511090e05492a5c0e862ebd03cd8817c6c960bd614a4b6e3e63",
+  "canonical_build_resolved_to_reviewed_image_id": true,
+  "created": "2026-07-27T14:05:24.270997474Z",
+  "size_bytes": 4188789755,
+  "rootfs_layer_count": 21,
+  "platform": "linux/amd64",
+  "repository_head": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
+  "reachable_repository_commit_count": 1,
+  "audited_file_hashes_verified": true,
+  "manifest_verified": true,
+  "hardhat_compile_files": 30,
+  "hardhat_tests": {
+    "passed": 0,
+    "failed_in_setup": 2,
+    "classification": "upstream_contract_artifact_name_drift"
+  },
+  "offline_isolation_check_passed": true
+}

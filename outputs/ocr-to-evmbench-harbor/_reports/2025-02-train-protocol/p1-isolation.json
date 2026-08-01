@@ -1,0 +1,27 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "candidate_id": "2025-02-train-protocol",
+  "status": "passed",
+  "opd_base": {
+    "path": "/home/experiments_base/OPD_base",
+    "observed_head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "status_entry_count": 206,
+    "preexisting_changes_preserved": true,
+    "requested_queue_document_sha256": "67519a84a7885cb33400164f1c4ffb87fa65659664799941fa3eca62615add7a"
+  },
+  "canonical_evmbench": {
+    "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+    "observed_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "status_entry_count": 94,
+    "written": false,
+    "preexisting_changes_preserved": true
+  },
+  "isolated_review_clones": {
+    "vulnerable_repository": "/tmp/train-protocol-review.cHBPjQ/layerswap-atomic-bridge",
+    "post_audit_repository": "/tmp/train-protocol-review.cHBPjQ/trainprotocol-contracts",
+    "pinned_opd_validator": "/tmp/train-opd-validator.sQ6aKK/opd-base"
+  },
+  "candidate_admitted": false,
+  "harbor_task_generated": false,
+  "agent_or_model_run": false
+}

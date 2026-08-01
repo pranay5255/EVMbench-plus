@@ -1,0 +1,23 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolated_admission.v1",
+  "phase": "P8",
+  "status": "passed",
+  "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "isolated_start_revision": "977c70ab2a418512eb887fb8ffee92535ac21be1",
+  "final_adapter_revision_reused": "977c70ab2a418512eb887fb8ffee92535ac21be1",
+  "admission_commit": "a20633ebc9e7a3606178ac9609f42a16a52631f2",
+  "forest_clone": "/tmp/train-ocr-harbor.R3Hlwf/forest-of-audits",
+  "evmbench_root": "/tmp/train-ocr-harbor.R3Hlwf/forest-of-audits/project/evmbench",
+  "admitted_path": "/tmp/train-ocr-harbor.R3Hlwf/forest-of-audits/project/evmbench/audits/2025-02-train-protocol",
+  "clean_start_required_and_observed": true,
+  "clean_after_admission_commit": true,
+  "only_newly_admitted_audit_id": "2025-02-train-protocol",
+  "detect_split_entry_added": true,
+  "candidate_checksum_stream_sha256": "6c5f39070e1937ee95f2b84782f674d656574e3ea0f0f365e73b3b860f54ac92",
+  "admitted_checksum_stream_sha256": "6c5f39070e1937ee95f2b84782f674d656574e3ea0f0f365e73b3b860f54ac92",
+  "candidate_and_admitted_tree_byte_identical": true,
+  "canonical_checkout_written": false,
+  "canonical_checkout_observed_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+  "canonical_checkout_status_entry_count": 94,
+  "canonical_checkout_external_drift_preserved": true
+}

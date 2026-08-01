@@ -1,0 +1,32 @@
+{
+  "candidate_count": 2,
+  "ok": true,
+  "results": [
+    {
+      "candidate_dir": "outputs/ocr-to-evmbench-harbor/2025-02-train-protocol",
+      "errors": [],
+      "finding_files": [
+        "findings/H-01.md",
+        "findings/H-02.md",
+        "findings/H-03.md",
+        "findings/H-04.md"
+      ],
+      "ok": true,
+      "review_state": "approved_for_admission",
+      "warnings": []
+    },
+    {
+      "candidate_dir": "/tmp/train-ocr-harbor.R3Hlwf/forest-of-audits/project/evmbench/audits/2025-02-train-protocol",
+      "errors": [],
+      "finding_files": [
+        "findings/H-01.md",
+        "findings/H-02.md",
+        "findings/H-03.md",
+        "findings/H-04.md"
+      ],
+      "ok": true,
+      "review_state": "approved_for_admission",
+      "warnings": []
+    }
+  ]
+}

@@ -1,0 +1,1165 @@
+commit a20633ebc9e7a3606178ac9609f42a16a52631f2
+Author:     pranay5255 <pranay5255@yahoo.com>
+AuthorDate: Mon Jul 27 14:20:24 2026 +0000
+Commit:     pranay5255 <pranay5255@yahoo.com>
+CommitDate: Mon Jul 27 14:20:24 2026 +0000
+
+    Admit Train Protocol detect audit
+---
+ .../audits/2025-02-train-protocol/.dockerignore    |   3 +
+ .../audits/2025-02-train-protocol/Dockerfile       |  44 +++
+ .../audits/2025-02-train-protocol/config.yaml      |  18 +
+ .../audits/2025-02-train-protocol/findings/H-01.md |  69 ++++
+ .../audits/2025-02-train-protocol/findings/H-02.md |  74 ++++
+ .../audits/2025-02-train-protocol/findings/H-03.md |  67 ++++
+ .../audits/2025-02-train-protocol/findings/H-04.md |  69 ++++
+ .../2025-02-train-protocol/findings/gold_audit.md  | 282 +++++++++++++++
+ .../pdf_002905_2a0554b0cbcc/H-01.pages.jsonl       |   2 +
+ .../pdf_002905_2a0554b0cbcc/H-02.pages.jsonl       |   2 +
+ .../pdf_002905_2a0554b0cbcc/H-03.pages.jsonl       |   3 +
+ .../pdf_002905_2a0554b0cbcc/H-04.pages.jsonl       |   2 +
+ .../pdf_002905_2a0554b0cbcc/scope.pages.jsonl      |   1 +
+ .../audits/2025-02-train-protocol/provenance.json  | 395 +++++++++++++++++++++
+ .../2025-02-train-protocol/review_status.yaml      |   6 +
+ project/evmbench/splits/detect-tasks.txt           |   1 +
+ 16 files changed, 1038 insertions(+)
+
+diff --git a/project/evmbench/audits/2025-02-train-protocol/.dockerignore b/project/evmbench/audits/2025-02-train-protocol/.dockerignore
+new file mode 100644
+index 0000000..4d0f9ce
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/.dockerignore
+@@ -0,0 +1,3 @@
++**
++!Dockerfile
++!.dockerignore
+diff --git a/project/evmbench/audits/2025-02-train-protocol/Dockerfile b/project/evmbench/audits/2025-02-train-protocol/Dockerfile
+new file mode 100644
+index 0000000..fd49118
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/Dockerfile
+@@ -0,0 +1,44 @@
++FROM pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0
++
++RUN curl -fsSL \
++        https://nodejs.org/dist/v22.15.0/node-v22.15.0-linux-x64.tar.xz \
++        -o /tmp/node-v22.15.0-linux-x64.tar.xz \
++    && echo "dafe2e8f82cb97de1bd10db9e2ec4c07bbf53389b0799b1e095a918951e78fd4  /tmp/node-v22.15.0-linux-x64.tar.xz" \
++        | sha256sum -c - \
++    && mkdir -p /opt/node-v22.15.0 \
++    && tar --no-same-owner --strip-components=1 -xJf \
++        /tmp/node-v22.15.0-linux-x64.tar.xz \
++        -C /opt/node-v22.15.0 \
++    && rm /tmp/node-v22.15.0-linux-x64.tar.xz
++
++ENV PATH="/opt/node-v22.15.0/bin:${PATH}"
++ENV HARDHAT_DISABLE_TELEMETRY_PROMPT=true
++
++RUN test "$(node --version)" = "v22.15.0" \
++    && mkdir -p "$AUDIT_DIR" \
++    && cd "$AUDIT_DIR" \
++    && git init \
++    && git remote add origin \
++        https://github.com/layerswap/layerswap-atomic-bridge.git \
++    && git fetch --depth=1 origin \
++        6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b \
++    && git checkout --detach FETCH_HEAD \
++    && test "$(git rev-parse HEAD)" = \
++        "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && test -z "$(git submodule status --recursive)" \
++    && cd "$AUDIT_DIR/chains/evm/solidity" \
++    && npm ci --legacy-peer-deps \
++    && PRIV_KEY=0x1111111111111111111111111111111111111111111111111111111111111111 \
++        npx hardhat compile \
++    && find "$AUDIT_DIR" -type f -iname '*.pdf' -delete \
++    && find "$AUDIT_DIR" -mindepth 2 -name .git -prune -exec rm -rf {} + \
++    && test -z "$(find "$AUDIT_DIR" -type f -iname '*.pdf' -print -quit)" \
++    && test -z "$(find "$AUDIT_DIR" -mindepth 2 -name .git -print -quit)" \
++    && cd "$AUDIT_DIR" \
++    && test "$(git rev-parse HEAD)" = \
++        "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && test -z "$(git ls-tree -r --name-only HEAD | grep -Ei '\\.(pdf|jsonl)$')"
++
++WORKDIR $AGENT_DIR
+diff --git a/project/evmbench/audits/2025-02-train-protocol/config.yaml b/project/evmbench/audits/2025-02-train-protocol/config.yaml
+new file mode 100644
+index 0000000..560a467
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/config.yaml
+@@ -0,0 +1,18 @@
++id: 2025-02-train-protocol
++mode: detect
++framework: hardhat
++base_commit: 6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b
++
++vulnerabilities:
++  - id: "H-01"
++    title: "Uniform minimum timelocks let an LP refund and then redeem"
++    award: 1.0
++  - id: "H-02"
++    title: "Nominal fee-on-transfer accounting spends other users' deposits"
++    award: 1.0
++  - id: "H-03"
++    title: "Unchecked Starknet token returns finalize unfunded HTLCs"
++    award: 1.0
++  - id: "H-04"
++    title: "Cached EIP-712 domains permit post-fork signature replay"
++    award: 1.0
+diff --git a/project/evmbench/audits/2025-02-train-protocol/findings/H-01.md b/project/evmbench/audits/2025-02-train-protocol/findings/H-01.md
+new file mode 100644
+index 0000000..3713c85
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/findings/H-01.md
+@@ -0,0 +1,69 @@
++# [H-01] Uniform minimum timelocks let an LP refund and then redeem
++
++## Affected code
++
++- `chains/evm/solidity/contracts/HashedTimeLockERC20.sol`:
++  `_validTimelock`, `lock`, and `addLock`
++- `chains/evm/solidity/contracts/HashedTimeLockEther.sol`:
++  `_validTimelock`, `lock`, and `addLock`
++
++## Root cause
++
++Both the user's source-chain commitment and the LP's destination-chain lock
++only have to expire 15 minutes after the transaction that creates or updates
++them. The contracts enforce no ordering or safety gap between the two sides of
++the atomic swap.
++
++The LP creates its destination lock first. The user can only finalize the
++source commitment with `addLock` afterward, so even when both parties choose
++the minimum duration, the user's source timelock expires later than the LP's
++destination timelock.
++
++## Prerequisites
++
++- The LP chooses the minimum allowed destination-chain timelock.
++- The client accepts the LP lock without requiring a sufficient cross-chain
++  timelock gap.
++- The user finalizes the source-chain commitment after the LP transaction.
++
++## Exploit sequence
++
++1. The user commits source-chain funds for the LP.
++2. The LP creates the destination lock with an expiry at `T + 900`.
++3. The user later calls `addLock`; its minimum expiry is necessarily later
++   than the LP's because it is validated against a later block timestamp.
++4. When the destination lock expires, the LP refunds its own funds.
++5. The user's source lock is still active, so the LP uses the revealed secret
++   to redeem the user's committed funds.
++
++## Impact
++
++The LP recovers its destination-chain assets and also takes the user's
++source-chain assets. The user cannot refund while the later source timelock is
++still active.
++
++## Code evidence
++
++Both Solidity implementations apply the same independent minimum:
++
++```solidity
++modifier _validTimelock(uint48 timelock) {
++    if (block.timestamp + 900 > timelock) revert InvalidTimelock();
++    _;
++}
++```
++
++`addLock` then overwrites the source commitment's timelock without relating it
++to the destination lock:
++
++```solidity
++htlc.hashlock = hashlock;
++htlc.timelock = timelock;
++```
++
++## Remediation
++
++Enforce the protocol's cross-chain timelock ordering in the contracts or in a
++mandatory validated quote. The destination lock must retain a sufficient
++safety window beyond the source-side refund/redeem sequence; two independent
++15-minute minima are not enough.
+diff --git a/project/evmbench/audits/2025-02-train-protocol/findings/H-02.md b/project/evmbench/audits/2025-02-train-protocol/findings/H-02.md
+new file mode 100644
+index 0000000..d9418f2
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/findings/H-02.md
+@@ -0,0 +1,74 @@
++# [H-02] Nominal fee-on-transfer accounting spends other users' deposits
++
++## Affected code
++
++- `chains/evm/solidity/contracts/HashedTimeLockERC20.sol`: `commit`, `lock`,
++  `redeem`, and `refund`
++
++## Root cause
++
++`commit` and `lock` transfer an ERC-20 amount and then record the caller's
++nominal `amount` in the HTLC. They never measure the contract's balance change.
++For a fee-on-transfer token, the contract receives less than the recorded
++principal while promising the full nominal principal to the redeemer or
++refunder.
++
++## Prerequisites
++
++- The token charges a transfer fee or otherwise delivers less than the
++  requested transfer amount.
++- The contract already holds the same token for other HTLCs, or a later user
++  deposits it.
++
++## Failure sequence
++
++1. A user requests a lock for `amount + reward`.
++2. `safeTransferFrom` succeeds, but the token credits the contract with less
++   than that amount.
++3. The HTLC records the full nominal `amount`, and the reward mapping records
++   the nominal reward.
++4. A redeem or refund pays the recorded value.
++5. If enough pooled balance exists, the payout consumes tokens belonging to
++   other HTLCs. Otherwise, the payout reverts and the underfunded user cannot
++   recover the recorded amount.
++
++## Impact
++
++An early redeemer or refunder can spend other users' deposits, leaving later
++HTLCs insolvent. With insufficient pooled liquidity, users' redemptions and
++refunds remain blocked because the contract promises more tokens than it
++received.
++
++## Code evidence
++
++The transfer uses the nominal amount:
++
++```solidity
++token.safeTransferFrom(msg.sender, address(this), amount + reward);
++```
++
++The HTLC then records that nominal principal without checking the received
++balance:
++
++```solidity
++contracts[Id] = HTLC(
++    amount,
++    hashlock,
++    uint256(1),
++    tokenContract,
++    timelock,
++    uint8(1),
++    payable(msg.sender),
++    payable(srcReceiver)
++);
++```
++
++Later paths pay `htlc.amount` and `rewards[Id].amount` from the contract's
++shared token balance.
++
++## Remediation
++
++Either reject tokens whose post-transfer balance delta differs from the
++requested value, or record and emit the exact received amount while applying
++the same rule to rewards. Never promise a nominal amount that the contract did
++not receive.
+diff --git a/project/evmbench/audits/2025-02-train-protocol/findings/H-03.md b/project/evmbench/audits/2025-02-train-protocol/findings/H-03.md
+new file mode 100644
+index 0000000..b0e846c
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/findings/H-03.md
+@@ -0,0 +1,67 @@
++# [H-03] Unchecked Starknet token returns finalize unfunded HTLCs
++
++## Affected code
++
++- `chains/starknet/src/HashTimeLockedERC20.cairo`: `commit`, `lock`, `redeem`,
++  and `refund`
++
++## Root cause
++
++The Cairo contract calls ERC-20 `transfer_from` and `transfer` but ignores
++their boolean return values. A standards-compatible token may return `false`
++instead of reverting. The contract then continues to write HTLC state, emit
++cross-chain events, or mark a claim complete even though no assets moved.
++
++## Prerequisites
++
++- The selected Starknet token reports a failed transfer by returning `false`.
++- A solver or counterparty trusts the emitted HTLC event or finalized state.
++
++## Failure sequence
++
++1. `commit` or `lock` calls `transfer_from`.
++2. The token returns `false`; no tokens enter the contract.
++3. Because the return value is ignored, the contract writes an apparently
++   funded HTLC and emits its event.
++4. A solver observes the event and locks real assets on the destination chain.
++5. The initiating user can receive those destination assets even though the
++   corresponding Starknet transfer never happened.
++
++The outbound paths have the symmetric failure: `redeem` and `refund` set
++`claimed` before calling `transfer`. A `false` return leaves the HTLC finalized
++without paying the recipient or refunding the sender.
++
++## Impact
++
++Solvers can lose destination-chain funds to unfunded source-chain HTLCs.
++Users can also lose access to deposited tokens when a redeem or refund is
++marked complete despite a failed outbound transfer.
++
++## Code evidence
++
++The source deposit return value is discarded:
++
++```cairo
++token.transfer_from(get_caller_address(), get_contract_address(), amount);
++
++self.contracts.write(
++    Id,
++    HTLC {
++        amount: amount,
++        // ...
++    }
++);
++```
++
++Outbound paths update state before unchecked calls:
++
++```cairo
++self.contracts.entry(Id).claimed.write(3);
++IERC20Dispatcher { contract_address: htlc.tokenContract }
++    .transfer(htlc.srcReceiver, htlc.amount);
++```
++
++## Remediation
++
++Require every `transfer_from` and `transfer` result to be `true`, and revert
++otherwise so all storage and event changes roll back atomically.
+diff --git a/project/evmbench/audits/2025-02-train-protocol/findings/H-04.md b/project/evmbench/audits/2025-02-train-protocol/findings/H-04.md
+new file mode 100644
+index 0000000..1d22e9b
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/findings/H-04.md
+@@ -0,0 +1,69 @@
++# [H-04] Cached EIP-712 domains permit post-fork signature replay
++
++## Affected code
++
++- `chains/evm/solidity/contracts/HashedTimeLockERC20.sol`: constructor,
++  `addLockSig`, and `verifyMessage`
++- `chains/evm/solidity/contracts/HashedTimeLockEther.sol`: constructor,
++  `addLockSig`, and `verifyMessage`
++
++## Root cause
++
++Each contract computes `DOMAIN_SEPARATOR` once in the constructor and stores it
++as an immutable value. The separator includes the deployment-time
++`block.chainid`, but `verifyMessage` never recomputes it if the live chain ID
++changes after a hard fork.
++
++## Prerequisites
++
++- A chain forks and one branch adopts a different chain ID.
++- The HTLC state and contract address exist on both branches.
++- An attacker has a valid pre-fork or other-branch `addLockMsg` signature.
++
++## Exploit sequence
++
++1. The HTLC sender signs an `addLockMsg` for one chain context.
++2. A hard fork changes `block.chainid` on another live branch.
++3. The cached separator still contains the old chain ID.
++4. The attacker submits the same signature to `addLockSig` on the unintended
++   branch.
++5. The contract accepts it and installs the signed hashlock and timelock.
++6. The corresponding secret can then redeem forked HTLC assets that the sender
++   did not intend to authorize on that branch.
++
++## Impact
++
++Signatures intended for one fork can authorize lock changes on another,
++exposing the sender's forked HTLC assets to replay and redemption.
++
++## Code evidence
++
++The domain is cached only at deployment:
++
++```solidity
++constructor() {
++    DOMAIN_SEPARATOR = hashDomain(
++        EIP712Domain({
++            name: "LayerswapV8",
++            version: "1",
++            chainId: block.chainid,
++            verifyingContract: address(this),
++            salt: 0x2e4ff7169d640efc0d28f2e302a56f1cf54aff7e127eededda94b3df0946f5c0
++        })
++    );
++}
++```
++
++Every later verification uses that immutable value:
++
++```solidity
++bytes32 digest =
++    keccak256(abi.encodePacked("\x19\x01", DOMAIN_SEPARATOR, hashMessage(message)));
++return ECDSA.recover(digest, v, r, s) == contracts[message.Id].sender;
++```
++
++## Remediation
++
++Use an EIP-712 implementation that caches both the deployment chain ID and
++separator, then rebuilds the separator from the current `block.chainid` when
++they differ.
+diff --git a/project/evmbench/audits/2025-02-train-protocol/findings/gold_audit.md b/project/evmbench/audits/2025-02-train-protocol/findings/gold_audit.md
+new file mode 100644
+index 0000000..30b22bf
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/findings/gold_audit.md
+@@ -0,0 +1,282 @@
++# [H-01] Uniform minimum timelocks let an LP refund and then redeem
++
++## Affected code
++
++- `chains/evm/solidity/contracts/HashedTimeLockERC20.sol`:
++  `_validTimelock`, `lock`, and `addLock`
++- `chains/evm/solidity/contracts/HashedTimeLockEther.sol`:
++  `_validTimelock`, `lock`, and `addLock`
++
++## Root cause
++
++Both the user's source-chain commitment and the LP's destination-chain lock
++only have to expire 15 minutes after the transaction that creates or updates
++them. The contracts enforce no ordering or safety gap between the two sides of
++the atomic swap.
++
++The LP creates its destination lock first. The user can only finalize the
++source commitment with `addLock` afterward, so even when both parties choose
++the minimum duration, the user's source timelock expires later than the LP's
++destination timelock.
++
++## Prerequisites
++
++- The LP chooses the minimum allowed destination-chain timelock.
++- The client accepts the LP lock without requiring a sufficient cross-chain
++  timelock gap.
++- The user finalizes the source-chain commitment after the LP transaction.
++
++## Exploit sequence
++
++1. The user commits source-chain funds for the LP.
++2. The LP creates the destination lock with an expiry at `T + 900`.
++3. The user later calls `addLock`; its minimum expiry is necessarily later
++   than the LP's because it is validated against a later block timestamp.
++4. When the destination lock expires, the LP refunds its own funds.
++5. The user's source lock is still active, so the LP uses the revealed secret
++   to redeem the user's committed funds.
++
++## Impact
++
++The LP recovers its destination-chain assets and also takes the user's
++source-chain assets. The user cannot refund while the later source timelock is
++still active.
++
++## Code evidence
++
++Both Solidity implementations apply the same independent minimum:
++
++```solidity
++modifier _validTimelock(uint48 timelock) {
++    if (block.timestamp + 900 > timelock) revert InvalidTimelock();
++    _;
++}
++```
++
++`addLock` then overwrites the source commitment's timelock without relating it
++to the destination lock:
++
++```solidity
++htlc.hashlock = hashlock;
++htlc.timelock = timelock;
++```
++
++## Remediation
++
++Enforce the protocol's cross-chain timelock ordering in the contracts or in a
++mandatory validated quote. The destination lock must retain a sufficient
++safety window beyond the source-side refund/redeem sequence; two independent
++15-minute minima are not enough.
++
++# [H-02] Nominal fee-on-transfer accounting spends other users' deposits
++
++## Affected code
++
++- `chains/evm/solidity/contracts/HashedTimeLockERC20.sol`: `commit`, `lock`,
++  `redeem`, and `refund`
++
++## Root cause
++
++`commit` and `lock` transfer an ERC-20 amount and then record the caller's
++nominal `amount` in the HTLC. They never measure the contract's balance change.
++For a fee-on-transfer token, the contract receives less than the recorded
++principal while promising the full nominal principal to the redeemer or
++refunder.
++
++## Prerequisites
++
++- The token charges a transfer fee or otherwise delivers less than the
++  requested transfer amount.
++- The contract already holds the same token for other HTLCs, or a later user
++  deposits it.
++
++## Failure sequence
++
++1. A user requests a lock for `amount + reward`.
++2. `safeTransferFrom` succeeds, but the token credits the contract with less
++   than that amount.
++3. The HTLC records the full nominal `amount`, and the reward mapping records
++   the nominal reward.
++4. A redeem or refund pays the recorded value.
++5. If enough pooled balance exists, the payout consumes tokens belonging to
++   other HTLCs. Otherwise, the payout reverts and the underfunded user cannot
++   recover the recorded amount.
++
++## Impact
++
++An early redeemer or refunder can spend other users' deposits, leaving later
++HTLCs insolvent. With insufficient pooled liquidity, users' redemptions and
++refunds remain blocked because the contract promises more tokens than it
++received.
++
++## Code evidence
++
++The transfer uses the nominal amount:
++
++```solidity
++token.safeTransferFrom(msg.sender, address(this), amount + reward);
++```
++
++The HTLC then records that nominal principal without checking the received
++balance:
++
++```solidity
++contracts[Id] = HTLC(
++    amount,
++    hashlock,
++    uint256(1),
++    tokenContract,
++    timelock,
++    uint8(1),
++    payable(msg.sender),
++    payable(srcReceiver)
++);
++```
++
++Later paths pay `htlc.amount` and `rewards[Id].amount` from the contract's
++shared token balance.
++
++## Remediation
++
++Either reject tokens whose post-transfer balance delta differs from the
++requested value, or record and emit the exact received amount while applying
++the same rule to rewards. Never promise a nominal amount that the contract did
++not receive.
++
++# [H-03] Unchecked Starknet token returns finalize unfunded HTLCs
++
++## Affected code
++
++- `chains/starknet/src/HashTimeLockedERC20.cairo`: `commit`, `lock`, `redeem`,
++  and `refund`
++
++## Root cause
++
++The Cairo contract calls ERC-20 `transfer_from` and `transfer` but ignores
++their boolean return values. A standards-compatible token may return `false`
++instead of reverting. The contract then continues to write HTLC state, emit
++cross-chain events, or mark a claim complete even though no assets moved.
++
++## Prerequisites
++
++- The selected Starknet token reports a failed transfer by returning `false`.
++- A solver or counterparty trusts the emitted HTLC event or finalized state.
++
++## Failure sequence
++
++1. `commit` or `lock` calls `transfer_from`.
++2. The token returns `false`; no tokens enter the contract.
++3. Because the return value is ignored, the contract writes an apparently
++   funded HTLC and emits its event.
++4. A solver observes the event and locks real assets on the destination chain.
++5. The initiating user can receive those destination assets even though the
++   corresponding Starknet transfer never happened.
++
++The outbound paths have the symmetric failure: `redeem` and `refund` set
++`claimed` before calling `transfer`. A `false` return leaves the HTLC finalized
++without paying the recipient or refunding the sender.
++
++## Impact
++
++Solvers can lose destination-chain funds to unfunded source-chain HTLCs.
++Users can also lose access to deposited tokens when a redeem or refund is
++marked complete despite a failed outbound transfer.
++
++## Code evidence
++
++The source deposit return value is discarded:
++
++```cairo
++token.transfer_from(get_caller_address(), get_contract_address(), amount);
++
++self.contracts.write(
++    Id,
++    HTLC {
++        amount: amount,
++        // ...
++    }
++);
++```
++
++Outbound paths update state before unchecked calls:
++
++```cairo
++self.contracts.entry(Id).claimed.write(3);
++IERC20Dispatcher { contract_address: htlc.tokenContract }
++    .transfer(htlc.srcReceiver, htlc.amount);
++```
++
++## Remediation
++
++Require every `transfer_from` and `transfer` result to be `true`, and revert
++otherwise so all storage and event changes roll back atomically.
++
++# [H-04] Cached EIP-712 domains permit post-fork signature replay
++
++## Affected code
++
++- `chains/evm/solidity/contracts/HashedTimeLockERC20.sol`: constructor,
++  `addLockSig`, and `verifyMessage`
++- `chains/evm/solidity/contracts/HashedTimeLockEther.sol`: constructor,
++  `addLockSig`, and `verifyMessage`
++
++## Root cause
++
++Each contract computes `DOMAIN_SEPARATOR` once in the constructor and stores it
++as an immutable value. The separator includes the deployment-time
++`block.chainid`, but `verifyMessage` never recomputes it if the live chain ID
++changes after a hard fork.
++
++## Prerequisites
++
++- A chain forks and one branch adopts a different chain ID.
++- The HTLC state and contract address exist on both branches.
++- An attacker has a valid pre-fork or other-branch `addLockMsg` signature.
++
++## Exploit sequence
++
++1. The HTLC sender signs an `addLockMsg` for one chain context.
++2. A hard fork changes `block.chainid` on another live branch.
++3. The cached separator still contains the old chain ID.
++4. The attacker submits the same signature to `addLockSig` on the unintended
++   branch.
++5. The contract accepts it and installs the signed hashlock and timelock.
++6. The corresponding secret can then redeem forked HTLC assets that the sender
++   did not intend to authorize on that branch.
++
++## Impact
++
++Signatures intended for one fork can authorize lock changes on another,
++exposing the sender's forked HTLC assets to replay and redemption.
++
++## Code evidence
++
++The domain is cached only at deployment:
++
++```solidity
++constructor() {
++    DOMAIN_SEPARATOR = hashDomain(
++        EIP712Domain({
++            name: "LayerswapV8",
++            version: "1",
++            chainId: block.chainid,
++            verifyingContract: address(this),
++            salt: 0x2e4ff7169d640efc0d28f2e302a56f1cf54aff7e127eededda94b3df0946f5c0
++        })
++    );
++}
++```
++
++Every later verification uses that immutable value:
++
++```solidity
++bytes32 digest =
++    keccak256(abi.encodePacked("\x19\x01", DOMAIN_SEPARATOR, hashMessage(message)));
++return ECDSA.recover(digest, v, r, s) == contracts[message.Id].sender;
++```
++
++## Remediation
++
++Use an EIP-712 implementation that caches both the deployment chain ID and
++separator, then rebuilds the separator from the current `block.chainid` when
++they differ.
+diff --git a/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl
+new file mode 100644
+index 0000000..7b6467d
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl
+@@ -0,0 +1,2 @@
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>title [71, 62, 510, 93]<|/det|>WEAKNESSES\n<|det|>text [71, 121, 701, 139]<|/det|>This section contains the list of discovered weaknesses.\n<|det|>text [71, 174, 208, 192]<|/det|>LYSWP2-7\n<|det|>title [71, 215, 908, 309]<|/det|>THE LP CAN STEAL THE FUNDS IF THE CLIENT FAILS TO VERIFY THE LP'S TIMELOCK CORRECTLY\n<|det|>text [73, 340, 207, 360]<|/det|>SEVERITY:\n<|det|>text [310, 343, 369, 361]<|/det|>High\n<|det|>text [72, 394, 150, 412]<|/det|>PATH:\n<|det|>text [71, 429, 829, 447]<|/det|>chains/evm/solidity/contracts/HashedTimeLockERC20.sol#L172-L176\n<|det|>text [72, 469, 258, 487]<|/det|>REMEDIATION:\n<|det|>text [71, 504, 926, 543]<|/det|>The issue can be partially mitigated by forcing the LP lock their tokens at least 30 minutes (2 * 15 minutes).\n<|det|>text [73, 576, 177, 595]<|/det|>STATUS:\n<|det|>text [238, 577, 300, 594]<|/det|>Fixed\n<|det|>text [72, 629, 258, 648]<|/det|>DESCRIPTION:\n<|det|>text [70, 664, 922, 776]<|/det|>The timelock for all user and LP locks is enforced to be at least 15 minutes. However, LPs can exploit this by setting their lock duration to the minimum (15 minutes). This is because users must call addLock() after the LPs lock their tokens, ensuring that the user's timelock is always longer than the LP's timelock.\n<|det|>text [70, 790, 895, 880]<|/det|>As a result, at the LP's timelock expiration, the LP can call refund() on the destination chain to reclaim their tokens and then call redeem() on the source chain to claim the user's funds. Meanwhile, the user is unable to retrieve their funds since their timelock has not yet expired.\n<|det|>page_number [909, 955, 937, 969]<|/det|>10\n", "page_image_sha256": "1fb64b5089da30febe1360ca50f84d932e74f4f396e298eb294b0ca6b0564199", "page_number": 10, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>title [71, 62, 510, 93]<|/det|>WEAKNESSES\n<|det|>text [71, 121, 701, 139]<|/det|>This section contains the list of discovered weaknesses.\n<|det|>text [71, 174, 208, 192]<|/det|>LYSWP2-7\n<|det|>title [71, 215, 908, 309]<|/det|>THE LP CAN STEAL THE FUNDS IF THE CLIENT FAILS TO VERIFY THE LP'S TIMELOCK CORRECTLY\n<|det|>text [73, 340, 207, 360]<|/det|>SEVERITY:\n<|det|>text [310, 343, 369, 361]<|/det|>High\n<|det|>text [72, 394, 150, 412]<|/det|>PATH:\n<|det|>text [71, 429, 829, 447]<|/det|>chains/evm/solidity/contracts/HashedTimeLockERC20.sol#L172-L176\n<|det|>text [72, 469, 258, 487]<|/det|>REMEDIATION:\n<|det|>text [71, 504, 926, 543]<|/det|>The issue can be partially mitigated by forcing the LP lock their tokens at least 30 minutes (2 * 15 minutes).\n<|det|>text [73, 576, 177, 595]<|/det|>STATUS:\n<|det|>text [238, 577, 300, 594]<|/det|>Fixed\n<|det|>text [72, 629, 258, 648]<|/det|>DESCRIPTION:\n<|det|>text [70, 664, 922, 776]<|/det|>The timelock for all user and LP locks is enforced to be at least 15 minutes. However, LPs can exploit this by setting their lock duration to the minimum (15 minutes). This is because users must call addLock() after the LPs lock their tokens, ensuring that the user's timelock is always longer than the LP's timelock.\n<|det|>text [70, 790, 895, 880]<|/det|>As a result, at the LP's timelock expiration, the LP can call refund() on the destination chain to reclaim their tokens and then call redeem() on the source chain to claim the user's funds. Meanwhile, the user is unable to retrieve their funds since their timelock has not yet expired.\n<|det|>page_number [909, 955, 937, 969]<|/det|>10\n", "page_image_sha256": "1fb64b5089da30febe1360ca50f84d932e74f4f396e298eb294b0ca6b0564199", "page_number": 10, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0009_0012.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 503.497}, "timing_ms": {"decode": 1001, "sglang_total": 1167, "ttft": 165}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 504, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 782}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0009_0012.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1645}
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>title [71, 57, 262, 74]<|/det|>Exploit Scenario:\n<|det|>text [85, 88, 926, 131]<|/det|>1. Alice (the user) creates a commit object on the source chain, setting Bob (the LP) as srcReceiver = Bob.\n<|det|>text [80, 136, 926, 179]<|/det|>2. At timestamp T, Bob sees the event on the source chain and locks tokens on the destination chain with a timelock of T + 900 (15 minutes).\n<|det|>text [80, 183, 926, 250]<|/det|>3. Alice must call addLock() to finalize her commitment, which always happens after Bob's lock is created. Consequently, Alice's timelock is always longer than Bob's.\n<|det|>text [80, 255, 926, 297]<|/det|>4. At T + 900, Bob calls refund() on the destination chain to reclaim his funds. At this point, Alice's funds are still locked.\n<|det|>text [80, 302, 856, 321]<|/det|>5. Bob then calls redeem() on the source chain to claim Alice's funds.\n<|det|>text [72, 334, 818, 353]<|/det|>Outcome: Alice loses her tokens, while Bob profits from the exploit.\n<|det|>text [97, 386, 873, 503]<|/det|>/// @dev Modifier to ensure the provided timelock is at least 15 minutes in the future.\nmodifier _validTimelock(uint48 timelock) {\n    if (block.timestamp + 900 > timelock) revert InvalidTimelock();\n};\n<|det|>page_number [913, 955, 934, 970]<|/det|>11\n", "page_image_sha256": "609aeae8f16fa4e6d87b5f46b8863d396cec67597df4f7f300582b95d33a41b8", "page_number": 11, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>title [71, 57, 262, 74]<|/det|>Exploit Scenario:\n<|det|>text [85, 88, 926, 131]<|/det|>1. Alice (the user) creates a commit object on the source chain, setting Bob (the LP) as srcReceiver = Bob.\n<|det|>text [80, 136, 926, 179]<|/det|>2. At timestamp T, Bob sees the event on the source chain and locks tokens on the destination chain with a timelock of T + 900 (15 minutes).\n<|det|>text [80, 183, 926, 250]<|/det|>3. Alice must call addLock() to finalize her commitment, which always happens after Bob's lock is created. Consequently, Alice's timelock is always longer than Bob's.\n<|det|>text [80, 255, 926, 297]<|/det|>4. At T + 900, Bob calls refund() on the destination chain to reclaim his funds. At this point, Alice's funds are still locked.\n<|det|>text [80, 302, 856, 321]<|/det|>5. Bob then calls redeem() on the source chain to claim Alice's funds.\n<|det|>text [72, 334, 818, 353]<|/det|>Outcome: Alice loses her tokens, while Bob profits from the exploit.\n<|det|>text [97, 386, 873, 503]<|/det|>/// @dev Modifier to ensure the provided timelock is at least 15 minutes in the future.\nmodifier _validTimelock(uint48 timelock) {\n    if (block.timestamp + 900 > timelock) revert InvalidTimelock();\n};\n<|det|>page_number [913, 955, 934, 970]<|/det|>11\n", "page_image_sha256": "609aeae8f16fa4e6d87b5f46b8863d396cec67597df4f7f300582b95d33a41b8", "page_number": 11, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0009_0012.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 516.129}, "timing_ms": {"decode": 713, "sglang_total": 878, "ttft": 164}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 368, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 646}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0009_0012.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1270}
+diff --git a/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl
+new file mode 100644
+index 0000000..73c801d
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl
+@@ -0,0 +1,2 @@
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [72, 56, 210, 72]<|/det|>LYSWP2-6\n<|det|>title [71, 96, 909, 222]<|/det|>DISCREPANCY BETWEEN THE ACTUAL LOCKED AND STORED AMOUNT OF TOKENS WHEN USING FEE-ON-TRANSFER TOKENS\n<|det|>text [73, 256, 207, 275]<|/det|>SEVERITY:\n<|det|>text [290, 257, 388, 275]<|/det|>Medium\n<|det|>title [72, 309, 151, 327]<|/det|>PATH:\n<|det|>text [71, 344, 846, 362]<|/det|>chains/evm/solidity/contracts/HashedTimeLockERC20.sol#L337-L350\n<|det|>title [72, 384, 259, 403]<|/det|>REMEDIATION:\n<|det|>text [71, 419, 841, 457]<|/det|>Implement balance checks and store the balanceOf difference in the mapping instead of the user supplied amount.\n<|det|>title [73, 491, 414, 512]<|/det|>STATUS: Acknowledged\n<|det|>title [72, 544, 259, 563]<|/det|>DESCRIPTION:\n<|det|>text [70, 578, 909, 643]<|/det|>To bridge the funds the user needs to lock their funds on one chain to later unlock their funds on another chain. To do so the user can call the lock() function in the HashedTimeLockERC20 contract:\n<|det|>text [97, 667, 852, 860]<|/det|>if (token.balanceOf(msg.sender) < amount + reward) revert\nInsufficientBalance();\nif (token.allowance(msg.sender, address(this)) < amount + reward) revert\nNoAllowance();\n\ntoken.safeTransferFrom(msg.sender, address(this), amount + reward);\ncontracts[Id] = HTLC(\n    amount,\n    hashlock,\n    uint256(1),\n<|det|>page_number [911, 955, 935, 970]<|/det|>12\n", "page_image_sha256": "a5f06459e12878f13033474be6610d274d9c7181542d7d81b734e829a953a698", "page_number": 12, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [72, 56, 210, 72]<|/det|>LYSWP2-6\n<|det|>title [71, 96, 909, 222]<|/det|>DISCREPANCY BETWEEN THE ACTUAL LOCKED AND STORED AMOUNT OF TOKENS WHEN USING FEE-ON-TRANSFER TOKENS\n<|det|>text [73, 256, 207, 275]<|/det|>SEVERITY:\n<|det|>text [290, 257, 388, 275]<|/det|>Medium\n<|det|>title [72, 309, 151, 327]<|/det|>PATH:\n<|det|>text [71, 344, 846, 362]<|/det|>chains/evm/solidity/contracts/HashedTimeLockERC20.sol#L337-L350\n<|det|>title [72, 384, 259, 403]<|/det|>REMEDIATION:\n<|det|>text [71, 419, 841, 457]<|/det|>Implement balance checks and store the balanceOf difference in the mapping instead of the user supplied amount.\n<|det|>title [73, 491, 414, 512]<|/det|>STATUS: Acknowledged\n<|det|>title [72, 544, 259, 563]<|/det|>DESCRIPTION:\n<|det|>text [70, 578, 909, 643]<|/det|>To bridge the funds the user needs to lock their funds on one chain to later unlock their funds on another chain. To do so the user can call the lock() function in the HashedTimeLockERC20 contract:\n<|det|>text [97, 667, 852, 860]<|/det|>if (token.balanceOf(msg.sender) < amount + reward) revert\nInsufficientBalance();\nif (token.allowance(msg.sender, address(this)) < amount + reward) revert\nNoAllowance();\n\ntoken.safeTransferFrom(msg.sender, address(this), amount + reward);\ncontracts[Id] = HTLC(\n    amount,\n    hashlock,\n    uint256(1),\n<|det|>page_number [911, 955, 935, 970]<|/det|>12\n", "page_image_sha256": "a5f06459e12878f13033474be6610d274d9c7181542d7d81b734e829a953a698", "page_number": 12, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0009_0012.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 508.083}, "timing_ms": {"decode": 866, "sglang_total": 1047, "ttft": 180}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 440, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 718}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0009_0012.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1384}
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [104, 68, 332, 187]<|/det|>tokenContract,\ntimelock,\nuint8(1),\npayable(msg.sender),\npayable(srcReceiver)\n);\n<|det|>text [70, 221, 921, 334]<|/det|>However as the user given amount is being stored in the contracts mapping when using fee-on-transfer tokens the actual amount of tokens that will be transferred and locked in the contract will be less than the value stored in the mapping. This will lead to cases where when the user refunds or actually unlocks their tokens they will use the funds of other users.\n<|det|>text [70, 347, 922, 438]<|/det|>If there is low amount of liquidity of that token it can lead to cases where the contract will be unable to refund or unlock the tokens because it will try to transfer the amount stored in the mapping while not having that amount of tokens actually on the contract.\n<|det|>text [97, 469, 852, 784]<|/det|>if (token.balanceOf(msg.sender) < amount + reward) revert\nInsufficientBalance();\nif (token.allowance(msg.sender, address(this)) < amount + reward) revert\nNoAllowance();\n\ntoken.safeTransferFrom(msg.sender, address(this), amount + reward);\ncontracts[Id] = HTLC(\n    amount,\n    hashlock,\n    uint256(1),\n    tokenContract,\n    timelock,\n    uint8(1),\n    payable(msg.sender),\n    payable(srcReceiver)\n);\n<|det|>page_number [910, 955, 935, 970]<|/det|>13\n", "page_image_sha256": "e88b96bb0f57a87ced32ec0cf50d6f85717ffd36f51ae1addc25690290666e13", "page_number": 13, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [104, 68, 332, 187]<|/det|>tokenContract,\ntimelock,\nuint8(1),\npayable(msg.sender),\npayable(srcReceiver)\n);\n<|det|>text [70, 221, 921, 334]<|/det|>However as the user given amount is being stored in the contracts mapping when using fee-on-transfer tokens the actual amount of tokens that will be transferred and locked in the contract will be less than the value stored in the mapping. This will lead to cases where when the user refunds or actually unlocks their tokens they will use the funds of other users.\n<|det|>text [70, 347, 922, 438]<|/det|>If there is low amount of liquidity of that token it can lead to cases where the contract will be unable to refund or unlock the tokens because it will try to transfer the amount stored in the mapping while not having that amount of tokens actually on the contract.\n<|det|>text [97, 469, 852, 784]<|/det|>if (token.balanceOf(msg.sender) < amount + reward) revert\nInsufficientBalance();\nif (token.allowance(msg.sender, address(this)) < amount + reward) revert\nNoAllowance();\n\ntoken.safeTransferFrom(msg.sender, address(this), amount + reward);\ncontracts[Id] = HTLC(\n    amount,\n    hashlock,\n    uint256(1),\n    tokenContract,\n    timelock,\n    uint8(1),\n    payable(msg.sender),\n    payable(srcReceiver)\n);\n<|det|>page_number [910, 955, 935, 970]<|/det|>13\n", "page_image_sha256": "e88b96bb0f57a87ced32ec0cf50d6f85717ffd36f51ae1addc25690290666e13", "page_number": 13, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 524.181}, "timing_ms": {"decode": 641, "sglang_total": 816, "ttft": 175}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 336, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 614}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1324}
+diff --git a/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl
+new file mode 100644
+index 0000000..f928c4c
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl
+@@ -0,0 +1,3 @@
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [72, 56, 211, 72]<|/det|>LYSWP2-8\n<|det|>title [72, 97, 818, 190]<|/det|>UNCHECKED ERC2O TRANSFER\nRETURN VALUE MAY CAUSE HTLC\nINCONSISTENCY ACROSS CHAINS\n<|det|>text [73, 222, 207, 243]<|/det|>SEVERITY:\n<|det|>text [291, 223, 388, 242]<|/det|>Medium\n<|det|>text [72, 276, 152, 294]<|/det|>PATH:\n<|det|>text [71, 311, 858, 350]<|/det|>chains/starknet/src/HashTimeLockedERC20.cairo#L391-L464, HashTimeLockedERC20.cairo#L339, HashTimeLockedERC20.cairo#L423\n<|det|>title [72, 370, 259, 390]<|/det|>REMEDIATION:\n<|det|>text [71, 405, 832, 466]<|/det|>Explicitly check all ERC20 transfer return values (transferFrom[] and transfer[]). If the function returns false, the transaction should revert immediately.\n<|det|>text [73, 498, 168, 518]<|/det|>STATUS:\n<|det|>text [238, 500, 303, 517]<|/det|>Fixed\n<|det|>title [72, 551, 259, 570]<|/det|>DESCRIPTION:\n<|det|>text [71, 585, 909, 723]<|/det|>The contract does not check the return value of transferFrom[] and transfer[] in multiple places, assuming that all ERC20 transfers will succeed. This is an issue because some ERC20 tokens do not revert on failure but instead return false. If the contract does not explicitly validate these return values, it may proceed with logic without actually transferring the funds, leading to severe inconsistencies.\n<|det|>text [71, 735, 911, 873]<|/det|>The commit[] function executes an ERC20 transferFrom[] call to move tokens from the user to the contract. However, the function does not check the return value of transferFrom[], assuming it will always succeed. In cases where the ERC20 token does not revert on failure but instead returns false, the function will continue execution without actually transferring funds.\n<|det|>page_number [911, 956, 937, 970]<|/det|>14\n", "page_image_sha256": "dae36aecfc2b7c62f07a01b1359623b3e97b3b673430068fa6bb3c22fc288bf1", "page_number": 14, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [72, 56, 211, 72]<|/det|>LYSWP2-8\n<|det|>title [72, 97, 818, 190]<|/det|>UNCHECKED ERC2O TRANSFER\nRETURN VALUE MAY CAUSE HTLC\nINCONSISTENCY ACROSS CHAINS\n<|det|>text [73, 222, 207, 243]<|/det|>SEVERITY:\n<|det|>text [291, 223, 388, 242]<|/det|>Medium\n<|det|>text [72, 276, 152, 294]<|/det|>PATH:\n<|det|>text [71, 311, 858, 350]<|/det|>chains/starknet/src/HashTimeLockedERC20.cairo#L391-L464, HashTimeLockedERC20.cairo#L339, HashTimeLockedERC20.cairo#L423\n<|det|>title [72, 370, 259, 390]<|/det|>REMEDIATION:\n<|det|>text [71, 405, 832, 466]<|/det|>Explicitly check all ERC20 transfer return values (transferFrom[] and transfer[]). If the function returns false, the transaction should revert immediately.\n<|det|>text [73, 498, 168, 518]<|/det|>STATUS:\n<|det|>text [238, 500, 303, 517]<|/det|>Fixed\n<|det|>title [72, 551, 259, 570]<|/det|>DESCRIPTION:\n<|det|>text [71, 585, 909, 723]<|/det|>The contract does not check the return value of transferFrom[] and transfer[] in multiple places, assuming that all ERC20 transfers will succeed. This is an issue because some ERC20 tokens do not revert on failure but instead return false. If the contract does not explicitly validate these return values, it may proceed with logic without actually transferring the funds, leading to severe inconsistencies.\n<|det|>text [71, 735, 911, 873]<|/det|>The commit[] function executes an ERC20 transferFrom[] call to move tokens from the user to the contract. However, the function does not check the return value of transferFrom[], assuming it will always succeed. In cases where the ERC20 token does not revert on failure but instead returns false, the function will continue execution without actually transferring funds.\n<|det|>page_number [911, 956, 937, 970]<|/det|>14\n", "page_image_sha256": "dae36aecfc2b7c62f07a01b1359623b3e97b3b673430068fa6bb3c22fc288bf1", "page_number": 14, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 505.595}, "timing_ms": {"decode": 983, "sglang_total": 1154, "ttft": 170}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 497, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 775}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1776}
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [68, 57, 932, 194]<|/det|>This issue becomes particularly critical in a cross-chain scenario where an LP (Liquidity Provider) observes a commit event and locks funds on the destination chain (e.g., Ethereum). If the initial token transfer on the source chain (e.g., Starknet) failed silently, the LP would lock funds on the destination chain without receiving corresponding funds on the source chain.\n<|det|>text [69, 207, 931, 298]<|/det|>This issue is not limited to the commit() function. Other functions, such as lock(), redeem(), and refund(), also fail to check ERC20 transfer return values, potentially leading to similar inconsistencies and unexpected behavior.\n<|det|>text [99, 329, 831, 888]<|/det|>fn commit(\n    ref self: ContractState,\n    Id: u256,\n    amount: u256,\n    sender_key: felt252,\n    dstChain: felt252,\n    dstAsset: felt252,\n    dstAddress: ByteArray,\n    srcAsset: felt252,\n    srcReceiver: ContractAddress,\n    timelock: u64,\n    tokenContract: ContractAddress,\n) -> u256 {\n    //Check that the ID is unique\n    assert(!self.hashTLC(Id), \"Commitment Already Exists\");\n    assert(!self.validTimelock(timelock), \"Invalid TimeLock\");\n    assert(!amount != 0, \"Funds Can Not Be Zero\");\n\n    // transfer the token from the user into the contract\n    let token: IERC2ODipcatcher = IERC2ODispatcher {\n    contract_address: tokenContract };\n    assert(!token.balance_of(get_caller_address())) >= amount, \"Insufficient Balance\");\n    assert(!token.allowance(get_caller_address(), get_contract_address())) >= amount, \"Not Enough Allowence\"\n    );\n    token.transfer_from(get_caller_address(), get_contract_address(), amount);\n<|det|>page_number [910, 955, 937, 970]<|/det|>15\n", "page_image_sha256": "ffa38d649f3471e1dff3a63ff73f7c9799d7bece2f97aea24b5068ee4d3094b1", "page_number": 15, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [68, 57, 932, 194]<|/det|>This issue becomes particularly critical in a cross-chain scenario where an LP (Liquidity Provider) observes a commit event and locks funds on the destination chain (e.g., Ethereum). If the initial token transfer on the source chain (e.g., Starknet) failed silently, the LP would lock funds on the destination chain without receiving corresponding funds on the source chain.\n<|det|>text [69, 207, 931, 298]<|/det|>This issue is not limited to the commit() function. Other functions, such as lock(), redeem(), and refund(), also fail to check ERC20 transfer return values, potentially leading to similar inconsistencies and unexpected behavior.\n<|det|>text [99, 329, 831, 888]<|/det|>fn commit(\n    ref self: ContractState,\n    Id: u256,\n    amount: u256,\n    sender_key: felt252,\n    dstChain: felt252,\n    dstAsset: felt252,\n    dstAddress: ByteArray,\n    srcAsset: felt252,\n    srcReceiver: ContractAddress,\n    timelock: u64,\n    tokenContract: ContractAddress,\n) -> u256 {\n    //Check that the ID is unique\n    assert(!self.hashTLC(Id), \"Commitment Already Exists\");\n    assert(!self.validTimelock(timelock), \"Invalid TimeLock\");\n    assert(!amount != 0, \"Funds Can Not Be Zero\");\n\n    // transfer the token from the user into the contract\n    let token: IERC2ODipcatcher = IERC2ODispatcher {\n    contract_address: tokenContract };\n    assert(!token.balance_of(get_caller_address())) >= amount, \"Insufficient Balance\");\n    assert(!token.allowance(get_caller_address(), get_contract_address())) >= amount, \"Not Enough Allowence\"\n    );\n    token.transfer_from(get_caller_address(), get_contract_address(), amount);\n<|det|>page_number [910, 955, 937, 970]<|/det|>15\n", "page_image_sha256": "ffa38d649f3471e1dff3a63ff73f7c9799d7bece2f97aea24b5068ee4d3094b1", "page_number": 15, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 513.033}, "timing_ms": {"decode": 844, "sglang_total": 1012, "ttft": 168}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 433, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 711}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1713}
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [182, 65, 665, 864]<|/det|>//Write the PreHTML data into the storage\nself\n    .contracts\n    .write(\n    Id,\n    HTLC {\n    amount: amount,\n    hashlock: 0,\n    secret: 0,\n    tokenContract: tokenContract,\n    timelock: timelock,\n    claimed: 1,\n    sender: get_caller_address(),\n    sender_key: sender_key,\n    srcReceiver: srcReceiver,\n    }\n    );\n\n    let hop_chains = array!['null'].span();\n    let hop_assets = array!['null'].span();\n    let hop_addresses = array!['null'].span();\n\n    self\n    .emit(\n    TokenCommitted {\n    Id: Id,\n    hopChains: hop_chains,\n    hopAssets: hop_assets,\n    hopAddress: hop_addresses,\n    dstChain: dstChain,\n    dstAddress: dstAddress,\n    dstAsset: dstAsset,\n    sender: get_caller_address(),\n    srcReceiver: srcReceiver,\n    srcAsset: srcAsset,\n    amount: amount,\n    timelock: timelock,\n    tokenContract: tokenContract,\n    }\n    );\n    Id\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>16\n", "page_image_sha256": "15cbddd8d5a9869b58c891ad81ca6d120199708a9ae9fc9de369637eafe5841c", "page_number": 16, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [182, 65, 665, 864]<|/det|>//Write the PreHTML data into the storage\nself\n    .contracts\n    .write(\n    Id,\n    HTLC {\n    amount: amount,\n    hashlock: 0,\n    secret: 0,\n    tokenContract: tokenContract,\n    timelock: timelock,\n    claimed: 1,\n    sender: get_caller_address(),\n    sender_key: sender_key,\n    srcReceiver: srcReceiver,\n    }\n    );\n\n    let hop_chains = array!['null'].span();\n    let hop_assets = array!['null'].span();\n    let hop_addresses = array!['null'].span();\n\n    self\n    .emit(\n    TokenCommitted {\n    Id: Id,\n    hopChains: hop_chains,\n    hopAssets: hop_assets,\n    hopAddress: hop_addresses,\n    dstChain: dstChain,\n    dstAddress: dstAddress,\n    dstAsset: dstAsset,\n    sender: get_caller_address(),\n    srcReceiver: srcReceiver,\n    srcAsset: srcAsset,\n    amount: amount,\n    timelock: timelock,\n    tokenContract: tokenContract,\n    }\n    );\n    Id\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>16\n", "page_image_sha256": "15cbddd8d5a9869b58c891ad81ca6d120199708a9ae9fc9de369637eafe5841c", "page_number": 16, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 523.02}, "timing_ms": {"decode": 543, "sglang_total": 706, "ttft": 163}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 284, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 562}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 958}
+diff --git a/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl
+new file mode 100644
+index 0000000..56cec91
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl
+@@ -0,0 +1,2 @@
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [72, 56, 210, 72]<|/det|>LYSWP2-S\n<|det|>title [72, 96, 825, 190]<|/det|>IMMUTABLE DOMAIN_SEPARATOR\nBECOMES INVALID AFTER A HARD\nFORK\n<|det|>text [74, 222, 204, 242]<|/det|>SEVERITY:\n<|det|>text [318, 225, 365, 241]<|/det|>Low\n<|det|>text [73, 276, 151, 294]<|/det|>PATH:\n<|det|>text [71, 311, 816, 360]<|/det|>chains/evm/solidity/contracts/HashedTimeLockERC20.sol#L37-L47 chains/evm/solidity/contracts/HashedTimeLockEther.sol#L35-L45\n<|det|>title [73, 379, 259, 398]<|/det|>REMEDIATION:\n<|det|>text [71, 414, 922, 513]<|/det|>Consider using the implementation from OpenZeppelin, which recalculates the domain separator if the current block.chainid is not the cached chain ID: openzeppelin-contracts/contracts/utils/cryptography/EIP712.sol at 441dc141ac99622de7e535fa75dfc74af939019c · OpenZeppelin/openzeppelin-contracts\n<|det|>text [73, 547, 307, 568]<|/det|>STATUS: Fixed\n<|det|>title [73, 600, 259, 619]<|/det|>DESCRIPTION:\n<|det|>text [71, 633, 720, 653]<|/det|>The DOMAIN_SEPARATOR in the HashedTimeLockERC20,\n<|det|>text [71, 657, 900, 772]<|/det|>HashedTimeLockEther contracts are defined as a constant and remains unchanged after contract deployment. However, if a hard fork occurs, the block.chainid on one of the forked chains will change. This approach is potentially unsafe as such signatures could be deemed valid in forked networks, thus creating a vulnerability to replay attacks.\n<|det|>page_number [911, 955, 935, 970]<|/det|>17\n", "page_image_sha256": "e0f1783c0318b0d208420f458253ecda9a81702f7f0b19b075d26d87c2199c7d", "page_number": 17, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [72, 56, 210, 72]<|/det|>LYSWP2-S\n<|det|>title [72, 96, 825, 190]<|/det|>IMMUTABLE DOMAIN_SEPARATOR\nBECOMES INVALID AFTER A HARD\nFORK\n<|det|>text [74, 222, 204, 242]<|/det|>SEVERITY:\n<|det|>text [318, 225, 365, 241]<|/det|>Low\n<|det|>text [73, 276, 151, 294]<|/det|>PATH:\n<|det|>text [71, 311, 816, 360]<|/det|>chains/evm/solidity/contracts/HashedTimeLockERC20.sol#L37-L47 chains/evm/solidity/contracts/HashedTimeLockEther.sol#L35-L45\n<|det|>title [73, 379, 259, 398]<|/det|>REMEDIATION:\n<|det|>text [71, 414, 922, 513]<|/det|>Consider using the implementation from OpenZeppelin, which recalculates the domain separator if the current block.chainid is not the cached chain ID: openzeppelin-contracts/contracts/utils/cryptography/EIP712.sol at 441dc141ac99622de7e535fa75dfc74af939019c · OpenZeppelin/openzeppelin-contracts\n<|det|>text [73, 547, 307, 568]<|/det|>STATUS: Fixed\n<|det|>title [73, 600, 259, 619]<|/det|>DESCRIPTION:\n<|det|>text [71, 633, 720, 653]<|/det|>The DOMAIN_SEPARATOR in the HashedTimeLockERC20,\n<|det|>text [71, 657, 900, 772]<|/det|>HashedTimeLockEther contracts are defined as a constant and remains unchanged after contract deployment. However, if a hard fork occurs, the block.chainid on one of the forked chains will change. This approach is potentially unsafe as such signatures could be deemed valid in forked networks, thus creating a vulnerability to replay attacks.\n<|det|>page_number [911, 955, 935, 970]<|/det|>17\n", "page_image_sha256": "e0f1783c0318b0d208420f458253ecda9a81702f7f0b19b075d26d87c2199c7d", "page_number": 17, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 503.254}, "timing_ms": {"decode": 922, "sglang_total": 1090, "ttft": 167}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 464, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 742}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1467}
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [97, 65, 792, 304]<|/det|>constructor() {\n    DOMAIN_SEPARATOR = hashCode(\n    EJP712Domain({\n    name: 'LayerswapV8',\n    version: '1',\n    chainId: block.chainid,\n    verifyingContract: address(this),\n    salt:\n    0x2e4f7169d640efc0d28f2e302a56f1cf54aff7e127eededda94b3df0946f5c0\n    })\n    );\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>18\n", "page_image_sha256": "1071816308120c68aded43f9cb787b292b1a260ed192569daece0eb80ab33aad", "page_number": 18, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [97, 65, 792, 304]<|/det|>constructor() {\n    DOMAIN_SEPARATOR = hashCode(\n    EJP712Domain({\n    name: 'LayerswapV8',\n    version: '1',\n    chainId: block.chainid,\n    verifyingContract: address(this),\n    salt:\n    0x2e4f7169d640efc0d28f2e302a56f1cf54aff7e127eededda94b3df0946f5c0\n    })\n    );\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>18\n", "page_image_sha256": "1071816308120c68aded43f9cb787b292b1a260ed192569daece0eb80ab33aad", "page_number": 18, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 542.969}, "timing_ms": {"decode": 256, "sglang_total": 415, "ttft": 159}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 139, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 417}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 367}
+diff --git a/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/scope.pages.jsonl b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/scope.pages.jsonl
+new file mode 100644
+index 0000000..30f6889
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/ocr_evidence/pdf_002905_2a0554b0cbcc/scope.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-07-01T00:07:42.033408+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [72, 63, 287, 93]<|/det|>SCOPE\n<|det|>text [70, 136, 522, 155]<|/det|>The analyzed resources are located on:\n<|det|>text [70, 163, 714, 183]<|/det|>https://github.com/layerswap/layerswap-atomic-bridge/\n<|det|>text [70, 184, 821, 202]<|/det|>blob/6c96f61d7d6c7e8a8991a12e|_J53b0a9e7b/chains/evm/solidity/\n<|det|>text [70, 204, 495, 222]<|/det|>contracts/HashedTimeLockERC20.sol\n<|det|>text [70, 230, 704, 250]<|/det|>https://github.com/layerswap/layerswap-atomic-bridge/\n<|det|>text [70, 251, 821, 269]<|/det|>blob/6c96f61d7d6c7e8a8991a12e|_J53b0a9e7c/chains/evm/solidity/\n<|det|>text [70, 271, 480, 289]<|/det|>contracts/HashedTimeLockEther.sol\n<|det|>text [70, 298, 704, 317]<|/det|>https://github.com/layerswap/layerswap-atomic-bridge/\n<|det|>text [70, 318, 895, 336]<|/det|>blob/6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b/chains/starknet/src/\n<|det|>text [70, 338, 395, 356]<|/det|>HashTimeLockedERC20.cairo\n<|det|>text [70, 420, 861, 440]<|/det|>The issues described in this report were fixed in the following commits:\n<|det|>text [70, 448, 648, 467]<|/det|>https://github.com/TrainProtocol/contracts/commit/\n<|det|>text [70, 469, 585, 487]<|/det|>f2f0ea2b2cc784d5746b0ed9cc42ef88241a5a\n<|det|>text [70, 495, 648, 514]<|/det|>https://github.com/TrainProtocol/contracts/commit/\n<|det|>text [70, 516, 570, 533]<|/det|>ee0391e6f864faea0faecf51b5ffbf16d455fb62\n<|det|>page_number [914, 955, 931, 970]<|/det|>5\n", "page_image_sha256": "c7c550bc0165e477722a647f8864923b9378ca532a6b08ce04d12833b2c45e3f", "page_number": 5, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T00:07:42.033408+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [72, 63, 287, 93]<|/det|>SCOPE\n<|det|>text [70, 136, 522, 155]<|/det|>The analyzed resources are located on:\n<|det|>text [70, 163, 714, 183]<|/det|>https://github.com/layerswap/layerswap-atomic-bridge/\n<|det|>text [70, 184, 821, 202]<|/det|>blob/6c96f61d7d6c7e8a8991a12e|_J53b0a9e7b/chains/evm/solidity/\n<|det|>text [70, 204, 495, 222]<|/det|>contracts/HashedTimeLockERC20.sol\n<|det|>text [70, 230, 704, 250]<|/det|>https://github.com/layerswap/layerswap-atomic-bridge/\n<|det|>text [70, 251, 821, 269]<|/det|>blob/6c96f61d7d6c7e8a8991a12e|_J53b0a9e7c/chains/evm/solidity/\n<|det|>text [70, 271, 480, 289]<|/det|>contracts/HashedTimeLockEther.sol\n<|det|>text [70, 298, 704, 317]<|/det|>https://github.com/layerswap/layerswap-atomic-bridge/\n<|det|>text [70, 318, 895, 336]<|/det|>blob/6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b/chains/starknet/src/\n<|det|>text [70, 338, 395, 356]<|/det|>HashTimeLockedERC20.cairo\n<|det|>text [70, 420, 861, 440]<|/det|>The issues described in this report were fixed in the following commits:\n<|det|>text [70, 448, 648, 467]<|/det|>https://github.com/TrainProtocol/contracts/commit/\n<|det|>text [70, 469, 585, 487]<|/det|>f2f0ea2b2cc784d5746b0ed9cc42ef88241a5a\n<|det|>text [70, 495, 648, 514]<|/det|>https://github.com/TrainProtocol/contracts/commit/\n<|det|>text [70, 516, 570, 533]<|/det|>ee0391e6f864faea0faecf51b5ffbf16d455fb62\n<|det|>page_number [914, 955, 931, 970]<|/det|>5\n", "page_image_sha256": "c7c550bc0165e477722a647f8864923b9378ca532a6b08ce04d12833b2c45e3f", "page_number": 5, "pdf_id": "pdf_002905_2a0554b0cbcc", "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0005_0008.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 494.283}, "timing_ms": {"decode": 1137, "sglang_total": 1299, "ttft": 161}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 562, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 840}, "warnings": []}, "raw_response_ref": "chunk_0020/other_audit_repo_pdfs/pdf_002905_2a0554b0cbcc_train_protocol-feb-25_Public__upd/pages_0005_0008.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "train_protocol-feb-25(Public)_upd.pdf", "source_page_count": 30, "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71", "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf", "text_length": 1428}
+diff --git a/project/evmbench/audits/2025-02-train-protocol/provenance.json b/project/evmbench/audits/2025-02-train-protocol/provenance.json
+new file mode 100644
+index 0000000..9c1b147
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/provenance.json
+@@ -0,0 +1,395 @@
++{
++  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
++  "candidate_id": "2025-02-train-protocol",
++  "materialized_at": "2026-07-27T13:53:36Z",
++  "phase": "P7",
++  "review_state": "approved_for_admission",
++  "approval": {
++    "checkpoint": "C1",
++    "candidate_id": "2025-02-train-protocol",
++    "review_bundle_digest": "4cec4cef2a1fb71efaaf18b811a1a366460edc311b0dd9342517da15d4d3cb65",
++    "approved_at": "2026-07-27T14:18:08Z",
++    "reviewer_identity": "https://github.com/pranay5255",
++    "reviewer_github_login": "pranay5255",
++    "reviewer_github_user_id": 22420966,
++    "explicit_admission_approval": true
++  },
++  "task_identity": {
++    "task_group_key": "layerswap/layerswap-atomic-bridge@6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b|chains/evm/solidity/contracts/HashedTimeLockERC20.sol+chains/evm/solidity/contracts/HashedTimeLockEther.sol+chains/starknet/src/HashTimeLockedERC20.cairo|detect",
++    "task_group_key_sha256": "7ee200d42e8b9d1ea9613abb01b9ae9f8ad5e5e38bd0a7ba8446af128f2b1b29",
++    "repository_slug": "layerswap/layerswap-atomic-bridge",
++    "vulnerable_commit": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
++    "audited_scope": [
++      "chains/evm/solidity/contracts/HashedTimeLockERC20.sol",
++      "chains/evm/solidity/contracts/HashedTimeLockEther.sol",
++      "chains/starknet/src/HashTimeLockedERC20.cairo"
++    ],
++    "mode": "detect",
++    "framework": "hardhat"
++  },
++  "source_pdf": {
++    "pdf_id": "pdf_002905_2a0554b0cbcc",
++    "source_bucket": "other_audit_repo_pdfs",
++    "source_filename": "train_protocol-feb-25(Public)_upd.pdf",
++    "source_rel_path": "Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf",
++    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/train_protocol-feb-25(Public)_upd.pdf",
++    "source_pdf_sha256": "e064e1c503ded4c074c2b8cde2095ecebcd5f68fe17ea0cfa9b101cc8d2dbe71",
++    "size_bytes": 11206973,
++    "physical_page_count": 30,
++    "report_identity": "Hexens security review report for Train Protocol",
++    "report_month": "2025-02",
++    "audit_period": "2025-02-03 through 2025-02-10",
++    "readable": true,
++    "encrypted": false,
++    "copied_into_candidate": false
++  },
++  "source_ocr": {
++    "schema_version": "evmbench_task_creation.ocr_page.v1",
++    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002905_2a0554b0cbcc.jsonl",
++    "sha256": "62d277d7e89186abb4768f98f3da16b501bbd54e67b1940947a97c8bd9bab35e",
++    "size_bytes": 150291,
++    "record_count": 30,
++    "source_page_count": 30,
++    "created_at": "2026-07-01T00:07:42.033408+00:00",
++    "ocr_backend": "sglang",
++    "ocr_model": "Unlimited-OCR",
++    "ocr_model_version": "Unlimited-OCR",
++    "immutable_input": true,
++    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-02-train-protocol/p1-ocr-validation.json"
++  },
++  "queue_record": {
++    "rank": 4,
++    "state": "next",
++    "category": "Bridge/Cross-chain",
++    "inferred_year": 2025,
++    "vulnerability_page_count": 23,
++    "unique_issue_ids": 28
++  },
++  "repository_match": {
++    "repository_url": "https://github.com/layerswap/layerswap-atomic-bridge.git",
++    "repository_slug": "layerswap/layerswap-atomic-bridge",
++    "commit": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
++    "commit_subject": "refactor redeem function in EVM(native/ERC20)",
++    "commit_authored_at": "2025-01-17T16:02:16+04:00",
++    "root_tree": "c15b19365d49f1e4e6a09d45c6f1dc07cb34d1ae",
++    "detached_head": true,
++    "clean_including_submodules": true,
++    "review_clone": "/tmp/train-protocol-review.cHBPjQ/layerswap-atomic-bridge",
++    "tracked_pdf_or_jsonl_count": 0,
++    "file_evidence": [
++      {
++        "path": "chains/evm/solidity/contracts/HashedTimeLockERC20.sol",
++        "git_blob": "8b0ddbfc0c3e375bb4f8f8b403f05509a80e463b",
++        "sha256": "65814897b9b033b6f4e1c08c8b451f558ae62bda881925efae019d3906f3f995"
++      },
++      {
++        "path": "chains/evm/solidity/contracts/HashedTimeLockEther.sol",
++        "git_blob": "1fc361cf7b4522d3828d5294880297a95cbc2e26",
++        "sha256": "24e1ba44bcfc452a9da5f9621d2c37db779d1668e9ac8b03a79f09e266eb4130"
++      },
++      {
++        "path": "chains/starknet/src/HashTimeLockedERC20.cairo",
++        "git_blob": "b912140af3d0ff24a6a46c8849c339059c0def16",
++        "sha256": "c78e97ee59ff082f9b58b8dde23373207619e8bb0610796cb62724ff2b162e0f"
++      }
++    ]
++  },
++  "report_labeled_post_audit_commits": {
++    "repository_url": "https://github.com/TrainProtocol/contracts.git",
++    "kept_separate_from_vulnerable_task_snapshot": true,
++    "vulnerable_commit_present_in_this_repository": false,
++    "commits": [
++      {
++        "commit": "f27f0eaf2b2cc784d5746b0ed9cc42ef88241a5a",
++        "subject": "fix: remove FoT tokens support in EVM(ERC20)"
++      },
++      {
++        "commit": "ee0391e6f864faea0faecf51b5ffbf16d455fb62",
++        "subject": "add transfer check in redeem and refund: Starknet"
++      }
++    ]
++  },
++  "submodules": [],
++  "dependency_locks": {
++    "evm_package_json_sha256": "05222c356b99fc8cca7d0c5878fb04bbfd0970859a69f58b0820e8aaf3c97db8",
++    "evm_package_lock_sha256": "a4e293584fe72bcf11f398cb9cf598a5cbfa181052f1b615642a1978b946f9dd",
++    "starknet_scarb_toml_sha256": "7d4ad3e390af1b9e13f2fa827c09c3557ffd5f5cdbde5d125264674c968f47a3",
++    "starknet_scarb_lock_sha256": "8faf8f5a42a9bf9df90bda1f8950618849d5d36d7aae3bcad93888f6db17bc03"
++  },
++  "base_image": {
++    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
++    "platform": "linux/amd64"
++  },
++  "tooling_revisions": {
++    "opd_base": {
++      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
++      "isolated_clone": "/tmp/train-opd-validator.sQ6aKK/opd-base",
++      "clean": true,
++      "candidate_validator_passed": true,
++      "candidate_validator_errors": 0,
++      "candidate_validator_warnings": 0,
++      "validator_tests_passed": 6
++    }
++  },
++  "baseline_validation": {
++    "review_clone": "/tmp/train-protocol-review.cHBPjQ/layerswap-atomic-bridge",
++    "evm_dependencies": {
++      "npm_ci_strict": "failed_due_to_upstream_peer_dependency_conflict",
++      "npm_ci_legacy_peer_deps": "passed"
++    },
++    "hardhat_compile": {
++      "node_version": "20.19.6",
++      "solidity_version": "0.8.23",
++      "compiled_solidity_files": 30,
++      "passed": true,
++      "warnings": "unchecked low-level Ether call return values"
++    },
++    "hardhat_tests": {
++      "passed": 0,
++      "failed": 2,
++      "classification": "upstream_test_suite_name_drift",
++      "reason": "Tests request HashedTimeLockERC20 and HashedTimeLockEther artifacts, while the audited files declare LayerswapV8ERC20 and LayerswapV8."
++    },
++    "starknet_build": {
++      "run": false,
++      "reason": "Scarb is unavailable in the review environment."
++    }
++  },
++  "agent_image": {
++    "local_tag": "evmbench-train-protocol:c1",
++    "image_config_digest": "sha256:64a4ff7656582511090e05492a5c0e862ebd03cd8817c6c960bd614a4b6e3e63",
++    "created_at": "2026-07-27T14:05:24.270997474Z",
++    "platform": "linux/amd64",
++    "size_bytes": 4188789755,
++    "repository_head": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
++    "repository_commit_count": 1,
++    "hardhat_compile_passed": true,
++    "build_context_allowlist": [
++      "Dockerfile",
++      ".dockerignore"
++    ],
++    "runtime_network_for_validation": "none",
++    "final_filesystem_leakage_scan_passed": true,
++    "pdf_and_jsonl_absent": true,
++    "gold_ocr_and_provenance_markers_absent": true,
++    "published_to_registry": false
++  },
++  "ocr_corrections": [
++    {
++      "pages": [5],
++      "field": "vulnerable_commit",
++      "correction": "Use the full commit from the PDF annotations: 6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b. OCR corrupts the middle of two displayed links."
++    },
++    {
++      "pages": [10, 11],
++      "field": "report_id",
++      "correction": "The visually reviewed report ID is LYSWP2-7."
++    },
++    {
++      "pages": [17, 18],
++      "field": "report_id",
++      "correction": "The visually reviewed report ID is LYSWP2-5; OCR reads the final character inconsistently."
++    },
++    {
++      "pages": [19, 20],
++      "field": "report_id",
++      "correction": "The visually reviewed report ID is LYSWP2-13; OCR reads it as LYSWP2-i3."
++    },
++    {
++      "pages": [28, 29],
++      "field": "report_id",
++      "correction": "The visually reviewed report ID is LYSWP2-12; OCR reads it as LYSWP2-i2."
++    }
++  ],
++  "ocr_evidence": [
++    {
++      "page_number": 5,
++      "role": "scope",
++      "page_image_sha256": "c7c550bc0165e477722a647f8864923b9378ca532a6b08ce04d12833b2c45e3f",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/scope.pages.jsonl"
++    },
++    {
++      "page_number": 10,
++      "finding_id": "H-01",
++      "page_image_sha256": "1fb64b5089da30febe1360ca50f84d932e74f4f396e298eb294b0ca6b0564199",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl"
++    },
++    {
++      "page_number": 11,
++      "finding_id": "H-01",
++      "page_image_sha256": "609aeae8f16fa4e6d87b5f46b8863d396cec67597df4f7f300582b95d33a41b8",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl"
++    },
++    {
++      "page_number": 12,
++      "finding_id": "H-02",
++      "page_image_sha256": "a5f06459e12878f13033474be6610d274d9c7181542d7d81b734e829a953a698",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl"
++    },
++    {
++      "page_number": 13,
++      "finding_id": "H-02",
++      "page_image_sha256": "e88b96bb0f57a87ced32ec0cf50d6f85717ffd36f51ae1addc25690290666e13",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl"
++    },
++    {
++      "page_number": 14,
++      "finding_id": "H-03",
++      "page_image_sha256": "dae36aecfc2b7c62f07a01b1359623b3e97b3b673430068fa6bb3c22fc288bf1",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl"
++    },
++    {
++      "page_number": 15,
++      "finding_id": "H-03",
++      "page_image_sha256": "ffa38d649f3471e1dff3a63ff73f7c9799d7bece2f97aea24b5068ee4d3094b1",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl"
++    },
++    {
++      "page_number": 16,
++      "finding_id": "H-03",
++      "page_image_sha256": "15cbddd8d5a9869b58c891ad81ca6d120199708a9ae9fc9de369637eafe5841c",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl"
++    },
++    {
++      "page_number": 17,
++      "finding_id": "H-04",
++      "page_image_sha256": "e0f1783c0318b0d208420f458253ecda9a81702f7f0b19b075d26d87c2199c7d",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl"
++    },
++    {
++      "page_number": 18,
++      "finding_id": "H-04",
++      "page_image_sha256": "1071816308120c68aded43f9cb787b292b1a260ed192569daece0eb80ab33aad",
++      "artifact_ref": "ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl"
++    }
++  ],
++  "selected_findings": [
++    {
++      "finding_id": "H-01",
++      "report_id": "LYSWP2-7",
++      "pages": [10, 11],
++      "reported_severity": "High",
++      "title": "Uniform minimum timelocks let an LP refund and then redeem",
++      "generated_file": "findings/H-01.md"
++    },
++    {
++      "finding_id": "H-02",
++      "report_id": "LYSWP2-6",
++      "pages": [12, 13],
++      "reported_severity": "Medium",
++      "title": "Nominal fee-on-transfer accounting spends other users' deposits",
++      "generated_file": "findings/H-02.md"
++    },
++    {
++      "finding_id": "H-03",
++      "report_id": "LYSWP2-8",
++      "pages": [14, 15, 16],
++      "reported_severity": "Medium",
++      "title": "Unchecked Starknet token returns finalize unfunded HTLCs",
++      "generated_file": "findings/H-03.md"
++    },
++    {
++      "finding_id": "H-04",
++      "report_id": "LYSWP2-5",
++      "pages": [17, 18],
++      "reported_severity": "Low",
++      "title": "Cached EIP-712 domains permit post-fork signature replay",
++      "generated_file": "findings/H-04.md"
++    }
++  ],
++  "report_dispositions": [
++    {
++      "report_id": "LYSWP2-7",
++      "pages": [10, 11],
++      "reported_severity": "High",
++      "reported_status": "Fixed",
++      "disposition": "included",
++      "finding_id": "H-01",
++      "loss_path": "The LP refunds its destination lock before the later user timelock expires, then redeems the user's source funds."
++    },
++    {
++      "report_id": "LYSWP2-6",
++      "pages": [12, 13],
++      "reported_severity": "Medium",
++      "reported_status": "Acknowledged",
++      "disposition": "included",
++      "finding_id": "H-02",
++      "loss_path": "Nominal accounting for a deflationary transfer consumes other users' pooled token balance or leaves later HTLCs insolvent."
++    },
++    {
++      "report_id": "LYSWP2-8",
++      "pages": [14, 15, 16],
++      "reported_severity": "Medium",
++      "reported_status": "Fixed",
++      "disposition": "included",
++      "finding_id": "H-03",
++      "loss_path": "A solver locks real destination assets after an unfunded source event, or a finalized failed payout traps deposited tokens."
++    },
++    {
++      "report_id": "LYSWP2-5",
++      "pages": [17, 18],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "included",
++      "finding_id": "H-04",
++      "loss_path": "A signature intended for one fork can install a redeemable hashlock on another fork and expose the sender's forked HTLC assets."
++    },
++    {
++      "report_id": "LYSWP2-13",
++      "pages": [19, 20],
++      "reported_severity": "Low",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason": "The missing ID check is an off-chain solver verification obligation; the report's remediation is documentation-only and does not identify an enforceable contract root cause."
++    },
++    {
++      "report_id": "LYSWP2-3",
++      "pages": [21, 22, 23, 24, 25],
++      "reported_severity": "Informational",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason": "Cross-chain token denomination and asset mapping are off-chain quote and integration concerns; the contract correctly transfers the explicitly supplied base-unit amount."
++    },
++    {
++      "report_id": "LYSWP2-10",
++      "pages": [26],
++      "reported_severity": "Informational",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason": "TODO comments do not establish a loss-of-assets vulnerability."
++    },
++    {
++      "report_id": "LYSWP2-11",
++      "pages": [27],
++      "reported_severity": "Informational",
++      "reported_status": "Acknowledged",
++      "disposition": "excluded",
++      "reason": "Comment wording has no security or asset-loss impact."
++    },
++    {
++      "report_id": "LYSWP2-12",
++      "pages": [28, 29],
++      "reported_severity": "Informational",
++      "reported_status": "Fixed",
++      "disposition": "excluded",
++      "reason": "The equality difference in rewardTimelock validation does not create a demonstrated asset-loss path."
++    }
++  ],
++  "generated_files": [
++    ".dockerignore",
++    "config.yaml",
++    "Dockerfile",
++    "provenance.json",
++    "review_status.yaml",
++    "findings/H-01.md",
++    "findings/H-02.md",
++    "findings/H-03.md",
++    "findings/H-04.md",
++    "findings/gold_audit.md",
++    "ocr_evidence/pdf_002905_2a0554b0cbcc/scope.pages.jsonl",
++    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-01.pages.jsonl",
++    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-02.pages.jsonl",
++    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-03.pages.jsonl",
++    "ocr_evidence/pdf_002905_2a0554b0cbcc/H-04.pages.jsonl"
++  ]
++}
+diff --git a/project/evmbench/audits/2025-02-train-protocol/review_status.yaml b/project/evmbench/audits/2025-02-train-protocol/review_status.yaml
+new file mode 100644
+index 0000000..dbcaed8
+--- /dev/null
++++ b/project/evmbench/audits/2025-02-train-protocol/review_status.yaml
+@@ -0,0 +1,6 @@
++state: approved_for_admission
++human_approved: true
++approved_by: https://github.com/pranay5255
++approved_at: 2026-07-27T14:18:08Z
++approval_checkpoint: C1
++review_bundle_digest: 4cec4cef2a1fb71efaaf18b811a1a366460edc311b0dd9342517da15d4d3cb65
+diff --git a/project/evmbench/splits/detect-tasks.txt b/project/evmbench/splits/detect-tasks.txt
+index 412e0d7..62c6276 100644
+--- a/project/evmbench/splits/detect-tasks.txt
++++ b/project/evmbench/splits/detect-tasks.txt
+@@ -30,6 +30,7 @@
+ 2025-01-liquid-ron
+ 2025-01-next-generation
+ 2025-02-thorwallet
++2025-02-train-protocol
+ 2025-04-forte
+ 2025-04-virtuals
+ 2025-05-blackhole

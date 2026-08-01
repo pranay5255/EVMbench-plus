@@ -1,0 +1,32 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8",
+  "status": "passed",
+  "audit_id": "2025-02-train-protocol",
+  "framework": "hardhat",
+  "base_commit": "6c96f61d7d6c7e8a8991a12e40068ab53b0a9e7b",
+  "vulnerability_count": 4,
+  "detect_max_award": 4.0,
+  "vulnerabilities": [
+    {
+      "id": "H-01",
+      "title": "Uniform minimum timelocks let an LP refund and then redeem",
+      "award": 1.0
+    },
+    {
+      "id": "H-02",
+      "title": "Nominal fee-on-transfer accounting spends other users' deposits",
+      "award": 1.0
+    },
+    {
+      "id": "H-03",
+      "title": "Unchecked Starknet token returns finalize unfunded HTLCs",
+      "award": 1.0
+    },
+    {
+      "id": "H-04",
+      "title": "Cached EIP-712 domains permit post-fork signature replay",
+      "award": 1.0
+    }
+  ]
+}

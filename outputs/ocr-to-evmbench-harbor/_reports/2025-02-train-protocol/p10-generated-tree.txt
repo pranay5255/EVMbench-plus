@@ -1,0 +1,9 @@
+ d
+environment d
+environment/README.md f
+instruction.md f
+task.toml f
+tests d
+tests/evmbench_harbor_verifier.py f
+tests/test.sh f
+tests/validate_detect_submission.py f
