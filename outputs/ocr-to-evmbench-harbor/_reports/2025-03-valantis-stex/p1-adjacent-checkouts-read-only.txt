@@ -1,0 +1,137 @@
+P1 ADJACENT CHECKOUT READ-ONLY EVIDENCE
+
+candidate_id: 2025-03-valantis-stex
+captured_at: 2026-07-25T11:42:22Z
+policy: adjacent dirty checkouts are read-only; all implementation uses isolated clones
+
+OPD_BASE
+path: /home/experiments_base/OPD_base
+head_before: 27b0d592ce079a02b83b2091b0c1cf41795012b2
+head_after: 27b0d592ce079a02b83b2091b0c1cf41795012b2
+status_scope: porcelain v1 with authorized task_dir paths excluded
+status_line_count_before: 5
+status_line_count_after: 5
+status_sha256_before: adfbb41cd0d38b910313d7a7b042226f6ab475791a58ca2addba0eff1c319748
+status_sha256_after: adfbb41cd0d38b910313d7a7b042226f6ab475791a58ca2addba0eff1c319748
+tracked_diff_sha256_before: 17dc73215b4a64749f652a41e92ca057c66603eec5c154b785b94a5ea113c385
+tracked_diff_sha256_after: 17dc73215b4a64749f652a41e92ca057c66603eec5c154b785b94a5ea113c385
+status_snapshot_after_matching_before_fingerprint:
+ M docs/audit-pdf-to-evmbench/1_OVERVIEW_AND_CURRENT_STATE.md
+ M docs/audit-pdf-to-evmbench/6_GROUP_OCR_PDFS_INTO_ONE_HARBOR_TASK.md
+ M docs/audit-pdf-to-evmbench/7_OCR_DATA_MAP_AND_CATEGORIES.md
+?? docs/audit-pdf-to-evmbench/8_HARBOR_TASK_AUTHORING_GUIDELINES.md
+?? docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md
+
+FOREST_OF_AUDITS
+path: /home/experiments_base/forestOfAudits
+head_before: 1db91e36ec6f7c5975a8779b6ad930503c23e9d4
+head_after: 1db91e36ec6f7c5975a8779b6ad930503c23e9d4
+status_scope: complete porcelain v1
+status_line_count_before: 94
+status_line_count_after: 94
+status_sha256_before: 58154ae7f5aa0f0378044cd89191d7f2e9307223ab21c9632e8a9a4aa24b49f8
+status_sha256_after: 58154ae7f5aa0f0378044cd89191d7f2e9307223ab21c9632e8a9a4aa24b49f8
+tracked_diff_sha256_before: e3fbfc3e401583b33ef4bef77689b91d474d4440fadb1f9bbfadd1f467fc4220
+tracked_diff_sha256_after: e3fbfc3e401583b33ef4bef77689b91d474d4440fadb1f9bbfadd1f467fc4220
+status_snapshot_after_matching_before_fingerprint:
+ D project/evmbench/forestLogs.txt
+ D project/evmbench/modal-forestLogs.txt
+ D project/evmbench/phase6variantsLogs.txt
+ M project/evmbench/research-artifacts/bash-call-analysis/.gitignore
+ M project/evmbench/research-artifacts/bash-call-analysis/.vercelignore
+ M project/evmbench/research-artifacts/bash-call-analysis/agent_run_intent_matrix.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/agent_run_summary.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/bash_calls.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/build_joined_analysis.py
+ M project/evmbench/research-artifacts/bash-call-analysis/build_notebook.py
+ M project/evmbench/research-artifacts/bash-call-analysis/by_audit.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/by_experiment.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/by_harness.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/by_intent.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/by_mode.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/by_primary_command.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/by_source_type.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/by_tool_family.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/exit_by_intent.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/index.html
+ M project/evmbench/research-artifacts/bash-call-analysis/intent_by_harness.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/intent_by_mode.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/intent_by_run.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/extractor_comparison.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/join_report.md
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/nonzero_exit_examples.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/command_ecology_bubble.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/complexity_vs_outcome.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/intent_fingerprint_heatmap.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/run_behavior_map.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/run_similarity_map.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/stable_invocation_category_mix.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/stable_nonzero_exit_categories.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/stable_segment_vs_invocation_mix.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/stable_source_manifest.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/stable_tool_ecology.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/plots/timeline_intent_stream.png
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/stable_invocation_fact.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/stable_manifest_fact.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/stable_run_category_fact.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/stable_segment_fact.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/joined/stable_source_files.json
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/bash_calls_timeline.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/command_length_distribution.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/exit_bucket_by_intent.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/harness_counts.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/intent_by_harness_heatmap.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/intent_by_mode_heatmap.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/intent_category_counts.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/mode_counts.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/mutation_share_by_intent.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/segment_count_distribution.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/source_type_counts.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/tool_family_by_experiment_heatmap.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/tool_family_counts.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/top_exact_commands.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/top_primary_commands.png
+ M project/evmbench/research-artifacts/bash-call-analysis/plots/top_runs_by_bash_calls.png
+ M project/evmbench/research-artifacts/bash-call-analysis/primary_command_by_run.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/report.md
+ M project/evmbench/research-artifacts/bash-call-analysis/run_intent_matrix.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/run_summary.csv
+ M project/evmbench/research-artifacts/bash-call-analysis/tool_family_by_experiment.csv
+ M project/evmbench/scripts/analyze_run_bash_calls.py
+ M project/evmbench/tests/test_analyze_run_bash_calls.py
+ M project/evmbench/tests/test_bash_call_dashboard.py
+?? project/evmbench/research-artifacts/bash-call-analysis/refresh_dashboard.py
+?? project/evmbench/research-artifacts/opd-trace-comparison/build_opd_trace_comparison.py
+?? project/evmbench/research-artifacts/opd-trace-comparison/command_extraction_parity.csv
+?? project/evmbench/research-artifacts/opd-trace-comparison/manifest_comparison.csv
+?? project/evmbench/research-artifacts/opd-trace-comparison/overlap_by_group.csv
+?? project/evmbench/research-artifacts/opd-trace-comparison/repo_mode_score_summary.csv
+?? project/evmbench/research-artifacts/opd-trace-comparison/repo_result_rows.csv
+?? project/evmbench/research-artifacts/opd-trace-comparison/report.md
+?? project/evmbench/research-artifacts/opd-trace-comparison/trace_metric_deltas.csv
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/DATA_CARD.md
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/README.md
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/audit_splits.json
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_clean_final_test.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_clean_final_train.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_clean_final_val.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_process_test.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_process_train.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_process_val.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_test.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_train.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/automodel_val.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/build_w0_sft_dataset.py
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/colab_qwen3_8b_sft.ipynb
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/dataset_summary.json
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/rejected_or_auxiliary.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/w0_clean_final_messages.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/w0_process_sft_messages.jsonl
+?? project/evmbench/research-artifacts/w0-sft-qwen3-8b-colab/w0_trace_records.jsonl
+
+RESULT
+heads_unchanged: true
+status_fingerprints_unchanged: true
+tracked_diff_fingerprints_unchanged: true
+adjacent_checkout_writes_performed: false
+

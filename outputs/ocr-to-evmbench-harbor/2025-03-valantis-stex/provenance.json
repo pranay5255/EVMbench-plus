@@ -1,0 +1,460 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-03-valantis-stex",
+  "materialized_at": "2026-07-25T13:13:50Z",
+  "revised_at": "2026-07-27T10:37:10Z",
+  "phase": "P11",
+  "candidate_revision": {
+    "reason": "P6 rejected the original full-clone image because post-audit fix history and 19 dependency audit PDFs were agent-visible.",
+    "authorized_by": "Explicit user approval of Phase P5R candidate Dockerfile remediation and Phase P6 rerun on 2026-07-25.",
+    "scope": [
+      "Replace the full clone with a depth-one fetch of only the vulnerable commit.",
+      "Verify all 14 reviewed recursive submodule revisions.",
+      "Remove dependency PDFs and nested submodule Git metadata in the clone layer.",
+      "Preserve the unapproved review state and all finding evidence."
+    ]
+  },
+  "base_image_revision": {
+    "reason": "Replace the mutable evmbench/base:latest build input with the exact reviewed base image published by digest.",
+    "authorized_by": "User instruction on 2026-07-27 to publish images to Docker Hub repository pranay5255/yudaii_evmbench.",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "registry_tag": "docker.io/pranay5255/yudaii_evmbench:base-fc20d776501708f9-amd64",
+    "registry_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "image_config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+    "platform": "linux/amd64",
+    "manifest_verified": true
+  },
+  "task_identity": {
+    "task_group_key": "ValantisLabs/valantis-stex@25a19b663f86b53112a5e020c843904a571cc1e8|src/**|detect",
+    "task_group_key_sha256": "9f59eac69f7a44cd5049f206652168cc70c46183df51fa33a923c94b2b6f2f3c",
+    "repository_slug": "ValantisLabs/valantis-stex",
+    "vulnerable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "audited_scope": "src/**",
+    "mode": "detect",
+    "framework": "foundry"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_002911_39a2c2ee71c9",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "valantis-mar-25(Final).pdf",
+    "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+    "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "size_bytes": 13601799,
+    "physical_page_count": 38,
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002911_39a2c2ee71c9.jsonl",
+    "sha256": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "size_bytes": 186206,
+    "record_count": 38,
+    "source_page_count": 38,
+    "created_at": "2026-07-01T17:46:49.843216+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/ValantisLabs/valantis-stex",
+    "repository_slug": "ValantisLabs/valantis-stex",
+    "commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "root_tree": "01a3298cb0d49d695a9832359ffa7658b8e140ae",
+    "src_tree": "05bfac7670a56c7c2d44d99f7463ca550477678f",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "review_clone": "/tmp/valantis-ocr-harbor.iZKXoT/p4-review.9tCIDp/repo"
+  },
+  "fixed_snapshot": {
+    "commit": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "root_tree": "ee3f91fd4e34b57a381ceb11746f7e5a43578ef5",
+    "vulnerable_commit_is_ancestor": true,
+    "kept_separate_from_vulnerable_task_snapshot": true
+  },
+  "tooling_revisions": {
+    "opd_base": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "isolated_clone": "/tmp/valantis-ocr-harbor.iZKXoT/opd-base",
+      "clean": true
+    },
+    "forest_of_audits": {
+      "revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+      "isolated_clone": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits",
+      "clean_before_admission": true,
+      "worktree_contains_isolated_admission": true
+    },
+    "harbor": {
+      "version": "0.20.0",
+      "wheel_sha256": "4b7e48223aea2384cdb8c9eff35eaebd482fc9b1ec09f8193a121c47356ff19a",
+      "task_schema": "1.3",
+      "task_path": "/tmp/valantis-harbor-dataset.Vrdzx8/evmbench__detect-2025-03-valantis-stex",
+      "loader_passed": true
+    }
+  },
+  "base_image": {
+    "source_tag": "docker.io/pranay5255/yudaii_evmbench:base-fc20d776501708f9-amd64",
+    "source_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "image_config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+    "platform": "linux/amd64"
+  },
+  "agent_image": {
+    "source_tag": "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-agent-d21ecebec4083ea5-amd64",
+    "source_digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+    "image_config_digest": "sha256:d21ecebec4083ea50db60dbcfceecb783dca553e4385724d9c2c2c9e5a089f71",
+    "platform": "linux/amd64",
+    "manifest_verified": true,
+    "foundry_offline_build_passed": true,
+    "foundry_tests": {
+      "passed": 34,
+      "failed": 0,
+      "skipped": 0
+    },
+    "leakage_scan_passed": true
+  },
+  "verifier_image": {
+    "source_tag": "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-verifier-p9",
+    "source_digest": "sha256:f6ad584c2fc82c2baea6ebc290da0074d1073f70bf131a968ccc967052622112",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:f6ad584c2fc82c2baea6ebc290da0074d1073f70bf131a968ccc967052622112",
+    "image_config_digest": "sha256:2d3af791f5f14762b3e651abc85ac013fb20855696b36c04508ca8d0017fa20b",
+    "platform": "linux/amd64",
+    "manifest_verified": true,
+    "separate_environment": true,
+    "credential_layers_absent": true,
+    "leakage_scan_passed": true
+  },
+  "submodules": [
+    {"path": "lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "b93cf4bc34ff214c099dc970b153f85ade8c9f66"},
+    {"path": "lib/openzeppelin-contracts", "url": "https://github.com/OpenZeppelin/openzeppelin-contracts", "revision": "acd4ff74de833399287ed6b31b4debf6b2b35527"},
+    {"path": "lib/openzeppelin-contracts/lib/erc4626-tests", "url": "https://github.com/a16z/erc4626-tests.git", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/openzeppelin-contracts/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "8f24d6b04c92975e0795b5868aa0d783251cdeaa"},
+    {"path": "lib/openzeppelin-contracts/lib/halmos-cheatcodes", "url": "https://github.com/a16z/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"},
+    {"path": "lib/solmate", "url": "https://github.com/transmissions11/solmate", "revision": "c93f7716c9909175d45f6ef80a34a650e2d24e56"},
+    {"path": "lib/solmate/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"},
+    {"path": "lib/valantis-core", "url": "https://github.com/ValantisLabs/valantis-core", "revision": "18ee8bb9ad91871ddfdb711f0522f15d89e03673"},
+    {"path": "lib/valantis-core/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "2f112697506eab12d433a65fdc31a639548fe365"},
+    {"path": "lib/valantis-core/lib/forge-std/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts", "url": "https://github.com/OpenZeppelin/openzeppelin-contracts", "revision": "281550b71c3df9a83e6b80ceefc700852c287570"},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/erc4626-tests", "url": "https://github.com/a16z/erc4626-tests.git", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "c2236853aadb8e2d9909bbecdc490099519b70a4"},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "6da7dd8f7395f83e1fb6fa88a64ba9a030f85d4f"}
+  ],
+  "ocr_evidence": [
+    {"page_number": 5, "role": "scope", "page_image_sha256": "2b1e01ad6db51f71a1e5cc8c1a3906e85c644b843c52125b91adaf8447be383b", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl"},
+    {"page_number": 10, "finding_id": "H-01", "page_image_sha256": "69e0fd4ae4e2a20159c8b5e0e86b1e9055fd07629858e744571c94dc5a4345bc", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl"},
+    {"page_number": 11, "finding_id": "H-01", "page_image_sha256": "b5b34fd50d2fe1267660651e13fba6be5ff70d963157943bf6dab41139bfddff", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl"},
+    {"page_number": 12, "finding_id": "H-01", "page_image_sha256": "c3fe88e666a2f50ad08959b6e91d10f1045c7f61e88ac5fc21fb36f1b6b39cf1", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl"},
+    {"page_number": 13, "finding_id": "H-02", "page_image_sha256": "18fe679a18d9ae4f4b6bea4c4fd3c520ca509db2b6f7d12fccdac265a20fd861", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
+    {"page_number": 14, "finding_id": "H-02", "page_image_sha256": "64650b541f7624a7c2e49dc3f66203bb1d8fc929b39ec7e444b04b17311000e4", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
+    {"page_number": 15, "finding_id": "H-02", "page_image_sha256": "0d779a79d8df9931a4c27c2e28b4cfb164abacef3a43753817d89819e1fbceed", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
+    {"page_number": 16, "finding_id": "H-02", "page_image_sha256": "a8d79859f0dd76dfd61823c321aefd12c639c918c17009195d61fa87b9e1d3c3", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
+    {"page_number": 17, "finding_id": "H-02", "page_image_sha256": "c76d2c4a9d5d167101cb97535bbad8de00f4e24014ca12179aeabf3b10e10f0b", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
+    {"page_number": 18, "finding_id": "H-02", "page_image_sha256": "e9294cbeb0e1aa1745023856fb6c75bb5e03681688f01cbd2920708f46b89d2e", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
+    {"page_number": 19, "finding_id": "H-03", "page_image_sha256": "351e8ba5c5a2bf35bd3a09bd73994b8efa65741dc4f1af870d5e8a62710a1854", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl"},
+    {"page_number": 20, "finding_id": "H-03", "page_image_sha256": "0f3477c2110eaf2f92113e7b1eef8a858fbaf6f9581eedd3a9a21fa92b3acc46", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl"},
+    {"page_number": 21, "finding_id": "H-04", "page_image_sha256": "51627636f7c315eae84fa175ce4d940a73dbec5687d29bc8ae01def75ba77e9c", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
+    {"page_number": 22, "finding_id": "H-04", "page_image_sha256": "569666f170d3d0182a431d8366a8b549c4903b1bd4c1c36db15b7a7cd94f2494", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
+    {"page_number": 23, "finding_id": "H-04", "page_image_sha256": "a3c130b08f0f50dd0f9458581579efb0d2b5f6b3bf10776205353b8226d2c217", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
+    {"page_number": 24, "finding_id": "H-04", "page_image_sha256": "a22d5d4b2092ea857508750acaf8a8c4a6fc9fecccc8c312de3b62f706d8c499", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
+    {"page_number": 25, "finding_id": "H-04", "page_image_sha256": "8b43bd5f0ace32d9e6f68aafb95fae275f4c78a5b8325dff75abcfc7557bd016", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
+    {"page_number": 26, "finding_id": "H-05", "page_image_sha256": "18722b210342973fa8e1ae2f6ca321656e55a7a82e66ba22e386c908d2d03d10", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl"},
+    {"page_number": 27, "finding_id": "H-05", "page_image_sha256": "5fdcd35b220508a23079c0e604fdb9c768b1a450034962c1fa04de88ec44dd32", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl"}
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "report_id": "VLTS3-5",
+      "pages": [10, 11, 12],
+      "title": "Stale pending-withdrawal accounting misprices LP shares",
+      "grounded_impact": "Stale pending-withdrawal accounting misprices deposits and withdrawals and costs users shares.",
+      "generated_file": "findings/H-01.md"
+    },
+    {
+      "finding_id": "H-02",
+      "report_id": "VLTS3-13",
+      "pages": [13, 14, 15, 16, 17, 18],
+      "title": "Swap callback can steal unstaking surplus",
+      "grounded_impact": "Calling update during a swap callback lets an attacker treat surplus HYPE as payment and steal pool value.",
+      "generated_file": "findings/H-02.md"
+    },
+    {
+      "finding_id": "H-03",
+      "report_id": "VLTS3-3",
+      "pages": [19, 20],
+      "title": "Lending-module migration strands withdrawn token1",
+      "grounded_impact": "Changing lending modules strands withdrawn assets in the withdrawal module.",
+      "generated_file": "findings/H-03.md"
+    },
+    {
+      "finding_id": "H-04",
+      "report_id": "VLTS3-9",
+      "pages": [21, 22, 23, 24, 25],
+      "title": "Withdrawal checkpoints let later claims bypass FIFO",
+      "grounded_impact": "Incorrect checkpoints let later withdrawals bypass FIFO and consume liquidity owed to earlier users.",
+      "generated_file": "findings/H-04.md"
+    },
+    {
+      "finding_id": "H-05",
+      "report_id": "VLTS3-14",
+      "pages": [26, 27],
+      "title": "Withdrawal read-only reentrancy discounts swap fees",
+      "grounded_impact": "Read-only reentrancy exposes an intermediate reserve ratio and discounts swap fees, leaking protocol revenue.",
+      "generated_file": "findings/H-05.md"
+    }
+  ],
+  "report_dispositions": [
+    {
+      "report_id": "VLTS3-5",
+      "pages": [10, 11, 12],
+      "reported_severity": "Critical",
+      "disposition": "included",
+      "finding_id": "H-01",
+      "affected_paths": ["src/STEXAMM.sol", "src/stHYPEWithdrawalModule.sol"],
+      "root_cause": "Pending token1 withdrawal storage remains stale after native HYPE arrives while the token0 pending getter nets the new balance immediately.",
+      "asset_loss_path": "Inconsistent total-assets accounting over-mints or underpays LP shares, transferring value between LP cohorts.",
+      "corroborating_fix_commit": "320fd6d3789f94a5bccd06d14c2f936d44f919fc"
+    },
+    {
+      "report_id": "VLTS3-13",
+      "pages": [13, 14, 15, 16, 17, 18],
+      "reported_severity": "Critical",
+      "disposition": "included",
+      "finding_id": "H-02",
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol", "lib/valantis-core/src/pools/SovereignPool.sol"],
+      "root_cause": "Public update can transfer surplus token1 to the Sovereign Pool while its swap callback is measuring attacker payment.",
+      "asset_loss_path": "The pool counts protocol surplus as attacker input and releases token0 without attacker-funded payment.",
+      "corroborating_fix_commit": "efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec"
+    },
+    {
+      "report_id": "VLTS3-3",
+      "pages": [19, 20],
+      "reported_severity": "High",
+      "disposition": "included",
+      "finding_id": "H-03",
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol"],
+      "root_cause": "Lending-module migration withdraws pool token1 to the withdrawal module, then replaces the module without returning or redepositing that balance.",
+      "asset_loss_path": "Pool-owned token1 is stranded outside reserve and lending accounting and cannot serve withdrawals.",
+      "corroborating_fix_commit": "b0ba237d9f972f3d74691d5ca42090887e49a556"
+    },
+    {
+      "report_id": "VLTS3-9",
+      "pages": [21, 22, 23, 24, 25],
+      "reported_severity": "High",
+      "disposition": "included",
+      "finding_id": "H-04",
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol", "src/structs/WithdrawalModuleStructs.sol"],
+      "root_cause": "Requests checkpoint cumulative fulfilled liquidity rather than cumulative queued obligations.",
+      "asset_loss_path": "A later small request can consume claimable HYPE owed by an earlier large request.",
+      "corroborating_fix_commit": "5115be75eb0f8dcb8bda9040f1cf0184cfbc9f5c"
+    },
+    {
+      "report_id": "VLTS3-14",
+      "pages": [26, 27],
+      "reported_severity": "Medium",
+      "disposition": "included",
+      "finding_id": "H-05",
+      "affected_paths": ["src/STEXAMM.sol", "src/STEXRatioSwapFeeModule.sol", "lib/valantis-core/src/pools/SovereignPool.sol"],
+      "root_cause": "A withdrawal recipient can reenter a view quote path while reserves and pending liabilities reflect an intermediate withdrawal state.",
+      "asset_loss_path": "The temporary reserve ratio selects a lower swap fee and leaks protocol or pool-manager fee revenue.",
+      "corroborating_fix_commit": "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2"
+    },
+    {
+      "report_id": "VLTS3-7",
+      "pages": [28, 29],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "reason_category": "availability_only",
+      "reason": "A zero-balance migration can revert, blocking that owner operation until code or configuration changes, but it does not transfer or destroy assets and establishes no unprivileged asset-loss path."
+    },
+    {
+      "report_id": "VLTS3-10",
+      "pages": [30, 31],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "reason_category": "privileged_design",
+      "reason": "The report assumes a malicious or compromised fee owner exercising an explicit administration capability; no separate unprivileged bug or accepted detect-mode asset-loss path is established."
+    },
+    {
+      "report_id": "VLTS3-11",
+      "pages": [32, 33],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "reason_category": "availability_and_privileged_design",
+      "reason": "The described consequence is temporary withdrawal unavailability caused by external Aave utilization and an owner-controlled allocation choice, not an independent theft, destruction, or permanent loss mechanism."
+    },
+    {
+      "report_id": "VLTS3-2",
+      "pages": [34],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "reason_category": "informational_best_practice",
+      "reason": "Two-step ownership transfer is a hardening recommendation for operator mistakes, not a presently exploitable asset-loss bug."
+    },
+    {
+      "report_id": "VLTS3-4",
+      "pages": [35],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "reason_category": "informational_dead_code",
+      "reason": "Unused error declarations do not alter execution or asset accounting."
+    },
+    {
+      "report_id": "VLTS3-12",
+      "pages": [36, 37],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "reason_category": "informational_simplification",
+      "reason": "The conditional and direct assignment are behaviorally equivalent and create no security impact."
+    }
+  ],
+  "ocr_corrections": [
+    {
+      "page": 5,
+      "field": "repository_url",
+      "ocr_value": "https://github.com/ValantisLabs/valantis-steX/",
+      "corrected_value": "https://github.com/ValantisLabs/valantis-stex/",
+      "pdf_confirmed": true,
+      "git_confirmed": true
+    },
+    {
+      "page": 5,
+      "field": "fixed_commit",
+      "ocr_value": "95122c7693f9516385aef330ef36bb1cece2cb94",
+      "corrected_value": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+      "pdf_confirmed": true,
+      "git_confirmed": true
+    },
+    {
+      "page": 10,
+      "field": "report_id",
+      "ocr_value": "VLTS3-S",
+      "corrected_value": "VLTS3-5",
+      "pdf_confirmed": true,
+      "git_confirmed": true
+    },
+    {
+      "page": 13,
+      "field": "report_id",
+      "ocr_value": "VLTS3-i3",
+      "corrected_value": "VLTS3-13",
+      "pdf_confirmed": true,
+      "git_confirmed": true
+    },
+    {
+      "page": 13,
+      "field": "affected_path",
+      "ocr_value": "src/stHYPEWithdrawalModule.solutpdate#L431-L475",
+      "corrected_value": "src/stHYPEWithdrawalModule.sol:update#L431-L475",
+      "pdf_confirmed": true,
+      "code_confirmed": true
+    },
+    {
+      "pages": [10, 11, 12],
+      "field": "code_identifiers",
+      "ocr_values": ["TokenI", "TokenO", "unstateToken0Reserves"],
+      "corrected_values": ["Token1", "Token0", "unstakeToken0Reserves"],
+      "pdf_confirmed": true,
+      "code_confirmed": true
+    },
+    {
+      "pages": [14, 17, 18, 20, 22, 24, 27],
+      "field": "code_identifiers",
+      "corrected_values": ["safeTransferFrom", "isZeroToOne", "MockStHype", "ILendingModule", "stHYPEWithdrawalModule__claim_cannotYetClaim", "withdrawalModule.update", "_amount0Min"],
+      "pdf_confirmed": true,
+      "code_confirmed": true
+    }
+  ],
+  "review_reports": [
+    {"phase": "P1", "path": "../_reports/2025-03-valantis-stex/p1-adjacent-checkouts-read-only.txt", "sha256": "b422115b8b0c7ae0ec083aeb9a1a44fbad72ed7c4e48c2407d3a7e9b171d0ccf"},
+    {"phase": "P1", "path": "../_reports/2025-03-valantis-stex/p1-checkout-isolation.json", "sha256": "92dc2f32abe73a45f47f1725675b29a76c2557dafe7437deb6bc6b5408866b5a"},
+    {"phase": "P1", "path": "../_reports/2025-03-valantis-stex/p1-input-hashes.json", "sha256": "fdf238239f566d61a6df8344a9aa3477a49f5e8e7d2ff3b19cd99bdaeb17e582"},
+    {"phase": "P2", "path": "../_reports/2025-03-valantis-stex/p2-ocr-validation.json", "sha256": "53bfbaf959a25c8faeb3043b4f6359068405a061d7050fb64817fb3ae90f07fc"},
+    {"phase": "P2", "path": "../_reports/2025-03-valantis-stex/p2-ocr-validation.txt", "sha256": "75cf5b0f89c157b0af5629fb7a3248e110559b67dbb80d98b12162a54e76f0e3"},
+    {"phase": "P2", "path": "../_reports/2025-03-valantis-stex/p2-validator-tests.txt", "sha256": "98d5d7149aeb252c42ea531698f78f40fa6ed4bf6758145318feb87ebd206469"},
+    {"phase": "P3", "path": "../_reports/2025-03-valantis-stex/p3-pdf-ocr-review.md", "sha256": "37a555441e8bf1df52cec4cda7f548f61c6e7ac70085092b19fca27d0fef070c"},
+    {"phase": "P3", "path": "../_reports/2025-03-valantis-stex/p3-pdf-validation.json", "sha256": "d12a849403e4dc751a88ef43896ed9923c39ceb7c85957f97624c0b93719e8ff"},
+    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-finding-grounding.md", "sha256": "6596ccf985b7aeacd0d4cda09bd1195b785a5c2a6503acc69b63ff6de0cca7b2"},
+    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-ocr-corrections.json", "sha256": "b40b6819b69d229aae0109e518b2c6c30df2ce8e3408a66dca65790a91461385"},
+    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-report-dispositions.json", "sha256": "0f79df4599cb6563bceaf8f2470e604193d9a559b55ef18b4e06e995deec7a84"},
+    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-repository-snapshot.json", "sha256": "7f4cec4aa46474b45dde240f8083b585d1d844399be02a16d67bf053e4644b6e"},
+    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-submodules.json", "sha256": "ea41e2cd0a73b4cfa6cdd9824f9ce1effab25a287f1b15e4310b5faf04b80767"},
+    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-task-group.json", "sha256": "6bb741bff0d5cbad73ec23a3335e784b8a434e362e60a2e785f683fcd1210135"}
+  ],
+  "generated_files": [
+    ".dockerignore",
+    "Dockerfile",
+    "config.yaml",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/H-04.md",
+    "findings/H-05.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl",
+    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl",
+    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl",
+    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl",
+    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl",
+    "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl",
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "generated_file_inventory": [
+    {"path": ".dockerignore", "size_bytes": 30, "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"},
+    {"path": "Dockerfile", "size_bytes": 2981, "sha256": "66a686a2bc590a83f949d0d0c0fcc6c1a443497bc6a8257a48c9dc77405b296b"},
+    {"path": "config.yaml", "size_bytes": 597, "sha256": "3b94a08a67a70df835637eebe811d5074e368d2af067057fd797b011d6b9713a"},
+    {"path": "findings/H-01.md", "size_bytes": 3136, "sha256": "920af3de53e29224ffc67a4b3747b426c26f6864c3b1b8a4e75989514b77683c"},
+    {"path": "findings/H-02.md", "size_bytes": 2361, "sha256": "c22e53e5479834ae74b262ac85af2ac6cdb950d6a1f053cfeb68991c3f3406a3"},
+    {"path": "findings/H-03.md", "size_bytes": 2132, "sha256": "a57381c7bde062e8820751129bfc4dc15a9df26440e7f929f30dbf16af3829f6"},
+    {"path": "findings/H-04.md", "size_bytes": 2449, "sha256": "145f4bad130f99d2d52c3f86fc14a64984ae1ce2a65563c4416f6f238035841f"},
+    {"path": "findings/H-05.md", "size_bytes": 2884, "sha256": "7009a743726581495a3fb484638c01cfd729d0c35ef26437c51f58ba5df586c9"},
+    {"path": "findings/gold_audit.md", "size_bytes": 12962, "sha256": "c60bc769fb33238badcfc2d720e7b75a3f51a3ae37862fc437369063bb91a4b8"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl", "size_bytes": 16873, "sha256": "5c52d390418d56ba03a94f371985ba5b9e4bd9f338763c918e9b69cef198f4a4"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl", "size_bytes": 31293, "sha256": "e8741e2b9ae9d9a6474dae40ca05627cbf8b643dffd9f95fd25efab05b3ea6ac"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl", "size_bytes": 9299, "sha256": "a01f69d0ae9931e254fbcadee266840d9d001352b29f1584e52d80ffb3b5cc71"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl", "size_bytes": 23083, "sha256": "18d290f85914fc28bc922978e0bb7896062b1f8a7b2efe0b672ced0642d42f4f"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl", "size_bytes": 10370, "sha256": "3fa57a38b90bb99d494d4175401993322175c82f8680aa6a1213d1f34db0b7c3"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl", "size_bytes": 3641, "sha256": "b5e7c3be6170240c10ad218462ec7290e0bfd2765fc542ee1e0d72b6eb7014e6"},
+    {"path": "provenance.json", "size_bytes": null, "sha256": null, "hash_location": "../_reports/2025-03-valantis-stex/p7-approved-file-manifest.json"},
+    {"path": "review_status.yaml", "size_bytes": 241, "sha256": "3f0e5663c18c465dec2eb7201d8a1d8408d26a170f14fb73c70b60bcc4070ee8"}
+  ],
+  "review_state": "approved_for_admission",
+  "human_approved": true,
+  "approved_by": "https://github.com/pranay5255",
+  "approval": {
+    "checkpoint": "C1R3",
+    "candidate_id": "2025-03-valantis-stex",
+    "review_bundle_digest": "11dd3b8f667da20aab1d343e804e7f53122ee64a5b0d086fc27a53445e05fe01",
+    "approved_at": "2026-07-27T10:21:14Z",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "explicit_admission_approval": true
+  },
+  "admission": {
+    "approved_for_admission": true,
+    "evmbench_admitted": true,
+    "isolated_evmbench_path": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits/project/evmbench/audits/2025-03-valantis-stex",
+    "harbor_task_generated": true,
+    "harbor_task_path": "/tmp/valantis-harbor-dataset.Vrdzx8/evmbench__detect-2025-03-valantis-stex",
+    "harbor_loader_passed": true,
+    "live_smoke_status": "blocked_preflight"
+  },
+  "pending_gates": {
+    "P6_structural_semantic_repository_build_and_leakage_validation": "passed",
+    "P7_candidate_approval_checkpoint": "passed",
+    "P8_admission": "passed",
+    "P9_separate_images": "passed",
+    "P10_harbor_generation_and_migration": "passed",
+    "P11_harbor_0_20_loader": "passed",
+    "P12_harbor_smoke": "blocked_missing_openai_credential_and_strict_no_network_model_transport",
+    "P12_final_manifest": "pending"
+  }
+}

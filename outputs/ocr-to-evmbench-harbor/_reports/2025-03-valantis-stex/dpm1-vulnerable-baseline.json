@@ -1,0 +1,96 @@
+{
+  "schema_version": "valantis_detect_patch.dpm1_vulnerable_baseline.v1",
+  "candidate_id": "2025-03-valantis-stex",
+  "completed_at": "2026-07-25T16:38:25Z",
+  "status": "passed",
+  "repository": {
+    "path": "/tmp/valantis-dpm1.w8cHzY/valantis",
+    "head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "root_tree": "01a3298cb0d49d695a9832359ffa7658b8e140ae",
+    "src_tree": "05bfac7670a56c7c2d44d99f7463ca550477678f",
+    "clean_after_build_and_tests": true
+  },
+  "submodules": [
+    {
+      "path": "lib/forge-std",
+      "revision": "b93cf4bc34ff214c099dc970b153f85ade8c9f66"
+    },
+    {
+      "path": "lib/openzeppelin-contracts",
+      "revision": "acd4ff74de833399287ed6b31b4debf6b2b35527"
+    },
+    {
+      "path": "lib/openzeppelin-contracts/lib/erc4626-tests",
+      "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"
+    },
+    {
+      "path": "lib/openzeppelin-contracts/lib/forge-std",
+      "revision": "8f24d6b04c92975e0795b5868aa0d783251cdeaa"
+    },
+    {
+      "path": "lib/openzeppelin-contracts/lib/halmos-cheatcodes",
+      "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"
+    },
+    {
+      "path": "lib/solmate",
+      "revision": "c93f7716c9909175d45f6ef80a34a650e2d24e56"
+    },
+    {
+      "path": "lib/solmate/lib/ds-test",
+      "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"
+    },
+    {
+      "path": "lib/valantis-core",
+      "revision": "18ee8bb9ad91871ddfdb711f0522f15d89e03673"
+    },
+    {
+      "path": "lib/valantis-core/lib/forge-std",
+      "revision": "2f112697506eab12d433a65fdc31a639548fe365"
+    },
+    {
+      "path": "lib/valantis-core/lib/forge-std/lib/ds-test",
+      "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"
+    },
+    {
+      "path": "lib/valantis-core/lib/openzeppelin-contracts",
+      "revision": "281550b71c3df9a83e6b80ceefc700852c287570"
+    },
+    {
+      "path": "lib/valantis-core/lib/openzeppelin-contracts/lib/erc4626-tests",
+      "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"
+    },
+    {
+      "path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std",
+      "revision": "c2236853aadb8e2d9909bbecdc490099519b70a4"
+    },
+    {
+      "path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test",
+      "revision": "6da7dd8f7395f83e1fb6fa88a64ba9a030f85d4f"
+    }
+  ],
+  "toolchain": {
+    "image_tag": "ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r2-review",
+    "image_id": "sha256:a8604ad62325521d2c597f46932094ae94f293b926194eba78e5ead4ba9ee9b7",
+    "forge_version": "1.3.6-v1.3.6",
+    "forge_commit": "d2415887096b10226d13af9240b5bef5e6b0d815",
+    "network_mode": "none",
+    "foundry_offline": true,
+    "checkout_mounted_from": "/tmp/valantis-dpm1.w8cHzY/valantis"
+  },
+  "build": {
+    "command": "forge build --force --offline",
+    "exit_code": 0,
+    "compiled_files": 102,
+    "solc_version": "0.8.30"
+  },
+  "tests": {
+    "command": "forge test --force --offline",
+    "exit_code": 0,
+    "suites": 3,
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0
+  },
+  "submodules_match_c1": true,
+  "head_and_trees_match_c1": true
+}

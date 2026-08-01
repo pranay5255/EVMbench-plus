@@ -1,0 +1,149 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_scan.v2",
+  "phase": "P6R",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T14:33:47Z",
+  "status": "passed",
+  "hard_failure": false,
+  "violations": [],
+  "candidate_context": {
+    "dockerignore_policy": "deny all; allow Dockerfile and .dockerignore only",
+    "effective_files": [".dockerignore", "Dockerfile"],
+    "effective_file_count": 2,
+    "copy_or_add_directive_count": 0,
+    "host_candidate_artifacts_in_context": false,
+    "context_check_passed": true
+  },
+  "dockerfile_boundary": {
+    "full_clone_present": false,
+    "exact_depth_one_fetch_present": true,
+    "reachable_commit_count_assertion_present": true,
+    "recursive_submodule_revision_assertion_count": 14,
+    "foundry_build_and_test_before_cleanup": true,
+    "pdf_cleanup_in_repository_layer": true,
+    "nested_git_cleanup_in_repository_layer": true,
+    "submodule_object_store_cleanup_in_repository_layer": true,
+    "post_cleanup_assertions_present": true
+  },
+  "history_scan": {
+    "history_entry_count": 44,
+    "history_jsonl_sha256": "aecbd7035154d94553cf543e5003fd3c32b438b050c97f05b1b69d8cf53a31cd",
+    "distinctive_sensitive_marker_matches": 0,
+    "depth_one_fetch_and_same_layer_cleanup_confirmed": true,
+    "passed": true
+  },
+  "saved_layer_scan": {
+    "layer_count": 20,
+    "whole_image_pdf_path_count": 0,
+    "whole_image_distinctive_sensitive_marker_matches": 0,
+    "candidate_layer_blob": "sha256:5becba0429872dd1985db3f1590d10dc53688136702d7c620550ac037ca47016",
+    "candidate_layer_audit_entry_count": 2441,
+    "candidate_layer_pdf_path_count": 0,
+    "candidate_layer_nested_git_path_count": 0,
+    "candidate_layer_submodule_object_store_path_count": 0,
+    "candidate_layer_authoring_path_count": 0,
+    "candidate_layer_archive_path_count": 0,
+    "candidate_layer_top_git_object_entry_count": 101,
+    "candidate_layer_extracted_and_scanned": true,
+    "candidate_layer_hidden_and_ignored_files_scanned": true,
+    "candidate_layer_sensitive_marker_matches": 0,
+    "passed": true
+  },
+  "pristine_rootfs_scan": {
+    "rootfs_tar_sha256": "400c649372ffb48babb34383f325e150b0214c8038086ec16b5f7850a3f5d188",
+    "rootfs_entry_count": 116649,
+    "rootfs_pdf_path_count": 0,
+    "rootfs_distinctive_sensitive_marker_matches": 0,
+    "audit_regular_file_count": 1903,
+    "audit_json_file_count": 143,
+    "audit_jsonl_file_count": 0,
+    "audit_pdf_file_count": 0,
+    "audit_symlink_count": 0,
+    "audit_archive_count": 0,
+    "audit_nested_git_entry_count": 0,
+    "audit_submodule_object_store_present": false,
+    "audit_top_git_object_file_count": 51,
+    "audit_git_status_line_count": 0,
+    "passed": true
+  },
+  "expected_answer_history_scan": {
+    "reachable_commit_count": 1,
+    "reachable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "unreachable_git_object_count": 0,
+    "known_disclosing_or_post_audit_commits_checked": [
+      "320fd6d3789f94a5bccd06d14c2f936d44f919fc",
+      "efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec",
+      "b0ba237d9f972f3d74691d5ca42090887e49a556",
+      "5115be75eb0f8dcb8bda9040f1cf0184cfbc9f5c",
+      "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2",
+      "95122c7693f9516385aef330ef36bb1ccec2cb94",
+      "27b5c748db73d5b5e7d7aeaee902b70c2b74a829"
+    ],
+    "known_disclosing_or_post_audit_commit_objects_present": 0,
+    "fix_subject_matches": 0,
+    "passed": true
+  },
+  "text_scan": {
+    "audit_scope_patterns": [
+      "all five H IDs",
+      "all five VLTS3 report IDs",
+      "all five gold titles",
+      "OCR PAGE and det markers",
+      "OCR and PDF SHA-256 values",
+      "source PDF filename",
+      "gold/provenance/review filenames",
+      "host workspace path",
+      "all five disclosing fix subjects"
+    ],
+    "audit_scope_matches_including_hidden_and_ignored_files": 0,
+    "all_saved_blobs_distinctive_marker_matches": 0,
+    "rootfs_tar_distinctive_marker_matches": 0,
+    "generic_token_triage": {
+      "preexisting_base_layer_case_insensitive_page_tag_matches": 19,
+      "preexisting_base_layer_h01_token_matches": 1,
+      "preexisting_base_layer_h02_token_matches": 4,
+      "candidate_layer_matches_for_these_generic_tokens": 0,
+      "audit_root_matches_for_these_generic_tokens": 0,
+      "classification": "Unrelated generic tokens in preexisting base-image dependencies; no OCR delimiters, report IDs, titles, hashes, or authoring artifacts accompany them."
+    },
+    "passed": true
+  },
+  "filesystem_nonmatches": {
+    "source_ocr_jsonl_present": false,
+    "source_pdf_present": false,
+    "dependency_pdf_present": false,
+    "provenance_json_present": false,
+    "review_status_present": false,
+    "gold_audit_present": false,
+    "individual_gold_markdown_present": false,
+    "candidate_ocr_evidence_directory_present": false,
+    "host_workspace_path_present": false,
+    "credential_or_private_key_file_found_in_audit_repository": false
+  },
+  "isolation": {
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "adjacent_opd_head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "adjacent_opd_status_excluding_task_dir_sha256": "adfbb41cd0d38b910313d7a7b042226f6ab475791a58ca2addba0eff1c319748",
+    "adjacent_opd_diff_binary_sha256": "17dc73215b4a64749f652a41e92ca057c66603eec5c154b785b94a5ea113c385",
+    "forest_of_audits_head": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+    "forest_of_audits_status_sha256": "58154ae7f5aa0f0378044cd89191d7f2e9307223ab21c9632e8a9a4aa24b49f8",
+    "forest_of_audits_diff_binary_sha256": "e3fbfc3e401583b33ef4bef77689b91d474d4440fadb1f9bbfadd1f467fc4220",
+    "original_ocr_sha256_unchanged": true,
+    "original_pdf_sha256_unchanged": true,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "summary": {
+    "ok": true,
+    "hard_failure_count": 0,
+    "context_passed": true,
+    "history_passed": true,
+    "layer_scan_passed": true,
+    "filesystem_passed": true,
+    "text_scan_passed": true,
+    "isolation_passed": true,
+    "candidate_review_checkpoint_allowed": true,
+    "candidate_admission_allowed_without_c1_approval": false
+  }
+}

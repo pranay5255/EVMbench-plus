@@ -1,0 +1,22 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_leakage.v1",
+  "phase": "P9",
+  "status": "passed",
+  "agent": {
+    "pdf_count": 0,
+    "jsonl_count": 0,
+    "ocr_marker_matches": 0,
+    "review_marker_matches": 0,
+    "provenance_marker_matches": 0,
+    "verifier_digest_matches": 0
+  },
+  "verifier": {
+    "pdf_count": 0,
+    "jsonl_count": 0,
+    "ocr_marker_matches": 0,
+    "review_marker_matches": 0,
+    "provenance_marker_matches": 0,
+    "runtime_credential_variable_count": 0,
+    "gold_findings_present_for_grading": true
+  }
+}

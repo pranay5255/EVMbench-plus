@@ -1,0 +1,32 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.smoke_summary.v1",
+  "phase": "P12",
+  "status": "blocked_preflight",
+  "smoke_started": false,
+  "agent": "mini-swe-agent",
+  "model": "openai/gpt-5.4",
+  "task_path": "/tmp/valantis-harbor-dataset.Vrdzx8/evmbench__detect-2025-03-valantis-stex",
+  "docker_available_bytes": 23724154880,
+  "credentials": {
+    "OPENAI_API_KEY_present": false,
+    "MSWEA_API_KEY_present": false,
+    "OPENAI_BASE_URL_present": false,
+    "OPENAI_API_BASE_present": false,
+    "values_printed": false
+  },
+  "network_contract": {
+    "configured_agent_mode": "no-network",
+    "docker_effective_rule": "deny-all",
+    "mini_swe_executes_inside_agent_environment": true,
+    "external_model_transport_possible_under_deny_all": false,
+    "allowlist_or_local_proxy_requires_user_direction": true
+  },
+  "blocked_artifacts": [
+    "/home/agent/submission/audit.md",
+    "/home/agent/submission/audit.json",
+    "/logs/verifier/audit-json-validation.json",
+    "/logs/verifier/reward.json",
+    "/logs/verifier/evmbench-grade.json"
+  ],
+  "reason": "No supported model credential is exported. Harbor 0.20.0 also runs Mini-SWE inside the task container, while strict no-network maps to deny-all Docker egress; reaching the external model requires an explicitly approved transport exception."
+}

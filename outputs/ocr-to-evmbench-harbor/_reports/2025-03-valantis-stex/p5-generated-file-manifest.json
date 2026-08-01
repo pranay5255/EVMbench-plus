@@ -1,0 +1,47 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "phase": "P5",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T13:23:06Z",
+  "status": "passed",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-valantis-stex",
+  "expected_file_count": 17,
+  "actual_file_count": 17,
+  "total_size_bytes": 145670,
+  "symlink_count": 0,
+  "checksum_stream": {
+    "definition": "SHA-256 of the byte stream emitted by sha256sum for all regular candidate files sorted by relative path.",
+    "sha256": "aa7b4facba6d54ffafbfdaabd9c7f4b1f48bad9b9a5a8a9bbdb7df2418491393"
+  },
+  "files": [
+    {"path": ".dockerignore", "size_bytes": 30, "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"},
+    {"path": "Dockerfile", "size_bytes": 415, "sha256": "3ed89d0cff66d20ac59d6451aa74da3144958d64bde80dc47ba22260560a796d"},
+    {"path": "config.yaml", "size_bytes": 597, "sha256": "3b94a08a67a70df835637eebe811d5074e368d2af067057fd797b011d6b9713a"},
+    {"path": "findings/H-01.md", "size_bytes": 3136, "sha256": "920af3de53e29224ffc67a4b3747b426c26f6864c3b1b8a4e75989514b77683c"},
+    {"path": "findings/H-02.md", "size_bytes": 2361, "sha256": "c22e53e5479834ae74b262ac85af2ac6cdb950d6a1f053cfeb68991c3f3406a3"},
+    {"path": "findings/H-03.md", "size_bytes": 2132, "sha256": "a57381c7bde062e8820751129bfc4dc15a9df26440e7f929f30dbf16af3829f6"},
+    {"path": "findings/H-04.md", "size_bytes": 2449, "sha256": "145f4bad130f99d2d52c3f86fc14a64984ae1ce2a65563c4416f6f238035841f"},
+    {"path": "findings/H-05.md", "size_bytes": 2884, "sha256": "7009a743726581495a3fb484638c01cfd729d0c35ef26437c51f58ba5df586c9"},
+    {"path": "findings/gold_audit.md", "size_bytes": 12962, "sha256": "c60bc769fb33238badcfc2d720e7b75a3f51a3ae37862fc437369063bb91a4b8"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl", "size_bytes": 16873, "sha256": "5c52d390418d56ba03a94f371985ba5b9e4bd9f338763c918e9b69cef198f4a4"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl", "size_bytes": 31293, "sha256": "e8741e2b9ae9d9a6474dae40ca05627cbf8b643dffd9f95fd25efab05b3ea6ac"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl", "size_bytes": 9299, "sha256": "a01f69d0ae9931e254fbcadee266840d9d001352b29f1584e52d80ffb3b5cc71"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl", "size_bytes": 23083, "sha256": "18d290f85914fc28bc922978e0bb7896062b1f8a7b2efe0b672ced0642d42f4f"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl", "size_bytes": 10370, "sha256": "3fa57a38b90bb99d494d4175401993322175c82f8680aa6a1213d1f34db0b7c3"},
+    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl", "size_bytes": 3641, "sha256": "b5e7c3be6170240c10ad218462ec7290e0bfd2765fc542ee1e0d72b6eb7014e6"},
+    {"path": "provenance.json", "size_bytes": 24106, "sha256": "f188fc4d8a8dd37ba25399e00f3ef35e649a69faec661f4d8ea071a768b1f136"},
+    {"path": "review_status.yaml", "size_bytes": 39, "sha256": "c59cdd1b9f9e668d26d858d272285abfff15235de67701bb59d144a82fc8e591"}
+  ],
+  "checks": [
+    {"id": "expected_file_set_matches_actual", "passed": true},
+    {"id": "all_candidate_files_are_regular_files", "passed": true},
+    {"id": "no_candidate_symlinks", "passed": true},
+    {"id": "all_candidate_files_have_sha256", "passed": true},
+    {"id": "provenance_is_covered_by_external_manifest", "passed": true},
+    {"id": "review_status_is_in_review_and_not_approved", "passed": true}
+  ],
+  "summary": {
+    "ok": true,
+    "failed_check_count": 0
+  }
+}

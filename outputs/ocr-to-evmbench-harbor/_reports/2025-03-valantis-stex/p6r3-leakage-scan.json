@@ -1,0 +1,87 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_scan.v2",
+  "phase": "P6R3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:12:53Z",
+  "status": "passed",
+  "hard_failure": false,
+  "violations": [],
+  "candidate_context": {
+    "dockerignore_policy": "deny all; allow Dockerfile and .dockerignore only",
+    "effective_files": [".dockerignore", "Dockerfile"],
+    "effective_file_count": 2,
+    "copy_or_add_directive_count": 0,
+    "host_candidate_artifacts_in_context": false,
+    "passed": true
+  },
+  "history_scan": {
+    "distinctive_sensitive_marker_matches": 0,
+    "depth_one_fetch_and_same_layer_cleanup_confirmed": true,
+    "passed": true
+  },
+  "saved_layer_scan": {
+    "layer_count": 20,
+    "whole_image_distinctive_sensitive_marker_matches": 0,
+    "candidate_layer_blob": "sha256:6f547c6b8d5a98d327856df504212b24b79cfc18f47ea2f36d3a9d35df7d7a91",
+    "candidate_layer_entry_count": 2450,
+    "candidate_layer_pdf_path_count": 0,
+    "candidate_layer_nested_git_path_count": 0,
+    "candidate_layer_submodule_object_store_path_count": 0,
+    "candidate_layer_authoring_path_count": 0,
+    "candidate_layer_archive_path_count": 0,
+    "candidate_layer_sensitive_marker_matches": 0,
+    "passed": true
+  },
+  "pristine_rootfs_scan": {
+    "rootfs_tar_sha256": "07468286e5cfe7ec325301654f9947b16de35c124223fe4d8dc8d4386e69748a",
+    "rootfs_entry_count": 116649,
+    "rootfs_pdf_path_count": 0,
+    "rootfs_distinctive_sensitive_marker_matches": 0,
+    "audit_regular_file_count": 1903,
+    "audit_json_file_count": 143,
+    "audit_jsonl_file_count": 0,
+    "audit_pdf_file_count": 0,
+    "audit_symlink_count": 0,
+    "audit_archive_count": 0,
+    "audit_nested_git_entry_count": 0,
+    "audit_submodule_object_store_present": false,
+    "audit_top_git_object_file_count": 51,
+    "audit_git_status_line_count": 0,
+    "passed": true
+  },
+  "expected_answer_history_scan": {
+    "reachable_commit_count": 1,
+    "reachable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "unreachable_git_object_count": 0,
+    "known_disclosing_or_post_audit_commit_objects_present": 0,
+    "passed": true
+  },
+  "text_scan": {
+    "patterns": [
+      "all five VLTS3 report IDs",
+      "all five gold titles",
+      "OCR and PDF SHA-256 values",
+      "source PDF filename",
+      "gold, provenance, review, and OCR-evidence paths",
+      "host workspace path"
+    ],
+    "saved_blob_matches": 0,
+    "candidate_layer_matches": 0,
+    "rootfs_tar_matches": 0,
+    "passed": true
+  },
+  "isolation": {
+    "source_ocr_sha256_unchanged": true,
+    "source_pdf_sha256_unchanged": true,
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "summary": {
+    "ok": true,
+    "hard_failure_count": 0,
+    "candidate_review_checkpoint_allowed": true,
+    "candidate_admission_allowed_without_c1_approval": false
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v2",
+  "phase": "P6R3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:12:53Z",
+  "status": "passed",
+  "task_group_key": "ValantisLabs/valantis-stex@25a19b663f86b53112a5e020c843904a571cc1e8|src/**|detect",
+  "task_group_key_sha256": "9f59eac69f7a44cd5049f206652168cc70c46183df51fa33a923c94b2b6f2f3c",
+  "inputs": {
+    "ocr_sha256": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "ocr_record_count": 38,
+    "pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "pdf_page_count": 38,
+    "vulnerable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "fixed_commit_kept_separate": "95122c7693f9516385aef330ef36bb1ccec2cb94"
+  },
+  "candidate_revision": {
+    "manifest": "p5r3-generated-file-manifest.json",
+    "manifest_sha256": "391bb3c53a8dcce20a2dbdcaddfab96c08d0f86fa65c33ed010331ce383f6b8d",
+    "candidate_file_count": 17,
+    "candidate_checksum_stream_sha256": "9f37669277597e149d2d62c899bc1edff455a26b20b3781e8d6b0836f2548d77",
+    "review_state": "in_review",
+    "human_approved": false
+  },
+  "configuration": {
+    "mode": "detect",
+    "framework": "foundry",
+    "ordered_finding_ids": ["H-01", "H-02", "H-03", "H-04", "H-05"],
+    "awards": [1.0, 1.0, 1.0, 1.0, 1.0],
+    "max_score": 5.0,
+    "individual_gold_file_count": 5,
+    "combined_gold_is_exact_ordered_byte_concatenation": true,
+    "report_disposition_count": 11,
+    "unresolved_report_dispositions": 0
+  },
+  "checks": [
+    {"id": "source_ocr_hash_and_38_records_unchanged", "passed": true},
+    {"id": "source_pdf_hash_and_38_pages_unchanged", "passed": true},
+    {"id": "five_grounded_findings_and_six_byte_exact_slices_unchanged", "passed": true},
+    {"id": "five_root_causes_and_asset_loss_paths_remain_distinct", "passed": true},
+    {"id": "all_11_report_dispositions_remain_resolved", "passed": true},
+    {"id": "review_state_remains_unapproved_in_review", "passed": true},
+    {"id": "dockerfile_has_no_copy_add_or_full_clone", "passed": true},
+    {"id": "dockerfile_fetches_only_exact_commit_at_depth_one", "passed": true},
+    {"id": "dockerfile_asserts_all_14_submodule_revisions", "passed": true},
+    {"id": "dockerfile_builds_tests_then_cleans_in_one_layer", "passed": true},
+    {"id": "dockerfile_base_is_pinned_by_registry_digest", "passed": true},
+    {"id": "p5r3_manifest_matches_all_17_candidate_files", "passed": true}
+  ],
+  "summary": {
+    "ok": true,
+    "check_count": 12,
+    "failed_check_count": 0,
+    "selected_finding_count": 5,
+    "unresolved_semantic_or_reproducibility_concerns": []
+  }
+}

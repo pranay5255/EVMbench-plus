@@ -1,0 +1,36 @@
+{
+  "schema_version": "valantis_detect_patch.dpm1_c1_integrity.v1",
+  "candidate_id": "2025-03-valantis-stex",
+  "completed_at": "2026-07-25T16:38:25Z",
+  "status": "passed",
+  "c1_historical_state": "in_review",
+  "c1_human_approved": false,
+  "review_artifacts": [
+    {
+      "path": "c1-review-manifest.json",
+      "size_bytes": 11195,
+      "sha256": "eb37343a23b3c171ccb5bcf7f24eff3079cbe29d3131cc7473cc91abe31f453d"
+    },
+    {
+      "path": "c1-review-bundle-digest.txt",
+      "size_bytes": 309,
+      "sha256": "c73b8b2b89d245a383ef768b6f0b74c2fef3b1bb6a38ab912edc95aa71e043fc"
+    },
+    {
+      "path": "c1-review-report.md",
+      "size_bytes": 1961,
+      "sha256": "c8b22ab80ba982d0db38826e3fb5871a0b65aafd718b3396ecb2ab1b60825717"
+    }
+  ],
+  "recorded_review_manifest_sha256": "eb37343a23b3c171ccb5bcf7f24eff3079cbe29d3131cc7473cc91abe31f453d",
+  "actual_review_manifest_sha256": "eb37343a23b3c171ccb5bcf7f24eff3079cbe29d3131cc7473cc91abe31f453d",
+  "digest_matches": true,
+  "manifest_candidate_id_matches": true,
+  "manifest_review_state_matches": true,
+  "all_17_candidate_files_match": true,
+  "finding_files_match": true,
+  "gold_audit_matches": true,
+  "ocr_slices_match": true,
+  "c1_files_mutated_in_dpm1": false,
+  "disposition": "preserved_as_historical_detect_only_review_bundle"
+}

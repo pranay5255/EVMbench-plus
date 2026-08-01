@@ -1,0 +1,76 @@
+{
+  "schema_version": "valantis_detect_patch.dpm1_source_evidence.v1",
+  "candidate_id": "2025-03-valantis-stex",
+  "completed_at": "2026-07-25T16:38:25Z",
+  "status": "passed",
+  "ocr": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002911_39a2c2ee71c9.jsonl",
+    "size_bytes": 186206,
+    "sha256": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "record_count": 38,
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "matches_c1": true,
+    "mutated": false
+  },
+  "pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+    "size_bytes": 13601799,
+    "sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "physical_page_count": 38,
+    "matches_c1": true,
+    "mutated": false
+  },
+  "finding_files": [
+    {
+      "id": "H-01",
+      "sha256": "920af3de53e29224ffc67a4b3747b426c26f6864c3b1b8a4e75989514b77683c"
+    },
+    {
+      "id": "H-02",
+      "sha256": "c22e53e5479834ae74b262ac85af2ac6cdb950d6a1f053cfeb68991c3f3406a3"
+    },
+    {
+      "id": "H-03",
+      "sha256": "a57381c7bde062e8820751129bfc4dc15a9df26440e7f929f30dbf16af3829f6"
+    },
+    {
+      "id": "H-04",
+      "sha256": "145f4bad130f99d2d52c3f86fc14a64984ae1ce2a65563c4416f6f238035841f"
+    },
+    {
+      "id": "H-05",
+      "sha256": "7009a743726581495a3fb484638c01cfd729d0c35ef26437c51f58ba5df586c9"
+    },
+    {
+      "id": "gold_audit",
+      "sha256": "c60bc769fb33238badcfc2d720e7b75a3f51a3ae37862fc437369063bb91a4b8"
+    }
+  ],
+  "ocr_slices": [
+    {
+      "id": "SCOPE",
+      "sha256": "b5e7c3be6170240c10ad218462ec7290e0bfd2765fc542ee1e0d72b6eb7014e6"
+    },
+    {
+      "id": "H-01",
+      "sha256": "5c52d390418d56ba03a94f371985ba5b9e4bd9f338763c918e9b69cef198f4a4"
+    },
+    {
+      "id": "H-02",
+      "sha256": "e8741e2b9ae9d9a6474dae40ca05627cbf8b643dffd9f95fd25efab05b3ea6ac"
+    },
+    {
+      "id": "H-03",
+      "sha256": "a01f69d0ae9931e254fbcadee266840d9d001352b29f1584e52d80ffb3b5cc71"
+    },
+    {
+      "id": "H-04",
+      "sha256": "18d290f85914fc28bc922978e0bb7896062b1f8a7b2efe0b672ced0642d42f4f"
+    },
+    {
+      "id": "H-05",
+      "sha256": "3fa57a38b90bb99d494d4175401993322175c82f8680aa6a1213d1f34db0b7c3"
+    }
+  ],
+  "all_finding_and_slice_hashes_match_c1": true
+}

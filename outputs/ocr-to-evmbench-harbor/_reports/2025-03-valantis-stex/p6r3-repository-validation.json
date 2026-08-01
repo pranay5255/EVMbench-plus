@@ -1,0 +1,45 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v2",
+  "phase": "P6R3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:12:53Z",
+  "status": "passed",
+  "image_repository": {
+    "image_tag": "ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r3-digest-pin",
+    "image_id": "sha256:d21ecebec4083ea50db60dbcfceecb783dca553e4385724d9c2c2c9e5a089f71",
+    "runtime_network_mode": "none",
+    "head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "reachable_commit_count": 1,
+    "git_status_line_count": 0,
+    "git_fsck_unreachable_object_count": 0,
+    "known_post_audit_commit_object_count": 0,
+    "nested_git_entry_count": 0,
+    "submodule_object_store_present": false,
+    "repository_pdf_count": 0,
+    "repository_jsonl_count": 0,
+    "repository_archive_count": 0
+  },
+  "submodule_validation": {
+    "recursive_revision_assertion_count": 14,
+    "all_assertions_passed_during_build": true,
+    "review_clone": "/tmp/valantis-ocr-harbor.iZKXoT/p4-review.9tCIDp/repo",
+    "review_clone_clean_including_submodules": true,
+    "cleaned_direct_dependency_roots_compared": 4,
+    "cleaned_direct_dependency_roots_matching_review_clone": 4,
+    "comparison_exclusions": [".git", "*.pdf"]
+  },
+  "known_post_audit_commits_checked": [
+    "320fd6d3789f94a5bccd06d14c2f936d44f919fc",
+    "efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec",
+    "b0ba237d9f972f3d74691d5ca42090887e49a556",
+    "5115be75eb0f8dcb8bda9040f1cf0184cfbc9f5c",
+    "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2",
+    "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "27b5c748db73d5b5e7d7aeaee902b70c2b74a829"
+  ],
+  "summary": {
+    "ok": true,
+    "failed_check_count": 0,
+    "vulnerable_snapshot_only": true
+  }
+}

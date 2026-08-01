@@ -1,0 +1,65 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v1",
+  "phase": "P6",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T13:30:49Z",
+  "status": "passed",
+  "repository": {
+    "review_clone": "/tmp/valantis-ocr-harbor.iZKXoT/p4-review.9tCIDp/repo",
+    "origin_url": "https://github.com/ValantisLabs/valantis-stex",
+    "head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "root_tree": "01a3298cb0d49d695a9832359ffa7658b8e140ae",
+    "src_tree": "05bfac7670a56c7c2d44d99f7463ca550477678f",
+    "fixed_commit": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "vulnerable_commit_is_fixed_ancestor": true,
+    "git_fsck_passed": true
+  },
+  "key_file_hashes": [
+    {"path": "src/STEXAMM.sol", "sha256": "4055f85b0f230c86a1296647891da20a04d63db32d7c86496724230a2b685392"},
+    {"path": "src/stHYPEWithdrawalModule.sol", "sha256": "19a1503e63b720dfcc0e583cbb04dc60ba4eee09c05ef549ebd702d77aabc4d5"},
+    {"path": "src/STEXRatioSwapFeeModule.sol", "sha256": "9cd0707d956c844cff89c8468e1701e6e0086f545aa0dd15831acf970f3c21cb"},
+    {"path": "src/AaveLendingModule.sol", "sha256": "225d1ae50466b63f5e87ef6242833d1c2648061dc74f7fa868289c5b53917357"},
+    {"path": "src/structs/WithdrawalModuleStructs.sol", "sha256": "6c4bad009081d1a31e58012ff68ede6e5b4bdb66860ed10b785c2970793a04cb"},
+    {"path": "lib/valantis-core/src/pools/SovereignPool.sol", "sha256": "f17cd9973b47a8f27634641ea2e4d49cad0e0a6204676bc13a7a4eb2e5d8ef6a"}
+  ],
+  "submodule_status_sha256": "3ce56683ef0333b8f14c389e958d0d19a6bc74bbc4eac199a92ca543d42735c8",
+  "submodules": [
+    {"path": "lib/forge-std", "revision": "b93cf4bc34ff214c099dc970b153f85ade8c9f66", "head_matches": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts", "revision": "acd4ff74de833399287ed6b31b4debf6b2b35527", "head_matches": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts/lib/erc4626-tests", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11", "head_matches": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts/lib/forge-std", "revision": "8f24d6b04c92975e0795b5868aa0d783251cdeaa", "head_matches": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts/lib/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5", "head_matches": true, "clean": true},
+    {"path": "lib/solmate", "revision": "c93f7716c9909175d45f6ef80a34a650e2d24e56", "head_matches": true, "clean": true},
+    {"path": "lib/solmate/lib/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0", "head_matches": true, "clean": true},
+    {"path": "lib/valantis-core", "revision": "18ee8bb9ad91871ddfdb711f0522f15d89e03673", "head_matches": true, "clean": true},
+    {"path": "lib/valantis-core/lib/forge-std", "revision": "2f112697506eab12d433a65fdc31a639548fe365", "head_matches": true, "clean": true},
+    {"path": "lib/valantis-core/lib/forge-std/lib/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0", "head_matches": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts", "revision": "281550b71c3df9a83e6b80ceefc700852c287570", "head_matches": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/erc4626-tests", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11", "head_matches": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std", "revision": "c2236853aadb8e2d9909bbecdc490099519b70a4", "head_matches": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test", "revision": "6da7dd8f7395f83e1fb6fa88a64ba9a030f85d4f", "head_matches": true, "clean": true}
+  ],
+  "checks": [
+    {"id": "head_matches", "passed": true},
+    {"id": "detached", "passed": true},
+    {"id": "root_clean", "passed": true},
+    {"id": "origin_matches", "passed": true},
+    {"id": "root_tree_matches", "passed": true},
+    {"id": "src_tree_matches", "passed": true},
+    {"id": "fixed_commit_exists", "passed": true},
+    {"id": "vulnerable_is_fixed_ancestor", "passed": true},
+    {"id": "submodule_count_14", "passed": true},
+    {"id": "all_submodule_heads_match", "passed": true},
+    {"id": "all_submodules_clean", "passed": true},
+    {"id": "key_file_hashes_match", "passed": true},
+    {"id": "git_fsck_passed", "passed": true}
+  ],
+  "summary": {
+    "ok": true,
+    "check_count": 13,
+    "failed_check_count": 0,
+    "submodule_count": 14
+  }
+}

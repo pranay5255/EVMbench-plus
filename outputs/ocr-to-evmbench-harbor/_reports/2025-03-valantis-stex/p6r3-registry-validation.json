@@ -1,0 +1,40 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.registry_validation.v1",
+  "phase": "P6R3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:12:53Z",
+  "status": "passed",
+  "reviewer": {
+    "requested_identity": "github.com/pranay5255",
+    "canonical_identity": "https://github.com/pranay5255",
+    "github_login": "pranay5255",
+    "github_user_id": 22420966,
+    "verified_with": "gh api users/pranay5255",
+    "authenticated_github_login": "pranay5255"
+  },
+  "registry": {
+    "provider": "Docker Hub",
+    "repository": "docker.io/pranay5255/yudaii_evmbench",
+    "base_image": {
+      "tag": "base-fc20d776501708f9-amd64",
+      "manifest_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+      "config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+      "platform": "linux/amd64",
+      "push_passed": true,
+      "manifest_inspect_passed": true
+    },
+    "agent_image": {
+      "tag": "2025-03-valantis-stex-agent-d21ecebec4083ea5-amd64",
+      "manifest_digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+      "config_digest": "sha256:d21ecebec4083ea50db60dbcfceecb783dca553e4385724d9c2c2c9e5a089f71",
+      "platform": "linux/amd64",
+      "push_passed": true,
+      "manifest_inspect_passed": true
+    }
+  },
+  "summary": {
+    "ok": true,
+    "base_is_immutable_by_digest": true,
+    "agent_image_is_available_by_digest": true
+  }
+}

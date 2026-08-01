@@ -1,0 +1,15 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolated_admission.v1",
+  "phase": "P8",
+  "status": "passed",
+  "forest_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "forest_clone": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits",
+  "evmbench_root": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits/project/evmbench",
+  "admitted_path": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits/project/evmbench/audits/2025-03-valantis-stex",
+  "clean_start_required_and_observed": true,
+  "only_admitted_audit_id": "2025-03-valantis-stex",
+  "detect_split_entry_added": true,
+  "candidate_and_admitted_tree_byte_identical": true,
+  "canonical_checkout_written": false,
+  "isolated_adapter_migration_is_separate_from_admission_diff": true
+}

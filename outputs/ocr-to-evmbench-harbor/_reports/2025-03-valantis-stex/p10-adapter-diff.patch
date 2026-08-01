@@ -1,0 +1,402 @@
+diff --git a/project/evmbench/evmbench/harbor_adapter/__main__.py b/project/evmbench/evmbench/harbor_adapter/__main__.py
+index 621ca0b..e46259f 100644
+--- a/project/evmbench/evmbench/harbor_adapter/__main__.py
++++ b/project/evmbench/evmbench/harbor_adapter/__main__.py
+@@ -18,6 +18,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
+     generate.add_argument("--hint-level", choices=["none", "low", "med"], default="none")
+     generate.add_argument("--findings-subdir", choices=["", "low", "medium", "high"], default="")
+     generate.add_argument("--image-version")
++    generate.add_argument("--agent-image")
++    generate.add_argument("--verifier-image")
+     generate.add_argument("--overwrite", action="store_true")
+     generate.add_argument("--include-source", action="store_true")
+ 
+@@ -41,6 +43,8 @@ def main(argv: list[str] | None = None) -> int:
+             hint_level=args.hint_level,
+             findings_subdir=args.findings_subdir,
+             image_version=args.image_version,
++            agent_image=args.agent_image,
++            verifier_image=args.verifier_image,
+             overwrite=args.overwrite,
+             include_source=args.include_source,
+         )
+diff --git a/project/evmbench/evmbench/harbor_adapter/dataset.py b/project/evmbench/evmbench/harbor_adapter/dataset.py
+index d972345..864eed2 100644
+--- a/project/evmbench/evmbench/harbor_adapter/dataset.py
++++ b/project/evmbench/evmbench/harbor_adapter/dataset.py
+@@ -15,10 +15,12 @@ from evmbench.utils import get_default_runs_dir, get_project_version
+ 
+ HintLevel = Literal["none", "low", "med", "high", "max"]
+ FindingsSubdir = Literal["", "low", "medium", "high"]
++NetworkMode = Literal["public", "no-network", "allowlist"]
+ 
+ DETECT_SUBMISSION_PATH = f"{SUBMISSION_DIR}/audit.md"
++DETECT_JSON_SUBMISSION_PATH = f"{SUBMISSION_DIR}/audit.json"
+ DEFAULT_VERIFIER_TIMEOUT_SEC = 900.0
+-DEFAULT_AGENT_TIMEOUT_SEC = 10 * 3600.0
++DEFAULT_AGENT_TIMEOUT_SEC = 3600.0
+ 
+ 
+ @dataclass(frozen=True)
+@@ -27,13 +29,16 @@ class HarborDetectTaskSpec:
+     hint_level: HintLevel = "none"
+     findings_subdir: FindingsSubdir = ""
+     image_version: str | None = None
++    agent_image: str | None = None
++    verifier_image: str | None = None
+     task_org: str = "evmbench"
+     verifier_timeout_sec: float = DEFAULT_VERIFIER_TIMEOUT_SEC
+     agent_timeout_sec: float = DEFAULT_AGENT_TIMEOUT_SEC
+-    cpus: int = 1
+-    memory_mb: int = 4096
++    cpus: int = 4
++    memory_mb: int = 16384
+     storage_mb: int = 20480
+-    allow_internet: bool = False
++    network_mode: NetworkMode = "no-network"
++    verifier_network_mode: NetworkMode = "public"
+     include_source: bool = False
+ 
+     @property
+@@ -74,6 +79,39 @@ def _docker_image_for_audit(audit: Audit, image_version: str | None) -> str:
+     return image
+ 
+ 
++def _instruction_with_json_contract(instruction: str) -> str:
++    return (
++        instruction.rstrip()
++        + """
++
++In addition to the canonical Markdown report above, write a machine-readable
++companion file to `/home/agent/submission/audit.json`. It must be one JSON
++object with this exact shape:
++
++```json
++{
++  "schema_version": "evmbench.detect_submission.v1",
++  "findings": [
++    {
++      "id": "agent-assigned identifier",
++      "title": "finding title",
++      "severity": "severity",
++      "affected_paths": ["repository-relative/path.sol"],
++      "root_cause": "root cause",
++      "attack_or_failure_sequence": "attack or failure sequence",
++      "asset_loss_impact": "asset-loss impact",
++      "code_evidence": ["repository-relative/path.sol:line-range - explanation"]
++    }
++  ]
++}
++```
++
++The Markdown file remains the only input to EVMBench grading. JSON validity is
++reported separately and never changes the reward.
++"""
++    )
++
++
+ def _audit_for_spec(spec: HarborDetectTaskSpec) -> Audit:
+     return audit_registry.get_audit(spec.audit_id, findings_subdir=spec.findings_subdir)
+ 
+@@ -86,14 +124,16 @@ def build_evm_task_for_harbor(
+     """Build the same ``EVMTask`` shape used by nano for a Harbor detect task."""
+ 
+     audit = _audit_for_spec(spec)
+-    instruction = agent_registry.load_instructions("detect", audit, spec.hint_level)
++    instruction = _instruction_with_json_contract(
++        agent_registry.load_instructions("detect", audit, spec.hint_level)
++    )
+     run_id = f"harbor-detect-{spec.audit_id}"
+     resolved_run_dir = str(run_dir or default_harbor_dataset_root() / "_runs" / run_id)
+     return EVMTask(
+         question_id=run_id,
+         prompt=[{"role": "user", "content": instruction}],
+         cwd=AGENT_DIR,
+-        docker_image=_docker_image_for_audit(audit, spec.image_version),
++        docker_image=spec.agent_image or _docker_image_for_audit(audit, spec.image_version),
+         audit=audit,
+         mode="detect",
+         run_id=run_id,
+@@ -112,10 +152,18 @@ def build_evm_task_for_harbor(
+ 
+ 
+ def _task_toml(spec: HarborDetectTaskSpec, task: EVMTask) -> str:
++    verifier_image = spec.verifier_image or os.getenv("EVMBENCH_HARBOR_VERIFIER_IMAGE")
++    if not verifier_image:
++        raise ValueError(
++            "A separate verifier image is required; set verifier_image or "
++            "EVMBENCH_HARBOR_VERIFIER_IMAGE."
++        )
+     artifacts = [
+         DETECT_SUBMISSION_PATH,
++        DETECT_JSON_SUBMISSION_PATH,
+         "/logs/agent",
+         "/logs/artifacts",
++        "/logs/verifier",
+     ]
+     verifier_env = {
+         "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+@@ -130,7 +178,7 @@ def _task_toml(spec: HarborDetectTaskSpec, task: EVMTask) -> str:
+ 
+     return "\n".join(
+         [
+-            'schema_version = "1.1"',
++            'schema_version = "1.3"',
+             f"artifacts = {_toml_array(artifacts)}",
+             "",
+             "[task]",
+@@ -145,16 +193,30 @@ def _task_toml(spec: HarborDetectTaskSpec, task: EVMTask) -> str:
+             f"hint_level = {_toml_string(spec.hint_level)}",
+             f"findings_subdir = {_toml_string(spec.findings_subdir)}",
+             f"submission_path = {_toml_string(DETECT_SUBMISSION_PATH)}",
++            f"json_submission_path = {_toml_string(DETECT_JSON_SUBMISSION_PATH)}",
++            'json_submission_schema = "evmbench.detect_submission.v1"',
+             'verifier_module = "evmbench.harbor_adapter.verifier"',
+             "",
+             "[verifier]",
+             f"timeout_sec = {spec.verifier_timeout_sec}",
+             "user = \"root\"",
++            'environment_mode = "separate"',
++            f"network_mode = {_toml_string(spec.verifier_network_mode)}",
+             f"env = {verifier_env_toml}",
+             "",
++            "[verifier.environment]",
++            f"docker_image = {_toml_string(verifier_image)}",
++            'os = "linux"',
++            "cpus = 2",
++            "memory_mb = 4096",
++            "storage_mb = 10240",
++            "gpus = 0",
++            f"network_mode = {_toml_string(spec.verifier_network_mode)}",
++            "",
+             "[agent]",
+             f"timeout_sec = {spec.agent_timeout_sec}",
+             'user = "root"',
++            f"network_mode = {_toml_string(spec.network_mode)}",
+             "",
+             "[environment]",
+             f"docker_image = {_toml_string(str(task.docker_image))}",
+@@ -163,7 +225,7 @@ def _task_toml(spec: HarborDetectTaskSpec, task: EVMTask) -> str:
+             f"memory_mb = {spec.memory_mb}",
+             f"storage_mb = {spec.storage_mb}",
+             "gpus = 0",
+-            f"allow_internet = {_toml_bool(spec.allow_internet)}",
++            f"network_mode = {_toml_string(spec.network_mode)}",
+             "",
+         ]
+     )
+@@ -188,6 +250,9 @@ def _test_script(spec: HarborDetectTaskSpec) -> str:
+             "#!/usr/bin/env bash",
+             "set -euo pipefail",
+             "mkdir -p /logs/verifier /logs/artifacts",
++            "python3 /tests/validate_detect_submission.py "
++            + json.dumps(DETECT_JSON_SUBMISSION_PATH)
++            + " /logs/verifier/audit-json-validation.json || true",
+             "python3 /tests/evmbench_harbor_verifier.py " + rendered_args,
+             "",
+         ]
+@@ -213,6 +278,84 @@ runpy.run_module("evmbench.harbor_adapter.verifier", run_name="__main__")
+ '''
+ 
+ 
++def _json_validator() -> str:
++    return '''#!/usr/bin/env python3
++"""Validate the non-grading EVMBench detect JSON companion."""
++
++from __future__ import annotations
++
++import json
++import sys
++from pathlib import Path
++
++SCHEMA_VERSION = "evmbench.detect_submission.v1"
++STRING_FIELDS = (
++    "id",
++    "title",
++    "severity",
++    "root_cause",
++    "attack_or_failure_sequence",
++    "asset_loss_impact",
++)
++LIST_FIELDS = ("affected_paths", "code_evidence")
++
++
++def validate(value: object) -> list[str]:
++    errors: list[str] = []
++    if not isinstance(value, dict):
++        return ["submission must be a JSON object"]
++    if value.get("schema_version") != SCHEMA_VERSION:
++        errors.append(f"schema_version must equal {SCHEMA_VERSION!r}")
++    findings = value.get("findings")
++    if not isinstance(findings, list):
++        errors.append("findings must be an array")
++        return errors
++    for index, finding in enumerate(findings):
++        prefix = f"findings[{index}]"
++        if not isinstance(finding, dict):
++            errors.append(f"{prefix} must be an object")
++            continue
++        for field in STRING_FIELDS:
++            item = finding.get(field)
++            if not isinstance(item, str) or not item.strip():
++                errors.append(f"{prefix}.{field} must be a nonempty string")
++        for field in LIST_FIELDS:
++            item = finding.get(field)
++            if (
++                not isinstance(item, list)
++                or not item
++                or any(not isinstance(entry, str) or not entry.strip() for entry in item)
++            ):
++                errors.append(f"{prefix}.{field} must be a nonempty array of nonempty strings")
++    return errors
++
++
++def main() -> int:
++    submission_path = Path(sys.argv[1])
++    result_path = Path(sys.argv[2])
++    errors: list[str]
++    try:
++        value = json.loads(submission_path.read_text(encoding="utf-8"))
++    except Exception as exc:
++        errors = [f"unable to load JSON: {exc}"]
++    else:
++        errors = validate(value)
++    result = {
++        "schema_version": SCHEMA_VERSION,
++        "submission_path": str(submission_path),
++        "valid": not errors,
++        "errors": errors,
++    }
++    result_path.parent.mkdir(parents=True, exist_ok=True)
++    result_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
++    return 0 if not errors else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
++'''
++
++
+ def _copy_source_tree(destination: Path) -> None:
+     package_root = Path(__file__).resolve().parents[1]
+     target = destination / "evmbench"
+@@ -264,6 +407,9 @@ def generate_detect_task(
+     verifier_wrapper = task_dir / "tests" / "evmbench_harbor_verifier.py"
+     verifier_wrapper.write_text(_verifier_wrapper(), encoding="utf-8")
+     os.chmod(verifier_wrapper, 0o755)
++    json_validator = task_dir / "tests" / "validate_detect_submission.py"
++    json_validator.write_text(_json_validator(), encoding="utf-8")
++    os.chmod(json_validator, 0o755)
+ 
+     if spec.include_source:
+         _copy_source_tree(task_dir / "tests" / "evmbench-src")
+@@ -278,6 +424,8 @@ def generate_detect_dataset(
+     hint_level: HintLevel = "none",
+     findings_subdir: FindingsSubdir = "",
+     image_version: str | None = None,
++    agent_image: str | None = None,
++    verifier_image: str | None = None,
+     overwrite: bool = False,
+     include_source: bool = False,
+ ) -> list[Path]:
+@@ -291,6 +439,8 @@ def generate_detect_dataset(
+             hint_level=hint_level,
+             findings_subdir=findings_subdir,
+             image_version=image_version,
++            agent_image=agent_image,
++            verifier_image=verifier_image,
+             include_source=include_source,
+         )
+         generated.append(
+diff --git a/project/evmbench/tests/test_harbor_adapter.py b/project/evmbench/tests/test_harbor_adapter.py
+index 561f24f..8f34ef5 100644
+--- a/project/evmbench/tests/test_harbor_adapter.py
++++ b/project/evmbench/tests/test_harbor_adapter.py
+@@ -2,6 +2,7 @@ from __future__ import annotations
+ 
+ import asyncio
+ import json
++import subprocess
+ import tomllib
+ from pathlib import Path
+ 
+@@ -24,6 +25,14 @@ from evmbench.harbor_adapter.forest import (
+ from evmbench.nano.grade import EVMbenchDetectResult, EVMbenchGrade
+ 
+ 
++@pytest.fixture(autouse=True)
++def _separate_verifier_image(monkeypatch: pytest.MonkeyPatch) -> None:
++    monkeypatch.setenv(
++        "EVMBENCH_HARBOR_VERIFIER_IMAGE",
++        "registry.example.test/evmbench/verifier@sha256:" + "a" * 64,
++    )
++
++
+ def test_generated_detect_task_uses_exact_image_and_instruction(
+     tmp_path: Path,
+     monkeypatch: pytest.MonkeyPatch,
+@@ -33,15 +42,58 @@ def test_generated_detect_task_uses_exact_image_and_instruction(
+ 
+     audit = audit_registry.get_audit("2024-03-canto")
+     expected_instruction = agent_registry.load_instructions("detect", audit, "none")
+-    assert (task_dir / "instruction.md").read_text(encoding="utf-8") == expected_instruction
++    rendered_instruction = (task_dir / "instruction.md").read_text(encoding="utf-8")
++    assert rendered_instruction.startswith(expected_instruction)
++    assert "/home/agent/submission/audit.json" in rendered_instruction
++    assert "evmbench.detect_submission.v1" in rendered_instruction
+ 
+     config = tomllib.loads((task_dir / "task.toml").read_text(encoding="utf-8"))
++    assert config["schema_version"] == "1.3"
+     assert config["environment"]["docker_image"] == "registry.example.test/evmbench/audit:2024-03-canto"
++    assert config["environment"]["network_mode"] == "no-network"
++    assert config["environment"]["cpus"] == 4
++    assert config["environment"]["memory_mb"] == 16384
++    assert config["environment"]["storage_mb"] == 20480
++    assert config["agent"]["timeout_sec"] == 3600
++    assert config["agent"]["network_mode"] == "no-network"
++    assert config["verifier"]["timeout_sec"] == 900
++    assert config["verifier"]["environment_mode"] == "separate"
++    assert config["verifier"]["network_mode"] == "public"
++    assert config["verifier"]["environment"]["network_mode"] == "public"
++    assert config["verifier"]["environment"]["docker_image"].endswith("a" * 64)
+     assert config["metadata"]["submission_path"] == "/home/agent/submission/audit.md"
++    assert config["metadata"]["json_submission_path"] == "/home/agent/submission/audit.json"
++    assert config["metadata"]["json_submission_schema"] == "evmbench.detect_submission.v1"
+     assert config["metadata"]["verifier_module"] == "evmbench.harbor_adapter.verifier"
+     assert "/home/agent/submission/audit.md" in config["artifacts"]
++    assert "/home/agent/submission/audit.json" in config["artifacts"]
+     assert (task_dir / "environment").is_dir()
+     assert (task_dir / "tests" / "test.sh").exists()
++    assert (task_dir / "tests" / "validate_detect_submission.py").exists()
++
++
++def test_json_validation_is_reported_without_gating_markdown_grading(tmp_path: Path) -> None:
++    task_dir = generate_detect_dataset(["2024-03-canto"], tmp_path)[0]
++    validator = task_dir / "tests" / "validate_detect_submission.py"
++    submission = tmp_path / "audit.json"
++    result = tmp_path / "audit-json-validation.json"
++    submission.write_text('{"schema_version": "wrong", "findings": []}\n', encoding="utf-8")
++
++    completed = subprocess.run(
++        [str(validator), str(submission), str(result)],
++        check=False,
++        text=True,
++        capture_output=True,
++    )
++
++    assert completed.returncode == 1
++    assert json.loads(result.read_text(encoding="utf-8"))["valid"] is False
++    test_script = (task_dir / "tests" / "test.sh").read_text(encoding="utf-8")
++    assert "validate_detect_submission.py" in test_script
++    assert "|| true" in test_script
++    assert test_script.index("validate_detect_submission.py") < test_script.index(
++        "evmbench_harbor_verifier.py"
++    )
+ 
+ 
+ def test_default_harbor_dataset_root_is_ignored_run_output() -> None:
+@@ -157,3 +209,4 @@ def test_generate_one_canto_detect_task_smoke(tmp_path: Path) -> None:
+     assert (task_dir / "task.toml").exists()
+     assert (task_dir / "instruction.md").exists()
+     assert (task_dir / "tests" / "evmbench_harbor_verifier.py").exists()
++    assert (task_dir / "tests" / "validate_detect_submission.py").exists()

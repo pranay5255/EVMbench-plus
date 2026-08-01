@@ -1,0 +1,6 @@
+candidate_id: 2025-03-valantis-stex
+checkpoint: C1R3
+review_manifest: c1r3-review-manifest.json
+sha256: 11dd3b8f667da20aab1d343e804e7f53122ee64a5b0d086fc27a53445e05fe01
+reviewer_identity: https://github.com/pranay5255
+state: awaiting_exact_digest_bound_admission_approval

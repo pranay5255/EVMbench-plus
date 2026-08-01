@@ -1,0 +1,29 @@
+P6 FOUNDRY TEST VALIDATION
+
+candidate_id: 2025-03-valantis-stex
+completed_at: 2026-07-25T13:34:35Z
+image_tag: ocr-to-evmbench-harbor/2025-03-valantis-stex:p6-review
+image_id: sha256:625094394c8627080403e5bd1fc9072a58a85a9465a432fba0f4380c79c09a71
+network_mode: none
+command: docker run --rm --network none --entrypoint forge ocr-to-evmbench-harbor/2025-03-valantis-stex:p6-review test --root /home/agent/audit --force
+exit_code: 0
+
+Compiling 102 files with Solc 0.8.30
+Solc 0.8.30 finished in 3.98s
+Compiler run successful!
+
+DepositWrapperTest:
+  2 passed; 0 failed; 0 skipped
+
+stHYPEWithdrawalModuleTest:
+  11 passed; 0 failed; 0 skipped
+
+STEXAMMTest:
+  21 passed; 0 failed; 0 skipped
+
+Ran 3 test suites in 8.86ms (11.16ms CPU time):
+34 tests passed, 0 failed, 0 skipped (34 total tests)
+
+The forced compilation and tests completed without runtime network access.
+
+RESULT: passed

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.submodule_snapshot.v1",
+  "phase": "P4",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T12:59:18Z",
+  "status": "passed",
+  "repository_path": "/tmp/valantis-ocr-harbor.iZKXoT/p4-review.9tCIDp/repo",
+  "repository_head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+  "recursive": true,
+  "submodule_count": 14,
+  "recursive_status_sha256": "3ce56683ef0333b8f14c389e958d0d19a6bc74bbc4eac199a92ca543d42735c8",
+  "all_initialized": true,
+  "all_match_parent_gitlinks": true,
+  "all_clean": true,
+  "entries": [
+    {"path": "lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "b93cf4bc34ff214c099dc970b153f85ade8c9f66", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts", "url": "https://github.com/OpenZeppelin/openzeppelin-contracts", "revision": "acd4ff74de833399287ed6b31b4debf6b2b35527", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts/lib/erc4626-tests", "url": "https://github.com/a16z/erc4626-tests.git", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "8f24d6b04c92975e0795b5868aa0d783251cdeaa", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/openzeppelin-contracts/lib/halmos-cheatcodes", "url": "https://github.com/a16z/halmos-cheatcodes", "revision": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/solmate", "url": "https://github.com/transmissions11/solmate", "revision": "c93f7716c9909175d45f6ef80a34a650e2d24e56", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/solmate/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/valantis-core", "url": "https://github.com/ValantisLabs/valantis-core", "revision": "18ee8bb9ad91871ddfdb711f0522f15d89e03673", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/valantis-core/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "2f112697506eab12d433a65fdc31a639548fe365", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/valantis-core/lib/forge-std/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "e282159d5170298eb2455a6c05280ab5a73a4ef0", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts", "url": "https://github.com/OpenZeppelin/openzeppelin-contracts", "revision": "281550b71c3df9a83e6b80ceefc700852c287570", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/erc4626-tests", "url": "https://github.com/a16z/erc4626-tests.git", "revision": "8b1d7c2ac248c33c3506b1bff8321758943c5e11", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std", "url": "https://github.com/foundry-rs/forge-std", "revision": "c2236853aadb8e2d9909bbecdc490099519b70a4", "initialized": true, "matches_parent_gitlink": true, "clean": true},
+    {"path": "lib/valantis-core/lib/openzeppelin-contracts/lib/forge-std/lib/ds-test", "url": "https://github.com/dapphub/ds-test", "revision": "6da7dd8f7395f83e1fb6fa88a64ba9a030f85d4f", "initialized": true, "matches_parent_gitlink": true, "clean": true}
+  ],
+  "summary": {
+    "ok": true,
+    "expected_count": 14,
+    "actual_count": 14,
+    "mismatch_count": 0,
+    "dirty_count": 0,
+    "uninitialized_count": 0
+  }
+}

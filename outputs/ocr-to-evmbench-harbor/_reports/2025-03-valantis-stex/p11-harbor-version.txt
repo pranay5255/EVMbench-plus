@@ -1,0 +1,7 @@
+harbor_version=0.20.0
+distribution=harbor==0.20.0
+wheel=/tmp/harbor-0.20.0-py3-none-any.whl
+wheel_sha256=4b7e48223aea2384cdb8c9eff35eaebd482fc9b1ec09f8193a121c47356ff19a
+tool_root=/tmp/valantis-harbor-tool.RJimtj
+tool_cache_writable=true
+tool_bin_writable=true

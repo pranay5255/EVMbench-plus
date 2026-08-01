@@ -1,0 +1,92 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "phase": "P4",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T12:59:18Z",
+  "status": "passed",
+  "source_ocr_sha256_before": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+  "source_ocr_sha256_after": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+  "source_ocr_unchanged": true,
+  "corrections": [
+    {
+      "page": 5,
+      "field": "repository_url",
+      "ocr_value": "https://github.com/ValantisLabs/valantis-steX/",
+      "corrected_value": "https://github.com/ValantisLabs/valantis-stex/",
+      "pdf_confirmed": true,
+      "git_confirmed": true,
+      "git_evidence": "The successful clone origin is https://github.com/ValantisLabs/valantis-stex."
+    },
+    {
+      "page": 5,
+      "field": "fixed_commit",
+      "ocr_value": "95122c7693f9516385aef330ef36bb1cece2cb94",
+      "corrected_value": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+      "pdf_confirmed": true,
+      "git_confirmed": true,
+      "git_object_type": "commit",
+      "vulnerable_commit_is_ancestor": true,
+      "git_subject": "Merge pull request #16 from ValantisLabs/fix/read-only-reentrancy-getLiquidityQuote"
+    },
+    {
+      "page": 10,
+      "field": "report_id",
+      "ocr_value": "VLTS3-S",
+      "corrected_value": "VLTS3-5",
+      "pdf_confirmed": true,
+      "code_or_git_confirmation": "Fix commit 320fd6d3789f94a5bccd06d14c2f936d44f919fc names the reported stale amountToken1PendingLPWithdrawal accounting."
+    },
+    {
+      "page": 13,
+      "field": "report_id",
+      "ocr_value": "VLTS3-i3",
+      "corrected_value": "VLTS3-13",
+      "pdf_confirmed": true,
+      "code_or_git_confirmation": "Fix commit efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec addresses the withdrawal-module swap-callback reentrancy."
+    },
+    {
+      "page": 13,
+      "field": "affected_path",
+      "ocr_value": "src/stHYPEWithdrawalModule.solutpdate#L431-L475",
+      "corrected_value": "src/stHYPEWithdrawalModule.sol:update#L431-L475",
+      "pdf_confirmed": true,
+      "code_confirmed": true,
+      "code_evidence": "src/stHYPEWithdrawalModule.sol contains function update at vulnerable lines 431-475."
+    },
+    {
+      "pages": [10, 11, 12],
+      "field": "code_identifiers",
+      "ocr_values": ["TokenI", "TokenO", "unstateToken0Reserves"],
+      "corrected_values": ["Token1", "Token0", "unstakeToken0Reserves"],
+      "pdf_confirmed": true,
+      "code_confirmed": true
+    },
+    {
+      "pages": [14, 17, 18, 20, 22, 24, 27],
+      "field": "code_identifiers",
+      "corrected_values": [
+        "safeTransferFrom",
+        "isZeroToOne",
+        "MockStHype",
+        "ILendingModule",
+        "stHYPEWithdrawalModule__claim_cannotYetClaim",
+        "withdrawalModule.update",
+        "_amount0Min"
+      ],
+      "pdf_confirmed": true,
+      "code_confirmed": true,
+      "note": "Production identifiers were confirmed in the vulnerable root or pinned valantis-core dependency; MockStHype and proof-call spelling were confirmed in the vulnerable test/mocks tree."
+    }
+  ],
+  "policy": {
+    "ocr_rewritten": false,
+    "corrections_are_host_side_metadata": true,
+    "fixed_commit_kept_separate_from_vulnerable_task_snapshot": true
+  },
+  "summary": {
+    "ok": true,
+    "correction_group_count": 7,
+    "pdf_and_git_fixed_commit_confirmation": true,
+    "source_ocr_unchanged": true
+  }
+}

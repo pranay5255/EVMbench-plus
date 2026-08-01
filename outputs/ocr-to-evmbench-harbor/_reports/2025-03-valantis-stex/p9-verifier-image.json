@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "verifier",
+  "status": "passed",
+  "registry_tag": "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-verifier-p9",
+  "registry_digest": "sha256:f6ad584c2fc82c2baea6ebc290da0074d1073f70bf131a968ccc967052622112",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:f6ad584c2fc82c2baea6ebc290da0074d1073f70bf131a968ccc967052622112",
+  "image_id": "sha256:2d3af791f5f14762b3e651abc85ac013fb20855696b36c04508ca8d0017fa20b",
+  "created": "2026-07-27T10:29:51.962618022Z",
+  "size_bytes": 1030462736,
+  "rootfs_layer_count": 10,
+  "platform": "linux/amd64",
+  "base_image": "docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+  "forest_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "dockerfile_sha256": "8b81c086f7748981c0f31a77f847ef9cd10699808f5d8f7671321af49e5b005b",
+  "requirements_sha256": "1b60d42d87faff2b512bd89b83aa5ea9d11693b3e4fd7a761067e0e378359e4b",
+  "registry_load_check": {"vulnerability_count": 5, "detect_max_award": 5.0},
+  "manifest_verified": true
+}

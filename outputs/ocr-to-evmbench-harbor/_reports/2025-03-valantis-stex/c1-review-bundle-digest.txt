@@ -1,0 +1,8 @@
+candidate_id: 2025-03-valantis-stex
+review_manifest: c1-review-manifest.json
+review_manifest_size_bytes: 11195
+review_bundle_digest_algorithm: sha256
+review_bundle_digest: eb37343a23b3c171ccb5bcf7f24eff3079cbe29d3131cc7473cc91abe31f453d
+review_state: in_review
+human_approved: false
+candidate_admitted: false

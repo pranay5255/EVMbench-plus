@@ -1,0 +1,277 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "phase": "P3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T12:25:48Z",
+  "status": "passed",
+  "inputs": {
+    "ocr_jsonl_path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002911_39a2c2ee71c9.jsonl",
+    "ocr_sha256_before_p3": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "ocr_sha256_after_p3": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "ocr_unchanged": true,
+    "p2_validation_report": "outputs/ocr-to-evmbench-harbor/_reports/2025-03-valantis-stex/p2-ocr-validation.json",
+    "p2_validation_report_sha256": "53bfbaf959a25c8faeb3043b4f6359068405a061d7050fb64817fb3ae90f07fc",
+    "p2_passed": true
+  },
+  "source_path_agreement": {
+    "record_count": 38,
+    "populated_raw_record_source_abs_path_count": 38,
+    "unique_populated_raw_record_source_abs_path_count": 1,
+    "all_populated_values_agree": true,
+    "agreed_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+    "source_rel_path": "Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+    "source_filename": "valantis-mar-25(Final).pdf"
+  },
+  "resolution": {
+    "mandated_search_order": [
+      "verified raw_record.source_abs_path",
+      "source_rel_path beneath caller-permitted local corpus roots",
+      "caller-permitted local or online discovery by filename, report identity, and provenance"
+    ],
+    "attempts": [
+      {
+        "order": 1,
+        "method": "verified raw_record.source_abs_path",
+        "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+        "exists": true,
+        "regular_file": true,
+        "sha256_match": true,
+        "selected": true
+      },
+      {
+        "order": 2,
+        "method": "source_rel_path beneath caller-permitted local corpus roots",
+        "attempted": false,
+        "reason": "The first search method returned the exact-checksum PDF."
+      },
+      {
+        "order": 3,
+        "method": "caller-permitted local or online discovery",
+        "attempted": false,
+        "reason": "The first search method returned the exact-checksum PDF."
+      }
+    ],
+    "selected_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf"
+  },
+  "pdf": {
+    "expected_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "actual_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "sha256_match": true,
+    "expected_physical_page_count": 38,
+    "actual_physical_page_count": 38,
+    "page_count_match": true,
+    "readable": true,
+    "encrypted": false,
+    "file_size_bytes": 13601799,
+    "page_size": "595 x 842 pts (A4)",
+    "page_rotation": 0,
+    "pdf_version": "1.7",
+    "full_document_layout_text_bytes": 39260,
+    "full_document_layout_text_form_feeds": 38,
+    "full_document_text_nonempty": true
+  },
+  "page_reconciliation": {
+    "ocr_exported_page_numbers": {
+      "first": 1,
+      "last": 38,
+      "count": 38,
+      "strictly_ordered_contiguous": true
+    },
+    "source_page_count": 38,
+    "physical_page_count": 38,
+    "exported_to_physical_mapping": "one-to-one",
+    "reviewed_pages": [
+      5,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "all_reviewed_ocr_footers_match_pdf_printed_footers_and_physical_pages": true,
+    "finding_ranges": [
+      {
+        "report_id": "VLTS3-5",
+        "start_page": 10,
+        "end_page": 12,
+        "start_role": "finding_start",
+        "end_role": "finding_end",
+        "next_finding_starts_on": 13
+      },
+      {
+        "report_id": "VLTS3-13",
+        "start_page": 13,
+        "end_page": 18,
+        "start_role": "finding_start",
+        "end_role": "finding_end",
+        "next_finding_starts_on": 19
+      },
+      {
+        "report_id": "VLTS3-3",
+        "start_page": 19,
+        "end_page": 20,
+        "start_role": "finding_start",
+        "end_role": "finding_end",
+        "next_finding_starts_on": 21
+      },
+      {
+        "report_id": "VLTS3-9",
+        "start_page": 21,
+        "end_page": 25,
+        "start_role": "finding_start",
+        "end_role": "finding_end",
+        "next_finding_starts_on": 26
+      },
+      {
+        "report_id": "VLTS3-14",
+        "start_page": 26,
+        "end_page": 27,
+        "start_role": "finding_start",
+        "end_role": "finding_end",
+        "next_finding_starts_on": 28
+      }
+    ]
+  },
+  "side_by_side_review": {
+    "ocr_preparation": "Removed OCR layout tags only for comparison; the source JSONL was not modified.",
+    "pdf_preparation": "Used pdftotext -layout on each selected physical page and rendered host-only PNGs under the P1 temporary root.",
+    "comparison_normalization": "Lowercase alphanumeric characters only.",
+    "similarity_algorithm": "Python difflib.SequenceMatcher with autojunk disabled",
+    "visual_checks": "Inspected the PDF render for page 5 and every selected finding start/end boundary page; compared extracted PDF text against OCR for all reviewed pages.",
+    "per_page": [
+      {"page": 5, "ocr_footer": 5, "pdf_footer": 5, "normalized_ocr_chars": 261, "normalized_pdf_chars": 261, "sequence_ratio": 0.996169},
+      {"page": 10, "ocr_footer": 10, "pdf_footer": 10, "normalized_ocr_chars": 688, "normalized_pdf_chars": 693, "sequence_ratio": 0.992035},
+      {"page": 11, "ocr_footer": 11, "pdf_footer": 11, "normalized_ocr_chars": 1285, "normalized_pdf_chars": 1285, "sequence_ratio": 0.989883},
+      {"page": 12, "ocr_footer": 12, "pdf_footer": 12, "normalized_ocr_chars": 981, "normalized_pdf_chars": 981, "sequence_ratio": 0.997961},
+      {"page": 13, "ocr_footer": 13, "pdf_footer": 13, "normalized_ocr_chars": 1279, "normalized_pdf_chars": 1278, "sequence_ratio": 0.998827},
+      {"page": 14, "ocr_footer": 14, "pdf_footer": 14, "normalized_ocr_chars": 978, "normalized_pdf_chars": 977, "sequence_ratio": 0.995396},
+      {"page": 15, "ocr_footer": 15, "pdf_footer": 15, "normalized_ocr_chars": 1407, "normalized_pdf_chars": 1407, "sequence_ratio": 1.0},
+      {"page": 16, "ocr_footer": 16, "pdf_footer": 16, "normalized_ocr_chars": 605, "normalized_pdf_chars": 604, "sequence_ratio": 0.999173},
+      {"page": 17, "ocr_footer": 17, "pdf_footer": 17, "normalized_ocr_chars": 918, "normalized_pdf_chars": 916, "sequence_ratio": 0.990185},
+      {"page": 18, "ocr_footer": 18, "pdf_footer": 18, "normalized_ocr_chars": 244, "normalized_pdf_chars": 245, "sequence_ratio": 0.997955},
+      {"page": 19, "ocr_footer": 19, "pdf_footer": 19, "normalized_ocr_chars": 814, "normalized_pdf_chars": 814, "sequence_ratio": 1.0},
+      {"page": 20, "ocr_footer": 20, "pdf_footer": 20, "normalized_ocr_chars": 492, "normalized_pdf_chars": 492, "sequence_ratio": 0.997967},
+      {"page": 21, "ocr_footer": 21, "pdf_footer": 21, "normalized_ocr_chars": 1000, "normalized_pdf_chars": 1000, "sequence_ratio": 1.0},
+      {"page": 22, "ocr_footer": 22, "pdf_footer": 22, "normalized_ocr_chars": 1060, "normalized_pdf_chars": 1054, "sequence_ratio": 0.996216},
+      {"page": 23, "ocr_footer": 23, "pdf_footer": 23, "normalized_ocr_chars": 208, "normalized_pdf_chars": 208, "sequence_ratio": 1.0},
+      {"page": 24, "ocr_footer": 24, "pdf_footer": 24, "normalized_ocr_chars": 737, "normalized_pdf_chars": 739, "sequence_ratio": 0.998645},
+      {"page": 25, "ocr_footer": 25, "pdf_footer": 25, "normalized_ocr_chars": 206, "normalized_pdf_chars": 206, "sequence_ratio": 1.0},
+      {"page": 26, "ocr_footer": 26, "pdf_footer": 26, "normalized_ocr_chars": 908, "normalized_pdf_chars": 908, "sequence_ratio": 1.0},
+      {"page": 27, "ocr_footer": 27, "pdf_footer": 27, "normalized_ocr_chars": 689, "normalized_pdf_chars": 690, "sequence_ratio": 0.999275}
+    ],
+    "minimum_sequence_ratio": 0.989883
+  },
+  "ocr_corrections": [
+    {
+      "page": 5,
+      "field": "repository_url",
+      "ocr": "https://github.com/ValantisLabs/valantis-steX/",
+      "pdf": "https://github.com/ValantisLabs/valantis-stex/",
+      "status": "pdf_confirmed"
+    },
+    {
+      "page": 5,
+      "field": "fixed_commit",
+      "ocr": "95122c7693f9516385aef330ef36bb1cece2cb94",
+      "pdf": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+      "status": "pdf_confirmed_git_confirmation_pending_p4"
+    },
+    {
+      "page": 10,
+      "field": "report_id",
+      "ocr": "VLTS3-S",
+      "pdf": "VLTS3-5",
+      "status": "pdf_confirmed"
+    },
+    {
+      "page": 13,
+      "field": "report_id",
+      "ocr": "VLTS3-i3",
+      "pdf": "VLTS3-13",
+      "status": "pdf_confirmed"
+    },
+    {
+      "page": 13,
+      "field": "affected_path",
+      "ocr": "src/stHYPEWithdrawalModule.solutpdate#L431-L475",
+      "pdf": "src/stHYPEWithdrawalModule.sol:update#L431-L475",
+      "status": "pdf_confirmed_code_confirmation_pending_p4"
+    },
+    {
+      "pages": [10, 11, 12],
+      "field": "code_identifiers",
+      "ocr_pattern": "Several digit/letter substitutions, including TokenI/TokenO and unstateToken0Reserves",
+      "pdf_pattern": "Token1/Token0 and unstakeToken0Reserves",
+      "status": "pdf_confirmed_code_confirmation_pending_p4"
+    },
+    {
+      "pages": [14, 17, 18, 20, 22, 24, 27],
+      "field": "code_identifiers",
+      "ocr_pattern": "Isolated identifier and punctuation transcription errors",
+      "pdf_examples": [
+        "safeTransferFrom",
+        "isZeroToOne",
+        "MockStHype",
+        "ILendingModule",
+        "stHYPEWithdrawalModule__claim_cannotYetClaim",
+        "withdrawalModule.update",
+        "_amount0Min"
+      ],
+      "status": "pdf_confirmed_code_confirmation_pending_p4"
+    }
+  ],
+  "visibility_boundary": {
+    "pdf_copied_into_task_dir": false,
+    "pdf_copied_into_output_root": false,
+    "pdf_copied_into_candidate": false,
+    "pdf_copied_into_docker_context": false,
+    "pdf_copied_into_evmbench_admission": false,
+    "pdf_copied_into_harbor_tree": false,
+    "pdf_copied_into_image_build_context": false,
+    "temporary_pdf_text_and_renders_root": "/tmp/valantis-ocr-harbor.iZKXoT/p3-review",
+    "temporary_material_host_only": true,
+    "candidate_path_created": false
+  },
+  "tools": {
+    "pdfinfo": "22.02.0",
+    "pdftotext": "22.02.0",
+    "pdfimages": "22.02.0"
+  },
+  "checks": [
+    {"id": "p2_passed", "passed": true},
+    {"id": "all_populated_source_abs_paths_agree", "passed": true},
+    {"id": "mandated_search_order_used", "passed": true},
+    {"id": "pdf_sha256_matches", "passed": true},
+    {"id": "physical_page_count_is_38", "passed": true},
+    {"id": "pdf_readable_and_unencrypted", "passed": true},
+    {"id": "exported_pages_reconcile_one_to_one", "passed": true},
+    {"id": "page_5_and_pages_10_through_27_reviewed", "passed": true},
+    {"id": "finding_boundaries_reconciled", "passed": true},
+    {"id": "ocr_corrections_recorded_without_source_rewrite", "passed": true},
+    {"id": "pdf_outside_all_agent_and_build_contexts", "passed": true},
+    {"id": "candidate_not_created", "passed": true},
+    {"id": "ocr_sha256_unchanged", "passed": true}
+  ],
+  "summary": {
+    "ok": true,
+    "check_count": 13,
+    "failed_check_count": 0,
+    "resolved_pdf_count": 1,
+    "reviewed_page_count": 19,
+    "finding_range_count": 5,
+    "exit_criterion_met": true
+  }
+}

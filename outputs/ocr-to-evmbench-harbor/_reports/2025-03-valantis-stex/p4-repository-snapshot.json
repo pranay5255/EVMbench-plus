@@ -1,0 +1,151 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "phase": "P4",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T12:59:18Z",
+  "status": "passed",
+  "review_clone": {
+    "path": "/tmp/valantis-ocr-harbor.iZKXoT/p4-review.9tCIDp/repo",
+    "temporary_root": "/tmp/valantis-ocr-harbor.iZKXoT/p4-review.9tCIDp",
+    "requested_url": "https://github.com/ValantisLabs/valantis-stex",
+    "origin_fetch_url": "https://github.com/ValantisLabs/valantis-stex",
+    "origin_push_url": "https://github.com/ValantisLabs/valantis-stex",
+    "normalized_repository_url": "https://github.com/ValantisLabs/valantis-stex",
+    "normalized_repository_slug": "ValantisLabs/valantis-stex",
+    "network_clone": true,
+    "separate_from_adjacent_and_tooling_checkouts": true
+  },
+  "vulnerable_snapshot": {
+    "expected_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "actual_head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "object_type": "commit",
+    "subject": "chore: contract headers",
+    "commit_date": "2025-03-08T18:17:37+00:00",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "root_tree": "01a3298cb0d49d695a9832359ffa7658b8e140ae"
+  },
+  "fixed_snapshot": {
+    "expected_commit": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "resolved_commit": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "object_type": "commit",
+    "subject": "Merge pull request #16 from ValantisLabs/fix/read-only-reentrancy-getLiquidityQuote",
+    "commit_date": "2025-03-19T11:27:01+00:00",
+    "root_tree": "ee3f91fd4e34b57a381ceb11746f7e5a43578ef5",
+    "vulnerable_commit_is_ancestor": true,
+    "merge_base_with_vulnerable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "kept_separate_from_task_snapshot": true
+  },
+  "audited_scope": {
+    "normalized_scope": "src/**",
+    "scope_count": 1,
+    "scope_exists": true,
+    "src_tree": "05bfac7670a56c7c2d44d99f7463ca550477678f",
+    "tracked_file_count": 21,
+    "derivation": "The PDF identifies one repository and vulnerable commit; all 11 report entries name production contracts under src. The benchmark scope excludes tests, scripts, broadcasts, and vendored libraries while retaining the pinned valantis-core dependency as exploit-path corroboration."
+  },
+  "key_vulnerable_files": [
+    {
+      "path": "src/STEXAMM.sol",
+      "blob": "e6551b36dc46654e6339092ac6f0c9e627b1dab6",
+      "sha256": "4055f85b0f230c86a1296647891da20a04d63db32d7c86496724230a2b685392"
+    },
+    {
+      "path": "src/stHYPEWithdrawalModule.sol",
+      "blob": "3bf09653191f406fcc2b82f496830f1a7613206b",
+      "sha256": "19a1503e63b720dfcc0e583cbb04dc60ba4eee09c05ef549ebd702d77aabc4d5"
+    },
+    {
+      "path": "src/STEXRatioSwapFeeModule.sol",
+      "blob": "af5c248798bf33d3511546b12514368942ee0c3c",
+      "sha256": "9cd0707d956c844cff89c8468e1701e6e0086f545aa0dd15831acf970f3c21cb"
+    },
+    {
+      "path": "src/AaveLendingModule.sol",
+      "blob": "046bd779afb1c0a1c23dd11352b5a3cb9d9bd105",
+      "sha256": "225d1ae50466b63f5e87ef6242833d1c2648061dc74f7fa868289c5b53917357"
+    },
+    {
+      "path": "src/structs/WithdrawalModuleStructs.sol",
+      "blob": "f2d31bbf148492bd25dd0149e046fefeb8e6993a",
+      "sha256": "6c4bad009081d1a31e58012ff68ede6e5b4bdb66860ed10b785c2970793a04cb"
+    },
+    {
+      "path": "lib/valantis-core/src/pools/SovereignPool.sol",
+      "submodule_commit": "18ee8bb9ad91871ddfdb711f0522f15d89e03673",
+      "blob": "009f708b6f5028ca00ed466f9b4fbc3b8f6bed14",
+      "sha256": "f17cd9973b47a8f27634641ea2e4d49cad0e0a6204676bc13a7a4eb2e5d8ef6a",
+      "role": "Pinned dependency behavior used to verify swap callback and fee/quote exploit paths; not added to normalized primary scope."
+    }
+  ],
+  "corroborating_fix_commits": [
+    {
+      "finding_id": "H-03",
+      "report_id": "VLTS3-3",
+      "commit": "b0ba237d9f972f3d74691d5ca42090887e49a556",
+      "subject": "fix: ensure proper account of token1 in lending module during updates",
+      "descends_from_vulnerable": true,
+      "ancestor_of_fixed": true
+    },
+    {
+      "finding_id": "H-01",
+      "report_id": "VLTS3-5",
+      "commit": "320fd6d3789f94a5bccd06d14c2f936d44f919fc",
+      "subject": "fix: improper accounting of withdrawalModule.amountToken1PendingLPWithdrawal post ETH balance increases and before calling withdrawalModule.update",
+      "descends_from_vulnerable": true,
+      "ancestor_of_fixed": true
+    },
+    {
+      "finding_id": "H-02",
+      "report_id": "VLTS3-13",
+      "commit": "efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec",
+      "subject": "fix: withdrawal module read-only reentrancy due to sovereignPool::swap callback on swap",
+      "descends_from_vulnerable": true,
+      "ancestor_of_fixed": true
+    },
+    {
+      "finding_id": "H-04",
+      "report_id": "VLTS3-9",
+      "commit": "5115be75eb0f8dcb8bda9040f1cf0184cfbc9f5c",
+      "subject": "fix: withdrawal module FIFO for LP withdrawal claims",
+      "descends_from_vulnerable": true,
+      "ancestor_of_fixed": true
+    },
+    {
+      "finding_id": "H-05",
+      "report_id": "VLTS3-14",
+      "commit": "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2",
+      "subject": "fix: read-only reentrancy in getLiquidityQuote during STEX withdrawals",
+      "descends_from_vulnerable": true,
+      "ancestor_of_fixed": true
+    }
+  ],
+  "integrity": {
+    "gitmodules_sha256": "efd607b8123f1fc40dd102364d89d1388a3dcff83c377fc3d585b55ba1fa28a9",
+    "recursive_submodule_status_sha256": "3ce56683ef0333b8f14c389e958d0d19a6bc74bbc4eac199a92ca543d42735c8",
+    "empty_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git_fsck_passed": true
+  },
+  "checks": [
+    {"id": "repository_cloned_in_separate_temporary_location", "passed": true},
+    {"id": "canonical_origin_matches_pdf_repository", "passed": true},
+    {"id": "vulnerable_commit_object_exists", "passed": true},
+    {"id": "fixed_commit_object_exists", "passed": true},
+    {"id": "fixed_commit_descends_from_vulnerable_commit", "passed": true},
+    {"id": "head_equals_vulnerable_commit", "passed": true},
+    {"id": "head_is_detached", "passed": true},
+    {"id": "recursive_submodules_initialized_and_clean", "passed": true},
+    {"id": "audited_src_scope_exists", "passed": true},
+    {"id": "repository_object_database_passes_fsck", "passed": true},
+    {"id": "candidate_not_created", "passed": true}
+  ],
+  "summary": {
+    "ok": true,
+    "check_count": 11,
+    "failed_check_count": 0,
+    "repository_count": 1,
+    "vulnerable_commit_count": 1,
+    "fixed_commit_count": 1,
+    "scope_count": 1
+  }
+}

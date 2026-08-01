@@ -1,0 +1,122 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image_validation.v2",
+  "phase": "P6R",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T14:33:47Z",
+  "status": "passed",
+  "candidate_review_image_admissible": true,
+  "candidate_admitted": false,
+  "image": {
+    "tag": "ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r2-review",
+    "id": "sha256:a8604ad62325521d2c597f46932094ae94f293b926194eba78e5ead4ba9ee9b7",
+    "local_content_digest": "sha256:a8604ad62325521d2c597f46932094ae94f293b926194eba78e5ead4ba9ee9b7",
+    "repo_digests": [],
+    "created": "2026-07-25T14:16:20.148078166Z",
+    "size_bytes": 3613086576,
+    "rootfs_layer_count": 20,
+    "base_tag": "evmbench/base:latest",
+    "base_image_id": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+    "base_image_size_bytes": 3575001740,
+    "base_image_created": "2026-06-12T13:51:52.262062894Z"
+  },
+  "candidate_revision": {
+    "phase": "P5R",
+    "dockerfile_sha256": "8e8a68c80b26768b91bffe9d0d2f723820416dd2f720c09e8a732341e1ca3f6c",
+    "dockerignore_sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64",
+    "generated_file_manifest": "p5r-generated-file-manifest.json",
+    "generated_file_manifest_sha256": "28d691982f1ee59501a27c58e86c54e930b04c6936cd31bbe1dcde409d4b38b9"
+  },
+  "build": {
+    "command": "docker build --no-cache --progress=plain -t ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r2-review .",
+    "exit_code": 0,
+    "no_cache": true,
+    "context_policy": "deny all; allow Dockerfile and .dockerignore only",
+    "effective_context_files": [".dockerignore", "Dockerfile"],
+    "copy_or_add_directive_count": 0,
+    "repository_layer_count": 1,
+    "exact_depth_one_fetch_passed": true,
+    "reachable_commit_count_assertion_passed": true,
+    "all_14_recursive_submodule_revision_assertions_passed": true,
+    "dockerfile_forge_build_passed": true,
+    "dockerfile_forge_test_count": 34,
+    "dockerfile_forge_test_failed": 0,
+    "same_layer_cleanup_assertions_passed": true,
+    "durable_summary_log": "p6r-docker-build.log",
+    "raw_temporary_log": {
+      "path": "/tmp/valantis-p6r2-docker-build.log",
+      "size_bytes": 34871,
+      "sha256": "206331bbfd5c46c4a2a1815a0a628d772b65d8d21388f48f7cabe9504c1e1c42"
+    }
+  },
+  "runtime_repository_validation": {
+    "network_mode": "none",
+    "head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "reachable_commit_count": 1,
+    "other_head_tag_or_remote_refs": 0,
+    "git_status_line_count": 0,
+    "git_fsck_unreachable_object_count": 0,
+    "known_post_audit_commit_object_count": 0,
+    "direct_gitlinks_match": true,
+    "all_cleaned_dependency_content_hashes_match_review_clone": true,
+    "repository_pdf_count": 0,
+    "nested_git_entry_count": 0,
+    "submodule_object_store_present": false,
+    "repository_symlink_count": 0,
+    "repository_archive_count": 0,
+    "repository_jsonl_count": 0,
+    "authoring_artifact_count": 0
+  },
+  "foundry": {
+    "network_mode": "none",
+    "foundry_offline": true,
+    "build_command": "forge build --force --offline",
+    "build_exit_code": 0,
+    "compiled_file_count": 102,
+    "solc_version": "0.8.30",
+    "build_log": "p6r-foundry-build.log",
+    "test_command": "forge test --force --offline",
+    "test_exit_code": 0,
+    "test_suite_count": 3,
+    "test_count": 34,
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0,
+    "test_log": "p6r-foundry-test.log",
+    "nonfatal_note": "Foundry's auto-installer reports missing Git submodule metadata, but vendored dependency content is present and matches the reviewed snapshot; forced offline compilation and tests pass."
+  },
+  "saved_image_inspection": {
+    "temporary_root": "/tmp/valantis-p6r2.pRfIf6",
+    "image_tar": {
+      "path": "/tmp/valantis-p6r2.pRfIf6/agent-image.tar",
+      "size_bytes": 3700922368,
+      "sha256": "e9fe9d17ed874fef1eeb6583f20ab34bf02e063b90ced379198ea33a6b13ff14"
+    },
+    "history": {
+      "entry_count": 44,
+      "path": "/tmp/valantis-p6r2.pRfIf6/history.jsonl",
+      "size_bytes": 16770,
+      "sha256": "aecbd7035154d94553cf543e5003fd3c32b438b050c97f05b1b69d8cf53a31cd"
+    },
+    "rootfs_tar": {
+      "path": "/tmp/valantis-p6r2.pRfIf6/rootfs.tar",
+      "size_bytes": 3692353536,
+      "sha256": "400c649372ffb48babb34383f325e150b0214c8038086ec16b5f7850a3f5d188",
+      "entry_count": 116649
+    },
+    "inspection_container_removed": true
+  },
+  "discarded_intermediate_iteration": {
+    "tag": "ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r-review",
+    "id": "sha256:41cd2b01348feff76d9db4bbe3a56407687d71f89f594a2288cbc3f0e5615eb9",
+    "accepted": false,
+    "reason": "Separate post-cleanup Forge layers recreated .git/modules. The final Dockerfile moved build/tests before cleanup in the single repository layer."
+  },
+  "summary": {
+    "ok": true,
+    "build_ok": true,
+    "runtime_repository_ok": true,
+    "foundry_ok": true,
+    "leakage_ok": true,
+    "admission_approval_still_required": true
+  }
+}

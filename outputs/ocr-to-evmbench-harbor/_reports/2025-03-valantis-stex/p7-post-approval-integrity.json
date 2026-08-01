@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.post_approval_integrity.v1",
+  "phase": "P7",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:37:10Z",
+  "status": "passed",
+  "review_bundle_digest": "11dd3b8f667da20aab1d343e804e7f53122ee64a5b0d086fc27a53445e05fe01",
+  "reviewer": "https://github.com/pranay5255",
+  "reviewed_content": {
+    "immutable_file_count": 15,
+    "all_hashes_match_p7_approved_manifest": true,
+    "mismatches": []
+  },
+  "operational_metadata": {
+    "review_status_sha256": "3f0e5663c18c465dec2eb7201d8a1d8408d26a170f14fb73c70b60bcc4070ee8",
+    "provenance_sha256_after_p11_update": "8d9dda9482cc0e5c3b2bc8c556bc34d0b2c5d88701d057ee5ae069cac91ac2b6",
+    "provenance_change_expected": true
+  },
+  "strict_validator": {
+    "require_approved": true,
+    "candidate_ok": true,
+    "admitted_copy_ok": true,
+    "finding_count": 5,
+    "errors": [],
+    "warnings": []
+  },
+  "candidate_and_admitted_tree_byte_identical": true
+}

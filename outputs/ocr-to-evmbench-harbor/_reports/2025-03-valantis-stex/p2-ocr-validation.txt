@@ -1,0 +1,22 @@
+P2 OCR JSONL VALIDATION
+
+result: PASS
+input: /home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002911_39a2c2ee71c9.jsonl
+sha256_before: 10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d
+sha256_after: 10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d
+input_unchanged: true
+record_count: 38
+valid_record_count: 38
+invalid_record_count: 0
+all_expected_page_records_passed: true
+pdf_id: pdf_002911_39a2c2ee71c9
+source_page_count: 38
+source_pdf_sha256: 64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7
+page_numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38]
+global_checks: 19
+failed_global_checks: 0
+record_checks: 1976
+failed_record_checks: 0
+
+FAILED CHECKS
+none

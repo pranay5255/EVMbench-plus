@@ -1,0 +1,37 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_integrity.v1",
+  "phase": "P12",
+  "status": "partial_blocked",
+  "candidate_id": "2025-03-valantis-stex",
+  "review_bundle_digest": "11dd3b8f667da20aab1d343e804e7f53122ee64a5b0d086fc27a53445e05fe01",
+  "candidate_checksum_stream_sha256": "fe4fcd359a8a2b1d1617c8716ddd7a1934718c20818f94503662b2051cca8de9",
+  "source_ocr": {
+    "sha256_initial": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "sha256_final": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "size_bytes": 186206,
+    "unchanged": true
+  },
+  "source_pdf": {
+    "sha256_initial": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "sha256_final": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "size_bytes": 13601799,
+    "unchanged": true
+  },
+  "isolated_checkouts": {
+    "opd_base_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "opd_base_clean": true,
+    "forest_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+    "candidate_and_admitted_tree_byte_identical": true
+  },
+  "canonical_checkouts": {
+    "opd_base_head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+    "opd_base_status_excluding_task_dir_unchanged": true,
+    "opd_base_status_sha256": "adfbb41cd0d38b910313d7a7b042226f6ab475791a58ca2addba0eff1c319748",
+    "forest_head_at_p1": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+    "forest_head_now": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "forest_external_drift_detected": true,
+    "forest_targeted_by_this_execution": false
+  },
+  "passed_gates": ["P7", "P8", "P9", "P10", "P11"],
+  "blocked_gate": "P12 live Mini-SWE/GPT-5.4 smoke"
+}

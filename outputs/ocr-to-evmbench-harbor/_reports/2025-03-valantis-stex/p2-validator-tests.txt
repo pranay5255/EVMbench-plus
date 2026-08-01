@@ -1,0 +1,30 @@
+P2 OCR VALIDATOR TEST EVIDENCE
+
+captured_at: 2026-07-25T11:52:41Z
+python: Python 3.10.12
+
+COMMAND
+python3 -m unittest -v tests/test_validate_ocr_jsonl.py
+
+RESULT
+test_cli_writes_json_and_text_reports ... ok
+test_detects_record_and_global_contract_violations ... ok
+test_valid_export_passes_all_records_and_expectations ... ok
+Ran 3 tests
+status: PASS
+
+COMPILE CHECK
+command: python3 -m py_compile scripts/validate_ocr_jsonl.py tests/test_validate_ocr_jsonl.py
+status: PASS
+
+SOURCE HASHES
+scripts/validate_ocr_jsonl.py:
+  3686b758a88598a2749f8f76cb78dcb8b1d3ae2ba891fff65ad9dd0ef09ecf2a
+tests/test_validate_ocr_jsonl.py:
+  07b24d04c02ee57d748ac3fa8dc3ef562fa49edc326c5abe70ed46f708a00b5e
+
+REPORT HASHES
+p2-ocr-validation.json:
+  53bfbaf959a25c8faeb3043b4f6359068405a061d7050fb64817fb3ae90f07fc
+p2-ocr-validation.txt:
+  75cf5b0f89c157b0af5629fb7a3248e110559b67dbb80d98b12162a54e76f0e3

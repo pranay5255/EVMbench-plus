@@ -1,0 +1,21 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-agent-d21ecebec4083ea5-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex"
+  ],
+  "registry_digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+  "image_id": "sha256:d21ecebec4083ea50db60dbcfceecb783dca553e4385724d9c2c2c9e5a089f71",
+  "created": "2026-07-27T10:07:33.625357065Z",
+  "size_bytes": 3613086576,
+  "rootfs_layer_count": 20,
+  "platform": "linux/amd64",
+  "repository_head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+  "manifest_verified": true,
+  "foundry_build_forced_offline_passed": true,
+  "foundry_tests": {"passed": 34, "failed": 0, "skipped": 0}
+}

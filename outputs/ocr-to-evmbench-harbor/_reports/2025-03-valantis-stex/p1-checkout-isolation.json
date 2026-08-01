@@ -1,0 +1,43 @@
+{
+  "schema_version": "valantis_ocr_to_evmbench.phase_evidence.v1",
+  "phase": "P1",
+  "candidate_id": "2025-03-valantis-stex",
+  "created_at": "2026-07-25T11:42:22Z",
+  "temporary_root": "/tmp/valantis-ocr-harbor.iZKXoT",
+  "clone_method": "local git clone --no-hardlinks --no-checkout followed by detached checkout",
+  "checkouts": {
+    "opd_base": {
+      "source_checkout": "/home/experiments_base/OPD_base",
+      "source_origin_url": "https://github.com/pranay5255/OPD_base.git",
+      "source_checkout_head": "27b0d592ce079a02b83b2091b0c1cf41795012b2",
+      "source_checkout_clean": false,
+      "clone_path": "/tmp/valantis-ocr-harbor.iZKXoT/opd-base",
+      "clone_origin_url": "/home/experiments_base/OPD_base",
+      "required_commit": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "actual_head": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "commit_object_type": "commit",
+      "detached_head": true,
+      "clean": true,
+      "required_validator_present": true
+    },
+    "forest_of_audits": {
+      "source_checkout": "/home/experiments_base/forestOfAudits",
+      "source_origin_url": "https://github.com/pranay5255/forestOfAudits",
+      "source_checkout_head": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+      "source_checkout_clean": false,
+      "clone_path": "/tmp/valantis-ocr-harbor.iZKXoT/forest-of-audits",
+      "clone_origin_url": "/home/experiments_base/forestOfAudits",
+      "required_commit": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+      "actual_head": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+      "commit_object_type": "commit",
+      "detached_head": true,
+      "clean": true,
+      "evmbench_audits_directory_present": true
+    }
+  },
+  "output_root": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor",
+  "report_directory": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_reports/2025-03-valantis-stex",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-valantis-stex",
+  "candidate_path_created": false,
+  "network_used_for_clones": false
+}

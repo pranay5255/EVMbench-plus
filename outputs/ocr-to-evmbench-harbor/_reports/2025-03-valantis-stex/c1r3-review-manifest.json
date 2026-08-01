@@ -1,0 +1,126 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1R3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:12:53Z",
+  "task_group_key": "ValantisLabs/valantis-stex@25a19b663f86b53112a5e020c843904a571cc1e8|src/**|detect",
+  "task_group_key_sha256": "9f59eac69f7a44cd5049f206652168cc70c46183df51fa33a923c94b2b6f2f3c",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-valantis-stex",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false,
+    "approved_by_present": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "reviewer_identity": {
+    "requested": "github.com/pranay5255",
+    "canonical": "https://github.com/pranay5255",
+    "github_login": "pranay5255",
+    "github_user_id": 22420966,
+    "verified_with_gh_api": true,
+    "approval_not_yet_recorded": true
+  },
+  "source_evidence": {
+    "ocr": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002911_39a2c2ee71c9.jsonl",
+      "sha256": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+      "record_count": 38,
+      "schema_version": "evmbench_task_creation.ocr_page.v1"
+    },
+    "pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+      "sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+      "page_count": 38
+    }
+  },
+  "repository": {
+    "url": "https://github.com/ValantisLabs/valantis-stex",
+    "vulnerable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "fixed_commit_kept_separate": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "root_tree": "01a3298cb0d49d695a9832359ffa7658b8e140ae",
+    "src_tree": "05bfac7670a56c7c2d44d99f7463ca550477678f",
+    "audited_scope": "src/**",
+    "mode": "detect",
+    "recursive_submodule_revision_count": 14
+  },
+  "findings": [
+    {"gold_id": "H-01", "report_id": "VLTS3-5", "pages": [10, 11, 12], "award": 1.0, "finding_sha256": "920af3de53e29224ffc67a4b3747b426c26f6864c3b1b8a4e75989514b77683c"},
+    {"gold_id": "H-02", "report_id": "VLTS3-13", "pages": [13, 14, 15, 16, 17, 18], "award": 1.0, "finding_sha256": "c22e53e5479834ae74b262ac85af2ac6cdb950d6a1f053cfeb68991c3f3406a3"},
+    {"gold_id": "H-03", "report_id": "VLTS3-3", "pages": [19, 20], "award": 1.0, "finding_sha256": "a57381c7bde062e8820751129bfc4dc15a9df26440e7f929f30dbf16af3829f6"},
+    {"gold_id": "H-04", "report_id": "VLTS3-9", "pages": [21, 22, 23, 24, 25], "award": 1.0, "finding_sha256": "145f4bad130f99d2d52c3f86fc14a64984ae1ce2a65563c4416f6f238035841f"},
+    {"gold_id": "H-05", "report_id": "VLTS3-14", "pages": [26, 27], "award": 1.0, "finding_sha256": "7009a743726581495a3fb484638c01cfd729d0c35ef26437c51f58ba5df586c9"}
+  ],
+  "max_score": 5.0,
+  "reviewed_candidate": {
+    "file_manifest": "p5r3-generated-file-manifest.json",
+    "file_manifest_sha256": "391bb3c53a8dcce20a2dbdcaddfab96c08d0f86fa65c33ed010331ce383f6b8d",
+    "candidate_file_count": 17,
+    "candidate_checksum_stream_sha256": "9f37669277597e149d2d62c899bc1edff455a26b20b3781e8d6b0836f2548d77",
+    "dockerfile_sha256": "66a686a2bc590a83f949d0d0c0fcc6c1a443497bc6a8257a48c9dc77405b296b",
+    "provenance_sha256": "0c601dee9188d21efee6de6b871bcadd6ac62a7953bef516be546fb3dc1e4982",
+    "review_status_sha256": "c59cdd1b9f9e668d26d858d272285abfff15235de67701bb59d144a82fc8e591"
+  },
+  "validation_reports": [
+    {"path": "p1-checkout-isolation.json", "sha256": "92dc2f32abe73a45f47f1725675b29a76c2557dafe7437deb6bc6b5408866b5a", "status": "passed"},
+    {"path": "p1-input-hashes.json", "sha256": "fdf238239f566d61a6df8344a9aa3477a49f5e8e7d2ff3b19cd99bdaeb17e582", "status": "passed"},
+    {"path": "p2-ocr-validation.json", "sha256": "53bfbaf959a25c8faeb3043b4f6359068405a061d7050fb64817fb3ae90f07fc", "status": "passed"},
+    {"path": "p3-pdf-validation.json", "sha256": "d12a849403e4dc751a88ef43896ed9923c39ceb7c85957f97624c0b93719e8ff", "status": "passed"},
+    {"path": "p4-task-group.json", "sha256": "6bb741bff0d5cbad73ec23a3335e784b8a434e362e60a2e785f683fcd1210135", "status": "passed"},
+    {"path": "p4-repository-snapshot.json", "sha256": "7f4cec4aa46474b45dde240f8083b585d1d844399be02a16d67bf053e4644b6e", "status": "passed"},
+    {"path": "p4-submodules.json", "sha256": "ea41e2cd0a73b4cfa6cdd9824f9ce1effab25a287f1b15e4310b5faf04b80767", "status": "passed"},
+    {"path": "p4-report-dispositions.json", "sha256": "0f79df4599cb6563bceaf8f2470e604193d9a559b55ef18b4e06e995deec7a84", "status": "passed"},
+    {"path": "p4-ocr-corrections.json", "sha256": "b40b6819b69d229aae0109e518b2c6c30df2ce8e3408a66dca65790a91461385", "status": "passed"},
+    {"path": "p5-byte-exact-slices.json", "sha256": "7ba7d26d2dbab378fa59d4c11fb866e6241362e25d7b06606a13f9f34d9fcc3e", "status": "passed"},
+    {"path": "p5r3-generated-file-manifest.json", "sha256": "391bb3c53a8dcce20a2dbdcaddfab96c08d0f86fa65c33ed010331ce383f6b8d", "status": "passed"},
+    {"path": "p6r3-structural-validator.json", "sha256": "df401d13178f19efde770616e24760870ee703bc30b100a7ab163529461f7f08", "status": "passed"},
+    {"path": "p6r3-semantic-validation.json", "sha256": "189d4982c54a1b72027501c4b7c35d167e78c1c65c559d3230977c3f26313c6c", "status": "passed"},
+    {"path": "p6r3-repository-validation.json", "sha256": "06eca485762e26788499175bfe2e086c4a75bd39445d216e98cb655e2ad58a23", "status": "passed"},
+    {"path": "p6r3-agent-image.json", "sha256": "ea8674b951b8757b3b5b8d78e2cf3e148fd26dca8a5bb86dbcf40e6cc723205b", "status": "passed"},
+    {"path": "p6r3-leakage-scan.json", "sha256": "9df8228feea070db669ab46c24c14f643af570d5f53da84f87d672a9370656dd", "status": "passed"},
+    {"path": "p6r3-registry-validation.json", "sha256": "32b40684d996c0dba69bd519a1dbd52a14e5d001b4479a001acffa7d1e89b745", "status": "passed"}
+  ],
+  "base_image": {
+    "tag": "docker.io/pranay5255/yudaii_evmbench:base-fc20d776501708f9-amd64",
+    "manifest_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9"
+  },
+  "agent_image": {
+    "tag": "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-agent-d21ecebec4083ea5-amd64",
+    "manifest_digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+    "config_digest": "sha256:d21ecebec4083ea50db60dbcfceecb783dca553e4385724d9c2c2c9e5a089f71",
+    "image_tar_sha256": "f76dc4d0153afa1f26fe18777112da566813e43d552771ef9542f7fe771889c8",
+    "rootfs_tar_sha256": "07468286e5cfe7ec325301654f9947b16de35c124223fe4d8dc8d4386e69748a"
+  },
+  "validation_summary": {
+    "structural": "passed",
+    "semantic": "passed",
+    "repository": "passed",
+    "docker_build": "passed",
+    "foundry_build": "passed",
+    "foundry_tests": "34 passed; 0 failed; 0 skipped",
+    "runtime_network": "none",
+    "leakage": "passed",
+    "registry_manifests": "passed",
+    "pdf_files_in_image_or_layers": 0,
+    "post_audit_commit_objects_in_image": 0,
+    "unresolved_semantic_or_reproducibility_concerns": []
+  },
+  "isolation": {
+    "canonical_evmbench_or_harbor_state_changed": false,
+    "adjacent_dirty_checkouts_preserved": true,
+    "agent_or_model_run": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false
+  },
+  "approval_requirement": {
+    "required_state_transition": "approved_for_admission",
+    "must_quote_exact_candidate_id": true,
+    "must_quote_review_manifest_sha256": true,
+    "must_supply_reviewer_identity": true,
+    "expected_reviewer_identity": "https://github.com/pranay5255",
+    "approval_not_contained_in_this_manifest": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "valantis_detect_patch.dpm1_isolated_checkouts.v1",
+  "candidate_id": "2025-03-valantis-stex",
+  "completed_at": "2026-07-25T16:38:25Z",
+  "status": "passed",
+  "temporary_root": "/tmp/valantis-dpm1.w8cHzY",
+  "checkouts": [
+    {
+      "name": "OPD_base",
+      "path": "/tmp/valantis-dpm1.w8cHzY/opd",
+      "source": "/home/experiments_base/OPD_base",
+      "head": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "detached": true,
+      "clean": true
+    },
+    {
+      "name": "forestOfAudits",
+      "path": "/tmp/valantis-dpm1.w8cHzY/forest",
+      "source": "/home/experiments_base/forestOfAudits",
+      "head": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+      "detached": true,
+      "clean": true
+    },
+    {
+      "name": "Valantis",
+      "path": "/tmp/valantis-dpm1.w8cHzY/valantis",
+      "source": "https://github.com/ValantisLabs/valantis-stex.git",
+      "head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+      "detached": true,
+      "clean": true,
+      "recursive_submodules_initialized": 14
+    }
+  ],
+  "submodule_initialization": {
+    "first_attempt": "failed_before_clone_completion_due_to_sandbox_dns_restriction",
+    "authorized_network_retry": "passed",
+    "repository_or_candidate_files_changed_by_failed_attempt": false
+  },
+  "retention": "temporary_root_retained_for_dpm2_after_explicit_approval",
+  "adjacent_dirty_checkouts_used_as_worktrees": false
+}

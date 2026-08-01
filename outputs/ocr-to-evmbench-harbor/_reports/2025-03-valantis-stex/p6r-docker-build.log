@@ -1,0 +1,29 @@
+P6R DOCKER BUILD VALIDATION
+
+candidate_id: 2025-03-valantis-stex
+completed_at: 2026-07-25T14:16:20Z
+image_tag: ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r2-review
+image_id: sha256:a8604ad62325521d2c597f46932094ae94f293b926194eba78e5ead4ba9ee9b7
+base_image_id: sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9
+command: docker build --no-cache --progress=plain
+exit_code: 0
+
+The single repository layer:
+- initialized an empty repository;
+- fetched only vulnerable commit
+  25a19b663f86b53112a5e020c843904a571cc1e8 at depth one;
+- asserted exactly one reachable top-level commit;
+- initialized and verified all 14 reviewed recursive submodule revisions;
+- compiled 102 Solidity files;
+- passed all 34 Foundry tests;
+- removed every PDF, nested .git entry, and .git/modules object store;
+- asserted the cleanup before the layer was committed.
+
+The final WORKDIR/ENV layer does not mutate the audit repository.
+
+Raw temporary log:
+  path: /tmp/valantis-p6r2-docker-build.log
+  size_bytes: 34871
+  sha256: 206331bbfd5c46c4a2a1815a0a628d772b65d8d21388f48f7cabe9504c1e1c42
+
+RESULT: passed

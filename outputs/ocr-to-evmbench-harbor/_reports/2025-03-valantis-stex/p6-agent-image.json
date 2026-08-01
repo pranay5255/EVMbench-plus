@@ -1,0 +1,72 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image.v1",
+  "phase": "P6",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T13:41:10Z",
+  "status": "rejected_due_to_leakage",
+  "admissible": false,
+  "image": {
+    "tag": "ocr-to-evmbench-harbor/2025-03-valantis-stex:p6-review",
+    "id": "sha256:625094394c8627080403e5bd1fc9072a58a85a9465a432fba0f4380c79c09a71",
+    "local_content_digest": "sha256:625094394c8627080403e5bd1fc9072a58a85a9465a432fba0f4380c79c09a71",
+    "repo_digests": [],
+    "created": "2026-07-25T13:32:50.428844144Z",
+    "size_bytes": 3763380423,
+    "base_tag": "evmbench/base:latest",
+    "base_image_id": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+    "rootfs_layer_count": 23
+  },
+  "build": {
+    "dockerfile_sha256": "3ed89d0cff66d20ac59d6451aa74da3144958d64bde80dc47ba22260560a796d",
+    "dockerignore_sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64",
+    "build_context_policy": "deny all; allow Dockerfile and .dockerignore only",
+    "network_mode": "default",
+    "exit_code": 0,
+    "clone_checkout_passed": true,
+    "dockerfile_forge_build_passed": true,
+    "dockerfile_forge_test_passed": true
+  },
+  "runtime_validation": {
+    "network_mode": "none",
+    "repository_head": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "repository_head_matches": true,
+    "repository_status_clean": true,
+    "recursive_submodule_count": 14,
+    "recursive_submodule_revisions_match": true,
+    "forced_forge_build_exit_code": 0,
+    "forced_forge_test_exit_code": 0,
+    "test_suites": 3,
+    "tests_passed": 34,
+    "tests_failed": 0,
+    "tests_skipped": 0
+  },
+  "inspection_artifacts": {
+    "temporary_root": "/tmp/valantis-p6.ukH6V0",
+    "docker_save_path": "/tmp/valantis-p6.ukH6V0/agent-image.tar",
+    "docker_save_size_bytes": 3851634176,
+    "docker_save_sha256": "3e7767352278fa58bbce98f8cb65b5fb36908d1105637013a38a4918f40a2d15",
+    "exported_rootfs_path": "/tmp/valantis-p6.ukH6V0/rootfs.tar",
+    "exported_rootfs_size_bytes": 3842929664,
+    "exported_rootfs_sha256": "ac3d9d5628f0bf4294c17bb7e07ed617eddf056edfb464a1d8769efb30d88f6e"
+  },
+  "checks": [
+    {"id": "build_completed", "passed": true},
+    {"id": "head_matches_vulnerable_commit", "passed": true},
+    {"id": "submodule_revisions_match", "passed": true},
+    {"id": "runtime_network_disabled", "passed": true},
+    {"id": "forced_foundry_build_passed", "passed": true},
+    {"id": "forced_foundry_tests_passed", "passed": true},
+    {"id": "visibility_boundary_passed", "passed": false}
+  ],
+  "rejection_reasons": [
+    "The cloned Git object database and origin refs retain post-audit commits whose subjects disclose all five selected root causes.",
+    "The image filesystem and clone layer contain 19 vendored dependency audit PDFs."
+  ],
+  "summary": {
+    "ok": false,
+    "build_ok": true,
+    "runtime_repository_ok": true,
+    "foundry_ok": true,
+    "leakage_ok": false
+  }
+}

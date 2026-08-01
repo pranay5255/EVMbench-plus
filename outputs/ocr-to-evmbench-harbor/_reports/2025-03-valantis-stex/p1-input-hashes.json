@@ -1,0 +1,27 @@
+{
+  "schema_version": "valantis_ocr_to_evmbench.phase_evidence.v1",
+  "phase": "P1",
+  "candidate_id": "2025-03-valantis-stex",
+  "created_at": "2026-07-25T11:42:22Z",
+  "ocr_jsonl": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_002911_39a2c2ee71c9.jsonl",
+    "sha256": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "size_bytes": 186206,
+    "line_count": 38,
+    "immutable_input": true
+  },
+  "source_pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/Smart-Contract-Review-Public-Reports/valantis-mar-25(Final).pdf",
+    "sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "size_bytes": 13601799,
+    "physical_page_count_preflight": 38,
+    "copied_into_output_root": false,
+    "immutable_input": true
+  },
+  "source_path_observation": {
+    "populated_raw_record_source_abs_path_count": 38,
+    "unique_populated_source_abs_path_count": 1,
+    "formal_agreement_gate": "P3"
+  },
+  "original_inputs_modified": false
+}

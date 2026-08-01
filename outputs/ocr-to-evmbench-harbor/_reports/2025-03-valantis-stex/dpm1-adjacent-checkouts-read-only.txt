@@ -1,0 +1,41 @@
+DPM1 ADJACENT CHECKOUT PRESERVATION
+
+candidate_id: 2025-03-valantis-stex
+completed_at: 2026-07-25T16:38:25Z
+status: passed
+
+OPD_base
+  path: /home/experiments_base/OPD_base
+  head_before: 27b0d592ce079a02b83b2091b0c1cf41795012b2
+  head_after: 27b0d592ce079a02b83b2091b0c1cf41795012b2
+  comparison_scope: all paths except authorized task_dir/**
+  status_sha256_before: adfbb41cd0d38b910313d7a7b042226f6ab475791a58ca2addba0eff1c319748
+  status_sha256_after: adfbb41cd0d38b910313d7a7b042226f6ab475791a58ca2addba0eff1c319748
+  status_entries_before: 5
+  status_entries_after: 5
+  status_classes: 3 modified, 2 untracked
+  unchanged_outside_task_dir: true
+
+forestOfAudits
+  path: /home/experiments_base/forestOfAudits
+  head_before: 1db91e36ec6f7c5975a8779b6ad930503c23e9d4
+  head_after: 1db91e36ec6f7c5975a8779b6ad930503c23e9d4
+  status_sha256_before: 58154ae7f5aa0f0378044cd89191d7f2e9307223ab21c9632e8a9a4aa24b49f8
+  status_sha256_after: 58154ae7f5aa0f0378044cd89191d7f2e9307223ab21c9632e8a9a4aa24b49f8
+  status_entries_before: 94
+  status_entries_after: 94
+  status_classes: 3 deleted, 63 modified, 28 untracked
+  unchanged: true
+
+Operations forbidden and not performed:
+  git reset
+  git clean
+  git stash
+  git checkout in either adjacent checkout
+  staging or committing adjacent work
+
+Authorized workspace writes:
+  DPM1 reports under task_dir/outputs/ocr-to-evmbench-harbor/_reports/
+  DPM0/DPM1 status updates in task_dir/VALANTIS_DETECT_PATCH_EVMBENCH_TASK_PLAN.md
+
+RESULT: adjacent user work preserved

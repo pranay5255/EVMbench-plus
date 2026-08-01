@@ -1,0 +1,78 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.task_group.v1",
+  "phase": "P4",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T12:59:18Z",
+  "status": "passed",
+  "task_group_key": "ValantisLabs/valantis-stex@25a19b663f86b53112a5e020c843904a571cc1e8|src/**|detect",
+  "task_group_key_sha256": "9f59eac69f7a44cd5049f206652168cc70c46183df51fa33a923c94b2b6f2f3c",
+  "components": {
+    "repository": {
+      "url": "https://github.com/ValantisLabs/valantis-stex",
+      "slug": "ValantisLabs/valantis-stex",
+      "count": 1
+    },
+    "vulnerable_commit": {
+      "sha": "25a19b663f86b53112a5e020c843904a571cc1e8",
+      "count": 1
+    },
+    "audited_scope": {
+      "glob": "src/**",
+      "count": 1
+    },
+    "mode": {
+      "value": "detect",
+      "count": 1
+    }
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_002911_39a2c2ee71c9",
+    "sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "count": 1
+  },
+  "ocr_jsonl": {
+    "sha256_before_p4": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "sha256_after_p4": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "unchanged": true
+  },
+  "fixed_commit": {
+    "sha": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "kept_out_of_task_group_key": true
+  },
+  "selected_findings": [
+    {"finding_id": "H-01", "report_id": "VLTS3-5", "pages": [10, 11, 12]},
+    {"finding_id": "H-02", "report_id": "VLTS3-13", "pages": [13, 14, 15, 16, 17, 18]},
+    {"finding_id": "H-03", "report_id": "VLTS3-3", "pages": [19, 20]},
+    {"finding_id": "H-04", "report_id": "VLTS3-9", "pages": [21, 22, 23, 24, 25]},
+    {"finding_id": "H-05", "report_id": "VLTS3-14", "pages": [26, 27]}
+  ],
+  "disposition_counts": {
+    "report_findings_total": 11,
+    "included": 5,
+    "excluded": 6,
+    "merged": 0,
+    "split": 0,
+    "unresolved": 0
+  },
+  "cardinality_checks": [
+    {"component": "source_pdf", "expected": 1, "actual": 1, "passed": true},
+    {"component": "repository", "expected": 1, "actual": 1, "passed": true},
+    {"component": "vulnerable_commit", "expected": 1, "actual": 1, "passed": true},
+    {"component": "audited_scope", "expected": 1, "actual": 1, "passed": true},
+    {"component": "mode", "expected": 1, "actual": 1, "passed": true},
+    {"component": "task_group_key", "expected": 1, "actual": 1, "passed": true}
+  ],
+  "visibility_boundary": {
+    "candidate_path_created": false,
+    "evmbench_modified": false,
+    "harbor_tree_created": false,
+    "agent_image_built": false
+  },
+  "summary": {
+    "ok": true,
+    "task_group_count": 1,
+    "selected_finding_count": 5,
+    "all_report_findings_dispositioned": true,
+    "exit_criterion_met": true
+  }
+}

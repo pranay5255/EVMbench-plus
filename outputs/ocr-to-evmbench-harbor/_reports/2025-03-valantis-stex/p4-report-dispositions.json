@@ -1,0 +1,177 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.report_dispositions.v1",
+  "phase": "P4",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T12:59:18Z",
+  "status": "passed",
+  "source_summary": {
+    "reported_total": 11,
+    "reported_by_severity": {
+      "Critical": 2,
+      "High": 2,
+      "Medium": 1,
+      "Low": 3,
+      "Informational": 3
+    },
+    "reviewed_total": 11
+  },
+  "dispositions": [
+    {
+      "report_id": "VLTS3-5",
+      "pages": [10, 11, 12],
+      "reported_severity": "Critical",
+      "disposition": "included",
+      "finding_id": "H-01",
+      "affected_paths": ["src/STEXAMM.sol", "src/stHYPEWithdrawalModule.sol"],
+      "root_cause": "Pending token1 withdrawal storage remains stale after native HYPE arrives while the token0 pending getter nets the new balance immediately.",
+      "asset_loss_path": "Inconsistent total-assets accounting over-mints or underpays LP shares, transferring value between LP cohorts.",
+      "vulnerable_code_verified": true,
+      "distinct_root_cause": true,
+      "corroborating_fix_commit": "320fd6d3789f94a5bccd06d14c2f936d44f919fc"
+    },
+    {
+      "report_id": "VLTS3-13",
+      "pages": [13, 14, 15, 16, 17, 18],
+      "reported_severity": "Critical",
+      "disposition": "included",
+      "finding_id": "H-02",
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol", "lib/valantis-core/src/pools/SovereignPool.sol"],
+      "root_cause": "Public update can transfer surplus token1 to the Sovereign Pool while its swap callback is measuring attacker payment.",
+      "asset_loss_path": "The pool counts protocol surplus as attacker input and releases token0 without attacker-funded payment.",
+      "vulnerable_code_verified": true,
+      "distinct_root_cause": true,
+      "corroborating_fix_commit": "efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec"
+    },
+    {
+      "report_id": "VLTS3-3",
+      "pages": [19, 20],
+      "reported_severity": "High",
+      "disposition": "included",
+      "finding_id": "H-03",
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol"],
+      "root_cause": "Lending-module migration withdraws pool token1 to the withdrawal module, then replaces the module without returning or redepositing that balance.",
+      "asset_loss_path": "Pool-owned token1 is stranded outside reserve and lending accounting and cannot serve withdrawals.",
+      "vulnerable_code_verified": true,
+      "distinct_root_cause": true,
+      "corroborating_fix_commit": "b0ba237d9f972f3d74691d5ca42090887e49a556"
+    },
+    {
+      "report_id": "VLTS3-9",
+      "pages": [21, 22, 23, 24, 25],
+      "reported_severity": "High",
+      "disposition": "included",
+      "finding_id": "H-04",
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol", "src/structs/WithdrawalModuleStructs.sol"],
+      "root_cause": "Requests checkpoint cumulative fulfilled liquidity rather than cumulative queued obligations.",
+      "asset_loss_path": "A later small request can consume claimable HYPE owed by an earlier large request.",
+      "vulnerable_code_verified": true,
+      "distinct_root_cause": true,
+      "corroborating_fix_commit": "5115be75eb0f8dcb8bda9040f1cf0184cfbc9f5c"
+    },
+    {
+      "report_id": "VLTS3-14",
+      "pages": [26, 27],
+      "reported_severity": "Medium",
+      "disposition": "included",
+      "finding_id": "H-05",
+      "affected_paths": ["src/STEXAMM.sol", "src/STEXRatioSwapFeeModule.sol", "lib/valantis-core/src/pools/SovereignPool.sol"],
+      "root_cause": "A withdrawal recipient can reenter a view quote path while reserves and pending liabilities reflect an intermediate withdrawal state.",
+      "asset_loss_path": "The temporary reserve ratio selects a lower swap fee and leaks protocol or pool-manager fee revenue.",
+      "vulnerable_code_verified": true,
+      "distinct_root_cause": true,
+      "corroborating_fix_commit": "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2"
+    },
+    {
+      "report_id": "VLTS3-7",
+      "pages": [28, 29],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "finding_id": null,
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol", "src/AaveLendingModule.sol"],
+      "code_evidence": "setProposedLendingModule calls lendingModule.withdraw(assetBalance, address(this)); AaveLendingModule forwards the request to Aave.",
+      "reason_category": "availability_only",
+      "reason": "A zero-balance migration can revert, blocking that owner operation until code/configuration changes, but it does not transfer or destroy assets and establishes no unprivileged asset-loss path.",
+      "vulnerable_code_verified": true
+    },
+    {
+      "report_id": "VLTS3-10",
+      "pages": [30, 31],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "finding_id": null,
+      "affected_paths": ["src/STEXRatioSwapFeeModule.sol"],
+      "code_evidence": "setSwapFeeParams is onlyOwner, lacks a timelock, and constrains both fee bounds below 5,000 bips.",
+      "reason_category": "privileged_design",
+      "reason": "The report assumes a malicious or compromised fee owner exercising an explicit administration capability; no separate unprivileged bug or accepted detect-mode asset-loss path is established.",
+      "vulnerable_code_verified": true
+    },
+    {
+      "report_id": "VLTS3-11",
+      "pages": [32, 33],
+      "reported_severity": "Low",
+      "disposition": "excluded",
+      "finding_id": null,
+      "affected_paths": ["src/AaveLendingModule.sol", "src/stHYPEWithdrawalModule.sol"],
+      "code_evidence": "The owner chooses how much pool token1 to supply to Aave; AaveLendingModule.withdraw forwards withdrawals that may revert when external liquidity is unavailable.",
+      "reason_category": "availability_and_privileged_design",
+      "reason": "The described consequence is temporary withdrawal unavailability caused by external Aave utilization and an owner-controlled allocation choice, not an independent theft, destruction, or permanent loss mechanism.",
+      "vulnerable_code_verified": true
+    },
+    {
+      "report_id": "VLTS3-2",
+      "pages": [34],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "finding_id": null,
+      "affected_paths": ["src/AaveLendingModule.sol", "src/stHYPEWithdrawalModule.sol", "src/STEXAMM.sol", "src/STEXRatioSwapFeeModule.sol"],
+      "code_evidence": "The contracts import and inherit OpenZeppelin Ownable rather than Ownable2Step.",
+      "reason_category": "informational_best_practice",
+      "reason": "Two-step ownership transfer is a hardening recommendation for operator mistakes, not a presently exploitable asset-loss bug.",
+      "vulnerable_code_verified": true
+    },
+    {
+      "report_id": "VLTS3-4",
+      "pages": [35],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "finding_id": null,
+      "affected_paths": ["src/STEXAMM.sol", "src/stHYPEWithdrawalModule.sol"],
+      "code_evidence": "The two named custom errors are declared and unused.",
+      "reason_category": "informational_dead_code",
+      "reason": "Unused error declarations do not alter execution or asset accounting.",
+      "vulnerable_code_verified": true
+    },
+    {
+      "report_id": "VLTS3-12",
+      "pages": [36, 37],
+      "reported_severity": "Informational",
+      "disposition": "excluded",
+      "finding_id": null,
+      "affected_paths": ["src/stHYPEWithdrawalModule.sol"],
+      "code_evidence": "amountToken0PendingUnstaking assigns excessToken0 with a redundant greater-than-zero conditional.",
+      "reason_category": "informational_simplification",
+      "reason": "The conditional and direct assignment are behaviorally equivalent and create no security impact.",
+      "vulnerable_code_verified": true
+    }
+  ],
+  "counts": {
+    "total": 11,
+    "included": 5,
+    "excluded": 6,
+    "merged": 0,
+    "split": 0,
+    "unresolved": 0
+  },
+  "checks": {
+    "all_report_findings_accounted_for": true,
+    "all_included_findings_code_verified": true,
+    "all_included_findings_have_asset_loss_paths": true,
+    "all_included_findings_have_distinct_root_causes": true,
+    "all_exclusions_have_code_grounded_reasons": true
+  },
+  "summary": {
+    "ok": true,
+    "expected_total": 11,
+    "actual_total": 11
+  }
+}

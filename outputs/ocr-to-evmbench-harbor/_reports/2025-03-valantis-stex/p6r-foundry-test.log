@@ -1,0 +1,39 @@
+P6R FOUNDRY TEST VALIDATION
+
+candidate_id: 2025-03-valantis-stex
+completed_at: 2026-07-25T14:33:47Z
+image_tag: ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r2-review
+image_id: sha256:a8604ad62325521d2c597f46932094ae94f293b926194eba78e5ead4ba9ee9b7
+network_mode: none
+foundry_offline: true
+head: 25a19b663f86b53112a5e020c843904a571cc1e8
+reachable_commits_before: 1
+command: forge test --force --offline
+exit_code: 0
+
+Compiling 102 files with Solc 0.8.30
+Solc 0.8.30 finished in 4.01s
+Compiler run successful!
+
+DepositWrapperTest:
+  2 passed; 0 failed; 0 skipped
+
+stHYPEWithdrawalModuleTest:
+  11 passed; 0 failed; 0 skipped
+
+STEXAMMTest:
+  21 passed; 0 failed; 0 skipped
+
+Ran 3 test suites in 8.61ms:
+34 tests passed, 0 failed, 0 skipped (34 total tests)
+
+Foundry emitted the same non-fatal dependency auto-install warnings described
+in p6r-foundry-build.log. Tests used the present, reviewed dependency content
+with Docker networking disabled and Foundry offline mode enabled.
+
+Raw temporary log:
+  path: /tmp/valantis-p6r-foundry-test-full.log
+  size_bytes: 3941
+  sha256: 1fd174d31051313c06d160ef81cd6c74ccd74210081a16ff2fd5b64d0321f2d8
+
+RESULT: passed

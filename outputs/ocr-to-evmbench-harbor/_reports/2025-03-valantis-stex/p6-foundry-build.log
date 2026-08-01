@@ -1,0 +1,20 @@
+P6 FOUNDRY BUILD VALIDATION
+
+candidate_id: 2025-03-valantis-stex
+completed_at: 2026-07-25T13:34:18Z
+image_tag: ocr-to-evmbench-harbor/2025-03-valantis-stex:p6-review
+image_id: sha256:625094394c8627080403e5bd1fc9072a58a85a9465a432fba0f4380c79c09a71
+network_mode: none
+command: docker run --rm --network none --entrypoint forge ocr-to-evmbench-harbor/2025-03-valantis-stex:p6-review build --root /home/agent/audit --force
+exit_code: 0
+
+Compiling 102 files with Solc 0.8.30
+Solc 0.8.30 finished in 4.08s
+Compiler run successful!
+
+The compiler emitted existing lint notes and unchecked-transfer warnings from
+the reviewed vulnerable repository and its tests. They were non-fatal; there
+were no compiler errors. The forced compilation completed without runtime
+network access.
+
+RESULT: passed

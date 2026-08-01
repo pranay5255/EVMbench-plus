@@ -1,0 +1,17 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8",
+  "status": "passed",
+  "audit_id": "2025-03-valantis-stex",
+  "framework": "foundry",
+  "base_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+  "vulnerability_count": 5,
+  "detect_max_award": 5.0,
+  "vulnerabilities": [
+    {"id": "H-01", "title": "Stale pending-withdrawal accounting misprices LP shares", "award": 1.0},
+    {"id": "H-02", "title": "Swap callback can steal unstaking surplus", "award": 1.0},
+    {"id": "H-03", "title": "Lending-module migration strands withdrawn token1", "award": 1.0},
+    {"id": "H-04", "title": "Withdrawal checkpoints let later claims bypass FIFO", "award": 1.0},
+    {"id": "H-05", "title": "Withdrawal read-only reentrancy discounts swap fees", "award": 1.0}
+  ]
+}

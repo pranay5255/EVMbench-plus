@@ -1,0 +1,29 @@
+P6R FOUNDRY BUILD VALIDATION
+
+candidate_id: 2025-03-valantis-stex
+completed_at: 2026-07-25T14:33:47Z
+image_tag: ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r2-review
+image_id: sha256:a8604ad62325521d2c597f46932094ae94f293b926194eba78e5ead4ba9ee9b7
+network_mode: none
+foundry_offline: true
+head: 25a19b663f86b53112a5e020c843904a571cc1e8
+reachable_commits_before: 1
+command: forge build --force --offline
+exit_code: 0
+
+Compiling 102 files with Solc 0.8.30
+Solc 0.8.30 finished in 4.00s
+Compiler run successful!
+
+Foundry emitted non-fatal dependency auto-install warnings because nested
+submodule Git metadata is intentionally absent. The vendored dependency
+contents were present and matched the reviewed snapshot; forced compilation
+completed with Docker networking disabled and Foundry offline mode enabled.
+Existing lint notes and unchecked-transfer warnings were non-fatal.
+
+Raw temporary log:
+  path: /tmp/valantis-p6r-foundry-build-full.log
+  size_bytes: 19533
+  sha256: e76be16eb47875f6ce84683376247fdf04f360894b2398d1ed4db069a0074931
+
+RESULT: passed

@@ -1,0 +1,107 @@
+{
+  "schema_version": "valantis_detect_patch.dpm1_candidate_freeze.v1",
+  "candidate_id": "2025-03-valantis-stex",
+  "completed_at": "2026-07-25T16:38:25Z",
+  "status": "passed",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-valantis-stex",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false
+  },
+  "candidate_file_count": 17,
+  "candidate_checksum_stream_sha256": "e889ffa3cfb8da41250d6ccb09889561adc0484760cfc4b3350e638e5078ca56",
+  "matches_c1_manifest": true,
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size_bytes": 30,
+      "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 2903,
+      "sha256": "8e8a68c80b26768b91bffe9d0d2f723820416dd2f720c09e8a732341e1ca3f6c"
+    },
+    {
+      "path": "config.yaml",
+      "size_bytes": 597,
+      "sha256": "3b94a08a67a70df835637eebe811d5074e368d2af067057fd797b011d6b9713a"
+    },
+    {
+      "path": "findings/H-01.md",
+      "size_bytes": 3136,
+      "sha256": "920af3de53e29224ffc67a4b3747b426c26f6864c3b1b8a4e75989514b77683c"
+    },
+    {
+      "path": "findings/H-02.md",
+      "size_bytes": 2361,
+      "sha256": "c22e53e5479834ae74b262ac85af2ac6cdb950d6a1f053cfeb68991c3f3406a3"
+    },
+    {
+      "path": "findings/H-03.md",
+      "size_bytes": 2132,
+      "sha256": "a57381c7bde062e8820751129bfc4dc15a9df26440e7f929f30dbf16af3829f6"
+    },
+    {
+      "path": "findings/H-04.md",
+      "size_bytes": 2449,
+      "sha256": "145f4bad130f99d2d52c3f86fc14a64984ae1ce2a65563c4416f6f238035841f"
+    },
+    {
+      "path": "findings/H-05.md",
+      "size_bytes": 2884,
+      "sha256": "7009a743726581495a3fb484638c01cfd729d0c35ef26437c51f58ba5df586c9"
+    },
+    {
+      "path": "findings/gold_audit.md",
+      "size_bytes": 12962,
+      "sha256": "c60bc769fb33238badcfc2d720e7b75a3f51a3ae37862fc437369063bb91a4b8"
+    },
+    {
+      "path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-01.pages.jsonl",
+      "size_bytes": 16873,
+      "sha256": "5c52d390418d56ba03a94f371985ba5b9e4bd9f338763c918e9b69cef198f4a4"
+    },
+    {
+      "path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-02.pages.jsonl",
+      "size_bytes": 31293,
+      "sha256": "e8741e2b9ae9d9a6474dae40ca05627cbf8b643dffd9f95fd25efab05b3ea6ac"
+    },
+    {
+      "path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-03.pages.jsonl",
+      "size_bytes": 9299,
+      "sha256": "a01f69d0ae9931e254fbcadee266840d9d001352b29f1584e52d80ffb3b5cc71"
+    },
+    {
+      "path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-04.pages.jsonl",
+      "size_bytes": 23083,
+      "sha256": "18d290f85914fc28bc922978e0bb7896062b1f8a7b2efe0b672ced0642d42f4f"
+    },
+    {
+      "path": "ocr_evidence/pdf_002911_39a2c2ee71c9/H-05.pages.jsonl",
+      "size_bytes": 10370,
+      "sha256": "3fa57a38b90bb99d494d4175401993322175c82f8680aa6a1213d1f34db0b7c3"
+    },
+    {
+      "path": "ocr_evidence/pdf_002911_39a2c2ee71c9/scope.pages.jsonl",
+      "size_bytes": 3641,
+      "sha256": "b5e7c3be6170240c10ad218462ec7290e0bfd2765fc542ee1e0d72b6eb7014e6"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 24773,
+      "sha256": "2796a4127bd60b8b6f96958754ea3f70aa542f22d6fa2cd17035fb020309cff2"
+    },
+    {
+      "path": "review_status.yaml",
+      "size_bytes": 39,
+      "sha256": "c59cdd1b9f9e668d26d858d272285abfff15235de67701bb59d144a82fc8e591"
+    }
+  ],
+  "reviewed_image": {
+    "tag": "ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r2-review",
+    "id": "sha256:a8604ad62325521d2c597f46932094ae94f293b926194eba78e5ead4ba9ee9b7",
+    "created_at": "2026-07-25T14:16:20.148078166Z"
+  },
+  "candidate_mutated_in_dpm1": false
+}

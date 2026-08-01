@@ -1,0 +1,36 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.structural_validator.v1",
+  "phase": "P6R3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:12:53Z",
+  "status": "passed",
+  "validator": {
+    "checkout": "/tmp/valantis-ocr-harbor.iZKXoT/opd-base",
+    "checkout_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "checkout_clean": true,
+    "script": "scripts/validate_evmbench_candidate.py",
+    "script_sha256": "6ab85456246bac79c4794ff69d5a2aab8aa0ade90e9ae1863d703730aa83fb5c",
+    "require_approved_used": false,
+    "exit_code": 0
+  },
+  "validator_result": {
+    "candidate_count": 1,
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "finding_files": [
+      "findings/H-01.md",
+      "findings/H-02.md",
+      "findings/H-03.md",
+      "findings/H-04.md",
+      "findings/H-05.md"
+    ],
+    "review_state": "in_review",
+    "human_approved": false
+  },
+  "summary": {
+    "ok": true,
+    "candidate_admitted": false,
+    "approval_still_required": true
+  }
+}

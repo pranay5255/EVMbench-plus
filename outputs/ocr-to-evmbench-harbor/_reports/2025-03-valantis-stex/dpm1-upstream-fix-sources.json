@@ -1,0 +1,86 @@
+{
+  "schema_version": "valantis_detect_patch.dpm1_upstream_fix_sources.v1",
+  "candidate_id": "2025-03-valantis-stex",
+  "completed_at": "2026-07-25T16:38:25Z",
+  "status": "passed",
+  "repository_path": "/tmp/valantis-dpm1.w8cHzY/valantis",
+  "working_head_before_and_after": "25a19b663f86b53112a5e020c843904a571cc1e8",
+  "working_tree_clean": true,
+  "fixes": [
+    {
+      "finding_id": "H-01",
+      "commit": "320fd6d3789f94a5bccd06d14c2f936d44f919fc",
+      "parent": "b0ba237d9f972f3d74691d5ca42090887e49a556",
+      "tree": "13af0eb8bcd778d4de9936ede2ee6844231af1a6",
+      "title": "fix: improper accounting of withdrawalModule.amountToken1PendingLPWithdrawal post ETH balance increases and before calling withdrawalModule.update",
+      "production_paths": [
+        "src/stHYPEWithdrawalModule.sol"
+      ],
+      "object_present": true,
+      "reachable_from_vulnerable_head": false
+    },
+    {
+      "finding_id": "H-02",
+      "commit": "efd1019ab0ee193c2a4b9c85b4aaa7ec4db74aec",
+      "parent": "3f5a7876f57ce14ccaab805cd84131ff686899c2",
+      "tree": "edb2bc33cf0732ad634731e3f15252c4b908ab3b",
+      "title": "fix: withdrawal module read-only reentrancy due to sovereignPool::swap callback on swap",
+      "production_paths": [
+        "src/interfaces/IWithdrawalModule.sol",
+        "src/stHYPEWithdrawalModule.sol"
+      ],
+      "object_present": true,
+      "reachable_from_vulnerable_head": false
+    },
+    {
+      "finding_id": "H-03",
+      "commit": "b0ba237d9f972f3d74691d5ca42090887e49a556",
+      "parent": "1d7b8293f94bb29f4b1a3735c3c1ea8be5a14304",
+      "tree": "7112560661edb0a141b92fb0e8cbe689a6bec8e9",
+      "title": "fix: ensure proper account of token1 in lending module during updates",
+      "production_paths": [
+        "src/stHYPEWithdrawalModule.sol"
+      ],
+      "object_present": true,
+      "reachable_from_vulnerable_head": false
+    },
+    {
+      "finding_id": "H-04",
+      "commit": "5115be75eb0f8dcb8bda9040f1cf0184cfbc9f5c",
+      "parent": "65eda234efe8ef86d2065cfb83cb4397cf9114b0",
+      "tree": "243f07ba951bd5d9302f5804950f930c2dc5e854",
+      "title": "fix: withdrawal module FIFO for LP withdrawal claims",
+      "production_paths": [
+        "src/STEXLens.sol",
+        "src/interfaces/IWithdrawalModule.sol",
+        "src/stHYPEWithdrawalModule.sol",
+        "src/structs/WithdrawalModuleStructs.sol"
+      ],
+      "object_present": true,
+      "reachable_from_vulnerable_head": false
+    },
+    {
+      "finding_id": "H-05",
+      "commit": "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2",
+      "parent": "f432f56beb7f597ad6a8e8bff7d6a6f90d28e1c5",
+      "tree": "ee3f91fd4e34b57a381ceb11746f7e5a43578ef5",
+      "title": "fix: read-only reentrancy in getLiquidityQuote during STEX withdrawals",
+      "production_paths": [
+        "src/STEXAMM.sol"
+      ],
+      "object_present": true,
+      "reachable_from_vulnerable_head": false
+    }
+  ],
+  "fixed_review_commit": {
+    "commit": "95122c7693f9516385aef330ef36bb1ccec2cb94",
+    "object_present": true,
+    "parents": [
+      "f432f56beb7f597ad6a8e8bff7d6a6f90d28e1c5",
+      "3020c02c170d9668b3e0a5ffb79d75fc4837e9e2"
+    ],
+    "tree": "ee3f91fd4e34b57a381ceb11746f7e5a43578ef5",
+    "kept_separate_from_base": true
+  },
+  "fixes_applied_in_dpm1": false
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image_validation.v2",
+  "phase": "P6R3",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-27T10:12:53Z",
+  "status": "passed",
+  "candidate_review_image_admissible": true,
+  "candidate_admitted": false,
+  "image": {
+    "local_tag": "ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r3-digest-pin",
+    "registry_tag": "docker.io/pranay5255/yudaii_evmbench:2025-03-valantis-stex-agent-d21ecebec4083ea5-amd64",
+    "registry_digest": "sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:a24989c61134ccfed57c61c5a978b1e871fed2c75202039899f267688fc20f44",
+    "id": "sha256:d21ecebec4083ea50db60dbcfceecb783dca553e4385724d9c2c2c9e5a089f71",
+    "created": "2026-07-27T10:07:33.625357065Z",
+    "size_bytes": 3613086576,
+    "rootfs_layer_count": 20,
+    "platform": "linux/amd64"
+  },
+  "base_image": {
+    "registry_tag": "docker.io/pranay5255/yudaii_evmbench:base-fc20d776501708f9-amd64",
+    "registry_digest": "sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "image_config_digest": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+    "manifest_verified": true
+  },
+  "build": {
+    "command": "docker build --pull --no-cache --progress=plain --metadata-file /tmp/valantis-p6r2-build-metadata.json -f Dockerfile -t ocr-to-evmbench-harbor/2025-03-valantis-stex:p6r3-digest-pin .",
+    "exit_code": 0,
+    "no_cache": true,
+    "pull": true,
+    "effective_context_files": [".dockerignore", "Dockerfile"],
+    "copy_or_add_directive_count": 0,
+    "exact_depth_one_fetch_passed": true,
+    "reachable_commit_count_assertion_passed": true,
+    "all_14_recursive_submodule_revision_assertions_passed": true,
+    "dockerfile_forge_build_passed": true,
+    "dockerfile_forge_test_count": 34,
+    "dockerfile_forge_test_failed": 0,
+    "same_layer_cleanup_assertions_passed": true,
+    "metadata_file_sha256": "dda641a7d61a134d988c9c51519d8ff2b9e17cfb3b71a133ddf6371cac36cc10"
+  },
+  "foundry": {
+    "network_mode": "none",
+    "foundry_offline": true,
+    "build_command": "forge build --force --offline",
+    "build_exit_code": 0,
+    "compiled_file_count": 102,
+    "solc_version": "0.8.30",
+    "test_command": "forge test --force --offline",
+    "test_exit_code": 0,
+    "test_suite_count": 3,
+    "test_count": 34,
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0
+  },
+  "saved_image_inspection": {
+    "temporary_root": "/tmp/valantis-p6r3.zYolRP",
+    "image_tar_size_bytes": 3700922368,
+    "image_tar_sha256": "f76dc4d0153afa1f26fe18777112da566813e43d552771ef9542f7fe771889c8",
+    "candidate_layer_blob": "sha256:6f547c6b8d5a98d327856df504212b24b79cfc18f47ea2f36d3a9d35df7d7a91",
+    "candidate_layer_entry_count": 2450,
+    "rootfs_tar_size_bytes": 3692353536,
+    "rootfs_tar_sha256": "07468286e5cfe7ec325301654f9947b16de35c124223fe4d8dc8d4386e69748a",
+    "rootfs_entry_count": 116649,
+    "inspection_container_removed": true
+  },
+  "summary": {
+    "ok": true,
+    "build_ok": true,
+    "runtime_repository_ok": true,
+    "foundry_ok": true,
+    "leakage_ok": true,
+    "registry_manifest_ok": true,
+    "admission_approval_still_required": true
+  }
+}

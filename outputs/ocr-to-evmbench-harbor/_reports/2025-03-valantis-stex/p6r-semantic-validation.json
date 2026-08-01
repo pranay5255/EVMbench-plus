@@ -1,0 +1,132 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v2",
+  "phase": "P6R",
+  "candidate_id": "2025-03-valantis-stex",
+  "generated_at": "2026-07-25T14:33:47Z",
+  "status": "passed",
+  "task_group_key": "ValantisLabs/valantis-stex@25a19b663f86b53112a5e020c843904a571cc1e8|src/**|detect",
+  "task_group_key_sha256": "9f59eac69f7a44cd5049f206652168cc70c46183df51fa33a923c94b2b6f2f3c",
+  "inputs": {
+    "ocr_sha256": "10dc7a85ff63d44fab604ffdcec2f47b22ad8abcdfea1973a553ff5c88f0268d",
+    "ocr_record_count": 38,
+    "ocr_global_check_count": 19,
+    "ocr_record_check_count": 1976,
+    "ocr_failed_check_count": 0,
+    "pdf_sha256": "64bf545adb3699eed16cd21abb0d6db6a651ca273e2992a02122825ec61966a7",
+    "pdf_page_count": 38,
+    "vulnerable_commit": "25a19b663f86b53112a5e020c843904a571cc1e8",
+    "fixed_commit_kept_separate": "95122c7693f9516385aef330ef36bb1ccec2cb94"
+  },
+  "candidate_revision": {
+    "phase": "P5R",
+    "manifest": "p5r-generated-file-manifest.json",
+    "manifest_sha256": "28d691982f1ee59501a27c58e86c54e930b04c6936cd31bbe1dcde409d4b38b9",
+    "candidate_file_count": 17,
+    "candidate_checksum_stream_sha256": "e889ffa3cfb8da41250d6ccb09889561adc0484760cfc4b3350e638e5078ca56",
+    "changed_from_p5": [
+      "Dockerfile",
+      "provenance.json"
+    ],
+    "unchanged_finding_config_evidence_and_review_files": true,
+    "review_state": "in_review",
+    "human_approved": false
+  },
+  "configuration": {
+    "mode": "detect",
+    "framework": "foundry",
+    "ordered_finding_ids": ["H-01", "H-02", "H-03", "H-04", "H-05"],
+    "awards": [1.0, 1.0, 1.0, 1.0, 1.0],
+    "max_score": 5,
+    "individual_gold_file_count": 5,
+    "combined_gold_is_exact_ordered_byte_concatenation": true,
+    "report_disposition_count": 11,
+    "unresolved_report_dispositions": 0
+  },
+  "finding_rechecks": [
+    {
+      "finding_id": "H-01",
+      "report_id": "VLTS3-5",
+      "pages": [10, 11, 12],
+      "pdf_terms_rechecked": ["VLTS3-5", "amountToken1PendingLPWithdrawal"],
+      "code_areas_rechecked": ["STEXAMM deposit/withdraw accounting", "stHYPEWithdrawalModule pending accounting"],
+      "pdf_passed": true,
+      "code_passed": true,
+      "slice_byte_exact": true,
+      "distinct_asset_loss_path_confirmed": true
+    },
+    {
+      "finding_id": "H-02",
+      "report_id": "VLTS3-13",
+      "pages": [13, 14, 15, 16, 17, 18],
+      "pdf_terms_rechecked": ["VLTS3-13", "directly steal", "surplus amount"],
+      "code_areas_rechecked": ["public update", "surplus transfer", "SovereignPool swap callback"],
+      "pdf_passed": true,
+      "code_passed": true,
+      "slice_byte_exact": true,
+      "distinct_asset_loss_path_confirmed": true
+    },
+    {
+      "finding_id": "H-03",
+      "report_id": "VLTS3-3",
+      "pages": [19, 20],
+      "pdf_terms_rechecked": ["VLTS3-3", "withdraw to address(this)"],
+      "code_areas_rechecked": ["setProposedLendingModule", "old-module withdrawal recipient", "supply path"],
+      "pdf_passed": true,
+      "code_passed": true,
+      "slice_byte_exact": true,
+      "distinct_asset_loss_path_confirmed": true
+    },
+    {
+      "finding_id": "H-04",
+      "report_id": "VLTS3-9",
+      "pages": [21, 22, 23, 24, 25],
+      "pdf_terms_rechecked": ["VLTS3-9", "priority queue"],
+      "code_areas_rechecked": ["withdrawal checkpoints", "LPWithdrawalRequest", "claim eligibility"],
+      "pdf_passed": true,
+      "code_passed": true,
+      "slice_byte_exact": true,
+      "distinct_asset_loss_path_confirmed": true
+    },
+    {
+      "finding_id": "H-05",
+      "report_id": "VLTS3-14",
+      "pages": [26, 27],
+      "pdf_terms_rechecked": ["VLTS3-14", "read-only reentrancy"],
+      "code_areas_rechecked": ["withdraw callback window", "getLiquidityQuote", "getSwapFeeInBips"],
+      "pdf_passed": true,
+      "code_passed": true,
+      "slice_byte_exact": true,
+      "distinct_asset_loss_path_confirmed": true
+    }
+  ],
+  "checks": [
+    {"id": "candidate_identity_and_folder", "passed": true},
+    {"id": "detect_foundry_config_and_exact_base_commit", "passed": true},
+    {"id": "five_ordered_nonempty_titled_equal_award_findings", "passed": true},
+    {"id": "task_key_and_task_key_hash_match", "passed": true},
+    {"id": "vulnerable_and_fixed_commits_are_separate", "passed": true},
+    {"id": "review_state_is_unapproved_in_review", "passed": true},
+    {"id": "five_individual_gold_files_and_exact_combined_gold", "passed": true},
+    {"id": "all_11_report_dispositions_resolved", "passed": true},
+    {"id": "five_root_causes_and_asset_loss_paths_remain_distinct", "passed": true},
+    {"id": "ocr_hash_and_all_38_rows_revalidated", "passed": true},
+    {"id": "pdf_hash_and_38_page_count_revalidated", "passed": true},
+    {"id": "all_six_ocr_slices_are_byte_exact", "passed": true},
+    {"id": "all_five_pdf_ranges_rechecked", "passed": true},
+    {"id": "all_five_vulnerable_code_paths_rechecked", "passed": true},
+    {"id": "dockerfile_has_no_copy_add_or_full_clone", "passed": true},
+    {"id": "dockerfile_fetches_only_exact_commit_at_depth_one", "passed": true},
+    {"id": "dockerfile_asserts_all_14_submodule_revisions", "passed": true},
+    {"id": "dockerfile_builds_tests_then_cleans_in_one_layer", "passed": true},
+    {"id": "p5r_manifest_matches_all_17_candidate_files", "passed": true},
+    {"id": "p5r_change_scope_is_only_dockerfile_and_provenance", "passed": true}
+  ],
+  "summary": {
+    "ok": true,
+    "check_count": 20,
+    "failed_check_count": 0,
+    "selected_finding_count": 5,
+    "report_disposition_count": 11,
+    "unresolved_semantic_concerns": []
+  }
+}
