@@ -1,0 +1,9 @@
+state: approved_for_admission
+human_approved: true
+approved_by: github.com/pranay5255
+approved_at: 2026-08-01T16:14:07Z
+approval_checkpoint: C1r1
+review_bundle_digest: aebcc04704be1f8c61071f97a9b93262f330476c41b565a82f2517877a2491c2
+candidate_admitted: false
+harbor_task_generated: false
+agent_or_model_run: false

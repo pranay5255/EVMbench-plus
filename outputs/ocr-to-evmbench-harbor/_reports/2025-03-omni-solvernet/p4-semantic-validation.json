@@ -1,0 +1,1 @@
+{"schema":"semantic_validation.v1","ok":true,"included":["OMNI6-01","OMNI6-02","OMNI6-03","OMNI6-04"],"excluded_count":9,"loss_of_funds_gate":"passed","distinct_root_causes":4}

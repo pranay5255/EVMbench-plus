@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-03-omni-solvernet-agent-52c551772e3190ef-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-03-omni-solvernet"
+  ],
+  "registry_digest": "sha256:49c243e67cd70ec868f94f78858c1b64ff6da60119c08202e6c34310e41fbbea",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:49c243e67cd70ec868f94f78858c1b64ff6da60119c08202e6c34310e41fbbea",
+  "image_id": "sha256:52c551772e3190ef268a386601f379b7dc729d9cb7680482076845fc0c13f8f1",
+  "review_image_id": "sha256:52c551772e3190ef268a386601f379b7dc729d9cb7680482076845fc0c13f8f1",
+  "canonical_build_resolved_to_reviewed_image_id": true,
+  "created": "2026-08-01T16:07:12.284130783Z",
+  "size_bytes": 3917298339,
+  "rootfs_layer_count": 20,
+  "platform": "linux/amd64",
+  "repository_head": "3ef37ae2704db4e1dcb8fc3f7acbb8babb543e8c",
+  "reachable_repository_commit_count": 1,
+  "foundry_active_version": "1.3.6-v1.3.6",
+  "foundry_downloaded_tar_sha256": "cf7e688ed0c4c48adffca788b496076e31060b67ac5afe1e43dbb5499c20c88b",
+  "solc_binary_sha256": "fb03a29a517452b9f12bcf459ef37d0a543765bb3bbc911e70a87d6a37c30d5f",
+  "foundry_compile_files": 100,
+  "foundry_tests": {"passed":37,"failed":0,"skipped":0,"executed":true},
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

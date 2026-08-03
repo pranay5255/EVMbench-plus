@@ -1,0 +1,30 @@
+{
+  "schema": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1r1",
+  "candidate_id": "2025-03-omni-solvernet",
+  "supersedes_review_bundle_digest": "832b40c860fce19aac92d4e7ce22477c175034a7d73878337629a6ffa14c804e",
+  "revision_reason": "Correct a 63-character Foundry tar checksum by restoring the omitted d; no semantic or evidence change.",
+  "review_state": "in_review",
+  "human_approved": false,
+  "candidate_checksum_stream_sha256": "aa59e2d659e9225a02ea280ccb6fe4f6615b9e757bc37a8290bdfe05bc74cbfd",
+  "candidate_file_manifest": "c1r1-generated-file-manifest.json",
+  "repository": "omni-network/omni",
+  "vulnerable_commit": "3ef37ae2704db4e1dcb8fc3f7acbb8babb543e8c",
+  "findings": ["H-01", "H-02", "H-03", "H-04"],
+  "max_score": 4,
+  "preapproval_agent_image": {
+    "tag": "evmbench-omni-solvernet:c1r1",
+    "image_id": "sha256:52c551772e3190ef268a386601f379b7dc729d9cb7680482076845fc0c13f8f1",
+    "size_bytes": 3917298339,
+    "repository_head_verified": true,
+    "reachable_commit_count": 1,
+    "offline_tests": {"passed": 37, "failed": 0, "skipped": 0},
+    "runtime_pdf_count": 0,
+    "runtime_jsonl_count": 0
+  },
+  "source_ocr_sha256": "756098f76d858d5bb7381ca48be8300e9240b09cbe9d21044111af30c263d01f",
+  "source_pdf_sha256": "5dfb020aa5da82c777e709bce0908f7584136d60d529a10d5305d200ae1b47a1",
+  "candidate_admitted": false,
+  "harbor_task_generated": false,
+  "approval": null
+}

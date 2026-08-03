@@ -1,0 +1,19 @@
+{
+  "schema_version":"ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase":"P10",
+  "status":"passed",
+  "task_file_count":6,
+  "symlink_count":0,
+  "source_pdf_count":0,
+  "ocr_jsonl_count":0,
+  "provenance_count":0,
+  "review_status_count":0,
+  "gold_finding_count":0,
+  "ocr_marker_matches":0,
+  "source_hash_matches":0,
+  "finding_title_matches":0,
+  "report_finding_id_matches":0,
+  "generated_tests_match_published_verifier_context":true,
+  "agent_image_digest_pinned":true,
+  "verifier_image_digest_pinned":true
+}
