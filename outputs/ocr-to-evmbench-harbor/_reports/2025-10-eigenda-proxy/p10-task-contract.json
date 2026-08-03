@@ -1,0 +1,40 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_task_contract.v1",
+  "phase": "P10",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "task_count": 1,
+  "directory_name": "evmbench__detect-2025-10-eigenda-proxy",
+  "task_name": "evmbench/detect-2025-10-eigenda-proxy",
+  "task_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-10-eigenda-proxy/evmbench__detect-2025-10-eigenda-proxy",
+  "harbor_schema_version": "1.3",
+  "impact_policy": "broader_bug_detection",
+  "standard_evmbench_detect_compatible": false,
+  "custom_noncanonical_detect_instruction": true,
+  "agent": {
+    "timeout_sec": 3600,
+    "network_mode": "no-network",
+    "image": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc"
+  },
+  "environment": {"cpus":4,"memory_mb":16384,"storage_mb":20480,"gpus":0,"network_mode":"no-network"},
+  "verifier": {
+    "timeout_sec": 900,
+    "environment_mode": "separate",
+    "network_mode": "public",
+    "image": "sha256:e23c5b41bec3fa2034e8e12d1b3e71ceef4c6ad209c864c65ae151dcbeef099e"
+  },
+  "grader_input": "/home/agent/submission/audit.md",
+  "json_submission_schema": "evmbench.detect_submission.v1",
+  "json_validation_gates_reward": false,
+  "task_file_count": 6,
+  "task_checksum_stream_sha256": "0fad09f27218afca6b180a770e22f0c2ae193a732510db3cc3a65730bf704b87",
+  "file_hashes": {
+    "environment/README.md": "4c8d7b14c61eeeedc571a62cbc48b30639900b42471ce49c81459793f2ad9df0",
+    "instruction.md": "593640ea1b8600ec6d5e5e991722c55f44324f4d003b4565acbf902b957277c9",
+    "task.toml": "e8c8e7c63eaff004f40d35dec695dd7992223d0929c1ed137b0772a9fd9f6271",
+    "tests/evmbench_harbor_verifier.py": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6",
+    "tests/test.sh": "92388a121924e8b48b8b6acd72d26e7c093e43e5a52eae1d5123a47511fdeaa8",
+    "tests/validate_detect_submission.py": "c868e9451cb2195a19926eb10e3eb73f6f12def408b588a24f9546b80f7a16df"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image.v1",
+  "phase": "P9",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed_reused_exact_reviewed_image",
+  "local_tag": "evmbench-eigenda-proxy:c1r4",
+  "config_digest": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc",
+  "size_bytes": 5415592446,
+  "candidate_layer_digest": "sha256:4829bfb1f66d5f23f91b77e4233ff76b61aba2e54945f1a2e7f38376b5032cc4",
+  "saved_image_tar_sha256": "7957e5b43276bc8221f04839a6ea2366b854aad331123edcd854085d201ccf99",
+  "harbor_reference": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc",
+  "repository_head": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+  "runtime_network": "none",
+  "pdf_or_jsonl_count_under_home_agent": 0,
+  "finding_or_gold_content_present": false,
+  "published_to_registry": false,
+  "repo_digests": []
+}

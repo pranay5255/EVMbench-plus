@@ -1,0 +1,52 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approval_binding.v1",
+  "phase": "P7",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:31:24Z",
+  "status": "passed",
+  "approval": {
+    "candidate_id": "2025-10-eigenda-proxy",
+    "review_checkpoint": "C1",
+    "review_manifest": "c1-review-manifest.json",
+    "review_manifest_sha256": "10af2c0e6b02b904fced2817b4d7aac5e4155532d578e76cc031460bab6496df",
+    "reviewer_identity_as_supplied": "github.com/pranay5255",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "explicit_admission_approval": true,
+    "impact_policy": "broader_bug_detection",
+    "explicit_broader_bug_policy_acceptance": true,
+    "custom_noncanonical_detect_instruction_authorized": true,
+    "received_at": "2026-08-01T16:31:24Z"
+  },
+  "pre_binding_integrity": {
+    "review_manifest_digest_matched": true,
+    "candidate_checksum_stream_sha256": "719e8e2452a9db68afd1b3beaf8ed6e63c651edd9ea59c5781b52342a946a794",
+    "candidate_checksum_stream_matched_review_manifest": true,
+    "candidate_files_matched_c1_before_binding": true,
+    "source_ocr_sha256_matched": true,
+    "source_pdf_sha256_matched": true
+  },
+  "post_binding_state": {
+    "state": "approved_for_admission",
+    "human_approved": true,
+    "approved_by": "https://github.com/pranay5255",
+    "review_status_sha256": "40a49e8891c0b283c0bdfe928a455e487be193863ca31c26b830eefd07555708",
+    "provenance_sha256": "7fdde79ade64b51e125a7c29dc592f752b331e292048c1c9230c1d3e4b8dfaa4",
+    "approved_candidate_checksum_stream_sha256": "19911f3be2a95b0bb9d0d7835f8ecda60afb4172598f7ed1d92c6965c47b87c7",
+    "files_changed_from_c1": ["provenance.json", "review_status.yaml"]
+  },
+  "validator": {
+    "require_approved_used": true,
+    "current_exit_code": 0,
+    "pinned_exit_code": 0,
+    "candidate_count": 1,
+    "finding_count": 12,
+    "errors": [],
+    "warnings": []
+  },
+  "summary": {
+    "ok": true,
+    "admission_authorized": true,
+    "candidate_admitted": false
+  }
+}

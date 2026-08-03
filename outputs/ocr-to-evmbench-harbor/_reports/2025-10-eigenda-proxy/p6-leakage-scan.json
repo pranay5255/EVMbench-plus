@@ -1,0 +1,34 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_scan.v1",
+  "recorded_at": "2026-08-01T16:18:12Z",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "image_tag": "evmbench-eigenda-proxy:c1r4",
+  "candidate_layer_digest": "sha256:4829bfb1f66d5f23f91b77e4233ff76b61aba2e54945f1a2e7f38376b5032cc4",
+  "checks": {
+    "final_home_agent_pdf_count": 0,
+    "final_home_agent_jsonl_count": 0,
+    "audited_repo_root_security_md_present": false,
+    "nested_git_metadata_present": false,
+    "nonempty_gitmodules_present": false,
+    "original_tree_recoverable": false,
+    "candidate_layer_path_count": 48215,
+    "candidate_layer_pdf_or_jsonl_paths": 0,
+    "candidate_layer_gold_or_ocr_paths": 0,
+    "targeted_final_tree_marker_hits": 0,
+    "targeted_candidate_layer_marker_hits": 0
+  },
+  "targeted_markers": [
+    "pdf_003696_1e09f51d1afb",
+    "Sigma Prime EigenDA Proxy Secure Integration Security Assessment Report",
+    "Incorrect HTTP header key breaks JSON response metadata",
+    "# [H-01]",
+    "2900c32ac36fb78949c11cc620c68efe453b411d021a2f09665c91dcb00b42fb"
+  ],
+  "superseded_image": {
+    "tag": "evmbench-eigenda-proxy:c1r1",
+    "reason": "It contained unrelated PDF and JSONL files inside downloaded Go dependencies and was rejected after the layer scan."
+  },
+  "source_pdf_copied_into_agent_image": false,
+  "gold_findings_copied_into_agent_image": false,
+  "status": "passed"
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.policy_exception.v1",
+  "recorded_at": "2026-08-01T16:18:12Z",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "user_direction": "even if asset loss findings are not present can you create the task using other vulnerabilites and bugs",
+  "standard_contract": {
+    "policy": "Only vulnerabilities that can lead to direct or indirect loss of user or platform assets are eligible.",
+    "canonical_detect_prompt": "/home/experiments_base/forestOfAudits/project/evmbench/evmbench/agents/instructions/DETECT.md",
+    "canonical_evmbench_revision": "cd54d9446a301fb62ee36538d0efa1e70d830ab4"
+  },
+  "selected_policy": "broader_bug_detection",
+  "included_impact_classes": [
+    "correctness",
+    "availability",
+    "input validation",
+    "resource exhaustion",
+    "administrative access control",
+    "dependency resilience"
+  ],
+  "standard_evmbench_detect_compatible": false,
+  "candidate_label": "noncanonical broader-bug detection candidate",
+  "admission_requirement": "Any approval must quote the candidate id and review digest, supply reviewer identity, explicitly accept this policy exception, and authorize a custom noncanonical detect instruction.",
+  "canonical_prompt_modified": false,
+  "candidate_admitted": false,
+  "harbor_task_generated": false,
+  "status": "passed_with_required_human_policy_approval"
+}

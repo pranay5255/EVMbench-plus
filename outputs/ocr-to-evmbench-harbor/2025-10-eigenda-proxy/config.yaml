@@ -1,0 +1,44 @@
+id: 2025-10-eigenda-proxy
+mode: detect
+framework: foundry
+base_commit: 066f8ef4f93bb8ce196555904e89adf7ef50e57f
+impact_policy: broader_bug_detection
+standard_evmbench_detect_compatible: false
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Incorrect HTTP header key breaks JSON response metadata"
+    award: 1.0
+  - id: "H-02"
+    title: "Blob retrieval ignores context cancellation and can outlive callers"
+    award: 1.0
+  - id: "H-03"
+    title: "Retrieval connections are never closed and exhaust resources"
+    award: 1.0
+  - id: "H-04"
+    title: "Failed gRPC client construction triggers a nil cleanup panic"
+    award: 1.0
+  - id: "H-05"
+    title: "Unbounded commitment paths enable memory-exhaustion denial of service"
+    award: 1.0
+  - id: "H-06"
+    title: "A zero reservation window panics payment accounting"
+    award: 1.0
+  - id: "H-07"
+    title: "Unknown chunk encodings leave invalid nil frames"
+    award: 1.0
+  - id: "H-08"
+    title: "Wrong-length keccak commitments reach the storage lookup"
+    award: 1.0
+  - id: "H-09"
+    title: "Mismatched security-parameter arrays panic the verifier"
+    award: 1.0
+  - id: "H-10"
+    title: "Unchecked quorum downcasts silently truncate certificate data"
+    award: 1.0
+  - id: "H-11"
+    title: "Enabled backend administration endpoints lack authentication"
+    award: 1.0
+  - id: "H-12"
+    title: "Certificate validation has no Ethereum RPC failover"
+    award: 1.0

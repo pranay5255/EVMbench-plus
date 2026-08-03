@@ -1,0 +1,17 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_validator.v1",
+  "phase": "P12",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "require_approved_used": true,
+  "current_validator_revision": "550ff8cfcea1bac7eb91145fd56df9c729cedf93",
+  "pinned_validator_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+  "candidate_count": 1,
+  "finding_count": 12,
+  "review_state": "approved_for_admission",
+  "current_ok": true,
+  "pinned_ok": true,
+  "errors": [],
+  "warnings": []
+}

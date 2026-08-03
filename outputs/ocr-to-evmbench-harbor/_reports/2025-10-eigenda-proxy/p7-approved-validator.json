@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approved_validator.v1",
+  "phase": "P7",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:31:24Z",
+  "status": "passed",
+  "require_approved_used": true,
+  "current_checkout": {
+    "revision": "550ff8cfcea1bac7eb91145fd56df9c729cedf93",
+    "result": {"candidate_count":1,"ok":true,"review_state":"approved_for_admission","finding_count":12,"errors":[],"warnings":[]}
+  },
+  "pinned_checkout": {
+    "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "path": "/tmp/opd-eigenda-validation.yyXBmR/repo",
+    "result": {"candidate_count":1,"ok":true,"review_state":"approved_for_admission","finding_count":12,"errors":[],"warnings":[]}
+  },
+  "finding_count": 12,
+  "errors": [],
+  "warnings": []
+}

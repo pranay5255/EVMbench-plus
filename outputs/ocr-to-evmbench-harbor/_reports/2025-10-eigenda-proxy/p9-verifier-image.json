@@ -1,0 +1,23 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.verifier_image.v1",
+  "phase": "P9",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "local_tag": "evmbench-eigenda-proxy-verifier:p9",
+  "config_digest": "sha256:e23c5b41bec3fa2034e8e12d1b3e71ceef4c6ad209c864c65ae151dcbeef099e",
+  "size_bytes": 1030504282,
+  "harbor_reference": "sha256:e23c5b41bec3fa2034e8e12d1b3e71ceef4c6ad209c864c65ae151dcbeef099e",
+  "build_context": "/tmp/eigenda-admission.ys2ks8/verifier-context",
+  "dockerfile_sha256": "fc67c33ff1e87941e8190bfb2e24345d676579cc518d2546ceb63b91754e8c69",
+  "dockerignore_sha256": "cc80459449916d45f1e34c25111a0399f98491aaa2ac0579c1b5f4a661dee266",
+  "source_revision_label": "48afb53c38969b7de8252a4897957f7df5ede673",
+  "tests_present_at_absolute_tests": true,
+  "vulnerability_count": 12,
+  "detect_max_award": 12.0,
+  "ocr_evidence_present": false,
+  "provenance_present": false,
+  "review_status_present": false,
+  "published_to_registry": false,
+  "repo_digests": []
+}

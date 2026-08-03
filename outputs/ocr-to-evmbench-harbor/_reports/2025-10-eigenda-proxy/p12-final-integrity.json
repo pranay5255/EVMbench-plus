@@ -1,0 +1,67 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_integrity.v1",
+  "phase": "P12",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "approval": {
+    "review_bundle_digest": "10af2c0e6b02b904fced2817b4d7aac5e4155532d578e76cc031460bab6496df",
+    "approved_by": "https://github.com/pranay5255",
+    "impact_policy": "broader_bug_detection",
+    "custom_noncanonical_detect_instruction_authorized": true
+  },
+  "candidate": {
+    "file_count": 31,
+    "checksum_stream_sha256": "19911f3be2a95b0bb9d0d7835f8ecda60afb4172598f7ed1d92c6965c47b87c7",
+    "strict_current_validator_ok": true,
+    "strict_pinned_validator_ok": true
+  },
+  "admission": {
+    "commit": "48afb53c38969b7de8252a4897957f7df5ede673",
+    "checkout": "/tmp/eigenda-admission.ys2ks8/forest-of-audits",
+    "file_count": 31,
+    "checksum_stream_sha256": "19911f3be2a95b0bb9d0d7835f8ecda60afb4172598f7ed1d92c6965c47b87c7",
+    "byte_identical_to_approved_candidate": true,
+    "registry_load_ok": true,
+    "finding_count": 12,
+    "max_score": 12.0
+  },
+  "images": {
+    "agent": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc",
+    "verifier": "sha256:e23c5b41bec3fa2034e8e12d1b3e71ceef4c6ad209c864c65ae151dcbeef099e",
+    "agent_and_verifier_separate": true,
+    "references_are_exact_local_image_ids": true,
+    "published_to_registry": false
+  },
+  "harbor": {
+    "version": "0.20.0",
+    "task_count": 1,
+    "task_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-10-eigenda-proxy/evmbench__detect-2025-10-eigenda-proxy",
+    "task_checksum_stream_sha256": "0fad09f27218afca6b180a770e22f0c2ae193a732510db3cc3a65730bf704b87",
+    "loader_ok": true,
+    "leakage_scan_ok": true,
+    "custom_instruction_sha256": "593640ea1b8600ec6d5e5e991722c55f44324f4d003b4565acbf902b957277c9",
+    "standard_evmbench_detect_compatible": false
+  },
+  "verifier_replay": {
+    "status": "passed",
+    "network": "none",
+    "score": 0.0,
+    "max_score": 12.0,
+    "judge_or_model_call_made": false
+  },
+  "agent_or_model_run": false,
+  "queue": {
+    "rank": 13,
+    "state": "created",
+    "record": "p13-queue-update.json",
+    "benqi_governance_remains_next": true
+  },
+  "canonical_checkout": {
+    "head_before_and_after": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "status_entry_count_before_and_after": 94,
+    "status_sha256_before_and_after": "31e2c8940e6e5d678458c379d69bc9ac10f13fb18544c53328d97b67feff3e67",
+    "written": false
+  },
+  "claim_boundary": "This is a custom noncanonical broader-bug Detect task. The synthetic 0/12 replay validates packaging only and is not model-performance evidence. Local image IDs are immutable on this host but were not published to a registry."
+}

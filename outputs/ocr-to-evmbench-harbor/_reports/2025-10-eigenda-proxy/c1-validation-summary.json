@@ -1,0 +1,45 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:20:47Z",
+  "review_state": "in_review",
+  "impact_policy": "broader_bug_detection",
+  "standard_evmbench_detect_compatible": false,
+  "checks": {
+    "ocr_schema_and_integrity": "passed",
+    "pdf_identity_and_readability": "passed",
+    "repository_snapshot": "passed",
+    "finding_dispositions": "passed_under_broader_bug_policy",
+    "byte_exact_ocr_slices": "passed",
+    "structural_validator": "passed",
+    "source_foundry_build": "passed",
+    "source_foundry_focused_tests": "23 passed; 0 failed; 0 skipped",
+    "source_go_audited_package_compile": "passed",
+    "source_go_focused_tests": "passed",
+    "agent_image_no_cache_build": "passed",
+    "agent_image_runtime_network": "none",
+    "agent_image_foundry_force_build_offline": "passed",
+    "agent_image_go_audited_package_compile": "passed",
+    "agent_image_leakage": "passed",
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "unresolved_disclosures": [
+    {
+      "artifact": "benchmark_policy",
+      "concern": "The 12 selected bugs do not claim asset loss and are incompatible with the stock DETECT.md eligibility rule. Admission requires explicit approval of a custom noncanonical broader-bug detect instruction."
+    },
+    {
+      "artifact": "source_go_suite",
+      "concern": "The broad upstream Go runtime suite was environmentally incomplete because some tests require writable SRS resources or nested Docker; scoped compilation and focused tests passed."
+    },
+    {
+      "artifact": "agent_image",
+      "concern": "The reviewed image is local-only and has not been published to a registry."
+    }
+  ],
+  "approval_gate": "Exact candidate id, exact review-manifest digest, reviewer identity, broader-policy acceptance, and custom-prompt authorization are required before admission.",
+  "status": "passed_with_disclosures"
+}

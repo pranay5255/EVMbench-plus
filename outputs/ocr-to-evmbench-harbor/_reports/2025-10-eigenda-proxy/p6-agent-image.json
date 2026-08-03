@@ -1,0 +1,40 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image.v1",
+  "recorded_at": "2026-08-01T16:18:12Z",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "base_image": {
+    "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0"
+  },
+  "go_toolchain_image": {
+    "immutable_reference": "docker.io/library/golang@sha256:10f549dc8489597aa7ed2b62008199bb96717f52a8e8434ea035d5b44368f8a6"
+  },
+  "final_image": {
+    "local_tag": "evmbench-eigenda-proxy:c1r4",
+    "config_digest": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc",
+    "platform": "linux/amd64",
+    "created": "2026-08-01T16:14:05.852268797Z",
+    "size_bytes": 5415592446,
+    "candidate_layer_digest": "sha256:4829bfb1f66d5f23f91b77e4233ff76b61aba2e54945f1a2e7f38376b5032cc4",
+    "saved_tar_path": "/tmp/evmbench-eigenda-proxy-c1r4.tar",
+    "saved_tar_sha256": "7957e5b43276bc8221f04839a6ea2366b854aad331123edcd854085d201ccf99",
+    "saved_tar_size_bytes": 5549632512,
+    "published_to_registry": false
+  },
+  "build": {
+    "no_cache": true,
+    "vulnerable_head": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+    "recursive_submodules": "passed",
+    "foundry_build": "216 files compiled with solc 0.8.12",
+    "go_audited_package_compile": "passed"
+  },
+  "runtime": {
+    "network": "none",
+    "repository_head": "passed",
+    "original_tree_object_unrecoverable": true,
+    "retained_git_object_count": 1,
+    "foundry_force_build_offline": "passed",
+    "go_audited_package_compile": "passed",
+    "submodule_reinstallation_attempt_count": 0
+  },
+  "status": "passed"
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolated_admission.v1",
+  "phase": "P8",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "isolated_checkout": {
+    "path": "/tmp/eigenda-admission.ys2ks8/forest-of-audits",
+    "source_revision": "adfe07615981a678123cf61d7a69a6aee08228c9",
+    "source_revision_subject": "harden Harbor detect task adapter",
+    "branch": "admit-2025-10-eigenda-proxy",
+    "admission_commit": "48afb53c38969b7de8252a4897957f7df5ede673",
+    "admission_commit_subject": "Admit 2025-10-eigenda-proxy detect task",
+    "worktree_clean_after_commit": true,
+    "worktree_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "admission": {
+    "destination": "project/evmbench/audits/2025-10-eigenda-proxy",
+    "split": "project/evmbench/splits/detect-tasks.txt",
+    "split_membership_count": 1,
+    "candidate_file_count": 31,
+    "admitted_file_count": 31,
+    "approved_candidate_checksum_stream_sha256": "19911f3be2a95b0bb9d0d7835f8ecda60afb4172598f7ed1d92c6965c47b87c7",
+    "admitted_checksum_stream_sha256": "19911f3be2a95b0bb9d0d7835f8ecda60afb4172598f7ed1d92c6965c47b87c7",
+    "byte_identical": true
+  },
+  "canonical_checkout": {
+    "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+    "head_before_and_after": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "status_entry_count_before_and_after": 94,
+    "status_sha256_before_and_after": "31e2c8940e6e5d678458c379d69bc9ac10f13fb18544c53328d97b67feff3e67",
+    "written": false
+  }
+}
