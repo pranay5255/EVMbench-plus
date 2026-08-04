@@ -1,0 +1,39 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation_record.v1",
+  "recorded_at": "2026-08-03T14:02:55Z",
+  "immutable_inputs": {
+    "ocr_jsonl": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003106_6a277b0bfd56.jsonl",
+    "source_pdf": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/AgoraStableSwap-security-review_2025-06-05.pdf"
+  },
+  "authoring_repository": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "550ff8cfcea1bac7eb91145fd56df9c729cedf93",
+    "clean": false,
+    "pre_existing_changes": [
+      "M docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md"
+    ],
+    "handling": "preserved; only a scoped Agora queue delta may be added after fail-closed evidence is stable"
+  },
+  "nested_task_repository": {
+    "path": "/home/experiments_base/OPD_base/task_dir",
+    "head": "fb4d1423b22103738e442454d6fd1cf5a565cd46",
+    "clean_before_run": true
+  },
+  "canonical_forest_checkout": {
+    "path": "/home/experiments_base/forestOfAudits",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "clean": false,
+    "handling": "read-only status inspection only; all existing deletions and untracked research artifacts were left untouched"
+  },
+  "canonical_evmbench_checkout": {
+    "path": "/home/experiments_base/forestOfAudits/project/evmbench",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "clean": false,
+    "handling": "not used for validation, admission, build, or generation"
+  },
+  "isolated_recovery_locations": [
+    "/tmp/agora-stableswap-review.baoPm5",
+    "/tmp/agora-stableswap-recovery-online.hLsoq0",
+    "/tmp/agora-stableswap-candidate-fetch.7FEtTp"
+  ]
+}

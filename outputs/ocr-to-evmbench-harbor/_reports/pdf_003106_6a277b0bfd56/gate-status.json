@@ -1,0 +1,25 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.gate_status.v1",
+  "generated_at": "2026-08-03T14:02:55Z",
+  "pdf_id": "pdf_003106_6a277b0bfd56",
+  "candidate_id": null,
+  "state": "blocked_retryable",
+  "reason": "exact_audited_snapshot_unavailable",
+  "impact_policy": "loss_of_assets",
+  "candidate_created": false,
+  "human_approved": false,
+  "approved_candidate_digest": null,
+  "repository_url": "https://github.com/amphora-atlas/stable-swap-dev",
+  "vulnerable_commit": "1dedf62430e2fcf164a807f95c80c12615bad135",
+  "fixed_commit": "0b424f359bc22a80f681a92440cf5746e5b7dcf8",
+  "selected_finding_count": 0,
+  "downstream_state": {
+    "candidate_validation_run": false,
+    "agent_image_built": false,
+    "verifier_image_built": false,
+    "evmbench_admitted": false,
+    "harbor_task_generated": false,
+    "verifier_replay_run": false,
+    "model_smoke_run": false
+  }
+}

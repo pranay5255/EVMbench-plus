@@ -1,0 +1,98 @@
+{
+  "schema_version": "ocr_to_evmbench.snapshot_recovery.v1",
+  "created_at": "2026-08-03T14:02:55Z",
+  "last_recovery_attempt_at": "2026-08-03T14:12:24Z",
+  "status": "blocked_retryable",
+  "reason": "exact_audited_snapshot_unavailable",
+  "candidate_created": false,
+  "requested_repository": "https://github.com/amphora-atlas/stable-swap-dev",
+  "requested_commit": "1dedf62430e2fcf164a807f95c80c12615bad135",
+  "fixed_commit": "0b424f359bc22a80f681a92440cf5746e5b7dcf8",
+  "audited_scope": [
+    "AgoraStableSwapAccessControl",
+    "AgoraStableSwapFactory",
+    "AgoraStableSwapPair",
+    "AgoraStableSwapPairConfiguration",
+    "AgoraStableSwapPairCore"
+  ],
+  "automated_recovery": {
+    "helper": "/root/.codex/skills/ocr-to-evmbench-harbor/scripts/recover_audited_snapshot.py",
+    "network_unrestricted_run": true,
+    "canonical_repository_metadata": "HTTP 404",
+    "canonical_forks_endpoint": "HTTP 404",
+    "github_commit_index_matches": 0,
+    "exact_git_fetch": "repository not found",
+    "canonical_ssh_probe": "permission denied (publickey)",
+    "related_repository_exact_git_fetches": {
+      "https://github.com/DrakeEvans/stable-swap-dev.git": "upload-pack: not our ref 1dedf62430e2fcf164a807f95c80c12615bad135",
+      "https://github.com/0xMacro/agora-stable-swap-dev.git": "upload-pack: not our ref 1dedf62430e2fcf164a807f95c80c12615bad135",
+      "https://github.com/agora-finance/stable-swap.git": "upload-pack: not our ref 1dedf62430e2fcf164a807f95c80c12615bad135"
+    },
+    "admissible_checkout": null
+  },
+  "discovered_repository_candidates": [
+    {
+      "repository": "https://github.com/DrakeEvans/stable-swap-dev",
+      "relationship": "independent public repository with matching scoped code",
+      "exact_vulnerable_commit": false,
+      "exact_fixed_commit": false,
+      "branches_checked": [
+        "master@7673c00f19571391de917eb00b8a8cf0e7d6eec2",
+        "devin/1738609537-add-set-fee-receiver-tests@2f02cef2987a60b222ee0a16898c7335b89be472"
+      ],
+      "tags": 0,
+      "pull_refs": 1,
+      "releases": 0,
+      "workflow_artifacts": 0
+    },
+    {
+      "repository": "https://github.com/0xMacro/agora-stable-swap-dev",
+      "relationship": "sole public fork of DrakeEvans/stable-swap-dev",
+      "exact_vulnerable_commit": false,
+      "exact_fixed_commit": false,
+      "branches_checked": [
+        "master@a70aeed5370bd9d973598c7f3aa97827323b1fe7"
+      ],
+      "tags": 0,
+      "pull_refs": 0,
+      "releases": 0,
+      "workflow_artifacts": 0
+    },
+    {
+      "repository": "https://github.com/agora-finance/stable-swap",
+      "relationship": "public repository under agora-finance with matching scoped code; Git-history succession is not proven",
+      "exact_vulnerable_commit": false,
+      "exact_fixed_commit": false,
+      "branches_checked": [
+        "master@03155c2e8b4a9cc23a47c4d93190ab0548049bb5",
+        "feat/v1.2@0fb63bdffc72df4f184edf0ab945fa1768247e3f",
+        "release/2.2.0@2a93c4db840ce70779e956da75df29d6b4e3a707"
+      ],
+      "tags": 0,
+      "pull_refs": 3,
+      "releases": 0,
+      "workflow_artifacts": 0
+    }
+  ],
+  "archives": {
+    "software_heritage_origin_matches": 0,
+    "software_heritage_vulnerable_revision": false,
+    "software_heritage_fixed_revision": false,
+    "web_exact_sha_matches": 0,
+    "github_public_event_records_for_canonical_repository": 0,
+    "github_code_search_exact_sha_source_matches": 0,
+    "github_code_search_exact_sha_navigation_matches": [
+      "pashov/audits:team/md/AgoraStableSwap-security-review_2025-06-05.md"
+    ]
+  },
+  "local_search": {
+    "git_roots_checked": 10,
+    "roots_containing_exact_commit": 0,
+    "matching_archives_or_bundles": 0,
+    "docker_images_named_for_agora": 0,
+    "dangling_images_checked_by_layer_history": 4,
+    "dangling_images_containing_agora": 0
+  },
+  "verification": null,
+  "resume_requirement": "Provide a trusted Git repository or bundle containing the exact commit object and its complete audited tree."
+}
