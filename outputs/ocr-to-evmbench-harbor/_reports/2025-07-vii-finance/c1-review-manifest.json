@@ -1,0 +1,111 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-07-vii-finance",
+  "created_at": "2026-08-03T15:28:53Z",
+  "review_state": "in_review",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "human_approved": false,
+    "reviewer_identity": null,
+    "approved_at": null,
+    "binding_rule": "Approval must name this candidate ID, the exact SHA-256 digest of this manifest, and the reviewer identity.",
+    "candidate_admission_allowed": false,
+    "harbor_generation_allowed": false,
+    "agent_or_model_run_allowed": false
+  },
+  "candidate": {
+    "repository": "https://github.com/kankodu/vii-finance-smart-contracts.git",
+    "vulnerable_commit": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+    "task_group_key": "kankodu/vii-finance-smart-contracts@2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7|src/libraries/UniswapPositionValueHelper.sol+src/uniswap/factory/BaseUniswapWrapperFactory.sol+src/uniswap/factory/UniswapV3WrapperFactory.sol+src/uniswap/factory/UniswapV4WrapperFactory.sol+src/uniswap/UniswapV3Wrapper.sol+src/uniswap/UniswapV4Wrapper.sol+src/ERC721WrapperBase.sol|detect|loss_of_assets",
+    "task_group_key_sha256": "3950493077d13cc7943df7cfd5731a6194b89c4ebb5b1d22d01b93d63655bd48",
+    "mode": "detect",
+    "framework": "foundry",
+    "selected_finding_count": 4,
+    "selected_findings": [
+      {"id": "H-01", "report_id": "H-1", "source_pages": [14, 15, 16, 17, 18, 19, 20], "title": "Uniswap V4 partial unwraps leave fee credits reusable for repeated theft"},
+      {"id": "H-02", "report_id": "H-2", "source_pages": [21, 22, 23], "title": "Liquidation transfers use total token supply and seize excess collateral"},
+      {"id": "H-03", "report_id": "M-1", "source_pages": [24, 25], "title": "Full unwrap strands accrued Uniswap V4 fees after the position exits"},
+      {"id": "H-04", "report_id": "M-2", "source_pages": [25, 26, 27, 28, 29], "title": "Floor-rounded liquidation transfers underpay liquidators"}
+    ]
+  },
+  "source_evidence": {
+    "pdf_id": "pdf_003614_a668da0d1f36",
+    "pdf_sha256": "ede34aec32fceb463b22923d707aa96f624844305b789ea27cfa39c5ff9fcc9e",
+    "ocr_sha256": "a7f39dffc24729be5272933d8786ffd2eed1eea631caad0ab32ae6e558006d43",
+    "pdf_pages": 36,
+    "ocr_records": 36,
+    "selected_byte_exact_pages": [3, 4, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+    "ocr_is_primary_page_indexed_evidence": true,
+    "pdf_and_source_used_for_corrections": true
+  },
+  "agent_image": {
+    "tag": "evmbench-vii-finance:c1",
+    "id": "sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418",
+    "size_bytes": 4265042400,
+    "local_only": true,
+    "repo_digests": [],
+    "candidate_layer_diff_id": "sha256:0901a722533c9f08069bd3feed17bc0adae4ebc038ee9a7ab781074c0820b426",
+    "network_disabled_replay": "passed",
+    "target_evidence_leakage": "passed"
+  },
+  "validation": {
+    "ocr": "passed_36_of_36",
+    "pdf_ocr_review": "passed_with_documented_corrections",
+    "repository_resolution": "passed_exact_clean_detached_commit",
+    "semantic_grounding": "passed_with_disclosures",
+    "report_finding_dispositions": "10_of_10",
+    "byte_exact_slices": "passed",
+    "current_structural_validator": "passed_zero_errors_zero_warnings",
+    "pinned_structural_validator": "passed_zero_errors_zero_warnings",
+    "current_validator_tests": "6_of_6",
+    "pinned_validator_tests": "6_of_6",
+    "no_cache_image_build": "passed",
+    "network_disabled_build": "passed_183_solidity_files",
+    "network_disabled_targeted_tests": "11_of_11",
+    "candidate_leakage": "passed_zero_target_markers"
+  },
+  "material_disclosures": [
+    "The report's Critical C-1 combines H-1, H-2, and L-2 behaviors rather than adding an independent vulnerable operation; it is split and merged into H-01 and H-02 to avoid double-scoring.",
+    "The Euler price-oracle submodule references an optional historical Redstone gitlink that is no longer exposed by its upstream. It was not substituted; no audited VII source or compiled import reaches it, and the exact required graph builds offline.",
+    "The repository is currently public but GitHub reports no asserted SPDX license; reviewer acceptance is required before admission.",
+    "The 11 passing tests are the non-RPC baseline and factory tests. Mainnet-fork integration tests were not run because they require MAINNET_RPC_URL; no exploit-specific PoC is claimed.",
+    "The exported image root filesystem inherits 12 unrelated LiteLLM guardrail JSONL files from the pinned base image. There are zero PDF or JSONL files under /home, zero in the candidate layer, and zero target evidence markers anywhere scanned.",
+    "The C1 image is local-only. A registry-pushed, digest-pinned image may be produced only after exact approval and isolated admission."
+  ],
+  "artifact_bindings": [
+    {"path": "c1-generated-file-manifest.json", "sha256": "cbe6639fb7ac797965884808e0d9d66cbedd2d69edb527d9a9a3e0d7b2c946a2"},
+    {"path": "c1-validation-summary.json", "sha256": "d6edf272d850f329c056e05942c3971b0e6a971ad9fc73a8b393f5bad3c283d2"},
+    {"path": "p1-isolation.json", "sha256": "212ddcba922567630b549defdf0aafc9f2551cd020044801fe2fc26fe875f9ce"},
+    {"path": "p1-ocr-validation.json", "sha256": "740852a6da0ab9a8b58211b12f891ead8d1ed9cfaeb82c78da94c64e2696f226"},
+    {"path": "p1-ocr-validation.txt", "sha256": "e9083a01956809eeab0269760649cbbe3c7c12a789f7ee4d00507c2af582051f"},
+    {"path": "p2-ocr-corrections.json", "sha256": "30c56f6a1015f045da1caa1230664ea90b2084ca99c7f381df99c0e475be856d"},
+    {"path": "p2-pdf-ocr-review.md", "sha256": "e999fb7e8390c1263a4660dd55192d19c3a3bb2b7d02d29fea22a552ee3e249c"},
+    {"path": "p2-pdf-validation.json", "sha256": "5110f5d470a57dd2e989ac06b2984c3c921a759f668f4095b83daefd7dd81d0b"},
+    {"path": "p3-repository-grounding.md", "sha256": "6d92beacbf238d542b62c3b6834a91457375e10fa5acd979c01e76b36e73905b"},
+    {"path": "p3-repository-snapshot.json", "sha256": "2d593ad771b2ec872e4fd2991a5be9bc77b545bfe7c31d1586142a5181fcd040"},
+    {"path": "p3-submodules.json", "sha256": "4b157d0aedba02ceaf273437321701f0cbc409ec5ec386b7a60ac3dd41b87f1f"},
+    {"path": "p3-task-group.json", "sha256": "9969313fdaf2cdca22f1e4d71ba56ddc37f6a516480c168df8fe58db2d124b9d"},
+    {"path": "p4-finding-grounding.md", "sha256": "9832afe4e474567e72453d30586def72efbe5c5a21fd1e423355c1f677761446"},
+    {"path": "p4-semantic-validation.json", "sha256": "c1fa629f17919ed0c221c2bf83fbb62e94185f24f06445b5c5e9ed628c32b91f"},
+    {"path": "p5-build-baseline.md", "sha256": "204171cd4cb7ab7c208bf2c82d35019049609c55065575a392ab1fab0b0d5a43"},
+    {"path": "p5-byte-exact-slices.json", "sha256": "db35c94179f6dd849eae403ae1e97f7b8966b4daaa9d924e1d56f40e05399b62"},
+    {"path": "p6-agent-image.json", "sha256": "3dfe36e93a1ac6d92d491ae162aea1fa1503987cf81c3616248899c917db6e6a"},
+    {"path": "p6-current-structural-validator.json", "sha256": "97aa821b9db9abdb042543b2ac90595f169a9c83deb50e594afff5872f164240"},
+    {"path": "p6-current-validator-tests.txt", "sha256": "ede79f995e2f310beccdc9410e7733dc39b02dbefaa16a04f56b0c5951bb8a9f"},
+    {"path": "p6-leakage-audit.json", "sha256": "b3afb54ea394c63c4de273a09a83099655724a45c572e2bc4b3b6852d00af3ba"},
+    {"path": "p6-pinned-structural-validator.json", "sha256": "595a7ae4834718406e9cbac8483103eced2cba16314c42e5724e6ae1704c69f4"},
+    {"path": "p6-pinned-validator-tests.txt", "sha256": "0b0f944787b74eb2f646db3fee5e1b26b43ab1bdfd66a7442728b825a538f187"},
+    {"path": "p6-repository-validation.json", "sha256": "d7b7c952bff7384410c75e983f325df73f7f725cd59d9d9f9649b7fa54cc16ea"}
+  ],
+  "queue_state_after_checkpoint_recording": {
+    "created": 9,
+    "blocked": 4,
+    "in_review": 1,
+    "next": 1,
+    "queued": 5,
+    "next_task": "rank 6 Benqi Governance",
+    "out_of_queue_order_selection": "rank 16 VII"
+  },
+  "summary": {"ok": true, "mandatory_human_approval_required": true}
+}

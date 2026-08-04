@@ -1,0 +1,15 @@
+{
+  "schema": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "ok": true,
+  "source_sha256": "a7f39dffc24729be5272933d8786ffd2eed1eea631caad0ab32ae6e558006d43",
+  "slices": [
+    {"path": "scope.pages.jsonl", "pages": [3, 4], "sha256": "64da41051d5dc835fe915bf67837fd4d9e6b25cde2c70745e0d5fb3e1f5ad91c"},
+    {"path": "H-01.pages.jsonl", "pages": [14, 15, 16, 17, 18, 19, 20], "sha256": "68a4b800b143ec5d82b1f78a520a5273aebb1617edcdf9ed8e1c92101f9c42fe"},
+    {"path": "H-02.pages.jsonl", "pages": [21, 22, 23], "sha256": "09afb0a1efbe1d0307ff1061d30129e2d165131f99084608d34fbcac62e53a47"},
+    {"path": "H-03.pages.jsonl", "pages": [24, 25], "sha256": "1e4d1c8844444b1ff20ffe5312536a7564b73ed874698b5a0d8ee888e93bfbf6"},
+    {"path": "H-04.pages.jsonl", "pages": [25, 26, 27, 28, 29], "sha256": "70583ca7d9d55316b2420eadddfac483b1ab79aa3653fde7c20619abe9547a1f"}
+  ],
+  "records_preserved_byte_for_byte": true,
+  "records_ordered_by_page_number": true,
+  "source_rehashed_unchanged": true
+}

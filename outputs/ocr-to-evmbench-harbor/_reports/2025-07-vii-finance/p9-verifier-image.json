@@ -1,0 +1,35 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "verifier",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-07-vii-finance-verifier-9098bd6ffc4d552e-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-07-vii-finance-verifier"
+  ],
+  "registry_digest": "sha256:d8a3025c47bdb1ab15e0149c88f160af7ce3f06c7ae0012ce65d7d531344941f",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:d8a3025c47bdb1ab15e0149c88f160af7ce3f06c7ae0012ce65d7d531344941f",
+  "image_id": "sha256:9098bd6ffc4d552eef03d1908b2afd80f93367d788d8e423b378986854820cf0",
+  "created": "2026-08-03T16:12:15.753787939Z",
+  "size_bytes": 1030473920,
+  "rootfs_layer_count": 12,
+  "platform": "linux/amd64",
+  "base_image": "docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+  "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+  "source_admission_commit_label": "284ea615e25d968628fb51732c39b3b3d7c5a0ee",
+  "adapter_revision": "adfe07615981a678123cf61d7a69a6aee08228c9",
+  "review_bundle_digest_label": "4c2d5501ea684386b006267e4b85af72377a8b8289fa8b8f8596b3410e4e7840",
+  "admitted_candidate_checksum_stream_sha256": "113cf74b6d6d9cd8158d0c536323687db8effa65c65b2d4786360c0e7db458b7",
+  "embedded_grader_audit_file_count": 6,
+  "embedded_grader_audit_checksum_stream_sha256": "a96dbb22e393934d2c2875f3045c7c7b0e6ae45449a3309598e1ac12cd87d988",
+  "embedded_grader_audit_matches_approved_candidate_subset": true,
+  "verifier_module_sha256": "975d92ebaede2a3eafaa80ab9ce673663daf20f3696cf6915a4dca69165e5bff",
+  "tests_packaged": [
+    {"path": "/tests/test.sh", "sha256": "65fdf28578e2ba61054bd4be5c7404db42586c3cc10fa6fe663aed066ca05880"},
+    {"path": "/tests/evmbench_harbor_verifier.py", "sha256": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6"},
+    {"path": "/tests/validate_detect_submission.py", "sha256": "c868e9451cb2195a19926eb10e3eb73f6f12def408b588a24f9546b80f7a16df"}
+  ],
+  "registry_load_check": {"vulnerability_count": 4, "detect_max_award": 4.0},
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

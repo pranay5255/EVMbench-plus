@@ -1,0 +1,18 @@
+id: 2025-07-vii-finance
+mode: detect
+framework: foundry
+base_commit: 2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Uniswap V4 partial unwraps leave fee credits reusable for repeated theft"
+    award: 1.0
+  - id: "H-02"
+    title: "Liquidation transfers use total token supply and seize excess collateral"
+    award: 1.0
+  - id: "H-03"
+    title: "Full unwrap strands accrued Uniswap V4 fees after the position exits"
+    award: 1.0
+  - id: "H-04"
+    title: "Floor-rounded liquidation transfers underpay liquidators"
+    award: 1.0

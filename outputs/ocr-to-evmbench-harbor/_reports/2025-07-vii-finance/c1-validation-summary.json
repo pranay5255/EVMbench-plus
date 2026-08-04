@@ -1,0 +1,29 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-07-vii-finance",
+  "created_at": "2026-08-03T15:28:53Z",
+  "checks": {
+    "ocr_schema_and_immutability": "passed_36_of_36",
+    "pdf_readability_and_page_count": "passed_36_pages",
+    "pdf_ocr_visual_review": "passed_with_documented_corrections",
+    "repository_snapshot": "passed_exact_clean_detached_commit",
+    "required_submodule_snapshot": "passed",
+    "semantic_dispositions": "passed_10_of_10_report_findings",
+    "selected_loss_of_assets_findings": "4",
+    "byte_exact_ocr_slices": "passed",
+    "offline_build": "passed_183_solidity_files",
+    "offline_tests": "passed_11_of_11_non_rpc_tests",
+    "current_structural_validator": "passed_zero_errors_zero_warnings",
+    "pinned_structural_validator": "passed_zero_errors_zero_warnings",
+    "current_validator_tests": "passed_6_of_6",
+    "pinned_validator_tests": "passed_6_of_6",
+    "no_cache_agent_image_build": "passed",
+    "network_disabled_replay": "passed",
+    "target_evidence_leakage": "passed_zero_hits"
+  },
+  "admission": false,
+  "harbor_task_generated": false,
+  "agent_or_model_run": false,
+  "summary": {"ok": true, "mandatory_human_approval_required": true}
+}

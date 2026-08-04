@@ -1,0 +1,27 @@
+{
+  "schema": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "ok": true,
+  "repository_url": "https://github.com/kankodu/vii-finance-smart-contracts.git",
+  "repository_public": true,
+  "repository_archived": false,
+  "repository_license_spdx": "NOASSERTION",
+  "commit": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+  "object_type": "commit",
+  "root_tree": "93e281561e07ae50cbbf4d08eef6c2d7a5fb6f48",
+  "parents": ["d37f46e4ff5c7025a23b0b28eaecd87fd0084cfd"],
+  "subject": "fix: remove unused imports",
+  "authored_at": "2025-07-04T12:13:33+05:30",
+  "checkout_path": "/tmp/vii-audit-review",
+  "detached_head": true,
+  "clean_main_worktree": true,
+  "audited_path_count": 7,
+  "audited_paths_present": true,
+  "required_submodules_verified": true,
+  "source_build_offline": "passed",
+  "non_rpc_tests": {"passed": 11, "failed": 0, "skipped": 0},
+  "admissibility": "passed_with_disclosures",
+  "disclosures": [
+    "The public repository declares no machine-detectable SPDX license; benchmark-use authority remains a human review item.",
+    "An unused nested Redstone gitlink in euler-price-oracle is unavailable upstream and was not substituted. It is outside the audited and compiled import graph."
+  ]
+}

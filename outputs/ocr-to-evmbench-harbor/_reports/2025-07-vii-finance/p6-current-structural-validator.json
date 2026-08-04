@@ -1,0 +1,25 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.structural_validation.v1",
+  "phase": "P6",
+  "candidate_id": "2025-07-vii-finance",
+  "validator_source": "current_parent_checkout",
+  "validator_revision": "550ff8cfcea1bac7eb91145fd56df9c729cedf93",
+  "candidate_count": 1,
+  "ok": true,
+  "results": [
+    {
+      "candidate_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-07-vii-finance",
+      "errors": [],
+      "finding_files": [
+        "findings/H-01.md",
+        "findings/H-02.md",
+        "findings/H-03.md",
+        "findings/H-04.md"
+      ],
+      "ok": true,
+      "review_state": "in_review",
+      "warnings": []
+    }
+  ],
+  "summary": {"ok": true, "errors": 0, "warnings": 0}
+}

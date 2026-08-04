@@ -1,0 +1,26 @@
+{
+  "schema": "ocr_to_evmbench_harbor.submodules.v1",
+  "ok": true,
+  "required": [
+    {"path": "lib/ethereum-vault-connector", "commit": "a7d3c29ef7e4964736e47675e0588630d6afbfd7", "verified": true},
+    {"path": "lib/euler-interfaces", "commit": "6e32696d2db2f72ae48bbbb4a0b73a8a314b36c8", "verified": true},
+    {"path": "lib/euler-price-oracle", "commit": "ffc3cb82615fc7d003a7f431175bd1eaf0bf41c5", "verified": true},
+    {"path": "lib/forge-std", "commit": "77041d2ce690e692d6e03cc812b57d1ddaa4d505", "verified": true},
+    {"path": "lib/openzeppelin-contracts", "commit": "e4f70216d759d8e6a64144a9e1f7bbeed78e7079", "verified": true},
+    {"path": "lib/v3-core", "commit": "6562c52e8f75f0c10f9deaf44861847585fc8129", "verified": true},
+    {"path": "lib/v3-periphery", "commit": "b325bb0905d922ae61fcc7df85ee802e8df5e96c", "verified": true},
+    {"path": "lib/v4-periphery", "commit": "ad04c9f24a170accf5ea1b2836bbafd514537ca6", "verified": true},
+    {"path": "lib/euler-price-oracle/lib/solady", "commit": "0123b4c0509ce253e41e5abd2c75a64c06389640", "verified": true},
+    {"path": "lib/euler-price-oracle/lib/v3-core", "commit": "6562c52e8f75f0c10f9deaf44861847585fc8129", "verified": true},
+    {"path": "lib/euler-price-oracle/lib/v3-periphery", "commit": "b325bb0905d922ae61fcc7df85ee802e8df5e96c", "verified": true}
+  ],
+  "unavailable_optional": {
+    "path": "lib/euler-price-oracle/lib/redstone-oracles-monorepo",
+    "commit": "2dc8e9a8e3030b6805d640325547a9a937342f76",
+    "canonical_commit_endpoint": "404",
+    "github_commit_search_results": 0,
+    "substituted": false,
+    "required_by_audited_import_graph": false
+  },
+  "proof": "The selected required dependency set compiles all 183 reachable source units offline and passes all 11 non-RPC tests."
+}

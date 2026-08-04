@@ -1,0 +1,212 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-07-vii-finance",
+  "materialized_at": "2026-08-03T14:58:56Z",
+  "phase": "P7",
+  "review_state": "approved_for_admission",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "4c2d5501ea684386b006267e4b85af72377a8b8289fa8b8f8596b3410e4e7840",
+    "approved_at": "2026-08-03T15:38:14Z",
+    "reviewer_identity": "github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "reviewer_github_html_url": "https://github.com/pranay5255",
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "kankodu/vii-finance-smart-contracts@2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7|src/libraries/UniswapPositionValueHelper.sol+src/uniswap/factory/BaseUniswapWrapperFactory.sol+src/uniswap/factory/UniswapV3WrapperFactory.sol+src/uniswap/factory/UniswapV4WrapperFactory.sol+src/uniswap/UniswapV3Wrapper.sol+src/uniswap/UniswapV4Wrapper.sol+src/ERC721WrapperBase.sol|detect|loss_of_assets",
+    "task_group_key_sha256": "3950493077d13cc7943df7cfd5731a6194b89c4ebb5b1d22d01b93d63655bd48",
+    "repository_slug": "kankodu/vii-finance-smart-contracts",
+    "vulnerable_commit": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+    "audited_scope": [
+      "src/libraries/UniswapPositionValueHelper.sol",
+      "src/uniswap/factory/BaseUniswapWrapperFactory.sol",
+      "src/uniswap/factory/UniswapV3WrapperFactory.sol",
+      "src/uniswap/factory/UniswapV4WrapperFactory.sol",
+      "src/uniswap/UniswapV3Wrapper.sol",
+      "src/uniswap/UniswapV4Wrapper.sol",
+      "src/ERC721WrapperBase.sol"
+    ],
+    "mode": "detect",
+    "framework": "foundry",
+    "impact_policy": "loss_of_assets"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003614_a668da0d1f36",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "2025-07-15-cyfrin-vii-v2.0.pdf",
+    "source_rel_path": "cyfrin-audit-reports/reports/2025-07-15-cyfrin-vii-v2.0.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/cyfrin-audit-reports/reports/2025-07-15-cyfrin-vii-v2.0.pdf",
+    "source_pdf_sha256": "ede34aec32fceb463b22923d707aa96f624844305b789ea27cfa39c5ff9fcc9e",
+    "size_bytes": 302203,
+    "physical_page_count": 36,
+    "report_identity": "Cyfrin VII Finance Security Review v2.0",
+    "report_month": "2025-07",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003614_a668da0d1f36.jsonl",
+    "sha256": "a7f39dffc24729be5272933d8786ffd2eed1eea631caad0ab32ae6e558006d43",
+    "size_bytes": 279307,
+    "record_count": 36,
+    "source_page_count": 36,
+    "created_at": "2026-06-30T06:30:00.271382+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "_reports/2025-07-vii-finance/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 16,
+    "selection": "selected-20-batch",
+    "category": "Lending/Credit",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 27,
+    "heuristic_unique_issue_ids": 12,
+    "reviewed_report_finding_count": 10,
+    "out_of_queue_order": true,
+    "canonical_next_preserved": "rank 6 Benqi Governance"
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/kankodu/vii-finance-smart-contracts.git",
+    "repository_slug": "kankodu/vii-finance-smart-contracts",
+    "commit": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+    "commit_subject": "fix: remove unused imports",
+    "commit_authored_at": "2025-07-04T12:13:33+05:30",
+    "root_tree": "93e281561e07ae50cbbf4d08eef6c2d7a5fb6f48",
+    "parents": ["d37f46e4ff5c7025a23b0b28eaecd87fd0084cfd"],
+    "detached_head": true,
+    "clean_main_worktree": true,
+    "top_level_submodules_verified": true,
+    "required_nested_submodules_verified": true,
+    "optional_uninitialized_nested_submodules": [
+      "lib/euler-price-oracle/lib/ethereum-vault-connector",
+      "lib/euler-price-oracle/lib/forge-std",
+      "lib/euler-price-oracle/lib/openzeppelin-contracts",
+      "lib/euler-price-oracle/lib/pendle-core-v2-public",
+      "lib/euler-price-oracle/lib/pyth-sdk-solidity",
+      "lib/euler-price-oracle/lib/redstone-oracles-monorepo"
+    ],
+    "optional_dependency_exception": "The Euler oracle's Redstone gitlink 2dc8e9a8e3030b6805d640325547a9a937342f76 is no longer exposed by its upstream and was not substituted. No audited VII source or compiled import reaches it; the exact required import graph compiled offline.",
+    "review_clone": "/tmp/vii-audit-review",
+    "public_repository": true,
+    "repository_license_spdx": "NOASSERTION",
+    "tracked_pdf_or_jsonl_count": 0
+  },
+  "required_submodules": [
+    {"path": "lib/ethereum-vault-connector", "commit": "a7d3c29ef7e4964736e47675e0588630d6afbfd7"},
+    {"path": "lib/euler-interfaces", "commit": "6e32696d2db2f72ae48bbbb4a0b73a8a314b36c8"},
+    {"path": "lib/euler-price-oracle", "commit": "ffc3cb82615fc7d003a7f431175bd1eaf0bf41c5"},
+    {"path": "lib/forge-std", "commit": "77041d2ce690e692d6e03cc812b57d1ddaa4d505"},
+    {"path": "lib/openzeppelin-contracts", "commit": "e4f70216d759d8e6a64144a9e1f7bbeed78e7079"},
+    {"path": "lib/v3-core", "commit": "6562c52e8f75f0c10f9deaf44861847585fc8129"},
+    {"path": "lib/v3-periphery", "commit": "b325bb0905d922ae61fcc7df85ee802e8df5e96c"},
+    {"path": "lib/v4-periphery", "commit": "ad04c9f24a170accf5ea1b2836bbafd514537ca6"},
+    {"path": "lib/euler-price-oracle/lib/solady", "commit": "0123b4c0509ce253e41e5abd2c75a64c06389640"},
+    {"path": "lib/euler-price-oracle/lib/v3-core", "commit": "6562c52e8f75f0c10f9deaf44861847585fc8129"},
+    {"path": "lib/euler-price-oracle/lib/v3-periphery", "commit": "b325bb0905d922ae61fcc7df85ee802e8df5e96c"}
+  ],
+  "file_evidence": [
+    {"path": "src/libraries/UniswapPositionValueHelper.sol", "git_blob": "649d593c99c543b7304eed6fcee02ff8874739a8", "sha256": "b8fa73882c96098e3e9339344b89209788f8923f9f952c2b11725a858887511c"},
+    {"path": "src/uniswap/factory/BaseUniswapWrapperFactory.sol", "git_blob": "d0de86d3a8fb3c0b7eec5fa60b5595a59a35bd16", "sha256": "566a95b3d9e0e080de1cd283bc446248de9f882b14efed28d8f36de30f1a5e29"},
+    {"path": "src/uniswap/factory/UniswapV3WrapperFactory.sol", "git_blob": "3e4515accbb61429b0b39c2f023dd5d5a3a36f5f", "sha256": "2cf72a0dce6bfdbcc44226684a976c76a8e2ffb04ff03f4cf14a768420462b38"},
+    {"path": "src/uniswap/factory/UniswapV4WrapperFactory.sol", "git_blob": "829a9a45d89cbcdf8d7887ce55fabe052af95f42", "sha256": "b91ad73b081d526bbd7e2b4a8a61c9c4032510d7c6fddff8cf5987f6caf4cf9e"},
+    {"path": "src/uniswap/UniswapV3Wrapper.sol", "git_blob": "faa56e0d17c89ec4b78d209cb010e3d8020ff161", "sha256": "4d4bbe1797a0c3bd52a9390a5bf7c6c751f9ec2c9723f780a8a41a3862efd074"},
+    {"path": "src/uniswap/UniswapV4Wrapper.sol", "git_blob": "4fc95784969c9ceeaf8c89a610fb81c94689db70", "sha256": "1730e2a65c9d416d54b9e0359dfa30de5ccd37a960228489e2078c3d3e9ffc52"},
+    {"path": "src/ERC721WrapperBase.sol", "git_blob": "611531251ffc7d30add5ade6a29c5e5553446d1b", "sha256": "1f36dd5b60732e42bacc882289f4b0bf66d75fcab3eb0b4c3d446aa09f255fe1"}
+  ],
+  "fixed_snapshots": [
+    {"report_ids": ["C-1", "H-1"], "commit": "8c6b6cca4ed65b22053dc7ffaa0b77d06a160caf", "kept_separate": true},
+    {"report_ids": ["C-1", "H-2"], "commit": "b7549f2700af133ce98a4d6f19e43c857b5ea78a", "kept_separate": true},
+    {"report_ids": ["M-1"], "commit": "bf5f099b5d73dbff8fa6d403cb54ee6474828ac4", "kept_separate": true},
+    {"report_ids": ["M-2"], "commit": "5e825d5f2eee6789b646bd0f00e9a9a53b5039ca", "kept_separate": true}
+  ],
+  "compiler": {
+    "version": "0.8.26+commit.8a97fa7a",
+    "binary_url": "https://binaries.soliditylang.org/linux-amd64/solc-linux-amd64-v0.8.26+commit.8a97fa7a",
+    "sha256": "d5f23436f443edb85d8e76906d12f0a86ce0490e7663a9e608efeb7a93f149ef",
+    "manifest_sha256": "78b63682e0e994bfbdf432b5eb1837b6d5190a21256e5e22971673bdc41bb0ce",
+    "verified_against_official_manifest": true
+  },
+  "source_validation": {
+    "clean_offline_build": true,
+    "compiled_files": 183,
+    "unit_tests_passed": 9,
+    "factory_tests_passed": 2,
+    "tests_failed": 0,
+    "tests_skipped": 0,
+    "rpc_dependent_tests_not_run": true
+  },
+  "tooling_revisions": {
+    "opd_base": {"compatible_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776", "isolated_validation_required": true},
+    "evmbench": {"compatible_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4", "admission_not_authorized": true}
+  },
+  "ocr_corrections": [
+    {"pages": [4], "field": "repository_and_commit", "correction": "The OCR preserves only the visible short commit 2a3a72c675a5; the PDF hyperlink resolves the exact repository and full vulnerable commit 2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7."},
+    {"pages": [5, 14, 20, 21, 24], "field": "identifiers", "correction": "The PDF and pinned code correct OCR variants including Uniswap4Wrapper to UniswapV4Wrapper, tokensDived or tokenUsed to tokensOwed, ERC8909 to ERC6909, and INconfigurablePositionManager to INonfungiblePositionManager."},
+    {"pages": [25], "field": "fixed_commit", "correction": "The OCR reads bf51099; the PDF hyperlink and repository resolve bf5f099b5d73dbff8fa6d403cb54ee6474828ac4."}
+  ],
+  "ocr_evidence": [
+    {"page_number": 3, "role": "scope", "page_image_sha256": "d8ba4075bb7aebe8381eac2e5718d1a75aefa90b25c13125ea50f89e64dfa13c", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/scope.pages.jsonl"},
+    {"page_number": 4, "role": "repository_and_commit", "page_image_sha256": "225ce8b961eeb4920a474ad3f2e5088aa998a0caf72eef61b06c427fb9bd6126", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/scope.pages.jsonl"},
+    {"page_number": 14, "finding_id": "H-01", "page_image_sha256": "733f284236c46941fce7699825812fe5f7999a18b5b68b7c17a1e3bb1bc8f5eb", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl"},
+    {"page_number": 15, "finding_id": "H-01", "page_image_sha256": "e8f4efa1bf3d9066b3e55a93a9f53b6ec12be1fcdc23685f54f73858b2355463", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl"},
+    {"page_number": 16, "finding_id": "H-01", "page_image_sha256": "eeee91891aca7a9ced494ca7ea0d281686b11a7d6254675fd14c5b026b1a3847", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl"},
+    {"page_number": 17, "finding_id": "H-01", "page_image_sha256": "8e749a9bc1882940560816bd55fdb5b78d11b7535eb00e7f6d46cba5ad401a0b", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl"},
+    {"page_number": 18, "finding_id": "H-01", "page_image_sha256": "c48e4546ed7fbc4f7d1a816aabe73f9048f5133ac142aed34d46b63812f99f2a", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl"},
+    {"page_number": 19, "finding_id": "H-01", "page_image_sha256": "0898f8d68da757c20aff24f9bb68e35b750b304ed512c89107d2454532de48b8", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl"},
+    {"page_number": 20, "finding_id": "H-01", "page_image_sha256": "4ef033addbb91b74770c173dc8c449a752dc833ee834a5b7c1e9730e428d0088", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl"},
+    {"page_number": 21, "finding_id": "H-02", "page_image_sha256": "d09182c64700c6e45bd19f2591fb6a597cc932c785d361d31ddb002096eadff9", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-02.pages.jsonl"},
+    {"page_number": 22, "finding_id": "H-02", "page_image_sha256": "cb2537764169b54930fa82839178eb76f2b701524b3442edceb8ef239570541a", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-02.pages.jsonl"},
+    {"page_number": 23, "finding_id": "H-02", "page_image_sha256": "d46df6aafde5062bde4c6e0f32f9f2ca003768fae0a728ab591437aaf6a91555", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-02.pages.jsonl"},
+    {"page_number": 24, "finding_id": "H-03", "page_image_sha256": "729d849bed009fa612483b630db6f4cc57efd3a448aa2e6606f734766347738e", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-03.pages.jsonl"},
+    {"page_number": 25, "finding_id": "H-03", "page_image_sha256": "eb6e9c1e9156c8182da55fa717082776a300731b5d151bc5a0725f189b2affce", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-03.pages.jsonl"},
+    {"page_number": 25, "finding_id": "H-04", "page_image_sha256": "eb6e9c1e9156c8182da55fa717082776a300731b5d151bc5a0725f189b2affce", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-04.pages.jsonl"},
+    {"page_number": 26, "finding_id": "H-04", "page_image_sha256": "5b7e09f8d317a12485ad4e03260ae5a75c315eba1cb9e79295780768b1e4dcc1", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-04.pages.jsonl"},
+    {"page_number": 27, "finding_id": "H-04", "page_image_sha256": "7a1d2a3eba57c9a2ede0dee682e924641fa75862c493bd51891ac73d564ccaad", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-04.pages.jsonl"},
+    {"page_number": 28, "finding_id": "H-04", "page_image_sha256": "55178291ee704dfea968af15421a5af884ef348b06185b81b9bcb839db99e582", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-04.pages.jsonl"},
+    {"page_number": 29, "finding_id": "H-04", "page_image_sha256": "e851df5165738ad2c556b7c302475f721490030c3e6e53095fcd0dfda4fed110", "artifact_ref": "ocr_evidence/pdf_003614_a668da0d1f36/H-04.pages.jsonl"}
+  ],
+  "selected_findings": [
+    {"finding_id": "H-01", "source_report_finding_id": "H-1", "source_pages": [14, 15, 16, 17, 18, 19, 20], "reported_severity": "High", "title": "Uniswap V4 partial unwraps leave fee credits reusable for repeated theft", "generated_file": "findings/H-01.md"},
+    {"finding_id": "H-02", "source_report_finding_id": "H-2", "source_pages": [21, 22, 23], "reported_severity": "High", "title": "Liquidation transfers use total token supply and seize excess collateral", "generated_file": "findings/H-02.md"},
+    {"finding_id": "H-03", "source_report_finding_id": "M-1", "source_pages": [24, 25], "reported_severity": "Medium", "title": "Full unwrap strands accrued Uniswap V4 fees after the position exits", "generated_file": "findings/H-03.md"},
+    {"finding_id": "H-04", "source_report_finding_id": "M-2", "source_pages": [25, 26, 27, 28, 29], "reported_severity": "Medium", "title": "Floor-rounded liquidation transfers underpay liquidators", "generated_file": "findings/H-04.md"}
+  ],
+  "report_dispositions": [
+    {"report_id": "C-1", "pages": [6, 7, 8, 9, 10, 11, 12, 13], "reported_severity": "Critical", "reported_status": "Resolved", "disposition": "split_and_merged", "reason": "The report explicitly composes the H-1 stale-fee credit, H-2 over-transfer, and L-2 zero-balance enrollment behaviors and prescribes those findings' fixes. It adds no independent vulnerable operation, so its asset-loss paths are scored through H-01 and H-02 rather than double-counted."},
+    {"report_id": "H-1", "pages": [14, 15, 16, 17, 18, 19, 20], "reported_severity": "High", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-01", "asset_loss_path": "Stale fee credits let an attacker withdraw LP-fee tokens reserved for other ERC-6909 holders."},
+    {"report_id": "H-2", "pages": [21, 22, 23], "reported_severity": "High", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-02", "asset_loss_path": "Inflated liquidation transfers seize more collateral from the violator than the requested value and can also block liquidation into bad debt."},
+    {"report_id": "M-1", "pages": [24, 25], "reported_severity": "Medium", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-03", "asset_loss_path": "The final holder or liquidator irrecoverably loses LP fees left in the wrapper after full unwrap."},
+    {"report_id": "M-2", "pages": [25, 26, 27, 28, 29], "reported_severity": "Medium", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-04", "asset_loss_path": "Floor rounding lets the violator retain collateral value that a partial liquidator paid debt to receive."},
+    {"report_id": "L-1", "pages": [30, 31, 32], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "reason_category": "speculative_no_material_asset_loss", "reason": "The report states that it could not identify a clear material attack, could not bypass deferred account checks, and found recursive partial unwraps unprofitable."},
+    {"report_id": "L-2", "pages": [33], "reported_severity": "Low", "reported_status": "Acknowledged", "disposition": "excluded_merged_dependency", "reason_category": "no_independent_asset_loss_root_cause", "reason": "Zero-balance token enrollment is observable, but its reported liquidation-blocking asset impact relies on H-2's total-supply normalization and is removed by the same H-2 code change. Scoring it separately would double-count that root cause."},
+    {"report_id": "L-3", "pages": [33, 34, 35], "reported_severity": "Low", "reported_status": "Acknowledged", "disposition": "excluded", "reason_category": "zero_value_position_reuse", "reason": "The remaining NFT has no liquidity after the full partial unwrap; the report and project response establish no retained asset value or theft path."},
+    {"report_id": "I-1", "pages": [36], "reported_severity": "Informational", "reported_status": "Resolved", "disposition": "excluded", "reason_category": "caller_controlled_revert", "reason": "Malformed optional data makes the caller's partial unwrap revert but does not transfer, destroy, or strand assets."},
+    {"report_id": "I-2", "pages": [36], "reported_severity": "Informational", "reported_status": "Resolved", "disposition": "excluded", "reason_category": "code_quality", "reason": "A duplicate import is a source-quality observation with no security or asset-loss behavior."}
+  ],
+  "generated_files": [
+    ".dockerignore",
+    "Dockerfile",
+    "config.yaml",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/H-04.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl",
+    "ocr_evidence/pdf_003614_a668da0d1f36/H-02.pages.jsonl",
+    "ocr_evidence/pdf_003614_a668da0d1f36/H-03.pages.jsonl",
+    "ocr_evidence/pdf_003614_a668da0d1f36/H-04.pages.jsonl",
+    "ocr_evidence/pdf_003614_a668da0d1f36/scope.pages.jsonl",
+    "provenance.json",
+    "review_status.yaml"
+  ]
+}

@@ -1,0 +1,6 @@
+evmbench__detect-2025-07-vii-finance/environment/README.md
+evmbench__detect-2025-07-vii-finance/instruction.md
+evmbench__detect-2025-07-vii-finance/task.toml
+evmbench__detect-2025-07-vii-finance/tests/evmbench_harbor_verifier.py
+evmbench__detect-2025-07-vii-finance/tests/test.sh
+evmbench__detect-2025-07-vii-finance/tests/validate_detect_submission.py

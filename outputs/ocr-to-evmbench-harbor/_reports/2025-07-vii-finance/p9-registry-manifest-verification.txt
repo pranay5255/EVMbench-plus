@@ -1,0 +1,11 @@
+agent unique tag: docker.io/pranay5255/yudaii_evmbench:2025-07-vii-finance-agent-0292eb58bc370423-amd64
+agent alias tag: docker.io/pranay5255/yudaii_evmbench:2025-07-vii-finance
+agent media type: application/vnd.docker.distribution.manifest.v2+json
+agent digest: sha256:3317ddec50da8ca33b3cb578c51516acb1178e93b852fbb60a8dacdad98736bd
+agent immutable pull image id: sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418
+
+verifier unique tag: docker.io/pranay5255/yudaii_evmbench:2025-07-vii-finance-verifier-9098bd6ffc4d552e-amd64
+verifier alias tag: docker.io/pranay5255/yudaii_evmbench:2025-07-vii-finance-verifier
+verifier media type: application/vnd.docker.distribution.manifest.v2+json
+verifier digest: sha256:d8a3025c47bdb1ab15e0149c88f160af7ce3f06c7ae0012ce65d7d531344941f
+verifier immutable pull image id: sha256:9098bd6ffc4d552eef03d1908b2afd80f93367d788d8e423b378986854820cf0

@@ -1,0 +1,13 @@
+{
+  "schema": "ocr_to_evmbench_harbor.task_group.v1",
+  "ok": true,
+  "candidate_id": "2025-07-vii-finance",
+  "task_group_key": "kankodu/vii-finance-smart-contracts@2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7|src/libraries/UniswapPositionValueHelper.sol+src/uniswap/factory/BaseUniswapWrapperFactory.sol+src/uniswap/factory/UniswapV3WrapperFactory.sol+src/uniswap/factory/UniswapV4WrapperFactory.sol+src/uniswap/UniswapV3Wrapper.sol+src/uniswap/UniswapV4Wrapper.sol+src/ERC721WrapperBase.sol|detect|loss_of_assets",
+  "task_group_key_sha256": "3950493077d13cc7943df7cfd5731a6194b89c4ebb5b1d22d01b93d63655bd48",
+  "repository_count": 1,
+  "commit_count": 1,
+  "scope_count": 1,
+  "source_pdf_count": 1,
+  "mode": "detect",
+  "impact_policy": "loss_of_assets"
+}

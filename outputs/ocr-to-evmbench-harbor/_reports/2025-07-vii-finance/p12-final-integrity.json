@@ -1,0 +1,127 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_integrity.v1",
+  "phase": "P12",
+  "candidate_id": "2025-07-vii-finance",
+  "generated_at": "2026-08-03T16:22:42Z",
+  "status": "passed",
+  "final_integrity_audit": "passed",
+  "approval": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "4c2d5501ea684386b006267e4b85af72377a8b8289fa8b8f8596b3410e4e7840",
+    "reviewer": "https://github.com/pranay5255",
+    "binding_report": "p7-approval-binding.json",
+    "candidate_drift_detected_before_binding": false
+  },
+  "candidate": {
+    "approved_checksum_stream_sha256": "113cf74b6d6d9cd8158d0c536323687db8effa65c65b2d4786360c0e7db458b7",
+    "file_count": 15,
+    "finding_count": 4,
+    "finding_ids": ["H-01", "H-02", "H-03", "H-04"],
+    "impact_policy": "loss_of_assets",
+    "current_strict_validator": {
+      "revision": "550ff8cfcea1bac7eb91145fd56df9c729cedf93",
+      "require_approved": true,
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    },
+    "pinned_strict_validator": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "require_approved": true,
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "immutable_inputs": {
+    "source_ocr_sha256": "a7f39dffc24729be5272933d8786ffd2eed1eea631caad0ab32ae6e558006d43",
+    "source_pdf_sha256": "ede34aec32fceb463b22923d707aa96f624844305b789ea27cfa39c5ff9fcc9e",
+    "vulnerable_commit": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+    "task_group_key_sha256": "3950493077d13cc7943df7cfd5731a6194b89c4ebb5b1d22d01b93d63655bd48",
+    "unchanged": true
+  },
+  "isolated_admission": {
+    "status": "passed",
+    "admission_commit": "284ea615e25d968628fb51732c39b3b3d7c5a0ee",
+    "candidate_and_admitted_tree_byte_identical": true,
+    "detect_split_entry_count": 1,
+    "audit_registry_vulnerability_count": 4,
+    "audit_registry_detect_max_award": 4.0,
+    "adapter_tests": {"passed": 7, "failed": 0},
+    "repository_audit_validation_tests": {
+      "passed": 5,
+      "failed": 1,
+      "disclosed_failure": "Legacy repository-wide mirror test assumes a literal one-line RUN git clone statement from evmbench-org; the approved exact-commit multi-step Dockerfile does not have that shape.",
+      "candidate_changed_to_satisfy_legacy_assumption": false,
+      "registry_or_adapter_affected": false
+    },
+    "isolated_tree_clean": true
+  },
+  "images": {
+    "agent": {
+      "digest": "sha256:3317ddec50da8ca33b3cb578c51516acb1178e93b852fbb60a8dacdad98736bd",
+      "image_id": "sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418",
+      "manifest_verified": true,
+      "network_disabled_replay_passed": true,
+      "offline_tests": {"passed": 11, "failed": 0}
+    },
+    "verifier": {
+      "digest": "sha256:d8a3025c47bdb1ab15e0149c88f160af7ce3f06c7ae0012ce65d7d531344941f",
+      "image_id": "sha256:9098bd6ffc4d552eef03d1908b2afd80f93367d788d8e423b378986854820cf0",
+      "manifest_verified": true,
+      "separate_from_agent": true,
+      "tests_packaged": true,
+      "audit_registry_vulnerability_count": 4,
+      "audit_registry_detect_max_award": 4.0
+    },
+    "leakage_and_isolation": "passed"
+  },
+  "harbor": {
+    "directory_count": 1,
+    "regular_file_count": 6,
+    "symlink_count": 0,
+    "checksum_stream_sha256": "4e65903b135d7ae09d4729d005004d8d3867448b9aed6ec41f88483ed213688c",
+    "task_checksum": "35b73ff347ad9e1bb1f170e8bc9effc8783c7f441c2ba025fd4184ce708a83b7",
+    "schema_version": "1.3",
+    "harbor_version": "0.20.0",
+    "task_load": "passed",
+    "agent_network_mode": "no-network",
+    "environment_network_mode": "no-network",
+    "agent_image_digest_pinned": true,
+    "verifier_image_digest_pinned": true,
+    "leakage_scan": "passed"
+  },
+  "verifier_packaging_replay": {
+    "status": "passed",
+    "runtime_network": "none",
+    "synthetic_empty_submission_score": 0,
+    "max_score": 4,
+    "json_submission_valid": true,
+    "judge_or_model_call_made": false,
+    "claim_boundary": "The 0/4 result validates verifier packaging only; it is not an agent evaluation or evidence about model quality."
+  },
+  "model_execution": {
+    "authorized": false,
+    "launched": false,
+    "agent": null,
+    "model": null
+  },
+  "workspace_isolation": {
+    "canonical_forest_checkout_written": false,
+    "canonical_forest_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "canonical_forest_status_entry_count": 76,
+    "canonical_forest_porcelain_v1_z_sha256": "199306451e707afc4c63e94f65ca7a188683b8a2419a9feaa78a20531c8640b4",
+    "external_dirty_state_preserved": true
+  },
+  "canonical_queue": {
+    "path": "docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md",
+    "vii_rank": 16,
+    "vii_state": "created",
+    "created_count": 10,
+    "blocked_count": 4,
+    "in_review_count": 0,
+    "next_count": 1,
+    "queued_count": 5,
+    "next_task": "Benqi Governance"
+  }
+}

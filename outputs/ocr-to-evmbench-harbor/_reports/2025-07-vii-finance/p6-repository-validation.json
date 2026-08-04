@@ -1,0 +1,38 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v1",
+  "phase": "P6",
+  "candidate_id": "2025-07-vii-finance",
+  "image_id": "sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418",
+  "network_mode": "none",
+  "root_repository": {
+    "path": "/home/agent/audit",
+    "head": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+    "detached": true,
+    "reachable_commit_count": 1,
+    "clean": true,
+    "remote_count": 1
+  },
+  "required_top_level_submodules": [
+    {"path": "lib/ethereum-vault-connector", "commit": "a7d3c29ef7e4964736e47675e0588630d6afbfd7"},
+    {"path": "lib/euler-interfaces", "commit": "6e32696d2db2f72ae48bbbb4a0b73a8a314b36c8"},
+    {"path": "lib/euler-price-oracle", "commit": "ffc3cb82615fc7d003a7f431175bd1eaf0bf41c5"},
+    {"path": "lib/forge-std", "commit": "77041d2ce690e692d6e03cc812b57d1ddaa4d505"},
+    {"path": "lib/openzeppelin-contracts", "commit": "e4f70216d759d8e6a64144a9e1f7bbeed78e7079"},
+    {"path": "lib/v3-core", "commit": "6562c52e8f75f0c10f9deaf44861847585fc8129"},
+    {"path": "lib/v3-periphery", "commit": "b325bb0905d922ae61fcc7df85ee802e8df5e96c"},
+    {"path": "lib/v4-periphery", "commit": "ad04c9f24a170accf5ea1b2836bbafd514537ca6"}
+  ],
+  "known_remediation_commits": [
+    {"commit": "8c6b6cca4ed65b22053dc7ffaa0b77d06a160caf", "reachable": false},
+    {"commit": "b7549f2700af133ce98a4d6f19e43c857b5ea78a", "reachable": false},
+    {"commit": "bf5f099b5d73dbff8fa6d403cb54ee6474828ac4", "reachable": false},
+    {"commit": "5e825d5f2eee6789b646bd0f00e9a9a53b5039ca", "reachable": false}
+  ],
+  "offline_validation": {
+    "compiled_solidity_files": 183,
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "rpc_dependent_integration_tests_run": false
+  },
+  "summary": {"ok": true}
+}
