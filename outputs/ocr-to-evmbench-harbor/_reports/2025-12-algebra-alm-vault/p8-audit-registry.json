@@ -1,0 +1,14 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8",
+  "status": "passed",
+  "audit_id": "2025-12-algebra-alm-vault",
+  "vulnerability_count": 1,
+  "vulnerability_ids": [
+    "H-01"
+  ],
+  "detect_max_award": 1.0,
+  "base_commit": "57d820afa1d58bf89073e668f5608942d90188c7",
+  "docker_image_property": null,
+  "evmbench_root": "/tmp/algebra-admission.3ONqCN/forest-of-audits/project/evmbench"
+}

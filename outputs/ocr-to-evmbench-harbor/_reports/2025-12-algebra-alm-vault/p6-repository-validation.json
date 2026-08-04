@@ -1,0 +1,10 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v1",
+  "repository": "https://github.com/cryptoalgebra/AlmVault.git",
+  "expected_commit": "57d820afa1d58bf89073e668f5608942d90188c7",
+  "head": "57d820afa1d58bf89073e668f5608942d90188c7",
+  "head_match": true,
+  "porcelain_empty": true,
+  "porcelain": "",
+  "result": "PASS"
+}

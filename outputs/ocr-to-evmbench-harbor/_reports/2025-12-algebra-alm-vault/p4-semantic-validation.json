@@ -1,0 +1,23 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v1",
+  "candidate_id": "2025-12-algebra-alm-vault",
+  "impact_policy": "loss_of_assets",
+  "result": "PASS",
+  "report_findings_reviewed": 18,
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "source_report_finding_id": "L-7",
+      "present_at_vulnerable_commit": true,
+      "asset_loss_path": true,
+      "code_paths": ["contracts/AlgebraVault.sol"],
+      "source_pages": [23, 24]
+    }
+  ],
+  "excluded_count": 17,
+  "duplicate_root_causes": 0,
+  "notes": [
+    "Only vault repository findings were eligible for this task-group key",
+    "L-6 CEI excluded under loss_of_assets without standard-ERC20 reentrancy path"
+  ]
+}

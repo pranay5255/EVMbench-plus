@@ -1,0 +1,9 @@
+agent unique tag: docker.io/pranay5255/yudaii_evmbench:2025-12-algebra-alm-vault-agent-e2583186e2053a19-amd64
+agent alias tag: docker.io/pranay5255/yudaii_evmbench:2025-12-algebra-alm-vault
+agent digest: sha256:109d59af35b98332aec4f15e8f233ba79d7efc678506865a042e8a1856832c8e
+agent immutable pull image id: sha256:e2583186e2053a193f18b540118fa7de226d473781ec12050d61a3abdae5cc84
+
+verifier unique tag: docker.io/pranay5255/yudaii_evmbench:2025-12-algebra-alm-vault-verifier-db794ef650f12023-amd64
+verifier alias tag: docker.io/pranay5255/yudaii_evmbench:2025-12-algebra-alm-vault-verifier
+verifier digest: sha256:f79be4d4dd75a5f68dfbae7b2b5550e667449fb7187521b5463d6af9845387a0
+verifier immutable pull image id: sha256:db794ef650f1202395ee96d2c3cc3eab16454f1156efd282bdcbe15af68466a5

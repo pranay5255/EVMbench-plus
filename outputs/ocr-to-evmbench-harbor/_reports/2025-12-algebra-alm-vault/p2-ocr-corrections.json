@@ -1,0 +1,43 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "pdf_id": "pdf_003345_a305f8485f3a",
+  "source_ocr_sha256": "cebf3de80fc6909d3af0c82800c8ce86e77401726a1b29b2df46f266093f9525",
+  "immutable_jsonl_rewritten": false,
+  "corrections": [
+    {
+      "page_number": 6,
+      "field": "repository_url_vault",
+      "ocr_value": null,
+      "corrected_value": "https://github.com/cryptoalgebra/AlmVault.git",
+      "evidence": "PDF link annotation on scope table rows for contracts/*"
+    },
+    {
+      "page_number": 6,
+      "field": "repository_url_plugin",
+      "ocr_value": null,
+      "corrected_value": "https://github.com/cryptoalgebra/plugins-monorepo.git",
+      "evidence": "PDF link annotation on packages/alm/* rows"
+    },
+    {
+      "page_number": 7,
+      "field": "initial_vault_commit",
+      "ocr_value": "57d820afald58bf89073e668f5608942d90188c7",
+      "corrected_value": "57d820afa1d58bf89073e668f5608942d90188c7",
+      "evidence": "PDF text extraction + git object fetch"
+    },
+    {
+      "page_number": 7,
+      "field": "re_audit_vault_commit",
+      "ocr_value": "d637339f968d67f175e8c5b6ce3ae54a69bd6fee",
+      "corrected_value": "d637339f968d67f175e8cb56ce3ae54a69bdefee",
+      "evidence": "PDF text extraction + git object fetch"
+    },
+    {
+      "page_number": 24,
+      "field": "L-7_fix_commit",
+      "ocr_value": "9f5f362a3723e9ec6fe8686fd30a22948653e1d8",
+      "corrected_value": "9f5f362a3723e9ec6fe8686fd30a22948653e1d8",
+      "evidence": "PDF client commentary; verified on cryptoalgebra/AlmVault"
+    }
+  ]
+}

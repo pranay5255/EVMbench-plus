@@ -1,0 +1,68 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_load.v1",
+  "phase": "P11",
+  "status": "passed",
+  "approval_checkpoint": "C1",
+  "loader": "harbor.models.task.task.Task",
+  "harbor_version": "0.20.0",
+  "task_count": 1,
+  "task_checksum": "17885bab7d3164504a3097414f21a0227a49ae49a4cc5b5f6fc8795000a46f0c",
+  "name": "evmbench/detect-2025-12-algebra-alm-vault",
+  "task_schema_version": "1.3",
+  "instruction_chars": 2367,
+  "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:109d59af35b98332aec4f15e8f233ba79d7efc678506865a042e8a1856832c8e",
+  "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:f79be4d4dd75a5f68dfbae7b2b5550e667449fb7187521b5463d6af9845387a0",
+  "agent_network_mode": "no-network",
+  "environment_network_mode": "no-network",
+  "verifier_environment_mode": "separate",
+  "verifier_network_mode": "public",
+  "resources": {
+    "cpus": 4,
+    "memory_mb": 16384,
+    "storage_mb": 20480
+  },
+  "timeouts": {
+    "agent": 3600,
+    "verifier": 900
+  },
+  "artifact_count": 5,
+  "tests_present": true,
+  "runtime_scope": {
+    "end_to_end_model_smoke": "not_authorized",
+    "task_load_validated": true,
+    "verifier_replay_report": "p12-smoke-summary.json"
+  },
+  "config_fields_sample": {
+    "agent": "<class 'harbor.models.task.config.AgentConfig'>",
+    "artifacts": [
+      "/home/agent/submission/audit.md",
+      "/home/agent/submission/audit.json",
+      "/logs/agent",
+      "/logs/artifacts",
+      "/logs/verifier"
+    ],
+    "environment": "<class 'harbor.models.task.config.EnvironmentConfig'>",
+    "metadata": {
+      "evmbench_audit_id": "2025-12-algebra-alm-vault",
+      "evmbench_mode": "detect",
+      "hint_level": "none",
+      "findings_subdir": "",
+      "submission_path": "/home/agent/submission/audit.md",
+      "json_submission_path": "/home/agent/submission/audit.json",
+      "json_submission_schema": "evmbench.detect_submission.v1",
+      "verifier_module": "evmbench.harbor_adapter.verifier"
+    },
+    "model_computed_fields": {},
+    "model_config": {},
+    "model_extra": null,
+    "model_fields": "<class 'dict'>",
+    "model_fields_set": "<class 'set'>",
+    "multi_step_reward_strategy": null,
+    "schema_version": "1.3",
+    "solution": "<class 'harbor.models.task.config.SolutionConfig'>",
+    "source": null,
+    "steps": null,
+    "task": "<class 'harbor.models.task.config.PackageInfo'>",
+    "verifier": "<class 'harbor.models.task.config.VerifierConfig'>"
+  }
+}

@@ -1,0 +1,963 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.53kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 446B done
+#3 DONE 0.0s
+
+#4 [ 1/10] FROM docker.io/library/python:3.11-slim@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 1.94MB 0.1s done
+#5 DONE 0.1s
+
+#6 [ 2/10] RUN apt-get update     && apt-get install -y --no-install-recommends git ca-certificates     && rm -rf /var/lib/apt/lists/*
+#6 0.371 Hit:1 http://deb.debian.org/debian trixie InRelease
+#6 0.390 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#6 0.425 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#6 0.454 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9673 kB]
+#6 0.602 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [4412 B]
+#6 0.624 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [231 kB]
+#6 1.239 Fetched 9999 kB in 1s (10.4 MB/s)
+#6 1.239 Reading package lists...
+#6 1.709 Reading package lists...
+#6 2.198 Building dependency tree...
+#6 2.324 Reading state information...
+#6 2.544 ca-certificates is already the newest version (20250419).
+#6 2.544 The following additional packages will be installed:
+#6 2.545   git-man libbrotli1 libcom-err2 libcurl3t64-gnutls liberror-perl libexpat1
+#6 2.545   libgdbm-compat4t64 libgnutls30t64 libgssapi-krb5-2 libidn2-0 libk5crypto3
+#6 2.545   libkeyutils1 libkrb5-3 libkrb5support0 libldap2 libnghttp2-14 libnghttp3-9
+#6 2.545   libngtcp2-16 libngtcp2-crypto-gnutls8 libp11-kit0 libperl5.40 libpsl5t64
+#6 2.545   librtmp1 libsasl2-2 libsasl2-modules-db libssh2-1t64 libtasn1-6
+#6 2.547   libunistring5 perl perl-modules-5.40
+#6 2.549 Suggested packages:
+#6 2.549   gettext-base git-doc git-email git-gui gitk gitweb git-cvs git-mediawiki
+#6 2.549   git-svn gnutls-bin krb5-doc krb5-user sensible-utils perl-doc
+#6 2.549   libterm-readline-gnu-perl | libterm-readline-perl-perl make
+#6 2.549   libtap-harness-archive-perl
+#6 2.549 Recommended packages:
+#6 2.549   patch less ssh-client krb5-locales libldap-common publicsuffix
+#6 2.549   libsasl2-modules
+#6 2.714 The following NEW packages will be installed:
+#6 2.714   git git-man libbrotli1 libcom-err2 libcurl3t64-gnutls liberror-perl
+#6 2.714   libexpat1 libgdbm-compat4t64 libgnutls30t64 libgssapi-krb5-2 libidn2-0
+#6 2.714   libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap2 libnghttp2-14
+#6 2.714   libnghttp3-9 libngtcp2-16 libngtcp2-crypto-gnutls8 libp11-kit0 libperl5.40
+#6 2.714   libpsl5t64 librtmp1 libsasl2-2 libsasl2-modules-db libssh2-1t64 libtasn1-6
+#6 2.715   libunistring5 perl perl-modules-5.40
+#6 2.788 0 upgraded, 31 newly installed, 0 to remove and 0 not upgraded.
+#6 2.788 Need to get 23.7 MB of archives.
+#6 2.788 After this operation, 119 MB of additional disk space will be used.
+#6 2.788 Get:1 http://deb.debian.org/debian-security trixie-security/main amd64 libexpat1 amd64 2.8.2-1~deb13u1 [122 kB]
+#6 2.825 Get:2 http://deb.debian.org/debian trixie/main amd64 perl-modules-5.40 all 5.40.1-6 [3019 kB]
+#6 2.917 Get:3 http://deb.debian.org/debian trixie/main amd64 libgdbm-compat4t64 amd64 1.24-2 [50.3 kB]
+#6 2.917 Get:4 http://deb.debian.org/debian trixie/main amd64 libperl5.40 amd64 5.40.1-6 [4341 kB]
+#6 2.945 Get:5 http://deb.debian.org/debian trixie/main amd64 perl amd64 5.40.1-6 [267 kB]
+#6 2.949 Get:6 http://deb.debian.org/debian trixie/main amd64 libbrotli1 amd64 1.1.0-2+b7 [307 kB]
+#6 2.951 Get:7 http://deb.debian.org/debian trixie/main amd64 libunistring5 amd64 1.3-2 [477 kB]
+#6 2.953 Get:8 http://deb.debian.org/debian trixie/main amd64 libidn2-0 amd64 2.3.8-2 [109 kB]
+#6 2.954 Get:9 http://deb.debian.org/debian trixie/main amd64 libp11-kit0 amd64 0.25.5-3 [425 kB]
+#6 2.956 Get:10 http://deb.debian.org/debian trixie/main amd64 libtasn1-6 amd64 4.20.0-2+deb13u1 [50.1 kB]
+#6 2.956 Get:11 http://deb.debian.org/debian trixie/main amd64 libgnutls30t64 amd64 3.8.9-3+deb13u4 [1469 kB]
+#6 2.962 Get:12 http://deb.debian.org/debian trixie/main amd64 libkrb5support0 amd64 1.21.3-5+deb13u1 [33.1 kB]
+#6 2.962 Get:13 http://deb.debian.org/debian trixie/main amd64 libcom-err2 amd64 1.47.2-3+b11 [25.0 kB]
+#6 2.967 Get:14 http://deb.debian.org/debian trixie/main amd64 libk5crypto3 amd64 1.21.3-5+deb13u1 [81.2 kB]
+#6 2.988 Get:15 http://deb.debian.org/debian trixie/main amd64 libkeyutils1 amd64 1.6.3-6 [9456 B]
+#6 2.988 Get:16 http://deb.debian.org/debian trixie/main amd64 libkrb5-3 amd64 1.21.3-5+deb13u1 [326 kB]
+#6 2.990 Get:17 http://deb.debian.org/debian trixie/main amd64 libgssapi-krb5-2 amd64 1.21.3-5+deb13u1 [138 kB]
+#6 2.991 Get:18 http://deb.debian.org/debian trixie/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg1-9 [19.8 kB]
+#6 2.991 Get:19 http://deb.debian.org/debian trixie/main amd64 libsasl2-2 amd64 2.1.28+dfsg1-9 [57.5 kB]
+#6 2.992 Get:20 http://deb.debian.org/debian trixie/main amd64 libldap2 amd64 2.6.10+dfsg-1 [194 kB]
+#6 2.993 Get:21 http://deb.debian.org/debian trixie/main amd64 libnghttp2-14 amd64 1.64.0-1.1+deb13u1 [76.2 kB]
+#6 2.994 Get:22 http://deb.debian.org/debian trixie/main amd64 libnghttp3-9 amd64 1.8.0-1 [67.7 kB]
+#6 2.994 Get:23 http://deb.debian.org/debian trixie/main amd64 libngtcp2-16 amd64 1.11.0-1+deb13u1 [132 kB]
+#6 3.010 Get:24 http://deb.debian.org/debian trixie/main amd64 libngtcp2-crypto-gnutls8 amd64 1.11.0-1+deb13u1 [29.5 kB]
+#6 3.030 Get:25 http://deb.debian.org/debian trixie/main amd64 libpsl5t64 amd64 0.21.2-1.1+b1 [57.2 kB]
+#6 3.031 Get:26 http://deb.debian.org/debian trixie/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2+b5 [58.8 kB]
+#6 3.033 Get:27 http://deb.debian.org/debian trixie/main amd64 libssh2-1t64 amd64 1.11.1-1+deb13u1 [245 kB]
+#6 3.057 Get:28 http://deb.debian.org/debian trixie/main amd64 libcurl3t64-gnutls amd64 8.14.1-2+deb13u4 [384 kB]
+#6 3.059 Get:29 http://deb.debian.org/debian trixie/main amd64 liberror-perl all 0.17030-1 [26.9 kB]
+#6 3.059 Get:30 http://deb.debian.org/debian trixie/main amd64 git-man all 1:2.47.3-0+deb13u1 [2205 kB]
+#6 3.070 Get:31 http://deb.debian.org/debian trixie/main amd64 git amd64 1:2.47.3-0+deb13u1 [8862 kB]
+#6 4.174 Fetched 23.7 MB in 0s (63.3 MB/s)
+#6 4.190 Selecting previously unselected package libexpat1:amd64.
+#6 4.190 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5645 files and directories currently installed.)
+#6 4.205 Preparing to unpack .../00-libexpat1_2.8.2-1~deb13u1_amd64.deb ...
+#6 4.207 Unpacking libexpat1:amd64 (2.8.2-1~deb13u1) ...
+#6 4.221 Selecting previously unselected package perl-modules-5.40.
+#6 4.222 Preparing to unpack .../01-perl-modules-5.40_5.40.1-6_all.deb ...
+#6 4.223 Unpacking perl-modules-5.40 (5.40.1-6) ...
+#6 4.388 Selecting previously unselected package libgdbm-compat4t64:amd64.
+#6 4.389 Preparing to unpack .../02-libgdbm-compat4t64_1.24-2_amd64.deb ...
+#6 4.390 Unpacking libgdbm-compat4t64:amd64 (1.24-2) ...
+#6 4.403 Selecting previously unselected package libperl5.40:amd64.
+#6 4.404 Preparing to unpack .../03-libperl5.40_5.40.1-6_amd64.deb ...
+#6 4.404 Unpacking libperl5.40:amd64 (5.40.1-6) ...
+#6 4.584 Selecting previously unselected package perl.
+#6 4.586 Preparing to unpack .../04-perl_5.40.1-6_amd64.deb ...
+#6 4.587 Unpacking perl (5.40.1-6) ...
+#6 4.608 Selecting previously unselected package libbrotli1:amd64.
+#6 4.609 Preparing to unpack .../05-libbrotli1_1.1.0-2+b7_amd64.deb ...
+#6 4.610 Unpacking libbrotli1:amd64 (1.1.0-2+b7) ...
+#6 4.634 Selecting previously unselected package libunistring5:amd64.
+#6 4.635 Preparing to unpack .../06-libunistring5_1.3-2_amd64.deb ...
+#6 4.636 Unpacking libunistring5:amd64 (1.3-2) ...
+#6 4.667 Selecting previously unselected package libidn2-0:amd64.
+#6 4.668 Preparing to unpack .../07-libidn2-0_2.3.8-2_amd64.deb ...
+#6 4.669 Unpacking libidn2-0:amd64 (2.3.8-2) ...
+#6 4.686 Selecting previously unselected package libp11-kit0:amd64.
+#6 4.687 Preparing to unpack .../08-libp11-kit0_0.25.5-3_amd64.deb ...
+#6 4.688 Unpacking libp11-kit0:amd64 (0.25.5-3) ...
+#6 4.713 Selecting previously unselected package libtasn1-6:amd64.
+#6 4.714 Preparing to unpack .../09-libtasn1-6_4.20.0-2+deb13u1_amd64.deb ...
+#6 4.715 Unpacking libtasn1-6:amd64 (4.20.0-2+deb13u1) ...
+#6 4.728 Selecting previously unselected package libgnutls30t64:amd64.
+#6 4.729 Preparing to unpack .../10-libgnutls30t64_3.8.9-3+deb13u4_amd64.deb ...
+#6 4.729 Unpacking libgnutls30t64:amd64 (3.8.9-3+deb13u4) ...
+#6 4.777 Selecting previously unselected package libkrb5support0:amd64.
+#6 4.778 Preparing to unpack .../11-libkrb5support0_1.21.3-5+deb13u1_amd64.deb ...
+#6 4.779 Unpacking libkrb5support0:amd64 (1.21.3-5+deb13u1) ...
+#6 4.792 Selecting previously unselected package libcom-err2:amd64.
+#6 4.793 Preparing to unpack .../12-libcom-err2_1.47.2-3+b11_amd64.deb ...
+#6 4.794 Unpacking libcom-err2:amd64 (1.47.2-3+b11) ...
+#6 4.806 Selecting previously unselected package libk5crypto3:amd64.
+#6 4.807 Preparing to unpack .../13-libk5crypto3_1.21.3-5+deb13u1_amd64.deb ...
+#6 4.808 Unpacking libk5crypto3:amd64 (1.21.3-5+deb13u1) ...
+#6 4.823 Selecting previously unselected package libkeyutils1:amd64.
+#6 4.824 Preparing to unpack .../14-libkeyutils1_1.6.3-6_amd64.deb ...
+#6 4.825 Unpacking libkeyutils1:amd64 (1.6.3-6) ...
+#6 4.837 Selecting previously unselected package libkrb5-3:amd64.
+#6 4.837 Preparing to unpack .../15-libkrb5-3_1.21.3-5+deb13u1_amd64.deb ...
+#6 4.838 Unpacking libkrb5-3:amd64 (1.21.3-5+deb13u1) ...
+#6 4.865 Selecting previously unselected package libgssapi-krb5-2:amd64.
+#6 4.866 Preparing to unpack .../16-libgssapi-krb5-2_1.21.3-5+deb13u1_amd64.deb ...
+#6 4.866 Unpacking libgssapi-krb5-2:amd64 (1.21.3-5+deb13u1) ...
+#6 4.886 Selecting previously unselected package libsasl2-modules-db:amd64.
+#6 4.887 Preparing to unpack .../17-libsasl2-modules-db_2.1.28+dfsg1-9_amd64.deb ...
+#6 4.887 Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#6 4.901 Selecting previously unselected package libsasl2-2:amd64.
+#6 4.902 Preparing to unpack .../18-libsasl2-2_2.1.28+dfsg1-9_amd64.deb ...
+#6 4.903 Unpacking libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#6 4.917 Selecting previously unselected package libldap2:amd64.
+#6 4.918 Preparing to unpack .../19-libldap2_2.6.10+dfsg-1_amd64.deb ...
+#6 4.918 Unpacking libldap2:amd64 (2.6.10+dfsg-1) ...
+#6 4.937 Selecting previously unselected package libnghttp2-14:amd64.
+#6 4.938 Preparing to unpack .../20-libnghttp2-14_1.64.0-1.1+deb13u1_amd64.deb ...
+#6 4.938 Unpacking libnghttp2-14:amd64 (1.64.0-1.1+deb13u1) ...
+#6 4.954 Selecting previously unselected package libnghttp3-9:amd64.
+#6 4.955 Preparing to unpack .../21-libnghttp3-9_1.8.0-1_amd64.deb ...
+#6 4.956 Unpacking libnghttp3-9:amd64 (1.8.0-1) ...
+#6 4.969 Selecting previously unselected package libngtcp2-16:amd64.
+#6 4.970 Preparing to unpack .../22-libngtcp2-16_1.11.0-1+deb13u1_amd64.deb ...
+#6 4.971 Unpacking libngtcp2-16:amd64 (1.11.0-1+deb13u1) ...
+#6 4.986 Selecting previously unselected package libngtcp2-crypto-gnutls8:amd64.
+#6 4.987 Preparing to unpack .../23-libngtcp2-crypto-gnutls8_1.11.0-1+deb13u1_amd64.deb ...
+#6 4.988 Unpacking libngtcp2-crypto-gnutls8:amd64 (1.11.0-1+deb13u1) ...
+#6 5.000 Selecting previously unselected package libpsl5t64:amd64.
+#6 5.001 Preparing to unpack .../24-libpsl5t64_0.21.2-1.1+b1_amd64.deb ...
+#6 5.002 Unpacking libpsl5t64:amd64 (0.21.2-1.1+b1) ...
+#6 5.015 Selecting previously unselected package librtmp1:amd64.
+#6 5.016 Preparing to unpack .../25-librtmp1_2.4+20151223.gitfa8646d.1-2+b5_amd64.deb ...
+#6 5.018 Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b5) ...
+#6 5.031 Selecting previously unselected package libssh2-1t64:amd64.
+#6 5.032 Preparing to unpack .../26-libssh2-1t64_1.11.1-1+deb13u1_amd64.deb ...
+#6 5.033 Unpacking libssh2-1t64:amd64 (1.11.1-1+deb13u1) ...
+#6 5.049 Selecting previously unselected package libcurl3t64-gnutls:amd64.
+#6 5.050 Preparing to unpack .../27-libcurl3t64-gnutls_8.14.1-2+deb13u4_amd64.deb ...
+#6 5.051 Unpacking libcurl3t64-gnutls:amd64 (8.14.1-2+deb13u4) ...
+#6 5.074 Selecting previously unselected package liberror-perl.
+#6 5.075 Preparing to unpack .../28-liberror-perl_0.17030-1_all.deb ...
+#6 5.076 Unpacking liberror-perl (0.17030-1) ...
+#6 5.087 Selecting previously unselected package git-man.
+#6 5.088 Preparing to unpack .../29-git-man_1%3a2.47.3-0+deb13u1_all.deb ...
+#6 5.088 Unpacking git-man (1:2.47.3-0+deb13u1) ...
+#6 5.131 Selecting previously unselected package git.
+#6 5.132 Preparing to unpack .../30-git_1%3a2.47.3-0+deb13u1_amd64.deb ...
+#6 5.138 Unpacking git (1:2.47.3-0+deb13u1) ...
+#6 5.349 Setting up libexpat1:amd64 (2.8.2-1~deb13u1) ...
+#6 5.351 Setting up libkeyutils1:amd64 (1.6.3-6) ...
+#6 5.353 Setting up libgdbm-compat4t64:amd64 (1.24-2) ...
+#6 5.355 Setting up libbrotli1:amd64 (1.1.0-2+b7) ...
+#6 5.357 Setting up libnghttp2-14:amd64 (1.64.0-1.1+deb13u1) ...
+#6 5.359 Setting up libcom-err2:amd64 (1.47.2-3+b11) ...
+#6 5.361 Setting up libkrb5support0:amd64 (1.21.3-5+deb13u1) ...
+#6 5.363 Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#6 5.365 Setting up libp11-kit0:amd64 (0.25.5-3) ...
+#6 5.367 Setting up libunistring5:amd64 (1.3-2) ...
+#6 5.369 Setting up libk5crypto3:amd64 (1.21.3-5+deb13u1) ...
+#6 5.371 Setting up libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#6 5.373 Setting up libnghttp3-9:amd64 (1.8.0-1) ...
+#6 5.374 Setting up perl-modules-5.40 (5.40.1-6) ...
+#6 5.376 Setting up libtasn1-6:amd64 (4.20.0-2+deb13u1) ...
+#6 5.378 Setting up git-man (1:2.47.3-0+deb13u1) ...
+#6 5.380 Setting up libngtcp2-16:amd64 (1.11.0-1+deb13u1) ...
+#6 5.381 Setting up libkrb5-3:amd64 (1.21.3-5+deb13u1) ...
+#6 5.383 Setting up libssh2-1t64:amd64 (1.11.1-1+deb13u1) ...
+#6 5.385 Setting up libldap2:amd64 (2.6.10+dfsg-1) ...
+#6 5.387 Setting up libidn2-0:amd64 (2.3.8-2) ...
+#6 5.389 Setting up libperl5.40:amd64 (5.40.1-6) ...
+#6 5.390 Setting up perl (5.40.1-6) ...
+#6 5.396 Setting up libgssapi-krb5-2:amd64 (1.21.3-5+deb13u1) ...
+#6 5.399 Setting up libgnutls30t64:amd64 (3.8.9-3+deb13u4) ...
+#6 5.402 Setting up libpsl5t64:amd64 (0.21.2-1.1+b1) ...
+#6 5.403 Setting up liberror-perl (0.17030-1) ...
+#6 5.405 Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b5) ...
+#6 5.407 Setting up libngtcp2-crypto-gnutls8:amd64 (1.11.0-1+deb13u1) ...
+#6 5.409 Setting up libcurl3t64-gnutls:amd64 (8.14.1-2+deb13u4) ...
+#6 5.411 Setting up git (1:2.47.3-0+deb13u1) ...
+#6 5.417 Processing triggers for libc-bin (2.41-12+deb13u3) ...
+#6 DONE 5.5s
+
+#7 [ 3/10] COPY common /opt/common
+#7 DONE 0.0s
+
+#8 [ 4/10] COPY evmbench /opt/evmbench
+#8 DONE 0.1s
+
+#9 [ 5/10] WORKDIR /opt/evmbench
+#9 DONE 0.0s
+
+#10 [ 6/10] RUN python -m pip install --no-cache-dir --disable-pip-version-check         -r /opt/evmbench/requirements.txt
+#10 1.450 Obtaining file:///opt/common/alcatraz (from -r /opt/evmbench/requirements.txt (line 3))
+#10 1.452   Installing build dependencies: started
+#10 3.020   Installing build dependencies: finished with status 'done'
+#10 3.021   Checking if build backend supports build_editable: started
+#10 3.146   Checking if build backend supports build_editable: finished with status 'done'
+#10 3.147   Getting requirements to build editable: started
+#10 3.308   Getting requirements to build editable: finished with status 'done'
+#10 3.309   Preparing editable metadata (pyproject.toml): started
+#10 3.471   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#10 3.473 Obtaining file:///opt/common/compatibility_api (from -r /opt/evmbench/requirements.txt (line 4))
+#10 3.475   Installing build dependencies: started
+#10 4.821   Installing build dependencies: finished with status 'done'
+#10 4.822   Checking if build backend supports build_editable: started
+#10 4.928   Checking if build backend supports build_editable: finished with status 'done'
+#10 4.929   Getting requirements to build editable: started
+#10 5.081   Getting requirements to build editable: finished with status 'done'
+#10 5.082   Preparing editable metadata (pyproject.toml): started
+#10 5.239   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#10 5.242 Obtaining file:///opt/common/nanoeval (from -r /opt/evmbench/requirements.txt (line 5))
+#10 5.244   Installing build dependencies: started
+#10 6.509   Installing build dependencies: finished with status 'done'
+#10 6.510   Checking if build backend supports build_editable: started
+#10 6.622   Checking if build backend supports build_editable: finished with status 'done'
+#10 6.622   Getting requirements to build editable: started
+#10 6.788   Getting requirements to build editable: finished with status 'done'
+#10 6.789   Preparing editable metadata (pyproject.toml): started
+#10 6.961   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#10 6.962 Obtaining file:///opt/common/nanoeval_alcatraz (from -r /opt/evmbench/requirements.txt (line 6))
+#10 6.965   Installing build dependencies: started
+#10 8.251   Installing build dependencies: finished with status 'done'
+#10 8.252   Checking if build backend supports build_editable: started
+#10 8.361   Checking if build backend supports build_editable: finished with status 'done'
+#10 8.362   Getting requirements to build editable: started
+#10 8.522   Getting requirements to build editable: finished with status 'done'
+#10 8.522   Preparing editable metadata (pyproject.toml): started
+#10 8.694   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#10 8.697 Obtaining file:///opt/common/preparedness_turn_completer (from -r /opt/evmbench/requirements.txt (line 7))
+#10 8.698   Installing build dependencies: started
+#10 9.985   Installing build dependencies: finished with status 'done'
+#10 9.986   Checking if build backend supports build_editable: started
+#10 10.10   Checking if build backend supports build_editable: finished with status 'done'
+#10 10.10   Getting requirements to build editable: started
+#10 10.26   Getting requirements to build editable: finished with status 'done'
+#10 10.27   Preparing editable metadata (pyproject.toml): started
+#10 10.44   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#10 10.44 Ignoring appnope: markers 'sys_platform == "darwin"' don't match your environment
+#10 10.44 Collecting chz@ git+https://github.com/openai/chz.git@9b79fd311eaa6d173b25ceecd3ef4d5f3b261c98 (from -r /opt/evmbench/requirements.txt (line 38))
+#10 10.44   Cloning https://github.com/openai/chz.git (to revision 9b79fd311eaa6d173b25ceecd3ef4d5f3b261c98) to /tmp/pip-install-fsqr7hqr/chz_4142d1f374b449fd954442f4f3af7e75
+#10 10.45   Running command git clone --filter=blob:none --quiet https://github.com/openai/chz.git /tmp/pip-install-fsqr7hqr/chz_4142d1f374b449fd954442f4f3af7e75
+#10 12.11   Running command git rev-parse -q --verify 'sha^9b79fd311eaa6d173b25ceecd3ef4d5f3b261c98'
+#10 12.11   Running command git fetch -q https://github.com/openai/chz.git 9b79fd311eaa6d173b25ceecd3ef4d5f3b261c98
+#10 12.75   Running command git checkout -q 9b79fd311eaa6d173b25ceecd3ef4d5f3b261c98
+#10 13.43   Resolved https://github.com/openai/chz.git to commit 9b79fd311eaa6d173b25ceecd3ef4d5f3b261c98
+#10 13.43   Installing build dependencies: started
+#10 14.85   Installing build dependencies: finished with status 'done'
+#10 14.85   Getting requirements to build wheel: started
+#10 15.00   Getting requirements to build wheel: finished with status 'done'
+#10 15.00   Preparing metadata (pyproject.toml): started
+#10 15.15   Preparing metadata (pyproject.toml): finished with status 'done'
+#10 15.15 Ignoring colorama: markers 'sys_platform == "win32"' don't match your environment
+#10 15.15 Ignoring pywin32: markers 'sys_platform == "win32"' don't match your environment
+#10 15.46 Collecting aioconsole==0.8.1 (from -r /opt/evmbench/requirements.txt (line 8))
+#10 15.54   Downloading aioconsole-0.8.1-py3-none-any.whl.metadata (46 kB)
+#10 15.56      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.3/46.3 kB 1.7 MB/s eta 0:00:00
+#10 15.81 Collecting aiodebug==2.3.0 (from -r /opt/evmbench/requirements.txt (line 9))
+#10 15.83   Downloading aiodebug-2.3.0-py3-none-any.whl.metadata (4.5 kB)
+#10 15.88 Collecting aiohappyeyeballs==2.6.1 (from -r /opt/evmbench/requirements.txt (line 10))
+#10 15.90   Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+#10 16.48 Collecting aiohttp==3.12.9 (from -r /opt/evmbench/requirements.txt (line 11))
+#10 16.51   Downloading aiohttp-3.12.9-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.6 kB)
+#10 16.76 Collecting aiomonitor==0.7.1 (from -r /opt/evmbench/requirements.txt (line 12))
+#10 16.78   Downloading aiomonitor-0.7.1-py3-none-any.whl.metadata (13 kB)
+#10 16.85 Collecting aiosignal==1.3.2 (from -r /opt/evmbench/requirements.txt (line 13))
+#10 16.87   Downloading aiosignal-1.3.2-py2.py3-none-any.whl.metadata (3.8 kB)
+#10 16.91 Collecting altair==5.5.0 (from -r /opt/evmbench/requirements.txt (line 14))
+#10 16.93   Downloading altair-5.5.0-py3-none-any.whl.metadata (11 kB)
+#10 16.97 Collecting annotated-types==0.7.0 (from -r /opt/evmbench/requirements.txt (line 15))
+#10 16.99   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+#10 17.03 Collecting anyio==4.9.0 (from -r /opt/evmbench/requirements.txt (line 16))
+#10 17.06   Downloading anyio-4.9.0-py3-none-any.whl.metadata (4.7 kB)
+#10 17.09 Collecting appdirs==1.4.4 (from -r /opt/evmbench/requirements.txt (line 17))
+#10 17.11   Downloading appdirs-1.4.4-py2.py3-none-any.whl.metadata (9.0 kB)
+#10 17.14 Collecting asttokens==3.0.0 (from -r /opt/evmbench/requirements.txt (line 19))
+#10 17.17   Downloading asttokens-3.0.0-py3-none-any.whl.metadata (4.7 kB)
+#10 17.20 Collecting async-lru==2.0.5 (from -r /opt/evmbench/requirements.txt (line 20))
+#10 17.22   Downloading async_lru-2.0.5-py3-none-any.whl.metadata (4.5 kB)
+#10 17.47 Collecting asyncvnc==1.3.0 (from -r /opt/evmbench/requirements.txt (line 21))
+#10 17.71   Downloading asyncvnc-1.3.0-py3-none-any.whl.metadata (4.8 kB)
+#10 17.75 Collecting attrs==25.3.0 (from -r /opt/evmbench/requirements.txt (line 22))
+#10 17.77   Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+#10 17.80 Collecting automat==25.4.16 (from -r /opt/evmbench/requirements.txt (line 23))
+#10 17.83   Downloading automat-25.4.16-py3-none-any.whl.metadata (8.4 kB)
+#10 17.86 Collecting azure-common==1.1.28 (from -r /opt/evmbench/requirements.txt (line 24))
+#10 17.88   Downloading azure_common-1.1.28-py2.py3-none-any.whl.metadata (5.0 kB)
+#10 17.92 Collecting azure-core==1.34.0 (from -r /opt/evmbench/requirements.txt (line 25))
+#10 17.95   Downloading azure_core-1.34.0-py3-none-any.whl.metadata (42 kB)
+#10 17.95      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.9/42.9 kB 8.0 MB/s eta 0:00:00
+#10 18.00 Collecting azure-identity==1.23.0 (from -r /opt/evmbench/requirements.txt (line 26))
+#10 18.02   Downloading azure_identity-1.23.0-py3-none-any.whl.metadata (81 kB)
+#10 18.03      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 81.9/81.9 kB 11.6 MB/s eta 0:00:00
+#10 18.08 Collecting azure-mgmt-compute==34.1.0 (from -r /opt/evmbench/requirements.txt (line 27))
+#10 18.11   Downloading azure_mgmt_compute-34.1.0-py3-none-any.whl.metadata (73 kB)
+#10 18.11      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.4/73.4 kB 24.1 MB/s eta 0:00:00
+#10 18.15 Collecting azure-mgmt-core==1.5.0 (from -r /opt/evmbench/requirements.txt (line 28))
+#10 18.17   Downloading azure_mgmt_core-1.5.0-py3-none-any.whl.metadata (4.3 kB)
+#10 18.21 Collecting azure-mgmt-network==29.0.0 (from -r /opt/evmbench/requirements.txt (line 29))
+#10 18.24   Downloading azure_mgmt_network-29.0.0-py3-none-any.whl.metadata (93 kB)
+#10 18.24      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 93.8/93.8 kB 24.6 MB/s eta 0:00:00
+#10 18.28 Collecting blinker==1.9.0 (from -r /opt/evmbench/requirements.txt (line 30))
+#10 18.30   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#10 18.34 Collecting blobfile==3.0.0 (from -r /opt/evmbench/requirements.txt (line 31))
+#10 18.36   Downloading blobfile-3.0.0-py3-none-any.whl.metadata (15 kB)
+#10 18.63 Collecting boostedblob==0.15.6 (from -r /opt/evmbench/requirements.txt (line 32))
+#10 18.66   Downloading boostedblob-0.15.6-py3-none-any.whl.metadata (2.0 kB)
+#10 18.71 Collecting cachetools==5.5.2 (from -r /opt/evmbench/requirements.txt (line 33))
+#10 18.73   Downloading cachetools-5.5.2-py3-none-any.whl.metadata (5.4 kB)
+#10 18.78 Collecting certifi==2025.4.26 (from -r /opt/evmbench/requirements.txt (line 34))
+#10 18.80   Downloading certifi-2025.4.26-py3-none-any.whl.metadata (2.5 kB)
+#10 18.94 Collecting cffi==1.17.1 (from -r /opt/evmbench/requirements.txt (line 35))
+#10 18.97   Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+#10 19.00 Collecting cfgv==3.4.0 (from -r /opt/evmbench/requirements.txt (line 36))
+#10 19.03   Downloading cfgv-3.4.0-py2.py3-none-any.whl.metadata (8.5 kB)
+#10 19.19 Collecting charset-normalizer==3.4.2 (from -r /opt/evmbench/requirements.txt (line 37))
+#10 19.21   Downloading charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
+#10 19.46 Collecting cli-helpers==2.4.0 (from -r /opt/evmbench/requirements.txt (line 39))
+#10 19.49   Downloading cli_helpers-2.4.0-py3-none-any.whl.metadata (2.6 kB)
+#10 19.53 Collecting click==8.2.1 (from -r /opt/evmbench/requirements.txt (line 40))
+#10 19.55   Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+#10 19.58 Collecting cloudpickle==3.1.1 (from -r /opt/evmbench/requirements.txt (line 41))
+#10 19.61   Downloading cloudpickle-3.1.1-py3-none-any.whl.metadata (7.1 kB)
+#10 19.64 Collecting comm==0.2.2 (from -r /opt/evmbench/requirements.txt (line 43))
+#10 19.66   Downloading comm-0.2.2-py3-none-any.whl.metadata (3.7 kB)
+#10 19.69 Collecting configobj==5.0.9 (from -r /opt/evmbench/requirements.txt (line 44))
+#10 19.72   Downloading configobj-5.0.9-py2.py3-none-any.whl.metadata (3.2 kB)
+#10 19.75 Collecting constantly==23.10.4 (from -r /opt/evmbench/requirements.txt (line 45))
+#10 19.77   Downloading constantly-23.10.4-py3-none-any.whl.metadata (1.8 kB)
+#10 19.86 Collecting contourpy==1.3.2 (from -r /opt/evmbench/requirements.txt (line 46))
+#10 19.88   Downloading contourpy-1.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.5 kB)
+#10 20.13 Collecting cryptography==45.0.3 (from -r /opt/evmbench/requirements.txt (line 47))
+#10 20.16   Downloading cryptography-45.0.3-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+#10 20.19 Collecting cycler==0.12.1 (from -r /opt/evmbench/requirements.txt (line 48))
+#10 20.21   Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+#10 20.32 Collecting debugpy==1.8.14 (from -r /opt/evmbench/requirements.txt (line 49))
+#10 20.35   Downloading debugpy-1.8.14-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.3 kB)
+#10 20.38 Collecting decorator==5.2.1 (from -r /opt/evmbench/requirements.txt (line 50))
+#10 20.40   Downloading decorator-5.2.1-py3-none-any.whl.metadata (3.9 kB)
+#10 20.49 Collecting dill==0.4.0 (from -r /opt/evmbench/requirements.txt (line 51))
+#10 20.51   Downloading dill-0.4.0-py3-none-any.whl.metadata (10 kB)
+#10 20.54 Collecting distlib==0.3.9 (from -r /opt/evmbench/requirements.txt (line 52))
+#10 20.57   Downloading distlib-0.3.9-py2.py3-none-any.whl.metadata (5.2 kB)
+#10 20.60 Collecting distro==1.9.0 (from -r /opt/evmbench/requirements.txt (line 53))
+#10 20.62   Downloading distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+#10 20.66 Collecting docker==7.1.0 (from -r /opt/evmbench/requirements.txt (line 54))
+#10 20.69   Downloading docker-7.1.0-py3-none-any.whl.metadata (3.8 kB)
+#10 20.72 Collecting executing==2.2.0 (from -r /opt/evmbench/requirements.txt (line 55))
+#10 20.75   Downloading executing-2.2.0-py2.py3-none-any.whl.metadata (8.9 kB)
+#10 20.84 Collecting fastapi==0.115.12 (from -r /opt/evmbench/requirements.txt (line 56))
+#10 20.86   Downloading fastapi-0.115.12-py3-none-any.whl.metadata (27 kB)
+#10 20.91 Collecting filelock==3.18.0 (from -r /opt/evmbench/requirements.txt (line 57))
+#10 20.94   Downloading filelock-3.18.0-py3-none-any.whl.metadata (2.9 kB)
+#10 21.11 Collecting fonttools==4.58.1 (from -r /opt/evmbench/requirements.txt (line 58))
+#10 21.13   Downloading fonttools-4.58.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (106 kB)
+#10 21.14      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.1/106.1 kB 27.9 MB/s eta 0:00:00
+#10 21.23 Collecting frozenlist==1.6.2 (from -r /opt/evmbench/requirements.txt (line 59))
+#10 21.25   Downloading frozenlist-1.6.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (17 kB)
+#10 21.28 Collecting gitdb==4.0.12 (from -r /opt/evmbench/requirements.txt (line 60))
+#10 21.31   Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+#10 21.35 Collecting gitpython==3.1.44 (from -r /opt/evmbench/requirements.txt (line 61))
+#10 21.38   Downloading GitPython-3.1.44-py3-none-any.whl.metadata (13 kB)
+#10 21.41 Collecting h11==0.16.0 (from -r /opt/evmbench/requirements.txt (line 62))
+#10 21.43   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#10 21.47 Collecting httpcore==1.0.9 (from -r /opt/evmbench/requirements.txt (line 63))
+#10 21.50   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#10 21.54 Collecting httpx==0.28.1 (from -r /opt/evmbench/requirements.txt (line 64))
+#10 21.57   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#10 21.60 Collecting hyperlink==21.0.0 (from -r /opt/evmbench/requirements.txt (line 65))
+#10 21.62   Downloading hyperlink-21.0.0-py2.py3-none-any.whl.metadata (1.5 kB)
+#10 21.69 Collecting identify==2.6.12 (from -r /opt/evmbench/requirements.txt (line 66))
+#10 21.94   Downloading identify-2.6.12-py2.py3-none-any.whl.metadata (4.4 kB)
+#10 21.97 Collecting idna==3.10 (from -r /opt/evmbench/requirements.txt (line 67))
+#10 21.99   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+#10 22.03 Collecting incremental==24.7.2 (from -r /opt/evmbench/requirements.txt (line 68))
+#10 22.05   Downloading incremental-24.7.2-py3-none-any.whl.metadata (8.1 kB)
+#10 22.08 Collecting iniconfig==2.1.0 (from -r /opt/evmbench/requirements.txt (line 69))
+#10 22.10   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
+#10 22.24 Collecting ipykernel==6.29.5 (from -r /opt/evmbench/requirements.txt (line 70))
+#10 22.26   Downloading ipykernel-6.29.5-py3-none-any.whl.metadata (6.3 kB)
+#10 22.33 Collecting ipython==9.3.0 (from -r /opt/evmbench/requirements.txt (line 71))
+#10 22.35   Downloading ipython-9.3.0-py3-none-any.whl.metadata (4.4 kB)
+#10 22.38 Collecting ipython-pygments-lexers==1.1.1 (from -r /opt/evmbench/requirements.txt (line 72))
+#10 22.40   Downloading ipython_pygments_lexers-1.1.1-py3-none-any.whl.metadata (1.1 kB)
+#10 22.45 Collecting ipywidgets==8.1.7 (from -r /opt/evmbench/requirements.txt (line 73))
+#10 22.47   Downloading ipywidgets-8.1.7-py3-none-any.whl.metadata (2.4 kB)
+#10 22.50 Collecting isodate==0.7.2 (from -r /opt/evmbench/requirements.txt (line 74))
+#10 22.53   Downloading isodate-0.7.2-py3-none-any.whl.metadata (11 kB)
+#10 22.56 Collecting janus==2.0.0 (from -r /opt/evmbench/requirements.txt (line 75))
+#10 22.58   Downloading janus-2.0.0-py3-none-any.whl.metadata (5.3 kB)
+#10 22.62 Collecting jedi==0.19.2 (from -r /opt/evmbench/requirements.txt (line 76))
+#10 22.64   Downloading jedi-0.19.2-py2.py3-none-any.whl.metadata (22 kB)
+#10 22.68 Collecting jinja2==3.1.6 (from -r /opt/evmbench/requirements.txt (line 77))
+#10 22.70   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#10 22.81 Collecting jiter==0.10.0 (from -r /opt/evmbench/requirements.txt (line 78))
+#10 22.83   Downloading jiter-0.10.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+#10 22.88 Collecting jsonschema==4.24.0 (from -r /opt/evmbench/requirements.txt (line 79))
+#10 22.90   Downloading jsonschema-4.24.0-py3-none-any.whl.metadata (7.8 kB)
+#10 22.93 Collecting jsonschema-specifications==2025.4.1 (from -r /opt/evmbench/requirements.txt (line 80))
+#10 22.96   Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl.metadata (2.9 kB)
+#10 23.00 Collecting jupyter-client==8.6.3 (from -r /opt/evmbench/requirements.txt (line 81))
+#10 23.03   Downloading jupyter_client-8.6.3-py3-none-any.whl.metadata (8.3 kB)
+#10 23.07 Collecting jupyter-core==5.8.1 (from -r /opt/evmbench/requirements.txt (line 82))
+#10 23.09   Downloading jupyter_core-5.8.1-py3-none-any.whl.metadata (1.6 kB)
+#10 23.14 Collecting jupyterlab-widgets==3.0.15 (from -r /opt/evmbench/requirements.txt (line 83))
+#10 23.16   Downloading jupyterlab_widgets-3.0.15-py3-none-any.whl.metadata (20 kB)
+#10 23.41 Collecting keysymdef==1.2.0 (from -r /opt/evmbench/requirements.txt (line 84))
+#10 23.43   Downloading keysymdef-1.2.0-py2.py3-none-any.whl.metadata (773 bytes)
+#10 23.51 Collecting kiwisolver==1.4.8 (from -r /opt/evmbench/requirements.txt (line 85))
+#10 23.54   Downloading kiwisolver-1.4.8-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.2 kB)
+#10 23.57 Collecting litecli==1.15.0 (from -r /opt/evmbench/requirements.txt (line 86))
+#10 23.83   Downloading litecli-1.15.0-py3-none-any.whl.metadata (2.6 kB)
+#10 24.09 Collecting loky==3.5.5 (from -r /opt/evmbench/requirements.txt (line 87))
+#10 24.11   Downloading loky-3.5.5-py3-none-any.whl.metadata (8.4 kB)
+#10 24.42 Collecting lxml==5.4.0 (from -r /opt/evmbench/requirements.txt (line 88))
+#10 24.44   Downloading lxml-5.4.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (3.5 kB)
+#10 24.48 Collecting markdown-it-py==3.0.0 (from -r /opt/evmbench/requirements.txt (line 89))
+#10 24.50   Downloading markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+#10 24.57 Collecting markupsafe==3.0.2 (from -r /opt/evmbench/requirements.txt (line 90))
+#10 24.59   Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+#10 24.74 Collecting matplotlib==3.10.3 (from -r /opt/evmbench/requirements.txt (line 91))
+#10 24.77   Downloading matplotlib-3.10.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+#10 24.80 Collecting matplotlib-inline==0.1.7 (from -r /opt/evmbench/requirements.txt (line 92))
+#10 24.82   Downloading matplotlib_inline-0.1.7-py3-none-any.whl.metadata (3.9 kB)
+#10 24.85 Collecting mdurl==0.1.2 (from -r /opt/evmbench/requirements.txt (line 93))
+#10 24.87   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+#10 24.91 Collecting more-itertools==10.7.0 (from -r /opt/evmbench/requirements.txt (line 94))
+#10 24.94   Downloading more_itertools-10.7.0-py3-none-any.whl.metadata (37 kB)
+#10 24.98 Collecting msal==1.32.3 (from -r /opt/evmbench/requirements.txt (line 95))
+#10 25.00   Downloading msal-1.32.3-py3-none-any.whl.metadata (11 kB)
+#10 25.04 Collecting msal-extensions==1.3.1 (from -r /opt/evmbench/requirements.txt (line 96))
+#10 25.06   Downloading msal_extensions-1.3.1-py3-none-any.whl.metadata (7.8 kB)
+#10 25.15 Collecting msgpack==1.1.0 (from -r /opt/evmbench/requirements.txt (line 97))
+#10 25.17   Downloading msgpack-1.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.4 kB)
+#10 25.40 Collecting multidict==6.4.4 (from -r /opt/evmbench/requirements.txt (line 98))
+#10 25.43   Downloading multidict-6.4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.3 kB)
+#10 25.61 Collecting narwhals==1.41.0 (from -r /opt/evmbench/requirements.txt (line 99))
+#10 25.64   Downloading narwhals-1.41.0-py3-none-any.whl.metadata (11 kB)
+#10 25.68 Collecting nest-asyncio==1.6.0 (from -r /opt/evmbench/requirements.txt (line 100))
+#10 25.70   Downloading nest_asyncio-1.6.0-py3-none-any.whl.metadata (2.8 kB)
+#10 25.74 Collecting nodeenv==1.9.1 (from -r /opt/evmbench/requirements.txt (line 101))
+#10 25.76   Downloading nodeenv-1.9.1-py2.py3-none-any.whl.metadata (21 kB)
+#10 25.97 Collecting numpy==2.2.6 (from -r /opt/evmbench/requirements.txt (line 102))
+#10 26.00   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+#10 26.00      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 53.7 MB/s eta 0:00:00
+#10 26.11 Collecting openai==1.99.9 (from -r /opt/evmbench/requirements.txt (line 103))
+#10 26.13   Downloading openai-1.99.9-py3-none-any.whl.metadata (29 kB)
+#10 26.17 Collecting packaging==24.2 (from -r /opt/evmbench/requirements.txt (line 104))
+#10 26.20   Downloading packaging-24.2-py3-none-any.whl.metadata (3.2 kB)
+#10 26.33 Collecting pandas==2.2.3 (from -r /opt/evmbench/requirements.txt (line 105))
+#10 26.35   Downloading pandas-2.2.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (89 kB)
+#10 26.36      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 89.9/89.9 kB 33.1 MB/s eta 0:00:00
+#10 26.40 Collecting parso==0.8.4 (from -r /opt/evmbench/requirements.txt (line 106))
+#10 26.43   Downloading parso-0.8.4-py2.py3-none-any.whl.metadata (7.7 kB)
+#10 26.46 Collecting pexpect==4.9.0 (from -r /opt/evmbench/requirements.txt (line 107))
+#10 26.48   Downloading pexpect-4.9.0-py2.py3-none-any.whl.metadata (2.5 kB)
+#10 26.67 Collecting pillow==11.2.1 (from -r /opt/evmbench/requirements.txt (line 108))
+#10 26.69   Downloading pillow-11.2.1-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (8.9 kB)
+#10 26.75 Collecting pip==25.1.1 (from -r /opt/evmbench/requirements.txt (line 109))
+#10 26.77   Downloading pip-25.1.1-py3-none-any.whl.metadata (3.6 kB)
+#10 26.82 Collecting platformdirs==4.3.8 (from -r /opt/evmbench/requirements.txt (line 110))
+#10 26.84   Downloading platformdirs-4.3.8-py3-none-any.whl.metadata (12 kB)
+#10 26.88 Collecting pluggy==1.6.0 (from -r /opt/evmbench/requirements.txt (line 111))
+#10 26.90   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+#10 26.96 Collecting pre-commit==4.2.0 (from -r /opt/evmbench/requirements.txt (line 112))
+#10 26.99   Downloading pre_commit-4.2.0-py2.py3-none-any.whl.metadata (1.3 kB)
+#10 27.04 Collecting prompt-toolkit==3.0.51 (from -r /opt/evmbench/requirements.txt (line 113))
+#10 27.06   Downloading prompt_toolkit-3.0.51-py3-none-any.whl.metadata (6.4 kB)
+#10 27.24 Collecting propcache==0.3.1 (from -r /opt/evmbench/requirements.txt (line 114))
+#10 27.27   Downloading propcache-0.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (10 kB)
+#10 27.45 Collecting protobuf==6.31.1 (from -r /opt/evmbench/requirements.txt (line 115))
+#10 27.47   Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+#10 27.56 Collecting psutil==7.0.0 (from -r /opt/evmbench/requirements.txt (line 116))
+#10 27.59   Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (22 kB)
+#10 27.63 Collecting ptpython==3.0.30 (from -r /opt/evmbench/requirements.txt (line 117))
+#10 27.66   Downloading ptpython-3.0.30-py3-none-any.whl.metadata (11 kB)
+#10 27.69 Collecting ptyprocess==0.7.0 (from -r /opt/evmbench/requirements.txt (line 118))
+#10 27.71   Downloading ptyprocess-0.7.0-py2.py3-none-any.whl.metadata (1.3 kB)
+#10 27.74 Collecting pure-eval==0.2.3 (from -r /opt/evmbench/requirements.txt (line 119))
+#10 27.76   Downloading pure_eval-0.2.3-py3-none-any.whl.metadata (6.3 kB)
+#10 27.86 Collecting pyarrow==23.0.1 (from -r /opt/evmbench/requirements.txt (line 120))
+#10 27.89   Downloading pyarrow-23.0.1-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (3.1 kB)
+#10 27.92 Collecting pycparser==2.22 (from -r /opt/evmbench/requirements.txt (line 121))
+#10 27.94   Downloading pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+#10 28.04 Collecting pycryptodomex==3.23.0 (from -r /opt/evmbench/requirements.txt (line 122))
+#10 28.06   Downloading pycryptodomex-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.4 kB)
+#10 28.20 Collecting pydantic==2.11.5 (from -r /opt/evmbench/requirements.txt (line 123))
+#10 28.23   Downloading pydantic-2.11.5-py3-none-any.whl.metadata (67 kB)
+#10 28.23      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.2/67.2 kB 46.1 MB/s eta 0:00:00
+#10 29.01 Collecting pydantic-core==2.33.2 (from -r /opt/evmbench/requirements.txt (line 124))
+#10 29.04   Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+#10 29.07 Collecting pydeck==0.9.1 (from -r /opt/evmbench/requirements.txt (line 125))
+#10 29.10   Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+#10 29.14 Collecting pygments==2.20.0 (from -r /opt/evmbench/requirements.txt (line 126))
+#10 29.16   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+#10 29.20 Collecting pyjwt==2.10.1 (from -r /opt/evmbench/requirements.txt (line 127))
+#10 29.22   Downloading PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+#10 29.27 Collecting pyparsing==3.2.3 (from -r /opt/evmbench/requirements.txt (line 128))
+#10 29.29   Downloading pyparsing-3.2.3-py3-none-any.whl.metadata (5.0 kB)
+#10 29.36 Collecting pytest==8.4.0 (from -r /opt/evmbench/requirements.txt (line 129))
+#10 29.39   Downloading pytest-8.4.0-py3-none-any.whl.metadata (7.7 kB)
+#10 29.43 Collecting pytest-asyncio==1.0.0 (from -r /opt/evmbench/requirements.txt (line 130))
+#10 29.45   Downloading pytest_asyncio-1.0.0-py3-none-any.whl.metadata (4.0 kB)
+#10 29.49 Collecting pytest-html==4.1.1 (from -r /opt/evmbench/requirements.txt (line 131))
+#10 29.51   Downloading pytest_html-4.1.1-py3-none-any.whl.metadata (3.9 kB)
+#10 29.55 Collecting pytest-metadata==3.1.1 (from -r /opt/evmbench/requirements.txt (line 132))
+#10 29.57   Downloading pytest_metadata-3.1.1-py3-none-any.whl.metadata (8.6 kB)
+#10 29.60 Collecting python-dateutil==2.9.0.post0 (from -r /opt/evmbench/requirements.txt (line 133))
+#10 29.63   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#10 29.66 Collecting python-dotenv==1.1.0 (from -r /opt/evmbench/requirements.txt (line 134))
+#10 29.69   Downloading python_dotenv-1.1.0-py3-none-any.whl.metadata (24 kB)
+#10 29.75 Collecting pytz==2025.2 (from -r /opt/evmbench/requirements.txt (line 135))
+#10 29.77   Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+#10 29.85 Collecting pyyaml==6.0.2 (from -r /opt/evmbench/requirements.txt (line 137))
+#10 29.87   Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+#10 30.12 Collecting pyzmq==26.4.0 (from -r /opt/evmbench/requirements.txt (line 138))
+#10 30.14   Downloading pyzmq-26.4.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (6.0 kB)
+#10 30.19 Collecting referencing==0.36.2 (from -r /opt/evmbench/requirements.txt (line 139))
+#10 30.21   Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+#10 30.76 Collecting regex==2024.11.6 (from -r /opt/evmbench/requirements.txt (line 140))
+#10 30.79   Downloading regex-2024.11.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (40 kB)
+#10 30.79      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.5/40.5 kB 48.2 MB/s eta 0:00:00
+#10 30.84 Collecting requests==2.32.3 (from -r /opt/evmbench/requirements.txt (line 141))
+#10 30.86   Downloading requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+#10 30.94 Collecting rich==14.0.0 (from -r /opt/evmbench/requirements.txt (line 142))
+#10 30.96   Downloading rich-14.0.0-py3-none-any.whl.metadata (18 kB)
+#10 31.23 Collecting rpds-py==0.25.1 (from -r /opt/evmbench/requirements.txt (line 143))
+#10 31.26   Downloading rpds_py-0.25.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+#10 31.43 Collecting setuptools==80.9.0 (from -r /opt/evmbench/requirements.txt (line 144))
+#10 31.45   Downloading setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+#10 31.48 Collecting six==1.17.0 (from -r /opt/evmbench/requirements.txt (line 145))
+#10 31.51   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#10 31.54 Collecting smmap==5.0.2 (from -r /opt/evmbench/requirements.txt (line 146))
+#10 31.56   Downloading smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+#10 31.59 Collecting sniffio==1.3.1 (from -r /opt/evmbench/requirements.txt (line 147))
+#10 31.61   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+#10 31.65 Collecting sqlparse==0.5.3 (from -r /opt/evmbench/requirements.txt (line 148))
+#10 31.67   Downloading sqlparse-0.5.3-py3-none-any.whl.metadata (3.9 kB)
+#10 31.70 Collecting stack-data==0.6.3 (from -r /opt/evmbench/requirements.txt (line 149))
+#10 31.72   Downloading stack_data-0.6.3-py3-none-any.whl.metadata (18 kB)
+#10 31.78 Collecting starlette==0.46.2 (from -r /opt/evmbench/requirements.txt (line 150))
+#10 31.80   Downloading starlette-0.46.2-py3-none-any.whl.metadata (6.2 kB)
+#10 31.87 Collecting streamlit==1.45.1 (from -r /opt/evmbench/requirements.txt (line 151))
+#10 31.90   Downloading streamlit-1.45.1-py3-none-any.whl.metadata (8.9 kB)
+#10 31.93 Collecting structlog==25.4.0 (from -r /opt/evmbench/requirements.txt (line 152))
+#10 31.96   Downloading structlog-25.4.0-py3-none-any.whl.metadata (7.6 kB)
+#10 31.99 Collecting tabulate==0.9.0 (from -r /opt/evmbench/requirements.txt (line 153))
+#10 32.01   Downloading tabulate-0.9.0-py3-none-any.whl.metadata (34 kB)
+#10 32.05 Collecting telnetlib3==2.0.4 (from -r /opt/evmbench/requirements.txt (line 154))
+#10 32.08   Downloading telnetlib3-2.0.4-py2.py3-none-any.whl.metadata (7.1 kB)
+#10 32.11 Collecting tenacity==9.1.2 (from -r /opt/evmbench/requirements.txt (line 155))
+#10 32.13   Downloading tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+#10 32.17 Collecting terminaltables==3.1.10 (from -r /opt/evmbench/requirements.txt (line 156))
+#10 32.19   Downloading terminaltables-3.1.10-py2.py3-none-any.whl.metadata (3.5 kB)
+#10 32.24 Collecting tiktoken==0.9.0 (from -r /opt/evmbench/requirements.txt (line 157))
+#10 32.27   Downloading tiktoken-0.9.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+#10 32.30 Collecting toml==0.10.2 (from -r /opt/evmbench/requirements.txt (line 158))
+#10 32.32   Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+#10 32.38 Collecting tornado==6.5.1 (from -r /opt/evmbench/requirements.txt (line 159))
+#10 32.40   Downloading tornado-6.5.1-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+#10 32.47 Collecting tqdm==4.67.1 (from -r /opt/evmbench/requirements.txt (line 160))
+#10 32.49   Downloading tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+#10 32.49      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.7/57.7 kB 71.6 MB/s eta 0:00:00
+#10 32.74 Collecting trafaret==2.1.1 (from -r /opt/evmbench/requirements.txt (line 161))
+#10 32.77   Downloading trafaret-2.1.1-py3-none-any.whl.metadata (5.3 kB)
+#10 32.81 Collecting traitlets==5.14.3 (from -r /opt/evmbench/requirements.txt (line 162))
+#10 32.83   Downloading traitlets-5.14.3-py3-none-any.whl.metadata (10 kB)
+#10 32.88 Collecting twisted==24.11.0 (from -r /opt/evmbench/requirements.txt (line 163))
+#10 32.90   Downloading twisted-24.11.0-py3-none-any.whl.metadata (20 kB)
+#10 32.94 Collecting typing-extensions==4.13.2 (from -r /opt/evmbench/requirements.txt (line 164))
+#10 32.96   Downloading typing_extensions-4.13.2-py3-none-any.whl.metadata (3.0 kB)
+#10 32.99 Collecting typing-inspection==0.4.1 (from -r /opt/evmbench/requirements.txt (line 165))
+#10 33.02   Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+#10 33.05 Collecting tzdata==2025.2 (from -r /opt/evmbench/requirements.txt (line 166))
+#10 33.08   Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+#10 33.13 Collecting urllib3==2.4.0 (from -r /opt/evmbench/requirements.txt (line 167))
+#10 33.16   Downloading urllib3-2.4.0-py3-none-any.whl.metadata (6.5 kB)
+#10 33.21 Collecting uvloop==0.21.0 (from -r /opt/evmbench/requirements.txt (line 168))
+#10 33.23   Downloading uvloop-0.21.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#10 33.33 Collecting virtualenv==20.31.2 (from -r /opt/evmbench/requirements.txt (line 169))
+#10 33.35   Downloading virtualenv-20.31.2-py3-none-any.whl.metadata (4.5 kB)
+#10 33.60 Collecting vncdotool==1.2.0 (from -r /opt/evmbench/requirements.txt (line 170))
+#10 33.85   Downloading vncdotool-1.2.0.tar.gz (54 kB)
+#10 33.85      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.8/54.8 kB 61.3 MB/s eta 0:00:00
+#10 33.86   Preparing metadata (setup.py): started
+#10 34.12   Preparing metadata (setup.py): finished with status 'done'
+#10 34.19 Collecting watchdog==6.0.0 (from -r /opt/evmbench/requirements.txt (line 171))
+#10 34.21   Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl.metadata (44 kB)
+#10 34.21      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.3/44.3 kB 250.2 MB/s eta 0:00:00
+#10 34.25 Collecting wcwidth==0.2.13 (from -r /opt/evmbench/requirements.txt (line 172))
+#10 34.27   Downloading wcwidth-0.2.13-py2.py3-none-any.whl.metadata (14 kB)
+#10 34.32 Collecting widgetsnbextension==4.0.14 (from -r /opt/evmbench/requirements.txt (line 173))
+#10 34.35   Downloading widgetsnbextension-4.0.14-py3-none-any.whl.metadata (1.6 kB)
+#10 34.64 Collecting yarl==1.20.0 (from -r /opt/evmbench/requirements.txt (line 174))
+#10 34.88   Downloading yarl-1.20.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (72 kB)
+#10 34.88      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.4/72.4 kB 39.7 MB/s eta 0:00:00
+#10 35.23 Collecting zope-interface==7.2 (from -r /opt/evmbench/requirements.txt (line 175))
+#10 35.25   Downloading zope.interface-7.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (44 kB)
+#10 35.25      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.4/44.4 kB 49.0 MB/s eta 0:00:00
+#10 38.51 Downloading aioconsole-0.8.1-py3-none-any.whl (43 kB)
+#10 38.51    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.3/43.3 kB 299.0 MB/s eta 0:00:00
+#10 38.53 Downloading aiodebug-2.3.0-py3-none-any.whl (7.9 kB)
+#10 38.56 Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+#10 38.80 Downloading aiohttp-3.12.9-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.7 MB)
+#10 38.86    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 28.4 MB/s eta 0:00:00
+#10 38.89 Downloading aiomonitor-0.7.1-py3-none-any.whl (189 kB)
+#10 38.89    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 189.6/189.6 kB 400.4 MB/s eta 0:00:00
+#10 38.91 Downloading aiosignal-1.3.2-py2.py3-none-any.whl (7.6 kB)
+#10 38.94 Downloading altair-5.5.0-py3-none-any.whl (731 kB)
+#10 38.94    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 731.2/731.2 kB 279.3 MB/s eta 0:00:00
+#10 38.96 Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#10 38.99 Downloading anyio-4.9.0-py3-none-any.whl (100 kB)
+#10 38.99    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.9/100.9 kB 372.5 MB/s eta 0:00:00
+#10 39.01 Downloading appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+#10 39.04 Downloading asttokens-3.0.0-py3-none-any.whl (26 kB)
+#10 39.06 Downloading async_lru-2.0.5-py3-none-any.whl (6.1 kB)
+#10 39.09 Downloading asyncvnc-1.3.0-py3-none-any.whl (19 kB)
+#10 39.11 Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+#10 39.11    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 303.5 MB/s eta 0:00:00
+#10 39.13 Downloading automat-25.4.16-py3-none-any.whl (42 kB)
+#10 39.13    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.8/42.8 kB 299.9 MB/s eta 0:00:00
+#10 39.16 Downloading azure_common-1.1.28-py2.py3-none-any.whl (14 kB)
+#10 39.18 Downloading azure_core-1.34.0-py3-none-any.whl (207 kB)
+#10 39.18    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.4/207.4 kB 399.4 MB/s eta 0:00:00
+#10 39.21 Downloading azure_identity-1.23.0-py3-none-any.whl (186 kB)
+#10 39.21    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 186.1/186.1 kB 264.8 MB/s eta 0:00:00
+#10 39.23 Downloading azure_mgmt_compute-34.1.0-py3-none-any.whl (2.0 MB)
+#10 39.26    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 103.4 MB/s eta 0:00:00
+#10 39.28 Downloading azure_mgmt_core-1.5.0-py3-none-any.whl (30 kB)
+#10 39.30 Downloading azure_mgmt_network-29.0.0-py3-none-any.whl (608 kB)
+#10 39.31    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 608.0/608.0 kB 371.7 MB/s eta 0:00:00
+#10 39.33 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#10 39.35 Downloading blobfile-3.0.0-py3-none-any.whl (75 kB)
+#10 39.35    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 75.4/75.4 kB 318.3 MB/s eta 0:00:00
+#10 39.38 Downloading boostedblob-0.15.6-py3-none-any.whl (59 kB)
+#10 39.38    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 59.2/59.2 kB 292.0 MB/s eta 0:00:00
+#10 39.40 Downloading cachetools-5.5.2-py3-none-any.whl (10 kB)
+#10 39.43 Downloading certifi-2025.4.26-py3-none-any.whl (159 kB)
+#10 39.43    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 159.6/159.6 kB 387.4 MB/s eta 0:00:00
+#10 39.45 Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
+#10 39.45    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 467.2/467.2 kB 423.2 MB/s eta 0:00:00
+#10 39.48 Downloading cfgv-3.4.0-py2.py3-none-any.whl (7.2 kB)
+#10 39.50 Downloading charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
+#10 39.50    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 147.3/147.3 kB 405.6 MB/s eta 0:00:00
+#10 39.53 Downloading cli_helpers-2.4.0-py3-none-any.whl (19 kB)
+#10 39.55 Downloading click-8.2.1-py3-none-any.whl (102 kB)
+#10 39.55    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 387.6 MB/s eta 0:00:00
+#10 39.57 Downloading cloudpickle-3.1.1-py3-none-any.whl (20 kB)
+#10 39.60 Downloading comm-0.2.2-py3-none-any.whl (7.2 kB)
+#10 39.62 Downloading configobj-5.0.9-py2.py3-none-any.whl (35 kB)
+#10 39.64 Downloading constantly-23.10.4-py3-none-any.whl (13 kB)
+#10 39.67 Downloading contourpy-1.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (326 kB)
+#10 39.67    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 326.2/326.2 kB 410.8 MB/s eta 0:00:00
+#10 39.69 Downloading cryptography-45.0.3-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+#10 39.72    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 188.3 MB/s eta 0:00:00
+#10 39.74 Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+#10 39.76 Downloading debugpy-1.8.14-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+#10 39.78    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 186.8 MB/s eta 0:00:00
+#10 39.81 Downloading decorator-5.2.1-py3-none-any.whl (9.2 kB)
+#10 39.83 Downloading dill-0.4.0-py3-none-any.whl (119 kB)
+#10 39.83    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 119.7/119.7 kB 357.9 MB/s eta 0:00:00
+#10 39.85 Downloading distlib-0.3.9-py2.py3-none-any.whl (468 kB)
+#10 39.86    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 469.0/469.0 kB 366.1 MB/s eta 0:00:00
+#10 39.88 Downloading distro-1.9.0-py3-none-any.whl (20 kB)
+#10 39.90 Downloading docker-7.1.0-py3-none-any.whl (147 kB)
+#10 39.90    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 147.8/147.8 kB 362.4 MB/s eta 0:00:00
+#10 39.93 Downloading executing-2.2.0-py2.py3-none-any.whl (26 kB)
+#10 39.95 Downloading fastapi-0.115.12-py3-none-any.whl (95 kB)
+#10 39.96    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 95.2/95.2 kB 364.4 MB/s eta 0:00:00
+#10 39.98 Downloading filelock-3.18.0-py3-none-any.whl (16 kB)
+#10 40.01 Downloading fonttools-4.58.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.9 MB)
+#10 40.04    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 167.1 MB/s eta 0:00:00
+#10 40.06 Downloading frozenlist-1.6.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (236 kB)
+#10 40.07    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 236.3/236.3 kB 381.2 MB/s eta 0:00:00
+#10 40.09 Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+#10 40.09    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.8/62.8 kB 306.1 MB/s eta 0:00:00
+#10 40.11 Downloading GitPython-3.1.44-py3-none-any.whl (207 kB)
+#10 40.12    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.6/207.6 kB 397.7 MB/s eta 0:00:00
+#10 40.14 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#10 40.16 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#10 40.16    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 365.9 MB/s eta 0:00:00
+#10 40.19 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#10 40.19    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 354.2 MB/s eta 0:00:00
+#10 40.21 Downloading hyperlink-21.0.0-py2.py3-none-any.whl (74 kB)
+#10 40.21    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 74.6/74.6 kB 351.9 MB/s eta 0:00:00
+#10 40.24 Downloading identify-2.6.12-py2.py3-none-any.whl (99 kB)
+#10 40.24    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.1/99.1 kB 343.6 MB/s eta 0:00:00
+#10 40.26 Downloading idna-3.10-py3-none-any.whl (70 kB)
+#10 40.26    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 325.2 MB/s eta 0:00:00
+#10 40.29 Downloading incremental-24.7.2-py3-none-any.whl (20 kB)
+#10 40.31 Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+#10 40.33 Downloading ipykernel-6.29.5-py3-none-any.whl (117 kB)
+#10 40.34    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.2/117.2 kB 376.7 MB/s eta 0:00:00
+#10 40.36 Downloading ipython-9.3.0-py3-none-any.whl (605 kB)
+#10 40.36    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 605.3/605.3 kB 330.3 MB/s eta 0:00:00
+#10 40.39 Downloading ipython_pygments_lexers-1.1.1-py3-none-any.whl (8.1 kB)
+#10 40.41 Downloading ipywidgets-8.1.7-py3-none-any.whl (139 kB)
+#10 40.41    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 139.8/139.8 kB 386.5 MB/s eta 0:00:00
+#10 40.44 Downloading isodate-0.7.2-py3-none-any.whl (22 kB)
+#10 40.46 Downloading janus-2.0.0-py3-none-any.whl (12 kB)
+#10 40.48 Downloading jedi-0.19.2-py2.py3-none-any.whl (1.6 MB)
+#10 40.74    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 6.1 MB/s eta 0:00:00
+#10 40.76 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#10 40.76    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 378.4 MB/s eta 0:00:00
+#10 40.79 Downloading jiter-0.10.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (352 kB)
+#10 40.79    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 352.2/352.2 kB 352.5 MB/s eta 0:00:00
+#10 40.81 Downloading jsonschema-4.24.0-py3-none-any.whl (88 kB)
+#10 40.81    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.7/88.7 kB 375.1 MB/s eta 0:00:00
+#10 40.84 Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl (18 kB)
+#10 40.86 Downloading jupyter_client-8.6.3-py3-none-any.whl (106 kB)
+#10 40.86    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.1/106.1 kB 370.4 MB/s eta 0:00:00
+#10 40.88 Downloading jupyter_core-5.8.1-py3-none-any.whl (28 kB)
+#10 40.91 Downloading jupyterlab_widgets-3.0.15-py3-none-any.whl (216 kB)
+#10 40.91    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 216.6/216.6 kB 356.6 MB/s eta 0:00:00
+#10 40.93 Downloading keysymdef-1.2.0-py2.py3-none-any.whl (20 kB)
+#10 40.96 Downloading kiwisolver-1.4.8-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.4 MB)
+#10 40.97    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 277.8 MB/s eta 0:00:00
+#10 41.00 Downloading litecli-1.15.0-py3-none-any.whl (52 kB)
+#10 41.00    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 52.5/52.5 kB 315.2 MB/s eta 0:00:00
+#10 41.02 Downloading loky-3.5.5-py3-none-any.whl (56 kB)
+#10 41.02    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.0/56.0 kB 296.6 MB/s eta 0:00:00
+#10 41.05 Downloading lxml-5.4.0-cp311-cp311-manylinux_2_28_x86_64.whl (4.9 MB)
+#10 41.08    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 193.2 MB/s eta 0:00:00
+#10 41.10 Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+#10 41.10    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.5/87.5 kB 358.8 MB/s eta 0:00:00
+#10 41.13 Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+#10 41.15 Downloading matplotlib-3.10.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.6 MB)
+#10 41.20    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.6/8.6 MB 170.0 MB/s eta 0:00:00
+#10 41.23 Downloading matplotlib_inline-0.1.7-py3-none-any.whl (9.9 kB)
+#10 41.25 Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+#10 41.28 Downloading more_itertools-10.7.0-py3-none-any.whl (65 kB)
+#10 41.28    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.3/65.3 kB 345.4 MB/s eta 0:00:00
+#10 41.30 Downloading msal-1.32.3-py3-none-any.whl (115 kB)
+#10 41.30    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 115.4/115.4 kB 392.6 MB/s eta 0:00:00
+#10 41.33 Downloading msal_extensions-1.3.1-py3-none-any.whl (20 kB)
+#10 41.35 Downloading msgpack-1.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (403 kB)
+#10 41.36    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 403.7/403.7 kB 356.7 MB/s eta 0:00:00
+#10 41.38 Downloading multidict-6.4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (223 kB)
+#10 41.38    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 223.7/223.7 kB 334.7 MB/s eta 0:00:00
+#10 41.41 Downloading narwhals-1.41.0-py3-none-any.whl (357 kB)
+#10 41.41    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 358.0/358.0 kB 388.6 MB/s eta 0:00:00
+#10 41.43 Downloading nest_asyncio-1.6.0-py3-none-any.whl (5.2 kB)
+#10 41.45 Downloading nodeenv-1.9.1-py2.py3-none-any.whl (22 kB)
+#10 41.48 Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+#10 41.55    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 239.4 MB/s eta 0:00:00
+#10 41.58 Downloading openai-1.99.9-py3-none-any.whl (786 kB)
+#10 41.58    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 786.8/786.8 kB 328.5 MB/s eta 0:00:00
+#10 41.60 Downloading packaging-24.2-py3-none-any.whl (65 kB)
+#10 41.60    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.5/65.5 kB 330.9 MB/s eta 0:00:00
+#10 41.63 Downloading pandas-2.2.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.1 MB)
+#10 41.68    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.1/13.1 MB 251.8 MB/s eta 0:00:00
+#10 41.71 Downloading parso-0.8.4-py2.py3-none-any.whl (103 kB)
+#10 41.71    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.7/103.7 kB 305.2 MB/s eta 0:00:00
+#10 41.73 Downloading pexpect-4.9.0-py2.py3-none-any.whl (63 kB)
+#10 41.73    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 337.1 MB/s eta 0:00:00
+#10 41.75 Downloading pillow-11.2.1-cp311-cp311-manylinux_2_28_x86_64.whl (4.6 MB)
+#10 41.82    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 73.5 MB/s eta 0:00:00
+#10 41.84 Downloading pip-25.1.1-py3-none-any.whl (1.8 MB)
+#10 41.85    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 240.5 MB/s eta 0:00:00
+#10 41.88 Downloading platformdirs-4.3.8-py3-none-any.whl (18 kB)
+#10 41.90 Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+#10 41.92 Downloading pre_commit-4.2.0-py2.py3-none-any.whl (220 kB)
+#10 41.92    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 220.7/220.7 kB 401.8 MB/s eta 0:00:00
+#10 41.95 Downloading prompt_toolkit-3.0.51-py3-none-any.whl (387 kB)
+#10 41.95    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 387.8/387.8 kB 363.8 MB/s eta 0:00:00
+#10 41.97 Downloading propcache-0.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (232 kB)
+#10 41.98    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 232.5/232.5 kB 397.4 MB/s eta 0:00:00
+#10 42.00 Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl (321 kB)
+#10 42.00    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 321.1/321.1 kB 409.5 MB/s eta 0:00:00
+#10 42.03 Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (277 kB)
+#10 42.03    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 278.0/278.0 kB 399.8 MB/s eta 0:00:00
+#10 42.27 Downloading ptpython-3.0.30-py3-none-any.whl (67 kB)
+#10 42.27    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.2/67.2 kB 300.9 MB/s eta 0:00:00
+#10 42.29 Downloading ptyprocess-0.7.0-py2.py3-none-any.whl (13 kB)
+#10 42.32 Downloading pure_eval-0.2.3-py3-none-any.whl (11 kB)
+#10 42.34 Downloading pyarrow-23.0.1-cp311-cp311-manylinux_2_28_x86_64.whl (47.6 MB)
+#10 42.70    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.6/47.6 MB 202.8 MB/s eta 0:00:00
+#10 42.72 Downloading pycparser-2.22-py3-none-any.whl (117 kB)
+#10 42.72    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.6/117.6 kB 354.2 MB/s eta 0:00:00
+#10 42.74 Downloading pycryptodomex-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.3 MB)
+#10 42.75    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 338.9 MB/s eta 0:00:00
+#10 42.78 Downloading pydantic-2.11.5-py3-none-any.whl (444 kB)
+#10 42.78    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 444.2/444.2 kB 316.7 MB/s eta 0:00:00
+#10 42.80 Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+#10 42.81    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 313.3 MB/s eta 0:00:00
+#10 42.83 Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+#10 42.87    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 201.9 MB/s eta 0:00:00
+#10 42.89 Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+#10 42.90    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 403.9 MB/s eta 0:00:00
+#10 42.92 Downloading PyJWT-2.10.1-py3-none-any.whl (22 kB)
+#10 42.94 Downloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+#10 42.95    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.1/111.1 kB 382.8 MB/s eta 0:00:00
+#10 42.97 Downloading pytest-8.4.0-py3-none-any.whl (363 kB)
+#10 42.97    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 363.8/363.8 kB 389.9 MB/s eta 0:00:00
+#10 43.00 Downloading pytest_asyncio-1.0.0-py3-none-any.whl (15 kB)
+#10 43.02 Downloading pytest_html-4.1.1-py3-none-any.whl (23 kB)
+#10 43.04 Downloading pytest_metadata-3.1.1-py3-none-any.whl (11 kB)
+#10 43.07 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#10 43.07    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 392.7 MB/s eta 0:00:00
+#10 43.09 Downloading python_dotenv-1.1.0-py3-none-any.whl (20 kB)
+#10 43.12 Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+#10 43.12    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 kB 327.8 MB/s eta 0:00:00
+#10 43.15 Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (762 kB)
+#10 43.15    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 763.0/763.0 kB 370.1 MB/s eta 0:00:00
+#10 43.17 Downloading pyzmq-26.4.0-cp311-cp311-manylinux_2_28_x86_64.whl (862 kB)
+#10 43.18    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 862.4/862.4 kB 311.2 MB/s eta 0:00:00
+#10 43.21 Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+#10 43.23 Downloading regex-2024.11.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (792 kB)
+#10 43.24    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 792.7/792.7 kB 342.9 MB/s eta 0:00:00
+#10 43.26 Downloading requests-2.32.3-py3-none-any.whl (64 kB)
+#10 43.26    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.9/64.9 kB 319.1 MB/s eta 0:00:00
+#10 43.28 Downloading rich-14.0.0-py3-none-any.whl (243 kB)
+#10 43.29    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 243.2/243.2 kB 377.1 MB/s eta 0:00:00
+#10 43.31 Downloading rpds_py-0.25.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (386 kB)
+#10 43.31    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 387.0/387.0 kB 320.8 MB/s eta 0:00:00
+#10 43.34 Downloading setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+#10 43.34    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 398.9 MB/s eta 0:00:00
+#10 43.37 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#10 43.39 Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+#10 43.41 Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+#10 43.43 Downloading sqlparse-0.5.3-py3-none-any.whl (44 kB)
+#10 43.44    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.4/44.4 kB 323.8 MB/s eta 0:00:00
+#10 43.46 Downloading stack_data-0.6.3-py3-none-any.whl (24 kB)
+#10 43.48 Downloading starlette-0.46.2-py3-none-any.whl (72 kB)
+#10 43.48    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.0/72.0 kB 319.5 MB/s eta 0:00:00
+#10 43.51 Downloading streamlit-1.45.1-py3-none-any.whl (9.9 MB)
+#10 43.56    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 193.2 MB/s eta 0:00:00
+#10 43.59 Downloading structlog-25.4.0-py3-none-any.whl (68 kB)
+#10 43.59    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 68.7/68.7 kB 341.1 MB/s eta 0:00:00
+#10 43.61 Downloading tabulate-0.9.0-py3-none-any.whl (35 kB)
+#10 43.63 Downloading telnetlib3-2.0.4-py2.py3-none-any.whl (93 kB)
+#10 43.64    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 93.3/93.3 kB 229.0 MB/s eta 0:00:00
+#10 43.66 Downloading tenacity-9.1.2-py3-none-any.whl (28 kB)
+#10 43.69 Downloading terminaltables-3.1.10-py2.py3-none-any.whl (15 kB)
+#10 43.71 Downloading tiktoken-0.9.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.2 MB)
+#10 43.72    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 213.5 MB/s eta 0:00:00
+#10 43.75 Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+#10 43.77 Downloading tornado-6.5.1-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (443 kB)
+#10 43.78    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 443.3/443.3 kB 252.4 MB/s eta 0:00:00
+#10 43.80 Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+#10 43.80    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 210.9 MB/s eta 0:00:00
+#10 43.83 Downloading trafaret-2.1.1-py3-none-any.whl (28 kB)
+#10 43.85 Downloading traitlets-5.14.3-py3-none-any.whl (85 kB)
+#10 43.85    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.4/85.4 kB 280.1 MB/s eta 0:00:00
+#10 43.88 Downloading twisted-24.11.0-py3-none-any.whl (3.2 MB)
+#10 43.94    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 54.2 MB/s eta 0:00:00
+#10 43.96 Downloading typing_extensions-4.13.2-py3-none-any.whl (45 kB)
+#10 43.96    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.8/45.8 kB 286.0 MB/s eta 0:00:00
+#10 43.99 Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+#10 44.01 Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+#10 44.02    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 347.8/347.8 kB 401.9 MB/s eta 0:00:00
+#10 44.04 Downloading urllib3-2.4.0-py3-none-any.whl (128 kB)
+#10 44.04    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 128.7/128.7 kB 383.7 MB/s eta 0:00:00
+#10 44.07 Downloading uvloop-0.21.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.0 MB)
+#10 44.09    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.0/4.0 MB 207.1 MB/s eta 0:00:00
+#10 44.11 Downloading virtualenv-20.31.2-py3-none-any.whl (6.1 MB)
+#10 44.15    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.1/6.1 MB 147.7 MB/s eta 0:00:00
+#10 44.18 Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)
+#10 44.18    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.1/79.1 kB 332.6 MB/s eta 0:00:00
+#10 44.20 Downloading wcwidth-0.2.13-py2.py3-none-any.whl (34 kB)
+#10 44.23 Downloading widgetsnbextension-4.0.14-py3-none-any.whl (2.2 MB)
+#10 44.24    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 194.9 MB/s eta 0:00:00
+#10 44.26 Downloading yarl-1.20.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (358 kB)
+#10 44.27    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 358.1/358.1 kB 251.1 MB/s eta 0:00:00
+#10 44.29 Downloading zope.interface-7.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (259 kB)
+#10 44.29    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 259.8/259.8 kB 354.0 MB/s eta 0:00:00
+#10 44.76 Building wheels for collected packages: vncdotool, alcatraz, compatibility_api, nanoeval, nanoeval_alcatraz, preparedness_turn_completer, chz
+#10 44.76   Building wheel for vncdotool (setup.py): started
+#10 44.94   Building wheel for vncdotool (setup.py): finished with status 'done'
+#10 44.94   Created wheel for vncdotool: filename=vncdotool-1.2.0-py3-none-any.whl size=31621 sha256=b3d27cc06658cf9c5d61775416bdec2fc46768082cb275a302ba3413a5b7d4ce
+#10 44.94   Stored in directory: /tmp/pip-ephem-wheel-cache-ojz6g5yw/wheels/da/63/c4/8738a1edbc763cc053bdc151579e28f3dc4d3684494dbd1aa2
+#10 44.94   Building editable for alcatraz (pyproject.toml): started
+#10 45.11   Building editable for alcatraz (pyproject.toml): finished with status 'done'
+#10 45.11   Created wheel for alcatraz: filename=alcatraz-0.1.0-0.editable-py3-none-any.whl size=2856 sha256=a278e102a10b551b8b98017c0804a776a48b9b43a0b6fb58ea3a8a355704e198
+#10 45.11   Stored in directory: /tmp/pip-ephem-wheel-cache-ojz6g5yw/wheels/06/37/09/a0e17dcb9f0c34a4963cb8bc4a40d9ead43ff97b4e78ab828b
+#10 45.12   Building editable for compatibility_api (pyproject.toml): started
+#10 45.29   Building editable for compatibility_api (pyproject.toml): finished with status 'done'
+#10 45.29   Created wheel for compatibility_api: filename=compatibility_api-0.1.0-0.editable-py3-none-any.whl size=2812 sha256=5c2490d292578ea66402bf268fc164ac0257afa0897dfd8acc6e8a7c9792a64f
+#10 45.29   Stored in directory: /tmp/pip-ephem-wheel-cache-ojz6g5yw/wheels/0d/87/a7/f5f56852af056ee5f9973e8ca146f91a0da388ef87c89dcdcd
+#10 45.30   Building editable for nanoeval (pyproject.toml): started
+#10 45.47   Building editable for nanoeval (pyproject.toml): finished with status 'done'
+#10 45.48   Created wheel for nanoeval: filename=nanoeval-0.1.0-0.editable-py3-none-any.whl size=2819 sha256=257ab6fad2664b99cc451cb321cc98fd8651fdd85350220b1fde7a627a61fcde
+#10 45.48   Stored in directory: /tmp/pip-ephem-wheel-cache-ojz6g5yw/wheels/4f/1d/1d/97c202fab1235f47acba93c23e1100f81fd6de7560bb150d55
+#10 45.48   Building editable for nanoeval_alcatraz (pyproject.toml): started
+#10 45.65   Building editable for nanoeval_alcatraz (pyproject.toml): finished with status 'done'
+#10 45.65   Created wheel for nanoeval_alcatraz: filename=nanoeval_alcatraz-0.1.0-0.editable-py3-none-any.whl size=2825 sha256=da91c94ed2138c0193dccfa1ace25b5ddf5a0f34ff22df47bc8778ce74477816
+#10 45.65   Stored in directory: /tmp/pip-ephem-wheel-cache-ojz6g5yw/wheels/28/35/e1/641e09868a60ff498595fde55829f9cdaa30b11b9913274200
+#10 45.65   Building editable for preparedness_turn_completer (pyproject.toml): started
+#10 45.82   Building editable for preparedness_turn_completer (pyproject.toml): finished with status 'done'
+#10 45.82   Created wheel for preparedness_turn_completer: filename=preparedness_turn_completer-0.1.0-0.editable-py3-none-any.whl size=2994 sha256=b8f35d48daa499c2513fb4c65b380c2f31806a005f6c821858ff5b9c71da580b
+#10 45.82   Stored in directory: /tmp/pip-ephem-wheel-cache-ojz6g5yw/wheels/41/fc/cd/25430643d07975cdcc5a8b3154f822fdf70a15c1f5ce56dee3
+#10 45.82   Building wheel for chz (pyproject.toml): started
+#10 45.98   Building wheel for chz (pyproject.toml): finished with status 'done'
+#10 45.98   Created wheel for chz: filename=chz-0.3.0-py3-none-any.whl size=52790 sha256=0341cb8f0968e0c060b657b7b5d90a006702e0da999abcf307f8785dfbaf8808
+#10 45.98   Stored in directory: /tmp/pip-ephem-wheel-cache-ojz6g5yw/wheels/55/12/19/9b4fc3033069e87cc7f15b99177ba02573b5c19cef172cfe8d
+#10 45.98 Successfully built vncdotool alcatraz compatibility_api nanoeval nanoeval_alcatraz preparedness_turn_completer chz
+#10 46.75 Installing collected packages: wcwidth, trafaret, pytz, pure-eval, ptyprocess, keysymdef, distlib, azure-common, appdirs, widgetsnbextension, watchdog, uvloop, urllib3, tzdata, typing-extensions, traitlets, tqdm, tornado, toml, terminaltables, tenacity, telnetlib3, tabulate, structlog, sqlparse, sniffio, smmap, six, setuptools, rpds-py, regex, pyzmq, pyyaml, python-dotenv, pyparsing, pyjwt, pygments, pycryptodomex, pycparser, pyarrow, psutil, protobuf, propcache, prompt-toolkit, pluggy, platformdirs, pip, pillow, pexpect, parso, packaging, numpy, nodeenv, nest-asyncio, narwhals, multidict, msgpack, more-itertools, mdurl, markupsafe, lxml, kiwisolver, jupyterlab-widgets, jiter, janus, isodate, iniconfig, idna, identify, h11, frozenlist, fonttools, filelock, executing, distro, dill, decorator, debugpy, cycler, constantly, configobj, cloudpickle, click, charset-normalizer, cfgv, certifi, cachetools, blinker, automat, attrs, async-lru, asttokens, annotated-types, aiohappyeyeballs, aioconsole, zope-interface, yarl, virtualenv, typing-inspection, stack-data, requests, referencing, python-dateutil, pytest, pydantic-core, nanoeval_alcatraz, matplotlib-inline, markdown-it-py, loky, jupyter-core, jinja2, jedi, ipython-pygments-lexers, incremental, hyperlink, httpcore, gitdb, contourpy, comm, chz, cffi, blobfile, anyio, aiosignal, aiodebug, twisted, tiktoken, starlette, rich, pytest-metadata, pytest-asyncio, pydeck, pydantic, ptpython, pre-commit, pandas, matplotlib, jupyter-client, jsonschema-specifications, ipython, httpx, gitpython, docker, cryptography, cli-helpers, azure-core, aiohttp, vncdotool, pytest-html, openai, jsonschema, ipywidgets, ipykernel, fastapi, boostedblob, azure-mgmt-core, asyncvnc, aiomonitor, preparedness_turn_completer, msal, litecli, azure-mgmt-network, azure-mgmt-compute, altair, streamlit, msal-extensions, nanoeval, azure-identity, compatibility_api, alcatraz
+#10 47.68   Attempting uninstall: setuptools
+#10 47.68     Found existing installation: setuptools 79.0.1
+#10 47.71     Uninstalling setuptools-79.0.1:
+#10 47.84       Successfully uninstalled setuptools-79.0.1
+#10 50.88   Attempting uninstall: pip
+#10 50.88     Found existing installation: pip 24.0
+#10 50.91     Uninstalling pip-24.0:
+#10 51.05       Successfully uninstalled pip-24.0
+#10 51.96   Attempting uninstall: packaging
+#10 51.96     Found existing installation: packaging 26.2
+#10 51.96     Uninstalling packaging-26.2:
+#10 51.98       Successfully uninstalled packaging-26.2
+#10 72.35 Successfully installed aioconsole-0.8.1 aiodebug-2.3.0 aiohappyeyeballs-2.6.1 aiohttp-3.12.9 aiomonitor-0.7.1 aiosignal-1.3.2 alcatraz-0.1.0 altair-5.5.0 annotated-types-0.7.0 anyio-4.9.0 appdirs-1.4.4 asttokens-3.0.0 async-lru-2.0.5 asyncvnc-1.3.0 attrs-25.3.0 automat-25.4.16 azure-common-1.1.28 azure-core-1.34.0 azure-identity-1.23.0 azure-mgmt-compute-34.1.0 azure-mgmt-core-1.5.0 azure-mgmt-network-29.0.0 blinker-1.9.0 blobfile-3.0.0 boostedblob-0.15.6 cachetools-5.5.2 certifi-2025.4.26 cffi-1.17.1 cfgv-3.4.0 charset-normalizer-3.4.2 chz-0.3.0 cli-helpers-2.4.0 click-8.2.1 cloudpickle-3.1.1 comm-0.2.2 compatibility_api-0.1.0 configobj-5.0.9 constantly-23.10.4 contourpy-1.3.2 cryptography-45.0.3 cycler-0.12.1 debugpy-1.8.14 decorator-5.2.1 dill-0.4.0 distlib-0.3.9 distro-1.9.0 docker-7.1.0 executing-2.2.0 fastapi-0.115.12 filelock-3.18.0 fonttools-4.58.1 frozenlist-1.6.2 gitdb-4.0.12 gitpython-3.1.44 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 hyperlink-21.0.0 identify-2.6.12 idna-3.10 incremental-24.7.2 iniconfig-2.1.0 ipykernel-6.29.5 ipython-9.3.0 ipython-pygments-lexers-1.1.1 ipywidgets-8.1.7 isodate-0.7.2 janus-2.0.0 jedi-0.19.2 jinja2-3.1.6 jiter-0.10.0 jsonschema-4.24.0 jsonschema-specifications-2025.4.1 jupyter-client-8.6.3 jupyter-core-5.8.1 jupyterlab-widgets-3.0.15 keysymdef-1.2.0 kiwisolver-1.4.8 litecli-1.15.0 loky-3.5.5 lxml-5.4.0 markdown-it-py-3.0.0 markupsafe-3.0.2 matplotlib-3.10.3 matplotlib-inline-0.1.7 mdurl-0.1.2 more-itertools-10.7.0 msal-1.32.3 msal-extensions-1.3.1 msgpack-1.1.0 multidict-6.4.4 nanoeval-0.1.0 nanoeval_alcatraz-0.1.0 narwhals-1.41.0 nest-asyncio-1.6.0 nodeenv-1.9.1 numpy-2.2.6 openai-1.99.9 packaging-24.2 pandas-2.2.3 parso-0.8.4 pexpect-4.9.0 pillow-11.2.1 pip-25.1.1 platformdirs-4.3.8 pluggy-1.6.0 pre-commit-4.2.0 preparedness_turn_completer-0.1.0 prompt-toolkit-3.0.51 propcache-0.3.1 protobuf-6.31.1 psutil-7.0.0 ptpython-3.0.30 ptyprocess-0.7.0 pure-eval-0.2.3 pyarrow-23.0.1 pycparser-2.22 pycryptodomex-3.23.0 pydantic-2.11.5 pydantic-core-2.33.2 pydeck-0.9.1 pygments-2.20.0 pyjwt-2.10.1 pyparsing-3.2.3 pytest-8.4.0 pytest-asyncio-1.0.0 pytest-html-4.1.1 pytest-metadata-3.1.1 python-dateutil-2.9.0.post0 python-dotenv-1.1.0 pytz-2025.2 pyyaml-6.0.2 pyzmq-26.4.0 referencing-0.36.2 regex-2024.11.6 requests-2.32.3 rich-14.0.0 rpds-py-0.25.1 setuptools-80.9.0 six-1.17.0 smmap-5.0.2 sniffio-1.3.1 sqlparse-0.5.3 stack-data-0.6.3 starlette-0.46.2 streamlit-1.45.1 structlog-25.4.0 tabulate-0.9.0 telnetlib3-2.0.4 tenacity-9.1.2 terminaltables-3.1.10 tiktoken-0.9.0 toml-0.10.2 tornado-6.5.1 tqdm-4.67.1 trafaret-2.1.1 traitlets-5.14.3 twisted-24.11.0 typing-extensions-4.13.2 typing-inspection-0.4.1 tzdata-2025.2 urllib3-2.4.0 uvloop-0.21.0 virtualenv-20.31.2 vncdotool-1.2.0 watchdog-6.0.0 wcwidth-0.2.13 widgetsnbextension-4.0.14 yarl-1.20.0 zope-interface-7.2
+#10 72.35 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#10 DONE 74.5s
+
+#11 [ 7/10] COPY audits /opt/evmbench/audits
+#11 DONE 0.0s
+
+#12 [ 8/10] COPY tests /tests
+#12 DONE 0.0s
+
+#13 [ 9/10] RUN chmod +x /tests/test.sh /tests/evmbench_harbor_verifier.py         /tests/validate_detect_submission.py     && python -c "from evmbench.audit import audit_registry; audit = audit_registry.get_audit('2025-12-algebra-alm-vault'); assert len(audit.vulnerabilities) == 1; assert audit.detect_max_award == 1.0"
+#13 DONE 0.3s
+
+#14 exporting to image
+#14 exporting layers
+#14 exporting layers 3.8s done
+#14 writing image sha256:db794ef650f1202395ee96d2c3cc3eab16454f1156efd282bdcbe15af68466a5 done
+#14 naming to docker.io/ocr-evmbench-c1/2025-12-algebra-alm-vault:verifier-local done
+#14 DONE 3.8s

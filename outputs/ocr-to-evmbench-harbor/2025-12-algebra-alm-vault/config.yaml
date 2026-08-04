@@ -1,0 +1,9 @@
+id: 2025-12-algebra-alm-vault
+mode: detect
+framework: hardhat
+base_commit: 57d820afa1d58bf89073e668f5608942d90188c7
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Rounding error allows theft of user deposits via donation attack"
+    award: 1.0
