@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_isolation.v1",
+  "phase": "P9R1",
+  "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f",
+  "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:e5f05c6e83ac446fd8ecd701238965707e43305e1dfc2d67ba580048e3a43ff2",
+  "agent_and_verifier_registry_digests_distinct": true,
+  "agent_and_verifier_image_ids_distinct": true,
+  "agent_head_matches_vulnerable_commit": true,
+  "agent_tree_matches_vulnerable_tree": true,
+  "agent_root_clean_and_remote_free": true,
+  "agent_nested_git_metadata_inert": true,
+  "agent_contains_gold": false,
+  "agent_contains_ocr_pdf_provenance_or_review_state": false,
+  "verifier_contains_gold": true,
+  "verifier_contains_tests": true,
+  "agent_network_disabled_check": "PASS",
+  "verifier_network_disabled_check": "PASS",
+  "immutable_pull_checks": "PASS",
+  "ok": true
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "phase": "P2",
+  "pdf_id": "pdf_000135_167389a70b9f",
+  "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/PublicAuditReports/NM0587-FINAL_Mellow.pdf",
+  "filename": "NM0587-FINAL_Mellow.pdf",
+  "sha256": "13a18507a8edf3db6e578788d853b76acc3935b1bac37ccc40b6c377f030ceab",
+  "size_bytes": 320560,
+  "physical_page_count": 25,
+  "ocr_record_count": 25,
+  "readable": true,
+  "encrypted": false,
+  "visual_review": {
+    "all_pages_rendered": true,
+    "all_pages_inspected": true,
+    "identity_and_commit_page": 3,
+    "audited_scope_pages": [4, 5],
+    "selected_finding_pages": [9],
+    "excluded_finding_pages": [10, 11, 12, 13],
+    "test_output_pages": [15, 16, 17, 18, 19, 20, 21, 22, 23]
+  },
+  "checks": {
+    "pdf_hash_matches_all_ocr_records": true,
+    "physical_pages_match_ocr_source_page_count": true,
+    "page_order_complete": true,
+    "source_pdf_not_copied_to_candidate": true
+  },
+  "status": "passed"
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.verifier_build_correction.v1",
+  "phase": "P9R1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "status": "corrected_and_passed",
+  "initial_attempt": {
+    "exit_code": 1,
+    "published": false,
+    "error": "Could not open requirements file: /opt/evmbench/requirements.txt",
+    "cause": "The compatible forest revision does not track the generated pip requirements export."
+  },
+  "correction": {
+    "requirements_source": "/tmp/securitize-verifier-context.xaOtgu/evmbench/requirements.txt",
+    "requirements_sha256": "b7aad983d31609225a1be271953196797e425afe50c92b9e043e158c0632520c",
+    "uv_lock_sha256": "5122fe00014d5b5b4da3a37d7497f29a6ef83a89ef2edfb38c12473c6bbfefd6",
+    "pyproject_sha256": "6669d708678b13431b0c8eeca551c72022d49fd156ffbed91a2207466f1b2cf5",
+    "source_and_current_uv_lock_identical": true,
+    "source_and_current_pyproject_identical": true,
+    "dependency_export_reused_without_modification": true
+  },
+  "final_attempt": {
+    "exit_code": 0,
+    "image_id": "sha256:20bf3505f307f5b2449b478e814e27255e3707dbcb82daba135ca0dc8273b70d",
+    "registry_digest": "sha256:e5f05c6e83ac446fd8ecd701238965707e43305e1dfc2d67ba580048e3a43ff2"
+  }
+}

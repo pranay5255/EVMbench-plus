@@ -1,0 +1,62 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_supersession.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "generated_at": "2026-08-04T15:57:06Z",
+  "supersedes": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+    "preapproval_candidate_checksum_stream_sha256": "313ce4c60fa8a82484821ed829a9afd53b8a70035860593ce66b898db418f227",
+    "approved_candidate_checksum_stream_sha256": "fdb34a78706346f8539174cea6d1a787d3caaa4d5e8be20a67059165c3c63036",
+    "approval_received": true,
+    "approval_reviewer": "https://github.com/pranay5255",
+    "isolated_admission_commit": "25d8e83f47ee238a1bb4ecdf1edd76a4de67829b",
+    "published": false
+  },
+  "replacement": {
+    "checkpoint": "C1R1",
+    "review_state": "in_review",
+    "human_approved": false,
+    "candidate_checksum_stream_sha256": "843996ee84c800a412d450ab6dfcae127a984fbb97294d087cb216b3f4b5cf76",
+    "file_count": 9,
+    "local_agent_image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+    "local_agent_image_published": false
+  },
+  "changed_files_from_approved_c1": [
+    {
+      "path": "Dockerfile",
+      "change_class": "packaging_and_runtime_isolation",
+      "old_sha256": "2286c8c9cc431544103f969544f4205ea0386d3fd32e132146f67bd94df12b40",
+      "new_sha256": "eeb50600e5177ac88f7049bb27a5f3381d5553502aa86a8ad0f9fe928cddc0f6"
+    },
+    {
+      "path": "provenance.json",
+      "change_class": "supersession_and_validation_metadata",
+      "old_sha256": "272a3f15166716752afa2345ddf992cb27ae3f9a1a36085c394a557e73f6cb8f",
+      "new_sha256": "3a12ed75b63a41b43c3b73a28aa559a2e90f9bf6a402e12907c9d7e59d1dcbae"
+    },
+    {
+      "path": "review_status.yaml",
+      "change_class": "approval_reset",
+      "old_sha256": "a0bb1ae8a6b3f84eb6f8a6be1ddafa02a185e158466b9b36935ed04811b3b52f",
+      "new_sha256": "f6fa95d097486b4666b3892f70fe93adf977b1fcb3b5c0898d1bfbac443a5290"
+    }
+  ],
+  "byte_identical_from_approved_c1": [
+    ".dockerignore",
+    "config.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_000135_167389a70b9f/H-01.pages.jsonl",
+    "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl"
+  ],
+  "semantic_identity_unchanged": {
+    "repository": "https://github.com/mellow-finance/flexible-vaults.git",
+    "vulnerable_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "root_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+    "scope": ["src/"],
+    "finding_ids": ["H-01"],
+    "impact_policy": "loss_of_assets",
+    "mode": "detect"
+  },
+  "approval_required": true
+}

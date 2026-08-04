@@ -1,0 +1,12 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.task_group.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "repository": "https://github.com/mellow-finance/flexible-vaults.git",
+  "commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+  "audited_scope": ["src/"],
+  "mode": "detect",
+  "impact_policy": "loss_of_assets",
+  "canonical_key": "https://github.com/mellow-finance/flexible-vaults.git|60c462d6b006b19790b07c009b7a48aa3bcb3e96|src/|detect|loss_of_assets",
+  "canonical_key_sha256": "97f321583f156547fa10bb9c25cc58973ef9fe91b513fc2e2e25b34306bd4c59",
+  "duplicate_candidate_found": false
+}

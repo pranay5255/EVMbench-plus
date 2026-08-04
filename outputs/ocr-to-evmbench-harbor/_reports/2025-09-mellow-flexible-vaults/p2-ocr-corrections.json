@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "pdf_id": "pdf_000135_167389a70b9f",
+  "source_ocr_mutated": false,
+  "corrections": [
+    {
+      "pages": [3, 4, 5],
+      "field": "repository_and_commit_identity",
+      "ocr_limitation": "Rendered OCR text does not preserve PDF hyperlink destinations and corrupts some repository/commit text.",
+      "pdf_truth": "Repository mellow-finance/flexible-vaults; headline initial commit 69413d545f788c0ad4ff7fe08085fb55589c5c61; final commit 72f689f965e4ac1a4c2bcfb645a8b5416cf740c7; OracleHelper audited-file link targets 60c462d6b006b19790b07c009b7a48aa3bcb3e96.",
+      "resolution": "PDF-visible text plus embedded hyperlink targets, then Git-object verification"
+    },
+    {
+      "pages": [9],
+      "field": "finding_formula",
+      "ocr_limitation": "OCR intermittently misreads priceD18 and punctuation in the Solidity formula.",
+      "pdf_truth": "The vulnerable expression divides demand_ by assetPrice.priceD18; the report recommendation is multiplication by assetPrice.priceD18.",
+      "resolution": "PDF visual review plus exact source at 60c462d6"
+    },
+    {
+      "pages": [4, 5],
+      "field": "audited_file_paths",
+      "ocr_limitation": "OCR spelling and path separators are not reliable enough for an exact path manifest.",
+      "pdf_truth": "The audited-files table contains 75 Solidity files, equal to the 75 src/**/*.sol files at 60c462d6.",
+      "resolution": "PDF table review and exact Git-tree comparison"
+    }
+  ]
+}

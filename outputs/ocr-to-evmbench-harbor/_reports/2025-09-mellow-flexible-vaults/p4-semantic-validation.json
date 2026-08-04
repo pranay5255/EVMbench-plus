@@ -1,0 +1,32 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.semantic_validation.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "policy": "loss_of_assets",
+  "report_finding_count": 5,
+  "dispositioned_report_finding_count": 5,
+  "selected_finding_count": 1,
+  "selected_findings": [
+    {
+      "id": "H-01",
+      "source_id": "6.1",
+      "report_page": 9,
+      "affected_file": "src/oracles/OracleHelper.sol",
+      "root_cause_grounded": true,
+      "preconditions_stated": true,
+      "value_transfer_sequence_grounded": true,
+      "direct_or_indirect_asset_loss": true,
+      "permissioned_oracle_precondition_disclosed": true,
+      "fix_commit_used_only_as_remediation_evidence": true
+    }
+  ],
+  "checks": [
+    {"id": "all_report_findings_dispositioned", "passed": true},
+    {"id": "selected_finding_is_within_audited_scope", "passed": true},
+    {"id": "selected_finding_exists_at_exact_vulnerable_commit", "passed": true},
+    {"id": "selected_finding_meets_loss_of_assets_policy", "passed": true},
+    {"id": "config_findings_and_provenance_agree", "passed": true},
+    {"id": "gold_audit_equals_H_01_bytes", "passed": true},
+    {"id": "no_broader_security_exception", "passed": true}
+  ],
+  "status": "passed"
+}

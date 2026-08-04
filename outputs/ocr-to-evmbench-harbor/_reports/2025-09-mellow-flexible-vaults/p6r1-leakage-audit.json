@@ -1,0 +1,55 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_audit.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "checkpoint": "C1R1",
+  "generated_at": "2026-08-04T15:57:06Z",
+  "candidate_host_only_files": [
+    "config.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_000135_167389a70b9f/H-01.pages.jsonl",
+    "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl",
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "docker_context": {
+    "dockerignore_rules": ["**", "!Dockerfile", "!.dockerignore"],
+    "included_files": [".dockerignore", "Dockerfile"],
+    "copy_or_add_instruction_count": 0,
+    "host_source_tree_copy_count": 0,
+    "host_gold_or_ocr_copy_count": 0
+  },
+  "local_image": {
+    "image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+    "published": false,
+    "runtime_network_mode": "none",
+    "source_repository_remote_count": 0,
+    "source_repository_status_entry_count": 0,
+    "nested_repository_count": 8,
+    "nested_repository_head_count": 0,
+    "nested_repository_remote_count": 0,
+    "nested_repository_object_file_count": 0,
+    "pdf_or_jsonl_file_count": 0,
+    "gold_audit_path_count": 0,
+    "provenance_path_count": 0,
+    "review_status_path_count": 0,
+    "ocr_evidence_path_count": 0
+  },
+  "harbor": {
+    "generated": false,
+    "leakage_scan_applicable": false
+  },
+  "checks": [
+    {"id": "docker_context_excludes_candidate_evidence", "passed": true},
+    {"id": "dockerfile_has_no_copy_or_add", "passed": true},
+    {"id": "exact_source_commit_and_tree_asserted", "passed": true},
+    {"id": "root_remote_removed", "passed": true},
+    {"id": "root_worktree_clean", "passed": true},
+    {"id": "nested_git_history_and_remotes_removed", "passed": true},
+    {"id": "no_pdf_or_jsonl_in_runtime_image", "passed": true},
+    {"id": "no_gold_review_provenance_or_ocr_evidence_in_runtime_image", "passed": true},
+    {"id": "no_harbor_task_exists_for_candidate", "passed": true},
+    {"id": "no_model_or_agent_run", "passed": true}
+  ],
+  "status": "passed"
+}

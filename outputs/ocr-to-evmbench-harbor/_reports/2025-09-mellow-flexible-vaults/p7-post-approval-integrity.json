@@ -1,0 +1,14 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.post_approval_integrity.v1",
+  "phase": "P7",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "generated_at": "2026-08-04T15:34:16Z",
+  "status": "passed",
+  "review_bundle_digest": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+  "c1_candidate_checksum_stream_sha256": "313ce4c60fa8a82484821ed829a9afd53b8a70035860593ce66b898db418f227",
+  "approved_candidate_checksum_stream_sha256": "fdb34a78706346f8539174cea6d1a787d3caaa4d5e8be20a67059165c3c63036",
+  "files_changed_from_c1": ["provenance.json", "review_status.yaml"],
+  "only_approval_state_files_changed": true,
+  "dockerfile_no_copy_add": true,
+  "strict_require_approved_ok": true
+}

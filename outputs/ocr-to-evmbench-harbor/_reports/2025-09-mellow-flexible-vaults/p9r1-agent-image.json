@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9R1",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-09-mellow-flexible-vaults-agent-b8353777d6b01886-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-09-mellow-flexible-vaults"
+  ],
+  "registry_digest": "sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f",
+  "image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+  "platform": "linux/amd64",
+  "repository_head": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+  "repository_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+  "reachable_repository_commit_count": 1,
+  "repository_remote_count": 0,
+  "repository_status_entry_count": 0,
+  "inert_nested_git_directory_count": 8,
+  "runtime_forge": "/usr/local/bin/forge 1.7.1",
+  "runtime_solc": "/usr/local/bin/solc-0.8.25",
+  "offline_source_build_passed": true,
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true,
+  "immutable_pull_image_id_matched": true,
+  "embedded_pdf_or_jsonl_count": 0,
+  "embedded_gold_provenance_review_or_ocr_evidence_count": 0
+}

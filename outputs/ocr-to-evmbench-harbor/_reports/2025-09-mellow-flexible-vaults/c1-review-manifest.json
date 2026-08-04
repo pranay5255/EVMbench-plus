@@ -1,0 +1,96 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "created_at": "2026-08-04T15:29:56Z",
+  "review_state": "in_review",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "human_approved": false,
+    "approved_by": null,
+    "approved_at": null,
+    "review_bundle_digest": null,
+    "binding_required": "exact candidate_id + SHA-256 of this review manifest + reviewer identity"
+  },
+  "candidate": {
+    "path": "task_dir/outputs/ocr-to-evmbench-harbor/2025-09-mellow-flexible-vaults",
+    "absolute_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-09-mellow-flexible-vaults",
+    "generated_file_manifest": "c1-generated-file-manifest.json",
+    "file_count": 9,
+    "file_manifest_sha256": "313ce4c60fa8a82484821ed829a9afd53b8a70035860593ce66b898db418f227",
+    "config_id": "2025-09-mellow-flexible-vaults",
+    "mode": "detect",
+    "framework": "foundry",
+    "base_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "repository_url": "https://github.com/mellow-finance/flexible-vaults.git",
+    "audited_scope": ["src/"],
+    "finding_count": 1,
+    "selected_findings": [
+      {
+        "id": "H-01",
+        "source_report_finding_id": "6.1",
+        "title": "Inverted redeem-demand conversion corrupts oracle prices and redistributes vault assets",
+        "source_pages": [9],
+        "award": 1.0
+      }
+    ],
+    "task_group_key_sha256": "97f321583f156547fa10bb9c25cc58973ef9fe91b513fc2e2e25b34306bd4c59"
+  },
+  "immutable_inputs": {
+    "pdf_id": "pdf_000135_167389a70b9f",
+    "source_pdf_sha256": "13a18507a8edf3db6e578788d853b76acc3935b1bac37ccc40b6c377f030ceab",
+    "source_ocr_sha256": "2065910066cd953132dd4b184840cd20d5cd774db6c4edec3c7ce20d794c22e2",
+    "vulnerable_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "root_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+    "selection_rank": 19
+  },
+  "review_artifacts": {
+    "canonical_stream_format": "path<TAB>size_bytes<TAB>sha256<LF>, in listed order",
+    "canonical_stream_sha256": "936737758cd3354fd49daed98392992b295230a7e7a5856506b347e326625770",
+    "files": [
+      {"path": "p1-ocr-validation.json", "size_bytes": 565871, "sha256": "80d268e1ee51fae1990fd1ce8092da6503ca984bc963fb915cca865c45d9b549"},
+      {"path": "p2-pdf-validation.json", "size_bytes": 1027, "sha256": "b7069191ba612129a373bde758faf9c66f56e6a3a987fc021cb8790d81016726"},
+      {"path": "p2-pdf-ocr-review.md", "size_bytes": 1808, "sha256": "583cb11bee7bf81ab611cc67113b58c5ebc76be04b5c9e9d84b571e6c1709697"},
+      {"path": "p2-ocr-corrections.json", "size_bytes": 1523, "sha256": "9fbbf77074c32698a6a9c94f14644010e426e7e3a735181134a7ecef1287c523"},
+      {"path": "p3-repository-snapshot.json", "size_bytes": 1711, "sha256": "120b1cbc936d8eb214e1b2c8988e7bc0e5519587262d52420a15c47bba08a8c9"},
+      {"path": "p3-task-group.json", "size_bytes": 606, "sha256": "33db52651a8bf5d1927b27256491809653f7f4a57a7426da7ad0a480c689c5d6"},
+      {"path": "p3-repository-grounding.md", "size_bytes": 1557, "sha256": "d099bbbb2f232954213641477f5edd2b08c6d99687cf8e5b74bdae96837e9304"},
+      {"path": "p4-finding-dispositions.md", "size_bytes": 1455, "sha256": "34b08dde09abce32e55cb61aa279f71307d82b73f18313a40840a6231a37f84b"},
+      {"path": "p4-finding-grounding.md", "size_bytes": 1591, "sha256": "f7e9bdc0e693c0907941406a1ec22b74c18765043216a33a706ca2ec29efe570"},
+      {"path": "p4-semantic-validation.json", "size_bytes": 1229, "sha256": "9b26ad019dc89ba667309023dc6fd671244225c67e367ff18b2727401cdf48e5"},
+      {"path": "p5-build-baseline.md", "size_bytes": 1680, "sha256": "3495dd97a4c71c744b2563d0cba319221132ba3efc29bb2456ef55c1bba28473"},
+      {"path": "p5-byte-exact-slices.json", "size_bytes": 1197, "sha256": "55ccdc6f4a0d21e73ecc58d38f42752daf3fb956ecf451dc3022fc4d41334d30"},
+      {"path": "p6-current-structural-validator.json", "size_bytes": 595, "sha256": "521a515d4aca464161e8f948315a09060e84bc01c1c8e6b3c7453a37c26e3e20"},
+      {"path": "p6-pinned-structural-validator.json", "size_bytes": 687, "sha256": "c5fd3590c5b0d5717e9edabfd78ff9865cb20c5d4c24445f5a85f37f01d14a3c"},
+      {"path": "p6-repository-validation.json", "size_bytes": 1201, "sha256": "ee76b02d17914d82f23baca381aac0028333b52f609783372d2edbc11992c7ee"},
+      {"path": "p6-leakage-audit.json", "size_bytes": 1653, "sha256": "826e5db38de0230870a6750dd315ed8157a9df433dd6bebdf9ff66b3e8471ce1"},
+      {"path": "p6-source-integrity.json", "size_bytes": 1161, "sha256": "f21614c1c887809aa707a9ede6bab4af35aed07ba858a50030742c76aec9938b"}
+    ]
+  },
+  "validators": {
+    "ocr_schema_order_and_completeness": "passed: 19/19 global and 1300/1300 record checks",
+    "pdf_hash_page_count_and_visual_review": "passed",
+    "repository_commit_tree_scope_and_submodules": "passed",
+    "source_build": "passed",
+    "focused_oracle_helper_units": "passed 19/19",
+    "full_unit_suite": "passed at stable block/timestamp context",
+    "byte_exact_ocr_slices": "passed",
+    "semantic_loss_of_assets": "passed",
+    "live_structural_validator": "passed; 6/6 validator tests",
+    "skill_pinned_structural_validator": "passed; 6/6 validator tests",
+    "leakage_and_docker_context": "passed",
+    "model_or_agent_smoke": "not run; not authorized"
+  },
+  "unresolved_risks": [
+    "The exact vulnerable snapshot has BUSL-1.1 SPDX headers and a BUSL-1.1 README marker, but no standalone license file; package.json says UNLICENSED.",
+    "The integration suite requires ETH_RPC and was not replayed; only the source build and local unit suite were executed.",
+    "The oracle report path is permissioned and threshold-validated; H-01 requires a helper-derived malformed report to be submitted and accepted.",
+    "No pre-approval candidate image was built; Dockerfile pins and context leakage were structurally audited, while canonical image construction remains admission-gated."
+  ],
+  "canonical_state": {
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false,
+    "ledger_mutated_by_this_candidate": false
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.local_image_validation.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "checkpoint": "C1R1",
+  "generated_at": "2026-08-04T15:57:06Z",
+  "status": "passed",
+  "image": {
+    "local_tag": "ocr-evmbench-c1/2025-09-mellow-flexible-vaults:c1r1-local",
+    "image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+    "registry_digest": null,
+    "platform": "linux/amd64",
+    "published": false,
+    "canonical_agent_tag_assigned": false,
+    "verifier_image_built": false
+  },
+  "build": {
+    "context_included_files": [".dockerignore", "Dockerfile"],
+    "copy_or_add_instruction_count": 0,
+    "network": "host during dependency acquisition",
+    "result": "passed"
+  },
+  "runtime_audit": {
+    "network_mode": "none",
+    "forge_path": "/usr/local/bin/forge",
+    "forge_version": "1.7.1",
+    "solc_path": "/usr/local/bin/solc-0.8.25",
+    "solc_version": "0.8.25+commit.b61c2a91.Linux.g++",
+    "source_head": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "source_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+    "reachable_commit_count": 1,
+    "all_ref_commit_count": 1,
+    "root_remote_count": 0,
+    "root_status_entry_count": 0,
+    "nested_git_directory_count": 8,
+    "nested_repositories_with_head": 0,
+    "nested_remote_count": 0,
+    "nested_object_file_count": 0,
+    "pdf_or_jsonl_file_count": 0,
+    "gold_provenance_review_or_ocr_evidence_path_count": 0,
+    "result": "passed"
+  },
+  "forced_offline_build": {
+    "network_mode": "none",
+    "command": "forge build --force --quiet --out /tmp/out --cache-path /tmp/cache",
+    "used_default_forge_resolution": true,
+    "FOUNDRY_OFFLINE": "true",
+    "FOUNDRY_SOLC": "/usr/local/bin/solc-0.8.25",
+    "exit_code": 0,
+    "result": "passed"
+  },
+  "authorization_boundary": "The local correction image was built to validate a defect discovered during work authorized by the C1 approval. It was not pushed, admitted as C1R1, converted into a verifier image, or used for a Harbor/model run."
+}

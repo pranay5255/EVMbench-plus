@@ -1,0 +1,143 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1R1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "created_at": "2026-08-04T15:57:06Z",
+  "review_state": "in_review",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "human_approved": false,
+    "approved_by": null,
+    "approved_at": null,
+    "review_bundle_digest": null,
+    "binding_required": "exact candidate_id + SHA-256 of this C1R1 review manifest + reviewer identity"
+  },
+  "candidate": {
+    "path": "task_dir/outputs/ocr-to-evmbench-harbor/2025-09-mellow-flexible-vaults",
+    "absolute_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-09-mellow-flexible-vaults",
+    "generated_file_manifest": "c1r1-generated-file-manifest.json",
+    "generated_file_manifest_size_bytes": 1661,
+    "generated_file_manifest_sha256": "1f0b8e3e3dbc5e563e7aff562586c689710aad3086a3357786d82ac28ae09c67",
+    "file_count": 9,
+    "file_manifest_sha256": "843996ee84c800a412d450ab6dfcae127a984fbb97294d087cb216b3f4b5cf76",
+    "config_id": "2025-09-mellow-flexible-vaults",
+    "mode": "detect",
+    "framework": "foundry",
+    "base_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "repository_url": "https://github.com/mellow-finance/flexible-vaults.git",
+    "audited_scope": ["src/"],
+    "finding_count": 1,
+    "selected_findings": [
+      {
+        "id": "H-01",
+        "source_report_finding_id": "6.1",
+        "title": "Inverted redeem-demand conversion corrupts oracle prices and redistributes vault assets",
+        "source_pages": [9],
+        "award": 1.0
+      }
+    ],
+    "task_group_key_sha256": "97f321583f156547fa10bb9c25cc58973ef9fe91b513fc2e2e25b34306bd4c59"
+  },
+  "immutable_inputs": {
+    "pdf_id": "pdf_000135_167389a70b9f",
+    "source_pdf_sha256": "13a18507a8edf3db6e578788d853b76acc3935b1bac37ccc40b6c377f030ceab",
+    "source_ocr_sha256": "2065910066cd953132dd4b184840cd20d5cd774db6c4edec3c7ce20d794c22e2",
+    "vulnerable_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "root_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+    "selection_rank": 19
+  },
+  "superseded_c1": {
+    "review_bundle_digest": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+    "approval_received": true,
+    "reviewer_identity": "https://github.com/pranay5255",
+    "approved_candidate_checksum_stream_sha256": "fdb34a78706346f8539174cea6d1a787d3caaa4d5e8be20a67059165c3c63036",
+    "isolated_admission_commit": "25d8e83f47ee238a1bb4ecdf1edd76a4de67829b",
+    "isolated_admission_published": false,
+    "reason": "Mandatory image construction exposed an unbuildable Forge path assertion and dirty dependency cleanup; corrected candidate bytes require a new exact approval."
+  },
+  "c1r1_delta": {
+    "changed_candidate_files": ["Dockerfile", "provenance.json", "review_status.yaml"],
+    "candidate_substance_change": "Dockerfile packaging and runtime isolation only",
+    "approval_metadata_reset": true,
+    "finding_bytes_changed": false,
+    "gold_bytes_changed": false,
+    "config_bytes_changed": false,
+    "ocr_evidence_bytes_changed": false,
+    "repository_commit_or_scope_changed": false
+  },
+  "local_correction_image": {
+    "image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+    "registry_digest": null,
+    "published": false,
+    "runtime_network_mode": "none",
+    "runtime_audit": "passed",
+    "forced_offline_build": "passed"
+  },
+  "review_artifacts": {
+    "canonical_stream_format": "path<TAB>size_bytes<TAB>sha256<LF>, in listed order",
+    "canonical_stream_sha256": "59158fe680ea0f5ed06eed77a71b67b2b45e6411bc1e6d77f130178a3b02c34d",
+    "files": [
+      {"path": "c1-review-manifest.json", "size_bytes": 6143, "sha256": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63"},
+      {"path": "c1r1-supersession.json", "size_bytes": 2631, "sha256": "e31f75b0fc020ff7e54989f3e7321ef6f3bf81227a2be2120305ee04bb9fe6ac"},
+      {"path": "p1-ocr-validation.json", "size_bytes": 565871, "sha256": "80d268e1ee51fae1990fd1ce8092da6503ca984bc963fb915cca865c45d9b549"},
+      {"path": "p2-ocr-corrections.json", "size_bytes": 1523, "sha256": "9fbbf77074c32698a6a9c94f14644010e426e7e3a735181134a7ecef1287c523"},
+      {"path": "p2-pdf-ocr-review.md", "size_bytes": 1808, "sha256": "583cb11bee7bf81ab611cc67113b58c5ebc76be04b5c9e9d84b571e6c1709697"},
+      {"path": "p2-pdf-validation.json", "size_bytes": 1027, "sha256": "b7069191ba612129a373bde758faf9c66f56e6a3a987fc021cb8790d81016726"},
+      {"path": "p3-repository-grounding.md", "size_bytes": 1557, "sha256": "d099bbbb2f232954213641477f5edd2b08c6d99687cf8e5b74bdae96837e9304"},
+      {"path": "p3-repository-snapshot.json", "size_bytes": 1711, "sha256": "120b1cbc936d8eb214e1b2c8988e7bc0e5519587262d52420a15c47bba08a8c9"},
+      {"path": "p3-task-group.json", "size_bytes": 606, "sha256": "33db52651a8bf5d1927b27256491809653f7f4a57a7426da7ad0a480c689c5d6"},
+      {"path": "p4-finding-dispositions.md", "size_bytes": 1455, "sha256": "34b08dde09abce32e55cb61aa279f71307d82b73f18313a40840a6231a37f84b"},
+      {"path": "p4-finding-grounding.md", "size_bytes": 1591, "sha256": "f7e9bdc0e693c0907941406a1ec22b74c18765043216a33a706ca2ec29efe570"},
+      {"path": "p4-semantic-validation.json", "size_bytes": 1229, "sha256": "9b26ad019dc89ba667309023dc6fd671244225c67e367ff18b2727401cdf48e5"},
+      {"path": "p5-build-baseline.md", "size_bytes": 1680, "sha256": "3495dd97a4c71c744b2563d0cba319221132ba3efc29bb2456ef55c1bba28473"},
+      {"path": "p5-byte-exact-slices.json", "size_bytes": 1197, "sha256": "55ccdc6f4a0d21e73ecc58d38f42752daf3fb956ecf451dc3022fc4d41334d30"},
+      {"path": "p6-repository-validation.json", "size_bytes": 1201, "sha256": "ee76b02d17914d82f23baca381aac0028333b52f609783372d2edbc11992c7ee"},
+      {"path": "p6r1-current-structural-validator.json", "size_bytes": 637, "sha256": "c4124f3d3e1f581e2733de69a992d16749297bca183cd46fde4f12ab2b4094fb"},
+      {"path": "p6r1-image-build-and-offline-replay.json", "size_bytes": 2058, "sha256": "63d4d8741f1b858eb759db616f553535e4884a436bfcfd62d0b8193fca1dd831"},
+      {"path": "p6r1-leakage-audit.json", "size_bytes": 2089, "sha256": "43fe1241ec2dc7909be657ae0a734ab6219a382ce93757cd73cfe3739605c5ff"},
+      {"path": "p6r1-pinned-structural-validator.json", "size_bytes": 729, "sha256": "ca5d8822b30516ff4ce97d68bb6826e972c3f3b9401028a00fe2ae01e862f26b"},
+      {"path": "p6r1-source-integrity.json", "size_bytes": 1274, "sha256": "00dfaba97fc32d69a6a9011ee82beb22ba9068272eca8b7742a3c7137501e27e"},
+      {"path": "p7-approval-binding.json", "size_bytes": 1724, "sha256": "db79eed1ed347ad6e11bd0e920946ef91b5b66a0c5a460aef2373096713a100e"},
+      {"path": "p7-approved-file-manifest.json", "size_bytes": 1778, "sha256": "b19ec28856c5706ec2e65b5874346f6c918f9fe70a475fb2a2f54b778a3cb044"},
+      {"path": "p7-post-approval-integrity.json", "size_bytes": 714, "sha256": "891a1baafce3c5a8b1844443a399a34aac41a03f2194bfbb653def0da3060d52"},
+      {"path": "p8-adapter-tests.log", "size_bytes": 3043, "sha256": "f94a4a4c0daec2fc4760dc47d8e3d1cb6b2b8c32904c48a0d507f8971ff1fa2f"},
+      {"path": "p8-audit-registry.json", "size_bytes": 550, "sha256": "99d676c5c24cc8f56054cb29ff9941b24d0cf4ee111b9e92c9a37f24f47bccc3"},
+      {"path": "p8-isolated-evmbench-state.json", "size_bytes": 1857, "sha256": "c69fe3006b074ebef5731bd7262c5f5c2d40ba83b9ae5c95b0f9ede79aa7d0d0"},
+      {"path": "p9r0-c1-image-build-failure-and-revision.json", "size_bytes": 3344, "sha256": "83ee793318a959bd5c0d4078f644c1356c1877cf2929076140d71c4a366ad763"}
+    ]
+  },
+  "validators": {
+    "ocr_schema_order_and_completeness": "passed: 19/19 global and 1300/1300 record checks",
+    "pdf_hash_page_count_and_visual_review": "passed",
+    "repository_commit_tree_scope_and_submodules": "passed",
+    "source_build": "passed",
+    "focused_oracle_helper_units": "passed 19/19",
+    "full_unit_suite": "passed at stable block/timestamp context",
+    "byte_exact_ocr_slices": "passed",
+    "semantic_loss_of_assets": "passed; finding and gold bytes unchanged from approved C1",
+    "live_structural_validator": "passed; 6/6 validator tests",
+    "skill_pinned_structural_validator": "passed; 6/6 validator tests",
+    "local_image_build": "passed",
+    "network_disabled_runtime_audit": "passed",
+    "forced_offline_runtime_build": "passed",
+    "runtime_leakage": "passed",
+    "model_or_agent_smoke": "not run; not authorized"
+  },
+  "unresolved_risks": [
+    "The exact vulnerable snapshot has BUSL-1.1 SPDX headers and a BUSL-1.1 README marker, but no standalone license file; package.json says UNLICENSED.",
+    "The integration suite requires ETH_RPC and was not replayed; only the source build and local unit suite were executed.",
+    "The oracle report path is permissioned and threshold-validated; H-01 requires a helper-derived malformed report to be submitted and accepted.",
+    "The local C1R1 image has an immutable local image ID but no registry digest because publication remains approval-gated."
+  ],
+  "canonical_state": {
+    "candidate_admitted": false,
+    "superseded_disposable_c1_admission_exists": true,
+    "superseded_disposable_c1_admission_published": false,
+    "c1r1_local_agent_image_built": true,
+    "c1r1_agent_image_pushed": false,
+    "c1r1_verifier_image_built_or_pushed": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false,
+    "ledger_mutated_by_this_candidate": false
+  }
+}

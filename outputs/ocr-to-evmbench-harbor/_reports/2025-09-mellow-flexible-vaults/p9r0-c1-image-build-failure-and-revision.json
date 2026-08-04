@@ -1,0 +1,61 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.post_approval_build_failure.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "generated_at": "2026-08-04T15:57:06Z",
+  "status": "superseded_and_returned_to_review",
+  "trigger": "mandatory post-approval agent-image construction and runtime validation",
+  "approved_c1": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "approved_candidate_checksum_stream_sha256": "fdb34a78706346f8539174cea6d1a787d3caaa4d5e8be20a67059165c3c63036"
+  },
+  "failures": [
+    {
+      "id": "forge_path_shadowing",
+      "observed": "The approved Dockerfile installed Forge 1.7.1 in /usr/local/bin but invoked an unqualified forge command while the base-image PATH selected /home/agent/.foundry/bin/forge 1.3.6.",
+      "impact": "The pinned-version assertion failed and the approved image recipe was not buildable as written."
+    },
+    {
+      "id": "tracked_dependency_pdf_cleanup",
+      "observed": "After selecting /usr/local/bin/forge explicitly, blanket PDF deletion removed tracked audit PDFs inside recursive OpenZeppelin dependencies and made the root report M lib/openzeppelin-contracts-upgradeable.",
+      "impact": "The source tree in the built image did not satisfy the clean-worktree invariant."
+    },
+    {
+      "id": "runtime_toolchain_shadowing_risk",
+      "observed": "Without a runtime PATH and FOUNDRY_SOLC override, an agent shell could still select the base image's older Foundry after a successful build layer.",
+      "impact": "Runtime compilation would not be bound to the toolchain used for validation."
+    }
+  ],
+  "correction": {
+    "checkpoint": "C1R1",
+    "candidate_substance_changed": ["Dockerfile"],
+    "administrative_state_changed": ["provenance.json", "review_status.yaml"],
+    "dockerfile_changes": [
+      "invoke the pinned Forge binary by absolute path during construction",
+      "remove nested submodule Git metadata after dependency verification and recreate eight inert empty repositories with exclude-all rules",
+      "remove root .git/modules and assert every nested repository has no HEAD, remotes, or object files",
+      "assert the root remains clean after report-file removal",
+      "put /usr/local/bin first at runtime and pin FOUNDRY_OFFLINE and FOUNDRY_SOLC"
+    ]
+  },
+  "superseded_isolated_admission": {
+    "admission_commit": "25d8e83f47ee238a1bb4ecdf1edd76a4de67829b",
+    "admission_tree": "7ede3e33e360b6b1a4781b7f29e6afc5c57bdbd1",
+    "location": "/tmp/mellow-admission.puX8OQ/forest-of-audits",
+    "published": false,
+    "canonical_checkout_written": false,
+    "usable_for_current_candidate": false,
+    "reason": "It contains the exact approved C1 bytes, not the corrected C1R1 bytes."
+  },
+  "external_effects": {
+    "agent_image_pushed": false,
+    "verifier_image_pushed": false,
+    "harbor_task_generated": false,
+    "harbor_run_started": false,
+    "model_or_agent_run_started": false,
+    "canonical_forest_checkout_written": false,
+    "canonical_ledger_updated": false
+  },
+  "decision": "The exact C1 approval cannot authorize changed candidate bytes. C1R1 must be validated and explicitly approved at its own review-manifest digest before admission or publication resumes."
+}
