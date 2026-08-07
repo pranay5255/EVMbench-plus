@@ -1,0 +1,22 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-07-securitize-onofframp",
+  "created_at": "2026-08-04T14:48:48Z",
+  "review_bundle_digest": "1e7a1c634591a268032ec3970839514f558df2635c3ebe985754f7c4ed20b404",
+  "checks": {
+    "ocr_gate1": "PASS",
+    "pdf_gate2": "PASS",
+    "repository_gate3": "PASS_on_off_ramp_only",
+    "byte_exact_slices": true,
+    "semantic": "PASS",
+    "structural_current": true,
+    "candidate_leakage": "PASS",
+    "host_hardhat_compile": "FAIL_private_package_404_@securitize/digital_securities@3.1.4",
+    "agent_image_strategy": "source_pin_only",
+    "bridge_repository": "blocked_private_bitbucket_separate_task_group"
+  },
+  "selected_findings": 1,
+  "ok": true,
+  "stopped_at": "human_approval_gate"
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_isolation.v1",
+  "agent_leakage": "PASS",
+  "agent_head_matches_vulnerable_commit": true,
+  "verifier_contains_gold": true,
+  "agent_contains_gold": false,
+  "network_disabled_head_check": "PASS",
+  "ok": true
+}

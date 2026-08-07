@@ -1,0 +1,15 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "recorded_at": "2026-08-04T14:41:55Z",
+  "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/cyfrin-audit-reports/reports/2025-07-23-cyfrin-securitize-onofframp-bridge-v2.1.pdf",
+  "exists": true,
+  "size_bytes": 285812,
+  "sha256": "3eae87e40dbad4acefcdf4175e3a943bffebd23272755b41fa881fbe817f27c6",
+  "expected_sha256": "3eae87e40dbad4acefcdf4175e3a943bffebd23272755b41fa881fbe817f27c6",
+  "checksum_matches": true,
+  "physical_page_count": 27,
+  "expected_page_count": 27,
+  "page_count_matches": true,
+  "readable": true,
+  "encrypted": false
+}

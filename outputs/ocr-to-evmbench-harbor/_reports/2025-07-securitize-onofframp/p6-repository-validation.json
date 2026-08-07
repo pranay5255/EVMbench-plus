@@ -1,0 +1,11 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v1",
+  "recorded_at": "2026-08-04T14:47:12Z",
+  "head": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+  "expected_head": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+  "head_matches": true,
+  "framework": "hardhat",
+  "submodules": [],
+  "compile_on_host": "blocked_node_version",
+  "ok": true
+}

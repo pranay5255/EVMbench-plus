@@ -1,0 +1,14 @@
+a944bb11b106c13a5e43f8de01c9c01eeb5bb472
+contracts/on-ramp/SecuritizeOnRamp.sol
+AUDIT_DIR=/home/agent/audit
+total 540
+drwxr-xr-x 1 root root   4096 Aug  4 14:54 .
+drwxr-xr-x 1 root root   4096 Jun 12 13:51 ..
+-rw-r--r-- 1 root root    287 Aug  4 14:54 .env.example
+drwxr-xr-x 8 root root   4096 Aug  4 14:54 .git
+-rw-r--r-- 1 root root    507 Aug  4 14:54 .gitignore
+-rw-r--r-- 1 root root     74 Aug  4 14:54 .npmrc
+-rw-r--r-- 1 root root      9 Aug  4 14:54 .nvmrc
+-rw-r--r-- 1 root root     68 Aug  4 14:54 .prettierignore
+-rw-r--r-- 1 root root    552 Aug  4 14:54 .prettierrc
+a944bb11b106c13a5e43f8de01c9c01eeb5bb472

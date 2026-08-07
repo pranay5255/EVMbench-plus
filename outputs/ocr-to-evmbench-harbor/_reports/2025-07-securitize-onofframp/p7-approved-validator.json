@@ -1,0 +1,16 @@
+{
+  "candidate_count": 1,
+  "ok": true,
+  "results": [
+    {
+      "candidate_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-07-securitize-onofframp",
+      "errors": [],
+      "finding_files": [
+        "findings/H-01.md"
+      ],
+      "ok": true,
+      "review_state": "approved_for_admission",
+      "warnings": []
+    }
+  ]
+}

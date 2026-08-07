@@ -1,0 +1,17 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "status": "PASS",
+  "errors": [],
+  "file_count": 6,
+  "file_hashes": {
+    "environment/README.md": "fc1b59d4e88d46b456bb2d476f7040b758e6211b95e08ed33343a4be364c8f39",
+    "instruction.md": "a6173e603e0a23aba42f903b058972b9d2fc12edd334aad287336a5b1596af35",
+    "task.toml": "e326e698f2ba7c7b1066b8c1d23040b75ab7e43b0a04e5181951a1a1a2c6f3a2",
+    "tests/evmbench_harbor_verifier.py": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6",
+    "tests/test.sh": "d1b4a9efdb5338c666de9c948773499842edf36946c4ee74afa28f5708a2e90f",
+    "tests/validate_detect_submission.py": "c868e9451cb2195a19926eb10e3eb73f6f12def408b588a24f9546b80f7a16df"
+  },
+  "checksum_stream_sha256": "9f3098f7b8604bae330c76766a76a641a19f9ef52ff13e51b0164f1efbc85496",
+  "ok": true
+}

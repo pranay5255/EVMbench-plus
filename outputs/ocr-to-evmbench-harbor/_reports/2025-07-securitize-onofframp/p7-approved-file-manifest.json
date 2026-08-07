@@ -1,0 +1,55 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "checkpoint": "C1-approved",
+  "candidate_id": "2025-07-securitize-onofframp",
+  "created_at": "2026-08-04T14:53:08Z",
+  "file_count": 9,
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size_bytes": 30,
+      "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 1744,
+      "sha256": "cfebf2d51aca85a9a78c120e13577b42b25eb9508a632202f304788c567513b7"
+    },
+    {
+      "path": "config.yaml",
+      "size_bytes": 267,
+      "sha256": "398a85bcbdab791c62d159a7ecb1a6ef6d776e22543c3ebae6ee7460963f8019"
+    },
+    {
+      "path": "findings/H-01.md",
+      "size_bytes": 4016,
+      "sha256": "3d154fabea9d063fd52ee1530f086f28211ee3a5ce39267ac51ea19c45341adf"
+    },
+    {
+      "path": "findings/gold_audit.md",
+      "size_bytes": 4471,
+      "sha256": "b3466af6401584abe68ec7df059b6a3894c826fd012a7e8befce2527c7c16226"
+    },
+    {
+      "path": "ocr_evidence/pdf_003618_4acdf39b26ba/H-01.pages.jsonl",
+      "size_bytes": 17498,
+      "sha256": "9ab6c038763e37c58e01b8e6b52d7bcea5ddad5a407414f69cf2ec4b5ccc1298"
+    },
+    {
+      "path": "ocr_evidence/pdf_003618_4acdf39b26ba/scope.pages.jsonl",
+      "size_bytes": 25870,
+      "sha256": "c502e9b6d6413d6e225df0ab74735c5798d07800416e896c6b9893947d1fc941"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 9765,
+      "sha256": "6de56e154e22bd4be55d4af0e863962093667fafb99359f1ac6a45015beea48a"
+    },
+    {
+      "path": "review_status.yaml",
+      "size_bytes": 342,
+      "sha256": "cb3450598e2f2d00a5324b94a85e7489571d9cf5010f6ce5121ba55bf9ad0182"
+    }
+  ],
+  "checksum_stream_sha256": "a9d4c95682d688288cb3d3a293b63a685435a0f85a6b033013751a8aebcc1888"
+}

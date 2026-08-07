@@ -1,0 +1,9 @@
+id: 2025-07-securitize-onofframp
+mode: detect
+framework: hardhat
+base_commit: a944bb11b106c13a5e43f8de01c9c01eeb5bb472
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Missing nonce validation allows EIP-712 subscription replay and double asset transfers"
+    award: 1.0

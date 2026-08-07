@@ -1,0 +1,127 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-07-securitize-onofframp",
+  "created_at": "2026-08-04T14:48:48Z",
+  "review_state": "in_review",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "human_approved": false,
+    "approved_by": null,
+    "approved_at": null,
+    "review_bundle_digest": null,
+    "binding_required": "exact candidate_id + review_bundle_digest + reviewer identity"
+  },
+  "candidate": {
+    "path": "task_dir/outputs/ocr-to-evmbench-harbor/2025-07-securitize-onofframp",
+    "absolute_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-07-securitize-onofframp",
+    "file_manifest_sha256": "bbf9aad5f81e807065456cfb1422de64bac6a2390deeb6133afd1253ae3c74d3",
+    "files": [
+      {
+        "path": ".dockerignore",
+        "size_bytes": 30,
+        "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+      },
+      {
+        "path": "Dockerfile",
+        "size_bytes": 1744,
+        "sha256": "cfebf2d51aca85a9a78c120e13577b42b25eb9508a632202f304788c567513b7"
+      },
+      {
+        "path": "config.yaml",
+        "size_bytes": 267,
+        "sha256": "398a85bcbdab791c62d159a7ecb1a6ef6d776e22543c3ebae6ee7460963f8019"
+      },
+      {
+        "path": "findings/H-01.md",
+        "size_bytes": 4016,
+        "sha256": "3d154fabea9d063fd52ee1530f086f28211ee3a5ce39267ac51ea19c45341adf"
+      },
+      {
+        "path": "findings/gold_audit.md",
+        "size_bytes": 4471,
+        "sha256": "b3466af6401584abe68ec7df059b6a3894c826fd012a7e8befce2527c7c16226"
+      },
+      {
+        "path": "ocr_evidence/pdf_003618_4acdf39b26ba/H-01.pages.jsonl",
+        "size_bytes": 17498,
+        "sha256": "9ab6c038763e37c58e01b8e6b52d7bcea5ddad5a407414f69cf2ec4b5ccc1298"
+      },
+      {
+        "path": "ocr_evidence/pdf_003618_4acdf39b26ba/scope.pages.jsonl",
+        "size_bytes": 25870,
+        "sha256": "c502e9b6d6413d6e225df0ab74735c5798d07800416e896c6b9893947d1fc941"
+      },
+      {
+        "path": "provenance.json",
+        "size_bytes": 9505,
+        "sha256": "9a3d89b0d00394884b0d8d1bddbef998014bd8d89b10ed61478abc88f252c5d1"
+      },
+      {
+        "path": "review_status.yaml",
+        "size_bytes": 239,
+        "sha256": "fe741e619218cfb2c59eb4823434f1e3ab8548eff184a7c9f06e4a667263464b"
+      }
+    ],
+    "config_id": "2025-07-securitize-onofframp",
+    "mode": "detect",
+    "framework": "hardhat",
+    "base_commit": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+    "selected_findings": [
+      {
+        "id": "H-01",
+        "source_report_finding_id": "C-1",
+        "title": "Missing nonce validation allows EIP-712 subscription replay and double asset transfers",
+        "source_pages": [
+          10,
+          11
+        ],
+        "award": 1.0
+      }
+    ],
+    "task_group_key_sha256": "dec131fd32621786fc81c70656791670b78b7b5cd706befe0d6749bb5dd329ab",
+    "repository_url": "https://github.com/securitize-io/bc-on-off-ramp-sc.git",
+    "finding_count": 1
+  },
+  "immutable_inputs": {
+    "source_pdf_sha256": "3eae87e40dbad4acefcdf4175e3a943bffebd23272755b41fa881fbe817f27c6",
+    "source_ocr_sha256": "10378faf737b4757af74693161c77d8c66c76c98aa9309eb31cd80813b07433c",
+    "vulnerable_commit": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+    "pdf_id": "pdf_003618_4acdf39b26ba",
+    "selection_rank": 18
+  },
+  "validators": {
+    "structural_ok": true,
+    "structural_report": "p6-current-structural-validator.json",
+    "leakage_ok": true,
+    "leakage_report": "p6-leakage-audit.json",
+    "semantic_ok": true,
+    "semantic_report": "p4-semantic-validation.json",
+    "ocr_ok": true,
+    "pdf_ok": true,
+    "repository_ok": true
+  },
+  "related_unresolved_task_groups": [
+    {
+      "repository": "bc-securitize-bridge-sc",
+      "canonical_host": "bitbucket.org/securitize_dev/bc-securitize-bridge-sc",
+      "vulnerable_commit_prefix": "60b6ef00e8a8",
+      "fix_commit": "1da35cde31a53e7b2de56de0d313ebdcb80cbfa3",
+      "status": "blocked_exact_snapshot_unavailable",
+      "findings_held": [
+        "M-2",
+        "M-3",
+        "L-1",
+        "L-7",
+        "L-8",
+        "L-9",
+        "I-9"
+      ],
+      "reason": "Private Bitbucket repository; no public exact Git object recovered."
+    }
+  ],
+  "notes": [
+    "Bridge repository bc-securitize-bridge-sc is a separate task group and is not part of this candidate.",
+    "Hardhat compile blocked: @securitize/digital_securities@3.1.4 returns 404 on the public npm registry. Agent image pins source only."
+  ]
+}
