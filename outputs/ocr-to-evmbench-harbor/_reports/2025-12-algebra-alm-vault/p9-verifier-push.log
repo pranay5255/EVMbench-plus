@@ -1,0 +1,66 @@
+The push refers to repository [docker.io/pranay5255/yudaii_evmbench]
+b5f7d0587d6a: Preparing
+dfe5d29dcb56: Preparing
+a5e2fad477d7: Preparing
+2a41cd524382: Preparing
+5f70bf18a086: Preparing
+16004dd0a244: Preparing
+e87ac60ff9cd: Preparing
+b4ab08df162d: Preparing
+fc95983f78e7: Preparing
+99ab40bce873: Preparing
+1d1e59fb3586: Preparing
+f2ec4de84f55: Preparing
+e87ac60ff9cd: Waiting
+b4ab08df162d: Waiting
+fc95983f78e7: Waiting
+99ab40bce873: Waiting
+1d1e59fb3586: Waiting
+f2ec4de84f55: Waiting
+16004dd0a244: Waiting
+5f70bf18a086: Layer already exists
+dfe5d29dcb56: Pushed
+a5e2fad477d7: Pushed
+b5f7d0587d6a: Pushed
+fc95983f78e7: Layer already exists
+16004dd0a244: Pushed
+99ab40bce873: Layer already exists
+1d1e59fb3586: Layer already exists
+f2ec4de84f55: Layer already exists
+e87ac60ff9cd: Pushed
+b4ab08df162d: Pushed
+2a41cd524382: Pushed
+2025-12-algebra-alm-vault-verifier-db794ef650f12023-amd64: digest: sha256:f79be4d4dd75a5f68dfbae7b2b5550e667449fb7187521b5463d6af9845387a0 size: 2835
+The push refers to repository [docker.io/pranay5255/yudaii_evmbench]
+b5f7d0587d6a: Preparing
+dfe5d29dcb56: Preparing
+a5e2fad477d7: Preparing
+2a41cd524382: Preparing
+5f70bf18a086: Preparing
+16004dd0a244: Preparing
+e87ac60ff9cd: Preparing
+b4ab08df162d: Preparing
+fc95983f78e7: Preparing
+99ab40bce873: Preparing
+1d1e59fb3586: Preparing
+f2ec4de84f55: Preparing
+e87ac60ff9cd: Waiting
+b4ab08df162d: Waiting
+fc95983f78e7: Waiting
+16004dd0a244: Waiting
+99ab40bce873: Waiting
+1d1e59fb3586: Waiting
+f2ec4de84f55: Waiting
+a5e2fad477d7: Layer already exists
+dfe5d29dcb56: Layer already exists
+5f70bf18a086: Layer already exists
+b5f7d0587d6a: Layer already exists
+2a41cd524382: Layer already exists
+b4ab08df162d: Layer already exists
+e87ac60ff9cd: Layer already exists
+16004dd0a244: Layer already exists
+fc95983f78e7: Layer already exists
+99ab40bce873: Layer already exists
+1d1e59fb3586: Layer already exists
+f2ec4de84f55: Layer already exists
+2025-12-algebra-alm-vault-verifier: digest: sha256:f79be4d4dd75a5f68dfbae7b2b5550e667449fb7187521b5463d6af9845387a0 size: 2835

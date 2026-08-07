@@ -1,0 +1,15 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.structural_validator.v1",
+  "recorded_at": "2026-08-01T16:18:12Z",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "validator_checkout": "/tmp/opd-eigenda-validation.yyXBmR/repo",
+  "validator_revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+  "command": "python3 scripts/validate_evmbench_candidate.py --json /home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-10-eigenda-proxy",
+  "candidate_count": 1,
+  "review_state": "in_review",
+  "finding_file_count": 12,
+  "errors": [],
+  "warnings": [],
+  "ok": true,
+  "status": "passed"
+}

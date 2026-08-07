@@ -1,0 +1,21 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "canonical_forestOfAudits": {
+    "path": "/home/experiments_base/forestOfAudits",
+    "status": "dirty_not_modified",
+    "action": "used_isolated_clone_only"
+  },
+  "canonical_OPD_base": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "550ff8cfcea1bac7eb91145fd56df9c729cedf93",
+    "pinned_compatible_for_validator": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+    "note": "validator run against both current and pinned script; no EVMBench admission performed"
+  },
+  "review_clones": {
+    "AlmVault": "/tmp/algebra-alm-recovery/AlmVault",
+    "plugins-monorepo": "/tmp/algebra-alm-recovery/plugins-monorepo"
+  },
+  "evmbench_admission": "not_started",
+  "harbor_generation": "not_started",
+  "agent_model_run": "not_started"
+}

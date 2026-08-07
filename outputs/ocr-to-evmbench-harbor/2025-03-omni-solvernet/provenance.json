@@ -1,0 +1,158 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-03-omni-solvernet",
+  "materialized_at": "2026-08-01T15:46:37Z",
+  "phase": "P7",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1r1",
+    "review_bundle_digest": "aebcc04704be1f8c61071f97a9b93262f330476c41b565a82f2517877a2491c2",
+    "approved_by": "github.com/pranay5255",
+    "approved_at": "2026-08-01T16:14:07Z",
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "omni-network/omni@3ef37ae2704db4e1dcb8fc3f7acbb8babb543e8c|contracts/solve/src/SolverNetInbox.sol+contracts/solve/src/SolverNetOutbox.sol+contracts/solve/src/SolverNetExecutor.sol+contracts/solve/src/SolverNetMiddleman.sol+contracts/solve/src/lib/AddrUtils.sol+contracts/solve/src/lib/SolverNet.sol+contracts/solve/src/util/DeployedAt.sol+contracts/solve/src/interfaces/ISolverNetBindings.sol+contracts/solve/src/interfaces/ISolverNetExecutor.sol+contracts/solve/src/interfaces/ISolverNetInbox.sol+contracts/solve/src/interfaces/ISolverNetOutbox.sol|detect",
+    "task_group_key_sha256": "471216e36eedc9a7df416d30c015ef310945b393953e581dbacbfca9c424c53b",
+    "repository_slug": "omni-network/omni",
+    "vulnerable_commit": "3ef37ae2704db4e1dcb8fc3f7acbb8babb543e8c",
+    "audited_scope": [
+      "contracts/solve/src/SolverNetInbox.sol",
+      "contracts/solve/src/SolverNetOutbox.sol",
+      "contracts/solve/src/SolverNetExecutor.sol",
+      "contracts/solve/src/SolverNetMiddleman.sol",
+      "contracts/solve/src/lib/AddrUtils.sol",
+      "contracts/solve/src/lib/SolverNet.sol",
+      "contracts/solve/src/util/DeployedAt.sol",
+      "contracts/solve/src/interfaces/ISolverNetBindings.sol",
+      "contracts/solve/src/interfaces/ISolverNetExecutor.sol",
+      "contracts/solve/src/interfaces/ISolverNetInbox.sol",
+      "contracts/solve/src/interfaces/ISolverNetOutbox.sol"
+    ],
+    "mode": "detect",
+    "framework": "foundry"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003743_a385d3eef0e4",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "Sigma_Prime_Omni_SolverNet_Security_Assessment_Report_v2_0.pdf",
+    "source_rel_path": "public-audits/reports/omni-network/Sigma_Prime_Omni_SolverNet_Security_Assessment_Report_v2_0.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/omni-network/Sigma_Prime_Omni_SolverNet_Security_Assessment_Report_v2_0.pdf",
+    "source_pdf_sha256": "5dfb020aa5da82c777e709bce0908f7584136d60d529a10d5305d200ae1b47a1",
+    "size_bytes": 440278,
+    "physical_page_count": 27,
+    "report_identity": "Sigma Prime Omni SolverNet Security Assessment Report",
+    "report_month": "2025-03",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003743_a385d3eef0e4.jsonl",
+    "sha256": "756098f76d858d5bb7381ca48be8300e9240b09cbe9d21044111af30c263d01f",
+    "size_bytes": 185577,
+    "record_count": 27,
+    "source_page_count": 27,
+    "created_at": "2026-06-26T12:28:57.759789+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "_reports/2025-03-omni-solvernet/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 14,
+    "selection": "selected-20-batch",
+    "category": "Infrastructure/L1",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 22,
+    "heuristic_unique_issue_ids": 0,
+    "reviewed_report_finding_count": 13
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/omni-network/omni.git",
+    "repository_slug": "omni-network/omni",
+    "commit": "3ef37ae2704db4e1dcb8fc3f7acbb8babb543e8c",
+    "commit_subject": "feat(contracts/solve): store reject reason in OrderState (#3119)",
+    "commit_authored_at": "2025-02-21T12:30:27-05:00",
+    "root_tree": "d3338b178c20b0cb1de10caa07902355caff0fe2",
+    "solve_tree": "fc8a0be5be0e747d3dec7bd7938c521af22db644",
+    "solve_src_tree": "a8e102b65452e07c4ee553f8dab013e564c272a4",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "submodule_count": 0,
+    "review_clone": "/tmp/omni-solvernet-review-full.lEhIhI/repo",
+    "tracked_pdf_or_jsonl_count": 0,
+    "scope_path_normalization": "The PDF prints utils/*; the exact snapshot has util/DeployedAt.sol and no utils directory. This is recorded as the sole matching path under the report's solve/src scope."
+  },
+  "file_evidence": [
+    {"path": "contracts/solve/src/SolverNetInbox.sol", "git_blob": "962794459f9e1b5916b78deeaefc345970055a263763977a896363ad4af78d4c", "sha256": "962794459f9e1b5916b78deeaefc345970055a263763977a896363ad4af78d4c"},
+    {"path": "contracts/solve/src/SolverNetOutbox.sol", "git_blob": "0e00dcf6e32862635ff8b283501beccff98a32ca", "sha256": "8fdc694e1afa809ffde2ddfe858286950e42f263918e436d780c61b35507ab97"},
+    {"path": "contracts/solve/src/SolverNetExecutor.sol", "git_blob": "c1d2f52e4024b2b8942f939bb11116f15d8204d1", "sha256": "07b2b19fc3998eee6aebc52b73fc057384897fd93b450f8c757c89faa6fef59d"},
+    {"path": "contracts/solve/src/SolverNetMiddleman.sol", "git_blob": "cde8a44a67b0dc3b94e700673ea599f4ea29c679", "sha256": "b0a21d0147fda56b51fe79bdfa58d47c034c899efc6495398fbf870d5da1f4d8"},
+    {"path": "contracts/solve/src/lib/AddrUtils.sol", "git_blob": "f5a1d6a1d0b102a8652f8270b5173bbf6e55b767", "sha256": "e0833267ec7244330242c698e9286850e7b6c4f76273dc92c05f7ebf35c41397"},
+    {"path": "contracts/solve/src/lib/SolverNet.sol", "git_blob": "990e297dd199f2d4629903b03f2c1a33a853a729", "sha256": "18e0738a1c9e8094ad1b301ca584809da7b47eeaf092161f555dceec1e81693b"},
+    {"path": "contracts/solve/src/util/DeployedAt.sol", "git_blob": "13047b4f6c6d73d54aaa5dfaf40db7ef60b925c0", "sha256": "0ae6fd54a2c6fc9b67b1a34849dc1e4c0e36b737c596500de35e9630c3ccd84f"},
+    {"path": "contracts/solve/src/interfaces/ISolverNetBindings.sol", "git_blob": "a5f5494db315f9b4751b2d0340871c7da5740c91", "sha256": "fab8a708f8366f865908c6abb37b92135f8b8d2d1d78937cfdc91e5b4e761378"},
+    {"path": "contracts/solve/src/interfaces/ISolverNetExecutor.sol", "git_blob": "3da67a9fd6d261a25c33fa067d8177305c074bb0", "sha256": "57af692430a40950f45fd5902bd88337052e674898ce1ff744a6fccbaf1f8d1f"},
+    {"path": "contracts/solve/src/interfaces/ISolverNetInbox.sol", "git_blob": "abbf29cb0259baa43854c55d546e11c62755ddb2", "sha256": "74d31e62eb5bb64e6eaae0c38142eb223a3ae385779adf15f4de061bda97176f"},
+    {"path": "contracts/solve/src/interfaces/ISolverNetOutbox.sol", "git_blob": "2270a7c1f93b4fda517b06e7ba1507f06f716385", "sha256": "93e0e8f54d0dace85a03fb364f68a3f769501b6ae8216a05df61cabd157870d3"}
+  ],
+  "fixed_snapshot": {
+    "commit": "ea808d7250650770e0509766ef7e2d3f22a76c3b",
+    "root_tree": "a3f7b50c62ca74b3221e6f343b687603b35a86d5",
+    "vulnerable_commit_is_ancestor": true,
+    "kept_separate_from_vulnerable_task_snapshot": true,
+    "agent_image_contains_post_audit_history": false
+  },
+  "compiler": {
+    "version": "0.8.24+commit.e11b9ed9",
+    "binary_url": "https://binaries.soliditylang.org/linux-amd64/solc-linux-amd64-v0.8.24+commit.e11b9ed9",
+    "sha256": "fb03a29a517452b9f12bcf459ef37d0a543765bb3bbc911e70a87d6a37c30d5f",
+    "manifest_sha256": "78b63682e0e994bfbdf432b5eb1837b6d5190a21256e5e22971673bdc41bb0ce",
+    "verified_against_official_manifest": true
+  },
+  "tooling_revisions": {"opd_base": {"revision": "38957485d5cd63dc5d664c3c2993f60b308f5776", "isolated_validation_required": true}},
+  "ocr_corrections": [
+    {"pages": [4], "field": "scope_path", "correction": "The PDF prints utils/*; the exact vulnerable tree contains util/DeployedAt.sol and no utils directory, so the sole matching path is normalized to util/*."},
+    {"pages": [8, 9], "field": "cross_chain_failure", "correction": "The PDF and pinned OmniPortal source are both used to establish that a failed user xcall advances the offset and emits a failed receipt."},
+    {"pages": [14], "field": "middleman_root_cause", "correction": "The report title says lack of access control, but the vulnerable code and cited fix establish the concrete theft root cause as reentrant callback execution."}
+  ],
+  "ocr_evidence": [
+    {"page_number": 1, "role": "identity", "page_image_sha256": "6f18955a126b77a6a85592c3a6b8488ed95670fc3bff5801836e5b81bc820f91", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/scope.pages.jsonl"},
+    {"page_number": 4, "role": "scope", "page_image_sha256": "b662c3991f04c93f760b4cf30405bbf71d2b554595593d6e4d8f5a5b9899a215", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/scope.pages.jsonl"},
+    {"page_number": 8, "finding_id": "H-01", "page_image_sha256": "7ba7b151667d4bd5c9348d0548fd0d7ff44a7405d03e0bb389a71690218904c7", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/H-01.pages.jsonl"},
+    {"page_number": 9, "finding_id": "H-01", "page_image_sha256": "812517754560c1464f4fd0739968b06ded2b6a309e2ba0e50e89e1b5c429e4e0", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/H-01.pages.jsonl"},
+    {"page_number": 10, "finding_id": "H-02", "page_image_sha256": "ef12baaab580a56e014f1536dd98276bd0252b5e263302bb3b7c69ae1803c6da", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/H-02.pages.jsonl"},
+    {"page_number": 11, "finding_id": "H-02", "page_image_sha256": "3effe3656675042b3c21406e3836eb60f1fcc5775c39c5d0e895655ed5d05620", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/H-02.pages.jsonl"},
+    {"page_number": 12, "finding_id": "H-03", "page_image_sha256": "76dbf6755d3ad698e49cbb37607d1cb95cd6d59c30a55f75b65d4dd7e329674f", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/H-03.pages.jsonl"},
+    {"page_number": 13, "finding_id": "H-03", "page_image_sha256": "eceed09c484dbcb04b177da6731db7b5cd2d4ebfa56873e36f362a3f4306486a", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/H-03.pages.jsonl"},
+    {"page_number": 14, "finding_id": "H-04", "page_image_sha256": "a91a0c7c82e7e272d912fe80d3a0a94a7f8f6e52b7a99e70bc8b15c40d8e6f3b", "artifact_ref": "ocr_evidence/pdf_003743_a385d3eef0e4/H-04.pages.jsonl"}
+  ],
+  "selected_findings": [
+    {"finding_id": "H-01", "report_id": "OMNI6-01", "pages": [8, 9], "reported_severity": "Critical", "title": "Reentrant fill acknowledgement lets a filled owner reclaim the source deposit", "generated_file": "findings/H-01.md"},
+    {"finding_id": "H-02", "report_id": "OMNI6-02", "pages": [10, 11], "reported_severity": "High", "title": "Underestimated fill gas makes a cross-chain fill acknowledgement fail", "generated_file": "findings/H-02.md"},
+    {"finding_id": "H-03", "report_id": "OMNI6-03", "pages": [12, 13], "reported_severity": "High", "title": "Fixed close buffer allows filled orders to reclaim deposits during portal downtime", "generated_file": "findings/H-03.md"},
+    {"finding_id": "H-04", "report_id": "OMNI6-04", "pages": [14], "reported_severity": "Medium", "title": "Reentrant middleman callbacks steal in-flight token or native balances", "generated_file": "findings/H-04.md"}
+  ],
+  "report_dispositions": [
+    {"report_id": "OMNI6-01", "pages": [8, 9], "reported_severity": "Critical", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-01", "affected_paths": ["contracts/solve/src/SolverNetInbox.sol", "contracts/core/src/xchain/OmniPortal.sol"], "root_cause": "markFilled shares the inbox reentrancy lock with external deposit/close entry points, while OmniPortal consumes failed user messages.", "asset_loss_path": "A filled order remains Pending and its owner can reclaim the source deposit after the destination fill."},
+    {"report_id": "OMNI6-02", "pages": [10, 11], "reported_severity": "High", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-02", "affected_paths": ["contracts/solve/src/SolverNetOutbox.sol", "contracts/solve/src/SolverNetInbox.sol"], "root_cause": "_fillGasLimit omits memory expansion for variable-length call parameters.", "asset_loss_path": "The destination fill succeeds but the consumed source acknowledgement fails, leaving the deposit refundable."},
+    {"report_id": "OMNI6-03", "pages": [12, 13], "reported_severity": "High", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-03", "affected_paths": ["contracts/solve/src/SolverNetInbox.sol"], "root_cause": "close relies on a fixed six-hour buffer and does not query portal or route pause state.", "asset_loss_path": "During prolonged downtime, a filled order remains Pending and its owner receives the source deposit as well."},
+    {"report_id": "OMNI6-04", "pages": [14], "reported_severity": "Medium", "reported_status": "Resolved", "disposition": "included", "finding_id": "H-04", "affected_paths": ["contracts/solve/src/SolverNetMiddleman.sol"], "root_cause": "An arbitrary target is called before the permissionless middleman transfers its entire balance, with no reentrancy guard.", "asset_loss_path": "A callback can reenter and redirect the in-flight token or native balance to the attacker."},
+    {"report_id": "OMNI6-05", "pages": [15, 16], "reported_severity": "Medium", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetOutbox.sol"], "reason_category": "availability_only", "reason": "A USDT-style nonzero approval conflict makes a fill revert; the report establishes blocked execution, not theft or destruction of assets."},
+    {"report_id": "OMNI6-06", "pages": [17], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetInbox.sol"], "reason_category": "gas_and_storage_availability", "reason": "Unbounded arrays can exhaust gas or bloat storage, but no concrete asset transfer or permanent loss is established."},
+    {"report_id": "OMNI6-07", "pages": [18], "reported_severity": "Low", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetOutbox.sol"], "reason_category": "availability_only", "reason": "A token that rejects zero approval causes the fill to revert atomically; it does not move or destroy user assets."},
+    {"report_id": "OMNI6-08", "pages": [19], "reported_severity": "Low", "reported_status": "Closed", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetExecutor.sol"], "reason_category": "gas_griefing", "reason": "The report describes solver gas expenditure and a recoverable rejected order, not a protocol or user asset-loss path."},
+    {"report_id": "OMNI6-09", "pages": [20], "reported_severity": "Informational", "reported_status": "Closed", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetExecutor.sol"], "reason_category": "deployment_hardening", "reason": "The constructor address is deployment configuration and the report establishes no reachable deployed asset-loss sequence."},
+    {"report_id": "OMNI6-10", "pages": [21, 22], "reported_severity": "Informational", "reported_status": "Closed", "disposition": "excluded", "affected_paths": ["contracts/solve/src/lib/SolverNet.sol", "contracts/solve/src/SolverNetOutbox.sol"], "reason_category": "configuration_flexibility", "reason": "A missing gas-limit field is an execution-interface suggestion, not an asset-loss vulnerability."},
+    {"report_id": "OMNI6-11", "pages": [23], "reported_severity": "Informational", "reported_status": "Closed", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetInbox.sol", "contracts/solve/src/SolverNetOutbox.sol"], "reason_category": "input_validation", "reason": "Duplicate expense approvals can under-approve a call and cause an unexpected result or revert; no theft path is shown."},
+    {"report_id": "OMNI6-12", "pages": [24], "reported_severity": "Informational", "reported_status": "Closed", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetInbox.sol"], "reason_category": "availability_only", "reason": "A short deadline can cause solver rejection or later refund; it does not cause a successful asset transfer at a loss."},
+    {"report_id": "OMNI6-13", "pages": [25], "reported_severity": "Informational", "reported_status": "Resolved", "disposition": "excluded", "affected_paths": ["contracts/solve/src/SolverNetInbox.sol", "contracts/solve/src/SolverNetMiddleman.sol"], "reason_category": "informational", "reason": "The two comments concern initializer usage and array-length validation, without a distinct concrete asset-loss path beyond the separately included middleman root cause."}
+  ],
+  "generated_files": [
+    ".dockerignore", "Dockerfile", "config.yaml", "findings/H-01.md", "findings/H-02.md", "findings/H-03.md", "findings/H-04.md", "findings/gold_audit.md", "ocr_evidence/pdf_003743_a385d3eef0e4/H-01.pages.jsonl", "ocr_evidence/pdf_003743_a385d3eef0e4/H-02.pages.jsonl", "ocr_evidence/pdf_003743_a385d3eef0e4/H-03.pages.jsonl", "ocr_evidence/pdf_003743_a385d3eef0e4/H-04.pages.jsonl", "ocr_evidence/pdf_003743_a385d3eef0e4/scope.pages.jsonl", "provenance.json", "review_status.yaml"
+  ]
+}

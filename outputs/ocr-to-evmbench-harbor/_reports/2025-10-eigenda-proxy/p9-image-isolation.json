@@ -1,0 +1,22 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_isolation.v1",
+  "phase": "P9",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "agent_image": {
+    "config_digest": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc",
+    "contains_vulnerable_repository": true,
+    "contains_gold_or_ocr": false,
+    "runtime_network": "no-network"
+  },
+  "verifier_image": {
+    "config_digest": "sha256:e23c5b41bec3fa2034e8e12d1b3e71ceef4c6ad209c864c65ae151dcbeef099e",
+    "contains_tests": true,
+    "contains_gold_findings": true,
+    "contains_ocr_or_provenance": false,
+    "environment_mode": "separate"
+  },
+  "same_image": false,
+  "gold_exposed_to_agent": false
+}

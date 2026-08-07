@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_audit.v1",
+  "candidate_files": [
+    ".dockerignore",
+    "Dockerfile",
+    "config.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_003618_4acdf39b26ba/H-01.pages.jsonl",
+    "ocr_evidence/pdf_003618_4acdf39b26ba/scope.pages.jsonl",
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "dockerfile_has_copy_add": false,
+  "dockerignore": "**\n!Dockerfile\n!.dockerignore\n",
+  "errors": [],
+  "warnings": [],
+  "agent_visible_paths_in_image_build": "remote_git_fetch_only",
+  "host_side_only": [
+    "findings/",
+    "ocr_evidence/",
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "ok": true
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "repository_url": "https://github.com/cryptoalgebra/AlmVault.git",
+  "repository_slug": "cryptoalgebra/AlmVault",
+  "vulnerable_commit": "57d820afa1d58bf89073e668f5608942d90188c7",
+  "object_type": "commit",
+  "root_tree": "df87262a3b75f1f95b2f20a78fceb280579b9838",
+  "parents": [
+    "66b2944672fe4e7d5a46b5703b41295f2360c6b3",
+    "fe4d9266a2c87656387e2adbc18ce24d1066246d"
+  ],
+  "detached_head": true,
+  "submodules": [],
+  "public": true,
+  "license_spdx": "MIT",
+  "review_clone": "/tmp/algebra-alm-recovery/AlmVault",
+  "framework": "hardhat",
+  "solidity": "0.8.20",
+  "audited_scope_present": true,
+  "audited_scope": [
+    "contracts/AlgebraVault.sol",
+    "contracts/AlgebraVaultDepositGuard.sol",
+    "contracts/AlgebraVaultFactory.sol",
+    "contracts/FarmingRewardsDistributor.sol",
+    "contracts/common/Enum.sol",
+    "contracts/lib/AlgebraVaultDeployer.sol",
+    "contracts/lib/FarmingRewardsDistributorDeployer.sol",
+    "contracts/lib/OracleLibrary.sol",
+    "contracts/lib/UV3Math.sol"
+  ],
+  "re_audit_commit_not_selected": "d637339f968d67f175e8cb56ce3ae54a69bdefee",
+  "sibling_repository_not_selected": {
+    "repository_url": "https://github.com/cryptoalgebra/plugins-monorepo.git",
+    "initial_commit": "6a5bcc44abfb90c3edb05bbea7efec233b5bd257"
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "materialized_at": "2026-08-01T15:42:14Z",
+  "phase": "C1",
+  "review_state": "approved_for_admission",
+  "approval": {
+    "checkpoint": "C1",
+    "candidate_id": "2025-10-eigenda-proxy",
+    "review_bundle_digest": "10af2c0e6b02b904fced2817b4d7aac5e4155532d578e76cc031460bab6496df",
+    "approved_at": "2026-08-01T16:31:24Z",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_identity_as_supplied": "github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "explicit_admission_approval": true,
+    "explicit_broader_bug_policy_acceptance": true,
+    "custom_noncanonical_detect_instruction_authorized": true
+  },
+  "impact_policy": {
+    "standard_evmbench_detect_policy": "direct or indirect loss of user or platform assets",
+    "user_authorized_exception": "broader bug detection including correctness, availability, validation, administrative security, and dependency resilience",
+    "authorized_at": "2026-08-01",
+    "selected_policy": "broader_bug_detection",
+    "standard_evmbench_detect_compatible": false,
+    "canonical_prompt_mismatch": "The stock DETECT.md instructs agents to search only for loss-of-assets vulnerabilities.",
+    "admission_requirement": "Exact human approval must explicitly accept the broader policy and a noncanonical/custom detect instruction before admission or Harbor generation."
+  },
+  "task_identity": {
+    "task_group_key": "https://github.com/Layr-Labs/eigenda.git@066f8ef4f93bb8ce196555904e89adf7ef50e57f|api/clients/**+api/proxy/**+contracts/src/integrations/cert/**-contracts/src/integrations/cert/legacy/**|detect",
+    "task_group_key_sha256": "85ab5a8c5f7b96b34fcf7468709809886a451d6d9b162aca12d3a739840f3d0b",
+    "repository_slug": "Layr-Labs/eigenda",
+    "vulnerable_commit": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+    "audited_scope": [
+      "api/clients/**",
+      "api/proxy/**",
+      "contracts/src/integrations/cert/**"
+    ],
+    "audited_exclusions": [
+      "contracts/src/integrations/cert/legacy/**",
+      "third-party libraries",
+      "dependencies"
+    ],
+    "mode": "detect",
+    "framework": "mixed Go and Foundry; config framework remains foundry for EVMBench loader compatibility"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003696_1e09f51d1afb",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "Sigma_Prime_EigenLayer_DA_Secure_Integration_Security_Assessment_Report_v2_0.pdf",
+    "source_rel_path": "public-audits/reports/eigenlayer/Sigma_Prime_EigenLayer_DA_Secure_Integration_Security_Assessment_Report_v2_0.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/eigenlayer/Sigma_Prime_EigenLayer_DA_Secure_Integration_Security_Assessment_Report_v2_0.pdf",
+    "source_pdf_sha256": "2900c32ac36fb78949c11cc620c68efe453b411d021a2f09665c91dcb00b42fb",
+    "size_bytes": 461391,
+    "physical_page_count": 33,
+    "report_identity": "Sigma Prime EigenDA Proxy Secure Integration Security Assessment Report v2.0",
+    "report_month": "2025-10",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003696_1e09f51d1afb.jsonl",
+    "sha256": "b6e57d6e6cf6a894a6f9d015170621861b3bc82091e0579efdf7cfa4d41b7686",
+    "size_bytes": 226604,
+    "record_count": 33,
+    "source_page_count": 33,
+    "created_at": "2026-07-01T17:46:49.843216+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "outputs/ocr-to-evmbench-harbor/_reports/pdf_003696_1e09f51d1afb/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 13,
+    "selection": "explicit_user_reopening_with_broader_bug_policy",
+    "category": "Payments/RWA/Stablecoin",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 32,
+    "reviewed_report_finding_count": 16
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/Layr-Labs/eigenda.git",
+    "repository_slug": "Layr-Labs/eigenda",
+    "commit": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+    "commit_subject": "feat(payments): Implement reservation vault monitor (#1952)",
+    "commit_authored_at": "2025-09-08T21:16:16Z",
+    "root_tree": "c3d52e52d6471ead466775bc80b40b35c62a4f08",
+    "parent": "d5eec17de570d20d4e24ad53146ad8df4dce54cb",
+    "detached_head": true,
+    "clean_including_submodules": true,
+    "review_clone": "/tmp/eigenda-review.uO3C5H/repo",
+    "recursive_submodule_count": 22,
+    "recursive_submodule_status_sha256": "58f6a64ea7fca48f61c1d6915609b976eeb866e381fb48a1e0831ed299d70922",
+    "tracked_pdf_or_jsonl_count": 5,
+    "agent_packaging_requires_history_pruning": true,
+    "file_evidence": [
+      {"path":"api/proxy/server/handlers_misc.go","git_blob":"5a953a1ab36fd56f5edc6a338929eed49e0d7b12","sha256":"fe8b233619afe0d7f100b4d237781bcd7b97534e0753b8bc4c038f88c4f7fd08"},
+      {"path":"api/clients/retrieval_client.go","git_blob":"c10f89dd7de6aafcc6ce0fc925fbb9b0092aedd4","sha256":"04ecd30de72996dc495cf30065686a1c7afbd775f1785368fc70aac16ffc8872"},
+      {"path":"api/clients/node_client.go","git_blob":"96c0d3838ea9eb6e599b5457a0f4341963450014","sha256":"30a04a00b1fb5cc2e34be38832937a3a7e5cc5d20ebff856acc7e37367a7fdbc"},
+      {"path":"api/clients/v2/validator/internal/validator_grpc_manager.go","git_blob":"e0c196b3103d7a94790f714b497d9e1920c8ec27","sha256":"75584cda42cb69278a82deac8dcf673cb3851b709aa1aaf86be7925dfea3ab7c"},
+      {"path":"api/proxy/server/routing.go","git_blob":"a95c0b0f9d18699e90fba4fe6893e377d6450349","sha256":"26c102a0105b8c79b6df1d57766361d9ad3b80209ce7269f7da05745b468de22"},
+      {"path":"api/clients/v2/accountant.go","git_blob":"fb2efc869162e98236a1c395c11603e5686f8cc8","sha256":"073ca403d0e0efe63d34430bdf4aab5031708a68bee0617a28c6a2fc1822ca56"},
+      {"path":"api/proxy/server/handlers_cert.go","git_blob":"435e72b72c82d5c7065f329ca5ecfddb6067ff4f","sha256":"fe11aec722c60e2b606e6179b96ec4a30537e3c31251fa45e137854cc72dfbe4"},
+      {"path":"api/proxy/store/generated_key/eigenda/verify/verifier.go","git_blob":"fb00bf7a2b787fd03bd4b9d880163f78aec9808b","sha256":"f98b90581e299faf58ce8a1ba3988ab17cbc79533334c19c8627c7d858532fc3"},
+      {"path":"api/proxy/store/generated_key/eigenda/verify/certificate.go","git_blob":"e6161f76d98b916a862ef736197a877b40287392","sha256":"fb5b6952d72d5e8b934f71cf46010ba658d95b5168ae527fb41051da4a48d1ed"},
+      {"path":"api/clients/v2/verification/cert_verifier.go","git_blob":"2e8009c8fc32d421f9bbadbe19f81ea0a48e0d3e","sha256":"3390c84b526a3eb15b84cf2881a709ac3c72bfcba683dc898b92416ffab77971"}
+    ]
+  },
+  "fixed_snapshot": {
+    "commit": "794c356269b2e9559b6d43e4b21dee7c45eb354b",
+    "root_tree": "155b4043663e651b97f14bb9747c4cfb70aa7c9e",
+    "kept_separate_from_vulnerable_task_snapshot": true
+  },
+  "corroborating_fix_pull_requests": [
+    {"report_id":"EDA-11","number":2108,"merge_commit":"33798543cee03c87f1fe2dfc0a4d48789225a7fa"},
+    {"report_id":"EDA-06","number":2157,"merge_commit":"3d37ba1ed0ba9c8355e975fc37887e007353c109"},
+    {"report_id":"EDA-10","number":2184,"merge_commit":"72a7856ee69653a4fdd6da4fc2e1449ceda6b4b8"},
+    {"report_id":"EDA-15","number":2211,"merge_commit":"4782f9b482553788e04d8bb21edac4170b6eef9f"}
+  ],
+  "tooling_revisions": {
+    "opd_base": {
+      "revision": "38957485d5cd63dc5d664c3c2993f60b308f5776",
+      "isolated_validation_checkout": "/tmp/opd-eigenda-validation.yyXBmR/repo"
+    },
+    "canonical_evmbench": {
+      "revision": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+      "modified_by_candidate_review": false
+    }
+  },
+  "baseline_validation": {
+    "go_image": "golang@sha256:10f549dc8489597aa7ed2b62008199bb96717f52a8e8434ea035d5b44368f8a6",
+    "foundry_image": "pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+    "go_compile": "passed for audited package groups",
+    "go_focused_tests": "passed for three selected package groups",
+    "go_full_runtime_suite": "environmentally incomplete because some tests require writable SRS resources or nested Docker",
+    "foundry_build": "216 files compiled with solc 0.8.12",
+    "foundry_focused_tests": "23 passed, 0 failed, 0 skipped",
+    "report": "outputs/ocr-to-evmbench-harbor/_reports/pdf_003696_1e09f51d1afb/p5-build-baseline.json"
+  },
+  "agent_image": {
+    "local_tag": "evmbench-eigenda-proxy:c1r4",
+    "status": "passed",
+    "config_digest": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc",
+    "platform": "linux/amd64",
+    "size_bytes": 5415592446,
+    "candidate_layer_digest": "sha256:4829bfb1f66d5f23f91b77e4233ff76b61aba2e54945f1a2e7f38376b5032cc4",
+    "saved_image_tar_path": "/tmp/evmbench-eigenda-proxy-c1r4.tar",
+    "saved_image_tar_sha256": "7957e5b43276bc8221f04839a6ea2366b854aad331123edcd854085d201ccf99",
+    "saved_image_tar_size_bytes": 5549632512,
+    "published_to_registry": false,
+    "runtime_network": "none",
+    "runtime_validation": {
+      "repository_head": "passed",
+      "original_tree_unrecoverable": "passed",
+      "foundry_force_build_offline": "passed",
+      "go_audited_package_compile": "passed",
+      "nested_submodule_reinstallation_attempts": 0,
+      "targeted_report_leakage_scan": "passed"
+    },
+    "superseded_attempts": [
+      {
+        "tag": "evmbench-eigenda-proxy:c1",
+        "config_digest": "sha256:dcc3de06e0a7bba5f84769ea14d840753d37196d049648ae7411ad916125394d",
+        "status": "superseded",
+        "reason": "The no-network replay exited successfully but Forge attempted to reinstall pruned submodules before using the vendored sources; all .gitmodules files are empty in c1r1 to eliminate that behavior."
+      },
+      {
+        "tag": "evmbench-eigenda-proxy:c1r1",
+        "config_digest": "sha256:d426004fe2ea82895d5ed754830258a7b5e3cd97022a51031645aabbf1e525e0",
+        "status": "superseded",
+        "reason": "The agent tree excluded the EigenDA report and gold evidence, but the candidate layer contained unrelated PDF and JSONL files downloaded inside Go dependencies; c1r4 removes every PDF and JSONL under /home/agent in the same build layer."
+      }
+    ],
+    "failed_build_attempts": [
+      {
+        "tag": "evmbench-eigenda-proxy:c1r2",
+        "image_created": false,
+        "reason": "A rejected cleanup order removed repository evidence files before their paths were removed from the sanitized Git index, so the final index check failed closed."
+      },
+      {
+        "tag": "evmbench-eigenda-proxy:c1r3",
+        "image_created": false,
+        "reason": "A recursive submodule fetch failed after an upstream connection reset; the serialized-fetch c1r4 retry succeeded."
+      }
+    ],
+    "repository_head_strategy": "sanitized exact-commit working tree with only the original commit object retained",
+    "source_pdf_and_history_leakage_policy": "Remove PDFs, JSONL, SECURITY.md, nested Git metadata, and all original tree/blob objects after build validation; retain only the original commit object and a sanitized index."
+  },
+  "ocr_corrections": [
+    {"pages":[2],"field":"function_name","correction":"Use RetrieveBlobChunks from the PDF and exact source; OCR says RetrieveBothChunks."},
+    {"pages":[4],"field":"repository_owner","correction":"Use Layr-Labs/eigenda from the PDF and GitHub; OCR says Lyr-Labs/eigenda."},
+    {"pages":[26],"field":"admin_endpoint_snippet","correction":"Use the exact route and handler identifiers from the PDF and vulnerable code; OCR materially corrupts the snippet."}
+  ],
+  "ocr_evidence": [
+    {"page_number":1,"role":"scope","page_image_sha256":"1fba06984f548be43273920f2955a3e8dea67204d8f5e512845c4bf28e108610","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/scope.pages.jsonl"},
+    {"page_number":4,"role":"scope","page_image_sha256":"0d6f5661fe65f8038498728171b4458bf56f844af37d8d6f3dab1175eff30996","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/scope.pages.jsonl"},
+    {"page_number":5,"role":"summary","page_image_sha256":"12d7596144a12b0db84298aff18091dfe496fa0ac44d45c8753885bca9703b64","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/scope.pages.jsonl"},
+    {"page_number":7,"role":"summary","page_image_sha256":"bc2b9c30cb37f3ceffca25068771dea1aee1c65db85259362ccca65ecc5ed6da","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/scope.pages.jsonl"},
+    {"page_number":8,"finding_id":"H-01","page_image_sha256":"4ec8f80f153be18e53054b9647627250b14e2314a55e88060dfd5c0550681953","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-01.pages.jsonl"},
+    {"page_number":9,"finding_id":"H-01","page_image_sha256":"c136fe3412d05535dc668e5cbdcadf01f3b98b12f24a9b4b0195dc43534eae21","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-01.pages.jsonl"},
+    {"page_number":10,"finding_id":"H-02","page_image_sha256":"201d89d9463c85b8bf8c5de47762f4b79c7d4563764fbd9cde6ff4d248c1ab2e","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-02.pages.jsonl"},
+    {"page_number":11,"finding_id":"H-02","page_image_sha256":"5466c4f272f4a901bde5de05198db4164e8197887691fb0e2b022c85413250e1","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-02.pages.jsonl"},
+    {"page_number":12,"finding_id":"H-03","page_image_sha256":"3752a9d99ebec39736d77219bd549373165918bb36f05ffedf2bd28252728ced","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-03.pages.jsonl"},
+    {"page_number":13,"finding_id":"H-03","page_image_sha256":"b3855176ef53dde0e809b9f0b66ff6b789fb6d20f5e5ee3ba4a51d876719ab0f","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-03.pages.jsonl"},
+    {"page_number":14,"finding_id":"H-04","page_image_sha256":"be471fe8b29e5b92c087b884e83ee4361f9276c16ce6ed0f84571fe38eb07640","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-04.pages.jsonl"},
+    {"page_number":15,"finding_id":"H-04","page_image_sha256":"f7a98ece9de3feb0c7dee595b1246c186a5adad18495ef85d7f2e51d1d476dd3","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-04.pages.jsonl"},
+    {"page_number":16,"finding_id":"H-05","page_image_sha256":"a1742f970152fc05fe8bcb51c3425b85e73f13ef3bbd7f2e15acf0fef9c1c815","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-05.pages.jsonl"},
+    {"page_number":17,"finding_id":"H-06","page_image_sha256":"c600079d36ba4b6f0603d2b305ec66f1a9faa27e1ee7ddedfa90080dac24d3cd","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-06.pages.jsonl"},
+    {"page_number":18,"finding_id":"H-06","page_image_sha256":"2811a40e365cd191545f4f09fa4fed602f2fbd7067032acbc227bb4778381843","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-06.pages.jsonl"},
+    {"page_number":19,"finding_id":"H-07","page_image_sha256":"342916902c25f1af8fd382a228e6748973d648b24b845b66f264317c0e3b3930","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-07.pages.jsonl"},
+    {"page_number":20,"finding_id":"H-08","page_image_sha256":"d42667433cef14e387ab42d53239270b1e2cacbfbf6f7c316bf2305f97c9dabd","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-08.pages.jsonl"},
+    {"page_number":21,"finding_id":"H-08","page_image_sha256":"8c771286618af1bdc52737c7cbf0aaeefce94e737921ceee80fe6af467ee0bf1","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-08.pages.jsonl"},
+    {"page_number":23,"finding_id":"H-09","page_image_sha256":"4caa5629ebc3d0d3b490f8ddc2f6186aa2c046d43270ea96caa2bd518fbb3145","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-09.pages.jsonl"},
+    {"page_number":24,"finding_id":"H-10","page_image_sha256":"0d51d8408d16357918ab8a53708ea19c308981c496259c795c33bf7561a8d5ed","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-10.pages.jsonl"},
+    {"page_number":26,"finding_id":"H-11","page_image_sha256":"e0db8aedfafd2b44ae4b8494c9d003490336733ff3f1ff5af4dbf661e926cbcd","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-11.pages.jsonl"},
+    {"page_number":28,"finding_id":"H-12","page_image_sha256":"1f2c78bb3c221fd08693b8f17a75678060e870c779524ac92379aec84c23c915","artifact_ref":"ocr_evidence/pdf_003696_1e09f51d1afb/H-12.pages.jsonl"}
+  ],
+  "selected_findings": [
+    {"finding_id":"H-01","report_id":"EDA-01","pages":[8,9],"reported_severity":"Medium","title":"Incorrect HTTP header key breaks JSON response metadata","generated_file":"findings/H-01.md"},
+    {"finding_id":"H-02","report_id":"EDA-02","pages":[10,11],"reported_severity":"Low","title":"Blob retrieval ignores context cancellation and can outlive callers","generated_file":"findings/H-02.md"},
+    {"finding_id":"H-03","report_id":"EDA-03","pages":[12,13],"reported_severity":"Low","title":"Retrieval connections are never closed and exhaust resources","generated_file":"findings/H-03.md"},
+    {"finding_id":"H-04","report_id":"EDA-04","pages":[14,15],"reported_severity":"Low","title":"Failed gRPC client construction triggers a nil cleanup panic","generated_file":"findings/H-04.md"},
+    {"finding_id":"H-05","report_id":"EDA-05","pages":[16],"reported_severity":"Low","title":"Unbounded commitment paths enable memory-exhaustion denial of service","generated_file":"findings/H-05.md"},
+    {"finding_id":"H-06","report_id":"EDA-06","pages":[17,18],"reported_severity":"Low","title":"A zero reservation window panics payment accounting","generated_file":"findings/H-06.md"},
+    {"finding_id":"H-07","report_id":"EDA-07","pages":[19],"reported_severity":"Low","title":"Unknown chunk encodings leave invalid nil frames","generated_file":"findings/H-07.md"},
+    {"finding_id":"H-08","report_id":"EDA-08","pages":[20,21],"reported_severity":"Low","title":"Wrong-length keccak commitments reach the storage lookup","generated_file":"findings/H-08.md"},
+    {"finding_id":"H-09","report_id":"EDA-10","pages":[23],"reported_severity":"Informational","title":"Mismatched security-parameter arrays panic the verifier","generated_file":"findings/H-09.md"},
+    {"finding_id":"H-10","report_id":"EDA-11","pages":[24],"reported_severity":"Informational","title":"Unchecked quorum downcasts silently truncate certificate data","generated_file":"findings/H-10.md"},
+    {"finding_id":"H-11","report_id":"EDA-13","pages":[26],"reported_severity":"Informational","title":"Enabled backend administration endpoints lack authentication","generated_file":"findings/H-11.md"},
+    {"finding_id":"H-12","report_id":"EDA-15","pages":[28],"reported_severity":"Informational","title":"Certificate validation has no Ethereum RPC failover","generated_file":"findings/H-12.md"}
+  ],
+  "report_dispositions": [
+    {"report_id":"EDA-01","pages":[8,9],"disposition":"included","finding_id":"H-01","impact_class":"response_correctness"},
+    {"report_id":"EDA-02","pages":[10,11],"disposition":"included","finding_id":"H-02","impact_class":"cancellation_availability"},
+    {"report_id":"EDA-03","pages":[12,13],"disposition":"included","finding_id":"H-03","impact_class":"resource_exhaustion"},
+    {"report_id":"EDA-04","pages":[14,15],"disposition":"included","finding_id":"H-04","impact_class":"panic_availability"},
+    {"report_id":"EDA-05","pages":[16],"disposition":"included","finding_id":"H-05","impact_class":"memory_dos"},
+    {"report_id":"EDA-06","pages":[17,18],"disposition":"included_in_scope_go_mechanism_only","finding_id":"H-06","impact_class":"panic_availability","scope_note":"PaymentVault.sol remains outside strict scope."},
+    {"report_id":"EDA-07","pages":[19],"disposition":"included","finding_id":"H-07","impact_class":"input_correctness_availability"},
+    {"report_id":"EDA-08","pages":[20,21],"disposition":"included","finding_id":"H-08","impact_class":"input_validation"},
+    {"report_id":"EDA-09","pages":[22],"disposition":"excluded","reason":"The report confirms no current audited function uses the empty-revert constructs; recommendation is future documentation/classification hardening."},
+    {"report_id":"EDA-10","pages":[23],"disposition":"included","finding_id":"H-09","impact_class":"panic_availability"},
+    {"report_id":"EDA-11","pages":[24],"disposition":"included","finding_id":"H-10","impact_class":"data_truncation"},
+    {"report_id":"EDA-12","pages":[25],"disposition":"excluded","reason":"Printing a non-secret boolean-like query value is low-signal debug hygiene rather than a substantive benchmark bug."},
+    {"report_id":"EDA-13","pages":[26],"disposition":"included","finding_id":"H-11","impact_class":"administrative_access_control"},
+    {"report_id":"EDA-14","pages":[27],"disposition":"excluded","reason":"Both report assets are outside the strict audited path allowlist and the lower limit comes from an excluded dependency."},
+    {"report_id":"EDA-15","pages":[28],"disposition":"included","finding_id":"H-12","impact_class":"dependency_resilience"},
+    {"report_id":"EDA-16","pages":[29,30,31],"disposition":"excluded","reason":"The five-item bundle is diagnostic, comment, spelling, and formatting maintenance expressly described as lacking direct security implications."}
+  ],
+  "generated_files": [
+    ".dockerignore",
+    "config.yaml",
+    "Dockerfile",
+    "findings/H-01.md",
+    "findings/H-02.md",
+    "findings/H-03.md",
+    "findings/H-04.md",
+    "findings/H-05.md",
+    "findings/H-06.md",
+    "findings/H-07.md",
+    "findings/H-08.md",
+    "findings/H-09.md",
+    "findings/H-10.md",
+    "findings/H-11.md",
+    "findings/H-12.md",
+    "findings/gold_audit.md",
+    "provenance.json",
+    "review_status.yaml",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/scope.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-01.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-02.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-03.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-04.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-05.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-06.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-07.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-08.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-09.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-10.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-11.pages.jsonl",
+    "ocr_evidence/pdf_003696_1e09f51d1afb/H-12.pages.jsonl"
+  ]
+}

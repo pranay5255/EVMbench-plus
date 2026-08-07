@@ -1,0 +1,27 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approved_file_manifest.v1",
+  "phase": "P7",
+  "candidate_id": "2025-07-vii-finance",
+  "generated_at": "2026-08-03T15:38:14Z",
+  "status": "passed",
+  "file_count": 15,
+  "checksum_stream_format": "sha256 two-spaces relative-path newline, LC_ALL=C path order",
+  "checksum_stream_sha256": "113cf74b6d6d9cd8158d0c536323687db8effa65c65b2d4786360c0e7db458b7",
+  "files": [
+    {"path": ".dockerignore", "size_bytes": 29, "sha256": "a80a9141c954548148b2acb4ef04adcc1a7cb0131a6c2cba19c5877531cc957c"},
+    {"path": "Dockerfile", "size_bytes": 3553, "sha256": "bec98bf03f689dc8fb2fbd5023e840b546544b97e0db2366e0d4212bcec7c690"},
+    {"path": "config.yaml", "size_bytes": 572, "sha256": "e8d0521d1d5be10c6764b8648504c3b4383274bea4d22a64aee7fbecffd97446"},
+    {"path": "findings/H-01.md", "size_bytes": 2348, "sha256": "173f39c9c24a9f2bf283cd403fb785f67f108c38c4fc12ad46644a011083874e"},
+    {"path": "findings/H-02.md", "size_bytes": 2048, "sha256": "94da0879a4f7c2adf403683e01ec159b94c336085d3decd1cb27a1eb2a132c7c"},
+    {"path": "findings/H-03.md", "size_bytes": 2005, "sha256": "97e5b50e37fb5bad391b235b24e4aed6e0cfdfcf1414453cb26b3a5c240a3c3e"},
+    {"path": "findings/H-04.md", "size_bytes": 2061, "sha256": "71ec6275a56de8ba7010f1d4fb29a8a0df6ad4e1e860d943a568551dc44a05ba"},
+    {"path": "findings/gold_audit.md", "size_bytes": 6283, "sha256": "2482c3aa03b3955f70eb81b213bac35dd4b0d0918f0e9f712ee670278b7fcf51"},
+    {"path": "ocr_evidence/pdf_003614_a668da0d1f36/H-01.pages.jsonl", "size_bytes": 58729, "sha256": "68a4b800b143ec5d82b1f78a520a5273aebb1617edcdf9ed8e1c92101f9c42fe"},
+    {"path": "ocr_evidence/pdf_003614_a668da0d1f36/H-02.pages.jsonl", "size_bytes": 25766, "sha256": "09afb0a1efbe1d0307ff1061d30129e2d165131f99084608d34fbcac62e53a47"},
+    {"path": "ocr_evidence/pdf_003614_a668da0d1f36/H-03.pages.jsonl", "size_bytes": 18415, "sha256": "1e4d1c8844444b1ff20ffe5312536a7564b73ed874698b5a0d8ee888e93bfbf6"},
+    {"path": "ocr_evidence/pdf_003614_a668da0d1f36/H-04.pages.jsonl", "size_bytes": 38454, "sha256": "70583ca7d9d55316b2420eadddfac483b1ab79aa3653fde7c20619abe9547a1f"},
+    {"path": "ocr_evidence/pdf_003614_a668da0d1f36/scope.pages.jsonl", "size_bytes": 19059, "sha256": "64da41051d5dc835fe915bf67837fd4d9e6b25cde2c70745e0d5fb3e1f5ad91c"},
+    {"path": "provenance.json", "size_bytes": 18607, "sha256": "3992bda5b9e67839828b8356a75d6e923d21febe6ef6d1c8e15ea66e1a28492b"},
+    {"path": "review_status.yaml", "size_bytes": 342, "sha256": "e7f02863310b4efc0c02088378a5eb2e7089fa0659a4682c43f28d58791b7806"}
+  ]
+}

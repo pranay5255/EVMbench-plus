@@ -1,0 +1,19 @@
+{
+  "validator": "/home/experiments_base/OPD_base/scripts/validate_evmbench_candidate.py",
+  "validator_sha256": "6ab85456246bac79c4794ff69d5a2aab8aa0ade90e9ae1863d703730aa83fb5c",
+  "opd_head": "10011ac7e802c04df6df2ca405ceaad0d83b6097",
+  "generated_at": "2026-08-04T15:57:06Z",
+  "candidate_count": 1,
+  "ok": true,
+  "results": [
+    {
+      "candidate_dir": "task_dir/outputs/ocr-to-evmbench-harbor/2025-09-mellow-flexible-vaults",
+      "errors": [],
+      "finding_files": ["findings/H-01.md"],
+      "ok": true,
+      "review_state": "in_review",
+      "warnings": []
+    }
+  ],
+  "validator_tests": {"passed": 6, "failed": 0}
+}

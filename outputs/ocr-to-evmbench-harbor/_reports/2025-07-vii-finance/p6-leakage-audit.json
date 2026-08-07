@@ -1,0 +1,52 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_audit.v1",
+  "phase": "P6",
+  "candidate_id": "2025-07-vii-finance",
+  "status": "passed",
+  "image_id": "sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418",
+  "build_context": {
+    "transferred_bytes": 69,
+    "included_files": [".dockerignore", "Dockerfile"],
+    "candidate_sensitive_files_included": 0
+  },
+  "runtime_filesystem": {
+    "exported_entry_count": 122073,
+    "pdf_entries": 0,
+    "jsonl_entries": 12,
+    "jsonl_entry_origin": "All 12 are inherited LiteLLM guardrail benchmark files under /usr/local/lib/python3.12/dist-packages; none are task evidence.",
+    "pdf_or_jsonl_files_under_home": 0,
+    "target_evidence_marker_hits": 0,
+    "root_repository_reachable_commits": 1,
+    "forbidden_fix_or_post_audit_commits_reachable": 0
+  },
+  "candidate_layer": {
+    "diff_id": "sha256:0901a722533c9f08069bd3feed17bc0adae4ebc038ee9a7ab781074c0820b426",
+    "raw_size_bytes": 695667712,
+    "entry_count": 7879,
+    "pdf_entries": 0,
+    "jsonl_entries": 0,
+    "whiteout_entries": 1,
+    "submodule_git_object_entries": 222,
+    "target_evidence_marker_hits": 0,
+    "pdf_signature_hits": 0,
+    "single_acquire_verify_build_sanitize_layer": true
+  },
+  "docker_history": {
+    "target_evidence_marker_hits": 0,
+    "candidate_nonempty_layer_count": 1
+  },
+  "target_markers": [
+    "PDF ID",
+    "OCR SHA-256",
+    "source PDF SHA-256",
+    "source PDF filename",
+    "gold finding titles",
+    "ocr_evidence",
+    "gold_audit.md",
+    "OCR detection token",
+    "OCR page delimiter"
+  ],
+  "admission_or_harbor_artifacts_created": false,
+  "agent_or_model_run": false,
+  "summary": {"ok": true}
+}

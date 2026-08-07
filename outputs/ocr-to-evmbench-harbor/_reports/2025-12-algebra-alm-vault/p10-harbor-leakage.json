@@ -1,0 +1,16 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "task_dir": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-12-algebra-alm-vault/evmbench__detect-2025-12-algebra-alm-vault",
+  "marker_hits": [],
+  "result": "PASS",
+  "file_count": 6,
+  "file_hashes": {
+    "environment/README.md": "ed099331ac2033e21005136d4e5b430eb09f90bce88d28e39825755f90c17d43",
+    "instruction.md": "a6173e603e0a23aba42f903b058972b9d2fc12edd334aad287336a5b1596af35",
+    "task.toml": "59fe4f6f9ab6289297711e8d8b173590ef0f386a76334fc34d20b8c3faf52f55",
+    "tests/evmbench_harbor_verifier.py": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6",
+    "tests/test.sh": "08455e5d6b15ad33837db3655f970ae8fca66d9387aa0cb9cffe8e8bf6cad382",
+    "tests/validate_detect_submission.py": "c868e9451cb2195a19926eb10e3eb73f6f12def408b588a24f9546b80f7a16df"
+  }
+}

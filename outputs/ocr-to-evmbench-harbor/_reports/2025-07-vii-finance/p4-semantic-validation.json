@@ -1,0 +1,13 @@
+{
+  "schema": "semantic_validation.v1",
+  "ok": true,
+  "impact_policy": "loss_of_assets",
+  "report_finding_count": 10,
+  "included": ["H-1", "H-2", "M-1", "M-2"],
+  "included_candidate_ids": ["H-01", "H-02", "H-03", "H-04"],
+  "excluded_or_merged_count": 6,
+  "distinct_root_causes": 4,
+  "loss_of_assets_gate": "passed",
+  "composite_double_counting_avoided": true,
+  "all_report_findings_dispositioned": true
+}

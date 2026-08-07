@@ -1,0 +1,18 @@
+id: 2025-03-omni-solvernet
+mode: detect
+framework: foundry
+base_commit: 3ef37ae2704db4e1dcb8fc3f7acbb8babb543e8c
+
+vulnerabilities:
+  - id: "H-01"
+    title: "Reentrant fill acknowledgement lets a filled owner reclaim the source deposit"
+    award: 1.0
+  - id: "H-02"
+    title: "Underestimated fill gas makes a cross-chain fill acknowledgement fail"
+    award: 1.0
+  - id: "H-03"
+    title: "Fixed close buffer allows filled orders to reclaim deposits during portal downtime"
+    award: 1.0
+  - id: "H-04"
+    title: "Reentrant middleman callbacks steal in-flight token or native balances"
+    award: 1.0

@@ -1,0 +1,59 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-12-algebra-alm-vault",
+  "candidate_root": "task_dir/outputs/ocr-to-evmbench-harbor/2025-12-algebra-alm-vault",
+  "created_at": "2026-08-04T11:24:47Z",
+  "file_count": 9,
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size_bytes": 30,
+      "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 1444,
+      "sha256": "0dfd1b1e069df66ae4296bf47943573c0760a0010056131ca828668b2bb4ccf9"
+    },
+    {
+      "path": "config.yaml",
+      "size_bytes": 242,
+      "sha256": "d9d784c5b1f6e91fa132be233dc298097061ffa3bda2c20da0cf8485d39d0c89"
+    },
+    {
+      "path": "findings/H-01.md",
+      "size_bytes": 2812,
+      "sha256": "8e223beb7dd3c23faf7f16107719eaa87ba6e7c02bf708d2cbb255654dbf2bc5"
+    },
+    {
+      "path": "findings/gold_audit.md",
+      "size_bytes": 3036,
+      "sha256": "3a9d2a62ff2826c1d2fc923187e02f6f3e9306d8a8b441607fbee89a52f8dbd8"
+    },
+    {
+      "path": "ocr_evidence/pdf_003345_a305f8485f3a/H-01.pages.jsonl",
+      "size_bytes": 13869,
+      "sha256": "bd74f6c7723668d44239fe2be8720bf218adc779b937bba89ffe66fc20bb1426"
+    },
+    {
+      "path": "ocr_evidence/pdf_003345_a305f8485f3a/scope.pages.jsonl",
+      "size_bytes": 10233,
+      "sha256": "80418eed9d017e3d395454b56f49b3c4005c09522dab64ccf8144ed064222286"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 7992,
+      "sha256": "efcc7193a61a17bbe819d7a07a95dbba78375069158dec42a9036dccdbe29df0"
+    },
+    {
+      "path": "review_status.yaml",
+      "size_bytes": 239,
+      "sha256": "fe741e619218cfb2c59eb4823434f1e3ab8548eff184a7c9f06e4a667263464b"
+    }
+  ],
+  "summary": {
+    "ok": true,
+    "candidate_bytes_frozen_pending_approval": true
+  }
+}

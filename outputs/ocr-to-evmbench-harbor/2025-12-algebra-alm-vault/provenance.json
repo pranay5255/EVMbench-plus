@@ -1,0 +1,210 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-12-algebra-alm-vault",
+  "materialized_at": "2026-08-04T11:19:25Z",
+  "phase": "P12",
+  "review_state": "admitted",
+  "impact_policy": "loss_of_assets",
+  "task_identity": {
+    "task_group_key": "cryptoalgebra/AlmVault@57d820afa1d58bf89073e668f5608942d90188c7|contracts/AlgebraVault.sol+contracts/AlgebraVaultDepositGuard.sol+contracts/AlgebraVaultFactory.sol+contracts/FarmingRewardsDistributor.sol+contracts/common/Enum.sol+contracts/lib/AlgebraVaultDeployer.sol+contracts/lib/FarmingRewardsDistributorDeployer.sol+contracts/lib/OracleLibrary.sol+contracts/lib/UV3Math.sol|detect|loss_of_assets",
+    "task_group_key_sha256": "b0a86f577e29a804775ae9046739ce20d4b79ebc2167c8889638b011c841047e",
+    "repository_slug": "cryptoalgebra/AlmVault",
+    "vulnerable_commit": "57d820afa1d58bf89073e668f5608942d90188c7",
+    "audited_scope": [
+      "contracts/AlgebraVault.sol",
+      "contracts/AlgebraVaultDepositGuard.sol",
+      "contracts/AlgebraVaultFactory.sol",
+      "contracts/FarmingRewardsDistributor.sol",
+      "contracts/common/Enum.sol",
+      "contracts/lib/AlgebraVaultDeployer.sol",
+      "contracts/lib/FarmingRewardsDistributorDeployer.sol",
+      "contracts/lib/OracleLibrary.sol",
+      "contracts/lib/UV3Math.sol"
+    ],
+    "mode": "detect",
+    "framework": "hardhat",
+    "impact_policy": "loss_of_assets",
+    "excluded_sibling_task_group": {
+      "repository_slug": "cryptoalgebra/plugins-monorepo",
+      "initial_commit": "6a5bcc44abfb90c3edb05bbea7efec233b5bd257",
+      "re_audit_commits": [
+        "facb3310cff162942ccba662d26821457ad20dac",
+        "9fc58be6a39ed8ca984284b0dee2b1d7bdbd91d0"
+      ],
+      "scope_paths": [
+        "packages/alm/contracts/AlmPlugin.sol",
+        "packages/alm/contracts/RebalanceManager.sol",
+        "packages/alm/contracts/base/BaseRebalanceManager.sol"
+      ],
+      "reason": "Same PDF covers two repositories; version-1 candidate admits one repository snapshot only. Plugin findings remain a separate task-group identity."
+    }
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003345_a305f8485f3a",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "Algebra ALM Security Audit Report.pdf",
+    "source_rel_path": "audits_public/Algebra Finance/Algebra ALM/Algebra ALM Security Audit Report.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits_public/Algebra Finance/Algebra ALM/Algebra ALM Security Audit Report.pdf",
+    "source_pdf_sha256": "810310a7d0bc20feb362250ebef10fd22946436fdd1dc998431be2a490819856",
+    "size_bytes": 2425928,
+    "physical_page_count": 35,
+    "report_identity": "MixBytes Algebra ALM Security Audit Report",
+    "report_date": "2025-12-19",
+    "report_month": "2025-12",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003345_a305f8485f3a.jsonl",
+    "sha256": "cebf3de80fc6909d3af0c82800c8ce86e77401726a1b29b2df46f266093f9525",
+    "size_bytes": 224363,
+    "record_count": 35,
+    "source_page_count": 35,
+    "created_at": "2026-07-01T15:31:12.803433+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "_reports/pdf_003345_a305f8485f3a/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 17,
+    "selection": "selected-20-batch",
+    "category": "Staking/Yield",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 27,
+    "heuristic_unique_issue_ids": 19,
+    "reviewed_report_finding_count": 18,
+    "out_of_queue_order": true,
+    "canonical_next_preserved": "rank 6 Benqi Governance"
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/cryptoalgebra/AlmVault.git",
+    "repository_slug": "cryptoalgebra/AlmVault",
+    "commit": "57d820afa1d58bf89073e668f5608942d90188c7",
+    "commit_subject": "Merge branch 'feature/farming-rewards' into integral-1.2.2",
+    "commit_authored_at": "2025-11-10T12:52:10+03:00",
+    "root_tree": "df87262a3b75f1f95b2f20a78fceb280579b9838",
+    "parents": [
+      "66b2944672fe4e7d5a46b5703b41295f2360c6b3",
+      "fe4d9266a2c87656387e2adbc18ce24d1066246d"
+    ],
+    "detached_head": true,
+    "clean_main_worktree": true,
+    "submodules": [],
+    "review_clone": "/tmp/algebra-alm-recovery/AlmVault",
+    "public_repository": true,
+    "repository_license_spdx": "MIT",
+    "repository_license_note": "GitHub API license field is null; contracts carry SPDX-License-Identifier: MIT",
+    "versions_log": {
+      "initial_commit_alm_vault": "57d820afa1d58bf89073e668f5608942d90188c7",
+      "re_audit_commit_alm_vault": "d637339f968d67f175e8cb56ce3ae54a69bdefee",
+      "selected_snapshot_role": "initial_vulnerable_commit",
+      "selected_snapshot_rationale": "Report Versions Log lists 57d820... as Initial Commit (ALM Vault). Client fix commits for vault findings (including L-7 at 9f5f362...) are ancestors of re-audit commit d637339... and are not present on 57d820..."
+    },
+    "fix_commits_recorded": {
+      "L-7": "9f5f362a3723e9ec6fe8686fd30a22948653e1d8"
+    }
+  },
+  "ocr_evidence": [
+    {
+      "finding_id": "SCOPE",
+      "page_number": 6,
+      "page_image_sha256": "4e181caa0f524a6b655ebad32c7610f635ecefddada410e204fb5070b85e1942",
+      "artifact_ref": "ocr_evidence/pdf_003345_a305f8485f3a/scope.pages.jsonl"
+    },
+    {
+      "finding_id": "SCOPE",
+      "page_number": 7,
+      "page_image_sha256": "d7e398d1a127f65db89fdc1e098b25e0dfef11ea74cea8afd30cfe62f4cef2f5",
+      "artifact_ref": "ocr_evidence/pdf_003345_a305f8485f3a/scope.pages.jsonl"
+    },
+    {
+      "finding_id": "H-01",
+      "page_number": 23,
+      "page_image_sha256": "ed46c8a9fa370dcbdcf7151d5584e9ab6a32ac2e4aa86f4b7f04549819fc9904",
+      "artifact_ref": "ocr_evidence/pdf_003345_a305f8485f3a/H-01.pages.jsonl"
+    },
+    {
+      "finding_id": "H-01",
+      "page_number": 24,
+      "page_image_sha256": "14b7856fb4672a1ad6d8d6ba0979b68d8eb7db367e474e4dd69c715ef0b73003",
+      "artifact_ref": "ocr_evidence/pdf_003345_a305f8485f3a/H-01.pages.jsonl"
+    }
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "source_report_finding_id": "L-7",
+      "title": "Rounding Error Allows Theft of User Deposits via Donation Attack",
+      "reported_severity": "Low",
+      "source_pages": [
+        23,
+        24
+      ],
+      "generated_file": "findings/H-01.md",
+      "affected_paths": [
+        "contracts/AlgebraVault.sol"
+      ],
+      "asset_loss": true,
+      "inclusion_reason": "Verified donation/inflation attack causes victim deposits to mint zero shares while tokens remain withdrawable by the attacker."
+    }
+  ],
+  "finding_dispositions_summary": {
+    "total_report_findings": 18,
+    "selected": 1,
+    "excluded_other_repository": 8,
+    "excluded_policy_or_non_vuln": 9,
+    "disposition_artifact": "_reports/2025-12-algebra-alm-vault/p4-finding-dispositions.md"
+  },
+  "generated_files": [
+    "config.yaml",
+    "Dockerfile",
+    ".dockerignore",
+    "provenance.json",
+    "review_status.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_003345_a305f8485f3a/scope.pages.jsonl",
+    "ocr_evidence/pdf_003345_a305f8485f3a/H-01.pages.jsonl"
+  ],
+  "visibility_boundary": {
+    "agent_visible": [
+      "Dockerfile-built vulnerable repository only",
+      "generic detect instructions after Harbor generation"
+    ],
+    "host_side_only": [
+      "findings/",
+      "gold_audit.md",
+      "provenance.json",
+      "review_status.yaml",
+      "ocr_evidence/",
+      "source PDF",
+      "OCR JSONL"
+    ],
+    "docker_context_allowlist": [
+      "Dockerfile",
+      ".dockerignore"
+    ]
+  },
+  "approval": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "2c000284d67d69a48f3d9f44f4181f5b47a23277ff55c08bd6bddf862648bb08",
+    "approved_at": "2026-08-04T11:28:46Z",
+    "reviewer_identity": "github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "reviewer_github_html_url": "https://github.com/pranay5255",
+    "explicit_admission_approval": true
+  },
+  "admission": {
+    "isolated_admission_commit": "f9e02abeabe8ea61602fc27d5f41a768eef6acb2",
+    "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:109d59af35b98332aec4f15e8f233ba79d7efc678506865a042e8a1856832c8e",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:f79be4d4dd75a5f68dfbae7b2b5550e667449fb7187521b5463d6af9845387a0",
+    "harbor_task": "evmbench__detect-2025-12-algebra-alm-vault",
+    "completed_at": "2026-08-04T11:35:11Z"
+  }
+}

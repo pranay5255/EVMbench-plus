@@ -1,0 +1,17 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.canonical_image_build.v1",
+  "phase": "P8",
+  "status": "passed",
+  "builder": "project/evmbench/docker_build.py",
+  "command": "uv run --frozen python docker_build.py --audit 2025-07-vii-finance --no-build-base --use-cache",
+  "isolated_checkout": "/tmp/vii-admission.sU18VB/forest-of-audits",
+  "audit_count": 1,
+  "built": 1,
+  "failed": 0,
+  "canonical_tag": "evmbench/audit:2025-07-vii-finance",
+  "resolved_image_id": "sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418",
+  "reviewed_image_id": "sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418",
+  "canonical_build_resolved_to_reviewed_image_id": true,
+  "sandbox_attempt": "non_evidence_docker_socket_denied",
+  "authorized_docker_rerun": "passed"
+}

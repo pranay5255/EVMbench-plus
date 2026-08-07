@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "status": "passed",
+  "task_count": 1,
+  "regular_file_count": 6,
+  "source_pdf_count": 0,
+  "ocr_jsonl_count": 0,
+  "provenance_filename_count": 0,
+  "review_status_filename_count": 0,
+  "gold_finding_filename_count": 0,
+  "gold_audit_filename_count": 0,
+  "gold_title_marker_matches": 0,
+  "source_ocr_id_marker_matches": 0,
+  "review_bundle_digest_marker_matches": 0,
+  "candidate_checksum_marker_matches": 0,
+  "tests_source_included": false,
+  "verifier_tests_present": true,
+  "instruction_policy": "loss_of_assets"
+}

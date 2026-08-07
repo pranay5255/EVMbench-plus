@@ -1,0 +1,23 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-07-securitize-onofframp-agent-e7b817b5c0bf5886-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-07-securitize-onofframp"
+  ],
+  "registry_digest": "sha256:359677e21c8bbb13409ceb85b5c2e089e9d1260c2fa42e041873eb51efaa02ed",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:359677e21c8bbb13409ceb85b5c2e089e9d1260c2fa42e041873eb51efaa02ed",
+  "image_id": "sha256:e7b817b5c0bf5886426650942585823d0e93740e240c61339e49946d1977c393",
+  "platform": "linux/amd64",
+  "repository_head": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+  "reachable_repository_commit_count": 1,
+  "hardhat_tests": {
+    "executed": false,
+    "reason": "private_npm_package_404"
+  },
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true,
+  "source_pin_only": true
+}

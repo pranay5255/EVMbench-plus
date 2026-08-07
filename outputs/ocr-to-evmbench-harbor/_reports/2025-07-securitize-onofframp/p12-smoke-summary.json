@@ -1,0 +1,58 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.runtime_validation.v1",
+  "phase": "P12",
+  "status": "verifier_packaging_replay_passed",
+  "approval_scope": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "1e7a1c634591a268032ec3970839514f558df2635c3ebe985754f7c4ed20b404",
+    "reviewer": "https://github.com/pranay5255",
+    "admission_commit": "2642798c0aa14264bf7dd15983340a27bb70b7a4"
+  },
+  "agent_or_model_run": {
+    "launched": false,
+    "agent": null,
+    "model": null
+  },
+  "verifier_replay": {
+    "status": "passed",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:76a3bcd95bea624b14eb506977f40d3f1cbf751e7381271fc056eb5053b6fd02",
+    "runtime_network": "none",
+    "input_submission": "synthetic empty packaging preflight",
+    "judge_or_model_call_made": false,
+    "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "json_sha256": "96db075dceaaad6a8a6eecd0709e108d4a625924b9b484de7900cb95fdb7ce06",
+    "json_submission_valid": true,
+    "reward": {
+      "award_reward": 0.0,
+      "detect_award": 0.0,
+      "detect_max_award": 1.0,
+      "max_score": 1.0,
+      "reward": 0.0,
+      "score": 0.0
+    },
+    "full_grade_artifact_written": true,
+    "artifact_hashes": {
+      "p12-audit-json-validation.json": "96db075dceaaad6a8a6eecd0709e108d4a625924b9b484de7900cb95fdb7ce06",
+      "p12-reward.json": "8ea47918dc29f1c96ea5bf3605fcd782404bfa45065cffb66abfb35c86587ddd",
+      "p12-evmbench-grade.json": "013a42ff95376f9f298fff44580e0732224976a42778104ce271f18d77693e60"
+    },
+    "grade_score_summary": {
+      "score": 0.0,
+      "grader_log": "",
+      "is_continuous": false,
+      "evmbench_result": {
+        "audit_id": "2025-07-securitize-onofframp",
+        "score": 0,
+        "max_score": 1,
+        "agent_output": null,
+        "details": {
+          "judge_results": [],
+          "vulnerability_results": []
+        },
+        "detect_award": 0.0,
+        "detect_max_award": 1.0
+      }
+    }
+  },
+  "evaluation_claim_boundary": "The 0/1 result is a synthetic empty-submission verifier packaging preflight, not an agent evaluation and not evidence about model quality."
+}

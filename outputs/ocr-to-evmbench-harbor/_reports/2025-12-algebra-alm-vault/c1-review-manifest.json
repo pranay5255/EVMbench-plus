@@ -1,0 +1,161 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-12-algebra-alm-vault",
+  "created_at": "2026-08-04T11:24:47Z",
+  "review_state": "in_review",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "human_approved": false,
+    "approved_by": null,
+    "approved_at": null,
+    "review_bundle_digest": null,
+    "binding_required": "exact candidate_id + review_bundle_digest + reviewer identity"
+  },
+  "candidate": {
+    "path": "task_dir/outputs/ocr-to-evmbench-harbor/2025-12-algebra-alm-vault",
+    "absolute_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-12-algebra-alm-vault",
+    "file_manifest_sha256": "7011a94d00f83fe4793079d4850805cf4da5c65871a4ba167c94b48a33c4e2c5",
+    "files": [
+      {
+        "path": ".dockerignore",
+        "size_bytes": 30,
+        "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"
+      },
+      {
+        "path": "Dockerfile",
+        "size_bytes": 1444,
+        "sha256": "0dfd1b1e069df66ae4296bf47943573c0760a0010056131ca828668b2bb4ccf9"
+      },
+      {
+        "path": "config.yaml",
+        "size_bytes": 242,
+        "sha256": "d9d784c5b1f6e91fa132be233dc298097061ffa3bda2c20da0cf8485d39d0c89"
+      },
+      {
+        "path": "findings/H-01.md",
+        "size_bytes": 2812,
+        "sha256": "8e223beb7dd3c23faf7f16107719eaa87ba6e7c02bf708d2cbb255654dbf2bc5"
+      },
+      {
+        "path": "findings/gold_audit.md",
+        "size_bytes": 3036,
+        "sha256": "3a9d2a62ff2826c1d2fc923187e02f6f3e9306d8a8b441607fbee89a52f8dbd8"
+      },
+      {
+        "path": "ocr_evidence/pdf_003345_a305f8485f3a/H-01.pages.jsonl",
+        "size_bytes": 13869,
+        "sha256": "bd74f6c7723668d44239fe2be8720bf218adc779b937bba89ffe66fc20bb1426"
+      },
+      {
+        "path": "ocr_evidence/pdf_003345_a305f8485f3a/scope.pages.jsonl",
+        "size_bytes": 10233,
+        "sha256": "80418eed9d017e3d395454b56f49b3c4005c09522dab64ccf8144ed064222286"
+      },
+      {
+        "path": "provenance.json",
+        "size_bytes": 7992,
+        "sha256": "efcc7193a61a17bbe819d7a07a95dbba78375069158dec42a9036dccdbe29df0"
+      },
+      {
+        "path": "review_status.yaml",
+        "size_bytes": 239,
+        "sha256": "fe741e619218cfb2c59eb4823434f1e3ab8548eff184a7c9f06e4a667263464b"
+      }
+    ],
+    "config_id": "2025-12-algebra-alm-vault",
+    "mode": "detect",
+    "framework": "hardhat",
+    "base_commit": "57d820afa1d58bf89073e668f5608942d90188c7",
+    "selected_findings": [
+      {
+        "id": "H-01",
+        "source_report_finding_id": "L-7",
+        "title": "Rounding error allows theft of user deposits via donation attack",
+        "source_pages": [
+          23,
+          24
+        ],
+        "award": 1.0
+      }
+    ],
+    "finding_count": 1
+  },
+  "source_evidence": {
+    "pdf_id": "pdf_003345_a305f8485f3a",
+    "source_pdf_sha256": "810310a7d0bc20feb362250ebef10fd22946436fdd1dc998431be2a490819856",
+    "ocr_jsonl_sha256": "cebf3de80fc6909d3af0c82800c8ce86e77401726a1b29b2df46f266093f9525",
+    "page_count": 35,
+    "selection_rank": 17,
+    "out_of_queue_order": true,
+    "canonical_next_preserved": "rank 6 Benqi Governance"
+  },
+  "repository": {
+    "url": "https://github.com/cryptoalgebra/AlmVault.git",
+    "slug": "cryptoalgebra/AlmVault",
+    "vulnerable_commit": "57d820afa1d58bf89073e668f5608942d90188c7",
+    "root_tree": "df87262a3b75f1f95b2f20a78fceb280579b9838",
+    "audited_scope": [
+      "contracts/AlgebraVault.sol",
+      "contracts/AlgebraVaultDepositGuard.sol",
+      "contracts/AlgebraVaultFactory.sol",
+      "contracts/FarmingRewardsDistributor.sol",
+      "contracts/common/Enum.sol",
+      "contracts/lib/AlgebraVaultDeployer.sol",
+      "contracts/lib/FarmingRewardsDistributorDeployer.sol",
+      "contracts/lib/OracleLibrary.sol",
+      "contracts/lib/UV3Math.sol"
+    ],
+    "task_group_key": "cryptoalgebra/AlmVault@57d820afa1d58bf89073e668f5608942d90188c7|contracts/AlgebraVault.sol+contracts/AlgebraVaultDepositGuard.sol+contracts/AlgebraVaultFactory.sol+contracts/FarmingRewardsDistributor.sol+contracts/common/Enum.sol+contracts/lib/AlgebraVaultDeployer.sol+contracts/lib/FarmingRewardsDistributorDeployer.sol+contracts/lib/OracleLibrary.sol+contracts/lib/UV3Math.sol|detect|loss_of_assets",
+    "task_group_key_sha256": "b0a86f577e29a804775ae9046739ce20d4b79ebc2167c8889638b011c841047e",
+    "sibling_repository_excluded": "cryptoalgebra/plugins-monorepo"
+  },
+  "agent_image": {
+    "local_tag": "ocr-evmbench-c1/2025-12-algebra-alm-vault:c1-local",
+    "image_id": "sha256:e2583186e2053a193f18b540118fa7de226d473781ec12050d61a3abdae5cc84",
+    "size_bytes": 4136290809,
+    "registry_digest": null,
+    "published": false
+  },
+  "validation": {
+    "ocr_gate1": "PASS",
+    "pdf_gate2": "PASS",
+    "repository_gate3": "PASS",
+    "byte_exact_slices": true,
+    "semantic": "PASS",
+    "structural_current": true,
+    "structural_pinned_38957485": true,
+    "candidate_leakage": "PASS",
+    "image_leakage_focused": "PASS",
+    "repository_validation": "PASS",
+    "host_compile_tests": "71 passing",
+    "image_build_tests": "71 passing",
+    "network_disabled_image_head_check": "PASS"
+  },
+  "material_disclosures": [
+    "PDF covers two repositories; only AlmVault is admitted into this candidate",
+    "Vulnerable snapshot is initial commit 57d820... not re-audit d637339... which already contains L-7 fix",
+    "Only L-7 selected under loss_of_assets; 17 other report findings dispositioned out",
+    "GitHub license API is null; contracts SPDX MIT",
+    "L-7 practical likelihood reduced by DepositGuard slippage, but vault deposit path remains vulnerable",
+    "Local C1 image is not registry-published and must not be treated as admitted",
+    "Canonical forestOfAudits checkout was dirty and was not modified; isolated clone used",
+    "No Harbor generation, EVMBench admission, or agent/model smoke performed"
+  ],
+  "artifact_bindings": {
+    "provenance": "2025-12-algebra-alm-vault/provenance.json",
+    "review_status": "2025-12-algebra-alm-vault/review_status.yaml",
+    "gold": "2025-12-algebra-alm-vault/findings/gold_audit.md",
+    "generated_file_manifest": "_reports/2025-12-algebra-alm-vault/c1-generated-file-manifest.json",
+    "finding_dispositions": "_reports/2025-12-algebra-alm-vault/p4-finding-dispositions.md"
+  },
+  "queue_state_after_checkpoint_recording": {
+    "action": "none_until_created_or_blocked",
+    "requested_explicit_task": "rank 17 Algebra ALM",
+    "preserve_next": "rank 6 Benqi Governance until separately processed"
+  },
+  "summary": {
+    "ready_for_human_approval": true,
+    "admission_blocked_until_explicit_approval_of_this_digest": true
+  }
+}

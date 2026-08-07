@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.generated_file_manifest.v1",
+  "checkpoint": "C1R1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "created_at": "2026-08-04T15:57:06Z",
+  "canonical_stream_format": "path<TAB>size_bytes<TAB>sha256<LF>, sorted by path",
+  "canonical_stream_sha256": "843996ee84c800a412d450ab6dfcae127a984fbb97294d087cb216b3f4b5cf76",
+  "file_count": 9,
+  "files": [
+    {"path": ".dockerignore", "size_bytes": 30, "sha256": "dff903861d9f0c39b4b107cf206243154443e801c48042429b6eaeaa311c9f64"},
+    {"path": "Dockerfile", "size_bytes": 4861, "sha256": "eeb50600e5177ac88f7049bb27a5f3381d5553502aa86a8ad0f9fe928cddc0f6"},
+    {"path": "config.yaml", "size_bytes": 270, "sha256": "e69900479f217855db42a01ad97bc2fd089966dcd9c9c0d4db85aae7e47527d4"},
+    {"path": "findings/H-01.md", "size_bytes": 3613, "sha256": "ce164650fb50cb207600385727feabc84597558a8d2178dad62cf6aa4137a424"},
+    {"path": "findings/gold_audit.md", "size_bytes": 3613, "sha256": "ce164650fb50cb207600385727feabc84597558a8d2178dad62cf6aa4137a424"},
+    {"path": "ocr_evidence/pdf_000135_167389a70b9f/H-01.pages.jsonl", "size_bytes": 9356, "sha256": "c3c15f8654e83399ec7a1c48ad15d852f8fc0b7af5a880eb5708aec81200a029"},
+    {"path": "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl", "size_bytes": 35566, "sha256": "8671bec163b224d1f210efaea9e3d9cff7b559e55e3f9a8d65ba0d25b12a97e2"},
+    {"path": "provenance.json", "size_bytes": 9351, "sha256": "3a12ed75b63a41b43c3b73a28aa559a2e90f9bf6a402e12907c9d7e59d1dcbae"},
+    {"path": "review_status.yaml", "size_bytes": 239, "sha256": "f6fa95d097486b4666b3892f70fe93adf977b1fcb3b5c0898d1bfbac443a5290"}
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_load.v1",
+  "phase": "P11",
+  "status": "passed",
+  "approval_checkpoint": "C1",
+  "loader": "harbor.models.task.task.Task",
+  "harbor_version": "0.20.0",
+  "task_count": 1,
+  "name": "evmbench/detect-2025-07-securitize-onofframp",
+  "task_schema_version": "1.3",
+  "instruction_chars": 2367,
+  "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:359677e21c8bbb13409ceb85b5c2e089e9d1260c2fa42e041873eb51efaa02ed",
+  "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:76a3bcd95bea624b14eb506977f40d3f1cbf751e7381271fc056eb5053b6fd02",
+  "agent_network_mode": "no-network",
+  "environment_network_mode": "no-network",
+  "verifier_environment_mode": "separate",
+  "verifier_network_mode": "public",
+  "resources": {
+    "cpus": 4,
+    "memory_mb": 16384,
+    "storage_mb": 20480
+  },
+  "timeouts": {
+    "agent": 3600,
+    "verifier": 900
+  },
+  "tests_present": true,
+  "runtime_scope": {
+    "end_to_end_model_smoke": "not_authorized",
+    "task_load_validated": true,
+    "verifier_replay_report": "p12-smoke-summary.json"
+  },
+  "task_checksum": "e326e698f2ba7c7b1066b8c1d23040b75ab7e43b0a04e5181951a1a1a2c6f3a2",
+  "generated_at": "2026-08-04T15:00:21Z"
+}

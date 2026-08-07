@@ -1,0 +1,125 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.review_manifest.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:21:13Z",
+  "task_group_key": "https://github.com/Layr-Labs/eigenda.git@066f8ef4f93bb8ce196555904e89adf7ef50e57f|api/clients/**+api/proxy/**+contracts/src/integrations/cert/**-contracts/src/integrations/cert/legacy/**|detect",
+  "task_group_key_sha256": "85ab5a8c5f7b96b34fcf7468709809886a451d6d9b162aca12d3a739840f3d0b",
+  "candidate_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-10-eigenda-proxy",
+  "review_state": {
+    "state": "in_review",
+    "human_approved": false,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "policy": {
+    "selected": "broader_bug_detection",
+    "asset_loss_claim_count": 0,
+    "standard_evmbench_detect_compatible": false,
+    "custom_noncanonical_detect_instruction_required": true,
+    "policy_exception_report": "p2-policy-exception.json"
+  },
+  "reviewer_identity": {
+    "supplied_as_approval": false,
+    "must_be_supplied_with_exact_approval": true
+  },
+  "source_evidence": {
+    "ocr": {
+      "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003696_1e09f51d1afb.jsonl",
+      "sha256": "b6e57d6e6cf6a894a6f9d015170621861b3bc82091e0579efdf7cfa4d41b7686",
+      "record_count": 33,
+      "schema_version": "evmbench_task_creation.ocr_page.v1"
+    },
+    "pdf": {
+      "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/public-audits/reports/eigenlayer/Sigma_Prime_EigenLayer_DA_Secure_Integration_Security_Assessment_Report_v2_0.pdf",
+      "sha256": "2900c32ac36fb78949c11cc620c68efe453b411d021a2f09665c91dcb00b42fb",
+      "page_count": 33,
+      "report_identity": "Sigma Prime EigenDA Proxy Secure Integration Security Assessment Report v2.0"
+    }
+  },
+  "repository": {
+    "url": "https://github.com/Layr-Labs/eigenda.git",
+    "vulnerable_commit": "066f8ef4f93bb8ce196555904e89adf7ef50e57f",
+    "root_tree": "c3d52e52d6471ead466775bc80b40b35c62a4f08",
+    "audited_scope": [
+      "api/clients/**",
+      "api/proxy/**",
+      "contracts/src/integrations/cert/**"
+    ],
+    "audited_exclusion": "contracts/src/integrations/cert/legacy/**",
+    "recursive_submodule_count": 22,
+    "fixed_commit_kept_separate": "794c356269b2e9559b6d43e4b21dee7c45eb354b"
+  },
+  "findings": [
+    {"gold_id":"H-01","report_id":"EDA-01","pages":[8,9],"award":1.0,"finding_sha256":"a84ca774874bf3d6b456da45da1a9f630b2a8442bab5f55b71861cfc416c2e5d"},
+    {"gold_id":"H-02","report_id":"EDA-02","pages":[10,11],"award":1.0,"finding_sha256":"8c625b7945476de1af84be02470d9d0cefff051a979d33436a84576202bbecf5"},
+    {"gold_id":"H-03","report_id":"EDA-03","pages":[12,13],"award":1.0,"finding_sha256":"38fdb97b353738e644a2b46e07a510584d93b946369c29253abb76befafb1fde"},
+    {"gold_id":"H-04","report_id":"EDA-04","pages":[14,15],"award":1.0,"finding_sha256":"db43d10134cc46fd6e9e6a5a2672fd3ede4e9010f54b52ef8af2b65378c91557"},
+    {"gold_id":"H-05","report_id":"EDA-05","pages":[16],"award":1.0,"finding_sha256":"0ce4678ad9d0aba7e32fbd2680877a6cbb53af1c998b14b7f33a28bc9e876ba6"},
+    {"gold_id":"H-06","report_id":"EDA-06","pages":[17,18],"award":1.0,"finding_sha256":"3d158ccffad12a8ea88af719ea9bd6a59cb8ebea44fac9c4158962392e9e995c"},
+    {"gold_id":"H-07","report_id":"EDA-07","pages":[19],"award":1.0,"finding_sha256":"b8a70b772a5dcd2e27b998dfdbe83c705503b28d86e6524797fcd29ab8134bac"},
+    {"gold_id":"H-08","report_id":"EDA-08","pages":[20,21],"award":1.0,"finding_sha256":"c0f1b593d46943ebd197c03ab86347ec8eaa9ac904d7933158a17788f9037b79"},
+    {"gold_id":"H-09","report_id":"EDA-10","pages":[23],"award":1.0,"finding_sha256":"a84a58cd0562e653ca20d5e899982f84a7c3e84e13c19e70cc440e853bf2f0d4"},
+    {"gold_id":"H-10","report_id":"EDA-11","pages":[24],"award":1.0,"finding_sha256":"7ef6a1ca6312dddc5eba6803b8d9a7f828df6b2b9190a7923160ce43487efcdb"},
+    {"gold_id":"H-11","report_id":"EDA-13","pages":[26],"award":1.0,"finding_sha256":"56bad2197e7f929f0cc11653c68c2875b74eb21a6c53e64ee1b918a798740946"},
+    {"gold_id":"H-12","report_id":"EDA-15","pages":[28],"award":1.0,"finding_sha256":"fde831c28a61dd237ac4a9208adf9eb47ae90d89298c00abffe3d1ed16b6f489"}
+  ],
+  "max_score": 12.0,
+  "reviewed_candidate": {
+    "file_manifest": "c1-generated-file-manifest.json",
+    "file_manifest_sha256": "75ff2be9e55646687860145ed5453574e6c827f560920857897c024352b65f7d",
+    "candidate_file_count": 31,
+    "candidate_checksum_stream_sha256": "719e8e2452a9db68afd1b3beaf8ed6e63c651edd9ea59c5781b52342a946a794",
+    "dockerfile_sha256": "1ce0d335dafda69d806221f650af53d603fbea0994c0c2301694999225dbd63e",
+    "config_sha256": "6ec59bb396d8ca258e5cfa8ff77c367f4c35aa28169f38936f76dbd73e6447e7",
+    "gold_audit_sha256": "131674dbc85e3d3b86904367cfd7d0f7d2bfbe2ef15b61b69e6875715f70ed48",
+    "provenance_sha256": "2776050bf337f3dcd4905f41db83df967c9cc511e452b4f40886a506804eb3b6",
+    "review_status_sha256": "1da1d323fcd76b1b11ed965814efd61733ab18f593402a7ff2b8fae570fa8e6b"
+  },
+  "validation_reports": [
+    {"path":"p1-isolation.json","sha256":"cff71a57ad3e3c58c65e706e5e0c1cdf74b5cc213c94aa41382a68aadbfc2b80","status":"passed"},
+    {"path":"p2-policy-exception.json","sha256":"3772ffcd02fcef60a5ee1dfd0cce3e7af13eea77802370a5895d0130d58b770e","status":"passed_with_required_human_policy_approval"},
+    {"path":"p3-finding-dispositions.json","sha256":"18eb934cdf9c2d34b2c97f8bdab0f878a2d231ee2b2b38e90f71cbea3a1ffe6f","status":"passed_under_broader_bug_policy"},
+    {"path":"p4-byte-exact-slices.json","sha256":"87e1aa692e6cffb5b95a7b03f467121705981b4eca4a567f1ceff0b0ee068f20","status":"passed"},
+    {"path":"p5-structural-validator.json","sha256":"8b86db2d73fb01b5b52097e36896ccdc7c882e44be7031ca24c826ebd3c70bea","status":"passed"},
+    {"path":"p6-agent-image.json","sha256":"ab0c2895a165b6277ab7ea3fab329b50888df334a7f8f14ffeebbaf8d5919735","status":"passed"},
+    {"path":"p6-leakage-scan.json","sha256":"9251e1a14a1e3d9faa0c58c3776c54bd1c74866bb531b23d7f97a6afb84939dc","status":"passed"},
+    {"path":"c1-generated-file-manifest.json","sha256":"75ff2be9e55646687860145ed5453574e6c827f560920857897c024352b65f7d","status":"passed"},
+    {"path":"c1-validation-summary.json","sha256":"875d70d8bf5c3ff48f29caf0e6747aef9c7e6a77ba382ac56e5c675095eb9409","status":"passed_with_disclosures"},
+    {"path":"../pdf_003696_1e09f51d1afb/p1-ocr-validation.json","sha256":"0e2dfd8cc2ca13508c3f9fdc37652e807b9b861e7540de50396da7bec96b94a0","status":"passed"},
+    {"path":"../pdf_003696_1e09f51d1afb/p2-pdf-validation.json","sha256":"fec464c172f87ce5da2c7094b161d97ed4f4d64329033682e47a0335567b8b11","status":"passed"},
+    {"path":"../pdf_003696_1e09f51d1afb/p3-repository-snapshot.json","sha256":"93a784b2a79e94c9751346ea600aed6c64d80501f023d62a5be397b030e5a2d0","status":"passed"},
+    {"path":"../pdf_003696_1e09f51d1afb/p5-build-baseline.json","sha256":"8d1a255091f6cbfdf78a8ea52bd4e2855283e9bec7fb8c494874f3e903894814","status":"passed_with_full_go_runtime_suite_environmentally_incomplete"}
+  ],
+  "agent_image": {
+    "local_tag": "evmbench-eigenda-proxy:c1r4",
+    "config_digest": "sha256:a19fd5a96a57867a580dbb3bdea14547dbe65448a742073ce346d7ad220ca0cc",
+    "platform": "linux/amd64",
+    "size_bytes": 5415592446,
+    "candidate_layer_digest": "sha256:4829bfb1f66d5f23f91b77e4233ff76b61aba2e54945f1a2e7f38376b5032cc4",
+    "saved_image_tar_sha256": "7957e5b43276bc8221f04839a6ea2366b854aad331123edcd854085d201ccf99",
+    "published_to_registry": false
+  },
+  "validation_summary": {
+    "structural": "passed",
+    "source_build_and_focused_tests": "passed",
+    "docker_build": "passed",
+    "runtime_network": "none",
+    "final_and_layer_leakage": "passed",
+    "pdf_files_under_home_agent": 0,
+    "jsonl_files_under_home_agent": 0,
+    "candidate_admitted": false,
+    "harbor_task_generated": false,
+    "agent_or_model_run": false
+  },
+  "approval_requirement": {
+    "required_state_transition": "approved_for_admission",
+    "must_quote_exact_candidate_id": true,
+    "must_quote_review_manifest_sha256": true,
+    "must_supply_reviewer_identity": true,
+    "must_explicitly_accept_broader_bug_policy_exception": true,
+    "must_authorize_custom_noncanonical_detect_instruction": true,
+    "approval_not_contained_in_this_manifest": true
+  }
+}

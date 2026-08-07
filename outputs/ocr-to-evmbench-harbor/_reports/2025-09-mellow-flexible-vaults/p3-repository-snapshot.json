@@ -1,0 +1,41 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "phase": "P3",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "repository_url": "https://github.com/mellow-finance/flexible-vaults.git",
+  "review_clone": "/tmp/mellow-review.xSrGG4/flexible-vaults",
+  "head": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+  "object_type": "commit",
+  "root_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+  "parents": [
+    "01b0a4507a29703a776de79e5e007616d4efe591",
+    "acdc8e279fc0af868c9149351ebfdcd79971b69b"
+  ],
+  "author": "Sergey <mrbroume@gmail.com>",
+  "authored_at": "2025-08-12T13:45:03+04:00",
+  "subject": "Merge pull request #26 from mellow-finance/fixes/oracle-helper",
+  "detached_head": true,
+  "worktree_clean": true,
+  "recursive_submodules_initialized": true,
+  "recursive_submodules_clean": true,
+  "audited_scope": ["src/"],
+  "audited_solidity_file_count": 75,
+  "pdf_scope_equals_git_scope": true,
+  "framework": "foundry",
+  "solidity_version": "0.8.25",
+  "headline_initial_commit": "69413d545f788c0ad4ff7fe08085fb55589c5c61",
+  "headline_initial_contains_oracle_helper": false,
+  "final_fix_commit": "72f689f965e4ac1a4c2bcfb645a8b5416cf740c7",
+  "ancestry": {
+    "headline_initial_is_ancestor_of_selected": true,
+    "selected_is_ancestor_of_final": true
+  },
+  "license": {
+    "source_spdx": "BUSL-1.1 for the audited implementation, with one MIT interface",
+    "readme_spdx": "BUSL-1.1",
+    "standalone_license_file_present": false,
+    "package_json_license": "UNLICENSED",
+    "note": "License metadata is inconsistent; this is disclosed for human review and does not change source identity."
+  },
+  "status": "passed_with_disclosed_license_metadata_risk"
+}

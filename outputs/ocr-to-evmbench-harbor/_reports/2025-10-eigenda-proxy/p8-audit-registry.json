@@ -1,0 +1,17 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "checkout_revision": "48afb53c38969b7de8252a4897957f7df5ede673",
+  "loader": "evmbench.audit.audit_registry.get_audit",
+  "audit_id": "2025-10-eigenda-proxy",
+  "mode": "detect",
+  "vulnerability_count": 12,
+  "detect_max_award": 12.0,
+  "default_docker_image": "evmbench/audit:2025-10-eigenda-proxy",
+  "split_membership_count": 1,
+  "impact_policy": "broader_bug_detection",
+  "standard_evmbench_detect_compatible": false
+}

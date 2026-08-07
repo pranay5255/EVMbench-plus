@@ -1,0 +1,46 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "phase": "P1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "generated_at": "2026-08-04T15:20:19Z",
+  "status": "passed",
+  "workspace": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "10011ac7e802c04df6df2ca405ceaad0d83b6097",
+    "dirty_before_candidate": true,
+    "preexisting_status": [
+      "M docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md"
+    ],
+    "handling": "preserved; no reset, clean, stash, checkout, or staging"
+  },
+  "task_repository": {
+    "path": "/home/experiments_base/OPD_base/task_dir",
+    "head": "1e2cc53667a04a5d7c96b3cb8fc7fedf3094e890",
+    "dirty_before_candidate": true,
+    "preexisting_status_entry_count": 80,
+    "handling": "all unrelated untracked Securitize artifacts preserved; Mellow written only to its new candidate and report paths"
+  },
+  "canonical_forest_of_audits": {
+    "path": "/home/experiments_base/forestOfAudits",
+    "head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "branch": "main",
+    "dirty": true,
+    "status_entry_count": 94,
+    "written": false
+  },
+  "review_checkout": {
+    "path": "/tmp/mellow-review.xSrGG4/flexible-vaults",
+    "repository": "https://github.com/mellow-finance/flexible-vaults.git",
+    "head": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "detached": true,
+    "clean_including_recursive_submodules": true
+  },
+  "checks": [
+    {"id": "dirty_parent_workspace_preserved", "passed": true},
+    {"id": "dirty_task_repository_preserved", "passed": true},
+    {"id": "canonical_forest_read_only", "passed": true},
+    {"id": "fresh_disposable_review_checkout", "passed": true},
+    {"id": "mellow_paths_were_absent_before_materialization", "passed": true}
+  ],
+  "summary": {"ok": true}
+}

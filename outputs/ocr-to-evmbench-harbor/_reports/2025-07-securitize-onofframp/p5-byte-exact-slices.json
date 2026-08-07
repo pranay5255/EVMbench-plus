@@ -1,0 +1,16 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "ok": true,
+  "slices": {
+    "scope.pages.jsonl": [
+      6,
+      7,
+      8
+    ],
+    "H-01.pages.jsonl": [
+      10,
+      11
+    ]
+  },
+  "note": "Rows parsed equal to immutable OCR objects for selected page_numbers; written via JSONL line extraction."
+}

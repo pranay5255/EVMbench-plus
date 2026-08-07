@@ -1,0 +1,28 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_leakage.v1",
+  "phase": "P9",
+  "status": "passed",
+  "agent": {
+    "files_scanned": 10858,
+    "source_pdf_count": 0,
+    "ocr_jsonl_count": 0,
+    "gold_filename_count": 0,
+    "provenance_filename_count": 0,
+    "review_status_filename_count": 0,
+    "gold_title_marker_matches": 0,
+    "review_bundle_marker_matches": 0,
+    "reachable_repository_commit_count": 1,
+    "post_audit_commit_objects": 0,
+    "repository_clean": true
+  },
+  "verifier": {
+    "source_pdf_count": 0,
+    "ocr_jsonl_count": 0,
+    "provenance_filename_count": 0,
+    "review_status_filename_count": 0,
+    "runtime_credential_value_count": 0,
+    "gold_findings_present_for_grading": true,
+    "embedded_audit_file_count": 6,
+    "tests_packaged": true
+  }
+}

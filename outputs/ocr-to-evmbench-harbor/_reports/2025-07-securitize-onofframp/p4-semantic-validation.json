@@ -1,0 +1,24 @@
+{
+  "function_present": true,
+  "increments_nonce": true,
+  "missing_nonce_equality_check": true,
+  "hash_uses_txData_nonce": true,
+  "finding_mentions_commit": true,
+  "ok": true
+}
+HASH_TX_SNIPPET
+function hashTx(ExecutePreApprovedTransaction calldata txData) private view returns (bytes32) {
+        bytes32 structHash = keccak256(
+            abi.encode(
+                TXTYPE_HASH,
+                keccak256(bytes(txData.senderInvestor)),
+                txData.destination,
+                keccak256(txData.data),
+                txData.nonce
+            )
+        );
+
+        return _hashTypedDataV4(structHash);
+    }
+
+    function calculat

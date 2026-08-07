@@ -1,0 +1,10 @@
+state: approved_for_admission
+impact_policy: loss_of_assets
+human_approved: true
+approved_by: github.com/pranay5255
+approved_at: 2026-08-03T15:38:14Z
+approval_checkpoint: C1
+review_bundle_digest: 4c2d5501ea684386b006267e4b85af72377a8b8289fa8b8f8596b3410e4e7840
+candidate_admitted: false
+harbor_task_generated: false
+agent_or_model_run: false

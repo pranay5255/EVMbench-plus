@@ -1,0 +1,8 @@
+agent unique tag: docker.io/pranay5255/yudaii_evmbench:2025-07-securitize-onofframp-agent-e7b817b5c0bf5886-amd64
+agent alias tag: docker.io/pranay5255/yudaii_evmbench:2025-07-securitize-onofframp
+agent registry digest: sha256:359677e21c8bbb13409ceb85b5c2e089e9d1260c2fa42e041873eb51efaa02ed
+agent immutable pull image id: sha256:e7b817b5c0bf5886426650942585823d0e93740e240c61339e49946d1977c393
+verifier unique tag: docker.io/pranay5255/yudaii_evmbench:2025-07-securitize-onofframp-verifier-789994ef6445848e-amd64
+verifier alias tag: docker.io/pranay5255/yudaii_evmbench:2025-07-securitize-onofframp-verifier
+verifier registry digest: sha256:76a3bcd95bea624b14eb506977f40d3f1cbf751e7381271fc056eb5053b6fd02
+verifier immutable pull image id: sha256:789994ef6445848eb071539fd39d474e47bf3c88adde26679acca69cd7b3529f

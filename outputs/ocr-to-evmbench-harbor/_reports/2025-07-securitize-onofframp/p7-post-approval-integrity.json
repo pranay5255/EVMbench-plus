@@ -1,0 +1,17 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.post_approval_integrity.v1",
+  "phase": "P7",
+  "candidate_id": "2025-07-securitize-onofframp",
+  "generated_at": "2026-08-04T14:53:08Z",
+  "status": "passed",
+  "review_bundle_digest": "1e7a1c634591a268032ec3970839514f558df2635c3ebe985754f7c4ed20b404",
+  "c1_candidate_checksum_stream_sha256": "bbf9aad5f81e807065456cfb1422de64bac6a2390deeb6133afd1253ae3c74d3",
+  "approved_candidate_checksum_stream_sha256": "a9d4c95682d688288cb3d3a293b63a685435a0f85a6b033013751a8aebcc1888",
+  "files_changed_from_c1": [
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "only_approval_state_files_changed": true,
+  "dockerfile_no_copy_add": true,
+  "strict_require_approved_ok": true
+}

@@ -1,0 +1,6 @@
+evmbench__detect-2025-09-mellow-flexible-vaults/environment/README.md
+evmbench__detect-2025-09-mellow-flexible-vaults/instruction.md
+evmbench__detect-2025-09-mellow-flexible-vaults/task.toml
+evmbench__detect-2025-09-mellow-flexible-vaults/tests/evmbench_harbor_verifier.py
+evmbench__detect-2025-09-mellow-flexible-vaults/tests/test.sh
+evmbench__detect-2025-09-mellow-flexible-vaults/tests/validate_detect_submission.py

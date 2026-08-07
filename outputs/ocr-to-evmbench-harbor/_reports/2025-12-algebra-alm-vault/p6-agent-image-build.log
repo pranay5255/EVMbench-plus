@@ -1,0 +1,185 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.48kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 70B done
+#3 DONE 0.0s
+
+#4 [1/3] FROM docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0
+#4 CACHED
+
+#5 [2/3] RUN test "$(node --version)" = "v22.22.3"     && mkdir -p "/home/agent/audit"     && cd "/home/agent/audit"     && git init     && git remote add origin https://github.com/cryptoalgebra/AlmVault.git     && git fetch --depth=1 origin 57d820afa1d58bf89073e668f5608942d90188c7     && git checkout --detach FETCH_HEAD     && test "$(git rev-parse HEAD)" = "57d820afa1d58bf89073e668f5608942d90188c7"     && test "$(git rev-list --all --count)" = "1"     && test -z "$(git submodule status --recursive)"     && npm ci     && ./node_modules/.bin/hardhat compile     && ./node_modules/.bin/hardhat test     && find "/home/agent/audit" -type f ( -iname '*.pdf' -o -iname '*.jsonl' ) -delete     && find "/home/agent/audit" -mindepth 2 -name .git -prune -exec rm -rf {} +     && test -z "$(find "/home/agent/audit" -type f \( -iname '*.pdf' -o -iname '*.jsonl' \) -print -quit)"     && test -z "$(find "/home/agent/audit" -mindepth 2 -name .git -print -quit)"     && cd "/home/agent/audit"     && test "$(git rev-parse HEAD)" = "57d820afa1d58bf89073e668f5608942d90188c7"     && test "$(git rev-list --all --count)" = "1"     && test -z "$(git status --porcelain)"     && test -z "$(git ls-tree -r --name-only HEAD | grep -Ei '\.(pdf|jsonl)$')"
+#5 0.186 hint: Using 'master' as the name for the initial branch. This default branch name
+#5 0.186 hint: is subject to change. To configure the initial branch name to use in all
+#5 0.186 hint: of your new repositories, which will suppress this warning, call:
+#5 0.186 hint: 
+#5 0.186 hint: 	git config --global init.defaultBranch <name>
+#5 0.186 hint: 
+#5 0.186 hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+#5 0.186 hint: 'development'. The just-created branch can be renamed via this command:
+#5 0.186 hint: 
+#5 0.186 hint: 	git branch -m <name>
+#5 0.187 Initialized empty Git repository in /home/agent/audit/.git/
+#5 1.257 From https://github.com/cryptoalgebra/AlmVault
+#5 1.257  * branch            57d820afa1d58bf89073e668f5608942d90188c7 -> FETCH_HEAD
+#5 1.266 HEAD is now at 57d820a Merge branch 'feature/farming-rewards' into integral-1.2.2
+#5 14.95 
+#5 14.95 added 717 packages, and audited 718 packages in 14s
+#5 14.95 
+#5 14.95 154 packages are looking for funding
+#5 14.95   run `npm fund` for details
+#5 15.00 
+#5 15.00 63 vulnerabilities (14 low, 19 moderate, 29 high, 1 critical)
+#5 15.00 
+#5 15.00 To address issues that do not require attention, run:
+#5 15.00   npm audit fix
+#5 15.00 
+#5 15.00 To address all issues possible (including breaking changes), run:
+#5 15.00   npm audit fix --force
+#5 15.00 
+#5 15.00 Some issues need review, and may require choosing
+#5 15.00 a different dependency.
+#5 15.00 
+#5 15.00 Run `npm audit` for details.
+#5 15.01 npm notice
+#5 15.01 npm notice New major version of npm available! 10.9.8 -> 12.0.2
+#5 15.01 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+#5 15.01 npm notice To update run: npm install -g npm@12.0.2
+#5 15.01 npm notice
+#5 15.77 [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+#5 15.95 Downloading compiler 0.8.20
+#5 42.90 Warning: This declaration shadows an existing declaration.
+#5 42.90    --> contracts/AlgebraVault.sol:385:9:
+#5 42.90     |
+#5 42.90 385 |         int24 currentTick,
+#5 42.90     |         ^^^^^^^^^^^^^^^^^
+#5 42.90 Note: The shadowed declaration is here:
+#5 42.90     --> contracts/AlgebraVault.sol:1046:5:
+#5 42.90      |
+#5 42.90 1046 |     function currentTick() public view override returns (int24) {
+#5 42.90      |     ^ (Relevant source part starts here and spans across multiple lines).
+#5 42.90 
+#5 42.90 
+#5 42.90 Warning: This declaration shadows an existing declaration.
+#5 42.90    --> contracts/AlgebraVault.sol:764:9:
+#5 42.90     |
+#5 42.90 764 |         int24 currentTick = currentTick();
+#5 42.90     |         ^^^^^^^^^^^^^^^^^
+#5 42.90 Note: The shadowed declaration is here:
+#5 42.90     --> contracts/AlgebraVault.sol:1046:5:
+#5 42.90      |
+#5 42.90 1046 |     function currentTick() public view override returns (int24) {
+#5 42.90      |     ^ (Relevant source part starts here and spans across multiple lines).
+#5 42.90 
+#5 42.90 
+#5 42.99 Generating typings for: 84 artifacts in dir: types for target: ethers-v6
+#5 45.31 Successfully generated 216 typings!
+#5 45.31 Compiled 85 Solidity files successfully (evm target: paris).
+#5 46.00 [dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+#5 46.55 
+#5 46.55 
+#5 46.55   AlgebraVault General Functionality
+#5 47.19     ✔ deposit with zero amount
+#5 47.24     ✔ deposit from only Alice account
+#5 47.29     ✔ deposit and withdraw
+#5 47.35     ✔ multiple users deposit and withdraw
+#5 47.40     ✔ multiple users deposit with different amounts
+#5 47.44     ✔ alice withdraw amount greater than her deposited
+#5 47.48     ✔ swap and deposit in same block
+#5 47.53     ✔ multiple users deposit and alice withdraw amount greater than her deposited
+#5 47.59     ✔ rebalance after deposited amount
+#5 47.64     ✔ withdraw after deposit and rebalance
+#5 47.69     ✔ withdraw after deposit and rebalance with swap
+#5 47.73     ✔ deposit with deposit guard
+#5 47.76     ✔ deposit with deposit guard with native deposit
+#5 47.80     ✔ native deposit with deposit guard
+#5 47.83     ✔ deposit guard -- forward withdraw from algebra vault
+#5 47.87     ✔ withdraw with deposit guard with native withdraw
+#5 47.92     ✔ deposit guard -- deposit and withdraw native after rebalance
+#5 47.95     ✔ Deposit guard - deposit token if this token not allowed
+#5 47.98     ✔ DepositGuard - deposit another token
+#5 48.03     ✔ deposit after set DepositMax==0
+#5 48.07     ✔ deposit from one with flashloan
+#5 48.12     ✔ Withdraw to vault address
+#5 48.18     ✔ Collected fees (38ms)
+#5 48.26     ✔ Deposit from two accounts and Collect fees (44ms)
+#5 48.32     ✔ deposit after tranfer token1 to vault
+#5 48.36     ✔ Delta balances after withdrowal
+#5 48.41     ✔ check Lp balance
+#5 48.44     ✔ check baseLower
+#5 48.48     ✔ check baseUpper
+#5 48.53     ✔ check limitPosition
+#5 48.56     ✔ check setAuxTwapPeriod
+#5 48.58     ✔ check hysteresis
+#5 48.61     ✔ check change rebalance manager
+#5 48.66     ✔ check setHysteresis
+#5 48.71     ✔ check Hysteresis and auxTWAP=0
+#5 48.75     ✔ check factory: setAmmFee
+#5 48.78     ✔ check factory: setBaseFee
+#5 48.81     ✔ check factory: setBaseFeeSplit
+#5 48.84     ✔ check createAlgebraVault
+#5 48.84 
+#5 48.85   AlgebraVault General Functionality (allowed token1)
+#5 48.90     ✔ deposit and withdraw token1 if allowed token1
+#5 48.90 
+#5 48.90   Farming Integration
+#5 48.90     With deposits
+#5 48.96       ✔ Enters farming on rebalance
+#5 49.03       ✔ CollectRewards()
+#5 49.03       Rewards Distribution
+#5 49.12         ✔ Collects rewards on first stake but does not update
+#5 49.21         ✔ Should handle rewards accrual when no users are staking
+#5 49.21         Not first stakers
+#5 49.33           ✔ Should handle unstaking correctly and update reward claims
+#5 49.46           ✔ Handles getReward for specific reward tokens correctly (46ms)
+#5 49.61           ✔ Distributes rewards correctly between multiple users (59ms)
+#5 49.72           ✔ Updates rewards on the subsequent stakes
+#5 49.82           ✔ Transfers rewards to distributor contract on alm deposit
+#5 49.94           ✔ Transfers rewards to distributor contract on rebalance
+#5 50.04           ✔ Transfers rewards to distributor contract on withdraw
+#5 50.18           ✔ Distribute reward after blurred shares (48ms)
+#5 50.28           ✔ Puase/Unpause stake
+#5 50.38           ✔ Recover erc20
+#5 50.47           ✔ check getUserRewardPerToken
+#5 50.55           ✔ check getUserData
+#5 50.55       Farming detach
+#5 50.65         ✔ pos has rewards after detach
+#5 50.76         ✔ ALM participates in new farming after detach
+#5 50.90         ✔ Add new token as reward (44ms)
+#5 50.90 
+#5 50.90   Access Control Checks
+#5 50.94     ✔ AlgebraVault
+#5 50.94 
+#5 50.94   Input Validation Checks
+#5 51.02     ✔ AlgebraVaultFactory - misc (39ms)
+#5 51.08     ✔ AlgebraVaultFactory - createAlgebraVault
+#5 51.14     ✔ AlgebraVault - manual calls
+#5 51.19     ✔ AlgebraVault - disconnected plugin
+#5 51.29     ✔ AlgebraVault - deposit (60ms)
+#5 51.34     ✔ AlgebraVault - withdraw
+#5 51.40     ✔ AlgebraVault - rebalance
+#5 51.44     ✔ AlgebraVault - setTwapPeriod
+#5 51.48     ✔ AlgebraVault - setHysteresis
+#5 51.52     ✔ AlgebraVault - setAmmFeeRecipient
+#5 51.57     ✔ AlgebraVault - symbol
+#5 51.57 
+#5 51.57 
+#5 51.57   71 passing (5s)
+#5 51.57 
+#5 DONE 52.0s
+
+#6 [3/3] WORKDIR /home/agent
+#6 DONE 0.0s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 4.6s done
+#7 writing image sha256:e2583186e2053a193f18b540118fa7de226d473781ec12050d61a3abdae5cc84 done
+#7 naming to docker.io/ocr-evmbench-c1/2025-12-algebra-alm-vault:c1-local done
+#7 DONE 4.6s

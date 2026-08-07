@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.pdf_validation.v1",
+  "validated_at": "2026-08-03T14:02:55Z",
+  "pdf_id": "pdf_003106_6a277b0bfd56",
+  "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/audits/team/pdf/AgoraStableSwap-security-review_2025-06-05.pdf",
+  "size_bytes": 2556141,
+  "expected_sha256": "a985d452fac4a3490c7186390a475da0cdf7fc9258c177310505a46909f5ba41",
+  "actual_sha256": "a985d452fac4a3490c7186390a475da0cdf7fc9258c177310505a46909f5ba41",
+  "sha256_match": true,
+  "expected_page_count": 29,
+  "physical_page_count": 29,
+  "page_count_match": true,
+  "encrypted": false,
+  "source_abs_path_consistent_across_ocr_rows": true,
+  "review": {
+    "pdf_text_and_ocr_complete_exported_page_range": {
+      "first": 1,
+      "last": 29,
+      "complete": true
+    },
+    "visually_rendered_pdf_pages_reviewed": [6, 7, 10, 15, 20, 25],
+    "page_boundary_source": "exported page_number",
+    "raw_response_ref_used_for_boundaries": false
+  },
+  "result": "pass"
+}

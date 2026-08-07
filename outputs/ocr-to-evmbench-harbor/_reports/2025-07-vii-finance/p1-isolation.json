@@ -1,0 +1,38 @@
+{
+  "schema": "ocr_to_evmbench_harbor.isolation.v1",
+  "candidate_id": "2025-07-vii-finance",
+  "recorded_at": "2026-08-03T14:58:56Z",
+  "source_ocr": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003614_a668da0d1f36.jsonl",
+    "sha256": "a7f39dffc24729be5272933d8786ffd2eed1eea631caad0ab32ae6e558006d43",
+    "immutable": true
+  },
+  "source_pdf": {
+    "path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/cyfrin-audit-reports/reports/2025-07-15-cyfrin-vii-v2.0.pdf",
+    "sha256": "ede34aec32fceb463b22923d707aa96f624844305b789ea27cfa39c5ff9fcc9e",
+    "immutable": true
+  },
+  "parent_workspace": {
+    "path": "/home/experiments_base/OPD_base",
+    "head": "550ff8cfcea1bac7eb91145fd56df9c729cedf93",
+    "dirty_before_vii": true,
+    "preserved_change": "docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md",
+    "modified_by_vii_work": false
+  },
+  "nested_task_repository": {
+    "path": "/home/experiments_base/OPD_base/task_dir",
+    "head": "fb4d1423b22103738e442454d6fd1cf5a565cd46",
+    "remote": "https://github.com/pranay5255/EVMbench-plus-plus.git",
+    "dirty_before_vii": true,
+    "preserved_unrelated_prefix": "outputs/ocr-to-evmbench-harbor/_reports/pdf_003106_6a277b0bfd56/"
+  },
+  "repository_review": {
+    "path": "/tmp/vii-audit-review",
+    "isolated_clone": true,
+    "detached_head": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+    "canonical_or_sibling_checkout_modified": false
+  },
+  "canonical_evmbench_modified": false,
+  "harbor_generated": false,
+  "agent_or_model_run": false
+}

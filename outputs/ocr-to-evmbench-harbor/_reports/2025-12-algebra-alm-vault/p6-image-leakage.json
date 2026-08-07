@@ -1,0 +1,12 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_leakage.v1",
+  "scope": "home_agent_and_audit_dir_focused",
+  "image_id": "sha256:e2583186e2053a193f18b540118fa7de226d473781ec12050d61a3abdae5cc84",
+  "focused_hits": {
+    "hits": [],
+    "count": 0
+  },
+  "base_image_false_positive_paths_ignored": true,
+  "note": "Full export matched base-image pdf/provenance library paths; focused scan is authoritative for candidate leakage",
+  "result": "PASS"
+}

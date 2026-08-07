@@ -1,0 +1,110 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_integrity.v1",
+  "phase": "P12",
+  "generated_at": "2026-08-01T16:30:29Z",
+  "status": "passed_with_end_to_end_model_smoke_not_authorized",
+  "final_integrity_audit": "passed",
+  "candidate_id": "2025-03-omni-solvernet",
+  "approval": {
+    "review_checkpoint": "C1r1",
+    "review_bundle_digest": "aebcc04704be1f8c61071f97a9b93262f330476c41b565a82f2517877a2491c2",
+    "reviewer": "github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "approved_at": "2026-08-01T16:14:07Z"
+  },
+  "source_evidence": {
+    "pdf_sha256": "5dfb020aa5da82c777e709bce0908f7584136d60d529a10d5305d200ae1b47a1",
+    "ocr_sha256": "756098f76d858d5bb7381ca48be8300e9240b09cbe9d21044111af30c263d01f",
+    "task_group_key_sha256": "471216e36eedc9a7df416d30c015ef310945b393953e581dbacbfca9c424c53b",
+    "hashes_unchanged": true
+  },
+  "candidate": {
+    "path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-03-omni-solvernet",
+    "file_count": 15,
+    "finding_count": 4,
+    "vulnerable_commit": "3ef37ae2704db4e1dcb8fc3f7acbb8babb543e8c",
+    "checksum_stream_sha256": "5d6985905cc003b1cb3683f3b71f382fd8ffbdaa1c044808db59aee353e74c38",
+    "matches_approved_bundle": true,
+    "current_and_pinned_strict_validators_passed": true
+  },
+  "admission": {
+    "isolated_path": "/tmp/omni-c1r1-admission.pcOOk0/forest-of-audits/project/evmbench/audits/2025-03-omni-solvernet",
+    "forest_compatible_base_revision": "1db91e36ec6f7c5975a8779b6ad930503c23e9d4",
+    "adapter_revision": "adfe07615981a678123cf61d7a69a6aee08228c9",
+    "isolated_start_revision": "8e5067f1ad5f180f753df5811b7e2f7c52b01c62",
+    "admission_commit": "797fd1d91a6a9ab735d7f9c3aac770533e4792dd",
+    "isolated_checkout_clean": true,
+    "candidate_and_admitted_byte_identical": true,
+    "admitted_checksum_stream_sha256": "5d6985905cc003b1cb3683f3b71f382fd8ffbdaa1c044808db59aee353e74c38",
+    "strict_validator_ok": true,
+    "canonical_checkout_written": false,
+    "canonical_checkout_observed_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "canonical_checkout_status_entry_count": 94,
+    "canonical_checkout_porcelain_v1_z_sha256": "887b61dc8ef547c42bad96952112ff2824cd68bdd0d21c5dbc2d5140b34216ce",
+    "canonical_checkout_external_drift_preserved": true
+  },
+  "images": {
+    "agent": "docker.io/pranay5255/yudaii_evmbench@sha256:49c243e67cd70ec868f94f78858c1b64ff6da60119c08202e6c34310e41fbbea",
+    "agent_image_id": "sha256:52c551772e3190ef268a386601f379b7dc729d9cb7680482076845fc0c13f8f1",
+    "agent_image_matches_reviewed_image": true,
+    "agent_active_foundry_version": "1.3.6-v1.3.6",
+    "agent_downloaded_foundry_tar_sha256": "cf7e688ed0c4c48adffca788b496076e31060b67ac5afe1e43dbb5499c20c88b",
+    "agent_offline_foundry_tests": "37/37 passed",
+    "verifier": "docker.io/pranay5255/yudaii_evmbench@sha256:969b4cf199a8c7cf1beb94987adebf2a3c335e7afc1efc1019f5f5b12eb323f4",
+    "verifier_image_id": "sha256:bc1fe427be885d4570cf016d9c869dccb23552b23404bd51cd7cc1485382dcef",
+    "verifier_source_admission_commit_label": "797fd1d91a6a9ab735d7f9c3aac770533e4792dd",
+    "verifier_embedded_grader_subset_checksum_stream_sha256": "6a9ea0f9eac6e0f3b19d5cbedb266bfcf026774800cd272d6a99fd978a5369c5",
+    "registry_manifests_verified": true,
+    "image_isolation_passed": true,
+    "leakage_scan_passed": true
+  },
+  "harbor_task": {
+    "path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-03-omni-solvernet/evmbench__detect-2025-03-omni-solvernet",
+    "task_count": 1,
+    "regular_file_count": 6,
+    "symlink_count": 0,
+    "checksum_stream_sha256": "1b2f20ec7592ed913fee8670a479fe0148c70210311b41baaa2b6cf4d589ea62",
+    "task_name": "evmbench/detect-2025-03-omni-solvernet",
+    "schema_version": "1.3",
+    "harbor_version": "0.20.0",
+    "task_load_status": "passed",
+    "leakage_status": "passed",
+    "forbidden_content_match_count": 0,
+    "agent_network_mode": "no-network",
+    "environment_network_mode": "no-network"
+  },
+  "runtime_validation": {
+    "end_to_end_model_smoke": "not_authorized",
+    "agent_or_model_run_launched": false,
+    "verifier_packaging_replay": "passed",
+    "replay_runtime_network": "none",
+    "replay_submission_kind": "synthetic_empty",
+    "judge_or_model_call_made": false,
+    "json_submission_valid": true,
+    "score": 0,
+    "max_score": 4,
+    "score_is_agent_evaluation": false,
+    "reward_artifact_sha256": "e8932417f2e85b1fb7dd4c36b1625d2de47218522fabafe072f0b1bed0e8590e",
+    "full_grade_artifact_sha256": "98b67cf8ba65adea77e43e49b4669ec8902ef3c87a0ee30c5027e205ea0ec4ea",
+    "grade_audit_id": "2025-03-omni-solvernet"
+  },
+  "queue": {
+    "ledger_sha256": "baf942a0c4785ab4b13973bd0381378495eaef57f58e5acd7aac7b45ef3a9cc2",
+    "created": 8,
+    "blocked": 3,
+    "in_review": 1,
+    "next": 1,
+    "queued": 7,
+    "omni_solvernet_state": "created",
+    "next_task": "Benqi Governance"
+  },
+  "gates": {
+    "P7_approval_binding": "passed",
+    "P8_isolated_admission": "passed",
+    "P9_image_build_publish_isolation": "passed",
+    "P10_single_task_generation_and_leakage": "passed",
+    "P11_harbor_task_load": "passed",
+    "P12_verifier_replay": "passed",
+    "P12_end_to_end_model_smoke": "not_authorized"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.agent_image_validation.v1",
+  "phase": "P6",
+  "candidate_id": "2025-07-vii-finance",
+  "created_at": "2026-08-03T15:28:53Z",
+  "tag": "evmbench-vii-finance:c1",
+  "image_id": "sha256:0292eb58bc370423f63ee30b82f8dd39f3c2544283dbd79c947652b0a8c3c418",
+  "size_bytes": 4265042400,
+  "local_only": true,
+  "repo_digests": [],
+  "base_image": "docker.io/pranay5255/yudaii_evmbench@sha256:745a1f8d9c49a855f02d0a7254e902f139f4d385a889d1815d699ab05c16c1a0",
+  "base_image_id": "sha256:fc20d776501708f9236e87b0e853d03f66d3b75af41a9ab1d1aad2c8b2c72fb9",
+  "candidate_layer_diff_id": "sha256:0901a722533c9f08069bd3feed17bc0adae4ebc038ee9a7ab781074c0820b426",
+  "candidate_layer_raw_size_bytes": 695667712,
+  "build": {
+    "no_cache": true,
+    "status": "passed",
+    "exact_commit": "2a3a72c675a580dcdeb2f7d733d40c6bfb1b3dc7",
+    "root_reachable_commit_count": 1,
+    "compiled_solidity_files": 183,
+    "offline_tests_passed": 11,
+    "offline_tests_failed": 0
+  },
+  "network_disabled_replay": {
+    "status": "passed",
+    "docker_network_mode": "none",
+    "head_verified": true,
+    "clean_worktree": true,
+    "required_submodule_heads_verified": 8,
+    "build_passed": true,
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "pdf_or_jsonl_files_under_home": 0,
+    "known_fixed_commits_reachable": 0
+  },
+  "build_correction": {
+    "first_attempt_status": "failed_closed",
+    "reason": "A transitive OpenZeppelin dependency contained a tracked audit PDF, so the image's final no-PDF guard rejected the first build after compile and tests passed.",
+    "resolution": "The same acquire/build layer marks tracked PDF and JSONL paths skip-worktree, deletes those files, rechecks a clean repository, and requires zero such files before committing the layer.",
+    "semantic_candidate_changed": false,
+    "final_no_cache_rebuild": "passed"
+  },
+  "summary": {"ok": true, "registry_publication_allowed": false}
+}

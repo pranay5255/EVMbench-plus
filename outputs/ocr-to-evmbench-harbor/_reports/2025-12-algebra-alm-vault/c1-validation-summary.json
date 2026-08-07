@@ -1,0 +1,21 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "candidate_id": "2025-12-algebra-alm-vault",
+  "review_bundle_digest": "2c000284d67d69a48f3d9f44f4181f5b47a23277ff55c08bd6bddf862648bb08",
+  "checks": {
+    "ocr_gate1": "PASS",
+    "pdf_gate2": "PASS",
+    "repository_gate3": "PASS",
+    "byte_exact_slices": true,
+    "semantic": "PASS",
+    "structural_current": true,
+    "structural_pinned_38957485": true,
+    "candidate_leakage": "PASS",
+    "image_leakage_focused": "PASS",
+    "repository_validation": "PASS",
+    "host_compile_tests": "71 passing",
+    "image_build_tests": "71 passing",
+    "network_disabled_image_head_check": "PASS"
+  },
+  "ok": true
+}

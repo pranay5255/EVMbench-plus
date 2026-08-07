@@ -1,0 +1,48 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "pdf_id": "pdf_003106_6a277b0bfd56",
+  "source_ocr_modified": false,
+  "basis": "hash-verified PDF rendering and extracted PDF text",
+  "material_corrections": [
+    {
+      "page_number": 1,
+      "ocr": "Oxbepresent / Oxunforgiven",
+      "pdf": "0xbepresent / 0xunforgiven"
+    },
+    {
+      "page_number": 10,
+      "ocr": "token00verToken1 and token00OverToken1",
+      "pdf": "token0OverToken1"
+    },
+    {
+      "page_number": 12,
+      "ocr": "duplicated token@ identifiers in the _sync snippet",
+      "pdf": "distinct token0/token1 balances, reserves, and fee accumulators"
+    },
+    {
+      "page_number": 16,
+      "ocr": "!UniswapV2Callee and duplicated amount identifiers",
+      "pdf": "IUniswapV2Callee with amount0/amount1 identifiers"
+    },
+    {
+      "page_number": 17,
+      "ocr": "negative-rate branch loses the unary minus in places",
+      "pdf": "uint256(-_perSecondInterestRate)"
+    },
+    {
+      "page_number": 23,
+      "ocr": "@openzepipeline, setup, and -3le18",
+      "pdf": "@openzeppelin, setUp, and -31e18"
+    },
+    {
+      "page_number": 27,
+      "ocr": "corrupted token addresses, IERC20 types, and fee field names",
+      "pdf": "token0Address/token1Address, IERC20, and purchase-fee fields"
+    },
+    {
+      "page_number": 29,
+      "ocr": "bytes& caldata and malformed collectFees token accessor",
+      "pdf": "bytes calldata and pair.token1()"
+    }
+  ]
+}

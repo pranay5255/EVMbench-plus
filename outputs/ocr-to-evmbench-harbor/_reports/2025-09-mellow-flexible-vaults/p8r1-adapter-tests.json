@@ -1,0 +1,13 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.adapter_tests.v1",
+  "phase": "P8R1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "generated_at": "2026-08-04T16:18:43Z",
+  "command": "PYTHONDONTWRITEBYTECODE=1 /home/experiments_base/forestOfAudits/project/evmbench/.venv/bin/python -m pytest -q -p no:cacheprovider tests/test_harbor_adapter.py",
+  "working_directory": "/tmp/mellow-c1r1-admission.xGAMgO/forest-of-audits/project/evmbench",
+  "passed": 7,
+  "failed": 0,
+  "warnings": 17,
+  "exit_code": 0,
+  "status": "passed"
+}

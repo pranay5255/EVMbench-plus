@@ -1,0 +1,32 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_validation.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "checkout": "/tmp/mellow-review.xSrGG4/flexible-vaults",
+  "expected_head": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+  "actual_head": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+  "expected_root_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+  "actual_root_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+  "detached_head": true,
+  "main_worktree_clean": true,
+  "recursive_submodule_drift_entries": 0,
+  "audited_scope_file_count": 75,
+  "git_scope_file_count": 75,
+  "missing_audited_paths": [],
+  "extra_git_paths": [],
+  "tracked_pdf_or_jsonl_count": 0,
+  "source_file_checks": [
+    {
+      "path": "src/oracles/OracleHelper.sol",
+      "git_blob": "d6307f4d2811c5058d8407415ac198995a49f036",
+      "sha256": "8cfc34f34c911121eeabbebb4ccd3f49b7c7547ddadfb8b97b33a21e39eac20e",
+      "matches": true
+    },
+    {
+      "path": "src/managers/FeeManager.sol",
+      "git_blob": "71ae13ab35729b1706a258ffc6a57ca53ee5ffee",
+      "sha256": "14a1567334108c7d114344f8a11ec8cabc2ea0498aefaee3107fcbfbbd24fffa",
+      "matches": true
+    }
+  ],
+  "status": "passed"
+}

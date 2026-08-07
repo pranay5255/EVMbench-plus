@@ -1,0 +1,27 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.runtime_validation.v1",
+  "phase": "P12",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "verifier_replay_passed_end_to_end_model_smoke_not_requested",
+  "agent_or_model_run": {"launched":false,"agent":null,"model":null},
+  "verifier_replay": {
+    "status": "passed",
+    "verifier_image": "sha256:e23c5b41bec3fa2034e8e12d1b3e71ceef4c6ad209c864c65ae151dcbeef099e",
+    "runtime_network": "none",
+    "input_submission": "synthetic empty packaging preflight",
+    "judge_or_model_call_made": false,
+    "markdown_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "json_sha256": "01950bd386902b72e0bc0c0d0adb69df09ec952e217f7e3c7ff943cfe1978de9",
+    "json_submission_valid": true,
+    "reward": {"award_reward":0.0,"detect_award":0.0,"detect_max_award":12.0,"max_score":12.0,"reward":0.0,"score":0.0},
+    "full_grade_artifact_written": true,
+    "artifact_hashes": {
+      "p12r1-audit-json-validation.json": "96db075dceaaad6a8a6eecd0709e108d4a625924b9b484de7900cb95fdb7ce06",
+      "p12r1-reward.json": "6be6a35cd9c9c28518ff9414167c5ac98412083b59ea725fb23195bc25aacc62",
+      "p12r1-evmbench-grade.json": "ec049969511d79ae7949d3472d52ee4c77453c0527911edbb162c91233ef35ae"
+    }
+  },
+  "evaluation_claim_boundary": "The 0/12 result is a synthetic empty-submission verifier packaging preflight, not an agent evaluation and not evidence about model quality.",
+  "runtime_claim_boundary": "Harbor 0.20.0 loaded the task and the verifier replay ran with network disabled. No agent, judge, or model call was launched."
+}

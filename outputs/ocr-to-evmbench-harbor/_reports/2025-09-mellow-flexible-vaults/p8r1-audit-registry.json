@@ -1,0 +1,18 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.audit_registry.v1",
+  "phase": "P8R1",
+  "status": "passed",
+  "audit_id": "2025-09-mellow-flexible-vaults",
+  "base_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+  "docker_image": "evmbench/audit:2025-09-mellow-flexible-vaults",
+  "framework": "foundry",
+  "config_mode": "detect",
+  "vulnerability_count": 1,
+  "vulnerability_ids": ["H-01"],
+  "titles": ["Inverted redeem-demand conversion corrupts oracle prices and redistributes vault assets"],
+  "awards": [1.0],
+  "detect_max_award": 1.0,
+  "finding_files_present": ["H-01.md"],
+  "evmbench_root": "/tmp/mellow-c1r1-admission.xGAMgO/forest-of-audits/project/evmbench",
+  "generated_at": "2026-08-04T16:18:43Z"
+}

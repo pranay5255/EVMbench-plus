@@ -1,0 +1,74 @@
+# Gold audit findings — 2025-12-algebra-alm-vault
+
+Detect-only gold for MixBytes Algebra ALM vault findings grounded at
+`cryptoalgebra/AlmVault@57d820afa1d58bf89073e668f5608942d90188c7` under the
+`loss_of_assets` policy.
+
+# [H-01] Rounding error allows theft of user deposits via donation attack
+
+## Affected code
+
+- `contracts/AlgebraVault.sol`: `deposit`, constant `MIN_SHARES`
+- Withdrawal path that pro-rates idle vault balances by share ownership
+
+## Root cause
+
+`AlgebraVault.deposit` mints shares with Solidity integer division that floors.
+When total supply is already non-zero, shares are computed as:
+
+```solidity
+shares = shares.mul(_totalSupply).div(pool0PricedInToken1.add(pool1));
+```
+
+There is no check that the resulting `shares` is non-zero before
+`_mint(to, shares)`. Combined with a small bootstrap multiplier
+(`MIN_SHARES = 1000`), an attacker can inflate the vault's measured pool value
+by donating tokens so that a later legitimate deposit rounds to zero shares
+while the deposited ERC-20 amounts remain in the vault.
+
+## Prerequisites
+
+- Attacker can be the first depositor (or otherwise hold the only outstanding
+  shares) and can transfer vault tokens directly into the contract.
+- Victim deposits through `AlgebraVault.deposit` without a positive
+  `minimumProceeds` slippage guard (direct vault deposit, or
+  `AlgebraVaultDepositGuard` with `minimumProceeds = 0`).
+
+## Exploit sequence
+
+1. Attacker deposits 1 wei and receives `1000` shares (`MIN_SHARES`).
+2. Attacker donates a large token balance directly to the vault, inflating
+   `getTotalAmounts()` / pool value used in the share formula.
+3. Victim deposits a normal amount; computed shares floor to `0`, so
+   `_mint(victim, 0)` leaves the victim with no claim while their tokens stay
+   in the vault.
+4. Attacker withdraws all `1000` shares and receives a pro-rata share of every
+   idle vault token, including the victim's deposited amount.
+
+## Impact
+
+Direct theft of victim deposit tokens by an unprivileged attacker. The stolen
+assets are withdrawn through the ordinary share-based withdraw path. The audit
+rated this Low because production users are expected to use
+`AlgebraVaultDepositGuard` with slippage protection, which reverts a zero-share
+mint when `minimumProceeds > 0`; the vulnerable path remains in the vault
+itself.
+
+## Code evidence
+
+At audited vulnerable commit `57d820afa1d58bf89073e668f5608942d90188c7`:
+
+- `MIN_SHARES = 1000` at `contracts/AlgebraVault.sol:42`
+- Share mint path at approximately lines 581–588 multiplies by total supply,
+  divides by pool value, and calls `_mint` with no `shares == 0` revert
+
+The client's fix commit `9f5f362a3723e9ec6fe8686fd30a22948653e1d8` raises
+`MIN_SHARES` to `1e6` and reverts when computed shares are zero. That fix is
+present on the later re-audit commit
+`d637339f968d67f175e8cb56ce3ae54a69bdefee` and is intentionally not the task
+snapshot.
+
+## Remediation
+
+Increase `MIN_SHARES` enough to make donation inflation uneconomical, and
+revert any deposit that would mint zero shares.

@@ -1,0 +1,11 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.isolation.v1",
+  "recorded_at": "2026-08-04T14:41:55Z",
+  "canonical_forest_checkout": "/home/experiments_base/forestOfAudits/project/evmbench",
+  "canonical_forest_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+  "canonical_forest_dirty": true,
+  "canonical_forest_modified": false,
+  "review_clone": "/tmp/grok-goal-901aea266828/implementer/bc-on-off-ramp-sc",
+  "review_clone_head": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+  "opd_base_touched_for_admission": false
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.ocr_corrections.v1",
+  "recorded_at": "2026-08-04T14:43:46Z",
+  "immutable_ocr_rewritten": false,
+  "corrections": [
+    {
+      "location": "gold findings",
+      "ocr_form": "SecuritieOnRamp",
+      "corrected_form": "SecuritizeOnRamp",
+      "source": "PDF + repository"
+    },
+    {
+      "location": "scope paths",
+      "ocr_form": "bc-on-off-contracts\\\\contracts\\\\...",
+      "corrected_form": "contracts/...",
+      "source": "repository tree"
+    },
+    {
+      "location": "summary table commit",
+      "ocr_form": "a944bb11b106...",
+      "corrected_form": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+      "source": "GitHub unique object for prefix"
+    }
+  ]
+}

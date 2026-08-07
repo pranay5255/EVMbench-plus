@@ -1,0 +1,6 @@
+{
+  "errors": [],
+  "schema_version": "evmbench.detect_submission.v1",
+  "submission_path": "/home/agent/submission/audit.json",
+  "valid": true
+}

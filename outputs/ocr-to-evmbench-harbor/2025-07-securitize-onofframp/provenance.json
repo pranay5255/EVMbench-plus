@@ -1,0 +1,208 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-07-securitize-onofframp",
+  "materialized_at": "2026-08-04T14:43:46Z",
+  "phase": "P12",
+  "review_state": "admitted",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "checkpoint": "C1",
+    "review_bundle_digest": "1e7a1c634591a268032ec3970839514f558df2635c3ebe985754f7c4ed20b404",
+    "approved_at": "2026-08-04T14:53:08Z",
+    "reviewer_identity": "github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "reviewer_github_html_url": "https://github.com/pranay5255",
+    "explicit_admission_approval": true
+  },
+  "task_identity": {
+    "task_group_key": "contracts/common/BaseContract.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/common/Errors.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/fee/MbpsFeeManager.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/off-ramp/CountryValidator.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/off-ramp/provider/AllowanceLiquidityProvider.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/off-ramp/provider/CollateralLiquidityProvider.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/off-ramp/RedemptionManager.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/off-ramp/RedemptionValidator.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/off-ramp/SecuritizeOffRamp.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/off-ramp/TokenCalculator.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/on-ramp/ISecuritizeOnRamp.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/on-ramp/provider/AllowanceAssetProvider.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/on-ramp/provider/MintingAssetProvider.solsecuritize-io/bc-on-off-ramp-sc@a944bb11b106c13a5e43f8de01c9c01eeb5bb472|+contracts/on-ramp/SecuritizeOnRamp.sol|detect|loss_of_assets",
+    "task_group_key_sha256": "dec131fd32621786fc81c70656791670b78b7b5cd706befe0d6749bb5dd329ab",
+    "repository_slug": "securitize-io/bc-on-off-ramp-sc",
+    "vulnerable_commit": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+    "audited_scope": [
+      "contracts/common/BaseContract.sol",
+      "contracts/common/Errors.sol",
+      "contracts/fee/MbpsFeeManager.sol",
+      "contracts/off-ramp/CountryValidator.sol",
+      "contracts/off-ramp/provider/AllowanceLiquidityProvider.sol",
+      "contracts/off-ramp/provider/CollateralLiquidityProvider.sol",
+      "contracts/off-ramp/RedemptionManager.sol",
+      "contracts/off-ramp/RedemptionValidator.sol",
+      "contracts/off-ramp/SecuritizeOffRamp.sol",
+      "contracts/off-ramp/TokenCalculator.sol",
+      "contracts/on-ramp/ISecuritizeOnRamp.sol",
+      "contracts/on-ramp/provider/AllowanceAssetProvider.sol",
+      "contracts/on-ramp/provider/MintingAssetProvider.sol",
+      "contracts/on-ramp/SecuritizeOnRamp.sol"
+    ],
+    "mode": "detect",
+    "framework": "hardhat",
+    "impact_policy": "loss_of_assets"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_003618_4acdf39b26ba",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "2025-07-23-cyfrin-securitize-onofframp-bridge-v2.1.pdf",
+    "source_rel_path": "cyfrin-audit-reports/reports/2025-07-23-cyfrin-securitize-onofframp-bridge-v2.1.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/cyfrin-audit-reports/reports/2025-07-23-cyfrin-securitize-onofframp-bridge-v2.1.pdf",
+    "source_pdf_sha256": "3eae87e40dbad4acefcdf4175e3a943bffebd23272755b41fa881fbe817f27c6",
+    "size_bytes": 285812,
+    "physical_page_count": 27,
+    "report_identity": "Cyfrin Securitize On-Off Ramp and Bridge Audit Report v2.1",
+    "report_month": "2025-07",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_003618_4acdf39b26ba.jsonl",
+    "sha256": "10378faf737b4757af74693161c77d8c66c76c98aa9309eb31cd80813b07433c",
+    "size_bytes": 226156,
+    "record_count": 27,
+    "source_page_count": 27,
+    "created_at": "2026-06-30T16:26:15.964870+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "_reports/2025-07-securitize-onofframp/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 18,
+    "selection": "selected-20-batch",
+    "category": "Bridge/Cross-chain",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 23,
+    "heuristic_unique_issue_ids": 24,
+    "reviewed_report_finding_count": 24,
+    "out_of_queue_order": false,
+    "canonical_next_at_start": "rank 18 Securitize Bridge"
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/securitize-io/bc-on-off-ramp-sc.git",
+    "repository_slug": "securitize-io/bc-on-off-ramp-sc",
+    "commit": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+    "commit_subject": "Merge pull request #6 from securitize-io/fix/twoSteps-with-slippage",
+    "commit_authored_at": "2025-07-07T12:37:25+02:00",
+    "root_tree": "414c5718a9daee2dc3ffdc52c2d4b68ce3659809",
+    "parents": [
+      "06377dfec1a8c622f3adac34085920cf99d5998a",
+      "ace148acd26971f98da201c9b8b02c914ed23964"
+    ],
+    "detached_head": true,
+    "clean_main_worktree": true,
+    "top_level_submodules_verified": true,
+    "required_nested_submodules_verified": true,
+    "review_clone": "/tmp/grok-goal-901aea266828/implementer/bc-on-off-ramp-sc",
+    "public_repository": true,
+    "repository_license_spdx": "Apache-2.0",
+    "tracked_pdf_or_jsonl_count": 0,
+    "path_prefix_note": "PDF lists Windows-style bc-on-off-contracts\\ paths; repository uses contracts/."
+  },
+  "required_submodules": [],
+  "file_evidence": [
+    {
+      "path": "contracts/on-ramp/SecuritizeOnRamp.sol",
+      "git_blob": "b4bdc26808e5679df672c9957607be086c2e9102",
+      "sha256": "3e10a580b9ad5a7b3dfcc98898e20ab24e7e726e3b31663f0d8cd3d37500c2ed"
+    }
+  ],
+  "related_unresolved_task_groups": [
+    {
+      "repository": "bc-securitize-bridge-sc",
+      "canonical_host": "bitbucket.org/securitize_dev/bc-securitize-bridge-sc",
+      "vulnerable_commit_prefix": "60b6ef00e8a8",
+      "fix_commit": "1da35cde31a53e7b2de56de0d313ebdcb80cbfa3",
+      "status": "blocked_exact_snapshot_unavailable",
+      "findings_held": [
+        "M-2",
+        "M-3",
+        "L-1",
+        "L-7",
+        "L-8",
+        "L-9",
+        "I-9"
+      ],
+      "reason": "Private Bitbucket repository; no public exact Git object recovered."
+    }
+  ],
+  "ocr_evidence": [
+    {
+      "finding_id": "SCOPE",
+      "page_number": 6,
+      "page_image_sha256": "849567cde018a9817ac44854803db1c5db4effa080914542c38c100c1c95a0e9",
+      "artifact_ref": "ocr_evidence/pdf_003618_4acdf39b26ba/scope.pages.jsonl"
+    },
+    {
+      "finding_id": "SCOPE",
+      "page_number": 7,
+      "page_image_sha256": "dd7205be9515b1d83d9fea976b6d2c92cd51dd7241e6257e1cbfe5483387deab",
+      "artifact_ref": "ocr_evidence/pdf_003618_4acdf39b26ba/scope.pages.jsonl"
+    },
+    {
+      "finding_id": "SCOPE",
+      "page_number": 8,
+      "page_image_sha256": "53b5c1ff68ad9231f5fa2b61aa08e388c5c86a49fe2d444efb9551b3b25194f4",
+      "artifact_ref": "ocr_evidence/pdf_003618_4acdf39b26ba/scope.pages.jsonl"
+    },
+    {
+      "finding_id": "H-01",
+      "page_number": 10,
+      "page_image_sha256": "d9b78f662be1944b9487f749fc78aebe8d115885fb020c5d4f7d2a1792d66ebf",
+      "artifact_ref": "ocr_evidence/pdf_003618_4acdf39b26ba/H-01.pages.jsonl"
+    },
+    {
+      "finding_id": "H-01",
+      "page_number": 11,
+      "page_image_sha256": "dd71cfd2523baa251bc01ae3875e56f87b670410715ec0c439d4fe6097875f36",
+      "artifact_ref": "ocr_evidence/pdf_003618_4acdf39b26ba/H-01.pages.jsonl"
+    }
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "source_report_finding_id": "C-1",
+      "source_report_section": "7.1.1",
+      "title": "Missing nonce validation allows EIP-712 subscription replay and double asset transfers",
+      "source_pages": [
+        10,
+        11
+      ],
+      "generated_file": "findings/H-01.md",
+      "award": 1.0,
+      "impact_policy": "loss_of_assets",
+      "asset_loss": "direct investor USDC/liquidity debit and DS-token over-delivery via signature replay"
+    }
+  ],
+  "finding_dispositions_ref": "_reports/2025-07-securitize-onofframp/p4-finding-dispositions.md",
+  "generated_files": [
+    "config.yaml",
+    "Dockerfile",
+    ".dockerignore",
+    "provenance.json",
+    "review_status.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_003618_4acdf39b26ba/scope.pages.jsonl",
+    "ocr_evidence/pdf_003618_4acdf39b26ba/H-01.pages.jsonl"
+  ],
+  "fix_commit_reference": "4a426e689586a37cdcb463dba2f670fd58190ef9",
+  "c1_fix_commit": "65179bcf41ed859106069dcaa751f5a2cec3038e",
+  "build_notes": {
+    "hardhat_compile_on_host": "failed_missing_private_npm_package",
+    "private_package": "@securitize/digital_securities@3.1.4",
+    "private_package_status": "404_on_registry_npmjs_org_with_and_without_checked_in_npmrc_token",
+    "agent_image_strategy": "source_pin_only_no_npm_ci",
+    "updated_at": "2026-08-04T14:48:48Z"
+  },
+  "admission": {
+    "admission_commit": "2642798c0aa14264bf7dd15983340a27bb70b7a4",
+    "admitted_at": "2026-08-04T15:00:21Z",
+    "harbor_task": "task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-07-securitize-onofframp/evmbench__detect-2025-07-securitize-onofframp",
+    "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:359677e21c8bbb13409ceb85b5c2e089e9d1260c2fa42e041873eb51efaa02ed",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:76a3bcd95bea624b14eb506977f40d3f1cbf751e7381271fc056eb5053b6fd02"
+  }
+}

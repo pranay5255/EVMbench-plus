@@ -1,0 +1,28 @@
+.......                                                                  [100%]
+=============================== warnings summary ===============================
+../../../../../home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/aiomonitor/termui/completion.py:8
+  /home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/aiomonitor/termui/completion.py:8: DeprecationWarning: Importing 'parser.split_arg_string' is deprecated, it will only be available in 'shell_completion' in Click 9.0.
+    from click.parser import split_arg_string
+
+../../../../../home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/jupyter_client/connect.py:22
+  /home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/jupyter_client/connect.py:22: DeprecationWarning: Jupyter is migrating its paths to use standard platformdirs
+  given by the platformdirs library.  To remove this warning and
+  see the appropriate new directories, set the environment variable
+  `JUPYTER_PLATFORM_DIRS=1` and then run `jupyter --paths`.
+  The use of platformdirs will be the default in `jupyter_core` v6
+    from jupyter_core.paths import jupyter_data_dir, jupyter_runtime_dir, secure_write
+
+../../../../../home/experiments_base/forestOfAudits/project/common/alcatraz/alcatraz/clusters/local.py:196
+  /home/experiments_base/forestOfAudits/project/common/alcatraz/alcatraz/clusters/local.py:196: PydanticDeprecatedSince20: `pydantic.config.Extra` is deprecated, use literal values instead (e.g. `extra='allow'`). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    extra = Extra.allow  # Allow other fields
+
+../../../../../home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/pydantic/_internal/_config.py:323
+  /home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/pydantic/_internal/_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+../../../../../home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:293: 13 warnings
+  /home/experiments_base/forestOfAudits/project/evmbench/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:293: PydanticDeprecatedSince20: `json_encoders` is deprecated. See https://docs.pydantic.dev/2.11/concepts/serialization/#custom-serializers for alternatives. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+7 passed, 17 warnings in 1.73s

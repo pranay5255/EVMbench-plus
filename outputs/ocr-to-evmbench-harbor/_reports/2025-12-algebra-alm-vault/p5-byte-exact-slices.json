@@ -1,0 +1,29 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "source_ocr_sha256": "cebf3de80fc6909d3af0c82800c8ce86e77401726a1b29b2df46f266093f9525",
+  "slices": [
+    {
+      "path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-12-algebra-alm-vault/ocr_evidence/pdf_003345_a305f8485f3a/scope.pages.jsonl",
+      "pages": [
+        6,
+        7
+      ],
+      "byte_exact": true,
+      "size_bytes": 10233,
+      "expected_size": 10233,
+      "sha256": "80418eed9d017e3d395454b56f49b3c4005c09522dab64ccf8144ed064222286"
+    },
+    {
+      "path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/2025-12-algebra-alm-vault/ocr_evidence/pdf_003345_a305f8485f3a/H-01.pages.jsonl",
+      "pages": [
+        23,
+        24
+      ],
+      "byte_exact": true,
+      "size_bytes": 13869,
+      "expected_size": 13869,
+      "sha256": "bd74f6c7723668d44239fe2be8720bf218adc779b937bba89ffe66fc20bb1426"
+    }
+  ],
+  "ok": true
+}

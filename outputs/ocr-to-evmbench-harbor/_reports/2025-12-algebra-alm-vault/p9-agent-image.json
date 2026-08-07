@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image.v1",
+  "phase": "P9",
+  "role": "agent",
+  "status": "passed",
+  "registry_tags": [
+    "docker.io/pranay5255/yudaii_evmbench:2025-12-algebra-alm-vault-agent-e2583186e2053a19-amd64",
+    "docker.io/pranay5255/yudaii_evmbench:2025-12-algebra-alm-vault"
+  ],
+  "registry_digest": "sha256:109d59af35b98332aec4f15e8f233ba79d7efc678506865a042e8a1856832c8e",
+  "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:109d59af35b98332aec4f15e8f233ba79d7efc678506865a042e8a1856832c8e",
+  "image_id": "sha256:e2583186e2053a193f18b540118fa7de226d473781ec12050d61a3abdae5cc84",
+  "review_image_id": "sha256:e2583186e2053a193f18b540118fa7de226d473781ec12050d61a3abdae5cc84",
+  "canonical_build_resolved_to_reviewed_image_id": true,
+  "size_bytes": 4136290809,
+  "platform": "linux/amd64",
+  "repository_head": "57d820afa1d58bf89073e668f5608942d90188c7",
+  "reachable_repository_commit_count": 1,
+  "hardhat_tests": {
+    "passed": 71,
+    "failed": 0,
+    "executed": true
+  },
+  "offline_isolation_check_passed": true,
+  "manifest_verified": true
+}

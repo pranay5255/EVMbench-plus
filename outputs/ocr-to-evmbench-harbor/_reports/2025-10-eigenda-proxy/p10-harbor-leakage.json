@@ -1,0 +1,20 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "task_file_count": 6,
+  "pdf_count": 0,
+  "jsonl_count": 0,
+  "gold_named_path_count": 0,
+  "ocr_named_path_count": 0,
+  "provenance_path_count": 0,
+  "review_status_path_count": 0,
+  "source_ocr_hash_hits": 0,
+  "source_pdf_hash_hits": 0,
+  "report_identity_hits": 0,
+  "report_finding_id_hits": 0,
+  "gold_finding_title_hits": 0,
+  "custom_instruction_contains_finding_specific_hints": false
+}

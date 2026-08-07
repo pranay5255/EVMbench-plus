@@ -1,0 +1,9 @@
+EVMBench isolated checkout: /tmp/vii-admission.sU18VB/forest-of-audits
+Adapter revision: adfe07615981a678123cf61d7a69a6aee08228c9
+Command: UV_CACHE_DIR=/tmp/vii-uv-cache uv run --frozen pytest -q tests/test_harbor_adapter.py
+Result: 7 passed, 0 failed, 17 warnings in 3.58s
+
+Command: UV_CACHE_DIR=/tmp/vii-uv-cache uv run --frozen pytest -q tests/test_audits.py
+Result: 5 passed, 1 failed
+Failure: test_audit_dockerfiles_use_evmbench_mirror
+Classification: disclosed legacy single-line Dockerfile shape assumption; see p8-compatibility-test.json

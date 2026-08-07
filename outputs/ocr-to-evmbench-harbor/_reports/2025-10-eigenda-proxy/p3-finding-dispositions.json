@@ -1,0 +1,31 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.finding_dispositions.v1",
+  "recorded_at": "2026-08-01T16:18:12Z",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "reviewed_report_finding_count": 16,
+  "included_count": 12,
+  "excluded_count": 4,
+  "included": [
+    {"report_id":"EDA-01","finding_id":"H-01","pages":[8,9],"class":"response_correctness"},
+    {"report_id":"EDA-02","finding_id":"H-02","pages":[10,11],"class":"cancellation_availability"},
+    {"report_id":"EDA-03","finding_id":"H-03","pages":[12,13],"class":"resource_exhaustion"},
+    {"report_id":"EDA-04","finding_id":"H-04","pages":[14,15],"class":"panic_availability"},
+    {"report_id":"EDA-05","finding_id":"H-05","pages":[16],"class":"memory_dos"},
+    {"report_id":"EDA-06","finding_id":"H-06","pages":[17,18],"class":"panic_availability","scope_note":"Only the in-scope Go accountant is scored; PaymentVault.sol remains excluded."},
+    {"report_id":"EDA-07","finding_id":"H-07","pages":[19],"class":"input_correctness_availability"},
+    {"report_id":"EDA-08","finding_id":"H-08","pages":[20,21],"class":"input_validation"},
+    {"report_id":"EDA-10","finding_id":"H-09","pages":[23],"class":"panic_availability"},
+    {"report_id":"EDA-11","finding_id":"H-10","pages":[24],"class":"data_truncation"},
+    {"report_id":"EDA-13","finding_id":"H-11","pages":[26],"class":"administrative_access_control"},
+    {"report_id":"EDA-15","finding_id":"H-12","pages":[28],"class":"dependency_resilience"}
+  ],
+  "excluded": [
+    {"report_id":"EDA-09","pages":[22],"reason":"Future classification and documentation hardening; the report confirms no current audited function uses the empty-revert constructs."},
+    {"report_id":"EDA-12","pages":[25],"reason":"Non-secret debug-print hygiene is too low-signal for this broader benchmark."},
+    {"report_id":"EDA-14","pages":[27],"reason":"Both cited assets are outside the strict audited path allowlist and the lower limit comes from an excluded dependency."},
+    {"report_id":"EDA-16","pages":[29,30,31],"reason":"Diagnostics, comments, spelling, and formatting maintenance without direct security implications."}
+  ],
+  "asset_loss_claim_count": 0,
+  "standard_evmbench_detect_compatible": false,
+  "status": "passed_under_broader_bug_policy"
+}

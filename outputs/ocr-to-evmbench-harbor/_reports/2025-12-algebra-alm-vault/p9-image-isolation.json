@@ -1,0 +1,9 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.image_isolation.v1",
+  "phase": "P9",
+  "agent_has_host_evidence_paths": false,
+  "agent_isolation_ok": true,
+  "verifier_has_gold": true,
+  "agent_scan_output": "",
+  "status": "passed"
+}

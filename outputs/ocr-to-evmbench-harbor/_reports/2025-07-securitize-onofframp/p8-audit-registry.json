@@ -1,0 +1,18 @@
+{
+  "audit_id": "2025-07-securitize-onofframp",
+  "base_commit": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+  "docker_image": "evmbench/audit:2025-07-securitize-onofframp",
+  "vulnerability_count": 1,
+  "vulnerability_ids": [
+    "H-01"
+  ],
+  "titles": [
+    "Missing nonce validation allows EIP-712 subscription replay and double asset transfers"
+  ],
+  "detect_max_award": 1.0,
+  "config_mode": "detect",
+  "finding_files_present": [
+    "H-01.md"
+  ],
+  "evmbench_root": "/tmp/securitize-admission.Myw26J/forest-of-audits/project/evmbench"
+}

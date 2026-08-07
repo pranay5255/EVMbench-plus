@@ -1,0 +1,1 @@
+{"schema":"leakage_scan.v1","ok":true,"context_allowlist":["Dockerfile",".dockerignore"],"runtime_report_pdf_count":0,"runtime_ocr_jsonl_count":0,"fixed_commit_reachable":false,"network_mode":"no-network","model_run":false}

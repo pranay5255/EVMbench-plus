@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_task_contract.v1",
+  "phase": "P10",
+  "status": "passed",
+  "approval_checkpoint": "C1R1",
+  "review_bundle_digest": "272a35f142fe209d617296a3366c6f6a42e5b78f213df8792c8e9da9e02c45e1",
+  "admission_commit": "7ae1e22fffe086bc48aa7805c007c9801c48c288",
+  "task_count": 1,
+  "directory_name": "evmbench__detect-2025-09-mellow-flexible-vaults",
+  "task_name": "evmbench/detect-2025-09-mellow-flexible-vaults",
+  "task_path": "/home/experiments_base/OPD_base/task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-09-mellow-flexible-vaults/evmbench__detect-2025-09-mellow-flexible-vaults",
+  "harbor_schema_version": "1.3",
+  "regular_file_count": 6,
+  "file_hashes": {
+    "environment/README.md": "cf7411db096ad0413dbcc4667525445682eb2deb1f2e2697bb64bd635d99320b",
+    "instruction.md": "a6173e603e0a23aba42f903b058972b9d2fc12edd334aad287336a5b1596af35",
+    "task.toml": "8c34d8ceca6aad226aac38586e8b3ca1adcd4b9b8d0cb6e144a9725a589fbc7d",
+    "tests/evmbench_harbor_verifier.py": "4dc604682e3cb7d1b660f70518c77c06ac1c2cf35041ac14774c6a772d5142b6",
+    "tests/test.sh": "6d01c17fe129b8000cfbea74baa165072c7b5f8e5e2e1b229d0a39f99c17ab7a",
+    "tests/validate_detect_submission.py": "c868e9451cb2195a19926eb10e3eb73f6f12def408b588a24f9546b80f7a16df"
+  },
+  "checksum_stream_sha256": "53f429aa32ac8cd3722ee2abe6940098719ca7f9d6738145bba206c9e5dc2e1e",
+  "leakage_result": "PASS",
+  "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f",
+  "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:e5f05c6e83ac446fd8ecd701238965707e43305e1dfc2d67ba580048e3a43ff2"
+}

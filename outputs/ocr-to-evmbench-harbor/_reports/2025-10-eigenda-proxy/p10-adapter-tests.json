@@ -1,0 +1,12 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.adapter_tests.v1",
+  "phase": "P10",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "generated_at": "2026-08-01T16:46:12Z",
+  "status": "passed",
+  "checkout_revision": "48afb53c38969b7de8252a4897957f7df5ede673",
+  "command": "uv run pytest tests/test_harbor_adapter.py -q",
+  "passed": 7,
+  "failed": 0,
+  "warnings": 17
+}

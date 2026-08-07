@@ -1,0 +1,15 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.task_group.v1",
+  "candidate_id": "2025-12-algebra-alm-vault",
+  "impact_policy": "loss_of_assets",
+  "mode": "detect",
+  "task_group_key": "cryptoalgebra/AlmVault@57d820afa1d58bf89073e668f5608942d90188c7|contracts/AlgebraVault.sol+contracts/AlgebraVaultDepositGuard.sol+contracts/AlgebraVaultFactory.sol+contracts/FarmingRewardsDistributor.sol+contracts/common/Enum.sol+contracts/lib/AlgebraVaultDeployer.sol+contracts/lib/FarmingRewardsDistributorDeployer.sol+contracts/lib/OracleLibrary.sol+contracts/lib/UV3Math.sol|detect|loss_of_assets",
+  "task_group_key_sha256": "b0a86f577e29a804775ae9046739ce20d4b79ebc2167c8889638b011c841047e",
+  "selected_repository_count": 1,
+  "rejected_additional_task_groups": [
+    {
+      "repository": "cryptoalgebra/plugins-monorepo",
+      "reason": "Second repository in the same PDF; not merged into this candidate"
+    }
+  ]
+}

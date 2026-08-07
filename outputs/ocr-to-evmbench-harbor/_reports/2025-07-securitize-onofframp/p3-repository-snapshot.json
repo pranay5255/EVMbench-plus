@@ -1,0 +1,53 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.repository_snapshot.v1",
+  "recorded_at": "2026-08-04T14:41:55Z",
+  "repository_url": "https://github.com/securitize-io/bc-on-off-ramp-sc.git",
+  "repository_slug": "securitize-io/bc-on-off-ramp-sc",
+  "vulnerable_commit": "a944bb11b106c13a5e43f8de01c9c01eeb5bb472",
+  "vulnerable_commit_subject": "Merge pull request #6 from securitize-io/fix/twoSteps-with-slippage",
+  "vulnerable_commit_authored_at": "2025-07-07T12:37:25+02:00",
+  "root_tree": "414c5718a9daee2dc3ffdc52c2d4b68ce3659809",
+  "parents": [
+    "06377dfec1a8c622f3adac34085920cf99d5998a",
+    "ace148acd26971f98da201c9b8b02c914ed23964"
+  ],
+  "detached_head": true,
+  "framework": "hardhat",
+  "public_repository": true,
+  "submodules": [],
+  "audited_scope_paths_verified": [
+    "contracts/common/BaseContract.sol",
+    "contracts/common/Errors.sol",
+    "contracts/fee/MbpsFeeManager.sol",
+    "contracts/off-ramp/CountryValidator.sol",
+    "contracts/off-ramp/provider/AllowanceLiquidityProvider.sol",
+    "contracts/off-ramp/provider/CollateralLiquidityProvider.sol",
+    "contracts/off-ramp/RedemptionManager.sol",
+    "contracts/off-ramp/RedemptionValidator.sol",
+    "contracts/off-ramp/SecuritizeOffRamp.sol",
+    "contracts/off-ramp/TokenCalculator.sol",
+    "contracts/on-ramp/ISecuritizeOnRamp.sol",
+    "contracts/on-ramp/provider/AllowanceAssetProvider.sol",
+    "contracts/on-ramp/provider/MintingAssetProvider.sol",
+    "contracts/on-ramp/SecuritizeOnRamp.sol"
+  ],
+  "file_evidence": [
+    {
+      "path": "contracts/on-ramp/SecuritizeOnRamp.sol",
+      "git_blob": "b4bdc26808e5679df672c9957607be086c2e9102",
+      "sha256": "3e10a580b9ad5a7b3dfcc98898e20ab24e7e726e3b31663f0d8cd3d37500c2ed"
+    }
+  ],
+  "secondary_repository": {
+    "name": "bc-securitize-bridge-sc",
+    "url_candidates": [
+      "https://bitbucket.org/securitize_dev/bc-securitize-bridge-sc"
+    ],
+    "vulnerable_commit_prefix": "60b6ef00e8a8",
+    "fix_commit": "1da35cde31a53e7b2de56de0d313ebdcb80cbfa3",
+    "status": "unavailable_public_snapshot",
+    "notes": "Separate task_group_key; not admitted in this candidate."
+  },
+  "fix_commit_on_off_ramp": "4a426e689586a37cdcb463dba2f670fd58190ef9",
+  "c1_fix_commit": "65179bcf41ed859106069dcaa751f5a2cec3038e"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.queue_update.v1",
+  "recorded_at": "2026-08-01T16:23:19Z",
+  "candidate_id": "2025-10-eigenda-proxy",
+  "queue_document": "/home/experiments_base/OPD_base/docs/audit-pdf-to-evmbench/9_SELECTED_20_PDF_AND_OCR_LINKS.md",
+  "pre_eigenda_update_sha256": "4df3d29a1d22015854742f4e6e3b00c96c9437cb6806a59eddca3441de6e2e3a",
+  "post_eigenda_update_sha256": "9892b87221a468a9381d856bde600aa1f3227b33fb252ba39dc61aca6d0e025e",
+  "rank": 13,
+  "previous_state": "blocked",
+  "new_state": "in_review",
+  "candidate_review_digest": "10af2c0e6b02b904fced2817b4d7aac5e4155532d578e76cc031460bab6496df",
+  "queue_totals": {
+    "created": 7,
+    "blocked": 3,
+    "in_review": 2,
+    "next": 1,
+    "queued": 7,
+    "total": 20
+  },
+  "preexisting_change_preserved": {
+    "rank": 14,
+    "report": "Omni SolverNet",
+    "state": "in review"
+  },
+  "next_report_unchanged": {
+    "rank": 6,
+    "report": "Benqi Governance"
+  },
+  "candidate_admitted": false,
+  "harbor_task_generated": false,
+  "agent_or_model_run": false,
+  "status": "passed"
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.harbor_leakage.v1",
+  "phase": "P10",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "status": "passed",
+  "task_path": "task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-09-mellow-flexible-vaults/evmbench__detect-2025-09-mellow-flexible-vaults",
+  "regular_file_count": 6,
+  "expected_task_identity_occurrences_allowed": true,
+  "instruction_is_generic_loss_of_assets_prompt": true,
+  "instruction_sha256": "a6173e603e0a23aba42f903b058972b9d2fc12edd334aad287336a5b1596af35",
+  "forbidden_content_counts": {
+    "ocr_jsonl_or_layout_markers": 0,
+    "pdf_identity_paths_hashes_or_page_ranges": 0,
+    "provenance_or_review_state": 0,
+    "finding_ids_titles_or_gold": 0,
+    "vulnerable_code_specific_hints": 0,
+    "credentials": 0
+  },
+  "agent_image_leakage_scan": "passed",
+  "separate_verifier_image": true,
+  "agent_image_digest_pinned": true,
+  "verifier_image_digest_pinned": true,
+  "agent_network_mode": "no-network",
+  "environment_network_mode": "no-network",
+  "ok": true
+}
