@@ -1,0 +1,8 @@
+agent unique tag: docker.io/pranay5255/yudaii_evmbench:2025-09-mellow-flexible-vaults-agent-b8353777d6b01886-amd64
+agent alias tag: docker.io/pranay5255/yudaii_evmbench:2025-09-mellow-flexible-vaults
+agent registry digest: sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f
+agent immutable pull image id: sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea
+verifier unique tag: docker.io/pranay5255/yudaii_evmbench:2025-09-mellow-flexible-vaults-verifier-20bf3505f307f5b2-amd64
+verifier alias tag: docker.io/pranay5255/yudaii_evmbench:2025-09-mellow-flexible-vaults-verifier
+verifier registry digest: sha256:e5f05c6e83ac446fd8ecd701238965707e43305e1dfc2d67ba580048e3a43ff2
+verifier immutable pull image id: sha256:20bf3505f307f5b2449b478e814e27255e3707dbcb82daba135ca0dc8273b70d

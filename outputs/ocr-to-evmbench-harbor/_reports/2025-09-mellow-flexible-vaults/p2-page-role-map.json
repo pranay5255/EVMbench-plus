@@ -1,0 +1,31 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.page_role_map.v1",
+  "pdf_id": "pdf_000135_167389a70b9f",
+  "pages": [
+    {"page": 1, "role": "cover"},
+    {"page": 2, "role": "contents"},
+    {"page": 3, "role": "identity_repository_commits_summary"},
+    {"page": 4, "role": "audited_scope_part_1"},
+    {"page": 5, "role": "audited_scope_part_2_and_issue_summary"},
+    {"page": 6, "role": "system_overview"},
+    {"page": 7, "role": "system_overview_and_risk_methodology"},
+    {"page": 8, "role": "risk_methodology"},
+    {"page": 9, "role": "finding_6_1_selected_H_01"},
+    {"page": 10, "role": "finding_6_2_excluded"},
+    {"page": 11, "role": "finding_6_3_excluded"},
+    {"page": 12, "role": "finding_6_4_excluded"},
+    {"page": 13, "role": "finding_6_5_excluded"},
+    {"page": 14, "role": "documentation_and_test_evaluation"},
+    {"page": 15, "role": "test_output"},
+    {"page": 16, "role": "test_output"},
+    {"page": 17, "role": "test_output"},
+    {"page": 18, "role": "test_output"},
+    {"page": 19, "role": "test_output"},
+    {"page": 20, "role": "test_output"},
+    {"page": 21, "role": "test_output"},
+    {"page": 22, "role": "test_output"},
+    {"page": 23, "role": "test_output_summary"},
+    {"page": 24, "role": "about_nethermind"},
+    {"page": 25, "role": "disclaimer"}
+  ]
+}

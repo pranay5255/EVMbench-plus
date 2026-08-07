@@ -1,0 +1,197 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.candidate_provenance.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "materialized_at": "2026-08-04T15:20:19Z",
+  "revised_at": "2026-08-04T15:57:06Z",
+  "phase": "P12",
+  "review_state": "admitted",
+  "impact_policy": "loss_of_assets",
+  "approval": {
+    "checkpoint": "C1R1",
+    "review_bundle_digest": "272a35f142fe209d617296a3366c6f6a42e5b78f213df8792c8e9da9e02c45e1",
+    "approved_at": "2026-08-04T16:06:25Z",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "explicit_admission_approval": true,
+    "superseded_approval": {
+      "checkpoint": "C1",
+      "review_bundle_digest": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+      "approved_at": "2026-08-04T15:34:16Z",
+      "reviewer_identity": "https://github.com/pranay5255",
+      "reason": "Post-approval agent-image build exposed PATH shadowing of pinned Forge and tracked PDF deletion dirt in recursive submodules; C1R1 changes candidate substance only in Dockerfile packaging/isolation commands, with provenance and review-state metadata reset for the new approval gate."
+    }
+  },
+  "task_identity": {
+    "task_group_key": "https://github.com/mellow-finance/flexible-vaults.git|60c462d6b006b19790b07c009b7a48aa3bcb3e96|src/|detect|loss_of_assets",
+    "task_group_key_sha256": "97f321583f156547fa10bb9c25cc58973ef9fe91b513fc2e2e25b34306bd4c59",
+    "repository_slug": "mellow-finance/flexible-vaults",
+    "vulnerable_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "audited_scope": [
+      "src/"
+    ],
+    "audited_solidity_file_count": 75,
+    "mode": "detect",
+    "framework": "foundry",
+    "impact_policy": "loss_of_assets"
+  },
+  "source_pdf": {
+    "pdf_id": "pdf_000135_167389a70b9f",
+    "source_bucket": "other_audit_repo_pdfs",
+    "source_filename": "NM0587-FINAL_Mellow.pdf",
+    "source_rel_path": "PublicAuditReports/NM0587-FINAL_Mellow.pdf",
+    "source_abs_path": "/home/experiments_base/smart-contract-data/crawlers/output/repos/audit_repos/PublicAuditReports/NM0587-FINAL_Mellow.pdf",
+    "source_pdf_sha256": "13a18507a8edf3db6e578788d853b76acc3935b1bac37ccc40b6c377f030ceab",
+    "size_bytes": 320560,
+    "physical_page_count": 25,
+    "report_identity": "Nethermind Security NM-0587 Mellow Protocol Security Review Report",
+    "report_date": "2025-09-03",
+    "readable": true,
+    "encrypted": false,
+    "copied_into_candidate": false
+  },
+  "source_ocr": {
+    "schema_version": "evmbench_task_creation.ocr_page.v1",
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_000135_167389a70b9f.jsonl",
+    "sha256": "2065910066cd953132dd4b184840cd20d5cd774db6c4edec3c7ce20d794c22e2",
+    "size_bytes": 267665,
+    "record_count": 25,
+    "source_page_count": 25,
+    "created_at": "2026-06-30T18:34:40.041293+00:00",
+    "ocr_backend": "sglang",
+    "ocr_endpoint_version": "modal-sglang-unlimited-ocr-v1",
+    "ocr_model": "Unlimited-OCR",
+    "ocr_model_version": "Unlimited-OCR",
+    "immutable_input": true,
+    "validation_report": "_reports/pdf_000135_167389a70b9f/p1-ocr-validation.json"
+  },
+  "queue_record": {
+    "rank": 19,
+    "selection": "evmbench-task-batch-v1",
+    "category": "Oracle/Data",
+    "inferred_year": 2025,
+    "vulnerability_page_count": 23,
+    "heuristic_unique_issue_ids": 49,
+    "reviewed_report_finding_count": 5,
+    "out_of_queue_order": false,
+    "canonical_next_at_start": "rank 19 Mellow"
+  },
+  "repository_match": {
+    "repository_url": "https://github.com/mellow-finance/flexible-vaults.git",
+    "repository_slug": "mellow-finance/flexible-vaults",
+    "commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "commit_subject": "Merge pull request #26 from mellow-finance/fixes/oracle-helper",
+    "commit_authored_at": "2025-08-12T13:45:03+04:00",
+    "root_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+    "parents": [
+      "01b0a4507a29703a776de79e5e007616d4efe591",
+      "acdc8e279fc0af868c9149351ebfdcd79971b69b"
+    ],
+    "headline_initial_commit": "69413d545f788c0ad4ff7fe08085fb55589c5c61",
+    "final_fix_commit": "72f689f965e4ac1a4c2bcfb645a8b5416cf740c7",
+    "snapshot_resolution": "The report's audited-file and H-01/H-02 OracleHelper hyperlinks resolve to 60c462d6; OracleHelper.sol is absent at the headline initial commit. Commit 60c462d6 is therefore the exact report-linked vulnerable snapshot for the full 75-file scope.",
+    "detached_head": true,
+    "clean_main_worktree": true,
+    "recursive_submodules_clean": true,
+    "review_clone": "/tmp/mellow-review.xSrGG4/flexible-vaults",
+    "public_repository": true,
+    "repository_license_spdx": "BUSL-1.1 with one MIT interface",
+    "license_metadata_note": "Source SPDX headers and README identify BUSL-1.1, but this commit has no standalone license file and package.json says UNLICENSED.",
+    "tracked_pdf_or_jsonl_count": 0
+  },
+  "required_submodules": [
+    {"path": "lib/openzeppelin-contracts-upgradeable", "commit": "60b305a8f3ff0c7688f02ac470417b6bbf1c4d27"},
+    {"path": "lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests", "commit": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/openzeppelin-contracts-upgradeable/lib/forge-std", "commit": "1eea5bae12ae557d589f9f0f0edae2faa47cb262"},
+    {"path": "lib/openzeppelin-contracts-upgradeable/lib/halmos-cheatcodes", "commit": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"},
+    {"path": "lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts", "commit": "e4f70216d759d8e6a64144a9e1f7bbeed78e7079"},
+    {"path": "lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts/lib/erc4626-tests", "commit": "8b1d7c2ac248c33c3506b1bff8321758943c5e11"},
+    {"path": "lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts/lib/forge-std", "commit": "1eea5bae12ae557d589f9f0f0edae2faa47cb262"},
+    {"path": "lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts/lib/halmos-cheatcodes", "commit": "c0d865508c0fee0a11b97732c5e90f9cad6b65a5"}
+  ],
+  "file_evidence": [
+    {"path": "src/oracles/OracleHelper.sol", "git_blob": "d6307f4d2811c5058d8407415ac198995a49f036", "sha256": "8cfc34f34c911121eeabbebb4ccd3f49b7c7547ddadfb8b97b33a21e39eac20e"},
+    {"path": "src/managers/FeeManager.sol", "git_blob": "71ae13ab35729b1706a258ffc6a57ca53ee5ffee", "sha256": "14a1567334108c7d114344f8a11ec8cabc2ea0498aefaee3107fcbfbbd24fffa"}
+  ],
+  "ocr_evidence": [
+    {"finding_id": "SCOPE", "page_number": 3, "page_image_sha256": "d12b51c07b4455c4306a95ff2bb9b76a5711e81cedaa28e5d0fd9c77d8a3785c", "artifact_ref": "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl"},
+    {"finding_id": "SCOPE", "page_number": 4, "page_image_sha256": "498c6459c1652fd4a7af9cf784856ac0d304843a2d3fe89e64447f7ed9affbf2", "artifact_ref": "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl"},
+    {"finding_id": "SCOPE", "page_number": 5, "page_image_sha256": "7090b48ea50f15b85da69cb79067635a118a43e372cf1353f631cc09372fa198", "artifact_ref": "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl"},
+    {"finding_id": "H-01", "page_number": 9, "page_image_sha256": "bfd8c1a6a83f6df57f6eb16769df35baec09b41dae1df096c657b23fdc348f43", "artifact_ref": "ocr_evidence/pdf_000135_167389a70b9f/H-01.pages.jsonl"}
+  ],
+  "selected_findings": [
+    {
+      "finding_id": "H-01",
+      "source_report_finding_id": "6.1",
+      "title": "Inverted redeem-demand conversion corrupts oracle prices and redistributes vault assets",
+      "source_pages": [9],
+      "generated_file": "findings/H-01.md",
+      "award": 1.0,
+      "impact_policy": "loss_of_assets",
+      "asset_loss": "incorrect queue exchange rates mint too few deposit shares or release too many redemption assets"
+    }
+  ],
+  "finding_dispositions_ref": "_reports/2025-09-mellow-flexible-vaults/p4-finding-dispositions.md",
+  "generated_files": [
+    ".dockerignore",
+    "Dockerfile",
+    "config.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_000135_167389a70b9f/H-01.pages.jsonl",
+    "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl",
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "build_notes": {
+    "host_build": "passed: 203 files compiled with solc 0.8.25",
+    "unit_tests": "passed: 454 listed unit-test entries under test/unit/** with report block 22730425 and task-local timestamp 1750000000",
+    "oracle_helper_unit_tests": "passed: 19/19",
+    "integration_tests": "not run: report suite requires ETH_RPC; no credential or live-fork access was used",
+    "toolchain": "Foundry 1.7.1; solc 0.8.25+commit.b61c2a91",
+    "c1r1_local_agent_image": {
+      "tag": "ocr-evmbench-c1/2025-09-mellow-flexible-vaults:c1r1-local",
+      "image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+      "platform": "linux/amd64",
+      "published": false,
+      "network_disabled_runtime_audit": "passed",
+      "forced_offline_rebuild": "passed",
+      "runtime_forge": "/usr/local/bin/forge 1.7.1",
+      "runtime_solc": "/usr/local/bin/solc-0.8.25",
+      "runtime_source_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+      "runtime_source_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+      "root_worktree_clean": true,
+      "root_remote_count": 0,
+      "inert_nested_git_directory_count": 8,
+      "embedded_pdf_or_jsonl_count": 0,
+      "embedded_gold_provenance_review_or_ocr_evidence_count": 0
+    }
+  },
+  "admission": {
+    "admission_commit": "7ae1e22fffe086bc48aa7805c007c9801c48c288",
+    "admission_tree": "fcd72291b2ade2fa7a4aa25a4c1ff5fef777d7b0",
+    "admitted_at": "2026-08-04T16:18:43Z",
+    "isolated_clone": "/tmp/mellow-c1r1-admission.xGAMgO/forest-of-audits",
+    "admitted_candidate_checksum_stream_sha256": "2a949d0cf641efb936284fe739a01be5b48362732077fe6127b5efa4fa97023f",
+    "audit_registry_vulnerability_count": 1,
+    "audit_registry_detect_max_award": 1.0,
+    "harbor_adapter_tests": "7/7 passed",
+    "harbor_task": "task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-09-mellow-flexible-vaults/evmbench__detect-2025-09-mellow-flexible-vaults",
+    "agent_image": "docker.io/pranay5255/yudaii_evmbench@sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f",
+    "agent_image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+    "verifier_image": "docker.io/pranay5255/yudaii_evmbench@sha256:e5f05c6e83ac446fd8ecd701238965707e43305e1dfc2d67ba580048e3a43ff2",
+    "verifier_image_id": "sha256:20bf3505f307f5b2449b478e814e27255e3707dbcb82daba135ca0dc8273b70d",
+    "harbor_version": "0.20.0",
+    "verifier_replay": {
+      "network_mode": "none",
+      "synthetic_empty_submission": true,
+      "score": 0.0,
+      "max_score": 1.0,
+      "judge_or_model_call_made": false,
+      "status": "passed"
+    },
+    "agent_or_model_run": false,
+    "canonical_forest_checkout_written": false,
+    "supersedes_disposable_c1_admission_commit": "25d8e83f47ee238a1bb4ecdf1edd76a4de67829b"
+  }
+}

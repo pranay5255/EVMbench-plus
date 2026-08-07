@@ -1,0 +1,34 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.byte_exact_slices.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "source": {
+    "path": "/home/experiments_base/OPD_base/outputs/evmbench_task_batch/extracted_pages/pdf_000135_167389a70b9f.jsonl",
+    "sha256": "2065910066cd953132dd4b184840cd20d5cd774db6c4edec3c7ce20d794c22e2",
+    "record_count": 25
+  },
+  "slices": [
+    {
+      "role": "scope",
+      "path": "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl",
+      "expected_pages": [3, 4, 5],
+      "actual_pages": [3, 4, 5],
+      "line_count": 3,
+      "sha256": "8671bec163b224d1f210efaea9e3d9cff7b559e55e3f9a8d65ba0d25b12a97e2",
+      "byte_exact": true,
+      "strictly_ordered": true
+    },
+    {
+      "role": "finding",
+      "finding_id": "H-01",
+      "path": "ocr_evidence/pdf_000135_167389a70b9f/H-01.pages.jsonl",
+      "expected_pages": [9],
+      "actual_pages": [9],
+      "line_count": 1,
+      "sha256": "c3c15f8654e83399ec7a1c48ad15d852f8fc0b7af5a880eb5708aec81200a029",
+      "byte_exact": true,
+      "strictly_ordered": true
+    }
+  ],
+  "source_sha256_after": "2065910066cd953132dd4b184840cd20d5cd774db6c4edec3c7ce20d794c22e2",
+  "status": "passed"
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.validation_summary.v1",
+  "checkpoint": "C1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "review_manifest": "c1-review-manifest.json",
+  "review_manifest_size_bytes": 6143,
+  "review_bundle_digest": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+  "review_state": "in_review",
+  "human_approved": false,
+  "checks": [
+    {"id": "strict_ocr_validation", "status": "passed", "detail": "25/25 records; 19/19 global checks; 1300/1300 record checks"},
+    {"id": "source_ocr_immutable", "status": "passed", "sha256": "2065910066cd953132dd4b184840cd20d5cd774db6c4edec3c7ce20d794c22e2"},
+    {"id": "source_pdf_validation_and_visual_review", "status": "passed", "sha256": "13a18507a8edf3db6e578788d853b76acc3935b1bac37ccc40b6c377f030ceab"},
+    {"id": "exact_repository_snapshot", "status": "passed", "commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96"},
+    {"id": "recursive_submodule_pins", "status": "passed", "entry_count": 8},
+    {"id": "audited_scope_equality", "status": "passed", "solidity_file_count": 75},
+    {"id": "all_report_findings_dispositioned", "status": "passed", "report_findings": 5, "selected": 1},
+    {"id": "loss_of_assets_semantics", "status": "passed", "selected_finding": "H-01"},
+    {"id": "vulnerable_snapshot_build", "status": "passed", "solidity_files_compiled": 203},
+    {"id": "focused_oracle_helper_units", "status": "passed", "passed": 19, "failed": 0},
+    {"id": "full_local_unit_suite", "status": "passed", "listed_test_entries": 454},
+    {"id": "byte_exact_ocr_slices", "status": "passed", "selected_pages": [3, 4, 5, 9]},
+    {"id": "gold_audit_equals_finding_bytes", "status": "passed"},
+    {"id": "live_structural_validator", "status": "passed", "validator_tests": "6/6"},
+    {"id": "skill_pinned_structural_validator", "status": "passed", "validator_commit": "38957485d5cd63dc5d664c3c2993f60b308f5776", "validator_tests": "6/6"},
+    {"id": "docker_context_and_leakage", "status": "passed"},
+    {"id": "candidate_file_manifest", "status": "passed", "file_count": 9, "canonical_stream_sha256": "313ce4c60fa8a82484821ed829a9afd53b8a70035860593ce66b898db418f227"},
+    {"id": "canonical_admission_state_unchanged", "status": "passed"},
+    {"id": "harbor_not_generated", "status": "passed"},
+    {"id": "model_or_agent_smoke_not_run", "status": "passed"}
+  ],
+  "unresolved_risks": [
+    "License metadata is inconsistent at the selected commit: source/README BUSL-1.1 markers, no standalone license file, package.json UNLICENSED.",
+    "Integration tests require ETH_RPC and were not replayed.",
+    "The oracle path is permissioned and threshold-validated; report acceptance is an explicit exploit precondition.",
+    "Candidate image build remains post-approval/admission work."
+  ],
+  "approval_gate": "Approve exact candidate 2025-09-mellow-flexible-vaults at exact digest 7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63 and provide reviewer identity before any admission, image, Harbor, or smoke action."
+}

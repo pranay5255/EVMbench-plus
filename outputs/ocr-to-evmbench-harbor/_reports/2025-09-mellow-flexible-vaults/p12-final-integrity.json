@@ -1,0 +1,113 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.final_integrity.v1",
+  "phase": "P12",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "generated_at": "2026-08-04T16:19:02Z",
+  "status": "passed",
+  "final_integrity_audit": "passed",
+  "approval": {
+    "checkpoint": "C1R1",
+    "review_bundle_digest": "272a35f142fe209d617296a3366c6f6a42e5b78f213df8792c8e9da9e02c45e1",
+    "reviewer": "https://github.com/pranay5255",
+    "binding_report": "p7r1-approval-binding.json",
+    "candidate_drift_detected_before_binding": false,
+    "superseded_c1_digest": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+    "superseded_c1_admission_published": false
+  },
+  "candidate": {
+    "approved_checksum_stream_sha256": "2a949d0cf641efb936284fe739a01be5b48362732077fe6127b5efa4fa97023f",
+    "final_host_checksum_stream_sha256": "b4e292feddca8e6d0cb8e65979fa33784f2bffab09ac88a42ba25a53d0c61b81",
+    "post_admission_metadata_files_changed": ["provenance.json", "review_status.yaml"],
+    "finding_config_dockerfile_and_ocr_evidence_unchanged_after_approval": true,
+    "finding_count": 1,
+    "finding_ids": ["H-01"],
+    "impact_policy": "loss_of_assets",
+    "state": "admitted",
+    "current_validator_require_approved": "passed",
+    "pinned_validator_require_approved": "passed"
+  },
+  "immutable_inputs": {
+    "source_ocr_sha256": "2065910066cd953132dd4b184840cd20d5cd774db6c4edec3c7ce20d794c22e2",
+    "source_pdf_sha256": "13a18507a8edf3db6e578788d853b76acc3935b1bac37ccc40b6c377f030ceab",
+    "vulnerable_commit": "60c462d6b006b19790b07c009b7a48aa3bcb3e96",
+    "vulnerable_tree": "6a5951f96a4e85282fcd53fc3e93954b56e61e8a",
+    "unchanged": true
+  },
+  "isolated_admission": {
+    "status": "passed",
+    "admission_commit": "7ae1e22fffe086bc48aa7805c007c9801c48c288",
+    "admission_tree": "fcd72291b2ade2fa7a4aa25a4c1ff5fef777d7b0",
+    "candidate_and_admitted_tree_byte_identical_at_admission": true,
+    "detect_split_entry_count": 1,
+    "audit_registry_vulnerability_count": 1,
+    "audit_registry_detect_max_award": 1.0,
+    "adapter_tests": {"passed": 7, "failed": 0},
+    "isolated_tree_clean": true,
+    "canonical_checkout_written": false,
+    "canonical_checkout_head": "cd54d9446a301fb62ee36538d0efa1e70d830ab4",
+    "canonical_checkout_porcelain_v1_z_sha256": "199306451e707afc4c63e94f65ca7a188683b8a2419a9feaa78a20531c8640b4"
+  },
+  "images": {
+    "agent": {
+      "digest": "sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f",
+      "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:baa9e3f557510d5405a0fc06b2275c3be08facae9d945c05528970e75ede0b1f",
+      "image_id": "sha256:b8353777d6b0188664e6b27cfda3cd3d80f7c3b89d2e4e8ad5adb17b590b2aea",
+      "manifest_and_immutable_pull_verified": true
+    },
+    "verifier": {
+      "digest": "sha256:e5f05c6e83ac446fd8ecd701238965707e43305e1dfc2d67ba580048e3a43ff2",
+      "immutable_reference": "docker.io/pranay5255/yudaii_evmbench@sha256:e5f05c6e83ac446fd8ecd701238965707e43305e1dfc2d67ba580048e3a43ff2",
+      "image_id": "sha256:20bf3505f307f5b2449b478e814e27255e3707dbcb82daba135ca0dc8273b70d",
+      "manifest_and_immutable_pull_verified": true,
+      "tests_present": true
+    },
+    "digests_and_image_ids_distinct": true,
+    "agent_contains_gold_or_authoring_evidence": false,
+    "isolation_ok": true
+  },
+  "harbor": {
+    "task_path": "task_dir/outputs/ocr-to-evmbench-harbor/_harbor/2025-09-mellow-flexible-vaults/evmbench__detect-2025-09-mellow-flexible-vaults",
+    "task_count": 1,
+    "regular_file_count": 6,
+    "checksum_stream_sha256": "53f429aa32ac8cd3722ee2abe6940098719ca7f9d6738145bba206c9e5dc2e1e",
+    "loader_version": "0.20.0",
+    "leakage": "PASS",
+    "agent_and_environment_network_mode": "no-network",
+    "verifier_environment_mode": "separate",
+    "verifier_replay": "0/1 packaging preflight"
+  },
+  "verifier_replay": {
+    "runtime_network": "none",
+    "input": "synthetic empty submission",
+    "exit_code": 0,
+    "score": 0.0,
+    "max_score": 1.0,
+    "judge_results": [],
+    "judge_or_model_call_made": false,
+    "artifacts": {
+      "p12-audit-json-validation.json": "96db075dceaaad6a8a6eecd0709e108d4a625924b9b484de7900cb95fdb7ce06",
+      "p12-reward.json": "8ea47918dc29f1c96ea5bf3605fcd782404bfa45065cffb66abfb35c86587ddd",
+      "p12-evmbench-grade.json": "44bc672604b6cba230c9e87b83bf5971fd59e3cf0622a08a3f52c6e8681536f1"
+    },
+    "claim_boundary": "Packaging replay only; not agent or model performance evidence."
+  },
+  "agent_or_model_run": {
+    "authorized": false,
+    "launched": false,
+    "agent": null,
+    "model": null
+  },
+  "canonical_queue": {
+    "created": 13,
+    "blocked": 6,
+    "in_review": 0,
+    "next": "rank 20 Mantle fBTC Timelock",
+    "queued": 0,
+    "stale_pasted_benqi_burve_transition_rejected": true
+  },
+  "unresolved_risks": [
+    "The integration suite requires ETH_RPC and was not replayed.",
+    "License metadata is inconsistent: BUSL-1.1 source/README markers, no standalone license file, and UNLICENSED in package.json.",
+    "H-01 requires an authorized helper-derived report to pass threshold validation and be accepted."
+  ]
+}

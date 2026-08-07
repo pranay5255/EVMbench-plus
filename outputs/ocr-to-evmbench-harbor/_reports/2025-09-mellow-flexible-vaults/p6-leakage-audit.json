@@ -1,0 +1,44 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.leakage_audit.v1",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "candidate_host_only_files": [
+    "config.yaml",
+    "findings/H-01.md",
+    "findings/gold_audit.md",
+    "ocr_evidence/pdf_000135_167389a70b9f/H-01.pages.jsonl",
+    "ocr_evidence/pdf_000135_167389a70b9f/scope.pages.jsonl",
+    "provenance.json",
+    "review_status.yaml"
+  ],
+  "docker_context": {
+    "dockerignore_rules": ["**", "!Dockerfile", "!.dockerignore"],
+    "included_files": [".dockerignore", "Dockerfile"],
+    "copy_or_add_instruction_count": 0,
+    "host_source_tree_copy_count": 0,
+    "host_gold_or_ocr_copy_count": 0
+  },
+  "source_image_plan": {
+    "repository_fetched_in_build": "https://github.com/mellow-finance/flexible-vaults.git",
+    "exact_commit_asserted": true,
+    "root_tree_asserted": true,
+    "recursive_submodule_pins_asserted": true,
+    "tracked_pdf_or_jsonl_count": 0,
+    "post_fetch_pdf_or_jsonl_cleanup_and_assertion": true
+  },
+  "image": {
+    "built_preapproval": false,
+    "reason": "Pre-approval source build and Dockerfile/context validation completed; canonical agent/verifier images are admission artifacts and remain gated."
+  },
+  "harbor": {
+    "generated": false,
+    "leakage_scan_applicable": false
+  },
+  "checks": [
+    {"id": "docker_context_excludes_candidate_evidence", "passed": true},
+    {"id": "dockerfile_has_no_COPY_or_ADD", "passed": true},
+    {"id": "no_pdf_or_jsonl_tracked_at_source_commit", "passed": true},
+    {"id": "no_harbor_task_exists_for_candidate", "passed": true},
+    {"id": "no_model_or_agent_run", "passed": true}
+  ],
+  "status": "passed"
+}

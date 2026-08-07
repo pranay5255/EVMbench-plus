@@ -1,0 +1,41 @@
+{
+  "schema_version": "ocr_to_evmbench_harbor.approval_binding.v1",
+  "phase": "P7",
+  "candidate_id": "2025-09-mellow-flexible-vaults",
+  "generated_at": "2026-08-04T15:34:16Z",
+  "status": "passed",
+  "approval": {
+    "candidate_id": "2025-09-mellow-flexible-vaults",
+    "review_checkpoint": "C1",
+    "review_manifest": "c1-review-manifest.json",
+    "review_manifest_sha256": "7eba708f41fa4d90f56d47e170b8a624aafc84032bade60a88470929d740ee63",
+    "reviewer_identity_as_declared": "github.com/pranay5255",
+    "reviewer_identity": "https://github.com/pranay5255",
+    "reviewer_github_login": "pranay5255",
+    "reviewer_github_user_id": 22420966,
+    "explicit_admission_approval": true,
+    "received_at": "2026-08-04T15:34:16Z"
+  },
+  "pre_binding_integrity": {
+    "review_manifest_digest_matched": true,
+    "c1_candidate_checksum_stream_sha256": "313ce4c60fa8a82484821ed829a9afd53b8a70035860593ce66b898db418f227",
+    "candidate_files_matched_c1_before_binding": true,
+    "source_ocr_sha256_matched": true,
+    "source_pdf_sha256_matched": true,
+    "candidate_drift_detected": false
+  },
+  "post_binding_state": {
+    "state": "approved_for_admission",
+    "human_approved": true,
+    "approved_by": "github.com/pranay5255",
+    "review_status_sha256": "a0bb1ae8a6b3f84eb6f8a6be1ddafa02a185e158466b9b36935ed04811b3b52f",
+    "provenance_sha256": "272a3f15166716752afa2345ddf992cb27ae3f9a1a36085c394a557e73f6cb8f",
+    "approved_candidate_checksum_stream_sha256": "fdb34a78706346f8539174cea6d1a787d3caaa4d5e8be20a67059165c3c63036",
+    "files_changed_from_c1": ["provenance.json", "review_status.yaml"]
+  },
+  "summary": {
+    "ok": true,
+    "admission_authorized": true,
+    "candidate_admitted": false
+  }
+}
